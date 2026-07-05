@@ -40,11 +40,11 @@ const DUMMY_SETUP_STEPS = [
 ];
 
 export default function Home() {
-  const [onboarded, setOnboarded] = useState(true);
+  const [showOnboarding, setShowOnboarding] = useState(true);
   const completedCount = DUMMY_SETUP_STEPS.filter((step) => step.complete).length;
 
-  if (!onboarded) {
-    return <Onboarding onComplete={() => setOnboarded(true)} />;
+  if (showOnboarding) {
+    return <Onboarding onComplete={() => setShowOnboarding(false)} />;
   }
 
   return (
