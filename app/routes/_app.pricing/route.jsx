@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useAppBridge } from "@shopify/app-bridge-react";
 import { authenticate } from "../../shopify.server";
-import { getShop, updateShopPlan } from "../../utils/api/shop";
+import { updateShopPlan } from "../../utils/api/shop";
+import { useShop, useRefreshShop } from "../../context/ShopContext";
 import PlanCard from "./component/PlanCard";
 
 export const loader = async ({ request }) => {
@@ -30,21 +31,20 @@ const PLANS = [
 
 export default function Pricing() {
   const shopify = useAppBridge();
-  const [currentPlan, setCurrentPlan] = useState(null);
+  const shop = useShop();
+  const refreshShop = useRefreshShop();
+  const [currentPlan, setCurrentPlan] = useState(shop.plan.name);
   const [selecting, setSelecting] = useState(null);
-
-  useEffect(() => {
-    getShop().then(({ shop }) => setCurrentPlan(shop.plan.name));
-  }, []);
 
   async function handleSelect(plan) {
     setSelecting(plan.name);
     try {
-      const { shop } = await updateShopPlan({
+      const { shop: updatedShop } = await updateShopPlan({
         name: plan.name,
         price: Number(plan.price.replace(/[^0-9.]/g, "")),
       });
-      setCurrentPlan(shop.plan.name);
+      setCurrentPlan(updatedShop.plan.name);
+      refreshShop();
       shopify.toast.show(`Switched to ${plan.name}`);
     } catch (error) {
       shopify.toast.show(error.message, { isError: true });

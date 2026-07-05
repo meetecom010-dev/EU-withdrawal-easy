@@ -5,6 +5,8 @@ import OnboardingSidebar from "./OnboardingSidebar";
 import WelcomeStep from "./steps/WelcomeStep";
 import DpaStep from "./steps/DpaStep";
 import WithdrawalStep from "./steps/WithdrawalStep";
+import { updateOnboardingStatus } from "../../../../utils/api/shop";
+import { useRefreshShop } from "../../../../context/ShopContext";
 
 const STEPS = [
   { key: "welcome", title: "Welcome", description: "Overview & what's included" },
@@ -16,6 +18,7 @@ const PRIMARY_LABEL = ["Get started", "Continue", "Finish setup"];
 
 export default function Onboarding({ onComplete }) {
   const shopify = useAppBridge();
+  const refreshShop = useRefreshShop();
   const [stepIndex, setStepIndex] = useState(0);
   const [dpaAccepted, setDpaAccepted] = useState(false);
   const [formEnabled, setFormEnabled] = useState(true);
@@ -29,12 +32,22 @@ export default function Onboarding({ onComplete }) {
     shopify.toast.show(message);
   }
 
+  async function persistOnboardingStatus() {
+    try {
+      await updateOnboardingStatus({ onboardingCompleted: true, dpaAccepted });
+      refreshShop();
+    } catch (error) {
+      notify(error.message);
+    }
+  }
+
   function handleBack() {
     setStepIndex((current) => Math.max(0, current - 1));
   }
 
-  function handlePrimary() {
+  async function handlePrimary() {
     if (isLast) {
+      await persistOnboardingStatus();
       onComplete?.();
       notify("Setup complete — you're ready for EU withdrawals 🎉");
       return;
@@ -42,8 +55,9 @@ export default function Onboarding({ onComplete }) {
     setStepIndex((current) => current + 1);
   }
 
-  function handleSkip() {
+  async function handleSkip() {
     if (isLast) {
+      await persistOnboardingStatus();
       onComplete?.();
       return;
     }

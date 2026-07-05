@@ -31,3 +31,25 @@ export async function getOrCreateShop(shop) {
   );
   return doc;
 }
+
+// Strips a Shop mongoose document down to a plain, network-safe object.
+// Loaders must never return documents/class instances directly - only the
+// fields the frontend actually needs.
+export function serializeShop(shopDoc) {
+  return {
+    shop: shopDoc.shop,
+    isActive: shopDoc.isActive,
+    installedAt: shopDoc.installedAt,
+    onboardingCompleted: shopDoc.onboardingCompleted,
+    dpaAccepted: shopDoc.dpaAccepted,
+    plan: {
+      name: shopDoc.plan?.name,
+      price: shopDoc.plan?.price,
+      currency: shopDoc.plan?.currency,
+      interval: shopDoc.plan?.interval,
+      status: shopDoc.plan?.status,
+      trialEndsAt: shopDoc.plan?.trialEndsAt,
+      currentPeriodEnd: shopDoc.plan?.currentPeriodEnd,
+    },
+  };
+}

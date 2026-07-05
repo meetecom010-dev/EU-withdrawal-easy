@@ -11,6 +11,7 @@ export default function OnboardingSidebar({
         {steps.map((step, index) => {
           const isDone = index < currentIndex;
           const isCurrent = index === currentIndex;
+
           return (
             <s-stack key={step.key} direction="block" gap="small-200">
               {index > 0 && <s-divider></s-divider>}
@@ -31,6 +32,7 @@ export default function OnboardingSidebar({
           );
         })}
       </s-box>
+
       <s-box padding="base" borderWidth="base" borderRadius="large" background="base">
         <s-stack direction="inline" gap="small-200" alignItems="start">
           <s-grid gridTemplateColumns="auto 1fr" gap="small-500">

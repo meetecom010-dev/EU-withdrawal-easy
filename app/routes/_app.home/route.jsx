@@ -1,8 +1,7 @@
-import { useState } from "react";
 import { useRouteError } from "react-router";
 import { boundary } from "@shopify/shopify-app-react-router/server";
 import { authenticate } from "../../shopify.server";
-import Onboarding from "./component/onboarding/onboarding";
+import { useShop } from "../../context/ShopContext";
 import Dashboard from "./component/dashboard/dashboard";
 
 export const loader = async ({ request }) => {
@@ -39,17 +38,15 @@ const DUMMY_SETUP_STEPS = [
   },
 ];
 
+// This route only renders once routes/_app.jsx has confirmed onboarding is
+// complete, so it always shows the dashboard.
 export default function Home() {
-  const [showOnboarding, setShowOnboarding] = useState(true);
+  const shop = useShop();
   const completedCount = DUMMY_SETUP_STEPS.filter((step) => step.complete).length;
-
-  if (showOnboarding) {
-    return <Onboarding onComplete={() => setShowOnboarding(false)} />;
-  }
 
   return (
     <Dashboard
-      shopDomain="example-store.myshopify.com"
+      shopDomain={shop.shop}
       stats={DUMMY_STATS}
       setupSteps={DUMMY_SETUP_STEPS}
       completedCount={completedCount}

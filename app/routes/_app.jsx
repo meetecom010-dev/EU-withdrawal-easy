@@ -2,26 +2,37 @@ import { Outlet, useLoaderData, useRouteError } from "react-router";
 import { boundary } from "@shopify/shopify-app-react-router/server";
 import { AppProvider } from "@shopify/shopify-app-react-router/react";
 import { authenticate } from "../shopify.server";
+import { getOrCreateShop, serializeShop } from "../services/shop.server";
+import { ShopProvider } from "../context/ShopContext";
+import Onboarding from "./_app.home/component/onboarding/onboarding";
 
 export const loader = async ({ request }) => {
-  await authenticate.admin(request);
+  const { session } = await authenticate.admin(request);
+  const shopDoc = await getOrCreateShop(session.shop);
 
-  // eslint-disable-next-line no-undef
-  return { apiKey: process.env.SHOPIFY_API_KEY || "" };
+  return {
+    // eslint-disable-next-line no-undef
+    apiKey: process.env.SHOPIFY_API_KEY || "",
+    shop: serializeShop(shopDoc),
+  };
 };
 
 export default function App() {
-  const { apiKey } = useLoaderData();
+  const { apiKey, shop } = useLoaderData();
 
   return (
     <AppProvider embedded apiKey={apiKey}>
-      <s-app-nav>
-        <s-link href="/home">Home</s-link>
-        <s-link href="/form-setup">Form Setup</s-link>
-        <s-link href="/withdrawal-requests">Withdrawal Requests</s-link>
-        <s-link href="/pricing">Pricing</s-link>
-      </s-app-nav>
-      <Outlet />
+      {shop.onboardingCompleted && (
+        <s-app-nav>
+          <s-link href="/home">Home</s-link>
+          <s-link href="/form-setup">Form Setup</s-link>
+          <s-link href="/withdrawal-requests">Withdrawal Requests</s-link>
+          <s-link href="/pricing">Pricing</s-link>
+        </s-app-nav>
+      )}
+      <ShopProvider shop={shop}>
+        {shop.onboardingCompleted ? <Outlet /> : <Onboarding />}
+      </ShopProvider>
     </AppProvider>
   );
 }

@@ -31,6 +31,8 @@ const shopSchema = new Schema(
     isActive: { type: Boolean, default: true },
     installedAt: { type: Date, default: Date.now },
     uninstalledAt: { type: Date, default: null },
+    onboardingCompleted: { type: Boolean, default: false },
+    dpaAccepted: { type: Boolean, default: false },
     plan: { type: planSchema, default: () => ({}) },
   },
   { timestamps: true },

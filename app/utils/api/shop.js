@@ -12,3 +12,10 @@ export function updateShopPlan(plan) {
 export function resetShopPlan() {
   return apiFetch("/shop", { method: "DELETE" });
 }
+
+export function updateOnboardingStatus({ onboardingCompleted, dpaAccepted }) {
+  return apiFetch("/shop", {
+    method: "PUT",
+    body: { onboardingCompleted, dpaAccepted },
+  });
+}

@@ -20,7 +20,7 @@ export default function WelcomeStep() {
   return (
     <s-stack direction="block" gap="large-100">
       <s-stack direction="block" gap="small-200">
-        
+
         <s-grid gridTemplateColumns="1fr 150px" gap="large-500">
           <s-stack gap="base">
             <s-stack direction="block" gap="small-500">

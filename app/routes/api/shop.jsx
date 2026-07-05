@@ -4,6 +4,7 @@ import Shop from "../../models/shop.server";
 import { getOrCreateShop } from "../../services/shop.server";
 
 const ALLOWED_PLAN_FIELDS = ["name", "price", "currency", "interval"];
+const ALLOWED_SHOP_FIELDS = ["onboardingCompleted", "dpaAccepted"];
 
 // GET /api/shop -> current shop details + pricing plan
 export const loader = async ({ request }) => {
@@ -29,23 +30,28 @@ export const action = async ({ request }) => {
 
   if (request.method === "PUT" || request.method === "PATCH") {
     const body = await request.json();
-    const planUpdate = {};
+    const update = {};
     for (const field of ALLOWED_PLAN_FIELDS) {
       if (body?.[field] !== undefined) {
-        planUpdate[`plan.${field}`] = body[field];
+        update[`plan.${field}`] = body[field];
+      }
+    }
+    for (const field of ALLOWED_SHOP_FIELDS) {
+      if (body?.[field] !== undefined) {
+        update[field] = body[field];
       }
     }
 
-    if (Object.keys(planUpdate).length === 0) {
+    if (Object.keys(update).length === 0) {
       return Response.json(
-        { error: "No valid plan fields provided" },
+        { error: "No valid fields provided" },
         { status: 400 },
       );
     }
 
     const shop = await Shop.findOneAndUpdate(
       { shop: session.shop },
-      { $set: planUpdate },
+      { $set: update },
       { new: true, upsert: true, setDefaultsOnInsert: true },
     );
     return Response.json({ shop });
