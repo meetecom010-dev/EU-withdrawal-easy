@@ -1,0 +1,117 @@
+import mongoose from "mongoose";
+
+const { Schema } = mongoose;
+
+const labelsSchema = new Schema(
+  {
+    step1Title: { type: String, default: "Withdraw from your purchase" },
+    step1Description: {
+      type: String,
+      default:
+        "You have the right to withdraw from this purchase within 14 days without giving any reason.",
+    },
+    itemSelectionHeading: { type: String, default: "Select the items you want to withdraw" },
+    deliveredTitle: { type: String, default: "Withdraw from your delivered order" },
+    deliveredDescription: {
+      type: String,
+      default:
+        "Your order has been delivered. You can still withdraw from your purchase within 14 days of delivery.",
+    },
+    deliveredItemSelectionHeading: {
+      type: String,
+      default: "Select the delivered items you want to withdraw",
+    },
+    confirmHeading: { type: String, default: "Confirm your withdrawal" },
+    confirmMessage: {
+      type: String,
+      default: "Please confirm that you want to withdraw from this purchase.",
+    },
+    deliveredConfirmMessage: {
+      type: String,
+      default: "Please confirm that you want to withdraw from this delivered order.",
+    },
+    declaration: {
+      type: String,
+      default: "I hereby withdraw from the contract for the purchase of the selected item(s).",
+    },
+    submittedTitle: { type: String, default: "Withdrawal request submitted" },
+    submittedMessage: {
+      type: String,
+      default: "We've received your withdrawal request and will be in touch shortly.",
+    },
+    deliveredSubmittedTitle: { type: String, default: "Return request submitted" },
+    deliveredSubmittedMessage: {
+      type: String,
+      default: "We've received your return request and will send further instructions by email.",
+    },
+    step1ButtonLabel: { type: String, default: "Continue" },
+    confirmButtonLabel: { type: String, default: "Confirm withdrawal" },
+  },
+  { _id: false },
+);
+
+const automationSchema = new Schema(
+  {
+    // "Before the order ships" — hold fulfillment for staff review, with a
+    // fallback if no one acts in time (see FALLBACK_OPTIONS in
+    // AutomationCard.jsx: hold | cancel-now | release-n | cancel-n).
+    holdFulfillment: { type: Boolean, default: false },
+    unshippedFallback: { type: String, default: "hold" },
+    unshippedFallbackDays: { type: Number, default: 3 },
+    tagBeforeShip: { type: Boolean, default: false },
+    beforeShipTags: { type: [String], default: [] },
+
+    // "After delivery" — delivered orders can't be held from shipping (the
+    // goods are already with the customer), so this is a simple action
+    // choice instead of the hold+fallback pattern above.
+    afterDeliveryAction: { type: String, default: "notify_only" },
+    tagAfterDelivery: { type: Boolean, default: false },
+    afterDeliveryTags: { type: [String], default: [] },
+  },
+  { _id: false },
+);
+
+const deadlineSchema = new Schema(
+  {
+    daysAfterDelivery: { type: Number, default: 14 },
+    estimatedTransitDays: { type: Number, default: 0 },
+  },
+  { _id: false },
+);
+
+// Mirrors the shape app/routes/_app.form-setup works with 1:1 — see
+// resolveFormSettings in app/routes/_app.form-setup/constants.js for the
+// "empty euCountries means all 27" convention applied on read.
+const formSettingsSchema = new Schema(
+  {
+    masterEnabled: { type: Boolean, default: false },
+    showOnOrderStatus: { type: Boolean, default: true },
+    showOnThemeBlock: { type: Boolean, default: true },
+    euCountries: { type: [String], default: [] },
+    languages: { type: [String], default: ["en"] },
+    reasonField: {
+      enabled: { type: Boolean, default: true },
+      label: { type: String, default: "Reason for return" },
+      options: {
+        type: [String],
+        default: ["Changed my mind", "Wrong size", "Item arrived damaged", "Prefer not to say"],
+      },
+    },
+    labels: { type: labelsSchema, default: () => ({}) },
+    automation: { type: automationSchema, default: () => ({}) },
+    deadline: { type: deadlineSchema, default: () => ({}) },
+  },
+  { _id: false },
+);
+
+// One document per shop, holding the withdrawal form configuration —
+// separate from Shop (app/models/shop.server.js) so shop identity stays lean.
+const appSettingsSchema = new Schema(
+  {
+    shop: { type: String, required: true, unique: true },
+    formSettings: { type: formSettingsSchema, default: () => ({}) },
+  },
+  { timestamps: true },
+);
+
+export default mongoose.models.AppSettings ?? mongoose.model("AppSettings", appSettingsSchema);

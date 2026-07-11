@@ -12,8 +12,8 @@ export default function WithdrawalStep({
       <s-paragraph color="subdued">
         Customers submit their intent to withdraw, then give a separate
         explicit confirmation — exactly what Article 11a requires. Sensible
-        defaults are already filled in: legal wording, a 14-day timeline from
-        delivery, and standard EU-wide exclusions.
+        defaults are already filled in: legal wording and a 14-day timeline
+        from delivery.
       </s-paragraph>
 
       <s-switch

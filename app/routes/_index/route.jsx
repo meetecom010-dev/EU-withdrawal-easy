@@ -1,54 +1,17 @@
-import { redirect, Form, useLoaderData } from "react-router";
-import { login } from "../../shopify.server";
-import styles from "./styles.module.css";
+import { redirect } from "react-router";
+import { authenticate } from "../../shopify.server";
 
+// This app is App Store-distributed and embedded-only — every real visitor
+// arrives through Shopify Admin, so "/" just forwards into the app shell
+// like every other route. The previous version of this loader sniffed for a
+// `shop` query param and showed a static marketing page otherwise, but
+// Shopify Admin's own left-nav "app icon" load (and other in-app returns to
+// the root) can hit this route without shop/host params attached yet.
+// authenticate.admin handles that case correctly on its own — it responds
+// with the App Bridge bootstrap script, which completes the handshake and
+// reloads with the right context — so bypassing it here was what sent that
+// load to a dead-end marketing page instead of the dashboard.
 export const loader = async ({ request }) => {
-  const url = new URL(request.url);
-
-  if (url.searchParams.get("shop")) {
-    throw redirect(`/home?${url.searchParams.toString()}`);
-  }
-
-  return { showForm: Boolean(login) };
+  await authenticate.admin(request);
+  throw redirect(`/home${new URL(request.url).search}`);
 };
-
-export default function App() {
-  const { showForm } = useLoaderData();
-
-  return (
-    <div className={styles.index}>
-      <div className={styles.content}>
-        <h1 className={styles.heading}>A short heading about [your app]</h1>
-        <p className={styles.text}>
-          A tagline about [your app] that describes your value proposition.
-        </p>
-        {showForm && (
-          <Form className={styles.form} method="post" action="/auth/login">
-            <label className={styles.label}>
-              <span>Shop domain</span>
-              <input className={styles.input} type="text" name="shop" />
-              <span>e.g: my-shop-domain.myshopify.com</span>
-            </label>
-            <button className={styles.button} type="submit">
-              Log in
-            </button>
-          </Form>
-        )}
-        <ul className={styles.list}>
-          <li>
-            <strong>Product feature</strong>. Some detail about your feature and
-            its benefit to your customer.
-          </li>
-          <li>
-            <strong>Product feature</strong>. Some detail about your feature and
-            its benefit to your customer.
-          </li>
-          <li>
-            <strong>Product feature</strong>. Some detail about your feature and
-            its benefit to your customer.
-          </li>
-        </ul>
-      </div>
-    </div>
-  );
-}

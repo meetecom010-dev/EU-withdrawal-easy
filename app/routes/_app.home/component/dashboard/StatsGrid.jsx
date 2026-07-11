@@ -1,4 +1,6 @@
 /* eslint-disable react/prop-types -- plain JS project, no prop-types package installed */
+import { formatMoney } from "../../../_app.withdrawal-requests/constants";
+
 export default function StatsGrid({ stats }) {
   return (
     <s-section heading="Withdrawal requests">
@@ -17,14 +19,14 @@ export default function StatsGrid({ stats }) {
         </s-box>
         <s-box padding="base" borderWidth="base" borderRadius="base">
           <s-stack direction="block" gap="small-200">
-            <s-text color="subdued">Withdrawal rate</s-text>
-            <s-heading>{stats.withdrawalRate}%</s-heading>
+            <s-text color="subdued">Approval rate</s-text>
+            <s-heading>{stats.approvalRate === null ? "—" : `${stats.approvalRate}%`}</s-heading>
           </s-stack>
         </s-box>
         <s-box padding="base" borderWidth="base" borderRadius="base">
           <s-stack direction="block" gap="small-200">
             <s-text color="subdued">Revenue at risk</s-text>
-            <s-heading>€{stats.revenueAtRisk.toFixed(2)}</s-heading>
+            <s-heading>{stats.revenueAtRisk ? formatMoney(stats.revenueAtRisk) : "—"}</s-heading>
           </s-stack>
         </s-box>
       </s-grid>

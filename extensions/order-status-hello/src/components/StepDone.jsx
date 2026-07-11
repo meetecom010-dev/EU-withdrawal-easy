@@ -1,0 +1,25 @@
+/* eslint-disable react/prop-types -- plain JS project, no prop-types package installed */
+import OrderItemRow from "./OrderItemRow.jsx";
+
+// Step 3 of 3 — terminal confirmation screen, no further navigation.
+export default function StepDone({ settings, lines, selectedLineIds }) {
+  const selectedLines = lines.filter((line) => selectedLineIds.includes(line.id));
+
+  return (
+    <s-stack direction="block" gap="base">
+      <s-banner tone="success" heading={settings.labels.submittedTitle}></s-banner>
+      <s-paragraph color="subdued">{settings.labels.submittedMessage}</s-paragraph>
+      <s-stack direction="inline" gap="small-200" alignItems="center">
+        <s-icon type="check-circle-filled" tone="success" size="small"></s-icon>
+        <s-text color="subdued">Submitted on {new Date().toLocaleDateString()}</s-text>
+      </s-stack>
+
+      <s-text type="strong">Items to withdraw</s-text>
+      <s-stack direction="block" gap="small-200">
+        {selectedLines.map((line) => (
+          <OrderItemRow key={line.id} line={line} readOnly />
+        ))}
+      </s-stack>
+    </s-stack>
+  );
+}

@@ -1,0 +1,25 @@
+# Learn more about configuring your checkout UI extension:
+# https://shopify.dev/docs/api/checkout-ui-extensions/latest/configuration
+
+# The version of APIs your extension will receive. Learn more:
+# https://shopify.dev/docs/api/usage/versioning
+api_version = "2026-04"
+
+[[extensions]]
+name = "Withdrawal form"
+handle = "order-status-hello"
+type = "ui_extension"
+uid = "475f0f06-24dc-7401-b85f-ad70afc049140632f873"
+
+# Controls where in Shopify your extension will be injected,
+# and the file that contains your extension’s source code. Learn more:
+# https://shopify.dev/docs/api/checkout-ui-extensions/latest/extension-targets-overview
+
+[[extensions.targeting]]
+module = "./src/Checkout.jsx"
+target = "customer-account.order-status.block.render"
+
+# Required to call our app's own backend (GET /api/public-form-settings) from
+# the extension to fetch the withdrawal form configuration.
+[extensions.capabilities]
+network_access = true
