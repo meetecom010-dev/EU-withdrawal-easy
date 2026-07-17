@@ -109,7 +109,7 @@ export default function FormSetup() {
 
   return (
     <s-page heading="Form setup">
-      <s-button slot="breadcrumb-actions" href="/home" accessibilityLabel="Back to dashboard" />
+      <s-button slot="breadcrumb-actions" href="/" accessibilityLabel="Back to dashboard" />
 
       {/* Shopify's native contextual save bar — shows automatically only
           while `settings` differs from `savedSettings`. Discard reverts the
@@ -123,10 +123,6 @@ export default function FormSetup() {
         </button>
       </ui-save-bar>
       <s-stack gap="large-100">
-        <s-heading>
-          Design the two-step withdrawal form, set where it appears, and control the automation
-          that runs after a customer submits.
-        </s-heading>
 
         {/* Left column: every setting, stacked. Right column: the live
             preview, sticky for the whole page so it stays visible while
@@ -134,9 +130,7 @@ export default function FormSetup() {
         <s-grid gridTemplateColumns="2fr 1fr" gap="base">
           <s-stack direction="block" gap="large-100">
             <TurnItOnCard settings={settings} update={update} />
-
-            <CountriesCard settings={settings} update={update} />
-
+            <CountriesCard settings={settings} update={update} errors={errors} />
             <FormFieldsEditor
               settings={settings}
               update={update}
@@ -144,12 +138,9 @@ export default function FormSetup() {
               onTabChange={setActiveTab}
               errors={errors}
             />
-
             <LanguagesCard settings={settings} update={update} />
-
             <AutomationCard settings={settings} update={update} errors={errors} />
           </s-stack>
-
           <div style={{ position: "sticky", top: "16px", alignSelf: "start" }}>
             <LivePreview settings={settings} activeTab={activeTab} />
           </div>

@@ -19,3 +19,17 @@ export function updateOnboardingStatus({ onboardingCompleted, dpaAccepted }) {
     body: { onboardingCompleted, dpaAccepted },
   });
 }
+
+export function updateOrderStatusBlockStatus(orderStatusBlockAdded) {
+  return apiFetch("/shop", {
+    method: "PATCH",
+    body: { orderStatusBlockAdded },
+  });
+}
+
+export function updateDpaAccepted(dpaAccepted) {
+  return apiFetch("/shop", {
+    method: "PATCH",
+    body: { dpaAccepted },
+  });
+}

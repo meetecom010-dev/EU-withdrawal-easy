@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 // Inline searchable multi-select: type to filter, check items in the
 // dropdown to add them, remove via the chip's own "x". Shared by EU
 // countries and languages so both behave identically.
-export default function PickerChips({ label, placeholder, items, selected, onChange, hint }) {
+export default function PickerChips({ label, placeholder, items, selected, onChange, hint, error }) {
   const [query, setQuery] = useState("");
   const [open, setOpen] = useState(false);
   const containerRef = useRef(null);
@@ -47,6 +47,7 @@ export default function PickerChips({ label, placeholder, items, selected, onCha
           </s-stack>
 
           {hint && <s-text color="subdued">{hint}</s-text>}
+          {error && <s-text tone="critical">{error}</s-text>}
 
           {open && (
             <s-box border="base" borderRadius="base" padding="small-200">

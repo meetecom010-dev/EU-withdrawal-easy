@@ -19,6 +19,10 @@ export function validateFormSettings(settings) {
   const deadline = settings.deadline ?? {};
   const reasonField = settings.reasonField ?? {};
 
+  if ((settings.euCountries ?? []).length === 0) {
+    errors.euCountries = "Select at least one country.";
+  }
+
   if (automation.tagBeforeShip && (automation.beforeShipTags ?? []).length === 0) {
     errors["automation.beforeShipTags"] = "Add at least one tag, or turn off tagging.";
   }

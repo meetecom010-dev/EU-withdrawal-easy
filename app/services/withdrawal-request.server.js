@@ -128,7 +128,7 @@ function sumRevenueAtRisk(pendingRequests) {
   return best;
 }
 
-// Dashboard summary tiles (app/routes/_app.home). No Shopify order data is
+// Dashboard summary tiles (app/routes/_app._index, Home, served at "/"). No Shopify order data is
 // fetched anywhere in this app (no read_orders scope), so there's no
 // denominator for a true "% of orders withdrawn" rate — approvalRate is the
 // share of *decided* requests that were approved instead.

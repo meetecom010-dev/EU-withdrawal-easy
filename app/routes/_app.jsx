@@ -1,11 +1,13 @@
+/* eslint-disable react/prop-types -- plain JS project, no prop-types package installed */
 import { Outlet, useLoaderData, useNavigation, useRouteError } from "react-router";
 import { boundary } from "@shopify/shopify-app-react-router/server";
 import { AppProvider } from "@shopify/shopify-app-react-router/react";
 import { authenticate } from "../shopify.server";
 import { getOrCreateShop, serializeShop } from "../services/shop.server";
-import { ShopProvider } from "../context/ShopContext";
-import Onboarding from "./_app.home/component/onboarding/onboarding";
-import DashboardSkeleton from "./_app.home/component/dashboard/DashboardSkeleton";
+import { ShopProvider, useShop, useOnboardingDismissed } from "../context/ShopContext";
+import OrderStatusExtensionSync from "../components/OrderStatusExtensionSync";
+import Onboarding from "./_app._index/component/onboarding/onboarding";
+import DashboardSkeleton from "./_app._index/component/dashboard/DashboardSkeleton";
 import FormSetupSkeleton from "./_app.form-setup/component/FormSetupSkeleton";
 import RequestsTableSkeleton from "./_app.withdrawal-requests/component/RequestsTableSkeleton";
 import RequestDetailSkeleton from "./_app.withdrawal-requests_.$id/component/RequestDetailSkeleton";
@@ -20,7 +22,7 @@ function routeSkeletonFor(pathname) {
   if (/^\/withdrawal-requests\/.+/.test(pathname)) return <RequestDetailSkeleton />;
   if (pathname.startsWith("/withdrawal-requests")) return <RequestsTableSkeleton />;
   if (pathname.startsWith("/pricing")) return <PricingSkeleton />;
-  if (pathname.startsWith("/home")) return <DashboardSkeleton />;
+  if (pathname === "/") return <DashboardSkeleton />;
   return null;
 }
 
@@ -35,6 +37,30 @@ export const loader = async ({ request }) => {
   };
 };
 
+// Rendered inside ShopProvider so it can read onboardingDismissed — a
+// merchant who clicks "Skip for now" sees the real app for the rest of this
+// session (nav included) even though onboardingCompleted is still false in
+// the database, so onboarding comes back next time they open the app.
+function AppShell({ pendingSkeleton }) {
+  const shop = useShop();
+  const onboardingDismissed = useOnboardingDismissed();
+  const showApp = shop.onboardingCompleted || onboardingDismissed;
+
+  return (
+    <>
+      {showApp && (
+        <s-app-nav>
+          <s-link href="/form-setup">Form Setup</s-link>
+          <s-link href="/withdrawal-requests">Withdrawal Requests</s-link>
+          <s-link href="/pricing">Pricing</s-link>
+        </s-app-nav>
+      )}
+      <OrderStatusExtensionSync />
+      {showApp ? (pendingSkeleton ?? <Outlet />) : <Onboarding />}
+    </>
+  );
+}
+
 export default function App() {
   const { apiKey, shop } = useLoaderData();
   const navigation = useNavigation();
@@ -45,15 +71,8 @@ export default function App() {
 
   return (
     <AppProvider embedded apiKey={apiKey}>
-      {shop.onboardingCompleted && (
-        <s-app-nav>
-          <s-link href="/form-setup">Form Setup</s-link>
-          <s-link href="/withdrawal-requests">Withdrawal Requests</s-link>
-          <s-link href="/pricing">Pricing</s-link>
-        </s-app-nav>
-      )}
       <ShopProvider shop={shop}>
-        {shop.onboardingCompleted ? (pendingSkeleton ?? <Outlet />) : <Onboarding />}
+        <AppShell pendingSkeleton={pendingSkeleton} />
       </ShopProvider>
     </AppProvider>
   );

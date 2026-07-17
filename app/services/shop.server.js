@@ -42,6 +42,7 @@ export function serializeShop(shopDoc) {
     installedAt: shopDoc.installedAt,
     onboardingCompleted: shopDoc.onboardingCompleted,
     dpaAccepted: shopDoc.dpaAccepted,
+    orderStatusBlockAdded: shopDoc.orderStatusBlockAdded,
     plan: {
       name: shopDoc.plan?.name,
       price: shopDoc.plan?.price,

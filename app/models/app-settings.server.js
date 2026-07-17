@@ -86,7 +86,6 @@ const formSettingsSchema = new Schema(
   {
     masterEnabled: { type: Boolean, default: false },
     showOnOrderStatus: { type: Boolean, default: true },
-    showOnThemeBlock: { type: Boolean, default: true },
     euCountries: { type: [String], default: [] },
     languages: { type: [String], default: ["en"] },
     reasonField: {
