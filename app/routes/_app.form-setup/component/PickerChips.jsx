@@ -31,38 +31,24 @@ export default function PickerChips({ label, placeholder, items, selected, onCha
     <s-stack direction="block" gap="small-200">
       <s-box ref={containerRef}>
         <s-stack direction="block" gap="small-200">
-          <s-stack direction="inline" gap="small-200" alignItems="center">
-            <s-search-field
-              label={label}
-              labelAccessibilityVisibility="exclusive"
-              placeholder={placeholder}
-              value={query}
-              onChange={(e) => {
-                setQuery(e.currentTarget.value);
-                setOpen(true);
-              }}
-              onFocus={() => setOpen(true)}
-            ></s-search-field>
-            <s-badge>{selected.length} selected</s-badge>
-          </s-stack>
+          <s-search-field
+            label={label}
+            labelAccessibilityVisibility="exclusive"
+            placeholder={placeholder}
+            value={query}
+            error={error}
+            onInput={(e) => {
+              setQuery(e.currentTarget.value);
+              setOpen(true);
+            }}
+            onFocus={() => setOpen(true)}
+          ></s-search-field>
 
           {hint && <s-text color="subdued">{hint}</s-text>}
-          {error && <s-text tone="critical">{error}</s-text>}
 
           {open && (
             <s-box border="base" borderRadius="base" padding="small-200">
               <s-stack direction="block" gap="small-200">
-                <s-stack direction="inline" gap="small-200">
-                  <s-button variant="tertiary" onClick={() => onChange(items.map((i) => i.code))}>
-                    Select all
-                  </s-button>
-                  <s-button variant="tertiary" onClick={() => onChange([])}>
-                    Clear all
-                  </s-button>
-                </s-stack>
-
-                <s-divider></s-divider>
-
                 {filtered.length === 0 && (
                   <s-text color="subdued">No matches for &quot;{query}&quot;.</s-text>
                 )}

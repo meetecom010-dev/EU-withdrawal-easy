@@ -1,5 +1,5 @@
 import { useEffect, useState } from "preact/hooks";
-import { fetchFormSettings, submitWithdrawalRequest } from "./lib/api.js";
+import { fetchFormSettings, fetchOrderDetails, submitWithdrawalRequest } from "./lib/api.js";
 import StepProgress from "./components/StepProgress.jsx";
 import StepDetails from "./components/StepDetails.jsx";
 import StepConfirm from "./components/StepConfirm.jsx";
@@ -20,11 +20,22 @@ const STEP_NUMBERS = { [STEP_DETAILS]: 1, [STEP_CONFIRM]: 2, [STEP_DONE]: 3 };
 export default function WithdrawalForm() {
   const [status, setStatus] = useState("loading"); // loading | ready | hidden
   const [settings, setSettings] = useState(null);
+  // The form starts as a compact card (title + description + start button)
+  // so it doesn't crowd out the actual order details on the page — the full
+  // step-by-step flow only takes over once the customer opts in.
+  const [started, setStarted] = useState(false);
   const [step, setStep] = useState(STEP_DETAILS);
   const [selectedLineIds, setSelectedLineIds] = useState([]);
   const [reason, setReason] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState(/** @type {string | null} */ (null));
+  // Customer name/email resolved by our backend from the Admin API — the
+  // client-side buyerIdentity hooks only exist once the app has protected
+  // customer data access, so this is the reliable source for the locked,
+  // prefilled fields.
+  const [orderCustomer, setOrderCustomer] = useState(
+    /** @type {{ customerName: string, customerEmail: string } | null} */ (null),
+  );
 
   useEffect(() => {
     let cancelled = false;
@@ -54,8 +65,44 @@ export default function WithdrawalForm() {
 
   const lines = shopify.lines.value ?? [];
   const order = shopify.order.value;
-  const fullName = shopify.buyerIdentity?.customer?.value?.fullName ?? "";
-  const email = shopify.buyerIdentity?.email?.value ?? "";
+  const orderId = order?.id ?? "";
+  const confirmationNumber = order?.confirmationNumber ?? "";
+
+  useEffect(() => {
+    if (!orderId || !confirmationNumber) return undefined;
+    let cancelled = false;
+
+    fetchOrderDetails(orderId, confirmationNumber)
+      .then((data) => {
+        if (!cancelled) setOrderCustomer(data);
+      })
+      .catch((error) => {
+        // Non-fatal: the form still works, the locked fields just stay empty.
+        console.error("[withdrawal-form] Couldn't load order details", error);
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [orderId, confirmationNumber]);
+
+  // Customer identity: prefer the extension API's buyerIdentity (only
+  // present when the app has protected customer data access), then the
+  // shipping address name, then the backend Admin API lookup above. `||`
+  // (not `??`) so an empty candidate falls through to the next source.
+  const customer = shopify.buyerIdentity?.customer?.value;
+  const shippingAddress = shopify.shippingAddress?.value;
+  const fullName =
+    customer?.fullName ||
+    [customer?.firstName, customer?.lastName].filter(Boolean).join(" ") ||
+    [shippingAddress?.firstName, shippingAddress?.lastName].filter(Boolean).join(" ") ||
+    orderCustomer?.customerName ||
+    "";
+  const email =
+    shopify.buyerIdentity?.email?.value ||
+    customer?.email ||
+    orderCustomer?.customerEmail ||
+    "";
   // The order's country, carried over from checkout — falls back to the
   // shipping/billing address if it's somehow unset. Only orders in one of
   // the merchant's selected countries (CountriesCard in form-setup) should
@@ -78,7 +125,6 @@ export default function WithdrawalForm() {
     setSubmitError(null);
     try {
       const selectedLines = lines.filter((line) => selectedLineIds.includes(line.id));
-      const shippingAddress = shopify.shippingAddress?.value;
       await submitWithdrawalRequest({
         orderId: order?.id ?? "",
         orderName: order?.name ?? "",
@@ -122,19 +168,26 @@ export default function WithdrawalForm() {
     }
   }
 
-  if (status === "loading") {
+  // Render nothing while loading — most customers will never see this form
+  // (disabled, wrong country, ...), so a spinner that pops in and vanishes
+  // again would just be layout noise on the order status page.
+  if (status !== "ready" || lines.length === 0 || !isEligibleCountry) {
+    return null;
+  }
+
+  // Compact entry card — the flow expands in place when the customer starts.
+  if (!started) {
     return (
       <s-section>
-        <s-stack direction="inline" gap="small-200" alignItems="center">
-          <s-spinner accessibilityLabel="Loading withdrawal form"></s-spinner>
-          <s-text color="subdued">Loading...</s-text>
+        <s-stack direction="block" gap="base">
+          <s-heading>{settings.labels.step1Title}</s-heading>
+          <s-paragraph color="subdued">{settings.labels.step1Description}</s-paragraph>
+          <s-stack direction="inline">
+            <s-button onClick={() => setStarted(true)}>Start withdrawal request</s-button>
+          </s-stack>
         </s-stack>
       </s-section>
     );
-  }
-
-  if (status !== "ready" || lines.length === 0 || !isEligibleCountry) {
-    return null;
   }
 
   return (

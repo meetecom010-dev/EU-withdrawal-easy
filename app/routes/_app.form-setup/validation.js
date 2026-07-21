@@ -19,7 +19,9 @@ export function validateFormSettings(settings) {
   const deadline = settings.deadline ?? {};
   const reasonField = settings.reasonField ?? {};
 
-  if ((settings.euCountries ?? []).length === 0) {
+  if (settings.countryMode !== "all" && settings.countryMode !== "specific") {
+    errors.countryMode = "Choose which countries are eligible.";
+  } else if (settings.countryMode === "specific" && (settings.euCountries ?? []).length === 0) {
     errors.euCountries = "Select at least one country.";
   }
 

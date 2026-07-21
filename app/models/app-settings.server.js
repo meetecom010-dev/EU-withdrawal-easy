@@ -80,12 +80,15 @@ const deadlineSchema = new Schema(
 );
 
 // Mirrors the shape app/routes/_app.form-setup works with 1:1 — see
-// resolveFormSettings in app/routes/_app.form-setup/constants.js for the
-// "empty euCountries means all 27" convention applied on read.
+// resolveFormSettings in app/routes/_app.form-setup/constants.js, which
+// resolves countryMode "all" to the full EU list on read.
 const formSettingsSchema = new Schema(
   {
     masterEnabled: { type: Boolean, default: false },
     showOnOrderStatus: { type: Boolean, default: true },
+    // "all" = every EU country is eligible (euCountries is ignored and
+    // resolved to the full list); "specific" = only the euCountries below.
+    countryMode: { type: String, enum: ["all", "specific"], default: "all" },
     euCountries: { type: [String], default: [] },
     languages: { type: [String], default: ["en"] },
     reasonField: {

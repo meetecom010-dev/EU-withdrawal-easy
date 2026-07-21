@@ -3,28 +3,24 @@ import OrderStatusExtensionStatus from "../../../components/OrderStatusExtension
 
 export default function TurnItOnCard({ settings, update }) {
   return (
-    <s-section>
+    <s-section heading="Enable EU Withdrawal Form">
       <s-stack direction="block" gap="small-200">
-        <s-stack direction="block" gap="small-500">
-          <s-heading>Enable EU Withdrawal Form</s-heading>
-          <s-text color="subdued">
-            Choose whether customers can access the EU Withdrawal Form on your order status page.
-          </s-text>
-        </s-stack>
+        <s-paragraph color="subdued">
+          Control whether customers can submit withdrawal requests for their orders.
+        </s-paragraph>
 
         <s-checkbox
-          label="Enable EU Withdrawal Form"
-          details="Enable or disable the EU Withdrawal Form across all selected locations."
+          label="Enable withdrawal form"
+          details="Offer the form to customers whose orders ship to the countries selected below."
           checked={settings.masterEnabled}
           onChange={(e) => update("masterEnabled", e.currentTarget.checked)}
         ></s-checkbox>
 
         {settings.masterEnabled && (
           <>
-            <s-divider></s-divider>
             <s-checkbox
-              label="Order status page"
-              details="Display the withdrawal form on Shopify's Order Status page after checkout."
+              label="Show on order status page"
+              details="Display the withdrawal form on Shopify's order status page after checkout."
               checked={settings.showOnOrderStatus}
               onChange={(e) => update("showOnOrderStatus", e.currentTarget.checked)}
             ></s-checkbox>

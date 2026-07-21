@@ -44,8 +44,11 @@ export const AVAILABLE_LANGUAGES = [
   { code: "sv", name: "Swedish" },
 ];
 
-// An empty euCountries array means "all" — resolve it to the explicit list so
-// the UI always shows a concrete selection.
+// countryMode governs eligibility: "all" ignores the stored euCountries and
+// resolves to the explicit full EU list (so the admin UI and the extension
+// always see a concrete selection), "specific" passes the stored list
+// through. Documents saved before countryMode existed derive it from the
+// legacy convention where an empty euCountries array meant "all".
 //
 // Also backfills array fields that were added to the schema after some shops
 // already had a saved formSettings document — Mongoose only applies schema
@@ -53,10 +56,13 @@ export const AVAILABLE_LANGUAGES = [
 // from documents that already existed in the DB, so older shops can come
 // back from the DB with these as `undefined`.
 export function resolveFormSettings(settings) {
+  const storedCountries = settings.euCountries ?? [];
+  const countryMode =
+    settings.countryMode ?? (storedCountries.length === 0 ? "all" : "specific");
   return {
     ...settings,
-    euCountries:
-      settings.euCountries.length > 0 ? settings.euCountries : EU_COUNTRIES.map((c) => c.code),
+    countryMode,
+    euCountries: countryMode === "all" ? EU_COUNTRIES.map((c) => c.code) : storedCountries,
     reasonField: {
       ...settings.reasonField,
       options: settings.reasonField.options ?? [],

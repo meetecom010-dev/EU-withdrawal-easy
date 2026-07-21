@@ -8,6 +8,7 @@ import FormFieldsEditor from "./component/FormFieldsEditor";
 import LivePreview from "./component/LivePreview";
 import LanguagesCard from "./component/LanguagesCard";
 import AutomationCard from "./component/AutomationCard";
+import DeadlineCard from "./component/DeadlineCard";
 import FormSetupSkeleton from "./component/FormSetupSkeleton";
 import { validateFormSettings } from "./validation";
 
@@ -38,6 +39,9 @@ export default function FormSetup() {
 
   const [loadError, setLoadError] = useState(null);
   const [isSaving, setIsSaving] = useState(false);
+  // Save failures surface in a critical banner, not a toast — Built for
+  // Shopify guidelines reserve toasts for confirmations.
+  const [saveError, setSaveError] = useState(null);
   const [activeTab, setActiveTab] = useState("step1");
 
   useEffect(() => {
@@ -57,6 +61,11 @@ export default function FormSetup() {
 
   const errors = useMemo(() => (settings ? validateFormSettings(settings) : {}), [settings]);
   const hasErrors = Object.keys(errors).length > 0;
+  // Validation runs live (so Save can react instantly), but the inline field
+  // errors only display after a save attempt — editing shouldn't flash red
+  // mid-change.
+  const [showErrors, setShowErrors] = useState(false);
+  const displayedErrors = showErrors ? errors : {};
 
   useEffect(() => {
     if (!shopify || !settings) return;
@@ -73,21 +82,26 @@ export default function FormSetup() {
 
   function handleDiscard() {
     setSettings(savedSettings);
+    setShowErrors(false);
   }
 
   async function handleSave() {
     if (hasErrors) {
-      shopify.toast.show("Fix the highlighted fields before saving", { isError: true });
+      // The inline field errors (displayedErrors) are the only signal —
+      // no error toast.
+      setShowErrors(true);
       return;
     }
     setIsSaving(true);
+    setSaveError(null);
     try {
       const { formSettings } = await saveFormSettings(settings);
       setSettings(formSettings);
       setSavedSettings(formSettings);
+      setShowErrors(false);
       shopify.toast.show("Form settings saved");
     } catch (error) {
-      shopify.toast.show(error.message, { isError: true });
+      setSaveError(error.message);
     } finally {
       setIsSaving(false);
     }
@@ -115,36 +129,56 @@ export default function FormSetup() {
           while `settings` differs from `savedSettings`. Discard reverts the
           in-memory state; nothing is written to the DB on discard. */}
       <ui-save-bar id={SAVE_BAR_ID}>
-        <button variant="primary" onClick={handleSave} disabled={isSaving || hasErrors || undefined}>
+        {/* Save stays clickable even with invalid fields — clicking it is
+            what reveals the inline errors (displayedErrors above). */}
+        <button variant="primary" onClick={handleSave} disabled={isSaving || undefined}>
           Save
         </button>
         <button onClick={handleDiscard} disabled={isSaving || undefined}>
           Discard
         </button>
       </ui-save-bar>
-      <s-stack gap="large-100">
+      <s-stack gap="base">
+        {saveError && (
+          <s-banner
+            tone="critical"
+            heading="Couldn't save form settings"
+            dismissible
+            onDismiss={() => setSaveError(null)}
+          >
+            <s-paragraph>{saveError}</s-paragraph>
+          </s-banner>
+        )}
 
         {/* Left column: every setting, stacked. Right column: the live
             preview, sticky for the whole page so it stays visible while
-            editing anything on the left — not just the form builder. */}
-        <s-grid gridTemplateColumns="2fr 1fr" gap="base">
-          <s-stack direction="block" gap="large-100">
-            <TurnItOnCard settings={settings} update={update} />
-            <CountriesCard settings={settings} update={update} errors={errors} />
-            <FormFieldsEditor
-              settings={settings}
-              update={update}
-              activeTab={activeTab}
-              onTabChange={setActiveTab}
-              errors={errors}
-            />
-            <LanguagesCard settings={settings} update={update} />
-            <AutomationCard settings={settings} update={update} errors={errors} />
-          </s-stack>
-          <div style={{ position: "sticky", top: "16px", alignSelf: "start" }}>
-            <LivePreview settings={settings} activeTab={activeTab} />
-          </div>
-        </s-grid>
+            editing anything on the left. The query container collapses the
+            grid to a single column when the page gets narrow. */}
+        <s-query-container>
+          <s-grid
+            gridTemplateColumns="@container (inline-size > 700px) 2fr 1fr, 1fr"
+            gap="base"
+            alignItems="start"
+          >
+            <s-stack direction="block" gap="base">
+              <TurnItOnCard settings={settings} update={update} />
+              <CountriesCard settings={settings} update={update} errors={displayedErrors} />
+              <FormFieldsEditor
+                settings={settings}
+                update={update}
+                activeTab={activeTab}
+                onTabChange={setActiveTab}
+                errors={displayedErrors}
+              />
+              <LanguagesCard settings={settings} update={update} />
+              <AutomationCard settings={settings} update={update} errors={displayedErrors} />
+              <DeadlineCard settings={settings} update={update} errors={displayedErrors} />
+            </s-stack>
+            <div style={{ position: "sticky", top: "16px", alignSelf: "start" }}>
+              <LivePreview settings={settings} activeTab={activeTab} />
+            </div>
+          </s-grid>
+        </s-query-container>
       </s-stack>
     </s-page>
   );

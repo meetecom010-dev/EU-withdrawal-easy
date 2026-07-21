@@ -14,6 +14,9 @@ import { formatMoney } from "../lib/money.js";
  */
 export default function OrderItemRow({ line, checked = false, onChange = () => {}, readOnly = false }) {
   const title = line.merchandise?.title ?? "Item";
+  // The variant title ("xs / red / water") — only present for products with
+  // selected options, so it renders conditionally.
+  const variantTitle = line.merchandise?.subtitle ?? "";
   const image = line.merchandise?.image;
   const price = formatMoney(line.cost?.totalAmount);
 
@@ -23,10 +26,11 @@ export default function OrderItemRow({ line, checked = false, onChange = () => {
         src={image?.url}
         alt={image?.altText ?? title}
         size="small"
+        totalItems={line.quantity}
       ></s-product-thumbnail>
       <s-stack direction="block" gap="small-100">
         <s-text type="strong">{title}</s-text>
-        {line.quantity > 1 && <s-text color="subdued">Qty {line.quantity}</s-text>}
+        {variantTitle && <s-text color="subdued">{variantTitle}</s-text>}
       </s-stack>
     </s-stack>
   );
