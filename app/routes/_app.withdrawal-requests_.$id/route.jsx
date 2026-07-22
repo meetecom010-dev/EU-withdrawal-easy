@@ -8,6 +8,7 @@ import {
   removeWithdrawalRequestTag,
   updateWithdrawalRequestStatus,
 } from "../../services/withdrawal-request.server";
+import { handleManualDecision } from "../../services/withdrawal-automation.server";
 import RequestDetail from "./component/RequestDetail";
 
 export const loader = async ({ request, params }) => {
@@ -67,7 +68,25 @@ export const action = async ({ request, params }) => {
 
   const status = formData.get("status");
   const withdrawalRequest = await updateWithdrawalRequestStatus(session.shop, params.id, status);
-  return { withdrawalRequest, decided: true };
+
+  // Deciding by hand retires whatever the automation had scheduled and lets
+  // the order move again: a release that was queued for N days out must never
+  // fire on a request staff have already dealt with, and an order left on hold
+  // after a decision would sit there indefinitely.
+  //
+  // Deliberately not awaited into the response shape — a Shopify hiccup here
+  // shouldn't make the decision itself look like it failed. The outcome is
+  // written to the request's automation log either way.
+  let automationError = null;
+  if (withdrawalRequest) {
+    try {
+      await handleManualDecision(session.shop, params.id);
+    } catch (error) {
+      automationError = error.message;
+    }
+  }
+
+  return { withdrawalRequest, decided: true, automationError };
 };
 
 export default function WithdrawalRequestDetail() {

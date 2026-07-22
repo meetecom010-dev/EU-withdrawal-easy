@@ -1,5 +1,11 @@
-import { useEffect, useState } from "preact/hooks";
-import { fetchFormSettings, fetchOrderDetails, submitWithdrawalRequest } from "./lib/api.js";
+import { useEffect, useMemo, useState } from "preact/hooks";
+import {
+  fetchFormSettings,
+  fetchOrderDetails,
+  fetchWithdrawalEligibility,
+  submitWithdrawalRequest,
+} from "./lib/api.js";
+import { resolveLabels } from "./lib/labels.js";
 import StepProgress from "./components/StepProgress.jsx";
 import StepDetails from "./components/StepDetails.jsx";
 import StepConfirm from "./components/StepConfirm.jsx";
@@ -35,6 +41,14 @@ export default function WithdrawalForm() {
   // prefilled fields.
   const [orderCustomer, setOrderCustomer] = useState(
     /** @type {{ customerName: string, customerEmail: string } | null} */ (null),
+  );
+  // Where the order is in its lifecycle, resolved by the backend on every
+  // load. Drives which set of merchant copy renders, and whether the
+  // withdrawal window is still open at all.
+  const [eligibility, setEligibility] = useState(
+    /** @type {{ isEligible: boolean, code: string | null, message: string, stage: string } | null} */ (
+      null
+    ),
   );
 
   useEffect(() => {
@@ -86,6 +100,38 @@ export default function WithdrawalForm() {
     };
   }, [orderId, confirmationNumber]);
 
+  // Keyed on the order so it re-resolves whenever the page is opened, which is
+  // what makes a newly delivered order switch to the delivered copy without
+  // anyone touching the settings.
+  useEffect(() => {
+    if (!orderId || !confirmationNumber) return undefined;
+    let cancelled = false;
+
+    fetchWithdrawalEligibility(orderId, confirmationNumber)
+      .then((data) => {
+        if (!cancelled) setEligibility(data);
+      })
+      .catch((error) => {
+        // Fail open. The submission endpoint enforces the deadline server-side
+        // and returns 422 regardless, so a network blip here costs the
+        // delivered wording — not a customer being wrongly denied a statutory
+        // right they still hold.
+        console.error("[withdrawal-form] Couldn't load withdrawal eligibility", error);
+        if (!cancelled) {
+          setEligibility({
+            isEligible: true,
+            code: null,
+            message: "",
+            stage: "before_delivery",
+          });
+        }
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [orderId, confirmationNumber]);
+
   // Customer identity: prefer the extension API's buyerIdentity (only
   // present when the app has protected customer data access), then the
   // shipping address name, then the backend Admin API lookup above. `||`
@@ -113,6 +159,14 @@ export default function WithdrawalForm() {
     shopify.billingAddress?.value?.countryCode;
   const isEligibleCountry =
     Boolean(buyerCountryCode) && (settings?.euCountries ?? []).includes(buyerCountryCode);
+
+  // The settings the whole flow renders from, with the delivered copy swapped
+  // in once the order has arrived. Everything downstream reads `settings.labels`
+  // by its base key names, so no step component needs to know about stages.
+  const stagedSettings = useMemo(() => {
+    if (!settings) return null;
+    return { ...settings, labels: resolveLabels(settings.labels, eligibility?.stage) };
+  }, [settings, eligibility?.stage]);
 
   function toggleLine(lineId, checked) {
     setSelectedLineIds((prev) =>
@@ -147,6 +201,11 @@ export default function WithdrawalForm() {
           : "",
         items: selectedLines.map((line) => ({
           lineId: line.id,
+          // The join key the backend needs to create a Shopify return.
+          // `line.id` is a CartLine id — a different id space from the
+          // LineItem ids the Admin API works in, and documented as unstable —
+          // so the variant is what actually identifies the item.
+          variantId: line.merchandise?.id ?? "",
           title: line.merchandise?.title ?? "Item",
           sku: line.merchandise?.sku ?? "",
           imageUrl: line.merchandise?.image?.url ?? "",
@@ -162,7 +221,14 @@ export default function WithdrawalForm() {
       setStep(STEP_DONE);
     } catch (error) {
       console.error("[withdrawal-form] Couldn't submit withdrawal request", error);
-      setSubmitError("Something went wrong submitting your request. Please try again.");
+      // A rejection the customer can act on (already requested, deadline
+      // passed) comes back with its own wording; anything else is a genuine
+      // fault and gets the retry message.
+      setSubmitError(
+        error.code
+          ? error.message
+          : "Something went wrong submitting your request. Please try again.",
+      );
     } finally {
       setSubmitting(false);
     }
@@ -171,8 +237,24 @@ export default function WithdrawalForm() {
   // Render nothing while loading — most customers will never see this form
   // (disabled, wrong country, ...), so a spinner that pops in and vanishes
   // again would just be layout noise on the order status page.
-  if (status !== "ready" || lines.length === 0 || !isEligibleCountry) {
+  //
+  // Waiting on `eligibility` matters beyond loading etiquette: rendering
+  // before the stage is known would show the pre-delivery heading and then
+  // swap it, which is the flicker this whole path exists to avoid.
+  if (status !== "ready" || !eligibility || lines.length === 0 || !isEligibleCountry) {
     return null;
+  }
+
+  // Past the deadline, already requested, order cancelled — the form is gone
+  // and the reason takes its place. Submitting is blocked server-side too, so
+  // this is the explanation rather than the enforcement.
+  if (!eligibility.isEligible) {
+    if (!eligibility.message) return null;
+    return (
+      <s-section>
+        <s-banner tone="info">{eligibility.message}</s-banner>
+      </s-section>
+    );
   }
 
   // Compact entry card — the flow expands in place when the customer starts.
@@ -180,8 +262,8 @@ export default function WithdrawalForm() {
     return (
       <s-section>
         <s-stack direction="block" gap="base">
-          <s-heading>{settings.labels.step1Title}</s-heading>
-          <s-paragraph color="subdued">{settings.labels.step1Description}</s-paragraph>
+          <s-heading>{stagedSettings.labels.step1Title}</s-heading>
+          <s-paragraph color="subdued">{stagedSettings.labels.step1Description}</s-paragraph>
           <s-stack direction="inline">
             <s-button onClick={() => setStarted(true)}>Start withdrawal request</s-button>
           </s-stack>
@@ -197,7 +279,7 @@ export default function WithdrawalForm() {
 
         {step === STEP_DETAILS && (
           <StepDetails
-            settings={settings}
+            settings={stagedSettings}
             lines={lines}
             orderName={order?.name ?? ""}
             fullName={fullName}
@@ -212,7 +294,7 @@ export default function WithdrawalForm() {
 
         {step === STEP_CONFIRM && (
           <StepConfirm
-            settings={settings}
+            settings={stagedSettings}
             lines={lines}
             selectedLineIds={selectedLineIds}
             onPrevious={() => setStep(STEP_DETAILS)}
@@ -223,7 +305,7 @@ export default function WithdrawalForm() {
         )}
 
         {step === STEP_DONE && (
-          <StepDone settings={settings} lines={lines} selectedLineIds={selectedLineIds} />
+          <StepDone settings={stagedSettings} lines={lines} selectedLineIds={selectedLineIds} />
         )}
       </s-stack>
     </s-section>

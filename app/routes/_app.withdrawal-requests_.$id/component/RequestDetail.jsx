@@ -31,9 +31,29 @@ function ItemRow({ item }) {
   );
 }
 
-// Built from facts this app actually knows (submission, decision, staff
-// notes) — deliberately doesn't claim automations (tagging, emails,
-// fulfillment holds) that aren't wired up yet.
+// What each automation step is called in the timeline. A step with no entry
+// here still shows, using its raw action name — better a slightly technical
+// label than a silently missing event.
+const AUTOMATION_LABEL = {
+  resolve_branch: "Automation started",
+  hold_fulfillment: "Fulfillment hold",
+  schedule_fallback: "Scheduled follow-up",
+  release_hold: "Fulfillment hold released",
+  cancel_order_immediate: "Order cancelled and refunded",
+  cancel_order_scheduled: "Order cancelled and refunded",
+  tag_before_ship: "Order tagged",
+  tag_after_delivery: "Order tagged",
+  create_return: "Shopify return",
+  notify_merchant: "Merchant notified",
+  run_automation: "Automation",
+};
+
+const OUTCOME_TONE = { success: "success", failed: "critical", skipped: undefined };
+
+// Built from facts this app actually knows: submission, decision, staff notes,
+// and every automation step that ran. Failed steps are shown, not hidden —
+// a merchant whose return wasn't created needs the reason here rather than in
+// server logs they can't reach.
 function buildTimeline(withdrawalRequest) {
   const events = [
     {
@@ -43,6 +63,20 @@ function buildTimeline(withdrawalRequest) {
       muted: true,
     },
   ];
+
+  for (const [index, entry] of (withdrawalRequest.automation?.log ?? []).entries()) {
+    const label = AUTOMATION_LABEL[entry.action] ?? entry.action;
+    events.push({
+      key: `automation-${index}`,
+      text: `${label}: ${entry.message}`,
+      time: new Date(entry.at),
+      tone: OUTCOME_TONE[entry.outcome],
+      muted: entry.outcome === "skipped",
+      // The failure detail (Shopify user errors, what was submitted vs what
+      // was returnable) rendered only when there's something to explain.
+      detail: entry.outcome === "failed" && entry.data ? entry.data : null,
+    });
+  }
   if (withdrawalRequest.decidedAt) {
     events.push({
       key: "decided",
@@ -70,7 +104,18 @@ function TimelineRow({ event }) {
         color={event.tone ? undefined : "subdued"}
       ></s-icon>
       <s-stack direction="block" gap="small-100">
-        <s-text color={event.muted ? "subdued" : undefined}>{event.text}</s-text>
+        <s-text color={event.muted ? "subdued" : undefined} tone={event.tone}>
+          {event.text}
+        </s-text>
+        {event.detail && (
+          <s-box border="base" borderRadius="base" padding="small-200">
+            <s-text color="subdued">
+              <pre style={{ margin: 0, whiteSpace: "pre-wrap", wordBreak: "break-word" }}>
+                {JSON.stringify(event.detail, null, 2)}
+              </pre>
+            </s-text>
+          </s-box>
+        )}
         <s-text color="subdued">{formatDateTime(event.time)}</s-text>
       </s-stack>
     </s-stack>

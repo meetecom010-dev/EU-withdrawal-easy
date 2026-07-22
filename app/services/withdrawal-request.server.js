@@ -25,13 +25,43 @@ export function serializeWithdrawalRequest(doc) {
     decidedAt: obj.decidedAt,
     notes: obj.notes ?? [],
     tags: obj.tags ?? [],
+    automation: obj.automation ?? null,
   };
+}
+
+// Thrown when an order already has an open request. The submission route turns
+// this into a 409 the extension can render, rather than a generic failure.
+export class DuplicateWithdrawalRequestError extends Error {
+  constructor(orderId) {
+    super(`A withdrawal request for order ${orderId} is already open`);
+    this.name = "DuplicateWithdrawalRequestError";
+    this.orderId = orderId;
+  }
 }
 
 export async function createWithdrawalRequest(shop, details) {
   await connectDB();
-  const doc = await WithdrawalRequest.create({ shop, ...details });
-  return serializeWithdrawalRequest(doc);
+  try {
+    const doc = await WithdrawalRequest.create({ shop, ...details });
+    return serializeWithdrawalRequest(doc);
+  } catch (error) {
+    // The partial unique index on (shop, orderId) for pending requests is the
+    // real guard — checking first and then inserting would still let two
+    // concurrent submissions through.
+    if (error?.code === 11000) {
+      throw new DuplicateWithdrawalRequestError(details.orderId);
+    }
+    throw error;
+  }
+}
+
+// The open request for an order, if there is one. Used by the eligibility
+// endpoint so the form can tell a returning customer their request is already
+// in rather than letting them submit into a 409.
+export async function findOpenWithdrawalRequest(shop, orderId) {
+  await connectDB();
+  const doc = await WithdrawalRequest.findOne({ shop, orderId, status: "pending" });
+  return doc ? serializeWithdrawalRequest(doc) : null;
 }
 
 export async function listWithdrawalRequests(shop) {

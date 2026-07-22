@@ -19,6 +19,12 @@ declare module './src/lib/api.js' {
 }
 
 //@ts-ignore
+declare module './src/lib/labels.js' {
+  const shopify: import('@shopify/ui-extensions/customer-account.order-status.block.render').Api;
+  const globalThis: { shopify: typeof shopify };
+}
+
+//@ts-ignore
 declare module './src/components/StepProgress.jsx' {
   const shopify: import('@shopify/ui-extensions/customer-account.order-status.block.render').Api;
   const globalThis: { shopify: typeof shopify };
