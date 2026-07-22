@@ -4,7 +4,16 @@ import { useEffect, useRef, useState } from "react";
 // Inline searchable multi-select: type to filter, check items in the
 // dropdown to add them, remove via the chip's own "x". Shared by EU
 // countries and languages so both behave identically.
-export default function PickerChips({ label, placeholder, items, selected, onChange, hint, error }) {
+export default function PickerChips({
+  label,
+  placeholder,
+  items,
+  selected,
+  onChange,
+  hint,
+  error,
+  onDismissError,
+}) {
   const [query, setQuery] = useState("");
   const [open, setOpen] = useState(false);
   const containerRef = useRef(null);
@@ -24,7 +33,12 @@ export default function PickerChips({ label, placeholder, items, selected, onCha
   );
 
   function toggle(code, checked) {
-    onChange(checked ? [...selected, code] : selected.filter((c) => c !== code));
+    const next = checked ? [...selected, code] : selected.filter((c) => c !== code);
+    // Stored in the option list's own order rather than the order they were
+    // clicked, so unchecking an item and checking it again lands back on the
+    // identical array — appending would reorder it and leave the save bar up
+    // for a selection that's back to what it was.
+    onChange(items.filter((item) => next.includes(item.code)).map((item) => item.code));
   }
 
   return (
@@ -41,7 +55,10 @@ export default function PickerChips({ label, placeholder, items, selected, onCha
               setQuery(e.currentTarget.value);
               setOpen(true);
             }}
-            onFocus={() => setOpen(true)}
+            onFocus={() => {
+              setOpen(true);
+              onDismissError?.();
+            }}
           ></s-search-field>
 
           {hint && <s-text color="subdued">{hint}</s-text>}

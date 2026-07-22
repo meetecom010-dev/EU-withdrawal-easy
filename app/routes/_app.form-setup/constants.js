@@ -44,6 +44,18 @@ export const AVAILABLE_LANGUAGES = [
   { code: "sv", name: "Swedish" },
 ];
 
+// The automation choices, kept here rather than in AutomationCard.jsx because
+// validation.js runs on the server too (see services/app-settings.server.js)
+// and can't pull in a component module to find out which values are legal.
+export const FALLBACK_OPTIONS = [
+  { value: "hold", label: "Do nothing — hold until staff act" },
+  { value: "cancel-now", label: "Cancel and refund immediately" },
+  { value: "release-n", label: "Release the hold after N days" },
+  { value: "cancel-n", label: "Cancel and refund after N days" },
+];
+
+export const AFTER_DELIVERY_ACTIONS = ["notify_only", "create_return"];
+
 // countryMode governs eligibility: "all" ignores the stored euCountries and
 // resolves to the explicit full EU list (so the admin UI and the extension
 // always see a concrete selection), "specific" passes the stored list

@@ -1,16 +1,17 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useAppBridge } from "@shopify/app-bridge-react";
 import { authenticate } from "../../shopify.server";
 import { getFormSettings, saveFormSettings } from "../../utils/api/formSettings";
 import TurnItOnCard from "./component/TurnItOnCard";
 import CountriesCard from "./component/CountriesCard";
-import FormFieldsEditor from "./component/FormFieldsEditor";
+import FormFieldsEditor, { tabForErrorPath } from "./component/FormFieldsEditor";
 import LivePreview from "./component/LivePreview";
 import LanguagesCard from "./component/LanguagesCard";
 import AutomationCard from "./component/AutomationCard";
 import DeadlineCard from "./component/DeadlineCard";
 import FormSetupSkeleton from "./component/FormSetupSkeleton";
 import { validateFormSettings } from "./validation";
+import { dirtyFingerprint } from "./fieldValue";
 
 export const loader = async ({ request }) => {
   await authenticate.admin(request);
@@ -55,8 +56,13 @@ export default function FormSetup() {
       .finally(() => setLoading(false));
   }, []);
 
+  // Every field updates on each keystroke so the save bar reacts immediately,
+  // which makes this run constantly — the baseline only moves on save or
+  // discard, so it's normalised on its own rather than per character.
+  const savedFingerprint = useMemo(() => dirtyFingerprint(savedSettings), [savedSettings]);
+  const currentFingerprint = useMemo(() => dirtyFingerprint(settings), [settings]);
   const hasChanges = Boolean(
-    settings && savedSettings && JSON.stringify(settings) !== JSON.stringify(savedSettings),
+    settings && savedSettings && currentFingerprint !== savedFingerprint,
   );
 
   const errors = useMemo(() => (settings ? validateFormSettings(settings) : {}), [settings]);
@@ -65,31 +71,65 @@ export default function FormSetup() {
   // errors only display after a save attempt — editing shouldn't flash red
   // mid-change.
   const [showErrors, setShowErrors] = useState(false);
-  const displayedErrors = showErrors ? errors : {};
+  // Paths the merchant has gone back to since that save attempt. Their message
+  // is hidden while they work on the fix, rather than sitting under the field
+  // contradicting what they're typing; the next Save re-runs validation and
+  // brings back whatever is still wrong.
+  const [dismissedErrors, setDismissedErrors] = useState([]);
 
+  const displayedErrors = useMemo(() => {
+    if (!showErrors) return {};
+    return Object.fromEntries(
+      Object.entries(errors).filter(([path]) => !dismissedErrors.includes(path)),
+    );
+  }, [errors, showErrors, dismissedErrors]);
+
+  const dismissError = useCallback((path) => {
+    setDismissedErrors((prev) => (prev.includes(path) ? prev : [...prev, path]));
+  }, []);
+
+  // The dirty flag is the only thing that drives the save bar. Depending on
+  // `settings` instead would re-issue show() on every keystroke; this way the
+  // App Bridge call happens only when the answer actually flips. `isReady`
+  // holds it back until <ui-save-bar> is on the page.
+  const isReady = Boolean(settings);
   useEffect(() => {
-    if (!shopify || !settings) return;
+    if (!shopify || !isReady) return;
     if (hasChanges) {
       shopify.saveBar.show(SAVE_BAR_ID);
     } else {
       shopify.saveBar.hide(SAVE_BAR_ID);
     }
-  }, [hasChanges, shopify, settings]);
+  }, [hasChanges, isReady, shopify]);
 
   function update(path, value) {
     setSettings((prev) => setPath(prev, path, value));
+    // Editing a field counts as acting on its message. Controls that can't
+    // take an onFocus handler (the choice lists) rely on this alone.
+    dismissError(path);
   }
 
   function handleDiscard() {
     setSettings(savedSettings);
     setShowErrors(false);
+    setDismissedErrors([]);
   }
 
   async function handleSave() {
     if (hasErrors) {
       // The inline field errors (displayedErrors) are the only signal —
-      // no error toast.
+      // no error toast. A fresh attempt re-surfaces every message, including
+      // ones dismissed by returning to the field.
+      setDismissedErrors([]);
       setShowErrors(true);
+      // A form-builder field can be invalid on a tab that isn't open, where
+      // its message would be invisible and Save would look like it did
+      // nothing. Only move if no error is on the current tab, so the merchant
+      // isn't pulled away from one they can already see.
+      const erroredTabs = Object.keys(errors).map(tabForErrorPath).filter(Boolean);
+      if (erroredTabs.length > 0 && !erroredTabs.includes(activeTab)) {
+        setActiveTab(erroredTabs[0]);
+      }
       return;
     }
     setIsSaving(true);
@@ -99,6 +139,7 @@ export default function FormSetup() {
       setSettings(formSettings);
       setSavedSettings(formSettings);
       setShowErrors(false);
+      setDismissedErrors([]);
       shopify.toast.show("Form settings saved");
     } catch (error) {
       setSaveError(error.message);
@@ -162,17 +203,33 @@ export default function FormSetup() {
           >
             <s-stack direction="block" gap="base">
               <TurnItOnCard settings={settings} update={update} />
-              <CountriesCard settings={settings} update={update} errors={displayedErrors} />
+              <CountriesCard
+                settings={settings}
+                update={update}
+                errors={displayedErrors}
+                dismissError={dismissError}
+              />
               <FormFieldsEditor
                 settings={settings}
                 update={update}
                 activeTab={activeTab}
                 onTabChange={setActiveTab}
                 errors={displayedErrors}
+                dismissError={dismissError}
               />
               <LanguagesCard settings={settings} update={update} />
-              <AutomationCard settings={settings} update={update} errors={displayedErrors} />
-              <DeadlineCard settings={settings} update={update} errors={displayedErrors} />
+              <AutomationCard
+                settings={settings}
+                update={update}
+                errors={displayedErrors}
+                dismissError={dismissError}
+              />
+              <DeadlineCard
+                settings={settings}
+                update={update}
+                errors={displayedErrors}
+                dismissError={dismissError}
+              />
             </s-stack>
             <div style={{ position: "sticky", top: "16px", alignSelf: "start" }}>
               <LivePreview settings={settings} activeTab={activeTab} />

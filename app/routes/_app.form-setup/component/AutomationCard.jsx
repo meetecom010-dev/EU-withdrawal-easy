@@ -1,21 +1,27 @@
 /* eslint-disable react/prop-types -- plain JS project, no prop-types package installed */
 import { useState } from "react";
+import { FALLBACK_OPTIONS } from "../constants";
+import { toNumberValue } from "../fieldValue";
 
-const FALLBACK_OPTIONS = [
-  { value: "hold", label: "Do nothing — hold until staff act" },
-  { value: "cancel-now", label: "Cancel and refund immediately" },
-  { value: "release-n", label: "Release the hold after N days" },
-  { value: "cancel-n", label: "Cancel and refund after N days" },
-];
-
-function FallbackControl({ value, onChange, days, onDaysChange, daysError }) {
+function FallbackControl({
+  value,
+  onChange,
+  error,
+  onDismissError,
+  days,
+  onDaysChange,
+  daysError,
+  onDismissDaysError,
+}) {
   const showDays = value === "release-n" || value === "cancel-n";
   return (
     <s-stack direction="block" gap="base">
       <s-select
         label="If no one reviews the request in time"
         value={value}
+        error={error}
         onChange={(e) => onChange(e.currentTarget.value)}
+        onFocus={onDismissError}
       >
         {FALLBACK_OPTIONS.map((option) => (
           <s-option key={option.value} value={option.value}>
@@ -30,14 +36,15 @@ function FallbackControl({ value, onChange, days, onDaysChange, daysError }) {
           min={1}
           max={90}
           error={daysError}
-          onChange={(e) => onDaysChange(Number(e.currentTarget.value))}
+          onInput={(e) => onDaysChange(toNumberValue(e.currentTarget.value))}
+          onFocus={onDismissDaysError}
         ></s-number-field>
       )}
     </s-stack>
   );
 }
 
-function TagInput({ tags = [], onChange }) {
+function TagInput({ tags = [], onChange, error, onDismissError }) {
   const [value, setValue] = useState("");
 
   const addTag = () => {
@@ -68,6 +75,10 @@ function TagInput({ tags = [], onChange }) {
         labelAccessibilityVisibility="exclusive"
         placeholder="Add tag"
         value={value}
+        // "Add at least one tag" belongs to the tag list, and this composer is
+        // the control that fixes it.
+        error={error}
+        onFocus={onDismissError}
         onInput={(e) => setValue(e.currentTarget.value)}
         onKeyDown={(e) => {
           if (e.key === "Enter" || e.key === ",") {
@@ -106,7 +117,15 @@ function TagInput({ tags = [], onChange }) {
 
 // The "Add tag on submission" toggle + tag input is identical before-ship
 // and after-delivery, differing only in which settings path they read/write.
-function TagOnSubmission({ description, checked, onToggle, tags, onTagsChange, error }) {
+function TagOnSubmission({
+  description,
+  checked,
+  onToggle,
+  tags,
+  onTagsChange,
+  error,
+  onDismissError,
+}) {
   return (
     <>
       <s-checkbox
@@ -116,16 +135,18 @@ function TagOnSubmission({ description, checked, onToggle, tags, onTagsChange, e
         onChange={onToggle}
       ></s-checkbox>
       {checked && (
-        <s-stack direction="block" gap="small-200">
-          <TagInput tags={tags ?? []} onChange={onTagsChange} />
-          {error && <s-text tone="critical">{error}</s-text>}
-        </s-stack>
+        <TagInput
+          tags={tags ?? []}
+          onChange={onTagsChange}
+          error={error}
+          onDismissError={onDismissError}
+        />
       )}
     </>
   );
 }
 
-export default function AutomationCard({ settings, update, errors = {} }) {
+export default function AutomationCard({ settings, update, errors = {}, dismissError }) {
   return (
     <s-section heading="Automation">
       <s-stack direction="block" gap="base">
@@ -144,9 +165,12 @@ export default function AutomationCard({ settings, update, errors = {} }) {
             <FallbackControl
               value={settings.automation.unshippedFallback}
               onChange={(value) => update("automation.unshippedFallback", value)}
+              error={errors["automation.unshippedFallback"]}
+              onDismissError={() => dismissError("automation.unshippedFallback")}
               days={settings.automation.unshippedFallbackDays}
               onDaysChange={(days) => update("automation.unshippedFallbackDays", days)}
               daysError={errors["automation.unshippedFallbackDays"]}
+              onDismissDaysError={() => dismissError("automation.unshippedFallbackDays")}
             />
           )}
           <TagOnSubmission
@@ -156,6 +180,7 @@ export default function AutomationCard({ settings, update, errors = {} }) {
             tags={settings.automation.beforeShipTags}
             onTagsChange={(tags) => update("automation.beforeShipTags", tags)}
             error={errors["automation.beforeShipTags"]}
+            onDismissError={() => dismissError("automation.beforeShipTags")}
           />
         </s-stack>
 
@@ -173,6 +198,7 @@ export default function AutomationCard({ settings, update, errors = {} }) {
             labelAccessibilityVisibility="exclusive"
             name="afterDeliveryAction"
             values={[settings.automation.afterDeliveryAction]}
+            error={errors["automation.afterDeliveryAction"]}
             onChange={(e) => update("automation.afterDeliveryAction", e.currentTarget.values[0])}
           >
             <s-choice value="notify_only">
@@ -196,6 +222,7 @@ export default function AutomationCard({ settings, update, errors = {} }) {
             tags={settings.automation.afterDeliveryTags}
             onTagsChange={(tags) => update("automation.afterDeliveryTags", tags)}
             error={errors["automation.afterDeliveryTags"]}
+            onDismissError={() => dismissError("automation.afterDeliveryTags")}
           />
         </s-stack>
 

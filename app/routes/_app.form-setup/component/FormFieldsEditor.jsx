@@ -9,9 +9,64 @@ const FORM_TABS = [
 
 const LOCKED_FIELDS = ["Full name", "Email", "Order number"];
 
-export default function FormFieldsEditor({ settings, update, activeTab, onTabChange, errors = {} }) {
+// Which tab each validatable field sits on. A save attempt uses this to open
+// the tab holding the first problem — otherwise an invalid field on a closed
+// tab would show no message anywhere and Save would look inert.
+const TAB_FIELDS = {
+  step1: [
+    "labels.step1Title",
+    "labels.step1Description",
+    "labels.itemSelectionHeading",
+    "labels.deliveredTitle",
+    "labels.deliveredDescription",
+    "labels.deliveredItemSelectionHeading",
+    "reasonField.label",
+    "reasonField.options",
+    "labels.step1ButtonLabel",
+  ],
+  confirm: [
+    "labels.confirmHeading",
+    "labels.confirmMessage",
+    "labels.deliveredConfirmMessage",
+    "labels.declaration",
+    "labels.confirmButtonLabel",
+  ],
+  done: [
+    "labels.submittedTitle",
+    "labels.submittedMessage",
+    "labels.deliveredSubmittedTitle",
+    "labels.deliveredSubmittedMessage",
+  ],
+};
+
+export function tabForErrorPath(path) {
+  return Object.keys(TAB_FIELDS).find((tab) => TAB_FIELDS[tab].includes(path)) ?? null;
+}
+
+export default function FormFieldsEditor({
+  settings,
+  update,
+  activeTab,
+  onTabChange,
+  errors = {},
+  dismissError,
+}) {
   const [newReason, setNewReason] = useState("");
   const options = settings.reasonField.options ?? [];
+
+  // Every field under `labels` is wired the same way, so they share one
+  // binding — that's what guarantees none of them is left on an event that
+  // fires too late for the save bar. See ../fieldValue.js for why it's
+  // `input` and not `change`.
+  function labelField(key) {
+    const path = `labels.${key}`;
+    return {
+      value: settings.labels[key],
+      error: errors[path],
+      onInput: (e) => update(path, e.currentTarget.value),
+      onFocus: () => dismissError(path),
+    };
+  }
 
   function addReason() {
     const value = newReason.trim();
@@ -63,21 +118,15 @@ export default function FormFieldsEditor({ settings, update, activeTab, onTabCha
               </s-text>
             </s-stack>
             <s-stack gap="small-200">
-              <s-text-field
-                label="Title"
-                value={settings.labels.step1Title}
-                onChange={(e) => update("labels.step1Title", e.currentTarget.value)}
-              ></s-text-field>
+              <s-text-field label="Title" {...labelField("step1Title")}></s-text-field>
               <s-text-area
                 label="Description"
                 rows={2}
-                value={settings.labels.step1Description}
-                onChange={(e) => update("labels.step1Description", e.currentTarget.value)}
+                {...labelField("step1Description")}
               ></s-text-area>
               <s-text-field
                 label="Item selection heading"
-                value={settings.labels.itemSelectionHeading}
-                onChange={(e) => update("labels.itemSelectionHeading", e.currentTarget.value)}
+                {...labelField("itemSelectionHeading")}
               ></s-text-field>
             </s-stack>
             <s-divider></s-divider>
@@ -88,23 +137,15 @@ export default function FormFieldsEditor({ settings, update, activeTab, onTabCha
               </s-text>
             </s-stack>
              <s-stack gap="small-200">
-              <s-text-field
-                label="Title"
-                value={settings.labels.deliveredTitle}
-                onChange={(e) => update("labels.deliveredTitle", e.currentTarget.value)}
-              ></s-text-field>
+              <s-text-field label="Title" {...labelField("deliveredTitle")}></s-text-field>
               <s-text-area
                 label="Description"
                 rows={2}
-                value={settings.labels.deliveredDescription}
-                onChange={(e) => update("labels.deliveredDescription", e.currentTarget.value)}
+                {...labelField("deliveredDescription")}
               ></s-text-area>
               <s-text-field
                 label="Delivered item selection heading"
-                value={settings.labels.deliveredItemSelectionHeading}
-                onChange={(e) =>
-                  update("labels.deliveredItemSelectionHeading", e.currentTarget.value)
-                }
+                {...labelField("deliveredItemSelectionHeading")}
               ></s-text-field>
             </s-stack>
 
@@ -146,7 +187,8 @@ export default function FormFieldsEditor({ settings, update, activeTab, onTabCha
                     label="Reason field label"
                     value={settings.reasonField.label}
                     error={errors["reasonField.label"]}
-                    onChange={(e) => update("reasonField.label", e.currentTarget.value)}
+                    onInput={(e) => update("reasonField.label", e.currentTarget.value)}
+                    onFocus={() => dismissError("reasonField.label")}
                   ></s-text-field>
 
                   <s-stack direction="block" gap="small-200">
@@ -155,10 +197,6 @@ export default function FormFieldsEditor({ settings, update, activeTab, onTabCha
                       Shoppers pick from this list. Add, remove, or reword the options to match your
                       store.
                     </s-text>
-                    {errors["reasonField.options"] && (
-                      <s-text tone="critical">{errors["reasonField.options"]}</s-text>
-                    )}
-
                     {options.length > 0 && (
                       <s-box border="base" borderRadius="base" padding="small-200">
                         <s-stack direction="block" gap="small-200">
@@ -192,6 +230,10 @@ export default function FormFieldsEditor({ settings, update, activeTab, onTabCha
                         labelAccessibilityVisibility="exclusive"
                         placeholder='Add a reason, e.g. "Ordered by mistake"'
                         value={newReason}
+                        // "Add at least one reason option" belongs to the list,
+                        // and this composer is the control that fixes it.
+                        error={errors["reasonField.options"]}
+                        onFocus={() => dismissError("reasonField.options")}
                         onInput={(e) => setNewReason(e.currentTarget.value)}
                         onKeyDown={(e) => {
                           if (e.key === "Enter") {
@@ -212,8 +254,7 @@ export default function FormFieldsEditor({ settings, update, activeTab, onTabCha
 
             <s-text-field
               label="Continue button label"
-              value={settings.labels.step1ButtonLabel}
-              onChange={(e) => update("labels.step1ButtonLabel", e.currentTarget.value)}
+              {...labelField("step1ButtonLabel")}
             ></s-text-field>
           </s-stack>
         )}
@@ -222,60 +263,46 @@ export default function FormFieldsEditor({ settings, update, activeTab, onTabCha
           <s-stack direction="block" gap="small-200">
             <s-text-field
               label="Confirmation heading"
-              value={settings.labels.confirmHeading}
-              onChange={(e) => update("labels.confirmHeading", e.currentTarget.value)}
+              {...labelField("confirmHeading")}
             ></s-text-field>
             <s-text-area
               label="Pre-fulfillment confirmation message"
               rows={3}
-              value={settings.labels.confirmMessage}
-              onChange={(e) => update("labels.confirmMessage", e.currentTarget.value)}
+              {...labelField("confirmMessage")}
             ></s-text-area>
             <s-text-area
               label="Delivered-order confirmation message"
               rows={3}
-              value={settings.labels.deliveredConfirmMessage}
-              onChange={(e) => update("labels.deliveredConfirmMessage", e.currentTarget.value)}
+              {...labelField("deliveredConfirmMessage")}
             ></s-text-area>
             <s-text-area
               label="Declaration"
               rows={2}
-              value={settings.labels.declaration}
-              onChange={(e) => update("labels.declaration", e.currentTarget.value)}
+              {...labelField("declaration")}
             ></s-text-area>
             <s-text-field
               label="Confirm button label"
-              value={settings.labels.confirmButtonLabel}
-              onChange={(e) => update("labels.confirmButtonLabel", e.currentTarget.value)}
+              {...labelField("confirmButtonLabel")}
             ></s-text-field>
           </s-stack>
         )}
 
         {activeTab === "done" && (
           <s-stack direction="block" gap="small-200">
-            <s-text-field
-              label="Submitted title"
-              value={settings.labels.submittedTitle}
-              onChange={(e) => update("labels.submittedTitle", e.currentTarget.value)}
-            ></s-text-field>
+            <s-text-field label="Submitted title" {...labelField("submittedTitle")}></s-text-field>
             <s-text-area
               label="Submitted message"
               rows={2}
-              value={settings.labels.submittedMessage}
-              onChange={(e) => update("labels.submittedMessage", e.currentTarget.value)}
+              {...labelField("submittedMessage")}
             ></s-text-area>
             <s-text-field
               label="Delivered submitted title"
-              value={settings.labels.deliveredSubmittedTitle}
-              onChange={(e) => update("labels.deliveredSubmittedTitle", e.currentTarget.value)}
+              {...labelField("deliveredSubmittedTitle")}
             ></s-text-field>
             <s-text-area
               label="Delivered submitted message"
               rows={2}
-              value={settings.labels.deliveredSubmittedMessage}
-              onChange={(e) =>
-                update("labels.deliveredSubmittedMessage", e.currentTarget.value)
-              }
+              {...labelField("deliveredSubmittedMessage")}
             ></s-text-area>
           </s-stack>
         )}

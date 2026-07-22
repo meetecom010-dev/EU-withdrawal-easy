@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types -- plain JS project, no prop-types package installed */
+import { toNumberValue } from "../fieldValue";
 
-export default function DeadlineCard({ settings, update, errors = {} }) {
+export default function DeadlineCard({ settings, update, errors = {}, dismissError }) {
   return (
     <s-section heading="Withdrawal deadline">
       <s-stack direction="block" gap="base">
@@ -16,7 +17,10 @@ export default function DeadlineCard({ settings, update, errors = {} }) {
             min={1}
             max={365}
             error={errors["deadline.daysAfterDelivery"]}
-            onChange={(e) => update("deadline.daysAfterDelivery", Number(e.currentTarget.value))}
+            onInput={(e) =>
+              update("deadline.daysAfterDelivery", toNumberValue(e.currentTarget.value))
+            }
+            onFocus={() => dismissError("deadline.daysAfterDelivery")}
           ></s-number-field>
           <s-number-field
             label="Estimated transit days"
@@ -25,7 +29,10 @@ export default function DeadlineCard({ settings, update, errors = {} }) {
             min={0}
             max={90}
             error={errors["deadline.estimatedTransitDays"]}
-            onChange={(e) => update("deadline.estimatedTransitDays", Number(e.currentTarget.value))}
+            onInput={(e) =>
+              update("deadline.estimatedTransitDays", toNumberValue(e.currentTarget.value))
+            }
+            onFocus={() => dismissError("deadline.estimatedTransitDays")}
           ></s-number-field>
         </s-grid>
       </s-stack>

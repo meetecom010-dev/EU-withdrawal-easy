@@ -1,21 +1,43 @@
 /* eslint-disable react/prop-types -- plain JS project, no prop-types package installed */
+import { useRef } from "react";
 import { EU_COUNTRIES } from "../constants";
 import PickerChips from "./PickerChips";
+
+const ALL_COUNTRY_CODES = EU_COUNTRIES.map((country) => country.code);
 
 // Two-mode country selection, persisted as formSettings.countryMode: "all"
 // makes every EU country eligible (the backend resolves it to the full list,
 // see resolveFormSettings in ../constants.js), "specific" reveals the
 // searchable picker for formSettings.euCountries. The radio is saved
 // alongside the rest of the form via the contextual save bar.
-export default function CountriesCard({ settings, update, errors }) {
+export default function CountriesCard({ settings, update, errors, dismissError }) {
+  // Leaving "specific" stashes the merchant's picks so switching back restores
+  // them. Both directions have to round-trip exactly, otherwise flipping the
+  // radio away and back would leave euCountries holding something other than
+  // what was loaded and the save bar would stay up over a setting the merchant
+  // had already put back.
+  const stashedSelection = useRef(null);
+
   function handleModeChange(mode) {
-    update("countryMode", mode);
-    // Switching to "specific" starts from an empty selection — the resolved
-    // list in "all" mode is the full 27, which isn't a meaningful starting
-    // point for someone who just said they want only specific countries.
-    if (mode === "specific") {
-      update("euCountries", []);
+    // Re-selecting the mode that's already active must not disturb the
+    // selection built up below.
+    if (mode === settings.countryMode) return;
+
+    if (mode === "all") {
+      stashedSelection.current = settings.euCountries;
+      // "all" is stored as the explicit full list (see resolveFormSettings in
+      // ../constants.js), so writing it here is what makes the comparison
+      // against the loaded settings come out clean again.
+      update("euCountries", ALL_COUNTRY_CODES);
+    } else {
+      // Nothing stashed means "all" was the loaded state — an empty selection
+      // is the right starting point, since the resolved full 27 isn't a
+      // meaningful one for someone who just asked for specific countries.
+      update("euCountries", stashedSelection.current ?? []);
+      stashedSelection.current = null;
     }
+
+    update("countryMode", mode);
   }
 
   return (
@@ -51,6 +73,7 @@ export default function CountriesCard({ settings, update, errors }) {
             selected={settings.euCountries}
             onChange={(countries) => update("euCountries", countries)}
             error={errors?.euCountries}
+            onDismissError={() => dismissError("euCountries")}
           />
         )}
       </s-stack>
