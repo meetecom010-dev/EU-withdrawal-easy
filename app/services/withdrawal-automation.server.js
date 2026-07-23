@@ -11,7 +11,6 @@ import {
   buildReturnLineItems,
   createReturn,
   fetchReturnableLines,
-  resolveReturnReasonDefinitionId,
 } from "./shopify/returns.server";
 import { fetchShopContact } from "./shopify/shop.server";
 import { cancelJobsForRequest, scheduleJob } from "./automation-jobs.server";
@@ -203,16 +202,12 @@ async function runAfterDelivery(admin, request, automation) {
 
 async function createReturnForRequest(admin, request) {
   const outcome = await step(request, "create_return", async () => {
-    const [returnable, returnReasonDefinitionId] = await Promise.all([
-      fetchReturnableLines(admin, request.orderId),
-      resolveReturnReasonDefinitionId(admin),
-    ]);
+    const returnable = await fetchReturnableLines(admin, request.orderId);
 
     const { returnLineItems, unreturnable } = buildReturnLineItems(request.items, returnable, {
       returnReasonNote: request.reason
         ? `Withdrawal request: ${request.reason}`
         : "Statutory withdrawal request",
-      returnReasonDefinitionId,
     });
 
     if (returnLineItems.length === 0) {
@@ -236,7 +231,6 @@ async function createReturnForRequest(admin, request) {
           returnableQuantity: candidate.returnableQuantity,
         })),
         unreturnable,
-        returnReasonDefinitionId,
       };
       throw error;
     }

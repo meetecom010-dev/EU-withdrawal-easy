@@ -35,20 +35,17 @@ const RETURNABLE_FULFILLMENTS_QUERY = `#graphql
   }
 `;
 
-// ReturnLineItemInput.returnReason is deprecated in favour of
-// returnReasonDefinitionId, and the definitions are per shop — so the id has
-// to be looked up rather than hardcoded.
-const RETURN_REASON_DEFINITIONS_QUERY = `#graphql
-  query WithdrawalReturnReasonDefinitions {
-    returnReasonDefinitions(first: 50) {
-      nodes {
-        id
-        handle
-        name
-      }
-    }
-  }
-`;
+// ReturnLineItemInput.returnReason is a required ReturnReason enum on this
+// API version. OTHER is the honest classification for a statutory withdrawal —
+// none of the merchandising reasons (SIZE_TOO_SMALL, DEFECTIVE, WRONG_ITEM…)
+// describes it — and OTHER is exactly the value Shopify pairs with a free-text
+// returnReasonNote, which carries the customer's own words.
+//
+// (An earlier revision tried returnReasonDefinitionId, a field that only
+// exists from 2026-04. The app's Admin client runs 2025-10, where the
+// returnReasonDefinitions query doesn't exist at all — that mismatch was the
+// "Field 'returnReasonDefinitions' doesn't exist on type 'QueryRoot'" error.)
+const RETURN_REASON = "OTHER";
 
 const RETURN_CREATE_MUTATION = `#graphql
   mutation WithdrawalReturnCreate($returnInput: ReturnInput!) {
@@ -119,38 +116,13 @@ export async function fetchReturnableLines(admin, orderId) {
   return { byVariantId, byLineItemId, available };
 }
 
-// A statutory withdrawal isn't a merchandising complaint, so the generic
-// reason is the honest one — "too small" would misreport why the goods came
-// back. Shops can rename or remove the built-in definitions, hence the
-// fallback chain and the null return: omitting the reason entirely is valid,
-// and the customer's own words still travel in returnReasonNote.
-const PREFERRED_REASON_HANDLES = ["other", "unwanted", "not-as-described"];
-
-export async function resolveReturnReasonDefinitionId(admin) {
-  const data = await adminQuery(admin, {
-    operation: "WithdrawalReturnReasonDefinitions",
-    query: RETURN_REASON_DEFINITIONS_QUERY,
-  });
-
-  const definitions = data.returnReasonDefinitions?.nodes ?? [];
-  for (const handle of PREFERRED_REASON_HANDLES) {
-    const match = definitions.find((definition) => definition.handle === handle);
-    if (match) return match.id;
-  }
-  return null;
-}
-
 // Turns the request's snapshotted items into returnCreate input. This is where
 // partial withdrawals are honoured: only the lines the customer selected, each
 // clamped to what Shopify still considers returnable.
 //
 // Returns the usable input alongside the lines that couldn't be matched, so the
 // caller can record a partial result instead of silently dropping items.
-export function buildReturnLineItems(
-  items,
-  returnable,
-  { returnReasonNote, returnReasonDefinitionId },
-) {
+export function buildReturnLineItems(items, returnable, { returnReasonNote }) {
   const returnLineItems = [];
   const unreturnable = [];
   // Tracks how much of each fulfillment line item this return has already
@@ -190,11 +162,11 @@ export function buildReturnLineItems(
       returnLineItems.push({
         fulfillmentLineItemId: candidate.fulfillmentLineItemId,
         quantity,
-        returnReasonNote,
-        // Omitted entirely when the shop has no matching definition —
-        // ReturnLineItemInput accepts a note without a reason, and the legacy
-        // `returnReason` enum is deprecated.
-        ...(returnReasonDefinitionId ? { returnReasonDefinitionId } : {}),
+        // Both required by ReturnLineItemInput. The note is capped at 255
+        // characters (Shopify rejects longer), and truncated rather than
+        // dropped so a long customer reason can't fail the whole return.
+        returnReason: RETURN_REASON,
+        returnReasonNote: (returnReasonNote ?? "").slice(0, 255),
       });
       remaining -= quantity;
     }
