@@ -58,6 +58,24 @@ export async function fetchWithdrawalEligibility(orderId, confirmationNumber) {
   return response.json();
 }
 
+// Records a pre-submission funnel event (button viewed / form opened) against
+// this app's backend (app/routes/api/public-form-events.jsx). Fire-and-forget:
+// funnel telemetry must never block or break the form, so failures are logged
+// and swallowed. `keepalive` lets the ping outlive a page navigation.
+export async function recordFormEvent({ orderId, type, sessionId }) {
+  try {
+    const token = await shopify.sessionToken.get();
+    await fetch(`${APP_URL}/api/public-form-events`, {
+      method: "POST",
+      headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+      body: JSON.stringify({ orderId, type, sessionId }),
+      keepalive: true,
+    });
+  } catch (error) {
+    console.error("[withdrawal-form] Couldn't record form event", type, error);
+  }
+}
+
 // Submits a withdrawal request to this app's backend
 // (app/routes/api/public-withdrawal-requests.jsx), where it's persisted so
 // it shows up in the admin's Withdrawal Requests table.

@@ -15,6 +15,7 @@ import {
 import { fetchShopContact } from "./shopify/shop.server";
 import { cancelJobsForRequest, scheduleJob } from "./automation-jobs.server";
 import { sendWithdrawalEmails } from "./email/index.server";
+import { recordAutomationEvents } from "./form-events/index.server";
 import { serializeWithdrawalRequest } from "./withdrawal-request.server";
 
 const DAY_MS = 24 * 60 * 60 * 1000;
@@ -22,8 +23,26 @@ const DAY_MS = 24 * 60 * 60 * 1000;
 // Appends to the request's audit trail. Every branch below logs through this,
 // including the ones that decide to do nothing — "why didn't this tag the
 // order?" is answered by a `skipped` entry, not by absence of evidence.
+//
+// The same entry is buffered for the formEvents stream (flushed once per run by
+// flushEvents). Writing both from this one place is what keeps the embedded log
+// and the event stream from ever disagreeing.
 function log(request, action, outcome, message, data = null) {
-  request.automation.log.push({ at: new Date(), action, outcome, message, data });
+  const entry = { at: new Date(), action, outcome, message, data };
+  request.automation.log.push(entry);
+  (request.__events ??= []).push(entry);
+}
+
+// Flushes this run's buffered log entries into the formEvents collection as one
+// batch. Never throws (recordAutomationEvents swallows) and clears the buffer so
+// flows that save more than once don't double-write.
+async function flushEvents(request) {
+  const buffered = request.__events;
+  if (!buffered?.length) return;
+  request.__events = [];
+  await recordAutomationEvents(request.shop, request.orderId, buffered, {
+    withdrawalRequestId: request._id,
+  });
 }
 
 // Pulls whatever diagnostic detail an error carries: Shopify user errors and
@@ -313,22 +332,26 @@ async function sendSubmissionEmails(request, shopContact) {
     error: result.merchant.error,
   };
 
-  // A send that failed (non-null error) is logged as failed so it surfaces in
-  // the timeline; a skip (no recipient / not configured) is logged as skipped.
-  const anyFailed = result.customer.error || result.merchant.error;
-  const anySent = result.customer.sent || result.merchant.sent;
-  log(
-    request,
-    "send_emails",
-    anyFailed ? "failed" : anySent ? "success" : "skipped",
-    `Customer: ${describeEmail(result.customer)}; Merchant: ${describeEmail(result.merchant)}`,
-    result,
-  );
+  // Logged as two events, one per recipient, so the stream and admin timeline
+  // show the customer confirmation and merchant notification separately — a
+  // failed (non-null error) send is `failed`, a skip (no recipient / not
+  // configured) is `skipped`.
+  logEmailOutcome(request, "customer_email", result.customer);
+  logEmailOutcome(request, "merchant_email", result.merchant);
 }
 
-function describeEmail(outcome) {
-  if (outcome.sent) return "sent";
-  return outcome.error ? `failed (${outcome.error})` : "not sent";
+function logEmailOutcome(request, action, outcome) {
+  const status = outcome.error ? "failed" : outcome.sent ? "success" : "skipped";
+  const message = outcome.sent
+    ? "Sent"
+    : outcome.error
+      ? `Failed: ${outcome.error}`
+      : "Not sent (no recipient or email not configured)";
+  log(request, action, status, message, {
+    sent: outcome.sent,
+    messageId: outcome.messageId,
+    error: outcome.error,
+  });
 }
 
 /**
@@ -362,6 +385,7 @@ export async function runWithdrawalAutomation(shop, requestId) {
       request.automation.status = "skipped";
       request.automation.completedAt = new Date();
       await request.save();
+      await flushEvents(request);
       return serializeWithdrawalRequest(request);
     }
 
@@ -395,11 +419,14 @@ export async function runWithdrawalAutomation(shop, requestId) {
     }
 
     // A step that failed logged itself; the run is only "completed" if none
-    // did. A failed email is deliberately excluded — it's still recorded (red)
-    // in the timeline for debugging, but a bounced notification must not mark
-    // an automation "failed" when the hold, return, or tag all succeeded.
+    // did. Failed emails are deliberately excluded — they're still recorded
+    // (red) in the timeline for debugging, but a bounced notification must not
+    // mark an automation "failed" when the hold, return, or tag all succeeded.
     const failed = request.automation.log.some(
-      (entry) => entry.outcome === "failed" && entry.action !== "send_emails",
+      (entry) =>
+        entry.outcome === "failed" &&
+        entry.action !== "customer_email" &&
+        entry.action !== "merchant_email",
     );
     request.automation.status = failed ? "failed" : "completed";
     if (failed) {
@@ -418,8 +445,18 @@ export async function runWithdrawalAutomation(shop, requestId) {
   }
 
   request.automation.completedAt = new Date();
+  // A single closing event carrying the run's final verdict, so the stream has
+  // an unambiguous end marker to query on.
+  log(
+    request,
+    "automation_completed",
+    request.automation.status === "completed" ? "success" : request.automation.status,
+    `Automation ${request.automation.status}`,
+    { branch: request.automation.branch },
+  );
   delete request.__orderContext;
   await request.save();
+  await flushEvents(request);
   return serializeWithdrawalRequest(request);
 }
 
@@ -446,6 +483,7 @@ export async function runScheduledAutomationJob(job) {
       `Request was already ${request.status} — scheduled ${job.type} not run`,
     );
     await request.save();
+    await flushEvents(request);
     return;
   }
 
@@ -458,12 +496,14 @@ export async function runScheduledAutomationJob(job) {
     const failed = request.automation.log.at(-1)?.outcome === "failed";
     if (failed) {
       await request.save();
+      await flushEvents(request);
       throw new Error(request.automation.log.at(-1)?.message ?? "Scheduled cancel failed");
     }
   }
 
   request.automation.fallbackCompletedAt = new Date();
   await request.save();
+  await flushEvents(request);
 }
 
 /**
@@ -523,5 +563,6 @@ export async function handleManualDecision(shop, requestId) {
   }
 
   await request.save();
+  await flushEvents(request);
   return serializeWithdrawalRequest(request);
 }

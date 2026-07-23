@@ -5,6 +5,7 @@ import {
 } from "../../services/withdrawal-request.server";
 import { runWithdrawalAutomation } from "../../services/withdrawal-automation.server";
 import { assertWithdrawalAllowed, WithdrawalNotAllowedError } from "../../services/withdrawal-eligibility.server";
+import { FORM_EVENT_TYPES, recordFormEvent } from "../../services/form-events/index.server";
 
 // POST /api/public-withdrawal-requests -> records a withdrawal request
 // submitted from the order-status extension (extensions/order-status-hello),
@@ -66,6 +67,17 @@ async function handleRequest(request) {
     }
     throw error;
   }
+
+  // The submission point in the funnel. Carries sessionId so it links to the
+  // button_viewed / form_opened events the extension emitted before a request
+  // existed. Recorded before the automation runs, which streams its own events.
+  await recordFormEvent(shop, withdrawalRequest.orderId, {
+    type: FORM_EVENT_TYPES.FORM_SUBMITTED,
+    status: "ok",
+    withdrawalRequestId: withdrawalRequest.id,
+    sessionId: typeof body.sessionId === "string" ? body.sessionId : null,
+    message: "Customer submitted the withdrawal form",
+  });
 
   // Run the automation inline so a hold lands within seconds rather than
   // waiting for the next cron tick. It never throws — failures are recorded on

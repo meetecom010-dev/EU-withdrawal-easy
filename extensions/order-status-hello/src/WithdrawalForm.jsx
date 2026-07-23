@@ -1,8 +1,9 @@
-import { useEffect, useMemo, useState } from "preact/hooks";
+import { useEffect, useMemo, useRef, useState } from "preact/hooks";
 import {
   fetchFormSettings,
   fetchOrderDetails,
   fetchWithdrawalEligibility,
+  recordFormEvent,
   submitWithdrawalRequest,
 } from "./lib/api.js";
 import { resolveLabels } from "./lib/labels.js";
@@ -10,6 +11,18 @@ import StepProgress from "./components/StepProgress.jsx";
 import StepDetails from "./components/StepDetails.jsx";
 import StepConfirm from "./components/StepConfirm.jsx";
 import StepDone from "./components/StepDone.jsx";
+
+// A per-mount id so the pre-submission funnel (button_viewed -> form_opened ->
+// form_submitted) can be stitched together on the backend before a withdrawal
+// request exists. randomUUID isn't guaranteed in every extension runtime, so
+// there's a plain-random fallback.
+function newSessionId() {
+  try {
+    return crypto.randomUUID();
+  } catch {
+    return `s-${Date.now()}-${Math.random().toString(36).slice(2)}`;
+  }
+}
 
 const STEP_DETAILS = "details";
 const STEP_CONFIRM = "confirm";
@@ -50,6 +63,10 @@ export default function WithdrawalForm() {
       null
     ),
   );
+  const sessionId = useRef(newSessionId());
+  // Guards so each funnel event fires at most once per mount.
+  const buttonViewedSent = useRef(false);
+  const formOpenedSent = useRef(false);
 
   useEffect(() => {
     let cancelled = false;
@@ -168,6 +185,32 @@ export default function WithdrawalForm() {
     return { ...settings, labels: resolveLabels(settings.labels, eligibility?.stage) };
   }, [settings, eligibility?.stage]);
 
+  // Whether the compact entry card (the withdrawal "button") is actually on
+  // screen — same condition as the render guards below. This is what a
+  // "customer viewed the button" event should reflect, not merely that the
+  // component mounted.
+  const buttonVisible =
+    status === "ready" &&
+    Boolean(eligibility?.isEligible) &&
+    lines.length > 0 &&
+    isEligibleCountry &&
+    !started;
+
+  useEffect(() => {
+    if (buttonVisible && orderId && !buttonViewedSent.current) {
+      buttonViewedSent.current = true;
+      recordFormEvent({ orderId, type: "button_viewed", sessionId: sessionId.current });
+    }
+  }, [buttonVisible, orderId]);
+
+  function startForm() {
+    if (!formOpenedSent.current) {
+      formOpenedSent.current = true;
+      recordFormEvent({ orderId, type: "form_opened", sessionId: sessionId.current });
+    }
+    setStarted(true);
+  }
+
   function toggleLine(lineId, checked) {
     setSelectedLineIds((prev) =>
       checked ? [...prev, lineId] : prev.filter((id) => id !== lineId),
@@ -186,6 +229,9 @@ export default function WithdrawalForm() {
         customerEmail: email,
         countryCode: buyerCountryCode ?? "",
         reason,
+        // Links this submission to the button_viewed / form_opened funnel
+        // events recorded before the request existed.
+        sessionId: sessionId.current,
         orderLineCount: lines.length,
         shippingAddress: shippingAddress
           ? [
@@ -265,7 +311,7 @@ export default function WithdrawalForm() {
           <s-heading>{stagedSettings.labels.step1Title}</s-heading>
           <s-paragraph color="subdued">{stagedSettings.labels.step1Description}</s-paragraph>
           <s-stack direction="inline">
-            <s-button onClick={() => setStarted(true)}>Start withdrawal request</s-button>
+            <s-button onClick={startForm}>Start withdrawal request</s-button>
           </s-stack>
         </s-stack>
       </s-section>

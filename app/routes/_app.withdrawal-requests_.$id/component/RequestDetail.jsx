@@ -45,8 +45,10 @@ const AUTOMATION_LABEL = {
   tag_after_delivery: "Order tagged",
   create_return: "Shopify return",
   fetch_shop_contact: "Store contact lookup",
-  send_emails: "Confirmation emails",
+  customer_email: "Customer confirmation email",
+  merchant_email: "Merchant notification email",
   notify_merchant: "Merchant notified",
+  automation_completed: "Automation completed",
   run_automation: "Automation",
 };
 
