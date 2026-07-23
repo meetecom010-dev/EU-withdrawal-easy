@@ -14,7 +14,7 @@ import {
 } from "./shopify/returns.server";
 import { fetchShopContact } from "./shopify/shop.server";
 import { cancelJobsForRequest, scheduleJob } from "./automation-jobs.server";
-import { notifyMerchantOfRequest } from "./notifications.server";
+import { sendWithdrawalEmails } from "./email/index.server";
 import { serializeWithdrawalRequest } from "./withdrawal-request.server";
 
 const DAY_MS = 24 * 60 * 60 * 1000;
@@ -190,7 +190,7 @@ async function runAfterDelivery(admin, request, automation) {
   if (automation.afterDeliveryAction === "create_return") {
     await createReturnForRequest(admin, request);
   } else {
-    await notifyForRequest(admin, request);
+    notifyForRequest(request);
   }
 
   if (automation.tagAfterDelivery) {
@@ -241,8 +241,9 @@ async function createReturnForRequest(admin, request) {
 
   if (!outcome.ok) {
     // The merchant still needs to know a withdrawal came in, even though the
-    // return they asked for couldn't be made.
-    await notifyForRequest(admin, request);
+    // return they asked for couldn't be made. The notification email already
+    // went out at submission; this records that fact against the fallback.
+    notifyForRequest(request);
     return;
   }
 
@@ -262,14 +263,15 @@ async function createReturnForRequest(admin, request) {
   });
 }
 
-async function notifyForRequest(admin, request) {
-  const contact = await step(request, "notify_merchant", () => fetchShopContact(admin));
-  const recipientEmail = contact.ok ? contact.result?.email : null;
-
-  const { channels, emailError } = await notifyMerchantOfRequest(
-    serializeWithdrawalRequest(request),
-    { shop: request.shop, recipientEmail, appUrl: appUrl() },
-  );
+// The merchant notification email is sent for every submission by
+// sendSubmissionEmails below, so the "notify only" branch (and the return
+// fallback) don't send a second email — they record that the merchant was
+// notified, referencing that send. The in-app record is always the request row
+// itself, which exists regardless of email.
+function notifyForRequest(request) {
+  const merchant = request.automation.emails?.merchant;
+  const channels = ["in_app"];
+  if (merchant?.sent) channels.push("email");
 
   request.automation.notifiedAt = new Date();
   request.automation.notificationChannels = channels;
@@ -277,12 +279,56 @@ async function notifyForRequest(admin, request) {
   log(
     request,
     "notify_merchant",
-    emailError ? "skipped" : "success",
-    emailError
-      ? `Recorded in app; email not sent (${emailError})`
-      : `Notified merchant via ${channels.join(", ")}`,
-    { channels, emailError },
+    "success",
+    merchant?.sent
+      ? "Merchant notified in app and by email"
+      : merchant?.error
+        ? `Recorded in app; merchant email failed (${merchant.error})`
+        : "Recorded in app; merchant email not sent",
+    { channels, emailError: merchant?.error ?? null },
   );
+}
+
+// Sends the customer confirmation and merchant notification once per
+// submission, then records the outcome on the request and in the log. Uses the
+// shop contact already fetched by the caller so it doesn't repeat the API call.
+async function sendSubmissionEmails(request, shopContact) {
+  const result = await sendWithdrawalEmails(serializeWithdrawalRequest(request), {
+    shopName: shopContact?.name ?? "",
+    merchantEmail: shopContact?.email ?? "",
+    appUrl: appUrl(),
+  });
+
+  const now = new Date();
+  request.automation.emails.customer = {
+    sent: result.customer.sent,
+    at: result.customer.sent ? now : null,
+    messageId: result.customer.messageId,
+    error: result.customer.error,
+  };
+  request.automation.emails.merchant = {
+    sent: result.merchant.sent,
+    at: result.merchant.sent ? now : null,
+    messageId: result.merchant.messageId,
+    error: result.merchant.error,
+  };
+
+  // A send that failed (non-null error) is logged as failed so it surfaces in
+  // the timeline; a skip (no recipient / not configured) is logged as skipped.
+  const anyFailed = result.customer.error || result.merchant.error;
+  const anySent = result.customer.sent || result.merchant.sent;
+  log(
+    request,
+    "send_emails",
+    anyFailed ? "failed" : anySent ? "success" : "skipped",
+    `Customer: ${describeEmail(result.customer)}; Merchant: ${describeEmail(result.merchant)}`,
+    result,
+  );
+}
+
+function describeEmail(outcome) {
+  if (outcome.sent) return "sent";
+  return outcome.error ? `failed (${outcome.error})` : "not sent";
 }
 
 /**
@@ -335,14 +381,26 @@ export async function runWithdrawalAutomation(shop, requestId) {
       { displayFulfillmentStatus: orderContext.displayFulfillmentStatus },
     );
 
+    // Confirmation to the customer and notification to the merchant go out for
+    // every submission, before the branch runs, so notify-only can reference
+    // the merchant send instead of emailing again. Shop contact is fetched
+    // once here (shop name + merchant recipient) and reused.
+    const contact = await step(request, "fetch_shop_contact", () => fetchShopContact(admin));
+    await sendSubmissionEmails(request, contact.ok ? contact.result : null);
+
     if (branch === "before_ship") {
       await runBeforeShip(admin, request, automation);
     } else {
       await runAfterDelivery(admin, request, automation);
     }
 
-    // A step that failed logged itself; the run is only "completed" if none did.
-    const failed = request.automation.log.some((entry) => entry.outcome === "failed");
+    // A step that failed logged itself; the run is only "completed" if none
+    // did. A failed email is deliberately excluded — it's still recorded (red)
+    // in the timeline for debugging, but a bounced notification must not mark
+    // an automation "failed" when the hold, return, or tag all succeeded.
+    const failed = request.automation.log.some(
+      (entry) => entry.outcome === "failed" && entry.action !== "send_emails",
+    );
     request.automation.status = failed ? "failed" : "completed";
     if (failed) {
       request.automation.error = "One or more automation steps failed — see the log";

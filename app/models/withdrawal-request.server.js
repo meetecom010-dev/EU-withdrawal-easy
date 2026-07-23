@@ -104,6 +104,25 @@ const automationStateSchema = new Schema(
     notifiedAt: { type: Date, default: null },
     notificationChannels: { type: [String], default: [] },
 
+    // Outcome of the two transactional emails sent on submission (customer
+    // confirmation + merchant notification, via app/services/email). `sent`
+    // false with a null error means it was skipped — no recipient, or Brevo
+    // isn't configured — rather than failed.
+    emails: {
+      customer: {
+        sent: { type: Boolean, default: false },
+        at: { type: Date, default: null },
+        messageId: { type: String, default: null },
+        error: { type: String, default: null },
+      },
+      merchant: {
+        sent: { type: Boolean, default: false },
+        at: { type: Date, default: null },
+        messageId: { type: String, default: null },
+        error: { type: String, default: null },
+      },
+    },
+
     log: { type: [automationLogEntrySchema], default: [] },
   },
   { _id: false },
