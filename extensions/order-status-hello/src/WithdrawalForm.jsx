@@ -253,6 +253,9 @@ export default function WithdrawalForm() {
           // so the variant is what actually identifies the item.
           variantId: line.merchandise?.id ?? "",
           title: line.merchandise?.title ?? "Item",
+          // The variant title ("xs / red") — shown under the product name in
+          // the confirmation emails, so it's persisted alongside the request.
+          variantTitle: line.merchandise?.subtitle ?? "",
           sku: line.merchandise?.sku ?? "",
           imageUrl: line.merchandise?.image?.url ?? "",
           quantity: line.quantity,

@@ -1,6 +1,10 @@
 import connectDB from "../db.server";
 import WithdrawalRequest from "../models/withdrawal-request.server";
-import { getOrCreateAppSettings, serializeFormSettings } from "./app-settings.server";
+import {
+  getOrCreateAppSettings,
+  serializeEmailSettings,
+  serializeFormSettings,
+} from "./app-settings.server";
 import { adminClientFor } from "./shopify/client.server";
 import { addOrderTags, cancelOrderWithRefund, fetchOrderContext } from "./shopify/orders.server";
 import {
@@ -14,7 +18,7 @@ import {
 } from "./shopify/returns.server";
 import { fetchShopContact } from "./shopify/shop.server";
 import { cancelJobsForRequest, scheduleJob } from "./automation-jobs.server";
-import { sendWithdrawalEmails } from "./email/index.server";
+import { sendWithdrawalEmails, sendCustomerRawEmail } from "./email/index.server";
 import { recordAutomationEvents } from "./form-events/index.server";
 import { serializeWithdrawalRequest } from "./withdrawal-request.server";
 
@@ -312,10 +316,15 @@ function notifyForRequest(request) {
 // submission, then records the outcome on the request and in the log. Uses the
 // shop contact already fetched by the caller so it doesn't repeat the API call.
 async function sendSubmissionEmails(request, shopContact) {
+  // The merchant's saved template config (subject/heading/body/sender name/
+  // reply-to, and the merchant-notification enable toggle) travels with the
+  // send context so the emails go out exactly as configured in Email Templates.
+  const appSettings = await getOrCreateAppSettings(request.shop);
   const result = await sendWithdrawalEmails(serializeWithdrawalRequest(request), {
     shopName: shopContact?.name ?? "",
     merchantEmail: shopContact?.email ?? "",
     appUrl: appUrl(),
+    emailSettings: serializeEmailSettings(appSettings),
   });
 
   const now = new Date();
@@ -550,19 +559,69 @@ export async function releaseHoldsForRequest(admin, request, releasedBy) {
  * Called when staff approve or reject a request in the admin. Retires anything
  * still scheduled and lets the order move again.
  */
-export async function handleManualDecision(shop, requestId) {
+export async function handleManualDecision(shop, requestId, { email } = {}) {
   await connectDB();
   const request = await WithdrawalRequest.findOne({ shop, _id: requestId });
   if (!request) return null;
 
   await cancelJobsForRequest(request._id);
 
-  if ((request.automation.holds ?? []).length > 0 && !request.automation.holdsReleasedAt) {
+  const needsHoldRelease =
+    (request.automation.holds ?? []).length > 0 && !request.automation.holdsReleasedAt;
+  const decided = request.status === "approved" || request.status === "rejected";
+
+  if (needsHoldRelease) {
     const admin = await adminClientFor(shop);
     await releaseHoldsForRequest(admin, request, "manual");
+  }
+
+  // The decision email is composed and (optionally) edited by staff in the admin
+  // decision modal, then passed in here as { send, subject, html }. We send that
+  // exact content — never re-render a template — so what staff previewed is what
+  // the customer receives.
+  if (decided) {
+    await sendDecisionEmailForRequest(request, shop, email);
   }
 
   await request.save();
   await flushEvents(request);
   return serializeWithdrawalRequest(request);
+}
+
+// Sends the staff-reviewed decision email to the customer and records the
+// outcome on the request's automation log. Best-effort: a mail failure is
+// logged, never thrown, so the decision itself still succeeds.
+async function sendDecisionEmailForRequest(request, shop, email) {
+  if (!email?.send) {
+    log(request, "notify_customer", "skipped", "Customer decision email skipped by staff");
+    return;
+  }
+  try {
+    const appSettings = await getOrCreateAppSettings(shop);
+    const contact = await fetchShopContact(await adminClientFor(shop));
+    const result = await sendCustomerRawEmail(
+      serializeWithdrawalRequest(request),
+      { subject: email.subject, html: email.html },
+      {
+        shopName: contact?.name ?? "",
+        merchantEmail: contact?.email ?? "",
+        emailSettings: serializeEmailSettings(appSettings),
+      },
+    );
+    log(
+      request,
+      "notify_customer",
+      result.sent ? "success" : result.error ? "failed" : "skipped",
+      result.sent
+        ? "Customer notified of the decision by email"
+        : result.error
+          ? `Customer decision email failed (${result.error})`
+          : "Customer decision email not sent (email not configured)",
+      { emailError: result.error ?? null },
+    );
+  } catch (error) {
+    log(request, "notify_customer", "failed", `Customer decision email failed (${error.message})`, {
+      emailError: error.message,
+    });
+  }
 }

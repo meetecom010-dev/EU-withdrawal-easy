@@ -16,6 +16,8 @@ const withdrawalRequestItemSchema = new Schema(
     // return automation matches on to find the fulfillment line item.
     variantId: { type: String, default: "" },
     title: { type: String, default: "" },
+    // Variant title ("xs / red"), shown under the product name in the emails.
+    variantTitle: { type: String, default: "" },
     sku: { type: String, default: "" },
     imageUrl: { type: String, default: "" },
     quantity: { type: Number, default: 1 },

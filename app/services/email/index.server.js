@@ -1,34 +1,32 @@
 // Public entry point for the email service. Import from here rather than
-// reaching into individual files:
+// reaching into individual files.
 //
-//   import { sendWithdrawalEmails } from "../services/email/index.server";
-//
-// Adding a new email type means adding a template + sender and, if it belongs
-// to submission, wiring it into sendWithdrawalEmails — nothing else changes.
+// Adding a new email means adding a template to registry.js and calling the
+// right sender from wherever the event happens — nothing here has to change for
+// a template that fits the customer/merchant recipient split.
 
 export { isEmailConfigured } from "./brevo.server";
-export { sendCustomerEmail } from "./send-customer-email.server";
-export { sendMerchantEmail } from "./send-merchant-email.server";
+export { sendCustomerTemplate, sendCustomerRawEmail } from "./send-customer-email.server";
+export { sendMerchantTemplate } from "./send-merchant-email.server";
 
-import { sendCustomerEmail } from "./send-customer-email.server";
-import { sendMerchantEmail } from "./send-merchant-email.server";
+import { sendCustomerTemplate } from "./send-customer-email.server";
+import { sendMerchantTemplate } from "./send-merchant-email.server";
 
 /**
  * Sends both submission emails — customer confirmation and merchant
- * notification — concurrently. Never throws: each sender already resolves to a
- * result, so a failure in one can't stop the other or the withdrawal flow.
+ * notification — concurrently. Never throws.
  *
  * @param {object} request  serialized withdrawal request
- * @param {{ shopName?: string, merchantEmail?: string, appUrl?: string }} context
- * @returns {Promise<{
- *   customer: { sent: boolean, messageId: string|null, error: string|null },
- *   merchant: { sent: boolean, messageId: string|null, error: string|null },
- * }>}
+ * @param {{ shopName?: string, merchantEmail?: string, appUrl?: string, emailSettings?: object }} context
  */
 export async function sendWithdrawalEmails(request, context = {}) {
   const [customer, merchant] = await Promise.all([
-    sendCustomerEmail(request, context),
-    sendMerchantEmail(request, context),
+    sendCustomerTemplate("customerConfirmation", request, context),
+    sendMerchantTemplate("merchantNotification", request, context),
   ]);
   return { customer, merchant };
 }
+
+// Decision emails (approved/rejected) are sent from the admin decision flow via
+// sendCustomerRawEmail, so staff can review and edit the exact message before
+// it goes — there is no automatic decision send here.

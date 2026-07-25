@@ -14,18 +14,18 @@ const SAMPLE_IMAGE =
 const SAMPLE_ITEMS = [
   {
     id: "1",
-    title: "Product title",
-    variant: "xs / red",
+    title: "Fjord Table Lamp",
+    variant: "Oak / Large",
     quantity: 1,
-    price: 44.95,
+    price: 89.00,
     image: SAMPLE_IMAGE,
   },
   {
     id: "2",
-    title: "Product title 1",
-    variant: "L / blue",
-    quantity: 1,
-    price: 29.95,
+    title: "Tind Candle Holder Set",
+    variant: "Brass",
+    quantity: 2,
+    price: 29.45,
     image: SAMPLE_IMAGE,
   },
 ];

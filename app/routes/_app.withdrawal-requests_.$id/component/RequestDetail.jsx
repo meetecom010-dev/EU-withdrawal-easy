@@ -12,6 +12,7 @@ import {
   countryName,
   withdrawalDeadline,
 } from "../../_app.withdrawal-requests/constants";
+import DecisionModal, { DECISION_MODAL_ID } from "./DecisionModal";
 
 function ItemRow({ item }) {
   return (
@@ -207,10 +208,13 @@ export default function RequestDetail({ withdrawalRequest, shopDomain, prevId, n
   const shopify = useAppBridge();
   const navigate = useNavigate();
   const decideFetcher = useFetcher();
+  const previewFetcher = useFetcher();
   const noteFetcher = useFetcher();
   const tagFetcher = useFetcher();
   const [noteText, setNoteText] = useState("");
   const [tagText, setTagText] = useState("");
+  // Which decision the modal is confirming ("approved" | "rejected" | null).
+  const [decision, setDecision] = useState(null);
 
   const deciding = decideFetcher.state !== "idle";
   const total = requestTotal(withdrawalRequest.items);
@@ -226,8 +230,19 @@ export default function RequestDetail({ withdrawalRequest, shopDomain, prevId, n
     // eslint-disable-next-line react-hooks/exhaustive-deps -- only react to the decide fetcher settling
   }, [decideFetcher.state, decideFetcher.data]);
 
-  function decide(status) {
-    decideFetcher.submit({ intent: "decide", status }, { method: "post" });
+  // Open the decision modal and kick off rendering its email in the background.
+  function openDecision(status) {
+    setDecision(status);
+    previewFetcher.submit({ intent: "decision-preview", status }, { method: "post" });
+    shopify.modal.show(DECISION_MODAL_ID);
+  }
+
+  // Confirmed from the modal: set the status and send the reviewed email.
+  function confirmDecision({ subject, html, sendEmail }) {
+    decideFetcher.submit(
+      { intent: "decide", status: decision, sendEmail: String(sendEmail), subject, html },
+      { method: "post" },
+    );
   }
 
   function submitNote() {
@@ -280,7 +295,7 @@ export default function RequestDetail({ withdrawalRequest, shopDomain, prevId, n
       <s-button
         slot="secondary-actions"
         tone="critical"
-        onClick={() => decide("rejected")}
+        onClick={() => openDecision("rejected")}
         disabled={withdrawalRequest.status !== "pending" || deciding}
       >
         Reject
@@ -288,12 +303,20 @@ export default function RequestDetail({ withdrawalRequest, shopDomain, prevId, n
       <s-button
         slot="secondary-actions"
         variant="primary"
-        onClick={() => decide("approved")}
+        onClick={() => openDecision("approved")}
         disabled={withdrawalRequest.status !== "pending" || deciding}
         loading={deciding || undefined}
       >
         Approve
       </s-button>
+
+      <DecisionModal
+        decision={decision}
+        preview={previewFetcher.data?.preview ?? null}
+        loading={previewFetcher.state !== "idle"}
+        deciding={deciding}
+        onConfirm={confirmDecision}
+      />
       <s-button
         slot="secondary-actions"
         icon="chevron-left"

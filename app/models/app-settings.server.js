@@ -106,12 +106,49 @@ const formSettingsSchema = new Schema(
   { _id: false },
 );
 
+// A merchant's sparse override for one template — only the fields they've
+// actually changed. An absent field means "use the current code default"
+// (services/email/registry.js), so defaults keep improving for every shop that
+// hasn't touched that field, and "reset to default" just drops the override.
+const emailOverrideSchema = new Schema(
+  {
+    enabled: { type: Boolean },
+    subject: { type: String },
+    bodyHtml: { type: String },
+  },
+  { _id: false, minimize: true },
+);
+
+// Shop-level email configuration: the sender identity shared by every email,
+// plus a Map of per-template overrides keyed by the registry's template keys.
+// Because it's a Map, adding a new template needs no schema change at all.
+const emailSettingsSchema = new Schema(
+  {
+    sender: {
+      fromName: { type: String, default: "" },
+      replyTo: { type: String, default: "" },
+      // A merchant's own From address. Only used once Brevo has verified it —
+      // registered via the Senders API, confirmed with a one-time code.
+      fromEmail: { type: String, default: "" },
+      fromEmailStatus: {
+        type: String,
+        enum: ["none", "pending", "verified"],
+        default: "none",
+      },
+      brevoSenderId: { type: Number, default: null },
+    },
+    overrides: { type: Map, of: emailOverrideSchema, default: () => ({}) },
+  },
+  { _id: false },
+);
+
 // One document per shop, holding the withdrawal form configuration —
 // separate from Shop (app/models/shop.server.js) so shop identity stays lean.
 const appSettingsSchema = new Schema(
   {
     shop: { type: String, required: true, unique: true },
     formSettings: { type: formSettingsSchema, default: () => ({}) },
+    emailSettings: { type: emailSettingsSchema, default: () => ({}) },
   },
   { timestamps: true },
 );

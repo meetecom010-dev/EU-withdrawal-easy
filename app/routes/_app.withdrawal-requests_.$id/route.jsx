@@ -9,7 +9,13 @@ import {
   updateWithdrawalRequestStatus,
 } from "../../services/withdrawal-request.server";
 import { handleManualDecision } from "../../services/withdrawal-automation.server";
+import { getOrCreateAppSettings, serializeEmailSettings } from "../../services/app-settings.server";
+import { buildEmailVariables } from "../../services/email/variables.server";
+import { renderEmailTemplate } from "../../services/email/render";
+import { fetchShopContact } from "../../services/shopify/shop.server";
 import RequestDetail from "./component/RequestDetail";
+
+const DECISION_TEMPLATE = { approved: "withdrawalApproved", rejected: "withdrawalRejected" };
 
 export const loader = async ({ request, params }) => {
   const { session } = await authenticate.admin(request);
@@ -35,9 +41,35 @@ export const loader = async ({ request, params }) => {
 // internal staff note; intent=add-tag/remove-tag edit the local (unsynced)
 // tag list. All come from the same detail page via useFetcher.
 export const action = async ({ request, params }) => {
-  const { session } = await authenticate.admin(request);
+  const { admin, session } = await authenticate.admin(request);
   const formData = await request.formData();
   const intent = formData.get("intent");
+
+  // Renders the approved/rejected email for this request with real data, so the
+  // decision modal can show (and let staff edit) the exact message before it's
+  // sent. No status change happens here.
+  if (intent === "decision-preview") {
+    const status = formData.get("status");
+    const templateKey = DECISION_TEMPLATE[status];
+    if (!templateKey) {
+      return data({ error: "Unknown decision" }, { status: 400 });
+    }
+    const [reqDoc, contact, appSettings] = await Promise.all([
+      getWithdrawalRequestById(session.shop, params.id),
+      fetchShopContact(admin),
+      getOrCreateAppSettings(session.shop),
+    ]);
+    if (!reqDoc) {
+      return data({ error: "Withdrawal request not found" }, { status: 404 });
+    }
+    const emailSettings = serializeEmailSettings(appSettings);
+    const vars = buildEmailVariables(reqDoc, {
+      shopName: contact?.name ?? "",
+      merchantEmail: contact?.email ?? "",
+    });
+    const { subject, html } = renderEmailTemplate(emailSettings.templates[templateKey], vars);
+    return { preview: { subject, html } };
+  }
 
   if (intent === "note") {
     const withdrawalRequest = await addWithdrawalRequestNote(
@@ -66,21 +98,25 @@ export const action = async ({ request, params }) => {
     return { withdrawalRequest };
   }
 
+  // intent=decide: set the status, then run the manual-decision handler, which
+  // retires scheduled automation, releases any holds, and sends the customer
+  // the decision email that staff reviewed/edited in the modal (subject + html,
+  // unless they chose not to email).
   const status = formData.get("status");
+  const sendEmail = formData.get("sendEmail") === "true";
+  const emailSubject = formData.get("subject") ?? "";
+  const emailHtml = formData.get("html") ?? "";
+
   const withdrawalRequest = await updateWithdrawalRequestStatus(session.shop, params.id, status);
 
-  // Deciding by hand retires whatever the automation had scheduled and lets
-  // the order move again: a release that was queued for N days out must never
-  // fire on a request staff have already dealt with, and an order left on hold
-  // after a decision would sit there indefinitely.
-  //
-  // Deliberately not awaited into the response shape — a Shopify hiccup here
-  // shouldn't make the decision itself look like it failed. The outcome is
-  // written to the request's automation log either way.
+  // Deliberately not surfaced as a failure of the decision itself — a Shopify or
+  // email hiccup is recorded in the request's automation log either way.
   let automationError = null;
   if (withdrawalRequest) {
     try {
-      await handleManualDecision(session.shop, params.id);
+      await handleManualDecision(session.shop, params.id, {
+        email: { send: sendEmail, subject: emailSubject, html: emailHtml },
+      });
     } catch (error) {
       automationError = error.message;
     }
