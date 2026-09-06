@@ -1,7 +1,7 @@
 import { sendTransactionalEmail } from "./brevo.server";
 import { renderEmailTemplate } from "./render";
 import { buildEmailVariables } from "./variables.server";
-import { EMAIL_TEMPLATES, resolveTemplate } from "./registry";
+import { EMAIL_TEMPLATES, resolveTemplate, pickTemplateForLocale } from "./registry";
 
 // Sends a pre-rendered email to the customer — subject and HTML supplied by the
 // caller rather than resolved from a template. Used by the decision flow, where
@@ -65,7 +65,10 @@ export async function sendCustomerTemplate(templateKey, request, context = {}) {
   }
 
   const vars = buildEmailVariables(request, context);
-  const { subject, html } = renderEmailTemplate(template, vars);
+  // Send in the buyer's language when the merchant offers a translation for it,
+  // otherwise English. request.locale is the language captured at submission.
+  const localized = pickTemplateForLocale(template, request.locale);
+  const { subject, html } = renderEmailTemplate(localized, vars);
   const sender = context.emailSettings?.sender ?? {};
   const senderName = sender.fromName || context.shopName || undefined;
   // Send From the merchant's own address only once Brevo has verified it.

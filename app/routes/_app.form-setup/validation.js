@@ -9,7 +9,7 @@
 // what lets a field find its own message and dismiss it when the merchant
 // returns to that field.
 
-import { AFTER_DELIVERY_ACTIONS, FALLBACK_OPTIONS } from "./constants";
+import { AFTER_DELIVERY_ACTIONS, BASE_LOCALE, FALLBACK_OPTIONS } from "./constants";
 
 const FALLBACK_DAYS_RANGE = { min: 1, max: 90 };
 const DEADLINE_DAYS_RANGE = { min: 1, max: 365 };
@@ -76,6 +76,35 @@ export function validateFormSettings(settings) {
     }
     if ((reasonField.options ?? []).length === 0) {
       errors["reasonField.options"] = "Add at least one reason option.";
+    }
+  }
+
+  // Every offered language is held to the same standard as English: no blank
+  // labels, and (when the reason field is on) a translated reason label and one
+  // translation per English option. Blanks are prevented in practice by the
+  // default-copy prefill (translations.js), so this only bites if a merchant
+  // clears a field or adds a custom English option they haven't translated yet.
+  const languages = settings.languages ?? [BASE_LOCALE];
+  const translations = settings.translations ?? {};
+  for (const lang of languages) {
+    if (lang === BASE_LOCALE) continue;
+    const t = translations[lang] ?? {};
+    const tLabels = t.labels ?? {};
+    for (const [key, message] of Object.entries(REQUIRED_LABELS)) {
+      if (isBlank(tLabels[key])) {
+        errors[`translations.${lang}.labels.${key}`] = message;
+      }
+    }
+    if (reasonField.enabled) {
+      if (isBlank(t.reasonLabel)) {
+        errors[`translations.${lang}.reasonLabel`] = "Enter a label for the reason field.";
+      }
+      const tOptions = t.reasonOptions ?? [];
+      (reasonField.options ?? []).forEach((_, index) => {
+        if (isBlank(tOptions[index])) {
+          errors[`translations.${lang}.reasonOptions.${index}`] = "Translate this reason option.";
+        }
+      });
     }
   }
 

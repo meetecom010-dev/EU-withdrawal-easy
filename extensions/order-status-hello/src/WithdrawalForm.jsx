@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "preact/hooks";
 import {
+  currentLanguage,
   fetchFormSettings,
   fetchOrderDetails,
   fetchWithdrawalEligibility,
@@ -7,8 +8,9 @@ import {
   submitWithdrawalRequest,
 } from "./lib/api.js";
 import { resolveLabels } from "./lib/labels.js";
+import { t } from "./lib/i18n.js";
 import StepProgress from "./components/StepProgress.jsx";
-import StepDetails from "./components/StepDetails.jsx";
+import StepDetails, { OTHER_REASON_VALUE } from "./components/StepDetails.jsx";
 import StepConfirm from "./components/StepConfirm.jsx";
 import StepDone from "./components/StepDone.jsx";
 
@@ -46,6 +48,9 @@ export default function WithdrawalForm() {
   const [step, setStep] = useState(STEP_DETAILS);
   const [selectedLineIds, setSelectedLineIds] = useState([]);
   const [reason, setReason] = useState("");
+  // The free-text reason shown when "Other" is picked, submitted in place of the
+  // sentinel value.
+  const [otherReason, setOtherReason] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState(/** @type {string | null} */ (null));
   // Customer name/email resolved by our backend from the Admin API — the
@@ -228,7 +233,11 @@ export default function WithdrawalForm() {
         customerName: fullName,
         customerEmail: email,
         countryCode: buyerCountryCode ?? "",
-        reason,
+        // The buyer's language, so their confirmation/decision emails are sent
+        // in it (falls back to English on the server when unsupported).
+        locale: currentLanguage(),
+        // "Other" submits the customer's own text instead of the sentinel.
+        reason: reason === OTHER_REASON_VALUE ? otherReason.trim() : reason,
         // Links this submission to the button_viewed / form_opened funnel
         // events recorded before the request existed.
         sessionId: sessionId.current,
@@ -273,11 +282,7 @@ export default function WithdrawalForm() {
       // A rejection the customer can act on (already requested, deadline
       // passed) comes back with its own wording; anything else is a genuine
       // fault and gets the retry message.
-      setSubmitError(
-        error.code
-          ? error.message
-          : "Something went wrong submitting your request. Please try again.",
-      );
+      setSubmitError(error.code ? error.message : t("error.submit"));
     } finally {
       setSubmitting(false);
     }
@@ -314,7 +319,7 @@ export default function WithdrawalForm() {
           <s-heading>{stagedSettings.labels.step1Title}</s-heading>
           <s-paragraph color="subdued">{stagedSettings.labels.step1Description}</s-paragraph>
           <s-stack direction="inline">
-            <s-button onClick={startForm}>Start withdrawal request</s-button>
+            <s-button onClick={startForm}>{t("entry.start")}</s-button>
           </s-stack>
         </s-stack>
       </s-section>
@@ -337,6 +342,8 @@ export default function WithdrawalForm() {
             onToggleLine={toggleLine}
             reason={reason}
             onReasonChange={setReason}
+            otherReason={otherReason}
+            onOtherReasonChange={setOtherReason}
             onContinue={() => setStep(STEP_CONFIRM)}
           />
         )}

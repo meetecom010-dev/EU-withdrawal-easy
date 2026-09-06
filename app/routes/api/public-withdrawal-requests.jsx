@@ -48,6 +48,7 @@ async function handleRequest(request) {
       customerName: body.customerName ?? "",
       customerEmail: body.customerEmail ?? "",
       countryCode: body.countryCode ?? "",
+      locale: typeof body.locale === "string" ? body.locale : "",
       shippingAddress: body.shippingAddress ?? "",
       reason: body.reason ?? "",
       orderLineCount: typeof body.orderLineCount === "number" ? body.orderLineCount : null,

@@ -43,6 +43,63 @@ const TAGS_ADD_MUTATION = `#graphql
   }
 `;
 
+const TAGS_REMOVE_MUTATION = `#graphql
+  mutation WithdrawalTagsRemove($id: ID!, $tags: [String!]!) {
+    tagsRemove(id: $id, tags: $tags) {
+      userErrors {
+        field
+        message
+      }
+    }
+  }
+`;
+
+// Everything the admin *detail page* needs about an order in one round trip, on
+// top of what fetchOrderContext already covers: live tags (the source of truth
+// for the Order tags section), money/financial state (for refund display and
+// gating), open returns, and per-line refundable quantities (to map the
+// withdrawn items to a refund and to know whether a refund is even possible).
+const ORDER_ADMIN_STATE_QUERY = `#graphql
+  query WithdrawalOrderAdminState($id: ID!) {
+    order(id: $id) {
+      id
+      name
+      createdAt
+      cancelledAt
+      tags
+      displayFinancialStatus
+      displayFulfillmentStatus
+      totalPriceSet { shopMoney { amount currencyCode } }
+      totalRefundedSet { shopMoney { amount currencyCode } }
+      fulfillments(first: 20) {
+        deliveredAt
+        displayStatus
+      }
+      fulfillmentOrders(first: 20) {
+        nodes { id status requestStatus }
+      }
+      returns(first: 10) {
+        nodes { id name status }
+      }
+      refunds(first: 20) {
+        id
+        createdAt
+        totalRefundedSet { shopMoney { amount currencyCode } }
+      }
+      lineItems(first: 100) {
+        nodes {
+          id
+          title
+          quantity
+          refundableQuantity
+          variant { id }
+          discountedUnitPriceSet { shopMoney { amount currencyCode } }
+        }
+      }
+    }
+  }
+`;
+
 const ORDER_CANCEL_MUTATION = `#graphql
   mutation WithdrawalOrderCancel(
     $orderId: ID!
@@ -137,6 +194,94 @@ export async function addOrderTags(admin, orderId, tags) {
   });
 
   return cleaned;
+}
+
+export async function removeOrderTags(admin, orderId, tags) {
+  const cleaned = [...new Set(tags.map((tag) => tag.trim()).filter(Boolean))];
+  if (cleaned.length === 0) return [];
+
+  await adminMutation(admin, {
+    operation: "WithdrawalTagsRemove",
+    query: TAGS_REMOVE_MUTATION,
+    variables: { id: orderId, tags: cleaned },
+    payloadKey: "tagsRemove",
+  });
+
+  return cleaned;
+}
+
+// Reads the shop-money amount off a MoneyBag field, as a number.
+function moneyAmount(moneyBag) {
+  const amount = moneyBag?.shopMoney?.amount;
+  return amount == null ? 0 : Number(amount);
+}
+
+// The live order state the detail page renders from and gates its actions on.
+// Fails soft at the call site: a null here means "couldn't reach Shopify", and
+// the page falls back to the stored request with actions disabled.
+export async function fetchOrderAdminState(admin, orderId) {
+  const data = await adminQuery(admin, {
+    operation: "WithdrawalOrderAdminState",
+    query: ORDER_ADMIN_STATE_QUERY,
+    variables: { id: orderId },
+  });
+
+  const order = data.order;
+  if (!order) return null;
+
+  const fulfillments = order.fulfillments ?? [];
+  const deliveredFulfillments = fulfillments.filter(
+    (fulfillment) => Boolean(fulfillment.deliveredAt) || fulfillment.displayStatus === "DELIVERED",
+  );
+  // Anything fulfilled means the goods have left, so the hold branch no longer
+  // applies — same rule the automation uses (fetchOrderContext).
+  const isFulfilled = fulfillments.length > 0;
+
+  const lineItems = (order.lineItems?.nodes ?? []).map((line) => ({
+    id: line.id,
+    title: line.title,
+    quantity: line.quantity,
+    refundableQuantity: line.refundableQuantity ?? 0,
+    variantId: line.variant?.id ?? null,
+    unitAmount: moneyAmount(line.discountedUnitPriceSet),
+    currencyCode: line.discountedUnitPriceSet?.shopMoney?.currencyCode ?? null,
+  }));
+
+  const currencyCode =
+    order.totalPriceSet?.shopMoney?.currencyCode ?? lineItems[0]?.currencyCode ?? null;
+
+  return {
+    id: order.id,
+    name: order.name,
+    createdAt: order.createdAt,
+    cancelledAt: order.cancelledAt,
+    tags: order.tags ?? [],
+    financialStatus: order.displayFinancialStatus ?? null,
+    fulfillmentStatus: order.displayFulfillmentStatus ?? null,
+    currencyCode,
+    totalPrice: moneyAmount(order.totalPriceSet),
+    totalRefunded: moneyAmount(order.totalRefundedSet),
+    isFulfilled,
+    isDelivered: deliveredFulfillments.length > 0,
+    deliveredAt: deliveredFulfillments[0]?.deliveredAt ?? null,
+    branch: isFulfilled ? "after_delivery" : "before_ship",
+    holdableFulfillmentOrders: (order.fulfillmentOrders?.nodes ?? []).filter((fulfillmentOrder) =>
+      HOLDABLE_STATUSES.has(fulfillmentOrder.status),
+    ),
+    returns: (order.returns?.nodes ?? []).map((ret) => ({
+      id: ret.id,
+      name: ret.name,
+      status: ret.status,
+    })),
+    refunds: (order.refunds ?? []).map((refund) => ({
+      id: refund.id,
+      createdAt: refund.createdAt,
+      amount: moneyAmount(refund.totalRefundedSet),
+    })),
+    lineItems,
+    // Whether any unit is still refundable, to gate the refund action.
+    hasRefundableItems: lineItems.some((line) => line.refundableQuantity > 0),
+  };
 }
 
 // Cancels with a refund to the original payment method — the "Cancel and

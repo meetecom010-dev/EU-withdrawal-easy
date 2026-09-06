@@ -4,9 +4,23 @@ import { APP_URL } from "./config.js";
 // (app/routes/api/public-form-settings.jsx). The session token proves to the
 // backend that the request came from this shop's order-status page — see
 // network_access in shopify.extension.toml.
+// The buyer's language (e.g. "de" or "de-DE"), read from the Localization API.
+// Defensive across shapes since the value may be a signal or a plain code; the
+// backend normalises "de-DE" -> "de".
+export function currentLanguage() {
+  try {
+    const language = shopify?.localization?.language;
+    const value = language?.value ?? language;
+    return value?.isoCode ?? value ?? "en";
+  } catch {
+    return "en";
+  }
+}
+
 export async function fetchFormSettings() {
   const token = await shopify.sessionToken.get();
-  const response = await fetch(`${APP_URL}/api/public-form-settings`, {
+  const locale = encodeURIComponent(currentLanguage());
+  const response = await fetch(`${APP_URL}/api/public-form-settings?locale=${locale}`, {
     headers: { Authorization: `Bearer ${token}` },
   });
 
@@ -86,6 +100,7 @@ export async function recordFormEvent({ orderId, type, sessionId }) {
  *   customerName?: string,
  *   customerEmail?: string,
  *   countryCode?: string,
+ *   locale?: string,
  *   reason?: string,
  *   orderLineCount?: number,
  *   shippingAddress?: string,

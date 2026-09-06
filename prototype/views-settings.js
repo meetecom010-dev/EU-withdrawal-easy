@@ -10,7 +10,7 @@ const SAMPLE_ORDER = {
   shipping: 4.9,
   items: [
     { title: "Fjord Table Lamp — Oak", sku: "NL-LAMP-01", price: 89, qty: 1, emoji: "\u{1F4A1}" },
-    { title: "Tind Candle Holder Set", sku: "NL-CNDL-11", price: 27, qty: 2, emoji: "\u{1F56F}️" },
+    { title: "Tind Candle Holder", sku: "NL-CNDL-11", price: 27, qty: 2, emoji: "\u{1F56F}️" },
     { title: "Alva Linen Cushion 50×50", sku: "NL-CUSH-14", price: 34, qty: 1, emoji: "\u{1F6CB}️" },
     { title: "Brygge Vase — engraved", sku: "NL-VASE-07E", price: 64, qty: 1, emoji: "\u{1F3FA}", exempt: "Personalized — can't be returned (Art. 16(c))" },
   ],

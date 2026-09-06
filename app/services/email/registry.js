@@ -8,6 +8,15 @@
 // Pure module (no server-only imports) so the UI, the live preview, and the
 // send path all share it. {{ dotted.paths }} are filled by ./variables.js at
 // render time; the selected products render via {{ withdrawal.line_items }}.
+//
+// The three customer emails are generated from ./email-strings.js — one builder
+// per template, run through every language's strings — so the English default
+// and every translation share a single structure and only the words differ.
+
+import { EMAIL_STRINGS, EMAIL_STRING_LOCALES } from "./email-strings";
+
+// English is the base language every email falls back to.
+export const BASE_EMAIL_LOCALE = "en";
 
 // Global sender identity shared by every email (like Shopify's shop-level
 // notification settings). Blank means "use the app defaults".
@@ -16,7 +25,7 @@ export const DEFAULT_EMAIL_SENDER = { fromName: "", replyTo: "" };
 // ── Shared HTML building blocks ─────────────────────────────────────────────
 // Inlined styles throughout, because email clients strip <style> blocks.
 
-function shell(content) {
+function shell(content, footer = EMAIL_STRINGS.en.footer) {
   return `<!doctype html>
 <html lang="en">
   <head>
@@ -41,7 +50,7 @@ ${content}
             </tr>
             <tr>
               <td style="padding:18px 28px;border-top:1px solid #e1e3e5;background:#fafbfb">
-                <span style="font-size:12px;color:#6d7175">This email was sent by EU Withdrawly on behalf of {{ shop.name }}.</span>
+                <span style="font-size:12px;color:#6d7175">${footer}</span>
               </td>
             </tr>
           </table>
@@ -100,59 +109,119 @@ const button = (label, url) =>
 
 const LINE_ITEMS = "                {{ withdrawal.line_items }}";
 
+const orderedList = (items) =>
+  `                <ol style="margin:0 0 20px;padding-left:20px;font-size:14px;line-height:1.7;color:#202223">
+${items.map((li) => `                  <li>${li}</li>`).join("\n")}
+                </ol>`;
+
 // Customer-facing details block, reused by the customer emails so they stay
 // consistent. `reason` is the customer's *own* reason for withdrawing, so it's
 // shown on the confirmation/approval but omitted on a rejection (where it would
-// read as if it were the reason we declined).
-const customerDetails = ({ reason = true } = {}) => {
+// read as if it were the reason we declined). Row labels come from the language
+// strings so the whole table translates.
+const customerDetails = (labels, { reason = true } = {}) => {
   const rows = [
-    detailRow("Reference number", "{{ withdrawal.request_id }}"),
-    detailRow("Order number", "{{ order.name }}"),
-    detailRow("Submitted on", "{{ withdrawal.submitted_at }}"),
-    detailRow("Status", "{{ request.status }}"),
+    detailRow(labels.referenceNumber, "{{ withdrawal.request_id }}"),
+    detailRow(labels.orderNumber, "{{ order.name }}"),
+    detailRow(labels.submittedOn, "{{ withdrawal.submitted_at }}"),
+    detailRow(labels.status, "{{ request.status }}"),
   ];
-  if (reason) rows.push(detailRow("Reason", "{{ withdrawal.reason }}"));
+  if (reason) rows.push(detailRow(labels.reason, "{{ withdrawal.reason }}"));
   return detailsTable(rows);
 };
 
-const contactLine = () =>
-  paragraph(
-    "Questions about your request? Contact {{ shop.name }} at <a href=\"mailto:{{ shop.email }}\" style=\"color:#2c6ecb\">{{ shop.email }}</a>, or simply reply to this email.",
+const contactLine = (text) => paragraph(text);
+
+// ── Customer email builders ─────────────────────────────────────────────────
+// Each takes one language's strings (email-strings.js) and returns the body
+// HTML. Run once per language to produce the default + every translation.
+
+function confirmationBody(s) {
+  return shell(
+    [
+      heading(s.confirmation.heading),
+      callout("success", s.confirmation.callout),
+      paragraph(s.confirmation.intro),
+      customerDetails(s.labels),
+      sectionHeading(s.confirmation.itemsHeading),
+      LINE_ITEMS,
+      sectionHeading(s.confirmation.nextHeading),
+      orderedList(s.confirmation.nextSteps),
+      contactLine(s.contact),
+      smallPrint(s.confirmation.smallPrint),
+    ].join("\n"),
+    s.footer,
   );
+}
+
+function approvedBody(s) {
+  return shell(
+    [
+      heading(s.approved.heading),
+      callout("success", s.approved.callout),
+      paragraph(s.approved.intro),
+      customerDetails(s.labels),
+      sectionHeading(s.approved.itemsHeading),
+      LINE_ITEMS,
+      sectionHeading(s.approved.refundHeading),
+      paragraph(s.approved.refund),
+      sectionHeading(s.approved.returnHeading),
+      paragraph(s.approved.returnText),
+      contactLine(s.contact),
+    ].join("\n"),
+    s.footer,
+  );
+}
+
+function rejectedBody(s) {
+  return shell(
+    [
+      heading(s.rejected.heading),
+      callout("warning", s.rejected.callout),
+      paragraph(s.rejected.intro),
+      customerDetails(s.labels, { reason: false }),
+      paragraph(s.rejected.exemptions),
+      sectionHeading(s.rejected.itemsHeading),
+      LINE_ITEMS,
+      paragraph(s.rejected.appeal),
+      contactLine(s.contact),
+    ].join("\n"),
+    s.footer,
+  );
+}
+
+// Builds a customer template's defaults (English) plus a translation per
+// language, all from the same builder + strings so they can never structurally
+// drift.
+function customerTemplate({ key, name, description, required, section, build }) {
+  const forLocale = (locale) => {
+    const s = EMAIL_STRINGS[locale];
+    return { subject: s[section].subject, bodyHtml: build(s) };
+  };
+  const translations = {};
+  for (const locale of EMAIL_STRING_LOCALES) translations[locale] = forLocale(locale);
+  return {
+    key,
+    name,
+    description,
+    audience: "Customer",
+    required,
+    defaults: forLocale(BASE_EMAIL_LOCALE),
+    translations,
+  };
+}
 
 // ── The registry ────────────────────────────────────────────────────────────
 
 export const EMAIL_TEMPLATES = {
-  customerConfirmation: {
+  customerConfirmation: customerTemplate({
     key: "customerConfirmation",
     name: "Customer withdrawal confirmation",
     description: "Sent to the customer the moment they submit a withdrawal request.",
-    audience: "Customer",
     required: true, // legal acknowledgement — always sent
-    defaults: {
-      subject: "We've received your withdrawal request — order {{ order.name }}",
-      bodyHtml: shell(
-        [
-          heading("Your withdrawal request has been received"),
-          callout("success", "Thanks — your withdrawal request has been received and is now being reviewed."),
-          paragraph(
-            "Hi {{ customer.first_name }}, thank you for contacting {{ shop.name }}. This email confirms that we've received your withdrawal request. You have the right to withdraw from your purchase under EU consumer law, and we'll process your request as quickly as possible.",
-          ),
-          customerDetails(),
-          sectionHeading("Items you're withdrawing"),
-          LINE_ITEMS,
-          sectionHeading("What happens next"),
-          `                <ol style="margin:0 0 20px;padding-left:20px;font-size:14px;line-height:1.7;color:#202223">
-                  <li>Our team will review your request.</li>
-                  <li>We'll email you the next steps, including return instructions if any items need to be sent back.</li>
-                  <li>Any refund you're due will be issued in line with EU consumer law once your withdrawal is processed.</li>
-                </ol>`,
-          contactLine(),
-          smallPrint("If you didn't make this request, or anything looks wrong, please let us know straight away."),
-        ].join("\n"),
-      ),
-    },
-  },
+    section: "confirmation",
+    build: confirmationBody,
+  }),
 
   merchantNotification: {
     key: "merchantNotification",
@@ -160,6 +229,8 @@ export const EMAIL_TEMPLATES = {
     description: "Alerts you by email whenever a new withdrawal request comes in.",
     audience: "You",
     required: false,
+    // Sent to the merchant, not the buyer, so it stays in one language (no
+    // translations map — the send path falls back to these defaults).
     defaults: {
       subject: "New withdrawal request — order {{ order.name }}",
       bodyHtml: shell(
@@ -185,67 +256,23 @@ export const EMAIL_TEMPLATES = {
     },
   },
 
-  withdrawalApproved: {
+  withdrawalApproved: customerTemplate({
     key: "withdrawalApproved",
     name: "Withdrawal approved",
     description: "Sent to the customer when you approve their withdrawal request.",
-    audience: "Customer",
     required: false,
-    defaults: {
-      subject: "Your withdrawal request for order {{ order.name }} has been approved",
-      bodyHtml: shell(
-        [
-          heading("Your withdrawal request has been approved"),
-          callout("success", "Good news — your withdrawal request has been approved."),
-          paragraph(
-            "Hi {{ customer.first_name }}, we've reviewed your request and approved your withdrawal from order {{ order.name }}. Here's what this means and what happens next.",
-          ),
-          customerDetails(),
-          sectionHeading("Approved items"),
-          LINE_ITEMS,
-          sectionHeading("Your refund"),
-          paragraph(
-            "We'll refund your payment to your original payment method within 14 days, as required by EU consumer law. Where you've withdrawn from your whole order, this includes the standard delivery cost.",
-          ),
-          sectionHeading("Returning your items"),
-          paragraph(
-            "If your order has already been delivered, please keep the items in their original condition. We'll send you separate return instructions — including the return address and who covers return shipping — and ask that you send the items back within 14 days. Your refund is completed once we've received the items back, or you've provided proof that you've returned them.",
-          ),
-          contactLine(),
-        ].join("\n"),
-      ),
-    },
-  },
+    section: "approved",
+    build: approvedBody,
+  }),
 
-  withdrawalRejected: {
+  withdrawalRejected: customerTemplate({
     key: "withdrawalRejected",
     name: "Withdrawal rejected",
     description: "Sent to the customer when you reject their withdrawal request.",
-    audience: "Customer",
     required: false,
-    defaults: {
-      subject: "Update on your withdrawal request for order {{ order.name }}",
-      bodyHtml: shell(
-        [
-          heading("Update on your withdrawal request"),
-          callout("warning", "After reviewing your request, we're unable to approve this withdrawal."),
-          paragraph(
-            "Hi {{ customer.first_name }}, thank you for contacting {{ shop.name }}. We've carefully reviewed your withdrawal request for order {{ order.name }}, and unfortunately we're unable to approve it on this occasion.",
-          ),
-          customerDetails({ reason: false }),
-          paragraph(
-            "This can happen when a request falls outside the statutory 14-day withdrawal period, or when the items are exempt from the right of withdrawal — for example personalised or made-to-order goods, sealed health or hygiene products that have been unsealed, or perishable items.",
-          ),
-          sectionHeading("Items in this request"),
-          LINE_ITEMS,
-          paragraph(
-            "If you'd like more detail on the reason for this decision, or you believe it may be a mistake, please get in touch — we'll be glad to help. This decision doesn't affect your statutory consumer rights.",
-          ),
-          contactLine(),
-        ].join("\n"),
-      ),
-    },
-  },
+    section: "rejected",
+    build: rejectedBody,
+  }),
 };
 
 // The template keys, in display order.
@@ -257,27 +284,75 @@ export const TEMPLATE_LIST = TEMPLATE_KEYS.map((key) => {
   return { key, name, description, audience, required };
 });
 
-// The effective template for a shop = its defaults with the shop's sparse
-// override merged on top. `enabled` defaults to true, and required templates
-// can never be disabled.
-export function resolveTemplate(key, override = {}) {
-  const template = EMAIL_TEMPLATES[key];
+// "de-DE" / "de_DE" -> "de". Buyer locales arrive region-tagged.
+export function normalizeEmailLocale(locale) {
+  return String(locale ?? "").toLowerCase().split(/[-_]/)[0];
+}
+
+// Picks the subject/body for a buyer's locale out of a *serialized* email
+// template (serializeEmailSettings output: base copy + a `translations` map).
+// Falls back to the base (English) copy when there's no translation for that
+// locale — which is also how an unsupported language and the merchant
+// notification resolve.
+export function pickTemplateForLocale(template, locale) {
+  const lang = normalizeEmailLocale(locale);
+  const translated = lang && lang !== BASE_EMAIL_LOCALE ? template.translations?.[lang] : null;
   return {
-    enabled: template.required ? true : override.enabled ?? true,
-    subject: override.subject ?? template.defaults.subject,
-    bodyHtml: override.bodyHtml ?? template.defaults.bodyHtml,
+    subject: translated?.subject ?? template.subject,
+    bodyHtml: translated?.bodyHtml ?? template.bodyHtml,
   };
 }
 
-// The clean default (no override) — used by the route's "Reset to default".
-export function templateDefault(key) {
-  return resolveTemplate(key, {});
+// The registry default subject/body for one locale. English uses `defaults`;
+// any other language uses its translation, falling back to English when the
+// template has no translation for it (e.g. the merchant notification, or an
+// unsupported locale).
+export function localeDefault(key, locale = BASE_EMAIL_LOCALE) {
+  const template = EMAIL_TEMPLATES[key];
+  if (locale === BASE_EMAIL_LOCALE) return template.defaults;
+  return template.translations?.[locale] ?? template.defaults;
 }
 
-// Reduces a full effective template down to only the fields that differ from
-// the code default. Storing just the diff means an unedited template stays on
-// the current default (and benefits from future improvements), and "reset"
-// simply produces an empty diff so the override is dropped.
+// True when the template has a real translation for this locale (so the editor
+// knows which language tabs to offer per template).
+export function hasTranslation(key, locale) {
+  return Boolean(EMAIL_TEMPLATES[key].translations?.[locale]);
+}
+
+// The per-locale slice of a stored override. English lives at the top level of
+// the override; other languages under override.translations[locale].
+function overrideForLocale(override = {}, locale) {
+  if (locale === BASE_EMAIL_LOCALE) {
+    return { subject: override.subject, bodyHtml: override.bodyHtml };
+  }
+  return override.translations?.[locale] ?? {};
+}
+
+// The effective template for a shop in a given language = that locale's default
+// with the shop's sparse override merged on top. `enabled` is shop-wide (not
+// per-locale); required templates can never be disabled.
+export function resolveTemplate(key, override = {}, locale = BASE_EMAIL_LOCALE) {
+  const template = EMAIL_TEMPLATES[key];
+  const base = localeDefault(key, locale);
+  const ov = overrideForLocale(override, locale);
+  return {
+    enabled: template.required ? true : override.enabled ?? true,
+    subject: ov.subject ?? base.subject,
+    bodyHtml: ov.bodyHtml ?? base.bodyHtml,
+  };
+}
+
+// The clean default (no override) for a locale — used by the route's "Reset to
+// default" and by the editor to seed a language tab.
+export function templateDefault(key, locale = BASE_EMAIL_LOCALE) {
+  return resolveTemplate(key, {}, locale);
+}
+
+// Reduces a full effective template (English base + per-locale translations)
+// down to only what differs from the code defaults. Storing just the diff means
+// an unedited template/locale stays on the current default (and benefits from
+// future improvements), and "reset" produces an empty diff so the override is
+// dropped.
 export function diffOverride(key, effective = {}) {
   const template = EMAIL_TEMPLATES[key];
   const override = {};
@@ -288,5 +363,17 @@ export function diffOverride(key, effective = {}) {
   if (effective.bodyHtml != null && effective.bodyHtml !== template.defaults.bodyHtml) {
     override.bodyHtml = effective.bodyHtml;
   }
+
+  const translations = {};
+  for (const [locale, copy] of Object.entries(effective.translations ?? {})) {
+    const def = template.translations?.[locale];
+    if (!def || !copy) continue;
+    const diff = {};
+    if (copy.subject != null && copy.subject !== def.subject) diff.subject = copy.subject;
+    if (copy.bodyHtml != null && copy.bodyHtml !== def.bodyHtml) diff.bodyHtml = copy.bodyHtml;
+    if (Object.keys(diff).length) translations[locale] = diff;
+  }
+  if (Object.keys(translations).length) override.translations = translations;
+
   return override;
 }

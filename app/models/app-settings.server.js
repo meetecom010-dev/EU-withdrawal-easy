@@ -80,6 +80,19 @@ const deadlineSchema = new Schema(
 );
 
 // Mirrors the shape app/routes/_app.form-setup works with 1:1 — see
+// A per-locale translation of the customer-facing copy. Sparse: only the fields
+// the merchant actually translated are stored — a blank falls back to the
+// English base (formSettings.labels / reasonField) field-by-field. Keyed by
+// language code inside `translations` below.
+const translationSchema = new Schema(
+  {
+    labels: { type: Map, of: String, default: () => ({}) },
+    reasonLabel: { type: String, default: "" },
+    reasonOptions: { type: [String], default: [] },
+  },
+  { _id: false },
+);
+
 // resolveFormSettings in app/routes/_app.form-setup/constants.js, which
 // resolves countryMode "all" to the full EU list on read.
 const formSettingsSchema = new Schema(
@@ -100,6 +113,10 @@ const formSettingsSchema = new Schema(
       },
     },
     labels: { type: labelsSchema, default: () => ({}) },
+    // Non-English translations, keyed by language code (e.g. "de"). English is
+    // the base and lives in `labels`/`reasonField` above; `languages` lists the
+    // locales offered (the admin tabs).
+    translations: { type: Map, of: translationSchema, default: () => ({}) },
     automation: { type: automationSchema, default: () => ({}) },
     deadline: { type: deadlineSchema, default: () => ({}) },
   },
@@ -110,11 +127,25 @@ const formSettingsSchema = new Schema(
 // actually changed. An absent field means "use the current code default"
 // (services/email/registry.js), so defaults keep improving for every shop that
 // hasn't touched that field, and "reset to default" just drops the override.
+// One language's sparse subject/body override, nested under a template override's
+// `translations` map. English lives at the top level of emailOverrideSchema; any
+// other offered language stores only what the merchant changed from that
+// language's default translation (registry.js).
+const emailTranslationOverrideSchema = new Schema(
+  {
+    subject: { type: String },
+    bodyHtml: { type: String },
+  },
+  { _id: false, minimize: true },
+);
+
 const emailOverrideSchema = new Schema(
   {
     enabled: { type: Boolean },
     subject: { type: String },
     bodyHtml: { type: String },
+    // Per-language overrides for the customer emails, keyed by language code.
+    translations: { type: Map, of: emailTranslationOverrideSchema, default: undefined },
   },
   { _id: false, minimize: true },
 );

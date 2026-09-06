@@ -3,6 +3,8 @@
 // formSettings defaults themselves live in the Mongoose schema
 // (app/models/app-settings.server.js), not here.
 
+import { DEFAULT_TRANSLATIONS, fillTranslationDefaults } from "./translations";
+
 export const EU_COUNTRIES = [
   { code: "AT", name: "Austria" },
   { code: "BE", name: "Belgium" },
@@ -50,8 +52,11 @@ export const AVAILABLE_LANGUAGES = [
 export const FALLBACK_OPTIONS = [
   { value: "hold", label: "Do nothing — hold until staff act" },
   { value: "cancel-now", label: "Cancel and refund immediately" },
-  { value: "release-n", label: "Release the hold after N days" },
-  { value: "cancel-n", label: "Cancel and refund after N days" },
+  // Hidden before app submission. The backend automation, the "Number of days"
+  // field (AutomationCard), and validation all still support these values — to
+  // offer the timed auto-actions again, just uncomment these two options.
+  // { value: "release-n", label: "Release the hold after N days" },
+  // { value: "cancel-n", label: "Cancel and refund after N days" },
 ];
 
 export const AFTER_DELIVERY_ACTIONS = ["notify_only", "create_return"];
@@ -79,10 +84,95 @@ export function resolveFormSettings(settings) {
       ...settings.reasonField,
       options: settings.reasonField.options ?? [],
     },
+    translations: seedTranslations(settings),
     automation: {
       ...settings.automation,
       beforeShipTags: settings.automation.beforeShipTags ?? [],
       afterDeliveryTags: settings.automation.afterDeliveryTags ?? [],
     },
+  };
+}
+
+// English is the base language: the required, always-complete label set every
+// other language falls back to, field by field.
+export const BASE_LOCALE = "en";
+
+// Fills every offered non-English language with a complete translation: the
+// merchant's own values where present, the default catalog copy elsewhere. This
+// is what makes each language ship prefilled with professional copy (and get
+// served to shoppers) rather than blank fields — see translations.js. Idempotent
+// and blank-preserving, so it's safe to run on every read.
+function seedTranslations(settings) {
+  const existing = normalizeTranslations(settings.translations);
+  const languages = settings.languages ?? [BASE_LOCALE];
+  const englishLabels = settings.labels ?? {};
+  const englishOptions = settings.reasonField?.options ?? [];
+  const out = { ...existing };
+  for (const lang of languages) {
+    if (lang === BASE_LOCALE) continue;
+    if (!DEFAULT_TRANSLATIONS[lang] && !existing[lang]) continue;
+    out[lang] = fillTranslationDefaults(lang, englishLabels, englishOptions, existing[lang]);
+  }
+  return out;
+}
+
+// "de-DE" / "de_DE" -> "de". Buyer locales arrive region-tagged; translations
+// are keyed by language code.
+export function toLanguageCode(locale) {
+  return String(locale ?? "").toLowerCase().split(/[-_]/)[0];
+}
+
+// Coerces the translations value to a plain nested object, tolerating a Mongoose
+// Map (when a doc wasn't read with flattenMaps) and the labels sub-Map.
+function normalizeTranslations(translations) {
+  if (!translations) return {};
+  const entries = translations instanceof Map ? translations : Object.entries(translations);
+  const out = {};
+  for (const [locale, value] of entries instanceof Map ? entries.entries() : entries) {
+    const labels = value?.labels;
+    out[locale] = {
+      labels: labels instanceof Map ? Object.fromEntries(labels) : labels ?? {},
+      reasonLabel: value?.reasonLabel ?? "",
+      reasonOptions: value?.reasonOptions ?? [],
+    };
+  }
+  return out;
+}
+
+// Resolves the customer-facing labels + reason field for a locale: the English
+// base with that locale's sparse translation merged on top, field by field.
+// Any blank or missing translation falls back to the English value, so a
+// partially translated form is never left with empty copy.
+export function resolveLabelsForLocale(settings, locale) {
+  const lang = toLanguageCode(locale);
+  const baseLabels = settings.labels ?? {};
+  const baseReason = settings.reasonField ?? {};
+  const translations = normalizeTranslations(settings.translations);
+  // Only serve a translation for a language the merchant still offers. Dropping
+  // a language from the Languages card stops its translation being served
+  // (buyers fall back to English) without discarding the merchant's typed copy,
+  // so re-adding the language brings it straight back.
+  const offered = settings.languages ?? [BASE_LOCALE];
+  const t =
+    lang && lang !== BASE_LOCALE && offered.includes(lang) ? translations[lang] : null;
+
+  if (!t) {
+    return { labels: baseLabels, reasonField: { ...baseReason, options: baseReason.options ?? [] } };
+  }
+
+  const pick = (translated, fallback) =>
+    typeof translated === "string" && translated.trim() !== "" ? translated : fallback;
+
+  const labels = {};
+  for (const [key, value] of Object.entries(baseLabels)) {
+    labels[key] = pick(t.labels?.[key], value);
+  }
+
+  const baseOptions = baseReason.options ?? [];
+  const options = baseOptions.map((opt, i) => pick(t.reasonOptions?.[i], opt));
+
+  return {
+    labels,
+    reasonField: { ...baseReason, label: pick(t.reasonLabel, baseReason.label), options },
   };
 }

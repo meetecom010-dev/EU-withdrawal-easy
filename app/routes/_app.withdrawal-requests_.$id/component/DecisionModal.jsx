@@ -9,7 +9,7 @@ export const DECISION_MODAL_ID = "decision-modal";
 // subject/body for this one send (the saved template is untouched). A checkbox
 // covers the "decide without emailing" case. Confirming both sets the status and
 // sends the reviewed email.
-export default function DecisionModal({ decision, preview, loading, deciding, onConfirm }) {
+export default function DecisionModal({ decision, preview, loading, deciding, language, onConfirm }) {
   const shopify = useAppBridge();
   const [subject, setSubject] = useState("");
   const [html, setHtml] = useState("");
@@ -62,6 +62,12 @@ export default function DecisionModal({ decision, preview, loading, deciding, on
 
           {sendEmail ? (
             <>
+              {language && (
+                <s-banner tone="info">
+                  This email is written in {language} — the customer&apos;s language. Edits below
+                  apply to this send only.
+                </s-banner>
+              )}
               <s-text-field
                 label="Subject"
                 value={subject}

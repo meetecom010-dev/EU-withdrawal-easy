@@ -141,6 +141,10 @@ const withdrawalRequestSchema = new Schema(
     customerName: { type: String, default: "" },
     customerEmail: { type: String, default: "" },
     countryCode: { type: String, default: "" },
+    // The buyer's language at submission (e.g. "de"), read from the order status
+    // extension's Localization API. Drives which language the customer emails are
+    // sent in — falls back to English when blank or unsupported.
+    locale: { type: String, default: "" },
     shippingAddress: { type: String, default: "" },
     reason: { type: String, default: "" },
     items: { type: [withdrawalRequestItemSchema], default: [] },

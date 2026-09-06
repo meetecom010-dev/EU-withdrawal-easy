@@ -2,6 +2,7 @@
 import { useState } from "preact/hooks";
 import OrderItemRow from "./OrderItemRow.jsx";
 import { formatMoney, sumMoney } from "../lib/money.js";
+import { t } from "../lib/i18n.js";
 
 // Step 2 of 3 — review the selected items, accept the withdrawal
 // declaration, and confirm. Submit stays disabled until the declaration is
@@ -30,7 +31,7 @@ export default function StepConfirm({
       <s-paragraph color="subdued">{settings.labels.confirmMessage}</s-paragraph>
 
       <s-text type="strong">
-        Items to withdraw ({selectedLines.length})
+        {t("confirm.itemsToWithdraw", { quantity: selectedLines.length })}
       </s-text>
       <s-stack direction="block" gap="small-200">
         {selectedLines.map((line) => (
@@ -42,7 +43,7 @@ export default function StepConfirm({
         <>
           <s-divider></s-divider>
           <s-stack direction="inline" gap="base" justifyContent="space-between">
-            <s-text type="strong">Selected items total</s-text>
+            <s-text type="strong">{t("confirm.selectedTotal")}</s-text>
             <s-text type="strong">{formatMoney(total)}</s-text>
           </s-stack>
         </>
@@ -60,7 +61,7 @@ export default function StepConfirm({
 
       <s-stack direction="inline" gap="base" justifyContent="space-between">
         <s-button onClick={onPrevious} disabled={submitting || undefined}>
-          Previous
+          {t("confirm.previous")}
         </s-button>
         <s-button
           variant="primary"

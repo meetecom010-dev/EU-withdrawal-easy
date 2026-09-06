@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types -- plain JS project, no prop-types package installed */
 import { formatMoney } from "../lib/money.js";
+import { t } from "../lib/i18n.js";
 
 // A single order line: checkbox + thumbnail + title + price. Used both as an
 // interactive picker (details step) and as a read-only summary row (confirm
@@ -13,7 +14,7 @@ import { formatMoney } from "../lib/money.js";
  * }} props
  */
 export default function OrderItemRow({ line, checked = false, onChange = () => {}, readOnly = false }) {
-  const title = line.merchandise?.title ?? "Item";
+  const title = line.merchandise?.title ?? t("item.fallbackTitle");
   // The variant title ("xs / red / water") — only present for products with
   // selected options, so it renders conditionally.
   const variantTitle = line.merchandise?.subtitle ?? "";
@@ -56,7 +57,7 @@ export default function OrderItemRow({ line, checked = false, onChange = () => {
           // separate, independently focusable control (no nested
           // interactive elements).
           <s-clickable
-            accessibilityLabel={`${checked ? "Remove" : "Select"} ${title}`}
+            accessibilityLabel={t(checked ? "item.remove" : "item.select", { title })}
             background={checked ? "subdued" : "transparent"}
             borderRadius="base"
             padding="small-200"

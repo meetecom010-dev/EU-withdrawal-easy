@@ -8,17 +8,30 @@ import {
   removeWithdrawalRequestTag,
   updateWithdrawalRequestStatus,
 } from "../../services/withdrawal-request.server";
-import { handleManualDecision } from "../../services/withdrawal-automation.server";
+import {
+  handleManualDecision,
+  placeHoldForRequest,
+  releaseHoldForRequest,
+  cancelOrderForRequest,
+  refundForRequest,
+  createReturnForRequestManual,
+  refreshReturnStatusForRequest,
+  addOrderTagForRequest,
+  removeOrderTagForRequest,
+} from "../../services/withdrawal-automation.server";
 import { getOrCreateAppSettings, serializeEmailSettings } from "../../services/app-settings.server";
 import { buildEmailVariables } from "../../services/email/variables.server";
 import { renderEmailTemplate } from "../../services/email/render";
+import { pickTemplateForLocale } from "../../services/email/registry";
 import { fetchShopContact } from "../../services/shopify/shop.server";
+import { fetchOrderAdminState } from "../../services/shopify/orders.server";
+import { previewWithdrawalRefund } from "../../services/shopify/refunds.server";
 import RequestDetail from "./component/RequestDetail";
 
 const DECISION_TEMPLATE = { approved: "withdrawalApproved", rejected: "withdrawalRejected" };
 
 export const loader = async ({ request, params }) => {
-  const { session } = await authenticate.admin(request);
+  const { admin, session } = await authenticate.admin(request);
   const [withdrawalRequest, allRequests] = await Promise.all([
     getWithdrawalRequestById(session.shop, params.id),
     listWithdrawalRequests(session.shop),
@@ -28,9 +41,23 @@ export const loader = async ({ request, params }) => {
     throw data({ error: "Withdrawal request not found" }, { status: 404 });
   }
 
+  // Live order state drives the contextual actions and keeps the Order tags in
+  // sync. Fail soft: if Shopify can't be reached the page still renders the
+  // stored request, with a banner and actions disabled, rather than erroring.
+  let orderState = null;
+  let orderStateError = null;
+  try {
+    orderState = await fetchOrderAdminState(admin, withdrawalRequest.orderId);
+    if (!orderState) orderStateError = "This order could no longer be found in Shopify.";
+  } catch (error) {
+    orderStateError = error.message;
+  }
+
   const index = allRequests.findIndex((r) => r.id === withdrawalRequest.id);
   return {
     withdrawalRequest,
+    orderState,
+    orderStateError,
     shopDomain: session.shop,
     prevId: index > 0 ? allRequests[index - 1].id : null,
     nextId: index >= 0 && index < allRequests.length - 1 ? allRequests[index + 1].id : null,
@@ -67,7 +94,10 @@ export const action = async ({ request, params }) => {
       shopName: contact?.name ?? "",
       merchantEmail: contact?.email ?? "",
     });
-    const { subject, html } = renderEmailTemplate(emailSettings.templates[templateKey], vars);
+    // Render the decision email in the buyer's language so staff review (and the
+    // customer receives) the message in the same language as the rest of the flow.
+    const localized = pickTemplateForLocale(emailSettings.templates[templateKey], reqDoc.locale);
+    const { subject, html } = renderEmailTemplate(localized, vars);
     return { preview: { subject, html } };
   }
 
@@ -95,6 +125,71 @@ export const action = async ({ request, params }) => {
       params.id,
       formData.get("tag"),
     );
+    return { withdrawalRequest };
+  }
+
+  // Live Shopify order tags — written straight to the order (the loader reads
+  // them live, so no local copy is kept).
+  if (intent === "order-tag-add") {
+    const withdrawalRequest = await addOrderTagForRequest(session.shop, params.id, formData.get("tag"));
+    return { withdrawalRequest };
+  }
+  if (intent === "order-tag-remove") {
+    const withdrawalRequest = await removeOrderTagForRequest(
+      session.shop,
+      params.id,
+      formData.get("tag"),
+    );
+    return { withdrawalRequest };
+  }
+
+  // Fulfillment hold (before-ship).
+  if (intent === "place-hold") {
+    const withdrawalRequest = await placeHoldForRequest(session.shop, params.id);
+    return { withdrawalRequest };
+  }
+  if (intent === "release-hold") {
+    const withdrawalRequest = await releaseHoldForRequest(session.shop, params.id);
+    return { withdrawalRequest };
+  }
+
+  // Return (after-delivery).
+  if (intent === "create-return") {
+    const withdrawalRequest = await createReturnForRequestManual(session.shop, params.id);
+    return { withdrawalRequest };
+  }
+  if (intent === "refresh-return") {
+    const withdrawalRequest = await refreshReturnStatusForRequest(session.shop, params.id);
+    return { withdrawalRequest };
+  }
+
+  // Cancel the whole order (cancels + refunds via Shopify).
+  if (intent === "cancel-order") {
+    const withdrawalRequest = await cancelOrderForRequest(session.shop, params.id);
+    return { withdrawalRequest };
+  }
+
+  // Refund the withdrawn items (plus shipping on a full withdrawal — decided in
+  // the service from the request itself). The amount the merchant sees in the
+  // confirm dialog comes from `refund-preview` (Shopify's suggested refund), the
+  // actual refund from `refund`.
+  if (intent === "refund-preview") {
+    const reqDoc = await getWithdrawalRequestById(session.shop, params.id);
+    if (!reqDoc) return data({ error: "Withdrawal request not found" }, { status: 404 });
+    const fullWithdrawal =
+      Boolean(reqDoc.orderLineCount) && reqDoc.items.length >= reqDoc.orderLineCount;
+    try {
+      const preview = await previewWithdrawalRefund(admin, reqDoc.orderId, {
+        items: reqDoc.items,
+        isFullWithdrawal: fullWithdrawal,
+      });
+      return { refundPreview: { ...preview, fullWithdrawal } };
+    } catch (error) {
+      return { refundPreview: { error: error.message } };
+    }
+  }
+  if (intent === "refund") {
+    const withdrawalRequest = await refundForRequest(session.shop, params.id);
     return { withdrawalRequest };
   }
 
@@ -126,11 +221,14 @@ export const action = async ({ request, params }) => {
 };
 
 export default function WithdrawalRequestDetail() {
-  const { withdrawalRequest, shopDomain, prevId, nextId } = useLoaderData();
+  const { withdrawalRequest, orderState, orderStateError, shopDomain, prevId, nextId } =
+    useLoaderData();
 
   return (
     <RequestDetail
       withdrawalRequest={withdrawalRequest}
+      orderState={orderState}
+      orderStateError={orderStateError}
       shopDomain={shopDomain}
       prevId={prevId}
       nextId={nextId}

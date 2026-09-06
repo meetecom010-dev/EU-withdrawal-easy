@@ -185,6 +185,28 @@ export function buildReturnLineItems(items, returnable, { returnReasonNote }) {
   return { returnLineItems, unreturnable };
 }
 
+const RETURN_STATUS_QUERY = `#graphql
+  query WithdrawalReturnStatus($id: ID!) {
+    return(id: $id) {
+      id
+      name
+      status
+    }
+  }
+`;
+
+// Re-reads a return's live status so the detail page can show whether it's still
+// open, closed, or declined after the merchant (or customer) acts on it in
+// Shopify.
+export async function fetchReturnStatus(admin, returnId) {
+  const data = await adminQuery(admin, {
+    operation: "WithdrawalReturnStatus",
+    query: RETURN_STATUS_QUERY,
+    variables: { id: returnId },
+  });
+  return data.return ?? null;
+}
+
 // ReturnInput.notifyCustomer is deprecated and ignored by Shopify, so it isn't
 // passed — the customer already knows, they just submitted the form, and the
 // merchant's own return notification settings govern anything further.

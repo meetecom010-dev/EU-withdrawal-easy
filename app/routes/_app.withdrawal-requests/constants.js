@@ -69,6 +69,19 @@ export function countryName(countryCode) {
   }
 }
 
+// The customer's language in English (for staff), from the locale captured at
+// submission ("de-DE" -> "German"). Drives the language the decision emails are
+// sent in.
+export function languageName(locale) {
+  if (!locale) return null;
+  const lang = String(locale).toLowerCase().split(/[-_]/)[0];
+  try {
+    return new Intl.DisplayNames(["en"], { type: "language" }).of(lang) ?? lang.toUpperCase();
+  } catch {
+    return lang.toUpperCase();
+  }
+}
+
 // Under the EU right of withdrawal (Directive 2011/83/EU, Art. 13), a trader
 // must reimburse the customer without undue delay and within 14 days of
 // being informed of the withdrawal decision — i.e. 14 days from

@@ -8,6 +8,9 @@
 // products, reason, current status, shop name, and merchant contact.
 export function buildEmailVariables(request, { shopName, merchantEmail, appUrl } = {}) {
   return {
+    // The buyer's language, so the app-generated line-item block and status
+    // label render in the same language as the surrounding template copy.
+    locale: request.locale || "",
     customerName: request.customerName || "",
     customerEmail: request.customerEmail || "",
     orderNumber: request.orderName || request.orderId || "",

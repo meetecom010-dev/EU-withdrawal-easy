@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types -- plain JS project, no prop-types package installed */
 import { useEffect, useRef, useState } from "react";
+import { resolveLabelsForLocale } from "../constants";
 
 // Mirrors extensions/order-status-hello 1:1 — same states (compact entry
 // card, three steps with a progress bar), same rows (thumbnail + quantity
@@ -22,7 +23,7 @@ const SAMPLE_ITEMS = [
   },
   {
     id: "2",
-    title: "Tind Candle Holder Set",
+    title: "Tind Candle Holder",
     variant: "Brass",
     quantity: 2,
     price: 29.45,
@@ -183,11 +184,13 @@ function ExtensionCard({ children }) {
 // expands into the step flow, exactly like the real order status page.
 // Switching form-builder tabs on the left jumps the preview straight to that
 // step so merchants can edit copy and see it immediately.
-export default function LivePreview({ settings, activeTab }) {
+export default function LivePreview({ settings, activeTab, activeLocale }) {
   const [selectedIds, setSelectedIds] = useState(["1"]);
   // "entry" | "step1" | "confirm" | "done"
   const [previewStep, setPreviewStep] = useState("entry");
   const [declarationAccepted, setDeclarationAccepted] = useState(false);
+  // Mirrors the storefront: picking "Other" reveals a free-text reason field.
+  const [reasonValue, setReasonValue] = useState("");
   // Don't leave the entry card on mount — only react to actual tab clicks.
   const skippedInitialTab = useRef(false);
 
@@ -203,9 +206,14 @@ export default function LivePreview({ settings, activeTab }) {
     if (previewStep !== "confirm") setDeclarationAccepted(false);
   }, [previewStep]);
 
+  // Resolve the copy to the language tab the merchant is editing — English base
+  // with that locale's translation merged on top, exactly as the storefront
+  // extension receives it — so the preview shows the translated form live.
+  const { labels, reasonField } = resolveLabelsForLocale(settings, activeLocale);
+
   const selectedItems = SAMPLE_ITEMS.filter((item) => selectedIds.includes(item.id));
   const selectedTotal = selectedItems.reduce((total, item) => total + item.price, 0);
-  const reasonOptions = settings.reasonField.options ?? [];
+  const reasonOptions = reasonField.options ?? [];
 
   function toggleItem(id, checked) {
     setSelectedIds((prev) => (checked ? [...prev, id] : prev.filter((x) => x !== id)));
@@ -222,8 +230,8 @@ export default function LivePreview({ settings, activeTab }) {
         <ExtensionCard>
           {previewStep === "entry" && (
             <s-stack direction="block" gap="small-200">
-              <s-heading>{settings.labels.step1Title}</s-heading>
-              <s-paragraph color="subdued">{settings.labels.step1Description}</s-paragraph>
+              <s-heading>{labels.step1Title}</s-heading>
+              <s-paragraph color="subdued">{labels.step1Description}</s-paragraph>
               <s-stack direction="inline">
                 <s-button onClick={() => setPreviewStep("step1")}>
                   Start withdrawal request
@@ -238,9 +246,9 @@ export default function LivePreview({ settings, activeTab }) {
 
               {previewStep === "step1" && (
                 <>
-                  <s-heading>{settings.labels.step1Title}</s-heading>
-                  <s-paragraph color="subdued">{settings.labels.step1Description}</s-paragraph>
-                  <s-text type="strong">{settings.labels.itemSelectionHeading}</s-text>
+                  <s-heading>{labels.step1Title}</s-heading>
+                  <s-paragraph color="subdued">{labels.step1Description}</s-paragraph>
+                  <s-text type="strong">{labels.itemSelectionHeading}</s-text>
                   <s-stack direction="block" gap="small-200">
                     {SAMPLE_ITEMS.map((item) => (
                       <ItemRow
@@ -254,17 +262,28 @@ export default function LivePreview({ settings, activeTab }) {
                   <s-text-field label="Full name" value="Jane Doe" disabled></s-text-field>
                   <s-text-field label="Email" value="jane@example.com" disabled></s-text-field>
                   <s-text-field label="Order number" value="#1001" disabled></s-text-field>
-                  {settings.reasonField.enabled && (
-                    <s-select
-                      label={settings.reasonField.label}
-                      placeholder="Select a reason (optional)"
-                    >
-                      {reasonOptions.map((option) => (
-                        <s-option key={option} value={option}>
-                          {option}
-                        </s-option>
-                      ))}
-                    </s-select>
+                  {reasonField.enabled && (
+                    <>
+                      <s-select
+                        label={reasonField.label}
+                        placeholder="Select a reason (optional)"
+                        value={reasonValue}
+                        onChange={(e) => setReasonValue(e.currentTarget.value)}
+                      >
+                        {reasonOptions.map((option) => (
+                          <s-option key={option} value={option}>
+                            {option}
+                          </s-option>
+                        ))}
+                        <s-option value="__other__">Other</s-option>
+                      </s-select>
+                      {reasonValue === "__other__" && (
+                        <s-text-field
+                          label="Your reason"
+                          placeholder="Tell us your reason"
+                        ></s-text-field>
+                      )}
+                    </>
                   )}
                   {selectedItems.length === 0 && (
                     <s-text color="subdued">Select at least one item to continue.</s-text>
@@ -274,15 +293,15 @@ export default function LivePreview({ settings, activeTab }) {
                     disabled={selectedItems.length === 0 || undefined}
                     onClick={() => setPreviewStep("confirm")}
                   >
-                    {settings.labels.step1ButtonLabel}
+                    {labels.step1ButtonLabel}
                   </s-button>
                 </>
               )}
 
               {previewStep === "confirm" && (
                 <>
-                  <s-heading>{settings.labels.confirmHeading}</s-heading>
-                  <s-paragraph color="subdued">{settings.labels.confirmMessage}</s-paragraph>
+                  <s-heading>{labels.confirmHeading}</s-heading>
+                  <s-paragraph color="subdued">{labels.confirmMessage}</s-paragraph>
                   <s-text type="strong">Items to withdraw ({selectedItems.length})</s-text>
                   <s-stack direction="block" gap="small-200">
                     {selectedItems.map((item) => (
@@ -295,7 +314,7 @@ export default function LivePreview({ settings, activeTab }) {
                     <s-text type="strong">{formatEUR(selectedTotal)}</s-text>
                   </s-stack>
                   <s-checkbox
-                    label={settings.labels.declaration}
+                    label={labels.declaration}
                     checked={declarationAccepted}
                     onChange={(e) => setDeclarationAccepted(e.currentTarget.checked)}
                   ></s-checkbox>
@@ -306,7 +325,7 @@ export default function LivePreview({ settings, activeTab }) {
                       disabled={!declarationAccepted || undefined}
                       onClick={() => setPreviewStep("done")}
                     >
-                      {settings.labels.confirmButtonLabel}
+                      {labels.confirmButtonLabel}
                     </s-button>
                   </s-stack>
                 </>
@@ -314,8 +333,8 @@ export default function LivePreview({ settings, activeTab }) {
 
               {previewStep === "done" && (
                 <>
-                  <s-banner tone="success" heading={settings.labels.submittedTitle}></s-banner>
-                  <s-paragraph color="subdued">{settings.labels.submittedMessage}</s-paragraph>
+                  <s-banner tone="success" heading={labels.submittedTitle}></s-banner>
+                  <s-paragraph color="subdued">{labels.submittedMessage}</s-paragraph>
                   <s-stack direction="inline" gap="small-200" alignItems="center">
                     <s-icon type="check-circle-filled" tone="success" size="small"></s-icon>
                     <s-text color="subdued">

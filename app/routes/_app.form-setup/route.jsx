@@ -4,7 +4,7 @@ import { authenticate } from "../../shopify.server";
 import { getFormSettings, saveFormSettings } from "../../utils/api/formSettings";
 import TurnItOnCard from "./component/TurnItOnCard";
 import CountriesCard from "./component/CountriesCard";
-import FormFieldsEditor, { tabForErrorPath } from "./component/FormFieldsEditor";
+import FormFieldsEditor, { tabForErrorPath, localeForErrorPath } from "./component/FormFieldsEditor";
 import LivePreview from "./component/LivePreview";
 import LanguagesCard from "./component/LanguagesCard";
 import AutomationCard from "./component/AutomationCard";
@@ -22,7 +22,14 @@ function setPath(obj, path, value) {
   const clone = structuredClone(obj);
   const keys = path.split(".");
   let cur = clone;
-  for (let i = 0; i < keys.length - 1; i++) cur = cur[keys[i]];
+  for (let i = 0; i < keys.length - 1; i++) {
+    // Create missing intermediate objects so a sparse path like
+    // `translations.de.labels.step1Title` can be written before that locale's
+    // translation subtree exists (translations are sparse — a locale only
+    // materialises when the merchant first types into one of its fields).
+    if (cur[keys[i]] == null || typeof cur[keys[i]] !== "object") cur[keys[i]] = {};
+    cur = cur[keys[i]];
+  }
   cur[keys[keys.length - 1]] = value;
   return clone;
 }
@@ -44,6 +51,9 @@ export default function FormSetup() {
   // Shopify guidelines reserve toasts for confirmations.
   const [saveError, setSaveError] = useState(null);
   const [activeTab, setActiveTab] = useState("step1");
+  // Which language the form builder is currently editing. "en" edits the base
+  // copy (labels/reasonField); any other code edits that locale's translation.
+  const [activeLocale, setActiveLocale] = useState("en");
 
   useEffect(() => {
     getFormSettings()
@@ -102,6 +112,16 @@ export default function FormSetup() {
     }
   }, [hasChanges, isReady, shopify]);
 
+  // If the active language tab is removed from the offered list (via the
+  // Languages card), fall back to the always-present English tab so the editor
+  // never points at a locale that no longer has a tab.
+  useEffect(() => {
+    const languages = settings?.languages ?? ["en"];
+    if (activeLocale !== "en" && !languages.includes(activeLocale)) {
+      setActiveLocale("en");
+    }
+  }, [settings?.languages, activeLocale]);
+
   function update(path, value) {
     setSettings((prev) => setPath(prev, path, value));
     // Editing a field counts as acting on its message. Controls that can't
@@ -122,13 +142,19 @@ export default function FormSetup() {
       // ones dismissed by returning to the field.
       setDismissedErrors([]);
       setShowErrors(true);
-      // A form-builder field can be invalid on a tab that isn't open, where
-      // its message would be invisible and Save would look like it did
-      // nothing. Only move if no error is on the current tab, so the merchant
-      // isn't pulled away from one they can already see.
-      const erroredTabs = Object.keys(errors).map(tabForErrorPath).filter(Boolean);
-      if (erroredTabs.length > 0 && !erroredTabs.includes(activeTab)) {
-        setActiveTab(erroredTabs[0]);
+      // A field can be invalid on a language tab or step tab that isn't open,
+      // where its message would be invisible and Save would look like it did
+      // nothing. If nothing invalid is on the current view, jump to the first
+      // error's language + step so the merchant lands on a message they can see.
+      const errorPaths = Object.keys(errors);
+      const visibleHere = errorPaths.some(
+        (path) => localeForErrorPath(path) === activeLocale && tabForErrorPath(path) === activeTab,
+      );
+      if (!visibleHere && errorPaths.length > 0) {
+        const target = errorPaths[0];
+        setActiveLocale(localeForErrorPath(target));
+        const targetTab = tabForErrorPath(target);
+        if (targetTab) setActiveTab(targetTab);
       }
       return;
     }
@@ -214,6 +240,8 @@ export default function FormSetup() {
                 update={update}
                 activeTab={activeTab}
                 onTabChange={setActiveTab}
+                activeLocale={activeLocale}
+                onLocaleChange={setActiveLocale}
                 errors={displayedErrors}
                 dismissError={dismissError}
               />
@@ -232,7 +260,7 @@ export default function FormSetup() {
               />
             </s-stack>
             <div style={{ position: "sticky", top: "16px", alignSelf: "start" }}>
-              <LivePreview settings={settings} activeTab={activeTab} />
+              <LivePreview settings={settings} activeTab={activeTab} activeLocale={activeLocale} />
             </div>
           </s-grid>
         </s-query-container>

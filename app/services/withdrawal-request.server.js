@@ -16,6 +16,7 @@ export function serializeWithdrawalRequest(doc) {
     customerName: obj.customerName,
     customerEmail: obj.customerEmail,
     countryCode: obj.countryCode,
+    locale: obj.locale ?? "",
     shippingAddress: obj.shippingAddress,
     reason: obj.reason,
     items: obj.items,

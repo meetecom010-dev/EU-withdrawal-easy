@@ -6,7 +6,12 @@ import {
   serializeFormSettings,
 } from "./app-settings.server";
 import { adminClientFor } from "./shopify/client.server";
-import { addOrderTags, cancelOrderWithRefund, fetchOrderContext } from "./shopify/orders.server";
+import {
+  addOrderTags,
+  cancelOrderWithRefund,
+  fetchOrderContext,
+  removeOrderTags,
+} from "./shopify/orders.server";
 import {
   holdFulfillmentOrder,
   releaseFulfillmentHold,
@@ -15,7 +20,9 @@ import {
   buildReturnLineItems,
   createReturn,
   fetchReturnableLines,
+  fetchReturnStatus,
 } from "./shopify/returns.server";
+import { createWithdrawalRefund } from "./shopify/refunds.server";
 import { fetchShopContact } from "./shopify/shop.server";
 import { cancelJobsForRequest, scheduleJob } from "./automation-jobs.server";
 import { sendWithdrawalEmails, sendCustomerRawEmail } from "./email/index.server";
@@ -624,4 +631,153 @@ async function sendDecisionEmailForRequest(request, shop, email) {
       emailError: error.message,
     });
   }
+}
+
+// ── Manual actions from the Request Details page ─────────────────────────────
+// Staff-triggered equivalents of the automation steps. Each loads the request,
+// runs the operation through the same `step`/`log` audit trail as the automatic
+// path, saves, and returns the serialized request — so a manual hold, refund, or
+// tag shows up in the timeline exactly like an automatic one.
+
+async function runManualAction(shop, requestId, fn) {
+  await connectDB();
+  const request = await WithdrawalRequest.findOne({ shop, _id: requestId });
+  if (!request) return null;
+  const admin = await adminClientFor(shop);
+  await fn(admin, request);
+  await request.save();
+  await flushEvents(request);
+  return serializeWithdrawalRequest(request);
+}
+
+export async function placeHoldForRequest(shop, requestId) {
+  return runManualAction(shop, requestId, async (admin, request) => {
+    if ((request.automation.holds ?? []).length > 0 && !request.automation.holdsReleasedAt) {
+      log(request, "hold_fulfillment", "skipped", "A hold is already in place for this request");
+      return;
+    }
+    const orderContext = await fetchOrderContext(admin, request.orderId);
+    const holdable = orderContext?.holdableFulfillmentOrders ?? [];
+    if (holdable.length === 0) {
+      log(request, "hold_fulfillment", "skipped", "No holdable fulfillment orders on this order");
+      return;
+    }
+    for (const fulfillmentOrder of holdable) {
+      const outcome = await step(request, "hold_fulfillment", () =>
+        holdFulfillmentOrder(admin, {
+          fulfillmentOrderId: fulfillmentOrder.id,
+          requestId: request._id,
+          reasonNotes: `Withdrawal request ${request.orderName || request.orderId} held by staff`,
+        }),
+      );
+      if (outcome.ok) {
+        request.automation.holds.push({
+          fulfillmentOrderId: outcome.result.fulfillmentOrderId,
+          holdIds: outcome.result.holdIds,
+        });
+        // Re-holding after an earlier release: clear the released markers so the
+        // state reads as "held" again.
+        request.automation.holdsReleasedAt = null;
+        request.automation.holdsReleasedBy = null;
+        log(request, "hold_fulfillment", "success", `Held ${fulfillmentOrder.id}`, {
+          fulfillmentOrderId: outcome.result.fulfillmentOrderId,
+          holdIds: outcome.result.holdIds,
+        });
+      }
+    }
+  });
+}
+
+export async function releaseHoldForRequest(shop, requestId) {
+  return runManualAction(shop, requestId, (admin, request) =>
+    releaseHoldsForRequest(admin, request, "manual"),
+  );
+}
+
+export async function cancelOrderForRequest(shop, requestId) {
+  return runManualAction(shop, requestId, (admin, request) =>
+    cancelForWithdrawal(admin, request, "cancel_order_manual"),
+  );
+}
+
+// A withdrawal covers the whole order when every line was requested — that's
+// when the original standard delivery charge is refunded too (EU right of
+// withdrawal). Unknown order line count (older requests) is treated as partial,
+// so shipping is never refunded on a guess.
+function isFullWithdrawal(request) {
+  return Boolean(request.orderLineCount) && request.items.length >= request.orderLineCount;
+}
+
+export async function refundForRequest(shop, requestId) {
+  return runManualAction(shop, requestId, async (admin, request) => {
+    const fullWithdrawal = isFullWithdrawal(request);
+    const outcome = await step(request, "refund", () =>
+      createWithdrawalRefund(admin, request.orderId, {
+        items: request.items,
+        isFullWithdrawal: fullWithdrawal,
+        note: `Refunded by EU Withdrawly: customer withdrew from the purchase (request ${request._id}).`,
+      }),
+    );
+    if (outcome.ok) {
+      log(
+        request,
+        "refund",
+        "success",
+        `Refunded ${outcome.result.amount} ${outcome.result.currencyCode ?? ""}`.trim(),
+        {
+          refundId: outcome.result.refundId,
+          amount: outcome.result.amount,
+          currencyCode: outcome.result.currencyCode,
+          includedShipping: fullWithdrawal,
+        },
+      );
+    }
+  });
+}
+
+export async function createReturnForRequestManual(shop, requestId) {
+  return runManualAction(shop, requestId, (admin, request) => createReturnForRequest(admin, request));
+}
+
+export async function refreshReturnStatusForRequest(shop, requestId) {
+  return runManualAction(shop, requestId, async (admin, request) => {
+    const returnId = request.automation.returnId;
+    if (!returnId) {
+      log(request, "refresh_return", "skipped", "No return exists for this request");
+      return;
+    }
+    const outcome = await step(request, "refresh_return", () => fetchReturnStatus(admin, returnId));
+    if (outcome.ok && outcome.result) {
+      request.automation.returnStatus = outcome.result.status ?? request.automation.returnStatus;
+      log(request, "refresh_return", "success", `Return status: ${outcome.result.status}`, {
+        status: outcome.result.status,
+      });
+    }
+  });
+}
+
+export async function addOrderTagForRequest(shop, requestId, tag) {
+  return runManualAction(shop, requestId, async (admin, request) => {
+    const outcome = await step(request, "order_tag_add", () =>
+      addOrderTags(admin, request.orderId, [tag]),
+    );
+    if (outcome.ok && outcome.result.length) {
+      log(request, "order_tag_add", "success", `Added order tag "${outcome.result.join(", ")}"`, {
+        tags: outcome.result,
+      });
+    }
+  });
+}
+
+export async function removeOrderTagForRequest(shop, requestId, tag) {
+  return runManualAction(shop, requestId, async (admin, request) => {
+    const outcome = await step(request, "order_tag_remove", () =>
+      removeOrderTags(admin, request.orderId, [tag]),
+    );
+    if (outcome.ok && outcome.result.length) {
+      log(request, "order_tag_remove", "success", `Removed order tag "${outcome.result.join(", ")}"`, {
+        tags: outcome.result,
+      });
+    }
+  });
 }

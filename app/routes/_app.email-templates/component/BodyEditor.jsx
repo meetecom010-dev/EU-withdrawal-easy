@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types -- plain JS project, no prop-types package installed */
 import { useRef, useState } from "react";
 import { useAppBridge } from "@shopify/app-bridge-react";
-import { applyLiquid, SAMPLE_LIQUID_DATA } from "../../../services/email/variables";
+import { applyLiquid, buildLiquidData, SAMPLE_REQUEST_VARS } from "../../../services/email/variables";
 import VariablePanel from "./VariablePanel";
 import RenderedEmail from "./RenderedEmail";
 
@@ -12,13 +12,15 @@ const PREVIEW_MODAL_ID = "email-preview-modal";
 // editor with the variable panel beside it. A separate "Preview" button opens
 // the email in a modal with sample data. The body is the merchant's own HTML —
 // stored and sent verbatim, with {{ liquid }} filled in at send time.
-export default function BodyEditor({ value, onChange, error, onFocus }) {
+export default function BodyEditor({ value, onChange, error, onFocus, locale = "en" }) {
   const shopify = useAppBridge();
   const [editing, setEditing] = useState(false);
   const textareaRef = useRef(null);
 
-  // Preview always uses sample data so the merchant sees a realistic email.
-  const previewHtml = applyLiquid(value, SAMPLE_LIQUID_DATA);
+  // Preview always uses sample data so the merchant sees a realistic email —
+  // built for the active language so the app-generated bits (line-item "Qty",
+  // status label) match the language being edited.
+  const previewHtml = applyLiquid(value, buildLiquidData({ ...SAMPLE_REQUEST_VARS, locale }));
 
   // Inserts a Liquid tag at the caret of the code editor, restoring the caret
   // after React re-renders the controlled textarea. Falls back to appending if

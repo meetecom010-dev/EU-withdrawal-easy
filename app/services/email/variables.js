@@ -36,7 +36,7 @@ export const EMAIL_VARIABLE_GROUPS = [
       { token: "withdrawal.request_id", label: "Reference number", description: "The withdrawal request reference", sample: "b5238240-5af0-479f-a16d-b1522cf35458" },
       { token: "withdrawal.submitted_at", label: "Submission date", description: "When the request was submitted, with time", sample: "24 July 2026 at 23:30" },
       { token: "withdrawal.reason", label: "Reason", description: "The reason the customer gave, if any", sample: "Changed my mind" },
-      { token: "withdrawal.selected_products", label: "Selected products (text)", description: "The items as a comma-separated list", sample: "Fjord Table Lamp — Oak × 1, Tind Candle Holder Set × 2" },
+      { token: "withdrawal.selected_products", label: "Selected products (text)", description: "The items as a comma-separated list", sample: "Fjord Table Lamp — Oak × 1, Tind Candle Holder × 2" },
     ],
   },
   {
@@ -98,7 +98,7 @@ export const SAMPLE_REQUEST_VARS = {
         "https://cdn.shopify.com/s/files/1/0682/4787/9778/files/AAUvwnj0ICORVuxs41ODOvnhvedArLiSV20df7r8XBjEUQ_s900-c-k-c0x00ffffff-no-rj.jpg",
     },
     {
-      title: "Tind Candle Holder Set",
+      title: "Tind Candle Holder",
       variantTitle: "Brass",
       sku: "CND-TND-02",
       quantity: 2,
@@ -115,9 +115,41 @@ export const SAMPLE_REQUEST_VARS = {
 // variant title beneath it, and the line price pinned to the right. Text parts
 // are escaped; the surrounding markup is app-generated and safe, so applyLiquid
 // inserts the result raw (see HTML_TOKENS).
-function renderLineItemsHtml(items = []) {
+// App-generated bits of the email that aren't part of the merchant's editable
+// body — the line-item card's "Qty" / empty-state text and the status label —
+// translated so the whole email reads in one language. Keyed by language code;
+// unknown locales fall back to English.
+const LINE_ITEM_STRINGS = {
+  en: { qty: "Qty", none: "No items listed." },
+  de: { qty: "Menge", none: "Keine Artikel aufgeführt." },
+  fr: { qty: "Qté", none: "Aucun article répertorié." },
+  nl: { qty: "Aantal", none: "Geen artikelen vermeld." },
+  it: { qty: "Qtà", none: "Nessun articolo elencato." },
+  es: { qty: "Cant.", none: "No hay artículos." },
+  pl: { qty: "Ilość", none: "Brak produktów." },
+  sv: { qty: "Antal", none: "Inga artiklar angivna." },
+};
+
+const STATUS_LABELS_BY_LOCALE = {
+  en: { pending: "Pending review", approved: "Approved", rejected: "Rejected" },
+  de: { pending: "In Prüfung", approved: "Genehmigt", rejected: "Abgelehnt" },
+  fr: { pending: "En cours d'examen", approved: "Approuvée", rejected: "Refusée" },
+  nl: { pending: "In behandeling", approved: "Goedgekeurd", rejected: "Afgewezen" },
+  it: { pending: "In revisione", approved: "Approvata", rejected: "Rifiutata" },
+  es: { pending: "En revisión", approved: "Aprobada", rejected: "Rechazada" },
+  pl: { pending: "W trakcie rozpatrywania", approved: "Zatwierdzony", rejected: "Odrzucony" },
+  sv: { pending: "Under granskning", approved: "Godkänd", rejected: "Avvisad" },
+};
+
+// "de-DE" -> "de", with a fallback to English for anything unsupported.
+function localeStrings(map, locale) {
+  const lang = String(locale ?? "").toLowerCase().split(/[-_]/)[0];
+  return map[lang] ?? map.en;
+}
+
+function renderLineItemsHtml(items = [], strings = LINE_ITEM_STRINGS.en) {
   if (!items.length) {
-    return `<p style="margin:0 0 20px;font-size:14px;color:#6d7175">No items listed.</p>`;
+    return `<p style="margin:0 0 20px;font-size:14px;color:#6d7175">${strings.none}</p>`;
   }
   return items
     .map((item) => {
@@ -135,7 +167,7 @@ function renderLineItemsHtml(items = []) {
             <td style="padding:12px 4px;vertical-align:middle">
               <div style="font-size:14px;font-weight:600;color:#202223;line-height:1.3">${title}</div>
               ${variant ? `<div style="font-size:13px;color:#6d7175;margin-top:2px">${variant}</div>` : ""}
-              <div style="font-size:12px;color:#8c9196;margin-top:2px">Qty: ${qty}</div>
+              <div style="font-size:12px;color:#8c9196;margin-top:2px">${strings.qty}: ${qty}</div>
             </td>
             <td style="padding:12px;vertical-align:middle;text-align:right;white-space:nowrap;font-size:14px;font-weight:600;color:#202223">${price}</td>
           </tr>
@@ -144,9 +176,9 @@ function renderLineItemsHtml(items = []) {
     .join("");
 }
 
-const STATUS_LABELS = { pending: "Pending review", approved: "Approved", rejected: "Rejected" };
-function statusLabel(status) {
-  return STATUS_LABELS[status] ?? "Pending review";
+function statusLabel(status, locale) {
+  const labels = localeStrings(STATUS_LABELS_BY_LOCALE, locale);
+  return labels[status] ?? labels.pending;
 }
 
 // Bridges the internal buildEmailVariables() shape to the nested object the
@@ -157,6 +189,7 @@ export function buildLiquidData(vars = {}) {
   const products = (vars.items ?? [])
     .map((item) => `${item.title ?? "Item"} × ${item.quantity ?? 1}`)
     .join(", ");
+  const lineItemStrings = localeStrings(LINE_ITEM_STRINGS, vars.locale);
 
   return {
     customer: {
@@ -173,10 +206,10 @@ export function buildLiquidData(vars = {}) {
       submitted_at: formatDateTime(vars.submissionDate),
       reason: vars.reason || "",
       selected_products: products,
-      line_items: renderLineItemsHtml(vars.items),
+      line_items: renderLineItemsHtml(vars.items, lineItemStrings),
     },
     request: {
-      status: statusLabel(vars.status),
+      status: statusLabel(vars.status, vars.locale),
       url: vars.reviewUrl || "",
     },
     shop: {

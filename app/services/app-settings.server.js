@@ -3,7 +3,13 @@ import AppSettings from "../models/app-settings.server";
 import { resolveFormSettings } from "../routes/_app.form-setup/constants";
 import { validateFormSettings } from "../routes/_app.form-setup/validation";
 import { validateEmailSettings } from "../routes/_app.email-templates/validation";
-import { TEMPLATE_KEYS, resolveTemplate, diffOverride } from "./email/registry";
+import {
+  TEMPLATE_KEYS,
+  resolveTemplate,
+  diffOverride,
+  hasTranslation,
+  BASE_EMAIL_LOCALE,
+} from "./email/registry";
 import { defaultSenderEmail } from "./email/brevo.server";
 
 // Returns the shop's AppSettings doc, creating a default one if it doesn't
@@ -21,8 +27,10 @@ export async function getOrCreateAppSettings(shop) {
 // Strips the mongoose document down to a plain, network-safe formSettings
 // object, resolving "empty euCountries means all 27" along the way.
 export function serializeFormSettings(doc) {
+  // flattenMaps turns the `translations` Map (and its inner labels Map) into
+  // plain objects so the frontend and resolver work with normal objects.
   const formSettings = doc.formSettings.toObject
-    ? doc.formSettings.toObject()
+    ? doc.formSettings.toObject({ flattenMaps: true })
     : doc.formSettings;
   return resolveFormSettings(formSettings);
 }
@@ -69,7 +77,11 @@ function readOverrides(stored) {
 // template resolved to its effective values (registry default ⊕ override). Each
 // template also reports whether it's `customized`, for the UI.
 export function serializeEmailSettings(doc) {
-  const stored = doc.emailSettings?.toObject ? doc.emailSettings.toObject() : doc.emailSettings ?? {};
+  // flattenMaps so the overrides Map and each override's nested `translations`
+  // Map come back as plain objects the resolver and UI can read directly.
+  const stored = doc.emailSettings?.toObject
+    ? doc.emailSettings.toObject({ flattenMaps: true })
+    : doc.emailSettings ?? {};
   const overrides = readOverrides(stored);
 
   const sender = {
@@ -81,15 +93,36 @@ export function serializeEmailSettings(doc) {
     fromEmailStatus: stored.sender?.fromEmailStatus ?? "none",
   };
 
+  // The languages the customer emails are offered in mirror the form's offered
+  // languages (Languages card) — one place controls both. English is the base.
+  const offered = Array.from(doc.formSettings?.languages ?? [BASE_EMAIL_LOCALE]);
+  const extraLocales = offered.filter((code) => code !== BASE_EMAIL_LOCALE);
+
   const templates = {};
   for (const key of TEMPLATE_KEYS) {
     const override = overrides[key] ?? {};
-    templates[key] = { ...resolveTemplate(key, override), customized: Object.keys(override).length > 0 };
+    const overrideTranslations = override.translations ?? {};
+    templates[key] = {
+      ...resolveTemplate(key, override, BASE_EMAIL_LOCALE),
+      customized: Object.keys(override).length > 0,
+    };
+    // Only customer templates that actually have a translation for an offered
+    // language get a language tab; the merchant notification has none.
+    const translations = {};
+    for (const locale of extraLocales) {
+      if (!hasTranslation(key, locale)) continue;
+      const localeOverride = overrideTranslations[locale] ?? {};
+      translations[locale] = {
+        ...resolveTemplate(key, override, locale),
+        customized: Object.keys(localeOverride).length > 0,
+      };
+    }
+    if (Object.keys(translations).length) templates[key].translations = translations;
   }
 
   // The app's default sender, shown in the UI as the address used until a
   // merchant verifies their own.
-  return { sender, templates, defaultFromEmail: defaultSenderEmail() };
+  return { sender, templates, languages: offered, defaultFromEmail: defaultSenderEmail() };
 }
 
 // Persists the shop's email settings. The frontend sends the full effective

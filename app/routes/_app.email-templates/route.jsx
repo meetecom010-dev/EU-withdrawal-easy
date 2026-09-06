@@ -18,9 +18,29 @@ function setPath(obj, path, value) {
   const clone = structuredClone(obj);
   const keys = path.split(".");
   let cur = clone;
-  for (let i = 0; i < keys.length - 1; i++) cur = cur[keys[i]];
+  for (let i = 0; i < keys.length - 1; i++) {
+    // Create missing intermediates so a per-locale path like
+    // `templates.customerConfirmation.translations.de.subject` is writable even
+    // before that language's override subtree exists.
+    if (cur[keys[i]] == null || typeof cur[keys[i]] !== "object") cur[keys[i]] = {};
+    cur = cur[keys[i]];
+  }
   cur[keys[keys.length - 1]] = value;
   return clone;
+}
+
+const BASE_EMAIL_LOCALE = "en";
+
+// Splits an error path into the template + language it belongs to, so Save can
+// jump to the exact tab. "templates.customerConfirmation.translations.de.subject"
+// -> { templateKey: "customerConfirmation", locale: "de" }.
+function locationForErrorPath(path) {
+  if (!path?.startsWith("templates.")) return null;
+  const parts = path.split(".");
+  return {
+    templateKey: parts[1],
+    locale: parts[2] === "translations" ? parts[3] : BASE_EMAIL_LOCALE,
+  };
 }
 
 const SAVE_BAR_ID = "email-templates-save-bar";
@@ -36,6 +56,9 @@ export default function EmailTemplates() {
   const [saveError, setSaveError] = useState(null);
 
   const [selectedKey, setSelectedKey] = useState(DEFAULT_KEY);
+  // Which language of the selected email is being edited. "en" edits the base
+  // copy; any other code edits that language's translation.
+  const [activeLocale, setActiveLocale] = useState(BASE_EMAIL_LOCALE);
 
   const [showErrors, setShowErrors] = useState(false);
   const [dismissedErrors, setDismissedErrors] = useState([]);
@@ -88,15 +111,41 @@ export default function EmailTemplates() {
     [dismissError],
   );
 
-  // Reset drops back to the registry default. Saving then produces an empty
-  // override, so the shop's customisation is removed entirely.
+  // Reset drops the current language back to the registry default. Saving then
+  // produces an empty override for that language, so the customisation is
+  // removed entirely — other languages are left untouched.
   const resetToDefault = useCallback(() => {
-    setSettings((prev) => ({
-      ...prev,
-      templates: { ...prev.templates, [selectedKey]: { ...templateDefault(selectedKey), customized: false } },
-    }));
+    setSettings((prev) => {
+      const template = prev.templates[selectedKey];
+      if (activeLocale === BASE_EMAIL_LOCALE) {
+        return {
+          ...prev,
+          templates: {
+            ...prev.templates,
+            [selectedKey]: {
+              ...template,
+              ...templateDefault(selectedKey, BASE_EMAIL_LOCALE),
+              customized: false,
+            },
+          },
+        };
+      }
+      return {
+        ...prev,
+        templates: {
+          ...prev.templates,
+          [selectedKey]: {
+            ...template,
+            translations: {
+              ...template.translations,
+              [activeLocale]: { ...templateDefault(selectedKey, activeLocale), customized: false },
+            },
+          },
+        },
+      };
+    });
     shopify?.toast?.show(`${TEMPLATE_META[selectedKey].name} reset to default`);
-  }, [selectedKey, shopify]);
+  }, [selectedKey, activeLocale, shopify]);
 
   function handleDiscard() {
     setSettings(savedSettings);
@@ -119,19 +168,22 @@ export default function EmailTemplates() {
       handleDiscard();
     }
     setSelectedKey(key);
+    // Start each email on its base language; not every template offers the same
+    // set of translation tabs (the merchant notification has none).
+    setActiveLocale(BASE_EMAIL_LOCALE);
   }
 
   async function handleSave() {
     if (hasErrors) {
       setDismissedErrors([]);
       setShowErrors(true);
-      // Jump to the template that owns the first error so its message is
-      // visible. Sender errors (sender.*) stay put — those fields are always
-      // shown at the top.
-      const firstErrorKey = Object.keys(errors)[0];
-      const templateKey = firstErrorKey?.startsWith("templates.") ? firstErrorKey.split(".")[1] : null;
-      if (templateKey && templateKey !== selectedKey) {
-        setSelectedKey(templateKey);
+      // Jump to the template + language that owns the first error so its
+      // message is visible. Sender errors (sender.*) stay put — those fields are
+      // always shown at the top.
+      const location = locationForErrorPath(Object.keys(errors)[0]);
+      if (location) {
+        if (location.templateKey !== selectedKey) setSelectedKey(location.templateKey);
+        setActiveLocale(location.locale);
       }
       return;
     }
@@ -200,8 +252,11 @@ export default function EmailTemplates() {
 
         <NotificationEditor
           templates={settings.templates}
+          languages={settings.languages}
           selectedKey={selectedKey}
           onSelect={handleSelect}
+          activeLocale={activeLocale}
+          onLocaleChange={setActiveLocale}
           update={update}
           dismissError={dismissError}
           errors={displayedErrors}

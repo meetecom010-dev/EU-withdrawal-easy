@@ -20,21 +20,29 @@ export function validateEmailSettings(settings) {
     errors["sender.replyTo"] = "Enter a valid email address.";
   }
 
-  const templates = settings.templates ?? {};
-  for (const key of Object.keys(TEMPLATE_META)) {
-    const template = templates[key];
-    if (!template) continue;
-    const at = (field) => `templates.${key}.${field}`;
-
-    const subject = template.subject?.trim() ?? "";
+  // Subject + body rules, applied identically to the English base and every
+  // language translation a template carries.
+  const checkCopy = (copy, at) => {
+    const subject = copy.subject?.trim() ?? "";
     if (!subject) {
       errors[at("subject")] = "Enter a subject line.";
     } else if (subject.length > SUBJECT_MAX) {
       errors[at("subject")] = `Keep the subject under ${SUBJECT_MAX} characters.`;
     }
-
-    if (!template.bodyHtml?.trim()) {
+    if (!copy.bodyHtml?.trim()) {
       errors[at("bodyHtml")] = "The email body can't be empty.";
+    }
+  };
+
+  const templates = settings.templates ?? {};
+  for (const key of Object.keys(TEMPLATE_META)) {
+    const template = templates[key];
+    if (!template) continue;
+
+    checkCopy(template, (field) => `templates.${key}.${field}`);
+
+    for (const [locale, copy] of Object.entries(template.translations ?? {})) {
+      checkCopy(copy, (field) => `templates.${key}.translations.${locale}.${field}`);
     }
   }
 
