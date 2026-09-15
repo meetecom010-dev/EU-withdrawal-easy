@@ -34,16 +34,16 @@ const SUGGESTED_REFUND_QUERY = `#graphql
   ) {
     order(id: $orderId) {
       suggestedRefund(refundLineItems: $refundLineItems, refundShipping: $refundShipping) {
-        amountSet { shopMoney { amount currencyCode } }
+        amountSet { presentmentMoney { amount currencyCode } }
         refundLineItems {
           lineItem { id }
           quantity
           restockType
           location { id }
         }
-        shipping { amountSet { shopMoney { amount } } }
+        shipping { amountSet { presentmentMoney { amount } } }
         suggestedTransactions {
-          amountSet { shopMoney { amount currencyCode } }
+          amountSet { presentmentMoney { amount currencyCode } }
           gateway
           kind
           parentTransaction { id }
@@ -138,10 +138,10 @@ export async function previewWithdrawalRefund(admin, orderId, { items, isFullWit
   const suggested = await fetchSuggestedRefund(admin, orderId, plan);
   return {
     refundable: true,
-    amount: Number(suggested?.amountSet?.shopMoney?.amount ?? 0),
-    currencyCode: suggested?.amountSet?.shopMoney?.currencyCode ?? null,
+    amount: Number(suggested?.amountSet?.presentmentMoney?.amount ?? 0),
+    currencyCode: suggested?.amountSet?.presentmentMoney?.currencyCode ?? null,
     includesShipping: Boolean(
-      isFullWithdrawal && Number(suggested?.shipping?.amountSet?.shopMoney?.amount ?? 0) > 0,
+      isFullWithdrawal && Number(suggested?.shipping?.amountSet?.presentmentMoney?.amount ?? 0) > 0,
     ),
     lineCount: plan.refundLineItems.length,
   };
@@ -163,8 +163,15 @@ export async function createWithdrawalRefund(admin, orderId, { items, isFullWith
     throw new Error("Refund: Shopify returned no suggested refund for these items");
   }
 
+  // Every amount below is presentment money — what the customer actually paid
+  // in. RefundInput.currency must be that presentment currency, and it is
+  // *required* whenever it differs from the shop currency: left unset Shopify
+  // falls back to the shop currency and rejects the refund with "Currency must
+  // match parent transaction". OrderTransactionInput has no currency field of
+  // its own, so this one value is what the transaction amounts are read in.
   const input = {
     orderId,
+    currency: suggested.amountSet?.presentmentMoney?.currencyCode,
     note: note ?? "Refunded by EU Withdrawly: customer withdrew from the purchase.",
     notify: true,
     refundLineItems: (suggested.refundLineItems ?? []).map((line) => ({
@@ -178,11 +185,11 @@ export async function createWithdrawalRefund(admin, orderId, { items, isFullWith
       parentId: transaction.parentTransaction?.id,
       gateway: transaction.gateway,
       kind: "REFUND",
-      amount: transaction.amountSet.shopMoney.amount,
+      amount: transaction.amountSet.presentmentMoney.amount,
     })),
   };
   // Full withdrawal → also refund the original standard delivery charge.
-  if (isFullWithdrawal && Number(suggested.shipping?.amountSet?.shopMoney?.amount ?? 0) > 0) {
+  if (isFullWithdrawal && Number(suggested.shipping?.amountSet?.presentmentMoney?.amount ?? 0) > 0) {
     input.shipping = { fullRefund: true };
   }
 
@@ -195,7 +202,7 @@ export async function createWithdrawalRefund(admin, orderId, { items, isFullWith
 
   return {
     refundId: payload.refund?.id ?? null,
-    amount: Number(suggested.amountSet?.shopMoney?.amount ?? 0),
-    currencyCode: suggested.amountSet?.shopMoney?.currencyCode ?? null,
+    amount: Number(suggested.amountSet?.presentmentMoney?.amount ?? 0),
+    currencyCode: suggested.amountSet?.presentmentMoney?.currencyCode ?? null,
   };
 }

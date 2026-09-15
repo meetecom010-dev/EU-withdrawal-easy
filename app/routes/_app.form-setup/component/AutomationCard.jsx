@@ -190,30 +190,25 @@ export default function AutomationCard({ settings, update, errors = {}, dismissE
             <s-heading>After delivery</s-heading>
             <s-text color="subdued">
               What happens when a request comes in after the goods may already be with the customer.
+              Your team is emailed about every request either way.
             </s-text>
           </s-stack>
 
-          <s-choice-list
-            label="What happens after delivery"
-            labelAccessibilityVisibility="exclusive"
-            name="afterDeliveryAction"
-            values={[settings.automation.afterDeliveryAction]}
+          {/* Still stored as "create_return" / "notify_only" — the automation and the
+              request history read those values. Unchecked is "notify_only", which is
+              just the absence of a return: the merchant email goes out regardless. */}
+          <s-checkbox
+            label="Create return"
+            details="Automatically create a Shopify return for the selected items."
+            checked={settings.automation.afterDeliveryAction === "create_return"}
             error={errors["automation.afterDeliveryAction"]}
-            onChange={(e) => update("automation.afterDeliveryAction", e.currentTarget.values[0])}
-          >
-            <s-choice value="notify_only">
-              Notify only
-              <s-text slot="details">
-                Email your team so they can review and handle the request manually.
-              </s-text>
-            </s-choice>
-            <s-choice value="create_return">
-              Create return
-              <s-text slot="details">
-                Automatically create a Shopify return for the selected items.
-              </s-text>
-            </s-choice>
-          </s-choice-list>
+            onChange={(e) =>
+              update(
+                "automation.afterDeliveryAction",
+                e.currentTarget.checked ? "create_return" : "notify_only",
+              )
+            }
+          ></s-checkbox>
 
           <TagOnSubmission
             description="Tag the order when a request arrives after delivery."

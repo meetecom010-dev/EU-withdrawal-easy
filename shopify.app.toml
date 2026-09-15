@@ -15,7 +15,9 @@ embedded = true
 #   merchant-managed and third-party variants are needed — a shop fulfilling
 #   through a 3PL has its fulfillment orders assigned to that service, and the
 #   merchant-managed scope alone can't hold those.
-scopes = "write_products,write_metaobjects,write_metaobject_definitions,read_checkout_settings,read_orders,write_orders,write_returns,write_merchant_managed_fulfillment_orders,write_third_party_fulfillment_orders"
+# read_locations: suggestedRefund reports the location each refunded line would
+#   be restocked to, and refundCreate needs that location id back.
+scopes = "write_products,write_metaobjects,write_metaobject_definitions,read_checkout_settings,read_orders,write_orders,write_returns,write_merchant_managed_fulfillment_orders,write_third_party_fulfillment_orders,read_locations"
 
 [product.metafields.app.demo_info]
 type = "single_line_text_field"
