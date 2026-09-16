@@ -32,18 +32,22 @@ export default function DashboardSkeleton() {
       <s-stack direction="block" gap="large-100">
         <SkeletonBox width="60%" height="14px" />
 
-        <s-section heading="Withdrawal requests">
-          <s-grid gridTemplateColumns="1fr 1fr 1fr 1fr" gap="base">
-            <StatTileSkeleton />
-            <StatTileSkeleton />
-            <StatTileSkeleton />
-            <StatTileSkeleton />
-          </s-grid>
+        <s-section>
+          <s-stack direction="block" gap="base">
+            <SkeletonBox width="90px" height="18px" />
+            <s-grid gridTemplateColumns="1fr 1fr 1fr 1fr" gap="base">
+              <StatTileSkeleton />
+              <StatTileSkeleton />
+              <StatTileSkeleton />
+              <StatTileSkeleton />
+            </s-grid>
+          </s-stack>
         </s-section>
 
         <s-grid gridTemplateColumns="2fr 1fr" gap="base">
-          <s-section heading="Setup guide">
+          <s-section>
             <s-stack direction="block" gap="base">
+              <SkeletonBox width="110px" height="18px" />
               <SkeletonBox width="30%" height="12px" />
               <SkeletonBox width="100%" height="6px" radius="base" />
               <s-box border="base" borderRadius="base">
@@ -54,8 +58,9 @@ export default function DashboardSkeleton() {
             </s-stack>
           </s-section>
 
-          <s-section heading="About">
+          <s-section>
             <s-stack direction="block" gap="small-200">
+              <SkeletonBox width="90px" height="18px" />
               <SkeletonBox width="90%" height="12px" />
               <SkeletonBox width="80%" height="12px" />
               <SkeletonBox width="70%" height="12px" />

@@ -44,6 +44,9 @@ export const AVAILABLE_LANGUAGES = [
   { code: "es", name: "Spanish" },
   { code: "pl", name: "Polish" },
   { code: "sv", name: "Swedish" },
+  { code: "pt", name: "Portuguese" },
+  { code: "lt", name: "Lithuanian" },
+  { code: "fi", name: "Finnish" },
 ];
 
 // The automation choices, kept here rather than in AutomationCard.jsx because

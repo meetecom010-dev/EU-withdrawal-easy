@@ -756,28 +756,30 @@ export async function refreshReturnStatusForRequest(shop, requestId) {
   });
 }
 
-export async function addOrderTagForRequest(shop, requestId, tag) {
+// Applies a staged batch of order tag adds/removes in one round trip — the
+// detail page's save bar collects edits locally and sends the whole diff here
+// on Save, rather than a request per click.
+export async function syncOrderTagsForRequest(shop, requestId, { added = [], removed = [] }) {
   return runManualAction(shop, requestId, async (admin, request) => {
-    const outcome = await step(request, "order_tag_add", () =>
-      addOrderTags(admin, request.orderId, [tag]),
-    );
-    if (outcome.ok && outcome.result.length) {
-      log(request, "order_tag_add", "success", `Added order tag "${outcome.result.join(", ")}"`, {
-        tags: outcome.result,
-      });
+    if (removed.length) {
+      const outcome = await step(request, "order_tag_remove", () =>
+        removeOrderTags(admin, request.orderId, removed),
+      );
+      if (outcome.ok && outcome.result.length) {
+        log(request, "order_tag_remove", "success", `Removed order tag "${outcome.result.join(", ")}"`, {
+          tags: outcome.result,
+        });
+      }
     }
-  });
-}
-
-export async function removeOrderTagForRequest(shop, requestId, tag) {
-  return runManualAction(shop, requestId, async (admin, request) => {
-    const outcome = await step(request, "order_tag_remove", () =>
-      removeOrderTags(admin, request.orderId, [tag]),
-    );
-    if (outcome.ok && outcome.result.length) {
-      log(request, "order_tag_remove", "success", `Removed order tag "${outcome.result.join(", ")}"`, {
-        tags: outcome.result,
-      });
+    if (added.length) {
+      const outcome = await step(request, "order_tag_add", () =>
+        addOrderTags(admin, request.orderId, added),
+      );
+      if (outcome.ok && outcome.result.length) {
+        log(request, "order_tag_add", "success", `Added order tag "${outcome.result.join(", ")}"`, {
+          tags: outcome.result,
+        });
+      }
     }
   });
 }

@@ -77,16 +77,18 @@ export default function FormSetupSkeleton() {
           {/* Left column — the six configuration cards */}
           <s-stack direction="block" gap="base">
             {/* Enable EU Withdrawal Form */}
-            <s-section heading="Enable EU Withdrawal Form">
+            <s-section>
               <s-stack direction="block" gap="small-200">
+                <SkeletonBox width="220px" height="18px" />
                 <SkeletonBox width="85%" height="12px" />
                 <CheckRow />
               </s-stack>
             </s-section>
 
             {/* Eligible countries */}
-            <s-section heading="Eligible countries">
+            <s-section>
               <s-stack direction="block" gap="base">
+                <SkeletonBox width="160px" height="18px" />
                 <SkeletonBox width="70%" height="12px" />
                 <ChoiceRow width="150px" />
                 <ChoiceRow width="200px" />
@@ -123,13 +125,17 @@ export default function FormSetupSkeleton() {
             </s-section>
 
             {/* Languages */}
-            <s-section heading="Languages">
-              <ChipCloudSkeleton />
+            <s-section>
+              <s-stack direction="block" gap="base">
+                <SkeletonBox width="100px" height="18px" />
+                <ChipCloudSkeleton />
+              </s-stack>
             </s-section>
 
             {/* Automation */}
-            <s-section heading="Automation">
+            <s-section>
               <s-stack direction="block" gap="base">
+                <SkeletonBox width="110px" height="18px" />
                 <SkeletonBox width="160px" height="14px" />
                 <CheckRow />
                 <CheckRow />
@@ -141,11 +147,14 @@ export default function FormSetupSkeleton() {
             </s-section>
 
             {/* Withdrawal deadline */}
-            <s-section heading="Withdrawal deadline">
-              <s-grid gridTemplateColumns="1fr 1fr" gap="base">
-                <FieldSkeleton />
-                <FieldSkeleton />
-              </s-grid>
+            <s-section>
+              <s-stack direction="block" gap="base">
+                <SkeletonBox width="170px" height="18px" />
+                <s-grid gridTemplateColumns="1fr 1fr" gap="base">
+                  <FieldSkeleton />
+                  <FieldSkeleton />
+                </s-grid>
+              </s-stack>
             </s-section>
           </s-stack>
 

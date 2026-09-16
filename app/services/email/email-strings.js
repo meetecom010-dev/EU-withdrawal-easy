@@ -10,7 +10,7 @@
 // `contact` is one <a> away from plain text — keep the anchor markup intact and
 // only translate the words around it.
 
-export const EMAIL_STRING_LOCALES = ["de", "fr", "nl", "it", "es", "pl", "sv"];
+export const EMAIL_STRING_LOCALES = ["de", "fr", "nl", "it", "es", "pl", "sv", "pt", "lt", "fi"];
 
 const link = `<a href="mailto:{{ shop.email }}" style="color:#2c6ecb">{{ shop.email }}</a>`;
 
@@ -380,6 +380,144 @@ export const EMAIL_STRINGS = {
       exemptions: `Detta kan inträffa när en begäran görs utanför den lagstadgade ångerfristen på 14 dagar, eller när artiklarna är undantagna från ångerrätten — till exempel personanpassade eller måttbeställda varor, förseglade hälso- eller hygienprodukter vars försegling brutits, eller lättfördärvliga varor.`,
       itemsHeading: `Artiklar i denna begäran`,
       appeal: `Om du vill ha mer information om skälet till detta beslut, eller om du tror att det är ett misstag, hör av dig till oss — vi hjälper dig gärna. Detta beslut påverkar inte dina lagstadgade konsumenträttigheter.`,
+    },
+  },
+
+  pt: {
+    footer: `Este e-mail foi enviado pela EU Withdrawly em nome de {{ shop.name }}.`,
+    labels: {
+      referenceNumber: `Número de referência`,
+      orderNumber: `Número da encomenda`,
+      submittedOn: `Enviado em`,
+      status: `Estado`,
+      reason: `Motivo`,
+    },
+    contact: `Tem dúvidas sobre o seu pedido? Contacte {{ shop.name }} através de ${link}, ou simplesmente responda a este e-mail.`,
+    confirmation: {
+      subject: `Recebemos o seu pedido de desistência — encomenda {{ order.name }}`,
+      heading: `O seu pedido de desistência foi recebido`,
+      callout: `Obrigado — o seu pedido de desistência foi recebido e está a ser analisado.`,
+      intro: `Olá {{ customer.first_name }}, obrigado por contactar {{ shop.name }}. Este e-mail confirma que recebemos o seu pedido de desistência. Tem o direito de desistir da sua compra ao abrigo do direito do consumidor da UE, e processaremos o seu pedido o mais rapidamente possível.`,
+      itemsHeading: `Artigos da sua desistência`,
+      nextHeading: `Próximos passos`,
+      nextSteps: [
+        `A nossa equipa irá analisar o seu pedido.`,
+        `Enviaremos por e-mail os próximos passos, incluindo instruções de devolução caso seja necessário devolver algum artigo.`,
+        `Qualquer reembolso a que tenha direito será emitido de acordo com o direito do consumidor da UE assim que a sua desistência for processada.`,
+      ],
+      smallPrint: `Se não fez este pedido, ou se algo parecer incorreto, informe-nos de imediato.`,
+    },
+    approved: {
+      subject: `O seu pedido de desistência para a encomenda {{ order.name }} foi aprovado`,
+      heading: `O seu pedido de desistência foi aprovado`,
+      callout: `Boas notícias — o seu pedido de desistência foi aprovado.`,
+      intro: `Olá {{ customer.first_name }}, analisámos o seu pedido e aprovámos a sua desistência da encomenda {{ order.name }}. Eis o que isto significa e o que acontece a seguir.`,
+      itemsHeading: `Artigos aprovados`,
+      refundHeading: `O seu reembolso`,
+      refund: `Iremos reembolsar o seu pagamento através do método de pagamento original no prazo de 14 dias, conforme exigido pelo direito do consumidor da UE. Caso tenha desistido de toda a encomenda, este valor inclui o custo de envio padrão.`,
+      returnHeading: `Devolução dos seus artigos`,
+      returnText: `Se a sua encomenda já foi entregue, mantenha os artigos no seu estado original. Enviaremos instruções de devolução separadas — incluindo a morada de devolução e quem cobre os custos de envio da devolução — e pedimos que devolva os artigos no prazo de 14 dias. O seu reembolso é concluído assim que recebermos os artigos de volta, ou quando fornecer prova de que os devolveu.`,
+    },
+    rejected: {
+      subject: `Atualização sobre o seu pedido de desistência para a encomenda {{ order.name }}`,
+      heading: `Atualização sobre o seu pedido de desistência`,
+      callout: `Após analisar o seu pedido, não nos é possível aprovar esta desistência.`,
+      intro: `Olá {{ customer.first_name }}, obrigado por contactar {{ shop.name }}. Analisámos cuidadosamente o seu pedido de desistência para a encomenda {{ order.name }} e, infelizmente, não podemos aprová-lo neste momento.`,
+      exemptions: `Isto pode acontecer quando um pedido é feito fora do prazo legal de desistência de 14 dias, ou quando os artigos estão isentos do direito de desistência — por exemplo, bens personalizados ou feitos por encomenda, produtos de saúde ou higiene selados que tenham sido desselados, ou bens perecíveis.`,
+      itemsHeading: `Artigos deste pedido`,
+      appeal: `Se desejar mais informações sobre o motivo desta decisão, ou se achar que possa ter havido um erro, entre em contacto connosco — teremos todo o gosto em ajudar. Esta decisão não afeta os seus direitos legais enquanto consumidor.`,
+    },
+  },
+
+  lt: {
+    footer: `Šį el. laišką išsiuntė EU Withdrawly {{ shop.name }} vardu.`,
+    labels: {
+      referenceNumber: `Nuorodos numeris`,
+      orderNumber: `Užsakymo numeris`,
+      submittedOn: `Pateikta`,
+      status: `Būsena`,
+      reason: `Priežastis`,
+    },
+    contact: `Turite klausimų apie savo prašymą? Susisiekite su {{ shop.name }} adresu ${link} arba tiesiog atsakykite į šį el. laišką.`,
+    confirmation: {
+      subject: `Gavome jūsų atsisakymo prašymą — užsakymas {{ order.name }}`,
+      heading: `Jūsų atsisakymo prašymas gautas`,
+      callout: `Ačiū — jūsų atsisakymo prašymas gautas ir šiuo metu peržiūrimas.`,
+      intro: `Sveiki, {{ customer.first_name }}, dėkojame, kad kreipėtės į {{ shop.name }}. Šis el. laiškas patvirtina, kad gavome jūsų atsisakymo prašymą. Pagal ES vartotojų teisę turite teisę atsisakyti savo pirkinio, ir mes apdorosime jūsų prašymą kuo greičiau.`,
+      itemsHeading: `Prekės, kurių atsisakote`,
+      nextHeading: `Kas bus toliau`,
+      nextSteps: [
+        `Mūsų komanda peržiūrės jūsų prašymą.`,
+        `Atsiųsime el. paštu tolesnius veiksmus, įskaitant grąžinimo instrukcijas, jei reikės grąžinti kokias nors prekes.`,
+        `Bet koks jums priklausantis grąžinamas mokestis bus išmokėtas pagal ES vartotojų teisę, kai jūsų atsisakymas bus apdorotas.`,
+      ],
+      smallPrint: `Jei šio prašymo nepateikėte jūs arba kažkas atrodo neteisingai, praneškite mums nedelsdami.`,
+    },
+    approved: {
+      subject: `Jūsų atsisakymo prašymas dėl užsakymo {{ order.name }} buvo patvirtintas`,
+      heading: `Jūsų atsisakymo prašymas patvirtintas`,
+      callout: `Geros naujienos — jūsų atsisakymo prašymas buvo patvirtintas.`,
+      intro: `Sveiki, {{ customer.first_name }}, peržiūrėjome jūsų prašymą ir patvirtinome jūsų atsisakymą dėl užsakymo {{ order.name }}. Štai ką tai reiškia ir kas bus toliau.`,
+      itemsHeading: `Patvirtintos prekės`,
+      refundHeading: `Jūsų grąžinamas mokestis`,
+      refund: `Grąžinsime jūsų mokėjimą į pradinį mokėjimo būdą per 14 dienų, kaip reikalaujama pagal ES vartotojų teisę. Jei atsisakėte viso užsakymo, tai apima standartines pristatymo išlaidas.`,
+      returnHeading: `Prekių grąžinimas`,
+      returnText: `Jei jūsų užsakymas jau buvo pristatytas, prašome išsaugoti prekes originalios būklės. Atsiųsime atskiras grąžinimo instrukcijas — įskaitant grąžinimo adresą ir informaciją, kas padengia grąžinimo siuntimo išlaidas — ir prašysime grąžinti prekes per 14 dienų. Jūsų grąžinamas mokestis bus užbaigtas, kai gausime prekes atgal arba kai pateiksite įrodymą, kad jas grąžinote.`,
+    },
+    rejected: {
+      subject: `Naujiena apie jūsų atsisakymo prašymą dėl užsakymo {{ order.name }}`,
+      heading: `Naujiena apie jūsų atsisakymo prašymą`,
+      callout: `Peržiūrėję jūsų prašymą, negalime patvirtinti šio atsisakymo.`,
+      intro: `Sveiki, {{ customer.first_name }}, dėkojame, kad kreipėtės į {{ shop.name }}. Atidžiai peržiūrėjome jūsų atsisakymo prašymą dėl užsakymo {{ order.name }} ir, deja, šįkart negalime jo patvirtinti.`,
+      exemptions: `Taip gali nutikti, kai prašymas pateikiamas pasibaigus teisės aktuose numatytam 14 dienų atsisakymo laikotarpiui, arba kai prekėms netaikoma atsisakymo teisė — pavyzdžiui, personalizuotoms ar pagal užsakymą pagamintoms prekėms, užplombuotiems sveikatos ar higienos produktams, kurių plomba buvo nuimta, arba greitai gendančioms prekėms.`,
+      itemsHeading: `Šio prašymo prekės`,
+      appeal: `Jei norite daugiau informacijos apie šio sprendimo priežastį arba manote, kad tai gali būti klaida, susisiekite su mumis — mielai padėsime. Šis sprendimas nepaveikia jūsų įstatymuose numatytų vartotojo teisių.`,
+    },
+  },
+
+  fi: {
+    footer: `Tämän sähköpostin on lähettänyt EU Withdrawly kaupan {{ shop.name }} puolesta.`,
+    labels: {
+      referenceNumber: `Viitenumero`,
+      orderNumber: `Tilausnumero`,
+      submittedOn: `Lähetetty`,
+      status: `Tila`,
+      reason: `Syy`,
+    },
+    contact: `Onko sinulla kysyttävää pyynnöstäsi? Ota yhteyttä kauppaan {{ shop.name }} osoitteessa ${link} tai vastaa suoraan tähän sähköpostiin.`,
+    confirmation: {
+      subject: `Olemme vastaanottaneet peruutuspyyntösi — tilaus {{ order.name }}`,
+      heading: `Peruutuspyyntösi on vastaanotettu`,
+      callout: `Kiitos — peruutuspyyntösi on vastaanotettu ja sitä käsitellään parhaillaan.`,
+      intro: `Hei {{ customer.first_name }}, kiitos kun otit yhteyttä kauppaan {{ shop.name }}. Tämä sähköposti vahvistaa, että olemme vastaanottaneet peruutuspyyntösi. Sinulla on EU:n kuluttajansuojalainsäädännön mukainen oikeus peruuttaa ostoksesi, ja käsittelemme pyyntösi mahdollisimman pian.`,
+      itemsHeading: `Tuotteet, jotka peruutat`,
+      nextHeading: `Mitä seuraavaksi tapahtuu`,
+      nextSteps: [
+        `Tiimimme käsittelee pyyntösi.`,
+        `Lähetämme sinulle sähköpostitse seuraavat vaiheet, mukaan lukien palautusohjeet, jos jokin tuote täytyy palauttaa.`,
+        `Mahdollinen sinulle kuuluva hyvitys maksetaan EU:n kuluttajansuojalainsäädännön mukaisesti, kun peruutuksesi on käsitelty.`,
+      ],
+      smallPrint: `Jos et tehnyt tätä pyyntöä tai jokin vaikuttaa virheelliseltä, ilmoita meille välittömästi.`,
+    },
+    approved: {
+      subject: `Peruutuspyyntösi tilaukselle {{ order.name }} on hyväksytty`,
+      heading: `Peruutuspyyntösi on hyväksytty`,
+      callout: `Hyviä uutisia — peruutuspyyntösi on hyväksytty.`,
+      intro: `Hei {{ customer.first_name }}, olemme käsitelleet pyyntösi ja hyväksyneet peruutuksesi tilaukselle {{ order.name }}. Tässä on, mitä tämä tarkoittaa ja mitä seuraavaksi tapahtuu.`,
+      itemsHeading: `Hyväksytyt tuotteet`,
+      refundHeading: `Hyvityksesi`,
+      refund: `Hyvitämme maksusi alkuperäiselle maksutavallesi 14 päivän kuluessa, kuten EU:n kuluttajansuojalainsäädäntö edellyttää. Jos peruutit koko tilauksesi, tähän sisältyy vakiotoimituskulut.`,
+      returnHeading: `Tuotteiden palauttaminen`,
+      returnText: `Jos tilauksesi on jo toimitettu, säilytä tuotteet alkuperäisessä kunnossa. Lähetämme sinulle erilliset palautusohjeet — mukaan lukien palautusosoitteen ja tiedon siitä, kuka vastaa palautuksen toimituskuluista — ja pyydämme palauttamaan tuotteet 14 päivän kuluessa. Hyvityksesi viimeistellään, kun olemme vastaanottaneet tuotteet takaisin tai kun olet toimittanut todisteen niiden palauttamisesta.`,
+    },
+    rejected: {
+      subject: `Päivitys peruutuspyyntöösi tilaukselle {{ order.name }}`,
+      heading: `Päivitys peruutuspyyntöösi`,
+      callout: `Käsiteltyämme pyyntösi emme valitettavasti voi hyväksyä tätä peruutusta.`,
+      intro: `Hei {{ customer.first_name }}, kiitos kun otit yhteyttä kauppaan {{ shop.name }}. Olemme käyneet huolellisesti läpi peruutuspyyntösi tilaukselle {{ order.name }}, emmekä valitettavasti voi hyväksyä sitä tällä kertaa.`,
+      exemptions: `Tämä voi tapahtua, kun pyyntö tehdään lakisääteisen 14 päivän peruutusajan jälkeen, tai kun tuotteet on vapautettu peruuttamisoikeudesta — esimerkiksi yksilöllisesti valmistetut tai tilaustyönä tehdyt tuotteet, sinetöidyt terveys- tai hygieniatuotteet, joiden sinetti on avattu, tai pilaantuvat tuotteet.`,
+      itemsHeading: `Tämän pyynnön tuotteet`,
+      appeal: `Jos haluat lisätietoja tämän päätöksen syystä tai uskot, että kyseessä on virhe, ota meihin yhteyttä — autamme mielellämme. Tämä päätös ei vaikuta lakisääteisiin kuluttajaoikeuksiisi.`,
     },
   },
 };

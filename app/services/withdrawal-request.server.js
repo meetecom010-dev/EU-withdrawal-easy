@@ -109,34 +109,6 @@ export async function addWithdrawalRequestNote(shop, id, body) {
   return doc ? serializeWithdrawalRequest(doc) : null;
 }
 
-export async function addWithdrawalRequestTag(shop, id, tag) {
-  const trimmed = tag?.trim();
-  if (!trimmed) {
-    throw new Error("Tag is required");
-  }
-  if (!mongoose.isValidObjectId(id)) return null;
-
-  await connectDB();
-  const doc = await WithdrawalRequest.findOneAndUpdate(
-    { shop, _id: id },
-    { $addToSet: { tags: trimmed } },
-    { new: true, runValidators: true },
-  );
-  return doc ? serializeWithdrawalRequest(doc) : null;
-}
-
-export async function removeWithdrawalRequestTag(shop, id, tag) {
-  if (!mongoose.isValidObjectId(id)) return null;
-
-  await connectDB();
-  const doc = await WithdrawalRequest.findOneAndUpdate(
-    { shop, _id: id },
-    { $pull: { tags: tag } },
-    { new: true },
-  );
-  return doc ? serializeWithdrawalRequest(doc) : null;
-}
-
 // Sums pending requests' totals per currency and returns the largest group —
 // there's no cross-currency conversion available, so a shop with pending
 // requests in more than one currency only sees its biggest-exposure currency
@@ -166,19 +138,31 @@ function sumRevenueAtRisk(pendingRequests) {
 export async function getDashboardStats(shop) {
   await connectDB();
   const thirtyDaysAgo = new Date(Date.now() - THIRTY_DAYS_MS);
+  const now = new Date();
+  const startOfToday = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
 
-  const [openRequests, approvedLast30, approvedCount, rejectedCount, pendingDocs] =
-    await Promise.all([
-      WithdrawalRequest.countDocuments({ shop, status: "pending" }),
-      WithdrawalRequest.countDocuments({
-        shop,
-        status: "approved",
-        decidedAt: { $gte: thirtyDaysAgo },
-      }),
-      WithdrawalRequest.countDocuments({ shop, status: "approved" }),
-      WithdrawalRequest.countDocuments({ shop, status: "rejected" }),
-      WithdrawalRequest.find({ shop, status: "pending" }),
-    ]);
+  const [
+    openRequests,
+    approvedLast30,
+    approvedCount,
+    rejectedCount,
+    pendingDocs,
+    submittedToday,
+    submittedThisMonth,
+  ] = await Promise.all([
+    WithdrawalRequest.countDocuments({ shop, status: "pending" }),
+    WithdrawalRequest.countDocuments({
+      shop,
+      status: "approved",
+      decidedAt: { $gte: thirtyDaysAgo },
+    }),
+    WithdrawalRequest.countDocuments({ shop, status: "approved" }),
+    WithdrawalRequest.countDocuments({ shop, status: "rejected" }),
+    WithdrawalRequest.find({ shop, status: "pending" }),
+    WithdrawalRequest.countDocuments({ shop, submittedAt: { $gte: startOfToday } }),
+    WithdrawalRequest.countDocuments({ shop, submittedAt: { $gte: startOfMonth } }),
+  ]);
 
   const decidedCount = approvedCount + rejectedCount;
   const approvalRate =
@@ -189,5 +173,8 @@ export async function getDashboardStats(shop) {
     approvedLast30,
     approvalRate,
     revenueAtRisk: sumRevenueAtRisk(pendingDocs.map(serializeWithdrawalRequest)),
+    submittedToday,
+    submittedThisMonth,
+    closedRequests: decidedCount,
   };
 }

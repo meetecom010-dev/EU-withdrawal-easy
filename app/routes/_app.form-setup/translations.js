@@ -237,6 +237,105 @@ export const DEFAULT_TRANSLATIONS = {
       "Prefer not to say": "Vill inte uppge",
     },
   },
+  pt: {
+    labels: {
+      step1Title: "Desista da sua compra",
+      step1Description:
+        "Tem o direito de desistir desta compra no prazo de 14 dias, sem necessidade de justificação.",
+      itemSelectionHeading: "Selecione os artigos dos quais pretende desistir",
+      deliveredTitle: "Desista da sua encomenda entregue",
+      deliveredDescription:
+        "A sua encomenda foi entregue. Ainda pode desistir da sua compra no prazo de 14 dias após a entrega.",
+      deliveredItemSelectionHeading:
+        "Selecione os artigos entregues dos quais pretende desistir",
+      confirmHeading: "Confirme a sua desistência",
+      confirmMessage: "Confirme que pretende desistir desta compra.",
+      deliveredConfirmMessage:
+        "Confirme que pretende desistir desta encomenda entregue.",
+      declaration: "Pelo presente, desisto do contrato de compra dos artigos selecionados.",
+      submittedTitle: "Pedido de desistência enviado",
+      submittedMessage:
+        "Recebemos o seu pedido de desistência e entraremos em contacto consigo brevemente.",
+      deliveredSubmittedTitle: "Pedido de devolução enviado",
+      deliveredSubmittedMessage:
+        "Recebemos o seu pedido de devolução e enviaremos mais instruções por e-mail.",
+      step1ButtonLabel: "Continuar",
+      confirmButtonLabel: "Confirmar desistência",
+    },
+    reasonLabel: "Motivo da devolução",
+    reasonOptions: {
+      "Changed my mind": "Mudei de ideias",
+      "Wrong size": "Tamanho errado",
+      "Item arrived damaged": "O artigo chegou danificado",
+      "Prefer not to say": "Prefiro não dizer",
+    },
+  },
+  lt: {
+    labels: {
+      step1Title: "Atsisakykite savo pirkinio",
+      step1Description:
+        "Turite teisę atsisakyti šio pirkinio per 14 dienų nenurodydami priežasties.",
+      itemSelectionHeading: "Pasirinkite prekes, kurių atsisakote",
+      deliveredTitle: "Atsisakykite pristatyto užsakymo",
+      deliveredDescription:
+        "Jūsų užsakymas buvo pristatytas. Vis tiek galite atsisakyti pirkinio per 14 dienų nuo pristatymo.",
+      deliveredItemSelectionHeading:
+        "Pasirinkite pristatytas prekes, kurių atsisakote",
+      confirmHeading: "Patvirtinkite atsisakymą",
+      confirmMessage: "Patvirtinkite, kad norite atsisakyti šio pirkinio.",
+      deliveredConfirmMessage:
+        "Patvirtinkite, kad norite atsisakyti šio pristatyto užsakymo.",
+      declaration: "Šiuo pranešimu atsisakau sutarties dėl pasirinktų prekių pirkimo.",
+      submittedTitle: "Atsisakymo prašymas pateiktas",
+      submittedMessage:
+        "Gavome jūsų atsisakymo prašymą ir netrukus su jumis susisieksime.",
+      deliveredSubmittedTitle: "Grąžinimo prašymas pateiktas",
+      deliveredSubmittedMessage:
+        "Gavome jūsų grąžinimo prašymą ir atsiųsime tolesnes instrukcijas el. paštu.",
+      step1ButtonLabel: "Tęsti",
+      confirmButtonLabel: "Patvirtinti atsisakymą",
+    },
+    reasonLabel: "Grąžinimo priežastis",
+    reasonOptions: {
+      "Changed my mind": "Persigalvojau",
+      "Wrong size": "Netinkamas dydis",
+      "Item arrived damaged": "Prekė atvyko pažeista",
+      "Prefer not to say": "Nenoriu nurodyti",
+    },
+  },
+  fi: {
+    labels: {
+      step1Title: "Peruuta ostoksesi",
+      step1Description:
+        "Sinulla on oikeus peruuttaa tämä osto 14 päivän kuluessa ilmoittamatta syytä.",
+      itemSelectionHeading: "Valitse tuotteet, jotka haluat peruuttaa",
+      deliveredTitle: "Peruuta toimitettu tilauksesi",
+      deliveredDescription:
+        "Tilauksesi on toimitettu. Voit silti peruuttaa ostoksesi 14 päivän kuluessa toimituksesta.",
+      deliveredItemSelectionHeading:
+        "Valitse toimitetut tuotteet, jotka haluat peruuttaa",
+      confirmHeading: "Vahvista peruutuksesi",
+      confirmMessage: "Vahvista, että haluat peruuttaa tämän ostoksen.",
+      deliveredConfirmMessage:
+        "Vahvista, että haluat peruuttaa tämän toimitetun tilauksen.",
+      declaration: "Peruutan täten sopimuksen valittujen tuotteiden ostosta.",
+      submittedTitle: "Peruutuspyyntö lähetetty",
+      submittedMessage:
+        "Olemme vastaanottaneet peruutuspyyntösi ja otamme sinuun pian yhteyttä.",
+      deliveredSubmittedTitle: "Palautuspyyntö lähetetty",
+      deliveredSubmittedMessage:
+        "Olemme vastaanottaneet palautuspyyntösi ja lähetämme lisäohjeet sähköpostitse.",
+      step1ButtonLabel: "Jatka",
+      confirmButtonLabel: "Vahvista peruutus",
+    },
+    reasonLabel: "Palautuksen syy",
+    reasonOptions: {
+      "Changed my mind": "Muutin mieleni",
+      "Wrong size": "Väärä koko",
+      "Item arrived damaged": "Tuote saapui vaurioituneena",
+      "Prefer not to say": "En halua kertoa",
+    },
+  },
 };
 
 function nonBlank(value) {

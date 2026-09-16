@@ -14,15 +14,19 @@ export default function EmailTemplatesSkeleton() {
   return (
     <s-page heading="Email templates">
       <s-stack direction="block" gap="base">
-        <s-section heading="Email settings">
-          <s-grid gridTemplateColumns="1fr 1fr" gap="base">
-            <FieldSkeleton />
-            <FieldSkeleton />
-          </s-grid>
+        <s-section>
+          <s-stack direction="block" gap="base">
+            <SkeletonBox width="130px" height="18px" />
+            <s-grid gridTemplateColumns="1fr 1fr" gap="base">
+              <FieldSkeleton />
+              <FieldSkeleton />
+            </s-grid>
+          </s-stack>
         </s-section>
 
-        <s-section heading="Notification">
+        <s-section>
           <s-stack direction="block" gap="base">
+            <SkeletonBox width="110px" height="18px" />
             <FieldSkeleton labelWidth="20%" />
             <FieldSkeleton labelWidth="45%" />
             <FieldSkeleton labelWidth="25%" />

@@ -17,6 +17,7 @@ import DecisionModal, { DECISION_MODAL_ID } from "./DecisionModal";
 import RefundModal, { REFUND_MODAL_ID } from "./RefundModal";
 
 const CANCEL_MODAL_ID = "cancel-order-modal";
+const ORDER_TAGS_SAVE_BAR_ID = "order-tags-save-bar";
 
 // "PARTIALLY_REFUNDED" -> "Partially refunded"
 function humanize(value) {
@@ -192,7 +193,8 @@ function DeadlineSection({ withdrawalRequest }) {
   );
 }
 
-// Live Shopify order tags — add/remove writes straight to the order.
+// Live Shopify order tags — edits stage locally and only write to the order
+// when the contextual save bar's Save is clicked (see ORDER_TAGS_SAVE_BAR_ID).
 function OrderTagsSection({ tags, tagText, onTagTextChange, onAdd, onRemove, disabled }) {
   return (
     <s-section heading="Order tags">
@@ -230,50 +232,7 @@ function OrderTagsSection({ tags, tagText, onTagTextChange, onAdd, onRemove, dis
             Add
           </s-button>
         </s-grid>
-        <s-text color="subdued">Synced with the order in Shopify admin.</s-text>
-      </s-stack>
-    </s-section>
-  );
-}
-
-// Internal, app-only labels (never synced to Shopify, never shown to the buyer).
-function InternalLabelsSection({ tags, tagText, onTagTextChange, onAdd, onRemove }) {
-  return (
-    <s-section heading="Internal labels">
-      <s-stack direction="block" gap="small-200">
-        {tags.length > 0 && (
-          <s-stack direction="inline" gap="small-200">
-            {tags.map((tag) => (
-              <s-clickable-chip
-                key={tag}
-                removable
-                accessibilityLabel={`Remove label ${tag}`}
-                onRemove={() => onRemove(tag)}
-              >
-                {tag}
-              </s-clickable-chip>
-            ))}
-          </s-stack>
-        )}
-        <s-grid gridTemplateColumns="1fr auto" gap="small-200" alignItems="start">
-          <s-text-field
-            label="Add label"
-            labelAccessibilityVisibility="exclusive"
-            placeholder="Add label"
-            value={tagText}
-            onChange={(event) => onTagTextChange(event.currentTarget.value)}
-            onKeyDown={(event) => {
-              if (event.key === "Enter") {
-                event.preventDefault();
-                onAdd();
-              }
-            }}
-          ></s-text-field>
-          <s-button onClick={onAdd} disabled={!tagText.trim() || undefined}>
-            Add
-          </s-button>
-        </s-grid>
-        <s-text color="subdued">Local to this app — never synced to Shopify or shown to the customer.</s-text>
+        <s-text color="subdued">Changes save to the order in Shopify admin — use the bar at the bottom to save or discard.</s-text>
       </s-stack>
     </s-section>
   );
@@ -420,13 +379,12 @@ export default function RequestDetail({
   const decideFetcher = useFetcher();
   const previewFetcher = useFetcher();
   const noteFetcher = useFetcher();
-  const labelFetcher = useFetcher();
   const orderTagFetcher = useFetcher();
   const actionFetcher = useFetcher();
   const refundPreviewFetcher = useFetcher();
 
   const [noteText, setNoteText] = useState("");
-  const [labelText, setLabelText] = useState("");
+  const [orderTags, setOrderTags] = useState(() => orderState?.tags ?? []);
   const [orderTagText, setOrderTagText] = useState("");
   const [decision, setDecision] = useState(null);
 
@@ -444,6 +402,35 @@ export default function RequestDetail({
   const returnStatus = withdrawalRequest.automation?.returnStatus;
   const money = (amount) =>
     formatMoney({ amount, currencyCode: orderState?.currencyCode });
+
+  // The order's live tags, keyed as a string so the effect below only fires
+  // when the actual tag list changes (e.g. after a save) — not on every
+  // unrelated revalidation of orderState.
+  const savedOrderTags = orderState?.tags ?? [];
+  const savedOrderTagsKey = JSON.stringify(savedOrderTags);
+  useEffect(() => {
+    setOrderTags(savedOrderTags);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- keyed on the serialized tag list, not array identity
+  }, [savedOrderTagsKey]);
+
+  const hasOrderTagChanges =
+    JSON.stringify([...orderTags].sort()) !== JSON.stringify([...savedOrderTags].sort());
+
+  // Shopify's native contextual save bar — mirrors the one on Form setup.
+  useEffect(() => {
+    if (!shopify) return;
+    if (hasOrderTagChanges) {
+      shopify.saveBar.show(ORDER_TAGS_SAVE_BAR_ID);
+    } else {
+      shopify.saveBar.hide(ORDER_TAGS_SAVE_BAR_ID);
+    }
+  }, [hasOrderTagChanges, shopify]);
+
+  useEffect(() => {
+    if (orderTagFetcher.state !== "idle" || !orderTagFetcher.data?.withdrawalRequest) return;
+    shopify.toast.show("Order tags saved");
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- only react to the order-tag fetcher settling
+  }, [orderTagFetcher.state, orderTagFetcher.data]);
 
   useEffect(() => {
     if (decideFetcher.state === "idle" && decideFetcher.data?.decided) {
@@ -485,24 +472,29 @@ export default function RequestDetail({
     setNoteText("");
   }
 
-  function addLabel() {
-    const tag = labelText.trim();
-    if (!tag) return;
-    labelFetcher.submit({ intent: "add-tag", tag }, { method: "post" });
-    setLabelText("");
-  }
-  function removeLabel(tag) {
-    labelFetcher.submit({ intent: "remove-tag", tag }, { method: "post" });
-  }
-
+  // Order tag edits stage locally — nothing is written to Shopify until
+  // saveOrderTags runs, matching the Form setup save bar's behavior.
   function addOrderTag() {
     const tag = orderTagText.trim();
-    if (!tag) return;
-    orderTagFetcher.submit({ intent: "order-tag-add", tag }, { method: "post" });
+    if (!tag || orderTags.includes(tag)) return;
+    setOrderTags((current) => [...current, tag]);
     setOrderTagText("");
   }
   function removeOrderTag(tag) {
-    orderTagFetcher.submit({ intent: "order-tag-remove", tag }, { method: "post" });
+    setOrderTags((current) => current.filter((t) => t !== tag));
+  }
+  function discardOrderTags() {
+    setOrderTags(savedOrderTags);
+    setOrderTagText("");
+    shopify.saveBar.hide(ORDER_TAGS_SAVE_BAR_ID);
+  }
+  function saveOrderTags() {
+    const added = orderTags.filter((tag) => !savedOrderTags.includes(tag));
+    const removed = savedOrderTags.filter((tag) => !orderTags.includes(tag));
+    orderTagFetcher.submit(
+      { intent: "order-tags-save", added: JSON.stringify(added), removed: JSON.stringify(removed) },
+      { method: "post" },
+    );
   }
 
   function runAction(intent) {
@@ -596,6 +588,23 @@ export default function RequestDetail({
           </s-button>
         </s-stack>
       </s-modal>
+
+      {/* Shopify's native contextual save bar — shows automatically only
+          while the staged order tags differ from what's on the order.
+          Discard reverts the in-memory list; nothing is written to Shopify
+          on discard. Mirrors the save bar on Form setup. */}
+      <ui-save-bar id={ORDER_TAGS_SAVE_BAR_ID}>
+        <button
+          variant="primary"
+          onClick={saveOrderTags}
+          disabled={orderTagFetcher.state !== "idle" || undefined}
+        >
+          Save
+        </button>
+        <button onClick={discardOrderTags} disabled={orderTagFetcher.state !== "idle" || undefined}>
+          Discard
+        </button>
+      </ui-save-bar>
 
       <s-button
         slot="secondary-actions"
@@ -835,20 +844,12 @@ export default function RequestDetail({
               <EmailHistorySection withdrawalRequest={withdrawalRequest} />
 
               <OrderTagsSection
-                tags={orderState?.tags ?? []}
+                tags={orderTags}
                 tagText={orderTagText}
                 onTagTextChange={setOrderTagText}
                 onAdd={addOrderTag}
                 onRemove={removeOrderTag}
                 disabled={!orderState || Boolean(orderState?.cancelledAt)}
-              />
-
-              <InternalLabelsSection
-                tags={withdrawalRequest.tags}
-                tagText={labelText}
-                onTagTextChange={setLabelText}
-                onAdd={addLabel}
-                onRemove={removeLabel}
               />
 
               <s-section heading="Reason given">

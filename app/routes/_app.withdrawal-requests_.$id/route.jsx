@@ -2,10 +2,8 @@ import { data, useLoaderData } from "react-router";
 import { authenticate } from "../../shopify.server";
 import {
   addWithdrawalRequestNote,
-  addWithdrawalRequestTag,
   getWithdrawalRequestById,
   listWithdrawalRequests,
-  removeWithdrawalRequestTag,
   updateWithdrawalRequestStatus,
 } from "../../services/withdrawal-request.server";
 import {
@@ -16,8 +14,7 @@ import {
   refundForRequest,
   createReturnForRequestManual,
   refreshReturnStatusForRequest,
-  addOrderTagForRequest,
-  removeOrderTagForRequest,
+  syncOrderTagsForRequest,
 } from "../../services/withdrawal-automation.server";
 import { getOrCreateAppSettings, serializeEmailSettings } from "../../services/app-settings.server";
 import { buildEmailVariables } from "../../services/email/variables.server";
@@ -65,8 +62,9 @@ export const loader = async ({ request, params }) => {
 };
 
 // intent=decide sets status (approve/reject); intent=note appends an
-// internal staff note; intent=add-tag/remove-tag edit the local (unsynced)
-// tag list. All come from the same detail page via useFetcher.
+// internal staff note; intent=order-tags-save applies a staged batch of order
+// tag adds/removes from the save bar. All come from the same detail page via
+// useFetcher.
 export const action = async ({ request, params }) => {
   const { admin, session } = await authenticate.admin(request);
   const formData = await request.formData();
@@ -110,36 +108,13 @@ export const action = async ({ request, params }) => {
     return { withdrawalRequest };
   }
 
-  if (intent === "add-tag") {
-    const withdrawalRequest = await addWithdrawalRequestTag(
-      session.shop,
-      params.id,
-      formData.get("tag"),
-    );
-    return { withdrawalRequest };
-  }
-
-  if (intent === "remove-tag") {
-    const withdrawalRequest = await removeWithdrawalRequestTag(
-      session.shop,
-      params.id,
-      formData.get("tag"),
-    );
-    return { withdrawalRequest };
-  }
-
-  // Live Shopify order tags — written straight to the order (the loader reads
-  // them live, so no local copy is kept).
-  if (intent === "order-tag-add") {
-    const withdrawalRequest = await addOrderTagForRequest(session.shop, params.id, formData.get("tag"));
-    return { withdrawalRequest };
-  }
-  if (intent === "order-tag-remove") {
-    const withdrawalRequest = await removeOrderTagForRequest(
-      session.shop,
-      params.id,
-      formData.get("tag"),
-    );
+  // Live Shopify order tags — the detail page stages edits locally and sends
+  // the whole batch here when the save bar's Save is clicked (the loader
+  // reads tags live, so no local copy is kept between saves).
+  if (intent === "order-tags-save") {
+    const added = JSON.parse(formData.get("added") || "[]");
+    const removed = JSON.parse(formData.get("removed") || "[]");
+    const withdrawalRequest = await syncOrderTagsForRequest(session.shop, params.id, { added, removed });
     return { withdrawalRequest };
   }
 

@@ -42,13 +42,16 @@ export default function DashboardSkeleton() {
         <SkeletonBox width="100%" height="56px" radius="base" />
 
         {/* Withdrawal requests — four stat tiles */}
-        <s-section heading="Withdrawal requests">
-          <s-grid gridTemplateColumns="1fr 1fr 1fr 1fr" gap="base">
-            <StatTileSkeleton />
-            <StatTileSkeleton />
-            <StatTileSkeleton />
-            <StatTileSkeleton />
-          </s-grid>
+        <s-section>
+          <s-stack direction="block" gap="base">
+            <SkeletonBox width="90px" height="18px" />
+            <s-grid gridTemplateColumns="1fr 1fr 1fr 1fr" gap="base">
+              <StatTileSkeleton />
+              <StatTileSkeleton />
+              <StatTileSkeleton />
+              <StatTileSkeleton />
+            </s-grid>
+          </s-stack>
         </s-section>
 
         {/* Set up guide — full width */}
