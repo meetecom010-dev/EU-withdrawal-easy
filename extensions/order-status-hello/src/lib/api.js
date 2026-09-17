@@ -10,6 +10,7 @@ import { APP_URL } from "./config.js";
 export function currentLanguage() {
   try {
     const language = shopify?.localization?.language;
+    /** @type {any} */
     const value = language?.value ?? language;
     return value?.isoCode ?? value ?? "en";
   } catch {
@@ -102,6 +103,7 @@ export async function recordFormEvent({ orderId, type, sessionId }) {
  *   countryCode?: string,
  *   locale?: string,
  *   reason?: string,
+ *   sessionId?: string,
  *   orderLineCount?: number,
  *   shippingAddress?: string,
  *   items: Array<{
@@ -130,6 +132,7 @@ export async function submitWithdrawalRequest(payload) {
     // written for the customer. Surfacing it beats "something went wrong",
     // which would leave them retrying a submission that can never succeed.
     const body = await response.json().catch(() => null);
+    /** @type {Error & { code?: string | null, status?: number }} */
     const error = new Error(
       body?.error ?? `Failed to submit withdrawal request (${response.status})`,
     );

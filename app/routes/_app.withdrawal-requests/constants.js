@@ -69,6 +69,47 @@ export function countryName(countryCode) {
   }
 }
 
+function csvEscape(value) {
+  const str = value === null || value === undefined ? "" : String(value);
+  return /[",\r\n]/.test(str) ? `"${str.replace(/"/g, '""')}"` : str;
+}
+
+const CSV_COLUMNS = [
+  { header: "Order", value: (r) => r.orderName },
+  { header: "Customer name", value: (r) => r.customerName },
+  { header: "Customer email", value: (r) => r.customerEmail },
+  { header: "Country", value: (r) => countryName(r.countryCode) },
+  { header: "Items", value: (r) => r.items.length },
+  { header: "Value", value: (r) => formatMoney(requestTotal(r.items)) },
+  { header: "Reason", value: (r) => r.reason },
+  { header: "Status", value: (r) => STATUS_LABEL[r.status] },
+  { header: "Submitted", value: (r) => formatDateTime(r.submittedAt) },
+  { header: "Decided", value: (r) => (r.decidedAt ? formatDateTime(r.decidedAt) : "") },
+];
+
+export function requestsToCsv(requests) {
+  const rows = [CSV_COLUMNS.map((col) => col.header)];
+  for (const request of requests) {
+    rows.push(CSV_COLUMNS.map((col) => csvEscape(col.value(request))));
+  }
+  return rows.map((row) => row.join(",")).join("\r\n");
+}
+
+// Builds the CSV in-browser from the already-loaded requests (no extra
+// server round trip) and triggers a download via a throwaway object URL.
+export function downloadRequestsCsv(requests) {
+  const csv = requestsToCsv(requests);
+  const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = `withdrawal-requests-${new Date().toISOString().slice(0, 10)}.csv`;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  URL.revokeObjectURL(url);
+}
+
 // The customer's language in English (for staff), from the locale captured at
 // submission ("de-DE" -> "German"). Drives the language the decision emails are
 // sent in.

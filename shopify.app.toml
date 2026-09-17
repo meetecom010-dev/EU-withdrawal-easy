@@ -2,7 +2,7 @@
 
 client_id = "6c28ec15a25b1c83c06facf84e2865c7"
 name = "EU Withdrawly"
-application_url = "https://example.com"
+application_url = "https://eu-withdrawly.fly.dev"
 embedded = true
 
 [access_scopes]
@@ -17,7 +17,7 @@ embedded = true
 #   merchant-managed scope alone can't hold those.
 # read_locations: suggestedRefund reports the location each refunded line would
 #   be restocked to, and refundCreate needs that location id back.
-scopes = "write_products,write_metaobjects,write_metaobject_definitions,read_checkout_settings,read_orders,write_orders,write_returns,write_merchant_managed_fulfillment_orders,write_third_party_fulfillment_orders,read_locations"
+scopes = "write_products,write_metaobjects,write_metaobject_definitions,read_orders,write_orders,write_returns,write_merchant_managed_fulfillment_orders,write_third_party_fulfillment_orders,read_locations"
 
 [product.metafields.app.demo_info]
 type = "single_line_text_field"
@@ -55,8 +55,7 @@ api_version = "2026-10"
   topics = [ "app/scopes_update" ]
 
 [auth]
-redirect_urls = [ "https://example.com/api/auth" ]
+redirect_urls = [ "https://eu-withdrawly.fly.dev/api/auth" ]
 
 [build]
-include_config_on_deploy = true
 automatically_update_urls_on_dev = true
