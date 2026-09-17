@@ -1,4 +1,7 @@
 import { Links, Meta, Outlet, Scripts, ScrollRestoration } from "react-router";
+import skeletonStyles from "./styles/skeleton.css?url";
+
+export const links = () => [{ rel: "stylesheet", href: skeletonStyles }];
 
 export default function App() {
   return (

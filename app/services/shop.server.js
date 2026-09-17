@@ -1,5 +1,6 @@
 import connectDB from "../db.server";
 import Shop from "../models/shop.server";
+import { fetchShopContact } from "./shopify/shop.server";
 
 // Called from the afterAuth hook whenever a shop installs or re-authenticates.
 export async function upsertShopOnInstall(shop) {
@@ -32,16 +33,37 @@ export async function getOrCreateShop(shop) {
   return doc;
 }
 
+// Fetches the store's contact (name + email) from Shopify and stores it on the
+// Shop doc, so it's available as the default reply-to without another API call.
+// Best-effort: if the Shopify call fails, returns whatever is already stored.
+export async function syncStoreContact(admin, shop) {
+  const contact = await fetchShopContact(admin).catch(() => null);
+  if (!contact) {
+    const doc = await getOrCreateShop(shop);
+    return { name: doc.name ?? "", email: doc.email ?? "" };
+  }
+  await connectDB();
+  await Shop.updateOne(
+    { shop },
+    { $set: { name: contact.name ?? "", email: contact.email ?? "" } },
+    { upsert: true },
+  );
+  return { name: contact.name ?? "", email: contact.email ?? "" };
+}
+
 // Strips a Shop mongoose document down to a plain, network-safe object.
 // Loaders must never return documents/class instances directly - only the
 // fields the frontend actually needs.
 export function serializeShop(shopDoc) {
   return {
     shop: shopDoc.shop,
+    name: shopDoc.name,
+    email: shopDoc.email,
     isActive: shopDoc.isActive,
     installedAt: shopDoc.installedAt,
     onboardingCompleted: shopDoc.onboardingCompleted,
     dpaAccepted: shopDoc.dpaAccepted,
+    orderStatusBlockAdded: shopDoc.orderStatusBlockAdded,
     plan: {
       name: shopDoc.plan?.name,
       price: shopDoc.plan?.price,

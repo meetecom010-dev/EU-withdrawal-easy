@@ -28,11 +28,16 @@ const planSchema = new Schema(
 const shopSchema = new Schema(
   {
     shop: { type: String, required: true, unique: true },
+    // The store's Shopify contact — name + email — synced from the Admin API.
+    // Used as the default reply-to for the app's emails.
+    name: { type: String, default: "" },
+    email: { type: String, default: "" },
     isActive: { type: Boolean, default: true },
     installedAt: { type: Date, default: Date.now },
     uninstalledAt: { type: Date, default: null },
     onboardingCompleted: { type: Boolean, default: false },
     dpaAccepted: { type: Boolean, default: false },
+    orderStatusBlockAdded: { type: Boolean, default: false },
     plan: { type: planSchema, default: () => ({}) },
   },
   { timestamps: true },

@@ -2,12 +2,22 @@
 
 client_id = "6c28ec15a25b1c83c06facf84e2865c7"
 name = "EU Withdrawly"
-application_url = "https://example.com"
+application_url = "https://eu-withdrawly.fly.dev"
 embedded = true
 
 [access_scopes]
 # Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
-scopes = "write_products,write_metaobjects,write_metaobject_definitions"
+# read_orders/write_orders: read the order behind a withdrawal request, tag it,
+#   and cancel+refund it for the "cancel" automation fallbacks.
+# write_returns: returnCreate for the "Create return" after-delivery action
+#   (also grants read_returns, needed for order.returnableFulfillments).
+# write_*_fulfillment_orders: place and release the fulfillment hold. Both the
+#   merchant-managed and third-party variants are needed — a shop fulfilling
+#   through a 3PL has its fulfillment orders assigned to that service, and the
+#   merchant-managed scope alone can't hold those.
+# read_locations: suggestedRefund reports the location each refunded line would
+#   be restocked to, and refundCreate needs that location id back.
+scopes = "write_products,write_metaobjects,write_metaobject_definitions,read_orders,write_orders,write_returns,write_merchant_managed_fulfillment_orders,write_third_party_fulfillment_orders,read_locations"
 
 [product.metafields.app.demo_info]
 type = "single_line_text_field"
@@ -45,8 +55,7 @@ api_version = "2026-10"
   topics = [ "app/scopes_update" ]
 
 [auth]
-redirect_urls = [ "https://example.com/api/auth" ]
+redirect_urls = [ "https://eu-withdrawly.fly.dev/api/auth" ]
 
 [build]
-include_config_on_deploy = true
 automatically_update_urls_on_dev = true

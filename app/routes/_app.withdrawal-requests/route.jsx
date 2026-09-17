@@ -1,43 +1,34 @@
+import { useLoaderData } from "react-router";
 import { authenticate } from "../../shopify.server";
+import { listWithdrawalRequests } from "../../services/withdrawal-request.server";
 import RequestsTable from "./component/RequestsTable";
+import { downloadRequestsCsv } from "./constants";
 
 export const loader = async ({ request }) => {
-  await authenticate.admin(request);
-  return null;
+  const { session } = await authenticate.admin(request);
+  const requests = await listWithdrawalRequests(session.shop);
+  return { requests };
 };
 
-// Dummy data until a real WithdrawalRequest model exists.
-const DUMMY_REQUESTS = [
-  {
-    id: "1",
-    orderName: "#1001",
-    customerName: "Ada Lovelace",
-    reason: "Changed my mind",
-    status: "pending",
-    submittedAt: "2026-06-20",
-  },
-  {
-    id: "2",
-    orderName: "#1002",
-    customerName: "Grace Hopper",
-    reason: "Wrong size",
-    status: "approved",
-    submittedAt: "2026-06-18",
-  },
-  {
-    id: "3",
-    orderName: "#1003",
-    customerName: "Alan Turing",
-    reason: "Item defective",
-    status: "rejected",
-    submittedAt: "2026-06-15",
-  },
-];
-
 export default function WithdrawalRequests() {
+  const { requests } = useLoaderData();
+
   return (
     <s-page heading="Withdrawal requests">
-      <RequestsTable requests={DUMMY_REQUESTS} />
+      <s-button
+        slot="secondary-actions"
+        disabled={requests.length === 0}
+        onClick={() => downloadRequestsCsv(requests)}
+      >
+        Export CSV
+      </s-button>
+      <s-stack direction="block" gap="large-100">
+        <s-paragraph color="subdued">
+          Every withdrawal submission from the order status page, matched to its order. Click a
+          request to review the items, customer details, and approve or reject it.
+        </s-paragraph>
+        <RequestsTable requests={requests} />
+      </s-stack>
     </s-page>
   );
 }

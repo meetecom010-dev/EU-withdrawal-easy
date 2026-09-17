@@ -4,8 +4,34 @@ import StatsGrid from "./StatsGrid";
 import SetupGuideCard from "./SetupGuideCard";
 import AboutCard from "./AboutCard";
 
+// Home unmounts/remounts on every tab switch (it's a plain route, not kept
+// alive), so a bare useState(false) here re-shows the setup guide every time
+// you navigate back — which reads as "it dismissed itself" just as often as
+// it reads as "dismissing didn't stick". Backing it with sessionStorage makes
+// a dismissal survive navigation for the rest of the browser session instead
+// of depending on the component instance staying mounted.
+const DISMISS_KEY = "eu-withdrawly:setup-guide-dismissed";
+
+function readDismissed() {
+  try {
+    return window.sessionStorage.getItem(DISMISS_KEY) === "1";
+  } catch {
+    return false;
+  }
+}
+
 export default function Dashboard({ shopDomain, stats, setupSteps, completedCount, showSetupGuide }) {
-  const [isDismissed, setIsDismissed] = useState(false);
+  const [isDismissed, setIsDismissed] = useState(readDismissed);
+
+  function dismissSetupGuide() {
+    try {
+      window.sessionStorage.setItem(DISMISS_KEY, "1");
+    } catch {
+      // Storage may be unavailable (e.g. blocked in a third-party iframe) —
+      // dismissal just won't survive navigation in that case.
+    }
+    setIsDismissed(true);
+  }
 
   const stepsRemaining = setupSteps.length - completedCount;
   const isFullyCompliant = stepsRemaining === 0;
@@ -40,7 +66,7 @@ export default function Dashboard({ shopDomain, stats, setupSteps, completedCoun
           <SetupGuideCard
             setupSteps={setupSteps}
             completedCount={completedCount}
-            onDismissed={() => setIsDismissed(true)}
+            onDismissed={dismissSetupGuide}
           />
           <AboutCard expanded />
         </s-grid>
