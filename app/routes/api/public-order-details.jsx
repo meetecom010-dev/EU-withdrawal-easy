@@ -41,7 +41,15 @@ async function handleRequest(request) {
 
   const { admin } = await unauthenticated.admin(shop);
   const response = await admin.graphql(ORDER_CUSTOMER_QUERY, { variables: { id: orderId } });
-  const { data } = await response.json();
+  const { data, errors } = await response.json();
+  if (errors?.length) {
+    // Customer/email/shippingAddress on Order are Protected Customer Data
+    // fields — a GraphQL error here (instead of order data) almost always
+    // means that access hasn't been approved for this app/store yet, not
+    // that the order is missing. Logged so that's distinguishable from a
+    // genuine 404, which the response below can't tell apart on its own.
+    console.error("[public-order-details] Admin API returned errors", errors);
+  }
   const order = data?.order;
 
   if (!order?.confirmationNumber || order.confirmationNumber !== confirmationNumber) {

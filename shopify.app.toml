@@ -17,7 +17,7 @@ embedded = true
 #   merchant-managed scope alone can't hold those.
 # read_locations: suggestedRefund reports the location each refunded line would
 #   be restocked to, and refundCreate needs that location id back.
-scopes = "write_products,write_metaobjects,write_metaobject_definitions,read_orders,write_orders,write_returns,write_merchant_managed_fulfillment_orders,write_third_party_fulfillment_orders,read_locations"
+scopes = "write_products,read_customers,write_metaobjects,write_metaobject_definitions,read_orders,write_orders,write_returns,write_merchant_managed_fulfillment_orders,write_third_party_fulfillment_orders,read_locations"
 
 [product.metafields.app.demo_info]
 type = "single_line_text_field"

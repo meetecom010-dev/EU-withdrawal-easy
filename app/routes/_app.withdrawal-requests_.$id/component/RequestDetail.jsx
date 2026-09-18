@@ -282,6 +282,7 @@ function EmailHistorySection({ withdrawalRequest }) {
 function ActionsCard({
   orderState,
   orderStateError,
+  cancelled,
   hasHold,
   returnId,
   busy,
@@ -302,7 +303,7 @@ function ActionsCard({
     );
   }
 
-  if (orderState.cancelledAt) {
+  if (cancelled) {
     return (
       <s-section heading="Actions">
         <s-banner tone="info">This order has been cancelled — no further order actions apply.</s-banner>
@@ -400,6 +401,11 @@ export default function RequestDetail({
     !withdrawalRequest.automation?.holdsReleasedAt;
   const returnId = withdrawalRequest.automation?.returnId;
   const returnStatus = withdrawalRequest.automation?.returnStatus;
+  // Shopify cancels orders as a background job, so orderState.cancelledAt can
+  // lag a few seconds behind reality. Our own record is set the moment
+  // Shopify accepts the cancellation, so it's trusted first — the banner and
+  // badge below flip immediately instead of waiting on the next live fetch.
+  const cancelled = Boolean(orderState?.cancelledAt || withdrawalRequest.automation?.cancelledAt);
   const money = (amount) =>
     formatMoney({ amount, currencyCode: orderState?.currencyCode });
 
@@ -624,6 +630,21 @@ export default function RequestDetail({
       <s-stack direction="block" gap="large-100">
         <s-stack direction="inline" gap="small-200" alignItems="center">
           {type && <s-badge>{type}</s-badge>}
+          {cancelled && <s-badge tone="critical">Cancelled</s-badge>}
+          {orderState?.financialStatus && (
+            <s-badge tone={FINANCIAL_TONE[orderState.financialStatus] ?? "neutral"}>
+              {humanize(orderState.financialStatus)}
+            </s-badge>
+          )}
+          {orderState?.fulfillmentStatus && (
+            <s-badge tone={orderState.fulfillmentStatus === "FULFILLED" ? "success" : "neutral"}>
+              {humanize(orderState.fulfillmentStatus)}
+            </s-badge>
+          )}
+          {returnId && (
+            <s-badge tone={RETURN_TONE[returnStatus] ?? "info"}>Return {humanize(returnStatus)}</s-badge>
+          )}
+          {orderState?.closed && <s-badge tone="neutral">Archived</s-badge>}
           <s-text color="subdued">
             Submitted {formatDateTime(withdrawalRequest.submittedAt)} · via order status page
           </s-text>
@@ -648,6 +669,7 @@ export default function RequestDetail({
               <ActionsCard
                 orderState={orderState}
                 orderStateError={orderStateError}
+                cancelled={cancelled}
                 hasHold={hasHold}
                 returnId={returnId}
                 busy={actionBusy}
@@ -849,7 +871,7 @@ export default function RequestDetail({
                 onTagTextChange={setOrderTagText}
                 onAdd={addOrderTag}
                 onRemove={removeOrderTag}
-                disabled={!orderState || Boolean(orderState?.cancelledAt)}
+                disabled={!orderState || cancelled}
               />
 
               <s-section heading="Reason given">
