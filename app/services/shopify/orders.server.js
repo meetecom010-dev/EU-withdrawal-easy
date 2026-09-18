@@ -66,6 +66,8 @@ const ORDER_ADMIN_STATE_QUERY = `#graphql
       name
       createdAt
       cancelledAt
+      closed
+      closedAt
       tags
       displayFinancialStatus
       displayFulfillmentStatus
@@ -255,6 +257,8 @@ export async function fetchOrderAdminState(admin, orderId) {
     name: order.name,
     createdAt: order.createdAt,
     cancelledAt: order.cancelledAt,
+    closed: order.closed ?? false,
+    closedAt: order.closedAt ?? null,
     tags: order.tags ?? [],
     financialStatus: order.displayFinancialStatus ?? null,
     fulfillmentStatus: order.displayFulfillmentStatus ?? null,
