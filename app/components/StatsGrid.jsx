@@ -5,14 +5,11 @@ import { useNavigate } from "react-router";
 // withdrawal requests table, so both read the same "Open / Today / This
 // month / Closed" numbers from getDashboardStats() rather than each page
 // computing its own slice of the requests list.
-function StatCard({ title, tone, count, countLabel, description }) {
+function StatCard({ title, count, countLabel, description }) {
   return (
     <s-box padding="base" borderWidth="base" borderRadius="base">
       <s-stack direction="block" gap="small-200">
-        <s-stack direction="inline" justifyContent="space-between" alignItems="center">
-          <s-text fontWeight="bold">{title}</s-text>
-          <s-badge tone={tone}>{count}</s-badge>
-        </s-stack>
+        <s-heading>{title}</s-heading>
         <s-text>
           {count} {countLabel}
         </s-text>
@@ -39,28 +36,24 @@ export default function StatsGrid({ stats, showHeader = true }) {
         <s-grid gridTemplateColumns="1fr 1fr 1fr 1fr" gap="base">
           <StatCard
             title="Open"
-            tone="success"
             count={stats.openRequests}
             countLabel="withdrawals"
             // description="Awaiting your action"
           />
           <StatCard
             title="Today"
-            tone="info"
             count={stats.submittedToday}
             countLabel="requests"
             // description="New requests"
           />
           <StatCard
             title="This month"
-            tone="info"
             count={stats.submittedThisMonth}
             countLabel="withdrawals"
             // description="Withdrawals received"
           />
           <StatCard
             title="Closed"
-            tone="success"
             count={stats.closedRequests}
             countLabel="withdrawals"
             // description="Approved, completed or declined"

@@ -9,7 +9,7 @@ function HelpCard({ title, description, linkLabel, href, external }) {
   return (
     <s-box padding="base" borderWidth="base" borderRadius="base">
       <s-stack direction="block" gap="small-200">
-        <s-text fontWeight="bold">{title}</s-text>
+        <s-heading>{title}</s-heading>
         <s-text color="subdued">{description}</s-text>
         <s-link href={href} target={external ? "_blank" : undefined}>
           {linkLabel}

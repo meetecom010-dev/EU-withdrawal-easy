@@ -5,7 +5,7 @@ function StatCard({ title, tone, count, countLabel, description }) {
     <s-box padding="base" borderWidth="base" borderRadius="base">
       <s-stack direction="block" gap="small-200">
         <s-stack direction="inline" justifyContent="space-between" alignItems="center">
-          <s-text fontWeight="bold">{title}</s-text>
+          <s-heading>{title}</s-heading>
           <s-badge tone={tone}>{count}</s-badge>
         </s-stack>
         <s-text>

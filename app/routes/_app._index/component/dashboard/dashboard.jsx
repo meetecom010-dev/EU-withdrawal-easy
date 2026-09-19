@@ -31,8 +31,6 @@ export default function Dashboard({ shopDomain, stats, setupSteps, completedCoun
 
       <StatsGrid stats={stats} />
 
-      <HelpResourcesCard />
-
       {isSetupGuideVisible && (
         <SetupGuideCard
           setupSteps={setupSteps}
@@ -40,6 +38,8 @@ export default function Dashboard({ shopDomain, stats, setupSteps, completedCoun
           onDismissed={dismissSetupGuide}
         />
       )}
+
+      <HelpResourcesCard />
     </s-page>
   );
 }
