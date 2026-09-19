@@ -2,7 +2,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { STATUS_TABS, STATUS_TONE, STATUS_LABEL, requestTotal, formatMoney } from "../constants";
 
-const PAGE_SIZE = 2;
+const PAGE_SIZE = 5;
 
 export default function RequestsTable({ requests }) {
   const [statusFilter, setStatusFilter] = useState("all");
@@ -39,28 +39,30 @@ export default function RequestsTable({ requests }) {
   const paginated = filtered.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE);
 
   return (
-    <s-section>
+    <s-section padding="none">
       <s-stack direction="block" gap="base">
-        <s-stack direction="inline" gap="base" alignItems="center" justifyContent="space-between">
-          <s-stack direction="inline" gap="small-200">
-            {STATUS_TABS.map((tab) => (
-              <s-button
-                key={tab.key}
-                variant={statusFilter === tab.key ? "primary" : "secondary"}
-                onClick={() => setStatusFilter(tab.key)}
-              >
-                {tab.label} ({counts[tab.key] ?? 0})
-              </s-button>
-            ))}
+        <s-box padding="base" paddingBlockEnd="none">
+          <s-stack direction="inline" gap="base" alignItems="center" justifyContent="space-between">
+            <s-stack direction="inline" gap="small-200">
+              {STATUS_TABS.map((tab) => (
+                <s-button
+                  key={tab.key}
+                  variant={statusFilter === tab.key ? "primary" : "secondary"}
+                  onClick={() => setStatusFilter(tab.key)}
+                >
+                  {tab.label} ({counts[tab.key] ?? 0})
+                </s-button>
+              ))}
+            </s-stack>
+            <s-search-field
+              label="Search requests"
+              labelAccessibilityVisibility="exclusive"
+              placeholder="Search order or customer"
+              value={search}
+              onInput={(event) => setSearch(event.currentTarget.value)}
+            ></s-search-field>
           </s-stack>
-          <s-search-field
-            label="Search requests"
-            labelAccessibilityVisibility="exclusive"
-            placeholder="Search order or customer"
-            value={search}
-            onInput={(event) => setSearch(event.currentTarget.value)}
-          ></s-search-field>
-        </s-stack>
+        </s-box>
 
         {filtered.length === 0 ? (
           // <s-section accessibilityLabel="Empty state section">
@@ -138,7 +140,8 @@ export default function RequestsTable({ requests }) {
           >
             <s-table-header-row>
               <s-table-header>Order</s-table-header>
-              <s-table-header>Customer</s-table-header>
+              <s-table-header>Customer name</s-table-header>
+              <s-table-header>Customer email</s-table-header>
               <s-table-header>Items</s-table-header>
               <s-table-header>Value</s-table-header>
               <s-table-header>Reason</s-table-header>
@@ -154,10 +157,10 @@ export default function RequestsTable({ requests }) {
                     </s-link>
                   </s-table-cell>
                   <s-table-cell>
-                    <s-stack direction="block" gap="small-100">
-                      <s-text type="strong">{request.customerName || "—"}</s-text>
-                      <s-text color="subdued">{request.customerEmail}</s-text>
-                    </s-stack>
+                    <s-text type="strong">{request.customerName || "—"}</s-text>
+                  </s-table-cell>
+                  <s-table-cell>
+                    <s-text color="subdued">{request.customerEmail || "—"}</s-text>
                   </s-table-cell>
                   <s-table-cell>
                     {request.items.length} item{request.items.length === 1 ? "" : "s"}

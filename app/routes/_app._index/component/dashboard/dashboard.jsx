@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types -- plain JS project, no prop-types package installed */
-import StatsGrid from "./StatsGrid";
+import StatsGrid from "../../../../components/StatsGrid";
 import SetupGuideCard from "./SetupGuideCard";
+import HelpResourcesCard from "./HelpResourcesCard";
 import { useSetupGuideDismissed, useDismissSetupGuide } from "../../../../context/ShopContext";
 
 export default function Dashboard({ shopDomain, stats, setupSteps, completedCount, showSetupGuide }) {
@@ -29,6 +30,8 @@ export default function Dashboard({ shopDomain, stats, setupSteps, completedCoun
       )}
 
       <StatsGrid stats={stats} />
+
+      <HelpResourcesCard />
 
       {isSetupGuideVisible && (
         <SetupGuideCard

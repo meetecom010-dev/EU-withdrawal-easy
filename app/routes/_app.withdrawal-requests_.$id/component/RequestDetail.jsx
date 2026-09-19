@@ -26,23 +26,39 @@ function humanize(value) {
   return text.charAt(0).toUpperCase() + text.slice(1);
 }
 
+// Tone maps mirror Shopify admin's own Order page badges (displayFinancialStatus /
+// displayFulfillmentStatus / return status), translated into this design
+// system's tone vocabulary (neutral/info/success/warning/critical — there's no
+// "attention" or "new" tone here, unlike classic Polaris badges).
 const FINANCIAL_TONE = {
-  PAID: "success",
-  PARTIALLY_REFUNDED: "warning",
-  REFUNDED: "info",
-  PARTIALLY_PAID: "warning",
   PENDING: "warning",
-  AUTHORIZED: "info",
+  AUTHORIZED: "warning",
+  PARTIALLY_PAID: "warning",
+  PAID: "success",
+  PARTIALLY_REFUNDED: "neutral",
+  REFUNDED: "neutral",
   VOIDED: "neutral",
   EXPIRED: "critical",
 };
 
+const FULFILLMENT_TONE = {
+  UNFULFILLED: "neutral",
+  PENDING_FULFILLMENT: "warning",
+  OPEN: "neutral",
+  IN_PROGRESS: "info",
+  ON_HOLD: "warning",
+  PARTIALLY_FULFILLED: "warning",
+  FULFILLED: "success",
+  RESTOCKED: "neutral",
+  SCHEDULED: "neutral",
+};
+
 const RETURN_TONE = {
+  REQUESTED: "warning",
   OPEN: "info",
   CLOSED: "success",
   DECLINED: "critical",
   CANCELED: "neutral",
-  REQUESTED: "warning",
 };
 
 // A label/value row, the building block of the summary-style side cards.
@@ -637,7 +653,7 @@ export default function RequestDetail({
             </s-badge>
           )}
           {orderState?.fulfillmentStatus && (
-            <s-badge tone={orderState.fulfillmentStatus === "FULFILLED" ? "success" : "neutral"}>
+            <s-badge tone={FULFILLMENT_TONE[orderState.fulfillmentStatus] ?? "neutral"}>
               {humanize(orderState.fulfillmentStatus)}
             </s-badge>
           )}
@@ -827,7 +843,7 @@ export default function RequestDetail({
                         </s-badge>
                       </Row>
                       <Row label="Fulfillment">
-                        <s-badge tone={orderState.fulfillmentStatus === "FULFILLED" ? "success" : "neutral"}>
+                        <s-badge tone={FULFILLMENT_TONE[orderState.fulfillmentStatus] ?? "neutral"}>
                           {humanize(orderState.fulfillmentStatus)}
                         </s-badge>
                       </Row>

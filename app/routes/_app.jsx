@@ -56,7 +56,7 @@ function AppShell({ pendingSkeleton }) {
           <s-link href="/form-setup">Form Setup</s-link>
           <s-link href="/withdrawal-requests">Withdrawal Requests</s-link>
           <s-link href="/email-templates">Email Templates</s-link>
-          <s-link href="/pricing">Pricing</s-link>
+          {/* <s-link href="/pricing">Pricing</s-link> */}
         </s-app-nav>
       )}
       <OrderStatusExtensionSync />

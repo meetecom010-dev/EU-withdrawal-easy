@@ -71,8 +71,8 @@ const ORDER_ADMIN_STATE_QUERY = `#graphql
       tags
       displayFinancialStatus
       displayFulfillmentStatus
-      totalPriceSet { shopMoney { amount currencyCode } }
-      totalRefundedSet { shopMoney { amount currencyCode } }
+      totalPriceSet { shopMoney { amount currencyCode } presentmentMoney { amount currencyCode } }
+      totalRefundedSet { shopMoney { amount currencyCode } presentmentMoney { amount currencyCode } }
       fulfillments(first: 20) {
         deliveredAt
         displayStatus
@@ -86,7 +86,7 @@ const ORDER_ADMIN_STATE_QUERY = `#graphql
       refunds(first: 20) {
         id
         createdAt
-        totalRefundedSet { shopMoney { amount currencyCode } }
+        totalRefundedSet { shopMoney { amount currencyCode } presentmentMoney { amount currencyCode } }
       }
       lineItems(first: 100) {
         nodes {
@@ -95,7 +95,7 @@ const ORDER_ADMIN_STATE_QUERY = `#graphql
           quantity
           refundableQuantity
           variant { id }
-          discountedUnitPriceSet { shopMoney { amount currencyCode } }
+          discountedUnitPriceSet { shopMoney { amount currencyCode } presentmentMoney { amount currencyCode } }
         }
       }
     }
@@ -346,10 +346,18 @@ export async function removeOrderTags(admin, orderId, tags) {
   return cleaned;
 }
 
-// Reads the shop-money amount off a MoneyBag field, as a number.
+// Reads the presentment-money amount off a MoneyBag field — the currency the
+// customer actually saw and paid in at checkout (their storefront currency),
+// not the shop's home currency. Same convention refunds.server.js already
+// uses for the refund preview/create flow; falls back to shop money only if
+// a MoneyBag somehow has no presentment value.
 function moneyAmount(moneyBag) {
-  const amount = moneyBag?.shopMoney?.amount;
+  const amount = moneyBag?.presentmentMoney?.amount ?? moneyBag?.shopMoney?.amount;
   return amount == null ? 0 : Number(amount);
+}
+
+function moneyCurrency(moneyBag) {
+  return moneyBag?.presentmentMoney?.currencyCode ?? moneyBag?.shopMoney?.currencyCode ?? null;
 }
 
 // The live order state the detail page renders from and gates its actions on.
@@ -380,11 +388,10 @@ export async function fetchOrderAdminState(admin, orderId) {
     refundableQuantity: line.refundableQuantity ?? 0,
     variantId: line.variant?.id ?? null,
     unitAmount: moneyAmount(line.discountedUnitPriceSet),
-    currencyCode: line.discountedUnitPriceSet?.shopMoney?.currencyCode ?? null,
+    currencyCode: moneyCurrency(line.discountedUnitPriceSet),
   }));
 
-  const currencyCode =
-    order.totalPriceSet?.shopMoney?.currencyCode ?? lineItems[0]?.currencyCode ?? null;
+  const currencyCode = moneyCurrency(order.totalPriceSet) ?? lineItems[0]?.currencyCode ?? null;
 
   return {
     id: order.id,

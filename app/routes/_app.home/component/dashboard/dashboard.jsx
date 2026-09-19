@@ -1,8 +1,9 @@
 /* eslint-disable react/prop-types -- plain JS project, no prop-types package installed */
 import { useState } from "react";
-import StatsGrid from "./StatsGrid";
+import StatsGrid from "../../../../components/StatsGrid";
 import SetupGuideCard from "./SetupGuideCard";
 import AboutCard from "./AboutCard";
+import HelpResourcesCard from "./HelpResourcesCard";
 
 // Home unmounts/remounts on every tab switch (it's a plain route, not kept
 // alive), so a bare useState(false) here re-shows the setup guide every time
@@ -60,6 +61,8 @@ export default function Dashboard({ shopDomain, stats, setupSteps, completedCoun
       )}
 
       <StatsGrid stats={stats} />
+
+      <HelpResourcesCard />
 
       {isSetupGuideVisible ? (
         <s-grid gridTemplateColumns="2fr 1fr" gap="base">
