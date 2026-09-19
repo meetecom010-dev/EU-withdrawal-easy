@@ -89,8 +89,9 @@ export default function FormFieldsEditor({
   const tLabels = translation.labels ?? {};
   const tReasonOptions = translation.reasonOptions ?? [];
 
-  // The language tabs the merchant can switch between — English first, then
-  // every other offered language (managed on the Languages card below).
+  // Every supported language, English first — settings.languages is always
+  // the full AVAILABLE_LANGUAGES list now (see resolveFormSettings), so this
+  // is really just "English, then everything else" in a stable order.
   const localeTabs = [
     BASE_LOCALE,
     ...(settings.languages ?? []).filter((code) => code !== BASE_LOCALE),
@@ -168,43 +169,24 @@ export default function FormFieldsEditor({
           </s-stack>
         </s-stack>
 
-        {/* Language tabs — only shown once the merchant offers more than
-            English (managed on the Languages card). Switching a tab retargets
-            every field below at that language's translation. */}
-        {localeTabs.length > 1 && (
-          <s-stack direction="block" gap="small-200">
-            <s-stack direction="inline" gap="small-200" alignItems="center">
-              <s-text type="strong">Language</s-text>
-              <s-badge tone={isBase ? "info" : "caution"}>
-                {isBase ? "Base language" : "Translation"}
-              </s-badge>
-            </s-stack>
-            <s-stack direction="inline" gap="small-200">
-              {localeTabs.map((code) => (
-                <s-button
-                  key={code}
-                  variant={activeLocale === code ? "primary" : "secondary"}
-                  onClick={() => onLocaleChange(code)}
-                >
-                  {languageName(code)}
-                </s-button>
-              ))}
-            </s-stack>
-          </s-stack>
-        )}
-
-        {isBase ? (
-          <s-banner tone="info">
-            Legally required fields — full name, email, and order number — are locked and
-            pre-filled from the order.
-          </s-banner>
-        ) : (
-          <s-banner tone="info">
-            Editing the {languageName(activeLocale)} translation. Every field is prefilled with a
-            default translation — adjust the wording to match your store. Fields can&apos;t be left
-            blank; the English text is shown as a placeholder for reference.
-          </s-banner>
-        )}
+        {/* Every supported language is available here directly — no separate
+            "offer this language" step. Switching the dropdown retargets every
+            field below at that language's translation; English is always the
+            base and always selected by default. */}
+        <s-select
+          label="Language"
+          details="Select a language to edit the withdrawal form content for that language. Changes are saved separately for each language."
+          value={activeLocale}
+          onChange={(event) =>
+            onLocaleChange(/** @type {HTMLSelectElement} */ (event.currentTarget).value)
+          }
+        >
+          {localeTabs.map((code) => (
+            <s-option key={code} value={code}>
+              {languageName(code)}
+            </s-option>
+          ))}
+        </s-select>
 
         {activeTab === "step1" && (
           <s-stack direction="block" gap="base">

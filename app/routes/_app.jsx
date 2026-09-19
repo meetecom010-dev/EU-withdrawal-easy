@@ -6,6 +6,7 @@ import { authenticate } from "../shopify.server";
 import { getOrCreateShop, serializeShop } from "../services/shop.server";
 import { ShopProvider, useShop, useOnboardingDismissed } from "../context/ShopContext";
 import OrderStatusExtensionSync from "../components/OrderStatusExtensionSync";
+import ThemeBlockExtensionSync from "../components/ThemeBlockExtensionSync";
 import Onboarding from "./_app._index/component/onboarding/onboarding";
 import DashboardSkeleton from "./_app._index/component/dashboard/DashboardSkeleton";
 import FormSetupSkeleton from "./_app.form-setup/component/FormSetupSkeleton";
@@ -59,6 +60,7 @@ function AppShell({ pendingSkeleton }) {
         </s-app-nav>
       )}
       <OrderStatusExtensionSync />
+      <ThemeBlockExtensionSync />
       {showApp ? (pendingSkeleton ?? <Outlet />) : <Onboarding />}
     </>
   );

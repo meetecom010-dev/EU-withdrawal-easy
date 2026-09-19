@@ -68,32 +68,18 @@ export default function NotificationEditor({
         <s-paragraph color="subdued">{meta.description}</s-paragraph>
 
         {localeTabs.length > 1 && (
-          <s-stack direction="block" gap="small-200">
-            <s-stack direction="inline" gap="small-200" alignItems="center">
-              <s-text type="strong">Language</s-text>
-              <s-badge tone={isBase ? "info" : "caution"}>
-                {isBase ? "Base language" : "Translation"}
-              </s-badge>
-            </s-stack>
-            <s-stack direction="inline" gap="small-200">
-              {localeTabs.map((code) => (
-                <s-button
-                  key={code}
-                  variant={locale === code ? "primary" : "secondary"}
-                  onClick={() => onLocaleChange(code)}
-                >
-                  {languageName(code)}
-                </s-button>
-              ))}
-            </s-stack>
-          </s-stack>
-        )}
-
-        {!isBase && (
-          <s-banner tone="info">
-            Editing the {languageName(locale)} version. It&apos;s prefilled with a default
-            translation — the buyer receives this language automatically, falling back to English.
-          </s-banner>
+          <s-select
+            label="Language"
+            details="Select a language to edit this email for that language. Changes are saved separately for each language, and buyers receive their own language automatically."
+            value={locale}
+            onChange={(e) => onLocaleChange(e.currentTarget.value)}
+          >
+            {localeTabs.map((code) => (
+              <s-option key={code} value={code}>
+                {languageName(code)}
+              </s-option>
+            ))}
+          </s-select>
         )}
 
         {/* The enable toggle is shop-wide (not per language), so it always writes

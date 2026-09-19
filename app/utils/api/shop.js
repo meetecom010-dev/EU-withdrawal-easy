@@ -27,6 +27,13 @@ export function updateOrderStatusBlockStatus(orderStatusBlockAdded) {
   });
 }
 
+export function updateThemeBlockAdded(themeBlockAdded) {
+  return apiFetch("/shop", {
+    method: "PATCH",
+    body: { themeBlockAdded },
+  });
+}
+
 export function updateDpaAccepted(dpaAccepted) {
   return apiFetch("/shop", {
     method: "PATCH",

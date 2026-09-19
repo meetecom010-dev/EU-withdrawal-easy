@@ -2,6 +2,7 @@ import { useLoaderData } from "react-router";
 import { authenticate } from "../../shopify.server";
 import { listWithdrawalRequests } from "../../services/withdrawal-request.server";
 import RequestsTable from "./component/RequestsTable";
+import RequestsStatsBar from "./component/RequestsStatsBar";
 import { downloadRequestsCsv } from "./constants";
 
 export const loader = async ({ request }) => {
@@ -27,6 +28,7 @@ export default function WithdrawalRequests() {
           Every withdrawal submission from the order status page, matched to its order. Click a
           request to review the items, customer details, and approve or reject it.
         </s-paragraph>
+        <RequestsStatsBar requests={requests} />
         <RequestsTable requests={requests} />
       </s-stack>
     </s-page>

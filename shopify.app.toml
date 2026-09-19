@@ -5,6 +5,14 @@ name = "EU Withdrawly"
 application_url = "https://eu-withdrawly.fly.dev"
 embedded = true
 
+# Lets the storefront theme app extension (extensions/withdrawal-theme-block)
+# call this app's backend as a same-origin, Shopify-signed request from
+# https://{shop}/apps/withdrawly/... — see app/routes/proxy.withdrawly.*.jsx.
+[app_proxy]
+url = "https://eu-withdrawly.fly.dev/proxy/withdrawly"
+subpath = "withdrawly"
+prefix = "apps"
+
 [access_scopes]
 # Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
 # read_orders/write_orders: read the order behind a withdrawal request, tag it,

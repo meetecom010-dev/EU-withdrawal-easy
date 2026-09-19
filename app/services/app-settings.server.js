@@ -1,6 +1,6 @@
 import connectDB from "../db.server";
 import AppSettings from "../models/app-settings.server";
-import { resolveFormSettings } from "../routes/_app.form-setup/constants";
+import { AVAILABLE_LANGUAGES, resolveFormSettings } from "../routes/_app.form-setup/constants";
 import { validateFormSettings } from "../routes/_app.form-setup/validation";
 import { validateEmailSettings } from "../routes/_app.email-templates/validation";
 import {
@@ -93,9 +93,10 @@ export function serializeEmailSettings(doc) {
     fromEmailStatus: stored.sender?.fromEmailStatus ?? "none",
   };
 
-  // The languages the customer emails are offered in mirror the form's offered
-  // languages (Languages card) — one place controls both. English is the base.
-  const offered = Array.from(doc.formSettings?.languages ?? [BASE_EMAIL_LOCALE]);
+  // Every supported language gets an email tab too — same fixed set the form
+  // builder offers (AVAILABLE_LANGUAGES), not a per-shop stored subset, so this
+  // doesn't depend on the shop's formSettings.languages being freshly saved.
+  const offered = AVAILABLE_LANGUAGES.map((lang) => lang.code);
   const extraLocales = offered.filter((code) => code !== BASE_EMAIL_LOCALE);
 
   const templates = {};

@@ -24,6 +24,7 @@ export default function Onboarding({ onComplete }) {
   const [dpaAccepted, setDpaAccepted] = useState(false);
   const [formEnabled, setFormEnabled] = useState(true);
   const [showOnOrderStatus, setShowOnOrderStatus] = useState(false);
+  const [showOnStandalonePage, setShowOnStandalonePage] = useState(false);
 
   const isFirst = stepIndex === 0;
   const isLast = stepIndex === STEPS.length - 1;
@@ -106,6 +107,8 @@ export default function Onboarding({ onComplete }) {
                   onEnabledChange={setFormEnabled}
                   showOnOrderStatus={showOnOrderStatus}
                   onShowOnOrderStatusChange={setShowOnOrderStatus}
+                  showOnStandalonePage={showOnStandalonePage}
+                  onShowOnStandalonePageChange={setShowOnStandalonePage}
                 />
               )}
 

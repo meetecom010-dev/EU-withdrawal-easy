@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types -- plain JS project, no prop-types package installed */
 import OrderStatusExtensionStatus from "../../../components/OrderStatusExtensionStatus";
+import StandalonePageStatus from "../../../components/StandalonePageStatus";
 
 export default function TurnItOnCard({ settings, update }) {
   return (
@@ -25,6 +26,14 @@ export default function TurnItOnCard({ settings, update }) {
               onChange={(e) => update("showOnOrderStatus", e.currentTarget.checked)}
             ></s-checkbox>
             {settings.showOnOrderStatus && <OrderStatusExtensionStatus />}
+
+            <s-checkbox
+              label="Show on a standalone storefront page"
+              details="Let customers start a withdrawal from a dedicated page on your storefront theme, via the Withdrawly theme app extension — useful if you want the button reachable outside the order status page too."
+              checked={settings.showOnStandalonePage}
+              onChange={(e) => update("showOnStandalonePage", e.currentTarget.checked)}
+            ></s-checkbox>
+            {settings.showOnStandalonePage && <StandalonePageStatus />}
           </>
         )}
       </s-stack>

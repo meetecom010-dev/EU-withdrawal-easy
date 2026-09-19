@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types -- plain JS project, no prop-types package installed */
 import { useState } from "react";
 import OrderStatusExtensionStatus from "../../../../components/OrderStatusExtensionStatus";
+import StandalonePageStatus from "../../../../components/StandalonePageStatus";
 
 function StepIcon({ complete }) {
   return complete ? (
@@ -92,16 +93,37 @@ export default function SetupGuideCard({
                   {isStepExpanded && (
                     <s-box padding="small" paddingBlockStart="none">
                       <s-stack direction="block" gap="small-200">
-                        {step.key === "extension" ? (
-                          step.complete ? (
-                            <s-box>
-                              <s-banner tone="success">
-                                The extension block is live on your order status page.
-                              </s-banner>
-                            </s-box>
-                          ) : (
-                            <OrderStatusExtensionStatus />
-                          )
+                        {step.key === "blocks" ? (
+                          <s-stack direction="block" gap="base">
+                            {step.surfaces.map((surface) => (
+                              <s-box
+                                key={surface.key}
+                                padding="base"
+                                borderWidth="base"
+                                borderRadius="base"
+                              >
+                                <s-stack direction="block" gap="small-200">
+                                  {/* Status indicator, not a control — checked
+                                      state is synced live from
+                                      *ExtensionSync, not user-togglable. */}
+                                  <s-checkbox
+                                    label={surface.label}
+                                    checked={surface.added}
+                                    disabled
+                                  ></s-checkbox>
+                                  {surface.added ? (
+                                    <s-banner tone="success">
+                                      The {surface.label} block is live.
+                                    </s-banner>
+                                  ) : surface.key === "orderStatus" ? (
+                                    <OrderStatusExtensionStatus />
+                                  ) : (
+                                    <StandalonePageStatus />
+                                  )}
+                                </s-stack>
+                              </s-box>
+                            ))}
+                          </s-stack>
                         ) : (
                           <s-box
                             padding="base"
@@ -112,14 +134,44 @@ export default function SetupGuideCard({
                               <s-paragraph color="subdued">
                                 {step.description}
                               </s-paragraph>
-                              {step.onToggle && (
-                                <s-checkbox
-                                  label={step.checkboxLabel ?? step.label}
-                                  checked={step.complete}
-                                  onChange={(event) =>
-                                    step.onToggle(event.currentTarget.checked)
-                                  }
-                                ></s-checkbox>
+                              {step.onToggle &&
+                                (step.useSwitch ? (
+                                  <s-switch
+                                    label={step.checkboxLabel ?? step.label}
+                                    checked={step.complete}
+                                    onChange={(event) =>
+                                      step.onToggle(event.currentTarget.checked)
+                                    }
+                                  ></s-switch>
+                                ) : (
+                                  <s-checkbox
+                                    label={step.checkboxLabel ?? step.label}
+                                    checked={step.complete}
+                                    onChange={(event) =>
+                                      step.onToggle(event.currentTarget.checked)
+                                    }
+                                  ></s-checkbox>
+                                ))}
+                              {step.placementOptions && step.complete && (
+                                <s-box padding="base" borderWidth="base" borderRadius="base">
+                                  <s-stack direction="block" gap="small-200">
+                                    <s-heading>{step.placementHeading}</s-heading>
+                                    <s-paragraph color="subdued">
+                                      {step.placementDescription}
+                                    </s-paragraph>
+                                    {step.placementOptions.map((option) => (
+                                      <s-checkbox
+                                        key={option.key}
+                                        label={option.label}
+                                        details={option.details}
+                                        checked={option.checked}
+                                        onChange={(event) =>
+                                          option.onToggle(event.currentTarget.checked)
+                                        }
+                                      ></s-checkbox>
+                                    ))}
+                                  </s-stack>
+                                </s-box>
                               )}
                               {step.ctaHref && (
                                 <s-stack direction="inline">

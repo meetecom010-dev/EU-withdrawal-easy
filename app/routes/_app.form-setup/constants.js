@@ -3,7 +3,7 @@
 // formSettings defaults themselves live in the Mongoose schema
 // (app/models/app-settings.server.js), not here.
 
-import { DEFAULT_TRANSLATIONS, fillTranslationDefaults } from "./translations";
+import { fillTranslationDefaults } from "./translations";
 
 export const EU_COUNTRIES = [
   { code: "AT", name: "Austria" },
@@ -83,6 +83,12 @@ export function resolveFormSettings(settings) {
     ...settings,
     countryMode,
     euCountries: countryMode === "all" ? EU_COUNTRIES.map((c) => c.code) : storedCountries,
+    // Every supported language is always available — there's no more merchant
+    // "offering" step (a separate Languages card used to gate this). Anything
+    // that reads `languages` (translation seeding below, the reason-option
+    // validator, the email templates' language tabs) keeps working unchanged
+    // because it always sees the full list now, not a sparse subset.
+    languages: AVAILABLE_LANGUAGES.map((lang) => lang.code),
     reasonField: {
       ...settings.reasonField,
       options: settings.reasonField.options ?? [],
@@ -100,20 +106,21 @@ export function resolveFormSettings(settings) {
 // other language falls back to, field by field.
 export const BASE_LOCALE = "en";
 
-// Fills every offered non-English language with a complete translation: the
+// Fills every supported non-English language with a complete translation: the
 // merchant's own values where present, the default catalog copy elsewhere. This
-// is what makes each language ship prefilled with professional copy (and get
-// served to shoppers) rather than blank fields — see translations.js. Idempotent
-// and blank-preserving, so it's safe to run on every read.
+// is what makes every language ship prefilled with professional copy (and get
+// served to shoppers) rather than blank fields — see translations.js. All
+// AVAILABLE_LANGUAGES are seeded unconditionally (there's no more "offered"
+// subset — every supported language is available and live by default; a
+// merchant edits a language's copy without an "add this language" step
+// first). Idempotent and blank-preserving, so it's safe to run on every read.
 function seedTranslations(settings) {
   const existing = normalizeTranslations(settings.translations);
-  const languages = settings.languages ?? [BASE_LOCALE];
   const englishLabels = settings.labels ?? {};
   const englishOptions = settings.reasonField?.options ?? [];
   const out = { ...existing };
-  for (const lang of languages) {
+  for (const { code: lang } of AVAILABLE_LANGUAGES) {
     if (lang === BASE_LOCALE) continue;
-    if (!DEFAULT_TRANSLATIONS[lang] && !existing[lang]) continue;
     out[lang] = fillTranslationDefaults(lang, englishLabels, englishOptions, existing[lang]);
   }
   return out;
@@ -151,10 +158,10 @@ export function resolveLabelsForLocale(settings, locale) {
   const baseLabels = settings.labels ?? {};
   const baseReason = settings.reasonField ?? {};
   const translations = normalizeTranslations(settings.translations);
-  // Only serve a translation for a language the merchant still offers. Dropping
-  // a language from the Languages card stops its translation being served
-  // (buyers fall back to English) without discarding the merchant's typed copy,
-  // so re-adding the language brings it straight back.
+  // Every supported language (settings.languages — always the full
+  // AVAILABLE_LANGUAGES list, see resolveFormSettings) is served automatically.
+  // This check now just guards against a buyer locale outside that supported
+  // set, which still correctly falls back to English.
   const offered = settings.languages ?? [BASE_LOCALE];
   const t =
     lang && lang !== BASE_LOCALE && offered.includes(lang) ? translations[lang] : null;

@@ -17,18 +17,37 @@ export const loader = async ({ request }) => {
 
 // Builds the setup-guide steps from real, live state instead of a hardcoded
 // guess. Order matters here — it's the order a merchant should reasonably
-// complete them in: accept the DPA, turn the form on, then place the block.
-// dpa/form are directly actionable from a checkbox right in the guide (see
-// onToggle); the extension step isn't — whether the block is actually
-// placed in the checkout & accounts editor can only be observed live via
-// OrderStatusExtensionSync, not set by checking a box.
+// complete them in: accept the DPA, turn the form on and pick where it shows,
+// then add the block(s) for whichever surfaces were picked. dpa/form/the
+// two placement checkboxes are directly actionable right in the guide (see
+// onToggle); the "blocks" step isn't — whether a block is actually placed
+// can only be observed live via *ExtensionSync, not set by checking a box,
+// so those checkboxes are status indicators, not controls (see
+// SetupGuideCard.jsx).
 function buildSetupSteps({
   dpaAccepted,
   formEnabled,
+  showOnOrderStatus,
+  showOnStandalonePage,
   orderStatusBlockAdded,
+  themeBlockAdded,
   onDpaToggle,
   onFormToggle,
+  onToggleOrderStatus,
+  onToggleStandalone,
 }) {
+  // Only surfaces the merchant actually picked get a block-setup entry —
+  // otherwise the final step would show an unavoidable, always-incomplete
+  // task for a surface nobody asked for.
+  const blockSurfaces = [
+    ...(showOnOrderStatus
+      ? [{ key: "orderStatus", label: "Order Status Page", added: Boolean(orderStatusBlockAdded) }]
+      : []),
+    ...(showOnStandalonePage
+      ? [{ key: "theme", label: "Theme Block", added: Boolean(themeBlockAdded) }]
+      : []),
+  ];
+
   return [
     {
       key: "dpa",
@@ -42,19 +61,52 @@ function buildSetupSteps({
       key: "form",
       label: "Configure your withdrawal form",
       description:
-        "Turns the form on. Sensible defaults are already filled in — customize the fields, reasons and wording anytime from Form Setup.",
+        "Turns the form on and picks where customers see it. Sensible defaults are already filled in — customize the fields, reasons and wording anytime from Form Setup.",
       complete: Boolean(formEnabled),
       checkboxLabel: "Enable the withdrawal form",
+      // Renders as a switch, not a checkbox — matches the onboarding
+      // wizard's WithdrawalStep, which this step mirrors.
+      useSwitch: true,
       onToggle: onFormToggle,
       ctaLabel: "Go to Form Setup",
       ctaHref: "/form-setup",
+      // Where to show it — a merchant can pick one or both. The next step
+      // (blockSurfaces above) only shows setup instructions for what's
+      // picked here. Heading/description/details copy matches
+      // onboarding/steps/WithdrawalStep.jsx so the two flows read as the
+      // same feature.
+      placementHeading: "Show it on your storefront",
+      placementDescription:
+        "The button needs to be placed on the order status page before customers can see it.",
+      placementOptions: [
+        {
+          key: "orderStatus",
+          label: "Order status page",
+          details: "Display the withdrawal form on Shopify's Order Status page after checkout.",
+          checked: Boolean(showOnOrderStatus),
+          onToggle: onToggleOrderStatus,
+        },
+        {
+          key: "theme",
+          label: "Standalone storefront page",
+          details:
+            "Let customers start a withdrawal from a dedicated page on your storefront theme, via the Withdrawly theme app extension.",
+          checked: Boolean(showOnStandalonePage),
+          onToggle: onToggleStandalone,
+        },
+      ],
     },
-    {
-      key: "extension",
-      label: "Add the withdrawal button to your storefront",
-      description: "Add the extension block from the checkout & accounts editor.",
-      complete: Boolean(orderStatusBlockAdded),
-    },
+    ...(blockSurfaces.length > 0
+      ? [
+          {
+            key: "blocks",
+            label: "Add the required app blocks",
+            description: "Add the block for each place you chose above.",
+            complete: blockSurfaces.some((surface) => surface.added),
+            surfaces: blockSurfaces,
+          },
+        ]
+      : []),
   ];
 }
 
@@ -99,14 +151,7 @@ export default function Home() {
 
   async function handleFormEnabledToggle(enabled) {
     const previous = formSettings;
-    // Turning it on also puts it on the order status page — that's the only
-    // surface there is, so a bare "enable" that doesn't also place it
-    // anywhere wouldn't actually make the form live for customers.
-    const next = {
-      ...formSettings,
-      masterEnabled: enabled,
-      showOnOrderStatus: enabled ? true : formSettings.showOnOrderStatus,
-    };
+    const next = { ...formSettings, masterEnabled: enabled };
     setFormSettings(next);
     try {
       const { formSettings: saved } = await saveFormSettings(next);
@@ -116,6 +161,24 @@ export default function Home() {
       notify(error.message);
     }
   }
+
+  // Shared by both placement checkboxes below — same optimistic-update-then-
+  // save shape as handleFormEnabledToggle, just targeting a different field.
+  async function handlePlacementToggle(field, value) {
+    const previous = formSettings;
+    const next = { ...formSettings, [field]: value };
+    setFormSettings(next);
+    try {
+      const { formSettings: saved } = await saveFormSettings(next);
+      setFormSettings(saved);
+    } catch (error) {
+      setFormSettings(previous);
+      notify(error.message);
+    }
+  }
+
+  const handleToggleOrderStatus = (checked) => handlePlacementToggle("showOnOrderStatus", checked);
+  const handleToggleStandalone = (checked) => handlePlacementToggle("showOnStandalonePage", checked);
 
   if (loading) {
     return <DashboardSkeleton />;
@@ -134,9 +197,14 @@ export default function Home() {
   const setupSteps = buildSetupSteps({
     dpaAccepted: shop.dpaAccepted,
     formEnabled: formSettings.masterEnabled,
+    showOnOrderStatus: formSettings.showOnOrderStatus,
+    showOnStandalonePage: formSettings.showOnStandalonePage,
     orderStatusBlockAdded: shop.orderStatusBlockAdded,
+    themeBlockAdded: shop.themeBlockAdded,
     onDpaToggle: handleDpaToggle,
     onFormToggle: handleFormEnabledToggle,
+    onToggleOrderStatus: handleToggleOrderStatus,
+    onToggleStandalone: handleToggleStandalone,
   });
   const completedCount = setupSteps.filter((step) => step.complete).length;
 

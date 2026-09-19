@@ -6,7 +6,6 @@ import TurnItOnCard from "./component/TurnItOnCard";
 import CountriesCard from "./component/CountriesCard";
 import FormFieldsEditor, { tabForErrorPath, localeForErrorPath } from "./component/FormFieldsEditor";
 import LivePreview from "./component/LivePreview";
-import LanguagesCard from "./component/LanguagesCard";
 import AutomationCard from "./component/AutomationCard";
 import DeadlineCard from "./component/DeadlineCard";
 import FormSetupSkeleton from "./component/FormSetupSkeleton";
@@ -111,16 +110,6 @@ export default function FormSetup() {
       shopify.saveBar.hide(SAVE_BAR_ID);
     }
   }, [hasChanges, isReady, shopify]);
-
-  // If the active language tab is removed from the offered list (via the
-  // Languages card), fall back to the always-present English tab so the editor
-  // never points at a locale that no longer has a tab.
-  useEffect(() => {
-    const languages = settings?.languages ?? ["en"];
-    if (activeLocale !== "en" && !languages.includes(activeLocale)) {
-      setActiveLocale("en");
-    }
-  }, [settings?.languages, activeLocale]);
 
   function update(path, value) {
     setSettings((prev) => setPath(prev, path, value));
@@ -245,7 +234,6 @@ export default function FormSetup() {
                 errors={displayedErrors}
                 dismissError={dismissError}
               />
-              <LanguagesCard settings={settings} update={update} />
               <AutomationCard
                 settings={settings}
                 update={update}

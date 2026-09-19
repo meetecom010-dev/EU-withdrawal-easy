@@ -132,9 +132,143 @@ const ORDER_CANCEL_MUTATION = `#graphql
   }
 `;
 
+// Finds one order by its order name (e.g. "#1001"), for the storefront
+// withdrawal-theme-block's lookup step, which has no session token or
+// confirmation number to key off — just what the customer types in.
+// Deliberately fetches everything the lookup response needs (order identity,
+// delivery state for the eligibility stage, and full line item detail for the
+// "choose items" step) in one round trip.
+const ORDER_LOOKUP_QUERY = `#graphql
+  query WithdrawalOrderLookup($query: String!) {
+    orders(first: 1, query: $query) {
+      nodes {
+        id
+        name
+        email
+        cancelledAt
+        shippingAddress {
+          address1
+          address2
+          city
+          provinceCode
+          zip
+          countryCode
+        }
+        fulfillments(first: 20) {
+          deliveredAt
+          displayStatus
+        }
+        lineItems(first: 100) {
+          nodes {
+            id
+            title
+            quantity
+            refundableQuantity
+            sku
+            image {
+              url
+              altText
+            }
+            discountedUnitPriceSet {
+              shopMoney {
+                amount
+                currencyCode
+              }
+            }
+            variant {
+              id
+              selectedOptions {
+                name
+                value
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
 // Fulfillment orders in these states are done with — holding them is either
 // impossible or meaningless.
 const HOLDABLE_STATUSES = new Set(["OPEN", "IN_PROGRESS", "SCHEDULED"]);
+
+// "1001" / "#1001" / " 1001 " -> "#1001" — the format Shopify's order search
+// query expects and the only one worth guessing at from free-text customer
+// input.
+function normalizeOrderName(input) {
+  const trimmed = String(input ?? "").trim();
+  if (!trimmed) return "";
+  return trimmed.startsWith("#") ? trimmed : `#${trimmed}`;
+}
+
+// Looks up an order by name and verifies the requester actually owns it via
+// the order's contact email — the only two facts a storefront visitor (no
+// session token, no confirmation number) can be asked for. Returns null on
+// any mismatch, deliberately without distinguishing "order not found" from
+// "wrong email" so the response can't be used to probe for valid order
+// numbers.
+export async function findOrderForWithdrawalLookup(admin, { orderName, email }) {
+  const name = normalizeOrderName(orderName);
+  const normalizedEmail = String(email ?? "").trim().toLowerCase();
+  if (!name || !normalizedEmail) return null;
+
+  const data = await adminQuery(admin, {
+    operation: "WithdrawalOrderLookup",
+    query: ORDER_LOOKUP_QUERY,
+    variables: { query: `name:${JSON.stringify(name)}` },
+  });
+
+  const order = data.orders?.nodes?.[0];
+  if (!order || String(order.email ?? "").trim().toLowerCase() !== normalizedEmail) {
+    return null;
+  }
+
+  const fulfillments = order.fulfillments ?? [];
+  const isDelivered = fulfillments.some(
+    (fulfillment) => Boolean(fulfillment.deliveredAt) || fulfillment.displayStatus === "DELIVERED",
+  );
+
+  const lineItems = (order.lineItems?.nodes ?? []).map((line) => {
+    const variantTitle = (line.variant?.selectedOptions ?? [])
+      .map((option) => option.value)
+      .filter(Boolean)
+      .join(" / ");
+    const price = line.discountedUnitPriceSet?.shopMoney;
+    return {
+      id: line.id,
+      title: line.title,
+      variantId: line.variant?.id ?? null,
+      variantTitle,
+      sku: line.sku ?? "",
+      imageUrl: line.image?.url ?? "",
+      imageAlt: line.image?.altText ?? line.title,
+      quantity: line.quantity,
+      refundableQuantity: line.refundableQuantity ?? 0,
+      price: price ? { amount: Number(price.amount), currencyCode: price.currencyCode } : null,
+    };
+  });
+
+  const address = order.shippingAddress;
+  const shippingAddress = address
+    ? {
+        countryCode: address.countryCode ?? "",
+        formatted: [address.address1, address.address2, address.city, address.provinceCode, address.zip, address.countryCode]
+          .filter(Boolean)
+          .join(", "),
+      }
+    : null;
+
+  return {
+    id: order.id,
+    name: order.name,
+    email: order.email,
+    cancelledAt: order.cancelledAt,
+    isDelivered,
+    shippingAddress,
+    lineItems,
+  };
+}
 
 export async function fetchOrderContext(admin, orderId) {
   const data = await adminQuery(admin, {

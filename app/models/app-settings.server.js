@@ -99,6 +99,10 @@ const formSettingsSchema = new Schema(
   {
     masterEnabled: { type: Boolean, default: false },
     showOnOrderStatus: { type: Boolean, default: true },
+    // Storefront theme app extension surface (extensions/withdrawal-theme-block)
+    // — opt-in, unlike showOnOrderStatus, since it requires the merchant to also
+    // add the app block in their theme editor before it does anything.
+    showOnStandalonePage: { type: Boolean, default: false },
     // "all" = every EU country is eligible (euCountries is ignored and
     // resolved to the full list); "specific" = only the euCountries below.
     countryMode: { type: String, enum: ["all", "specific"], default: "all" },

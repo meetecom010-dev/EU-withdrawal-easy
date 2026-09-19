@@ -1,0 +1,389 @@
+/* Scoped under [data-withdrawly-widget] so this never leaks into the
+   surrounding theme — theme app extension assets load globally on every page
+   that has the block. Visual language mirrors the order-status extension's
+   Polaris web components (<s-section>, <s-button>, <s-text-field>, ...) as
+   closely as plain CSS can: white bordered card, near-black primary buttons,
+   blue "plain" buttons, grey locked fields, thin blue step-progress bar. */
+[data-withdrawly-widget] {
+  --withdrawly-accent: #2b45a8;
+  --withdrawly-text: #1a1a1a;
+  --withdrawly-text-subdued: #6b6b6b;
+  --withdrawly-border: #e3e3e3;
+  --withdrawly-field-bg: #f1f1f1;
+  --withdrawly-radius: 12px;
+  display: block;
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+.withdrawly {
+  font-family: inherit;
+  color: var(--withdrawly-text);
+  box-sizing: border-box;
+}
+
+.withdrawly *,
+.withdrawly *::before,
+.withdrawly *::after {
+  box-sizing: inherit;
+}
+
+/* Several fields below (.withdrawly__field, .withdrawly__hint, ...) set their
+   own `display` unconditionally, which — without this — silently overrides
+   the browser's default `[hidden] { display: none }` rule: author CSS beats
+   user-agent CSS even without adding specificity, so `element.hidden = true`
+   would do nothing and the element stays visibly rendered. One `!important`
+   rule here guarantees `hidden` always actually hides, for every element in
+   the widget, instead of requiring a bespoke `<class>[hidden]` override per
+   field (which is exactly how the "Your reason" field shipped visibly stuck
+   open — it was missing that override). */
+.withdrawly [hidden] {
+  display: none !important;
+}
+
+.withdrawly__card {
+  background: #fff;
+  border: 1px solid var(--withdrawly-border);
+  border-radius: var(--withdrawly-radius);
+  padding: 20px 22px 22px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+/* ---- step header + progress bar ---------------------------------------- */
+
+.withdrawly__stepheader {
+  margin-bottom: 14px;
+}
+
+.withdrawly__stepheader-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+}
+
+.withdrawly__stepname {
+  font-weight: 600;
+}
+
+.withdrawly__stepof {
+  color: var(--withdrawly-text-subdued);
+}
+
+.withdrawly__progress {
+  height: 4px;
+  border-radius: 999px;
+  background: var(--withdrawly-border);
+  overflow: hidden;
+}
+
+.withdrawly__progress-fill {
+  height: 100%;
+  background: var(--withdrawly-accent);
+  border-radius: 999px;
+  transition: width 0.2s ease;
+}
+
+/* ---- headings ------------------------------------------------------------ */
+
+.withdrawly__heading {
+  font-size: 1.25rem;
+  font-weight: 650;
+  margin: 0 0 6px;
+  line-height: 1.3;
+}
+
+.withdrawly__subheading {
+  font-size: 0.95rem;
+  font-weight: 650;
+  margin: 18px 0 10px;
+}
+
+.withdrawly__sub {
+  color: var(--withdrawly-text-subdued);
+  margin: 0 0 16px;
+  line-height: 1.5;
+  font-size: 0.9rem;
+}
+
+/* ---- banners --------------------------------------------------------------- */
+
+.withdrawly__banner {
+  border-radius: 10px;
+  padding: 12px 14px;
+  margin: 0 0 14px;
+  font-size: 0.88rem;
+}
+
+.withdrawly__banner--error {
+  background: #fdf1f1;
+  color: #a3251f;
+  border: 1px solid #f3c9c7;
+}
+
+.withdrawly__banner--success {
+  background: #f0f7f0;
+  color: #1a1a1a;
+  border: 1px solid #c9e5c9;
+  font-weight: 650;
+}
+
+.withdrawly__submitted {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--withdrawly-text-subdued);
+  font-size: 0.88rem;
+  margin: 0 0 16px;
+}
+
+.withdrawly__check {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #2e7d32;
+  color: #fff;
+  font-size: 0.7rem;
+  flex: none;
+}
+
+/* ---- form fields ----------------------------------------------------------- */
+
+.withdrawly__form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.withdrawly__field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 0.85rem;
+  margin-bottom: 14px;
+}
+
+.withdrawly__field:last-of-type {
+  margin-bottom: 0;
+}
+
+.withdrawly__field > span {
+  font-weight: 600;
+}
+
+.withdrawly__field input,
+.withdrawly__field select {
+  font: inherit;
+  font-size: 0.9rem;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--withdrawly-border);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--withdrawly-text);
+}
+
+.withdrawly__field input:focus,
+.withdrawly__field select:focus {
+  outline: 2px solid var(--withdrawly-accent);
+  outline-offset: 1px;
+}
+
+.withdrawly__field--locked {
+  margin-bottom: 12px;
+}
+
+.withdrawly__locked-value {
+  padding: 0.6rem 0.75rem;
+  border-radius: 8px;
+  background: var(--withdrawly-field-bg);
+  color: var(--withdrawly-text-subdued);
+  font-size: 0.9rem;
+}
+
+/* ---- item rows -------------------------------------------------------------- */
+
+.withdrawly__items {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.withdrawly__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.withdrawly__item-main {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.withdrawly__checkbox {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  flex: none;
+  border: 2px solid #c9c9c9;
+  border-radius: 50%;
+  position: relative;
+  cursor: pointer;
+  margin: 0;
+}
+
+.withdrawly__checkbox:checked {
+  border-color: var(--withdrawly-accent);
+  background: var(--withdrawly-accent);
+}
+
+.withdrawly__checkbox:checked::after {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 1px;
+  width: 4px;
+  height: 8px;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.withdrawly__item-thumb {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  flex: none;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #f1f1f1;
+}
+
+.withdrawly__item-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.withdrawly__item-qty {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 3px;
+  border-radius: 999px;
+  background: #1a1a1a;
+  color: #fff;
+  font-size: 0.65rem;
+  font-weight: 650;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.withdrawly__item-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.withdrawly__item-title {
+  font-weight: 650;
+  font-size: 0.88rem;
+}
+
+.withdrawly__item-variant {
+  font-size: 0.8rem;
+  color: var(--withdrawly-text-subdued);
+}
+
+.withdrawly__item-price {
+  font-size: 0.88rem;
+  color: var(--withdrawly-text-subdued);
+  white-space: nowrap;
+  flex: none;
+}
+
+/* ---- hint / total / declaration --------------------------------------------- */
+
+.withdrawly__hint {
+  font-size: 0.85rem;
+  color: var(--withdrawly-text-subdued);
+  margin: 0 0 14px;
+}
+
+.withdrawly__total {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 650;
+  font-size: 0.9rem;
+  border-top: 1px solid var(--withdrawly-border);
+  padding-top: 12px;
+  margin: 2px 0 16px;
+}
+
+.withdrawly__declaration {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.85rem;
+  margin-bottom: 14px;
+  cursor: pointer;
+}
+
+.withdrawly__declaration input {
+  margin-top: 2px;
+  flex: none;
+}
+
+/* ---- buttons ------------------------------------------------------------------ */
+
+.withdrawly__actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 4px;
+}
+
+.withdrawly__actions--split {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.withdrawly__btn {
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 650;
+  padding: 0.6rem 0;
+  border: none;
+  background: none;
+  color: var(--withdrawly-accent);
+  cursor: pointer;
+}
+
+.withdrawly__btn--primary {
+  padding: 0.65rem 1.4rem;
+  border-radius: 8px;
+  background: #1a1a1a;
+  color: #fff;
+}
+
+.withdrawly__btn--primary:disabled {
+  background: var(--withdrawly-field-bg);
+  color: #a8a8a8;
+  cursor: not-allowed;
+}
+
+.withdrawly__btn.is-loading {
+  opacity: 0.7;
+}

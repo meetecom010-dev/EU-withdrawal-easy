@@ -4,7 +4,12 @@ import Shop from "../../models/shop.server";
 import { getOrCreateShop } from "../../services/shop.server";
 
 const ALLOWED_PLAN_FIELDS = ["name", "price", "currency", "interval"];
-const ALLOWED_SHOP_FIELDS = ["onboardingCompleted", "dpaAccepted", "orderStatusBlockAdded"];
+const ALLOWED_SHOP_FIELDS = [
+  "onboardingCompleted",
+  "dpaAccepted",
+  "orderStatusBlockAdded",
+  "themeBlockAdded",
+];
 
 // GET /api/shop -> current shop details + pricing plan
 export const loader = async ({ request }) => {

@@ -1,11 +1,14 @@
 /* eslint-disable react/prop-types -- plain JS project, no prop-types package installed */
 import OrderStatusExtensionStatus from "../../../../../components/OrderStatusExtensionStatus";
+import StandalonePageStatus from "../../../../../components/StandalonePageStatus";
 
 export default function WithdrawalStep({
   enabled,
   onEnabledChange,
   showOnOrderStatus,
   onShowOnOrderStatusChange,
+  showOnStandalonePage,
+  onShowOnStandalonePageChange,
 }) {
   return (
     <s-stack direction="block" gap="base">
@@ -23,22 +26,31 @@ export default function WithdrawalStep({
         onChange={(event) => onEnabledChange(event.target.checked)}
       ></s-switch>
 
-      <s-box padding="base" borderWidth="base" borderRadius="base">
-        <s-stack direction="block" gap="small-200">
-          <s-heading>Show it on your storefront</s-heading>
-          <s-paragraph color="subdued">
-            The button needs to be placed on the order status page before
-            customers can see it.
-          </s-paragraph>
-          <s-checkbox
-            label="Order status page"
-            details="Display the withdrawal form on Shopify's Order Status page after checkout."
-            checked={showOnOrderStatus}
-            onChange={(event) => onShowOnOrderStatusChange(event.target.checked)}
-          ></s-checkbox>
-          {showOnOrderStatus && <OrderStatusExtensionStatus />}
-        </s-stack>
-      </s-box>
+      {enabled && (
+        <s-box padding="base" borderWidth="base" borderRadius="base">
+          <s-stack direction="block" gap="small-200">
+            <s-heading>Show it on your storefront</s-heading>
+            <s-paragraph color="subdued">
+              The button needs to be placed on the order status page before
+              customers can see it.
+            </s-paragraph>
+            <s-checkbox
+              label="Order status page"
+              details="Display the withdrawal form on Shopify's Order Status page after checkout."
+              checked={showOnOrderStatus}
+              onChange={(event) => onShowOnOrderStatusChange(event.target.checked)}
+            ></s-checkbox>
+            {showOnOrderStatus && <OrderStatusExtensionStatus />}
+            <s-checkbox
+              label="Standalone storefront page"
+              details="Let customers start a withdrawal from a dedicated page on your storefront theme, via the Withdrawly theme app extension."
+              checked={showOnStandalonePage}
+              onChange={(event) => onShowOnStandalonePageChange(event.target.checked)}
+            ></s-checkbox>
+            {showOnStandalonePage && <StandalonePageStatus />}
+          </s-stack>
+        </s-box>
+      )}
 
       <s-banner tone="info">
         <s-paragraph>

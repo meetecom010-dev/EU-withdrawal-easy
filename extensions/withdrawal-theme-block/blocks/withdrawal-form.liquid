@@ -1,0 +1,24 @@
+{{ 'withdrawal-form.css' | asset_url | stylesheet_tag }}
+
+<div
+  data-withdrawly-widget
+  style="--withdrawly-accent: {{ block.settings.accent_color }};"
+  {{ block.shopify_attributes }}
+></div>
+
+<script src="{{ 'withdrawal-form.js' | asset_url }}" defer="defer"></script>
+
+{% schema %}
+{
+  "name": "Withdrawal form",
+  "target": "section",
+  "settings": [
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent color",
+      "default": "#2b45a8"
+    }
+  ]
+}
+{% endschema %}

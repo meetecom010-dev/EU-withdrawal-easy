@@ -18,11 +18,21 @@ export class WithdrawalNotAllowedError extends Error {
  * The single source of truth for "can this order still be withdrawn from".
  * Used by the eligibility endpoint (to render the form or an explanation) and
  * again at submission (because the client can't be trusted with the answer).
+ *
+ * `surface` picks which per-surface enable flag gates the form: the order
+ * status page (default, unchanged behavior) or the storefront theme app
+ * extension's standalone page.
  */
-export async function resolveWithdrawalEligibility(shop, orderId) {
-  const settings = serializeFormSettings(await getOrCreateAppSettings(shop));
+const SURFACE_FLAGS = {
+  order_status: "showOnOrderStatus",
+  standalone_page: "showOnStandalonePage",
+};
 
-  if (!settings.masterEnabled || !settings.showOnOrderStatus) {
+export async function resolveWithdrawalEligibility(shop, orderId, { surface = "order_status" } = {}) {
+  const settings = serializeFormSettings(await getOrCreateAppSettings(shop));
+  const surfaceFlag = SURFACE_FLAGS[surface] ?? SURFACE_FLAGS.order_status;
+
+  if (!settings.masterEnabled || !settings[surfaceFlag]) {
     return {
       isEligible: false,
       code: "form_disabled",
@@ -87,8 +97,8 @@ export async function resolveWithdrawalEligibility(shop, orderId) {
 }
 
 /** Throws WithdrawalNotAllowedError unless the order can still be withdrawn from. */
-export async function assertWithdrawalAllowed(shop, orderId) {
-  const eligibility = await resolveWithdrawalEligibility(shop, orderId);
+export async function assertWithdrawalAllowed(shop, orderId, options) {
+  const eligibility = await resolveWithdrawalEligibility(shop, orderId, options);
   if (!eligibility.isEligible) {
     throw new WithdrawalNotAllowedError(
       eligibility.code,

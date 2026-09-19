@@ -38,6 +38,11 @@ const shopSchema = new Schema(
     onboardingCompleted: { type: Boolean, default: false },
     dpaAccepted: { type: Boolean, default: false },
     orderStatusBlockAdded: { type: Boolean, default: false },
+    // Manually confirmed by the merchant (see StandalonePageStatus.jsx) —
+    // unlike orderStatusBlockAdded, there's no App Bridge API to poll a theme
+    // app extension block's live placement the way there is for a checkout
+    // UI extension's activations, so this is self-reported rather than synced.
+    themeBlockAdded: { type: Boolean, default: false },
     plan: { type: planSchema, default: () => ({}) },
   },
   { timestamps: true },

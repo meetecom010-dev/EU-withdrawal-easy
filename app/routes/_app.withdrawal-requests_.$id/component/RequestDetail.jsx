@@ -524,7 +524,7 @@ export default function RequestDetail({
       <s-badge slot="accessory" tone={STATUS_TONE[withdrawalRequest.status]}>
         {STATUS_LABEL[withdrawalRequest.status]}
       </s-badge>
-      <s-link slot="breadcrumb-actions" href="/withdrawal-requests" accessibilityLabel="Back to requests"></s-link>
+      <s-link slot="breadcrumb-actions" href="/withdrawal-requests">Back to withdrawals</s-link>
 
       <s-button
         slot="secondary-actions"

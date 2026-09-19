@@ -47,26 +47,23 @@ export default function OrderStatusExtensionStatus() {
     <s-banner tone="warning" heading="Order status page extension block not added">
       <s-stack direction="block" gap="small-200">
         <s-paragraph>
-          Customers won&apos;t see the withdrawal form on the order status page until the
-          extension block is added. Here&apos;s how:
+          Customers won&apos;t see the withdrawal form on the order status page until the app
+          block is added. Here&apos;s how:
         </s-paragraph>
         <s-ordered-list>
           <s-list-item>
-            Click &quot;Open checkout editor&quot; below — it opens in a new tab.
+            Click &quot;Add app block&quot; below — it will open the Order status page in
+            Shopify&apos;s checkout editor.
           </s-list-item>
-          <s-list-item>
-            In the page selector at the top of the editor, choose &quot;Order status&quot;.
-          </s-list-item>
-          <s-list-item>
-            Click &quot;Add app block&quot; in the left sidebar, choose EU Withdrawal Form, then
-            save.
-          </s-list-item>
+          <s-list-item>Click &quot;Add app block&quot; in the left sidebar.</s-list-item>
+          <s-list-item>Choose &quot;EU Withdrawal Form&quot;.</s-list-item>
+          <s-list-item>Click &quot;Save&quot;.</s-list-item>
         </s-ordered-list>
         <s-paragraph color="subdued">
-          This page updates automatically within a few seconds of the block being saved.
+          This warning updates automatically within a few seconds of the block being saved.
         </s-paragraph>
         <s-button href={addExtensionBlockUrl} target="_blank">
-          Open checkout editor
+          Add app block
         </s-button>
       </s-stack>
     </s-banner>
