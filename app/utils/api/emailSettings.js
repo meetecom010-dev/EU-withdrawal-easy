@@ -25,3 +25,16 @@ export function refreshSenderStatus() {
 export function removeCustomSender() {
   return apiFetch("/email-sender", { method: "POST", body: { intent: "remove" } });
 }
+
+// Domain-level authentication (app/routes/api/email-domain.jsx).
+export function startDomainAuth(domain) {
+  return apiFetch("/email-domain", { method: "POST", body: { intent: "start", domain } });
+}
+
+export function refreshDomainAuth() {
+  return apiFetch("/email-domain", { method: "POST", body: { intent: "refresh" } });
+}
+
+export function removeDomainAuth() {
+  return apiFetch("/email-domain", { method: "POST", body: { intent: "remove" } });
+}

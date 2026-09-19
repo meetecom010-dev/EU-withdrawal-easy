@@ -6,6 +6,7 @@ import {
   refreshSenderStatus,
   removeCustomSender,
 } from "../../../utils/api/emailSettings";
+import { isFreeEmailDomain } from "../../../utils/freeEmailDomains";
 
 // Shop-level sender identity, laid out as two fields: the sender email (with its
 // verify flow) on the left, the reply-to on the right. Reply-to saves with the
@@ -77,6 +78,8 @@ export default function SenderSettings({ sender, defaultFromEmail, update, dismi
         ? "Enter the code we emailed to verify this address."
         : `Leave blank to use ${defaultFromEmail || "the app's verified address"}, or add your own.`;
 
+  const showFreeProviderWarning = status === "none" && isFreeEmailDomain(emailInput);
+
   return (
     <s-section heading="Email settings">
       <s-stack direction="block" gap="base">
@@ -108,10 +111,20 @@ export default function SenderSettings({ sender, defaultFromEmail, update, dismi
                 label="Sender email address"
                 value={status === "none" ? emailInput : customEmail}
                 disabled={status !== "none" || undefined}
-                placeholder="you@yourstore.com"
+                placeholder="notifications@withdrawaleasy.com"
                 details={senderDetails}
                 onInput={(e) => setEmailInput(e.currentTarget.value)}
               ></s-email-field>
+
+              {showFreeProviderWarning && (
+                <s-banner tone="warning">
+                  <s-paragraph>
+                    Free providers like Gmail or Yahoo can&apos;t be authenticated — verified emails
+                    from this address will show recipients &quot;via brevosend.com&quot;. For a
+                    professional look, use an address on your own store&apos;s domain instead.
+                  </s-paragraph>
+                </s-banner>
+              )}
 
               {status === "verified" ? (
                 <s-stack direction="inline" gap="small-200" alignItems="center">

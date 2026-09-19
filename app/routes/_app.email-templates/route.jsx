@@ -6,6 +6,7 @@ import { templateDefault } from "../../services/email/registry";
 import { TEMPLATE_META, TEMPLATE_LIST } from "./constants";
 import { validateEmailSettings } from "./validation";
 import SenderSettings from "./component/SenderSettings";
+import DomainSettings from "./component/DomainSettings";
 import NotificationEditor from "./component/NotificationEditor";
 import EmailTemplatesSkeleton from "./component/EmailTemplatesSkeleton";
 
@@ -249,6 +250,8 @@ export default function EmailTemplates() {
           dismissError={dismissError}
           errors={displayedErrors}
         />
+
+        <DomainSettings domain={settings.domain} />
 
         <NotificationEditor
           templates={settings.templates}

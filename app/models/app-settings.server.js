@@ -154,6 +154,20 @@ const emailOverrideSchema = new Schema(
   { _id: false, minimize: true },
 );
 
+// One DNS record Brevo wants added to authenticate a domain (Brevo-code, DKIM,
+// or DMARC) — normalized from Brevo's keyed dns_records response into an array
+// so the UI can just iterate and render a table.
+const dnsRecordSchema = new Schema(
+  {
+    recordType: { type: String, default: "" }, // "brevo_code" | "dkim_record" | "dmarc_record"
+    type: { type: String, default: "" }, // "TXT" | "CNAME"
+    hostName: { type: String, default: "" },
+    value: { type: String, default: "" },
+    verified: { type: Boolean, default: false },
+  },
+  { _id: false },
+);
+
 // Shop-level email configuration: the sender identity shared by every email,
 // plus a Map of per-template overrides keyed by the registry's template keys.
 // Because it's a Map, adding a new template needs no schema change at all.
@@ -171,6 +185,18 @@ const emailSettingsSchema = new Schema(
         default: "none",
       },
       brevoSenderId: { type: Number, default: null },
+    },
+    // Domain-level authentication (SPF/DKIM/DMARC) — separate from `sender`
+    // above and managed entirely by email-domain.server.js. Once a domain here
+    // is verified, any sender address on it comes back active with no OTP.
+    domain: {
+      name: { type: String, default: "" },
+      status: {
+        type: String,
+        enum: ["none", "pending", "verified"],
+        default: "none",
+      },
+      dnsRecords: { type: [dnsRecordSchema], default: [] },
     },
     overrides: { type: Map, of: emailOverrideSchema, default: () => ({}) },
   },

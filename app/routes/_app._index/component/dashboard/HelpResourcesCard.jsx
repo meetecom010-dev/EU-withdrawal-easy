@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types -- plain JS project, no prop-types package installed */
 
-// TODO: swap these for the app's real destinations once they exist.
+// TODO: swap HELP_CENTER_URL/FAQ_URL for the app's real destinations once they exist.
 const HELP_CENTER_URL = "https://example.com/help";
-const SUPPORT_EMAIL = "support@example.com";
+const SUPPORT_EMAIL = "support@withdrawaleasy.com";
 const FAQ_URL = "https://example.com/faq";
 
 function HelpCard({ title, description, linkLabel, href, external }) {

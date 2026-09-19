@@ -196,3 +196,37 @@ export async function validateBrevoSender({ senderId, otp }) {
   });
   return true;
 }
+
+// Domain-level authentication (SPF/DKIM/DMARC), as opposed to the
+// single-sender OTP flow above. Authenticating a whole domain is what
+// actually stops Brevo substituting brevosend.com as the sending domain —
+// once it's done, every sender on that domain (verified via createBrevoSender)
+// comes back active with no OTP needed.
+
+// Registers a domain with the Brevo account. Idempotent in practice: an
+// already-registered domain is just looked up by the caller via
+// getBrevoDomain rather than treated as a hard error here.
+export async function createBrevoDomain({ name }) {
+  return brevoRequest("/senders/domains", { method: "POST", body: { name } });
+}
+
+// Fetches a domain's authentication status and the DNS records Brevo wants
+// added (SPF/Brevo-code, DKIM, DMARC) so the caller can show them to a
+// merchant.
+export async function getBrevoDomain(name) {
+  return brevoRequest(`/senders/domains/${encodeURIComponent(name)}`);
+}
+
+// Triggers a re-check of the domain's DNS records against what's published.
+// This endpoint's own response shape isn't authoritative — callers should
+// always follow up with getBrevoDomain for the real status.
+export async function authenticateBrevoDomain(name) {
+  return brevoRequest(`/senders/domains/${encodeURIComponent(name)}/authenticate`, {
+    method: "PUT",
+  });
+}
+
+// Removes a domain from the Brevo account.
+export async function deleteBrevoDomain(name) {
+  return brevoRequest(`/senders/domains/${encodeURIComponent(name)}`, { method: "DELETE" });
+}

@@ -93,6 +93,20 @@ export function serializeEmailSettings(doc) {
     fromEmailStatus: stored.sender?.fromEmailStatus ?? "none",
   };
 
+  // Domain-level authentication (SPF/DKIM/DMARC), managed by
+  // email-domain.server.js — separate from the single-sender OTP flow above.
+  const domain = {
+    name: stored.domain?.name ?? "",
+    status: stored.domain?.status ?? "none",
+    dnsRecords: (stored.domain?.dnsRecords ?? []).map((record) => ({
+      recordType: record.recordType ?? "",
+      type: record.type ?? "",
+      hostName: record.hostName ?? "",
+      value: record.value ?? "",
+      verified: Boolean(record.verified),
+    })),
+  };
+
   // Every supported language gets an email tab too — same fixed set the form
   // builder offers (AVAILABLE_LANGUAGES), not a per-shop stored subset, so this
   // doesn't depend on the shop's formSettings.languages being freshly saved.
@@ -123,7 +137,7 @@ export function serializeEmailSettings(doc) {
 
   // The app's default sender, shown in the UI as the address used until a
   // merchant verifies their own.
-  return { sender, templates, languages: offered, defaultFromEmail: defaultSenderEmail() };
+  return { sender, domain, templates, languages: offered, defaultFromEmail: defaultSenderEmail() };
 }
 
 // Persists the shop's email settings. The frontend sends the full effective
