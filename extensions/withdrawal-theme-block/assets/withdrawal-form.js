@@ -17,8 +17,17 @@
 (function () {
   "use strict";
 
-  const PROXY_BASE = "/apps/withdrawl-easy";
+  // Fallback only. The real base comes from the block’s "App proxy subpath"
+  // setting (data-proxy-base): each app — withdrawl-easy-rm and
+  // withdrawl-easy-mr — is proxied under its own subpath, and both can be
+  // installed on the same dev store.
+  const DEFAULT_PROXY_BASE = "/apps/withdrawl-easy";
   const OTHER_REASON_VALUE = "__other__";
+
+  function trimTrailingSlash(value) {
+    const base = String(value);
+    return base.endsWith("/") ? base.slice(0, -1) : base;
+  }
 
   // Copied verbatim from extensions/withdrawal-order-status/locales/en.default.json
   // so the two surfaces read identically. This surface's chrome is
@@ -133,6 +142,7 @@
   class WithdrawalWidget {
     constructor(root) {
       this.root = root;
+      this.proxyBase = trimTrailingSlash(root.dataset.proxyBase || DEFAULT_PROXY_BASE);
       this.settings = null;
       this.order = null;
       this.stage = "before_delivery";
@@ -154,7 +164,7 @@
     async init() {
       try {
         const params = new URLSearchParams({ locale: (document.documentElement.lang || "en").split("-")[0] });
-        const data = await fetchJson(`${PROXY_BASE}/form-settings?${params}`);
+        const data = await fetchJson(`${this.proxyBase}/form-settings?${params}`);
         if (!data.enabled) {
           this.root.remove();
           return;
@@ -270,7 +280,7 @@
       submitBtn.textContent = STRINGS.lookingUp;
 
       try {
-        const data = await fetchJson(`${PROXY_BASE}/order-lookup`, {
+        const data = await fetchJson(`${this.proxyBase}/order-lookup`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ name: this.customerName, email, orderNumber }),
@@ -476,7 +486,7 @@
 
       const selectedItems = this.selectedItems();
       try {
-        await fetchJson(`${PROXY_BASE}/submit`, {
+        await fetchJson(`${this.proxyBase}/submit`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
