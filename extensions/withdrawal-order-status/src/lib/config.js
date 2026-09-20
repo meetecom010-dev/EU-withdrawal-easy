@@ -9,7 +9,7 @@
 // below is what makes that safe: when the reference wasn't substituted away
 // at build time, accessing it throws, and PRODUCTION_APP_URL is used
 // instead. Keep PRODUCTION_APP_URL up to date with this app's real URL.
-const PRODUCTION_APP_URL = "https://eu-withdrawly.fly.dev";
+const PRODUCTION_APP_URL = "https://eu-withdrawal-easy.fly.dev";
 
 function resolveAppUrl() {
   try {

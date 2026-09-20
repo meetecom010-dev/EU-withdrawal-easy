@@ -1,10 +1,10 @@
-# fly.toml app configuration file generated for eu-withdrawly on 2026-09-17T09:22:40+05:30
+# fly.toml app configuration file for eu-withdrawal-easy
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'eu-withdrawly'
-primary_region = 'sin'
+app = 'eu-withdrawal-easy'
+primary_region = 'fra'
 
 [build]
 [http_service]
@@ -16,7 +16,7 @@ primary_region = 'sin'
   processes = ['app']
 
 [[vm]]
-  memory = '256mb'
+  memory = '1gb'
   cpu_kind = 'shared'
   cpus = 1
-  memory_mb = 256
+  memory_mb = 1024

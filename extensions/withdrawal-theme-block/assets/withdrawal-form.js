@@ -1,12 +1,12 @@
 /**
  * Storefront withdrawal/return form — theme app extension version of
- * extensions/order-status-hello's WithdrawalForm.jsx, reimplemented in plain
+ * extensions/withdrawal-order-status's WithdrawalForm.jsx, reimplemented in plain
  * JS/DOM because Polaris web components (<s-*>) only exist inside the
  * checkout/customer-account UI extension sandbox, not on a storefront page.
  *
  * Mirrors that extension's screens (entry card -> Details -> Confirm -> Done)
  * and copy 1:1 (see STRINGS below, copied from
- * extensions/order-status-hello/locales/en.default.json) so both surfaces
+ * extensions/withdrawal-order-status/locales/en.default.json) so both surfaces
  * feel like the same product. The one structural difference: the order-status
  * page already knows the buyer (session token + confirmation number), so its
  * Details step shows locked, pre-filled name/email/order fields. A storefront
@@ -20,7 +20,7 @@
   const PROXY_BASE = "/apps/withdrawly";
   const OTHER_REASON_VALUE = "__other__";
 
-  // Copied verbatim from extensions/order-status-hello/locales/en.default.json
+  // Copied verbatim from extensions/withdrawal-order-status/locales/en.default.json
   // so the two surfaces read identically. This surface's chrome is
   // English-only for now (the merchant's own copy — headings, reasons,
   // declaration — already comes through localized via /form-settings).
@@ -170,7 +170,7 @@
       }
     }
 
-    // Mirrors resolveLabels() in extensions/order-status-hello/src/lib/labels.js
+    // Mirrors resolveLabels() in extensions/withdrawal-order-status/src/lib/labels.js
     // — swaps six keys to their delivered variant once the order's stage is
     // known; everything else is shared between both stages.
     labels() {

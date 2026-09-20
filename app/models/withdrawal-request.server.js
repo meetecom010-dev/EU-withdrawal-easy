@@ -131,7 +131,7 @@ const automationStateSchema = new Schema(
 );
 
 // One document per customer submission of the order-status withdrawal form
-// (extensions/order-status-hello). Mirrors the fields
+// (extensions/withdrawal-order-status). Mirrors the fields
 // app/routes/_app.withdrawal-requests/component/RequestsTable.jsx expects.
 const withdrawalRequestSchema = new Schema(
   {

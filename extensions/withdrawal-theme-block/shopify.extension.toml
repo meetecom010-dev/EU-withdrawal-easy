@@ -1,7 +1,7 @@
 # Theme app extension — lets merchants add the withdrawal/return form as a
 # block anywhere in their theme (any section-accepting area, including a
 # dedicated page template), instead of only on the order status page
-# (extensions/order-status-hello). Learn more:
+# (extensions/withdrawal-order-status). Learn more:
 # https://shopify.dev/docs/apps/build/online-store/theme-app-extensions
 
 [[extensions]]

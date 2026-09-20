@@ -3,7 +3,7 @@ import { useAppBridge } from "@shopify/app-bridge-react";
 import { useShop, usePatchShop } from "../context/ShopContext";
 import { updateOrderStatusBlockStatus } from "../utils/api/shop";
 
-const ORDER_STATUS_EXTENSION_HANDLE = "order-status-hello";
+const ORDER_STATUS_EXTENSION_HANDLE = "withdrawal-order-status";
 const ORDER_STATUS_EXTENSION_TARGET = "customer-account.order-status.block.render";
 const EXTENSION_CHECK_INTERVAL_MS = 10_000;
 

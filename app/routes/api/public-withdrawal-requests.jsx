@@ -2,7 +2,7 @@ import { authenticate } from "../../shopify.server";
 import { submitWithdrawalRequestFlow } from "../../services/withdrawal-submission.server";
 
 // POST /api/public-withdrawal-requests -> records a withdrawal request
-// submitted from the order-status extension (extensions/order-status-hello),
+// submitted from the order-status extension (extensions/withdrawal-order-status),
 // then runs the merchant's configured automation against the Shopify order.
 // Verified via the extension's session token, same as
 // app/routes/api/public-form-settings.jsx — see that file for why `dest`

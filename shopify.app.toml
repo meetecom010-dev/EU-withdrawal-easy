@@ -1,69 +1,21 @@
 # Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
 
-client_id = "6c28ec15a25b1c83c06facf84e2865c7"
-name = "EU Withdrawly"
-application_url = "https://eu-withdrawly.fly.dev"
+client_id = "5d7f87aa33802d02b496148727ede58a"
+application_url = "https://eu-withdrawal-easy.fly.dev"
 embedded = true
+name = "EU withdrawal easy"
 
-# Lets the storefront theme app extension (extensions/withdrawal-theme-block)
-# call this app's backend as a same-origin, Shopify-signed request from
-# https://{shop}/apps/withdrawly/... — see app/routes/proxy.withdrawly.*.jsx.
-[app_proxy]
-url = "https://eu-withdrawly.fly.dev/proxy/withdrawly"
-subpath = "withdrawly"
-prefix = "apps"
+[webhooks]
+api_version = "2026-07"
 
 [access_scopes]
 # Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
-# read_orders/write_orders: read the order behind a withdrawal request, tag it,
-#   and cancel+refund it for the "cancel" automation fallbacks.
-# write_returns: returnCreate for the "Create return" after-delivery action
-#   (also grants read_returns, needed for order.returnableFulfillments).
-# write_*_fulfillment_orders: place and release the fulfillment hold. Both the
-#   merchant-managed and third-party variants are needed — a shop fulfilling
-#   through a 3PL has its fulfillment orders assigned to that service, and the
-#   merchant-managed scope alone can't hold those.
-# read_locations: suggestedRefund reports the location each refunded line would
-#   be restocked to, and refundCreate needs that location id back.
-scopes = "write_products,read_customers,write_metaobjects,write_metaobject_definitions,read_orders,write_orders,write_returns,write_merchant_managed_fulfillment_orders,write_third_party_fulfillment_orders,read_locations"
-
-[product.metafields.app.demo_info]
-type = "single_line_text_field"
-name = "Demo Source Info"
-description = "Tracks products created by the Shopify app template for development"
-
-  [product.metafields.app.demo_info.access]
-  admin = "merchant_read_write"
-
-[metaobjects.app.example]
-name = "Example"
-description = "An example metaobject definition created by this template"
-
-  [metaobjects.app.example.access]
-  admin = "merchant_read_write"
-
-[metaobjects.app.example.fields.title]
-name = "Title"
-type = "single_line_text_field"
-required = true
-
-[metaobjects.app.example.fields.description]
-name = "Description"
-type = "multi_line_text_field"
-
-[webhooks]
-api_version = "2026-10"
-
-  [[webhooks.subscriptions]]
-  uri = "/webhooks/app/uninstalled"
-  topics = [ "app/uninstalled" ]
-
-  [[webhooks.subscriptions]]
-  uri = "/webhooks/app/scopes_update"
-  topics = [ "app/scopes_update" ]
+scopes = " write_products,read_customers,write_metaobjects,write_metaobject_definitions,read_orders,write_orders,write_returns,write_merchant_managed_fulfillment_orders,write_third_party_fulfillment_orders,read_locations"
+optional_scopes = [ ]
+use_legacy_install_flow = false
 
 [auth]
-redirect_urls = [ "https://eu-withdrawly.fly.dev/api/auth" ]
+redirect_urls = [" https://eu-withdrawal-easy.fly.dev/auth"]
 
 [build]
 automatically_update_urls_on_dev = true

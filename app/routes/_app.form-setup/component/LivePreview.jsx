@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import { resolveLabelsForLocale } from "../constants";
 
-// Mirrors extensions/order-status-hello 1:1 — same states (compact entry
+// Mirrors extensions/withdrawal-order-status 1:1 — same states (compact entry
 // card, three steps with a progress bar), same rows (thumbnail + quantity
 // badge + variant title + line total), same rules (Continue needs a
 // selection, Confirm needs the declaration checked). Keep this file in sync
