@@ -17,7 +17,7 @@
 (function () {
   "use strict";
 
-  const PROXY_BASE = "/apps/withdrawly";
+  const PROXY_BASE = "/apps/withdrawl-easy";
   const OTHER_REASON_VALUE = "__other__";
 
   // Copied verbatim from extensions/withdrawal-order-status/locales/en.default.json

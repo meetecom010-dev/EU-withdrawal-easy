@@ -4,7 +4,7 @@ import AppSettings from "../models/app-settings.server";
 import { serializeFormSettings } from "../services/app-settings.server";
 import { resolveLabelsForLocale } from "./_app.form-setup/constants";
 
-// GET /apps/withdrawly/form-settings -> the withdrawal form config for the
+// GET /apps/withdrawl-easy/form-settings -> the withdrawal form config for the
 // storefront theme app extension (extensions/withdrawal-theme-block).
 // Mirrors app/routes/api/public-form-settings.jsx (used by the order-status
 // extension) but is reached via Shopify's App Proxy instead of a

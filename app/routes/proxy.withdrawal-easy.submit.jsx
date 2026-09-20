@@ -1,7 +1,7 @@
 import { authenticate } from "../shopify.server";
 import { submitWithdrawalRequestFlow } from "../services/withdrawal-submission.server";
 
-// POST /apps/withdrawly/submit -> records a withdrawal request submitted
+// POST /apps/withdrawl-easy/submit -> records a withdrawal request submitted
 // from the storefront theme app extension (extensions/withdrawal-theme-block).
 // Shares the actual submission logic (deadline check, DB write, funnel
 // event, automation) with app/routes/api/public-withdrawal-requests.jsx via

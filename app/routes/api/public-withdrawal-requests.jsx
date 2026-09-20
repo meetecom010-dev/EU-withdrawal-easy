@@ -10,7 +10,7 @@ import { submitWithdrawalRequestFlow } from "../../services/withdrawal-submissio
 //
 // The actual submission logic (deadline check, DB write, funnel event,
 // automation) lives in services/withdrawal-submission.server.js, shared with
-// the storefront theme app extension's proxy.withdrawly.submit route — this
+// the storefront theme app extension's proxy.withdrawal-easy.submit route — this
 // file only handles this surface's auth and the order-status surface flag.
 async function handleRequest(request) {
   const { sessionToken, cors } = await authenticate.public.customerAccount(request);
