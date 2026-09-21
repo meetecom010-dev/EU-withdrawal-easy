@@ -4,6 +4,7 @@ import { ServerRouter } from "react-router";
 import { createReadableStreamFromReadable } from "@react-router/node";
 import { isbot } from "isbot";
 import { addDocumentResponseHeaders } from "./shopify.server";
+import { alertError } from "./services/slack/alert-error.server";
 
 export const streamTimeout = 5000;
 
@@ -40,6 +41,7 @@ export default async function handleRequest(
         onError(error) {
           responseStatusCode = 500;
           console.error(error);
+          alertError({ context: "ssr-render", error }).catch(() => {});
         },
       },
     );

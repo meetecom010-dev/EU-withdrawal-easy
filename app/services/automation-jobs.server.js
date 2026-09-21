@@ -1,5 +1,6 @@
 import connectDB from "../db.server";
 import AutomationJob from "../models/automation-job.server";
+import { alertError } from "./slack/alert-error.server";
 
 // A job left "running" longer than this is assumed dead — the worker that
 // claimed it was killed mid-flight — and becomes claimable again. Generous
@@ -69,6 +70,12 @@ async function finishJob(job, { ok, error }) {
     job.status = "failed";
     job.completedAt = new Date();
     job.lastError = error;
+    alertError({
+      context: "automation-job",
+      error: new Error(error),
+      shop: job.shop,
+      extra: { type: job.type, requestId: job.requestId, attempts: job.attempts },
+    }).catch(() => {});
   } else {
     // Exponential backoff, so a shop that's rate limited or briefly down isn't
     // retried immediately on the next cron tick.

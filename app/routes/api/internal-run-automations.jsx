@@ -1,5 +1,6 @@
 import { drainDueJobs } from "../../services/automation-jobs.server";
 import { runScheduledAutomationJob } from "../../services/withdrawal-automation.server";
+import { alertError } from "../../services/slack/alert-error.server";
 
 // POST /api/internal-run-automations -> runs scheduled automation work that has
 // come due: releasing a fulfillment hold after N days, and the delayed
@@ -36,8 +37,15 @@ export const action = async ({ request }) => {
     return Response.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const summary = await drainDueJobs(runScheduledAutomationJob);
-  return Response.json({ ok: true, ...summary });
+  try {
+    const summary = await drainDueJobs(runScheduledAutomationJob);
+    return Response.json({ ok: true, ...summary });
+  } catch (error) {
+    // drainDueJobs already catches per-job errors internally, so reaching
+    // here means something catastrophic (e.g. the DB is unreachable).
+    await alertError({ context: "automation-runner", error });
+    throw error;
+  }
 };
 
 // GET is a health check for the scheduler itself — it confirms the endpoint is
