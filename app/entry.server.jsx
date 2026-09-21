@@ -51,3 +51,21 @@ export default async function handleRequest(
     setTimeout(abort, streamTimeout + 1000);
   });
 }
+
+// React Router's single point of failure for loader/action errors — called
+// for every route (document requests, .data fetcher/action requests, and
+// resource routes) whenever a loader or action throws. This is what actually
+// catches things like a failed "place fulfillment order" click, which never
+// goes through the onError above (that's React's own render-error hook, not
+// React Router's route-error hook).
+export function handleError(error, { request }) {
+  // A client that navigated away or cancelled the request isn't a real
+  // failure worth alerting on.
+  if (request.signal.aborted) return;
+  console.error(error);
+  alertError({
+    context: "route-error",
+    error,
+    extra: { method: request.method, url: request.url },
+  }).catch(() => {});
+}
