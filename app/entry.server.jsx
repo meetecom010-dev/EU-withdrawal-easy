@@ -62,10 +62,6 @@ export function handleError(error, { request }) {
   // A client that navigated away or cancelled the request isn't a real
   // failure worth alerting on.
   if (request.signal.aborted) return;
-  // TEMP DEBUG: pin down the exact Origin header Shopify's embedded admin
-  // sends on live, since it's rejecting action submissions there but not in
-  // local dev. Remove once allowedActionOrigins is set correctly.
-  console.error("[debug] request.url host:", new URL(request.url).host, "| Origin header:", request.headers.get("origin"));
   console.error(error);
   alertError({
     context: "route-error",
