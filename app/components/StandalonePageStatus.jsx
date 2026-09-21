@@ -10,7 +10,7 @@ import { useShop } from "../context/ShopContext";
 // module entry (dev-only sessions never get one — deep links need a deployed
 // + released version to resolve against). Re-check that file if this ever
 // needs updating (e.g. after deleting and recreating the extension).
-const THEME_EXTENSION_UUID = "01a0b5cc-8493-7292-a25f-2168e67538c9";
+const THEME_EXTENSION_UUID = "01a0bd99-6768-7142-980f-d2db94658a7d";
 const THEME_BLOCK_HANDLE = "withdrawal-form";
 
 // Shopify's built-in template groups, not merchant-specific resources — no
