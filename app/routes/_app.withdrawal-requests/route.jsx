@@ -49,7 +49,7 @@ export default function WithdrawalRequests() {
           Every withdrawal submission from the order status page, matched to its order. Click a
           request to review the items, customer details, and approve or reject it.
         </s-paragraph> */}
-        <StatsGrid stats={stats} showHeader={false} />
+        <StatsGrid stats={stats} showViewRequestsButton={false} />
         <RequestsTable requests={requests} />
       </s-stack>
     </s-page>

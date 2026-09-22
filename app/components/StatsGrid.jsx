@@ -19,7 +19,7 @@ function StatCard({ title, count, countLabel, description }) {
   );
 }
 
-export default function StatsGrid({ stats, showHeader = true }) {
+export default function StatsGrid({ stats, showHeader = true, showViewRequestsButton = true }) {
   const navigate = useNavigate();
 
   return (
@@ -27,10 +27,15 @@ export default function StatsGrid({ stats, showHeader = true }) {
       <s-stack direction="block" gap="base">
         {showHeader && (
           <s-grid gridTemplateColumns="1fr auto" gap="small-300" alignItems="center">
-            <s-heading>Overview</s-heading>
-            <s-button variant="primary" onClick={() => navigate("/withdrawal-requests")}>
-              View requests
-            </s-button>
+            <s-stack direction="block" gap="small-500">
+              <s-heading>Overview</s-heading>
+              <s-text color="subdued">A quick snapshot of your withdrawal requests</s-text>
+            </s-stack>
+            {showViewRequestsButton && (
+              <s-button variant="primary" onClick={() => navigate("/withdrawal-requests")}>
+                View requests
+              </s-button>
+            )}
           </s-grid>
         )}
         <s-grid gridTemplateColumns="1fr 1fr 1fr 1fr" gap="base">

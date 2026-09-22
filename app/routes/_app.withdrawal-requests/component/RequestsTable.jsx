@@ -43,6 +43,7 @@ export default function RequestsTable({ requests }) {
         .includes(query);
     });
   }, [requests, statusFilter, search]);
+  const isFiltered = statusFilter !== "all" || search.trim().length > 0;
 
   // Switching status/search filters can leave `page` past the new result
   // set's last page, which would render an empty table with no way back.
@@ -84,7 +85,11 @@ export default function RequestsTable({ requests }) {
     );
   }
   function exportSelected() {
-    downloadRequestsCsv(requests.filter((request) => selectedIds.includes(request.id)));
+    const rows =
+      selectedIds.length > 0
+        ? requests.filter((request) => selectedIds.includes(request.id))
+        : filtered;
+    downloadRequestsCsv(rows);
   }
   function openDelete(ids) {
     setDeleteIds(ids);
@@ -101,7 +106,19 @@ export default function RequestsTable({ requests }) {
     <s-section padding="none">
       <s-stack direction="block" gap="base">
         <s-box padding="base" paddingBlockEnd="none">
-          <s-stack direction="inline" gap="base" alignItems="center" justifyContent="space-between">
+          <s-stack direction="block" gap="base">
+            <s-grid gridTemplateColumns="1fr auto" gap="base" alignItems="center">
+              <s-search-field
+                label="Search requests"
+                labelAccessibilityVisibility="exclusive"
+                placeholder="Search order or customer"
+                value={search}
+                onInput={(event) => setSearch(event.currentTarget.value)}
+              ></s-search-field>
+              <s-button onClick={exportSelected}>
+                {selectedIds.length > 0 ? "Export selected" : "Export"}
+              </s-button>
+            </s-grid>
             <s-stack direction="inline" gap="small-200">
               {STATUS_TABS.map((tab) => (
                 <s-button
@@ -113,133 +130,85 @@ export default function RequestsTable({ requests }) {
                 </s-button>
               ))}
             </s-stack>
-            <s-search-field
-              label="Search requests"
-              labelAccessibilityVisibility="exclusive"
-              placeholder="Search order or customer"
-              value={search}
-              onInput={(event) => setSearch(event.currentTarget.value)}
-            ></s-search-field>
           </s-stack>
         </s-box>
 
-        {selectedIds.length > 0 && (
-          <s-box padding="base" paddingBlockStart="none">
-            <s-stack direction="inline" gap="base" alignItems="center" justifyContent="space-between">
-              <s-text type="strong">
-                {selectedIds.length} selected
-              </s-text>
-              <s-stack direction="inline" gap="small-200">
-                <s-button onClick={exportSelected}>
-                  {allSelected ? "Export all" : "Export selected"}
-                </s-button>
-                <s-button
-                  tone="critical"
-                  disabled={deleting || undefined}
-                  onClick={() => openDelete(selectedIds)}
-                >
-                  Delete
-                </s-button>
-              </s-stack>
-            </s-stack>
-          </s-box>
-        )}
-
         {filtered.length === 0 ? (
-          // <s-section accessibilityLabel="Empty state section">
-          //   <s-grid gap="base" justifyItems="center" paddingBlock="large-400">
-          //     <s-box maxInlineSize="200px" maxBlockSize="200px" paddingBlock="large-100">
-          //       <s-icon type="search" tone="subdued" size="base" accessibilityLabel="No results"></s-icon>
-          //     </s-box>
-          //     <s-grid justifyItems="center" maxInlineSize="450px" gap="base">
-          //       <s-stack alignItems="center">
-          //         <s-heading>No withdrawal requests found</s-heading>
-          //         <s-paragraph>
-          //           {isFiltered
-          //             ? "Try changing your search or filter to find what you're looking for."
-          //             : "Withdrawal requests submitted by customers will show up here."}
-          //         </s-paragraph>
-          //       </s-stack>
-          //       {isFiltered && (
-          //         <s-button-group>
-          //           <s-button
-          //             slot="secondary-actions"
-          //             aria-label="Clear search and filters"
-          //             onClick={() => {
-          //               setSearch("");
-          //               setStatusFilter("all");
-          //             }}
-          //           >
-          //             Clear filters
-          //           </s-button>
-          //         </s-button-group>
-          //       )}
-          //     </s-grid>
-          //   </s-grid>
-          // </s-section>
-          <s-section accessibilityLabel="Empty state section">
-  <s-grid gap="base" justifyItems="center" paddingBlock="large-400">
-    <s-box maxInlineSize="200px" maxBlockSize="200px">
-      {/* aspectRatio should match the actual image dimensions (width/height) */}
-      <s-image
-        aspectRatio="1/0.5"
-        src="https://cdn.shopify.com/static/images/polaris/patterns/callout.png"
-        alt="A stylized graphic of four characters, each holding a puzzle piece"
-      />
-    </s-box>
-    <s-grid justifyItems="center" maxInlineSize="450px" gap="base">
-      <s-stack alignItems="center">
-        <s-heading>Start creating puzzles</s-heading>
-        <s-paragraph>
-          Create and manage your collection of puzzles for players to enjoy.
-        </s-paragraph>
-      </s-stack>
-      <s-button-group>
-        <s-button
-          slot="secondary-actions"
-          aria-label="Learn more about creating puzzles"
-        >
-          {" "}
-          Learn more{" "}
-        </s-button>
-        <s-button slot="primary-action" aria-label="Add a new puzzle">
-          {" "}
-          Create puzzle{" "}
-        </s-button>
-      </s-button-group>
-    </s-grid>
-  </s-grid>
-</s-section>
+          <>
+            <s-divider></s-divider>
+            <s-section accessibilityLabel="Empty state section">
+              <s-grid gap="base" justifyItems="center" paddingBlock="large-400">
+                <s-box maxInlineSize="200px" maxBlockSize="200px">
+                  <s-image
+                    aspectRatio="1/0.5"
+                    src="https://cdn.shopify.com/static/images/polaris/patterns/callout.png"
+                    alt="No withdrawal requests"
+                  />
+                </s-box>
+                <s-grid justifyItems="center" maxInlineSize="450px" gap="base">
+                  <s-stack alignItems="center">
+                    <s-heading>No withdrawal requests found</s-heading>
+                    <s-paragraph>
+                      {isFiltered
+                        ? "Try changing your search or filter to find what you're looking for."
+                        : "Withdrawal requests submitted by customers will show up here."}
+                    </s-paragraph>
+                  </s-stack>
+                </s-grid>
+              </s-grid>
+            </s-section>
+          </>
         ) : (
-          <s-table
-            variant="auto"
-            paginate
-            hasPreviousPage={currentPage > 1}
-            hasNextPage={currentPage < pageCount}
-            onPreviousPage={() => setPage((current) => Math.max(1, current - 1))}
-            onNextPage={() => setPage((current) => Math.min(pageCount, current + 1))}
-          >
-            <s-table-header-row>
-              <s-table-header>
-                <s-checkbox
-                  accessibilityLabel="Select all requests"
-                  checked={allSelected}
-                  indeterminate={someSelected || undefined}
-                  onChange={(event) => toggleAll(event.currentTarget.checked)}
-                ></s-checkbox>
-              </s-table-header>
-              <s-table-header>Order</s-table-header>
-              <s-table-header>Customer name</s-table-header>
-              <s-table-header>Customer email</s-table-header>
-              <s-table-header>Items</s-table-header>
-              <s-table-header>Value</s-table-header>
-              <s-table-header>Reason</s-table-header>
-              <s-table-header>Status</s-table-header>
-              <s-table-header>Submitted</s-table-header>
-              <s-table-header>Actions</s-table-header>
-            </s-table-header-row>
-            <s-table-body>
-              {paginated.map((request) => (
+          <s-stack direction="block" gap="none">
+            <s-table
+              variant="auto"
+              paginate
+              hasPreviousPage={currentPage > 1}
+              hasNextPage={currentPage < pageCount}
+              onPreviousPage={() => setPage((current) => Math.max(1, current - 1))}
+              onNextPage={() => setPage((current) => Math.min(pageCount, current + 1))}
+            >
+              <s-table-header-row>
+                <s-table-header>
+                  <s-checkbox
+                    accessibilityLabel="Select all requests"
+                    checked={allSelected}
+                    indeterminate={someSelected || undefined}
+                    onChange={(event) => toggleAll(event.currentTarget.checked)}
+                  ></s-checkbox>
+                </s-table-header>
+                <s-table-header>
+                  {selectedIds.length > 0 ? (
+                    <s-text type="strong">{selectedIds.length} selected</s-text>
+                  ) : (
+                    "Order"
+                  )}
+                </s-table-header>
+                <s-table-header>{selectedIds.length === 0 ? "Customer name" : ""}</s-table-header>
+                <s-table-header>{selectedIds.length === 0 ? "Items" : ""}</s-table-header>
+                <s-table-header>{selectedIds.length === 0 ? "Value" : ""}</s-table-header>
+                <s-table-header>{selectedIds.length === 0 ? "Status" : ""}</s-table-header>
+                <s-table-header>{selectedIds.length === 0 ? "Submitted" : ""}</s-table-header>
+                <s-table-header>
+                  <s-box minBlockSize="2rem">
+                    <s-stack direction="inline" justifyContent="end">
+                      {selectedIds.length > 0 ? (
+                        <s-button
+                          tone="critical"
+                          disabled={deleting || undefined}
+                          onClick={() => openDelete(selectedIds)}
+                        >
+                          Delete
+                        </s-button>
+                      ) : (
+                        "Actions"
+                      )}
+                    </s-stack>
+                  </s-box>
+                </s-table-header>
+              </s-table-header-row>
+              <s-table-body>
+                {paginated.map((request) => (
                 <s-table-row key={request.id}>
                   <s-table-cell>
                     <s-checkbox
@@ -257,13 +226,9 @@ export default function RequestsTable({ requests }) {
                     <s-text type="strong">{request.customerName || "—"}</s-text>
                   </s-table-cell>
                   <s-table-cell>
-                    <s-text color="subdued">{request.customerEmail || "—"}</s-text>
-                  </s-table-cell>
-                  <s-table-cell>
                     {request.items.length} item{request.items.length === 1 ? "" : "s"}
                   </s-table-cell>
                   <s-table-cell>{formatMoney(requestTotal(request.items))}</s-table-cell>
-                  <s-table-cell>{request.reason || "—"}</s-table-cell>
                   <s-table-cell>
                     <s-badge tone={STATUS_TONE[request.status]}>
                       {STATUS_LABEL[request.status]}
@@ -271,19 +236,28 @@ export default function RequestsTable({ requests }) {
                   </s-table-cell>
                   <s-table-cell>{new Date(request.submittedAt).toLocaleDateString()}</s-table-cell>
                   <s-table-cell>
-                    <s-button
-                      icon="delete"
-                      variant="tertiary"
-                      tone="critical"
-                      accessibilityLabel={`Delete ${request.orderName}`}
-                      disabled={deleting || undefined}
-                      onClick={() => openDelete([request.id])}
-                    ></s-button>
+                    <s-stack direction="inline" gap="small-200" justifyContent="end">
+                      <s-button
+                        icon="edit"
+                        variant="tertiary"
+                        accessibilityLabel={`Edit ${request.orderName}`}
+                        href={`/withdrawal-requests/${request.id}`}
+                      ></s-button>
+                      <s-button
+                        icon="delete"
+                        variant="tertiary"
+                        tone="critical"
+                        accessibilityLabel={`Delete ${request.orderName}`}
+                        disabled={deleting || undefined}
+                        onClick={() => openDelete([request.id])}
+                      ></s-button>
+                    </s-stack>
                   </s-table-cell>
                 </s-table-row>
-              ))}
-            </s-table-body>
-          </s-table>
+                ))}
+              </s-table-body>
+            </s-table>
+          </s-stack>
         )}
 
         <s-modal
