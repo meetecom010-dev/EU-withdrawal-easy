@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types -- plain JS project, no prop-types package installed */
 
-// TODO: swap HELP_CENTER_URL/FAQ_URL for the app's real destinations once they exist.
+// TODO: swap HELP_CENTER_URL for the app's real destination once it exists.
 const HELP_CENTER_URL = "https://example.com/help";
 const SUPPORT_EMAIL = "support@withdrawaleasy.com";
-const FAQ_URL = "https://example.com/faq";
+const FAQ_URL = "/faqs";
 
 function HelpCard({ title, description, linkLabel, href, external }) {
   return (
@@ -23,13 +23,13 @@ export default function HelpResourcesCard() {
   return (
     <s-section heading="Help & resources">
       <s-grid gridTemplateColumns="1fr 1fr 1fr" gap="base">
-        <HelpCard
+        {/* <HelpCard
           title="Help center"
           description="Step-by-step guides for setup, daily use, and troubleshooting."
           linkLabel="Open help center"
           href={HELP_CENTER_URL}
           external
-        />
+        /> */}
         <HelpCard
           title="Email support"
           description="Questions? Our support team is here to help."
@@ -41,7 +41,6 @@ export default function HelpResourcesCard() {
           description="Answers to common questions about setting up and using the app."
           linkLabel="Open FAQ"
           href={FAQ_URL}
-          external
         />
       </s-grid>
     </s-section>

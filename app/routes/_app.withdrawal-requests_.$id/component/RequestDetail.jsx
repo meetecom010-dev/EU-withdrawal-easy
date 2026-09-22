@@ -5,10 +5,11 @@ import { useAppBridge } from "@shopify/app-bridge-react";
 import {
   STATUS_TONE,
   STATUS_LABEL,
-  withdrawalType,
+  SOURCE_LABEL,
   requestTotal,
   formatMoney,
   formatDateTime,
+  formatSubmittedAt,
   countryName,
   languageName,
   withdrawalDeadline,
@@ -24,6 +25,17 @@ function humanize(value) {
   if (!value) return "—";
   const text = String(value).replace(/_/g, " ").toLowerCase();
   return text.charAt(0).toUpperCase() + text.slice(1);
+}
+
+// "Jane Doe" -> "JD" for the customer avatar fallback.
+function initials(name) {
+  if (!name) return "";
+  return name
+    .trim()
+    .split(/\s+/)
+    .slice(0, 2)
+    .map((part) => part.charAt(0).toUpperCase())
+    .join("");
 }
 
 // Tone maps mirror Shopify admin's own Order page badges (displayFinancialStatus /
@@ -73,18 +85,28 @@ function Row({ label, children }) {
 
 function ItemRow({ item }) {
   return (
-    <s-stack direction="inline" gap="base" alignItems="center" justifyContent="space-between">
+    <s-stack direction="inline" gap="base" alignItems="start" justifyContent="space-between">
       <s-stack direction="inline" gap="base" alignItems="center">
-        {item.imageUrl && <s-thumbnail src={item.imageUrl} alt={item.title} size="small"></s-thumbnail>}
-        <s-stack direction="block" gap="small-100">
+        {item.imageUrl ? (
+          <s-thumbnail src={item.imageUrl} alt={item.title} size="base"></s-thumbnail>
+        ) : (
+          <s-box
+            inlineSize="40px"
+            blockSize="40px"
+            background="subdued"
+            border="base"
+            borderRadius="base"
+          ></s-box>
+        )}
+        <s-stack direction="block" gap="small-500">
           <s-text type="strong">{item.title}</s-text>
           {item.variantTitle && <s-text color="subdued">{item.variantTitle}</s-text>}
           {item.sku && <s-text color="subdued">SKU {item.sku}</s-text>}
         </s-stack>
       </s-stack>
-      <s-stack direction="inline" gap="base" alignItems="center">
-        <s-text color="subdued">×{item.quantity}</s-text>
+      <s-stack direction="block" gap="small-500" alignItems="end">
         <s-text type="strong">{formatMoney(item.price)}</s-text>
+        <s-text color="subdued">Qty {item.quantity}</s-text>
       </s-stack>
     </s-stack>
   );
@@ -161,7 +183,7 @@ function TimelineRow({ event }) {
   return (
     <s-stack direction="inline" gap="small-200" alignItems="start">
       <s-icon type="check-circle" tone={event.tone} color={event.tone ? undefined : "subdued"}></s-icon>
-      <s-stack direction="block" gap="small-100">
+      <s-stack direction="block" gap="small-500">
         <s-text color={event.muted ? "subdued" : undefined} tone={event.tone}>
           {event.text}
         </s-text>
@@ -183,6 +205,12 @@ function TimelineRow({ event }) {
 function DeadlineSection({ withdrawalRequest }) {
   const { deadline, daysLeft, overdue } = withdrawalDeadline(withdrawalRequest);
   const pending = withdrawalRequest.status === "pending";
+  // Fraction of the 14-day window still remaining — a full bar means the whole
+  // window is left, and it empties (and shifts warning → critical) as the
+  // deadline nears. Colours are hard-coded because s-box backgrounds only
+  // expose neutral tones, not semantic ones.
+  const remaining = Math.max(0, Math.min(1, daysLeft / 14));
+  const barColor = overdue ? "#d72c0d" : daysLeft <= 3 ? "#b98900" : "#1a7f52";
 
   return (
     <s-section heading="Deadline">
@@ -194,7 +222,25 @@ function DeadlineSection({ withdrawalRequest }) {
         </Row>
         <s-heading>
           {Math.abs(daysLeft)} day{Math.abs(daysLeft) === 1 ? "" : "s"}
+          {pending && !overdue ? " left" : ""}
         </s-heading>
+        <div
+          style={{
+            height: "8px",
+            borderRadius: "999px",
+            background: "rgba(128,128,128,0.2)",
+            overflow: "hidden",
+          }}
+        >
+          <div
+            style={{
+              height: "100%",
+              width: `${remaining * 100}%`,
+              borderRadius: "999px",
+              background: barColor,
+            }}
+          />
+        </div>
         <s-paragraph color="subdued">
           {pending
             ? overdue
@@ -211,10 +257,18 @@ function DeadlineSection({ withdrawalRequest }) {
 
 // Live Shopify order tags — edits stage locally and only write to the order
 // when the contextual save bar's Save is clicked (see ORDER_TAGS_SAVE_BAR_ID).
-function OrderTagsSection({ tags, tagText, onTagTextChange, onAdd, onRemove, disabled }) {
+function OrderTagsSection({ tags, tagText, onTagTextChange, onRemove, disabled }) {
   return (
     <s-section heading="Order tags">
       <s-stack direction="block" gap="small-200">
+        <s-text-field
+          label="Add order tag"
+          labelAccessibilityVisibility="exclusive"
+          placeholder="Add order tag"
+          value={tagText}
+          disabled={disabled || undefined}
+          onInput={(event) => onTagTextChange(event.currentTarget.value)}
+        ></s-text-field>
         {tags.length > 0 && (
           <s-stack direction="inline" gap="small-200">
             {tags.map((tag) => (
@@ -229,26 +283,7 @@ function OrderTagsSection({ tags, tagText, onTagTextChange, onAdd, onRemove, dis
             ))}
           </s-stack>
         )}
-        <s-grid gridTemplateColumns="1fr auto" gap="small-200" alignItems="start">
-          <s-text-field
-            label="Add order tag"
-            labelAccessibilityVisibility="exclusive"
-            placeholder="Add order tag"
-            value={tagText}
-            disabled={disabled || undefined}
-            onChange={(event) => onTagTextChange(event.currentTarget.value)}
-            onKeyDown={(event) => {
-              if (event.key === "Enter") {
-                event.preventDefault();
-                onAdd();
-              }
-            }}
-          ></s-text-field>
-          <s-button onClick={onAdd} disabled={disabled || !tagText.trim() || undefined}>
-            Add
-          </s-button>
-        </s-grid>
-        <s-text color="subdued">Changes save to the order in Shopify admin — use the bar at the bottom to save or discard.</s-text>
+   
       </s-stack>
     </s-section>
   );
@@ -279,105 +314,16 @@ function EmailHistorySection({ withdrawalRequest }) {
 
   return (
     <s-section heading="Email history">
-      <s-stack direction="block" gap="small-200">
+      <s-stack direction="block" gap="base">
         {rows.map((row, index) => (
-          <Row key={row.key ?? index} label={row.label}>
+          <s-stack key={row.key ?? index} direction="block" gap="small-500">
+            <s-text type="strong">{row.label}</s-text>
             <s-stack direction="inline" gap="small-200" alignItems="center">
               {row.at && <s-text color="subdued">{formatDateTime(new Date(row.at))}</s-text>}
               <s-badge tone={tone(row)}>{status(row)}</s-badge>
             </s-stack>
-          </Row>
+          </s-stack>
         ))}
-      </s-stack>
-    </s-section>
-  );
-}
-
-// The contextual action hub — which order actions apply is decided by the live
-// branch and order state. Money/irreversible actions open a confirm modal.
-function ActionsCard({
-  orderState,
-  orderStateError,
-  cancelled,
-  hasHold,
-  returnId,
-  busy,
-  onPlaceHold,
-  onReleaseHold,
-  onCreateReturn,
-  onRefreshReturn,
-  onRefund,
-  onCancel,
-}) {
-  if (!orderState) {
-    return (
-      <s-section heading="Actions">
-        <s-banner tone="warning">
-          {orderStateError ?? "Live order state is unavailable, so order actions are disabled."}
-        </s-banner>
-      </s-section>
-    );
-  }
-
-  if (cancelled) {
-    return (
-      <s-section heading="Actions">
-        <s-banner tone="info">This order has been cancelled — no further order actions apply.</s-banner>
-      </s-section>
-    );
-  }
-
-  const beforeShip = orderState.branch === "before_ship";
-  const holdable = (orderState.holdableFulfillmentOrders ?? []).length > 0;
-  const canRefund = orderState.hasRefundableItems;
-
-  return (
-    <s-section heading="Actions">
-      <s-stack direction="block" gap="small-300">
-        <s-stack direction="inline" gap="small-200" alignItems="center">
-          <s-text color="subdued">
-            {beforeShip ? "Order not shipped yet" : "Order shipped or delivered"}
-          </s-text>
-          <s-badge tone={beforeShip ? "info" : "warning"}>
-            {beforeShip ? "Before shipping" : "After delivery"}
-          </s-badge>
-        </s-stack>
-
-        <s-stack direction="inline" gap="small-200">
-          {beforeShip && holdable && !hasHold && (
-            <s-button disabled={busy || undefined} onClick={onPlaceHold}>
-              Place fulfillment hold
-            </s-button>
-          )}
-          {beforeShip && hasHold && (
-            <s-button disabled={busy || undefined} onClick={onReleaseHold}>
-              Release fulfillment hold
-            </s-button>
-          )}
-
-          {!beforeShip && !returnId && (
-            <s-button disabled={busy || undefined} onClick={onCreateReturn}>
-              Create Shopify return
-            </s-button>
-          )}
-          {!beforeShip && returnId && (
-            <s-button disabled={busy || undefined} onClick={onRefreshReturn}>
-              Refresh return status
-            </s-button>
-          )}
-
-          {canRefund && (
-            <s-button tone="critical" disabled={busy || undefined} onClick={onRefund}>
-              Refund withdrawn items
-            </s-button>
-          )}
-
-          {beforeShip && (
-            <s-button tone="critical" disabled={busy || undefined} onClick={onCancel}>
-              Cancel order
-            </s-button>
-          )}
-        </s-stack>
       </s-stack>
     </s-section>
   );
@@ -408,7 +354,6 @@ export default function RequestDetail({
   const deciding = decideFetcher.state !== "idle";
   const actionBusy = actionFetcher.state !== "idle";
   const total = requestTotal(withdrawalRequest.items);
-  const type = withdrawalType(withdrawalRequest);
   const timeline = buildTimeline(withdrawalRequest);
   const orderNumericId = withdrawalRequest.orderId?.split("/").pop();
 
@@ -425,6 +370,22 @@ export default function RequestDetail({
   const money = (amount) =>
     formatMoney({ amount, currencyCode: orderState?.currencyCode });
 
+  // Which contextual order actions apply, decided by the live branch/order
+  // state (was computed inside ActionsCard; now drives the title-bar actions).
+  // Only meaningful while the order is live and not cancelled.
+  const orderActionsAvailable = Boolean(orderState) && !cancelled;
+  const beforeShip = orderState?.branch === "before_ship";
+  const holdable = (orderState?.holdableFulfillmentOrders ?? []).length > 0;
+  const canRefund = Boolean(orderState?.hasRefundableItems);
+  const isPending = withdrawalRequest.status === "pending";
+
+  // The Shopify-order-page style subtitle shown under the order number: when
+  // and where the customer submitted the withdrawal, e.g.
+  // "September 21, 2026 at 11:29 am from Order status page".
+  const submittedLine = `${formatSubmittedAt(withdrawalRequest.submittedAt)} from ${
+    SOURCE_LABEL[withdrawalRequest.source] ?? SOURCE_LABEL.order_status
+  }`;
+
   // The order's live tags, keyed as a string so the effect below only fires
   // when the actual tag list changes (e.g. after a save) — not on every
   // unrelated revalidation of orderState.
@@ -435,8 +396,18 @@ export default function RequestDetail({
     // eslint-disable-next-line react-hooks/exhaustive-deps -- keyed on the serialized tag list, not array identity
   }, [savedOrderTagsKey]);
 
+  // The tag currently typed in the field counts as a pending add (no "Add"
+  // button — typing anything is enough to stage it). Commas let a merchant add
+  // several at once. `stagedOrderTags` is the full set that Save will write:
+  // the remaining chips plus whatever's still in the field.
+  const pendingOrderTags = orderTagText
+    .split(",")
+    .map((tag) => tag.trim())
+    .filter(Boolean);
+  const stagedOrderTags = [...new Set([...orderTags, ...pendingOrderTags])];
+
   const hasOrderTagChanges =
-    JSON.stringify([...orderTags].sort()) !== JSON.stringify([...savedOrderTags].sort());
+    JSON.stringify([...stagedOrderTags].sort()) !== JSON.stringify([...savedOrderTags].sort());
 
   // Shopify's native contextual save bar — mirrors the one on Form setup.
   useEffect(() => {
@@ -496,12 +467,6 @@ export default function RequestDetail({
 
   // Order tag edits stage locally — nothing is written to Shopify until
   // saveOrderTags runs, matching the Form setup save bar's behavior.
-  function addOrderTag() {
-    const tag = orderTagText.trim();
-    if (!tag || orderTags.includes(tag)) return;
-    setOrderTags((current) => [...current, tag]);
-    setOrderTagText("");
-  }
   function removeOrderTag(tag) {
     setOrderTags((current) => current.filter((t) => t !== tag));
   }
@@ -511,12 +476,16 @@ export default function RequestDetail({
     shopify.saveBar.hide(ORDER_TAGS_SAVE_BAR_ID);
   }
   function saveOrderTags() {
-    const added = orderTags.filter((tag) => !savedOrderTags.includes(tag));
-    const removed = savedOrderTags.filter((tag) => !orderTags.includes(tag));
+    const added = stagedOrderTags.filter((tag) => !savedOrderTags.includes(tag));
+    const removed = savedOrderTags.filter((tag) => !stagedOrderTags.includes(tag));
     orderTagFetcher.submit(
       { intent: "order-tags-save", added: JSON.stringify(added), removed: JSON.stringify(removed) },
       { method: "post" },
     );
+    // Fold the typed tag into the committed chips optimistically and clear the
+    // field, so the chip shows immediately instead of waiting on the reload.
+    setOrderTags(stagedOrderTags);
+    setOrderTagText("");
   }
 
   function runAction(intent) {
@@ -537,19 +506,83 @@ export default function RequestDetail({
 
   return (
     <s-page heading={withdrawalRequest.orderName}>
+      {/* Badges next to the order number: request status + the order's live
+          payment / fulfillment / hold / return state, mirroring Shopify's own
+          order page. */}
       <s-badge slot="accessory" tone={STATUS_TONE[withdrawalRequest.status]}>
         {STATUS_LABEL[withdrawalRequest.status]}
       </s-badge>
+      {cancelled && (
+        <s-badge slot="accessory" tone="critical">
+          Cancelled
+        </s-badge>
+      )}
+      {orderState?.financialStatus && (
+        <s-badge slot="accessory" tone={FINANCIAL_TONE[orderState.financialStatus] ?? "neutral"}>
+          {humanize(orderState.financialStatus)}
+        </s-badge>
+      )}
+      {orderState?.fulfillmentStatus && (
+        <s-badge slot="accessory" tone={FULFILLMENT_TONE[orderState.fulfillmentStatus] ?? "neutral"}>
+          {humanize(orderState.fulfillmentStatus)}
+        </s-badge>
+      )}
+      {hasHold && (
+        <s-badge slot="accessory" tone="warning">
+          On hold
+        </s-badge>
+      )}
+      {returnId && (
+        <s-badge slot="accessory" tone={RETURN_TONE[returnStatus] ?? "info"}>
+          Return {humanize(returnStatus)}
+        </s-badge>
+      )}
       <s-link slot="breadcrumb-actions" href="/withdrawal-requests">Back to withdrawals</s-link>
 
-      <s-button
-        slot="secondary-actions"
-        icon="menu-horizontal"
-        variant="tertiary"
-        accessibilityLabel="More actions"
-        commandFor="more-actions-menu"
-      ></s-button>
+      {/* Order-level operations live in the title bar. Refund is surfaced as
+          its own button; everything else (Cancel order, holds, returns, view)
+          sits inside the More actions menu. */}
+      {orderActionsAvailable && canRefund && (
+        <s-button
+          slot="secondary-actions"
+          disabled={actionBusy || undefined}
+          onClick={openRefund}
+        >
+          Refund
+        </s-button>
+      )}
+      <s-button slot="secondary-actions" commandFor="more-actions-menu">
+        More actions
+      </s-button>
       <s-menu id="more-actions-menu" accessibilityLabel="More actions">
+        {orderActionsAvailable && beforeShip && (
+          <s-button
+            disabled={actionBusy || undefined}
+            onClick={() => shopify.modal.show(CANCEL_MODAL_ID)}
+          >
+            Cancel order
+          </s-button>
+        )}
+        {orderActionsAvailable && beforeShip && holdable && !hasHold && (
+          <s-button disabled={actionBusy || undefined} onClick={() => runAction("place-hold")}>
+            Place fulfillment hold
+          </s-button>
+        )}
+        {orderActionsAvailable && beforeShip && hasHold && (
+          <s-button disabled={actionBusy || undefined} onClick={() => runAction("release-hold")}>
+            Release fulfillment hold
+          </s-button>
+        )}
+        {orderActionsAvailable && !beforeShip && !returnId && (
+          <s-button disabled={actionBusy || undefined} onClick={() => runAction("create-return")}>
+            Create Shopify return
+          </s-button>
+        )}
+        {orderActionsAvailable && !beforeShip && returnId && (
+          <s-button disabled={actionBusy || undefined} onClick={() => runAction("refresh-return")}>
+            Refresh return status
+          </s-button>
+        )}
         {shopDomain && orderNumericId && (
           <s-button href={`https://${shopDomain}/admin/orders/${orderNumericId}`} target="_blank">
             View order in Shopify
@@ -559,23 +592,6 @@ export default function RequestDetail({
           Evidence pack
         </s-button>
       </s-menu>
-      <s-button
-        slot="secondary-actions"
-        tone="critical"
-        onClick={() => openDecision("rejected")}
-        disabled={withdrawalRequest.status !== "pending" || deciding}
-      >
-        Reject
-      </s-button>
-      <s-button
-        slot="secondary-actions"
-        variant="primary"
-        onClick={() => openDecision("approved")}
-        disabled={withdrawalRequest.status !== "pending" || deciding}
-        loading={deciding || undefined}
-      >
-        Approve
-      </s-button>
 
       <DecisionModal
         decision={decision}
@@ -620,6 +636,7 @@ export default function RequestDetail({
           variant="primary"
           onClick={saveOrderTags}
           disabled={orderTagFetcher.state !== "idle" || undefined}
+          loading={orderTagFetcher.state !== "idle" || undefined}
         >
           Save
         </button>
@@ -643,28 +660,11 @@ export default function RequestDetail({
         disabled={!nextId}
       ></s-button>
 
-      <s-stack direction="block" gap="large-100">
-        <s-stack direction="inline" gap="small-200" alignItems="center">
-          {type && <s-badge>{type}</s-badge>}
-          {cancelled && <s-badge tone="critical">Cancelled</s-badge>}
-          {orderState?.financialStatus && (
-            <s-badge tone={FINANCIAL_TONE[orderState.financialStatus] ?? "neutral"}>
-              {humanize(orderState.financialStatus)}
-            </s-badge>
-          )}
-          {orderState?.fulfillmentStatus && (
-            <s-badge tone={FULFILLMENT_TONE[orderState.fulfillmentStatus] ?? "neutral"}>
-              {humanize(orderState.fulfillmentStatus)}
-            </s-badge>
-          )}
-          {returnId && (
-            <s-badge tone={RETURN_TONE[returnStatus] ?? "info"}>Return {humanize(returnStatus)}</s-badge>
-          )}
-          {orderState?.closed && <s-badge tone="neutral">Archived</s-badge>}
-          <s-text color="subdued">
-            Submitted {formatDateTime(withdrawalRequest.submittedAt)} · via order status page
-          </s-text>
-        </s-stack>
+      <s-stack direction="block" gap="small-300">
+        {/* Sits directly under the order number in the title bar — the native
+            title bar has no subtitle slot in this App Bridge version, so this
+            is the closest place to show when/where the request came from. */}
+        <s-text color="subdued">{submittedLine}</s-text>
 
         {orderStateError && (
           <s-banner tone="warning" heading="Live order state unavailable">
@@ -672,39 +672,56 @@ export default function RequestDetail({
           </s-banner>
         )}
 
-        {withdrawalRequest.status !== "rejected" && (
-          <s-banner tone="info" heading="14-day withdrawal window">
-            Under the EU right of withdrawal, refunds must be issued within 14 days of the withdrawal
-            request being submitted.
+        {cancelled && (
+          <s-banner tone="info">
+            This order has been cancelled — no further order actions apply.
           </s-banner>
         )}
 
         <s-query-container>
           <s-grid gridTemplateColumns="@container (inline-size > 720px) 2fr 1fr, 1fr" gap="base" alignItems="start">
             <s-stack direction="block" gap="large-100">
-              <ActionsCard
-                orderState={orderState}
-                orderStateError={orderStateError}
-                cancelled={cancelled}
-                hasHold={hasHold}
-                returnId={returnId}
-                busy={actionBusy}
-                onPlaceHold={() => runAction("place-hold")}
-                onReleaseHold={() => runAction("release-hold")}
-                onCreateReturn={() => runAction("create-return")}
-                onRefreshReturn={() => runAction("refresh-return")}
-                onRefund={openRefund}
-                onCancel={() => shopify.modal.show(CANCEL_MODAL_ID)}
-              />
+              {withdrawalRequest.status !== "rejected" && (
+                <DeadlineSection withdrawalRequest={withdrawalRequest} />
+              )}
 
-              <s-section heading="Selected products">
+              {/* No `heading` prop: the card renders its own header row so the
+                  Reject / Approve decision buttons can sit on the right (section
+                  header action slots don't render in this App Bridge version). */}
+              <s-section accessibilityLabel="Withdrawn items">
                 <s-stack direction="block" gap="base">
+                  <s-stack
+                    direction="inline"
+                    justifyContent="space-between"
+                    alignItems="center"
+                    gap="base"
+                  >
+                    <s-heading>Withdrawn items</s-heading>
+                    <s-stack direction="inline" gap="small-200">
+                      <s-button
+                        tone="critical"
+                        onClick={() => openDecision("rejected")}
+                        disabled={!isPending || deciding || undefined}
+                      >
+                        Reject
+                      </s-button>
+                      <s-button
+                        variant="primary"
+                        onClick={() => openDecision("approved")}
+                        disabled={!isPending || deciding || undefined}
+                        loading={deciding || undefined}
+                      >
+                        Approve
+                      </s-button>
+                    </s-stack>
+                  </s-stack>
+
                   {withdrawalRequest.items.map((item) => (
                     <ItemRow key={item.lineId} item={item} />
                   ))}
                   <s-divider></s-divider>
                   <s-stack direction="inline" justifyContent="space-between">
-                    <s-text type="strong">Total</s-text>
+                    <s-text type="strong">Total withdrawn</s-text>
                     <s-text type="strong">{formatMoney(total)}</s-text>
                   </s-stack>
                 </s-stack>
@@ -731,7 +748,7 @@ export default function RequestDetail({
                 </s-section>
               )}
 
-              <s-section heading="Refund">
+              <s-section heading="Payment">
                 <s-stack direction="block" gap="small-200">
                   {orderState ? (
                     <>
@@ -740,14 +757,20 @@ export default function RequestDetail({
                           {humanize(orderState.financialStatus)}
                         </s-badge>
                       </Row>
-                      <Row label="Order total">{money(orderState.totalPrice)}</Row>
-                      <Row label="Refunded">{money(orderState.totalRefunded)}</Row>
-                      {!orderState.hasRefundableItems && (
-                        <s-text color="subdued">Nothing further is refundable on this order.</s-text>
+                      <s-divider></s-divider>
+                      <Row label="Withdrawal subtotal">{formatMoney(total)}</Row>
+                      <Row label="Order shipping">{money(orderState.totalShipping)}</Row>
+                      <s-divider></s-divider>
+                      <s-stack direction="inline" justifyContent="space-between" alignItems="center">
+                        <s-text type="strong">Order total</s-text>
+                        <s-text type="strong">{money(orderState.totalPrice)}</s-text>
+                      </s-stack>
+                      {orderState.totalRefunded > 0 && (
+                        <Row label="Refunded">{money(orderState.totalRefunded)}</Row>
                       )}
                     </>
                   ) : (
-                    <s-text color="subdued">Refund state is unavailable right now.</s-text>
+                    <s-text color="subdued">Payment state is unavailable right now.</s-text>
                   )}
                 </s-stack>
               </s-section>
@@ -786,41 +809,6 @@ export default function RequestDetail({
             </s-stack>
 
             <s-stack direction="block" gap="large-100">
-              {withdrawalRequest.status !== "rejected" && (
-                <DeadlineSection withdrawalRequest={withdrawalRequest} />
-              )}
-
-              <s-section heading="Customer">
-                <s-stack direction="block" gap="small-200">
-                  <Row label="Name">
-                    <s-stack direction="inline" gap="small-100" alignItems="center">
-                      {withdrawalRequest.countryCode && <s-badge>{withdrawalRequest.countryCode}</s-badge>}
-                      <s-text type="strong">{withdrawalRequest.customerName || "—"}</s-text>
-                    </s-stack>
-                  </Row>
-                  <Row label="Email">
-                    {withdrawalRequest.customerEmail ? (
-                      <s-link href={`mailto:${withdrawalRequest.customerEmail}`}>
-                        {withdrawalRequest.customerEmail}
-                      </s-link>
-                    ) : (
-                      <s-text>—</s-text>
-                    )}
-                  </Row>
-                  <Row label="Country">{countryName(withdrawalRequest.countryCode) || "—"}</Row>
-                  {languageName(withdrawalRequest.locale) && (
-                    <Row label="Language">{languageName(withdrawalRequest.locale)}</Row>
-                  )}
-                  {withdrawalRequest.shippingAddress && (
-                    <>
-                      <s-divider></s-divider>
-                      <s-text color="subdued">Shipping address</s-text>
-                      <s-text>{withdrawalRequest.shippingAddress}</s-text>
-                    </>
-                  )}
-                </s-stack>
-              </s-section>
-
               <s-section heading="Order">
                 <s-stack direction="block" gap="small-200">
                   <Row label="Order">
@@ -829,7 +817,7 @@ export default function RequestDetail({
                         {withdrawalRequest.orderName}
                       </s-link>
                     ) : (
-                      <s-text>{withdrawalRequest.orderName}</s-text>
+                      <s-text type="strong">{withdrawalRequest.orderName}</s-text>
                     )}
                   </Row>
                   {orderState?.createdAt && (
@@ -847,6 +835,65 @@ export default function RequestDetail({
                           {humanize(orderState.fulfillmentStatus)}
                         </s-badge>
                       </Row>
+                    </>
+                  )}
+                </s-stack>
+              </s-section>
+
+              <s-section heading="Customer">
+                <s-stack direction="block" gap="base">
+                  <s-stack direction="inline" gap="base" alignItems="center">
+                    <s-avatar
+                      initials={initials(withdrawalRequest.customerName)}
+                      alt={withdrawalRequest.customerName || "Customer"}
+                      size="base"
+                    ></s-avatar>
+                    <s-stack direction="block" gap="small-500">
+                      <s-text type="strong">{withdrawalRequest.customerName || "—"}</s-text>
+                      {countryName(withdrawalRequest.countryCode) && (
+                        <s-stack direction="inline" gap="small-500" alignItems="center">
+                          {withdrawalRequest.countryCode && (
+                            <s-badge>{withdrawalRequest.countryCode}</s-badge>
+                          )}
+                          <s-text color="subdued">{countryName(withdrawalRequest.countryCode)}</s-text>
+                        </s-stack>
+                      )}
+                    </s-stack>
+                  </s-stack>
+
+                  <s-divider></s-divider>
+
+                  <s-stack direction="block" gap="small-200">
+                    <s-heading>Contact information</s-heading>
+                    <Row label="Email">
+                      {withdrawalRequest.customerEmail ? (
+                        <s-link href={`mailto:${withdrawalRequest.customerEmail}`}>
+                          {withdrawalRequest.customerEmail}
+                        </s-link>
+                      ) : (
+                        <s-text>—</s-text>
+                      )}
+                    </Row>
+                    {languageName(withdrawalRequest.locale) && (
+                      <Row label="Language">{languageName(withdrawalRequest.locale)}</Row>
+                    )}
+                  </s-stack>
+
+                  {withdrawalRequest.shippingAddress && (
+                    <>
+                      <s-divider></s-divider>
+                      <s-stack direction="block" gap="small-200">
+                        <s-heading>Shipping address</s-heading>
+                        <s-stack direction="block" gap="small-500">
+                          {withdrawalRequest.shippingAddress
+                            .split(",")
+                            .map((line) => line.trim())
+                            .filter(Boolean)
+                            .map((line, index) => (
+                              <s-text key={index} color="subdued">{line}</s-text>
+                            ))}
+                        </s-stack>
+                      </s-stack>
                     </>
                   )}
                 </s-stack>
@@ -885,7 +932,6 @@ export default function RequestDetail({
                 tags={orderTags}
                 tagText={orderTagText}
                 onTagTextChange={setOrderTagText}
-                onAdd={addOrderTag}
                 onRemove={removeOrderTag}
                 disabled={!orderState || cancelled}
               />
@@ -897,7 +943,6 @@ export default function RequestDetail({
                       {withdrawalRequest.reason ? `"${withdrawalRequest.reason}"` : "No reason given."}
                     </s-paragraph>
                   </s-box>
-                  <s-text color="subdued">Optional field — a reason is never required.</s-text>
                 </s-stack>
               </s-section>
             </s-stack>

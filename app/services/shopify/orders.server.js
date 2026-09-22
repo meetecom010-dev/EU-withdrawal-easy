@@ -73,6 +73,7 @@ const ORDER_ADMIN_STATE_QUERY = `#graphql
       displayFulfillmentStatus
       totalPriceSet { shopMoney { amount currencyCode } presentmentMoney { amount currencyCode } }
       totalRefundedSet { shopMoney { amount currencyCode } presentmentMoney { amount currencyCode } }
+      totalShippingPriceSet { shopMoney { amount currencyCode } presentmentMoney { amount currencyCode } }
       fulfillments(first: 20) {
         deliveredAt
         displayStatus
@@ -406,6 +407,7 @@ export async function fetchOrderAdminState(admin, orderId) {
     currencyCode,
     totalPrice: moneyAmount(order.totalPriceSet),
     totalRefunded: moneyAmount(order.totalRefundedSet),
+    totalShipping: moneyAmount(order.totalShippingPriceSet),
     isFulfilled,
     isDelivered: deliveredFulfillments.length > 0,
     deliveredAt: deliveredFulfillments[0]?.deliveredAt ?? null,

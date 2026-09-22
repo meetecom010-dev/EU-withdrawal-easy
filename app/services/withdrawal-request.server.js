@@ -22,6 +22,7 @@ export function serializeWithdrawalRequest(doc) {
     items: obj.items,
     orderLineCount: obj.orderLineCount,
     status: obj.status,
+    source: obj.source ?? "order_status",
     submittedAt: obj.submittedAt,
     decidedAt: obj.decidedAt,
     notes: obj.notes ?? [],
@@ -91,6 +92,18 @@ export async function updateWithdrawalRequestStatus(shop, id, status) {
     { new: true, runValidators: true },
   );
   return doc ? serializeWithdrawalRequest(doc) : null;
+}
+
+// Permanently removes one or more withdrawal requests for this shop. Scoped to
+// `shop` so a request can never be deleted across store boundaries, and ids are
+// validated first so a malformed id can't widen the filter. Returns how many
+// documents were actually removed.
+export async function deleteWithdrawalRequests(shop, ids) {
+  const validIds = (Array.isArray(ids) ? ids : []).filter((id) => mongoose.isValidObjectId(id));
+  if (validIds.length === 0) return 0;
+  await connectDB();
+  const result = await WithdrawalRequest.deleteMany({ shop, _id: { $in: validIds } });
+  return result.deletedCount ?? 0;
 }
 
 export async function addWithdrawalRequestNote(shop, id, body) {

@@ -32,6 +32,12 @@ export async function submitWithdrawalRequestFlow(shop, body, { surface } = {}) 
     throw error;
   }
 
+  // Record which surface this came from, derived from the calling route's
+  // `surface` (never the client) so the admin can show where a request
+  // originated. Anything that isn't the theme app extension's standalone page
+  // is the order status page.
+  const source = surface === "standalone_page" ? "standalone_page" : "order_status";
+
   let withdrawalRequest;
   try {
     withdrawalRequest = await createWithdrawalRequest(shop, {
@@ -44,6 +50,7 @@ export async function submitWithdrawalRequestFlow(shop, body, { surface } = {}) 
       shippingAddress: body.shippingAddress ?? "",
       reason: body.reason ?? "",
       orderLineCount: typeof body.orderLineCount === "number" ? body.orderLineCount : null,
+      source,
       items: body.items,
     });
   } catch (error) {

@@ -17,6 +17,15 @@ export const STATUS_LABEL = {
   rejected: "Rejected",
 };
 
+// Where the customer submitted the withdrawal form. `order_status` is the order
+// status page extension; `standalone_page` is the storefront theme app
+// extension (the "theme page"). Mirrors the surfaces in
+// services/withdrawal-eligibility.server.js.
+export const SOURCE_LABEL = {
+  order_status: "Order status page",
+  standalone_page: "Theme page",
+};
+
 // Whether every line item on the order was requested for withdrawal (vs a
 // subset). `orderLineCount` is only known for requests submitted after this
 // field was added — older requests fall back to just counting items,
@@ -58,6 +67,21 @@ export function formatDateTime(value) {
     dateStyle: "medium",
     timeStyle: "short",
   });
+}
+
+// A longer, sentence-style timestamp for the request header line, e.g.
+// "September 21, 2026 at 11:29 am".
+export function formatSubmittedAt(value) {
+  const date = new Date(value);
+  const day = date.toLocaleDateString(undefined, {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+  const time = date
+    .toLocaleTimeString(undefined, { hour: "numeric", minute: "2-digit" })
+    .toLowerCase();
+  return `${day} at ${time}`;
 }
 
 export function countryName(countryCode) {

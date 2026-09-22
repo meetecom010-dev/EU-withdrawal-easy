@@ -187,7 +187,12 @@ export default function FormSetup() {
       <ui-save-bar id={SAVE_BAR_ID}>
         {/* Save stays clickable even with invalid fields — clicking it is
             what reveals the inline errors (displayedErrors above). */}
-        <button variant="primary" onClick={handleSave} disabled={isSaving || undefined}>
+        <button
+          variant="primary"
+          onClick={handleSave}
+          disabled={isSaving || undefined}
+          loading={isSaving || undefined}
+        >
           Save
         </button>
         <button onClick={handleDiscard} disabled={isSaving || undefined}>

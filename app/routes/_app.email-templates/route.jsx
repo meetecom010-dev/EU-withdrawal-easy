@@ -223,7 +223,12 @@ export default function EmailTemplates() {
       <s-button slot="breadcrumb-actions" href="/" accessibilityLabel="Back to dashboard" />
 
       <ui-save-bar id={SAVE_BAR_ID}>
-        <button variant="primary" onClick={handleSave} disabled={isSaving || undefined}>
+        <button
+          variant="primary"
+          onClick={handleSave}
+          disabled={isSaving || undefined}
+          loading={isSaving || undefined}
+        >
           Save
         </button>
         <button onClick={handleDiscard} disabled={isSaving || undefined}>

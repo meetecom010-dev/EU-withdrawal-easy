@@ -157,6 +157,16 @@ const withdrawalRequestSchema = new Schema(
       enum: ["pending", "approved", "rejected"],
       default: "pending",
     },
+    // Which surface the customer submitted from: the order status page
+    // (order_status) or the storefront theme app extension's standalone/theme
+    // page (standalone_page). Set server-side from the submitting route so it
+    // can't be spoofed by the client. Defaults to order_status for requests
+    // created before this field existed.
+    source: {
+      type: String,
+      enum: ["order_status", "standalone_page"],
+      default: "order_status",
+    },
     submittedAt: { type: Date, default: Date.now },
     decidedAt: { type: Date, default: null },
     notes: { type: [withdrawalRequestNoteSchema], default: [] },

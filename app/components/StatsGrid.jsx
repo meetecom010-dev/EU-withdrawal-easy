@@ -2,8 +2,8 @@
 import { useNavigate } from "react-router";
 
 // Shared summary tiles — used on the dashboard (Home) and on top of the
-// withdrawal requests table, so both read the same "Open / Today / This
-// month / Closed" numbers from getDashboardStats() rather than each page
+// withdrawal requests table, so both read the same "All requests / Today /
+// Open / Closed" numbers from getDashboardStats() rather than each page
 // computing its own slice of the requests list.
 function StatCard({ title, count, countLabel, description }) {
   return (
@@ -35,28 +35,24 @@ export default function StatsGrid({ stats, showHeader = true }) {
         )}
         <s-grid gridTemplateColumns="1fr 1fr 1fr 1fr" gap="base">
           <StatCard
-            title="Open"
-            count={stats.openRequests}
-            countLabel="withdrawals"
-            // description="Awaiting your action"
+            title="All requests"
+            count={stats.openRequests + stats.closedRequests}
+            countLabel="requests"
           />
           <StatCard
             title="Today"
             count={stats.submittedToday}
             countLabel="requests"
-            // description="New requests"
           />
           <StatCard
-            title="This month"
-            count={stats.submittedThisMonth}
+            title="Open"
+            count={stats.openRequests}
             countLabel="withdrawals"
-            // description="Withdrawals received"
           />
           <StatCard
             title="Closed"
             count={stats.closedRequests}
             countLabel="withdrawals"
-            // description="Approved, completed or declined"
           />
         </s-grid>
       </s-stack>
