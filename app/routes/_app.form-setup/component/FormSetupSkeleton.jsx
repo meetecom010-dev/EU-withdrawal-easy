@@ -172,6 +172,12 @@ export default function FormSetupSkeleton() {
                   <SkeletonBox width="140px" height="20px" radius="10px" />
                 </s-stack>
 
+                {/* Preview surface dropdown */}
+                <s-stack direction="block" gap="small-500">
+                  <SkeletonBox width="60px" height="12px" />
+                  <SkeletonBox width="100%" height="32px" radius="base" />
+                </s-stack>
+
                 <s-box border="base" borderRadius="base" padding="base">
                   <s-stack direction="block" gap="small-200">
                     <SkeletonBox width="70%" height="18px" />

@@ -7,6 +7,18 @@ import { resolveLabelsForLocale } from "../constants";
 // badge + variant title + line total), same rules (Continue needs a
 // selection, Confirm needs the declaration checked). Keep this file in sync
 // with the extension's components when the extension changes.
+//
+// The same form also ships as a theme block on the storefront
+// (extensions/withdrawal-theme-block). Its flow is identical except for one
+// screen: a storefront visitor isn't signed in, so before Details it asks for
+// name/email/order number on an unnumbered "Find your order" screen, and
+// Details then shows those values instead of the ones the order status page
+// already knows. The dropdown picks which of the two surfaces to preview.
+
+const SURFACES = [
+  { value: "order-status", label: "Order status page" },
+  { value: "theme", label: "Storefront page (theme block)" },
+];
 
 // Sample order lines shaped like the extension's `shopify.lines` data, using
 // a real product image so the preview reads like an actual order.
@@ -30,6 +42,14 @@ const SAMPLE_ITEMS = [
     image: SAMPLE_IMAGE,
   },
 ];
+
+// The buyer the order status page already knows, and the values the theme
+// block's lookup screen starts prefilled with.
+const SAMPLE_CUSTOMER = {
+  name: "Jane Doe",
+  email: "jane@example.com",
+  orderNumber: "#1001",
+};
 
 const STEP_LABELS = { step1: "Details", confirm: "Confirm", done: "Done" };
 const STEP_NUMBERS = { step1: 1, confirm: 2, done: 3 };
@@ -185,14 +205,21 @@ function ExtensionCard({ children }) {
 // Switching form-builder tabs on the left jumps the preview straight to that
 // step so merchants can edit copy and see it immediately.
 export default function LivePreview({ settings, activeTab, activeLocale }) {
+  const [surface, setSurface] = useState("order-status");
   const [selectedIds, setSelectedIds] = useState(["1"]);
-  // "entry" | "step1" | "confirm" | "done"
+  // "entry" | "lookup" | "step1" | "confirm" | "done" — "lookup" only exists
+  // on the theme block.
   const [previewStep, setPreviewStep] = useState("entry");
   const [declarationAccepted, setDeclarationAccepted] = useState(false);
   // Mirrors the storefront: picking "Other" reveals a free-text reason field.
   const [reasonValue, setReasonValue] = useState("");
+  // What the theme block's lookup screen collects. The order status page gets
+  // the same values from the buyer's session instead of asking for them.
+  const [lookup, setLookup] = useState(SAMPLE_CUSTOMER);
   // Don't leave the entry card on mount — only react to actual tab clicks.
   const skippedInitialTab = useRef(false);
+
+  const isTheme = surface === "theme";
 
   useEffect(() => {
     if (!skippedInitialTab.current) {
@@ -214,9 +241,27 @@ export default function LivePreview({ settings, activeTab, activeLocale }) {
   const selectedItems = SAMPLE_ITEMS.filter((item) => selectedIds.includes(item.id));
   const selectedTotal = selectedItems.reduce((total, item) => total + item.price, 0);
   const reasonOptions = reasonField.options ?? [];
+  // On the theme block these are whatever the visitor just looked up; on the
+  // order status page they're the buyer the session already identified.
+  const buyer = isTheme ? lookup : SAMPLE_CUSTOMER;
 
   function toggleItem(id, checked) {
     setSelectedIds((prev) => (checked ? [...prev, id] : prev.filter((x) => x !== id)));
+  }
+
+  // Switching surface restarts the flow at the entry card: the two surfaces
+  // don't have the same screens (only the theme block has "Find your order"),
+  // and the point of switching is to walk the other one from the top.
+  function changeSurface(next) {
+    setSurface(next);
+    setPreviewStep("entry");
+    setSelectedIds(["1"]);
+    setReasonValue("");
+    setLookup(SAMPLE_CUSTOMER);
+  }
+
+  function updateLookup(field, value) {
+    setLookup((prev) => ({ ...prev, [field]: value }));
   }
 
   return (
@@ -227,20 +272,62 @@ export default function LivePreview({ settings, activeTab, activeLocale }) {
           <s-badge tone="success">Two-step compliant</s-badge>
         </s-stack>
 
+        <s-select
+          label="Preview"
+          value={surface}
+          onChange={(e) => changeSurface(e.currentTarget.value)}
+        >
+          {SURFACES.map((option) => (
+            <s-option key={option.value} value={option.value}>
+              {option.label}
+            </s-option>
+          ))}
+        </s-select>
+
         <ExtensionCard>
           {previewStep === "entry" && (
             <s-stack direction="block" gap="small-200">
               <s-heading>{labels.step1Title}</s-heading>
               <s-paragraph color="subdued">{labels.step1Description}</s-paragraph>
               <s-stack direction="inline">
-                <s-button onClick={() => setPreviewStep("step1")}>
+                <s-button onClick={() => setPreviewStep(isTheme ? "lookup" : "step1")}>
                   Start withdrawal request
                 </s-button>
               </s-stack>
             </s-stack>
           )}
 
-          {previewStep !== "entry" && (
+          {/* Theme block only, and unnumbered — the real widget doesn't show
+              the step bar until Details, which is still "Step 1 of 3". */}
+          {previewStep === "lookup" && (
+            <s-stack direction="block" gap="small">
+              <s-heading>Find your order</s-heading>
+              <s-paragraph color="subdued">
+                Enter your order details to start your withdrawal request.
+              </s-paragraph>
+              <s-text-field
+                label="Full name"
+                value={lookup.name}
+                onInput={(e) => updateLookup("name", e.currentTarget.value)}
+              ></s-text-field>
+              <s-text-field
+                label="Email"
+                value={lookup.email}
+                onInput={(e) => updateLookup("email", e.currentTarget.value)}
+              ></s-text-field>
+              <s-text-field
+                label="Order number"
+                placeholder="#1001"
+                value={lookup.orderNumber}
+                onInput={(e) => updateLookup("orderNumber", e.currentTarget.value)}
+              ></s-text-field>
+              <s-button variant="primary" onClick={() => setPreviewStep("step1")}>
+                Continue
+              </s-button>
+            </s-stack>
+          )}
+
+          {previewStep !== "entry" && previewStep !== "lookup" && (
             <s-stack direction="block" gap="small">
               <StepProgress step={previewStep} />
 
@@ -259,9 +346,13 @@ export default function LivePreview({ settings, activeTab, activeLocale }) {
                       />
                     ))}
                   </s-stack>
-                  <s-text-field label="Full name" value="Jane Doe" disabled></s-text-field>
-                  <s-text-field label="Email" value="jane@example.com" disabled></s-text-field>
-                  <s-text-field label="Order number" value="#1001" disabled></s-text-field>
+                  <s-text-field label="Full name" value={buyer.name} disabled></s-text-field>
+                  <s-text-field label="Email" value={buyer.email} disabled></s-text-field>
+                  <s-text-field
+                    label="Order number"
+                    value={buyer.orderNumber}
+                    disabled
+                  ></s-text-field>
                   {reasonField.enabled && (
                     <>
                       <s-select
@@ -359,8 +450,9 @@ export default function LivePreview({ settings, activeTab, activeLocale }) {
         </ExtensionCard>
 
         <s-banner tone="info">
-          This is the exact flow customers see on the order status page. Click through it here,
-          or use the form builder tabs to jump the preview to a step.
+          {isTheme
+            ? "This is the flow customers see in the theme block on your storefront. It adds a “Find your order” step first, because a storefront visitor isn’t signed in."
+            : "This is the exact flow customers see on the order status page. Click through it here, or use the form builder tabs to jump the preview to a step."}
         </s-banner>
 
         <s-stack direction="inline" justifyContent="space-between" alignItems="center">
@@ -368,7 +460,11 @@ export default function LivePreview({ settings, activeTab, activeLocale }) {
             Restart preview
           </s-button>
           <s-text color="subdued">
-            {previewStep === "entry" ? "Entry card" : `Step ${STEP_NUMBERS[previewStep]} of 3`}
+            {previewStep === "entry"
+              ? "Entry card"
+              : previewStep === "lookup"
+                ? "Find your order"
+                : `Step ${STEP_NUMBERS[previewStep]} of 3`}
           </s-text>
         </s-stack>
       </s-stack>
