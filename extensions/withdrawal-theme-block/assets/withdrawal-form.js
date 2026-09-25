@@ -21,7 +21,7 @@
   // setting (data-proxy-base): each app — withdrawl-easy-rm and
   // withdrawl-easy-mr — is proxied under its own subpath, and both can be
   // installed on the same dev store.
-  const DEFAULT_PROXY_BASE = "/apps/withdrawl-easy";
+  const DEFAULT_PROXY_BASE = "/apps/withdrawal-easy";
   const OTHER_REASON_VALUE = "__other__";
 
   function trimTrailingSlash(value) {
@@ -60,6 +60,24 @@
     fallbackTitle: "Item",
     errorSubmit: "Something went wrong submitting your request. Please try again.",
     orderNotFound: "We couldn't find an order matching those details.",
+  };
+
+  // Merchant-facing notices, only ever rendered inside the theme editor
+  // (request.design_mode) — customers still get nothing when the form is off.
+  const EDITOR_NOTICES = {
+    form_disabled: {
+      heading: "Withdrawal form is turned off",
+      body: 'Customers can\'t see this block yet. In the app, open Form setup and turn on "Enable withdrawal form" and "Show on a standalone storefront page".',
+    },
+    surface_disabled: {
+      heading: "Standalone storefront page is turned off",
+      body: 'Customers can\'t see this block yet. In the app, open Form setup and turn on "Show on a standalone storefront page".',
+    },
+    unreachable: {
+      heading: "Couldn't reach the app",
+      body: (proxyBase) =>
+        `The form couldn't load from ${proxyBase}. Check that the "App proxy subpath" setting in this block matches the app's proxy subpath and that the app is installed.`,
+    },
   };
 
   function escapeHtml(value) {
@@ -142,6 +160,7 @@
   class WithdrawalWidget {
     constructor(root) {
       this.root = root;
+      this.designMode = root.dataset.designMode === "true";
       this.proxyBase = trimTrailingSlash(root.dataset.proxyBase || DEFAULT_PROXY_BASE);
       this.settings = null;
       this.order = null;
@@ -166,7 +185,7 @@
         const params = new URLSearchParams({ locale: (document.documentElement.lang || "en").split("-")[0] });
         const data = await fetchJson(`${this.proxyBase}/form-settings?${params}`);
         if (!data.enabled) {
-          this.root.remove();
+          this.hide(data.disabledReason === "form_disabled" ? "form_disabled" : "surface_disabled");
           return;
         }
         this.settings = data;
@@ -176,8 +195,29 @@
         // visitors will never know this feature exists, so a broken fetch
         // shouldn't leave a half-rendered error box on the page.
         console.error("[withdrawly] couldn't load form settings", error);
-        this.root.remove();
+        this.hide("unreachable");
       }
+    }
+
+    // Customers get nothing; the merchant in the theme editor gets told why
+    // the block is empty instead of staring at a blank gap.
+    hide(noticeKey) {
+      if (!this.designMode) {
+        this.root.remove();
+        return;
+      }
+      const notice = EDITOR_NOTICES[noticeKey];
+      const body = typeof notice.body === "function" ? notice.body(this.proxyBase) : notice.body;
+      this.root.innerHTML = `
+        <div class="withdrawly">
+          <div class="withdrawly__card">
+            <div class="withdrawly__banner withdrawly__banner--warning">
+              <strong>${escapeHtml(notice.heading)}</strong>
+              <p>${escapeHtml(body)}</p>
+            </div>
+          </div>
+        </div>
+      `;
     }
 
     // Mirrors resolveLabels() in extensions/withdrawal-order-status/src/lib/labels.js
@@ -567,4 +607,9 @@
   } else {
     boot();
   }
+
+  // The theme editor swaps a section's HTML in place when it's added or its
+  // settings change, without re-running this (already loaded) script — so
+  // pick up the fresh, un-booted widget root it leaves behind.
+  document.addEventListener("shopify:section:load", boot);
 })();

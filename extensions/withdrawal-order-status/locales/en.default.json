@@ -20,5 +20,11 @@
   "item.select": "Select {{title}}",
   "item.remove": "Remove {{title}}",
   "item.fallbackTitle": "Item",
-  "error.submit": "Something went wrong submitting your request. Please try again."
+  "error.submit": "Something went wrong submitting your request. Please try again.",
+  "editor.form_disabled.heading": "Withdrawal form is turned off",
+  "editor.form_disabled.body": "Customers can't see this block yet. In the app, open Form setup and turn on \"Enable withdrawal form\" and \"Show on order status page\".",
+  "editor.surface_disabled.heading": "Order status page form is turned off",
+  "editor.surface_disabled.body": "Customers can't see this block yet. In the app, open Form setup and turn on \"Show on order status page\".",
+  "editor.unreachable.heading": "Couldn't reach the app",
+  "editor.unreachable.body": "The withdrawal form couldn't load its settings. Check that the app is installed and its server is running."
 }

@@ -26,7 +26,10 @@ async function handleRequest(request) {
   const isEnabled = Boolean(formSettings?.masterEnabled && formSettings.showOnOrderStatus);
 
   if (!isEnabled) {
-    return cors(Response.json({ enabled: false }));
+    // Only the checkout/customer account editor preview reads this — it tells
+    // the merchant which switch in Form setup is keeping the block hidden.
+    const disabledReason = formSettings?.masterEnabled ? "surface_disabled" : "form_disabled";
+    return cors(Response.json({ enabled: false, disabledReason }));
   }
 
   const { labels, reasonField } = resolveLabelsForLocale(formSettings, locale);

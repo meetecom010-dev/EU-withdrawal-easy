@@ -29,7 +29,10 @@ async function handleRequest(request) {
   const isEnabled = Boolean(formSettings?.masterEnabled && formSettings.showOnStandalonePage);
 
   if (!isEnabled) {
-    return Response.json({ enabled: false });
+    // Only the theme editor preview reads this — it tells the merchant which
+    // switch in Form setup is keeping the block hidden from customers.
+    const disabledReason = formSettings?.masterEnabled ? "surface_disabled" : "form_disabled";
+    return Response.json({ enabled: false, disabledReason });
   }
 
   const { labels, reasonField } = resolveLabelsForLocale(formSettings, locale);

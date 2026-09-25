@@ -122,6 +122,17 @@
   border: 1px solid #f3c9c7;
 }
 
+.withdrawly__banner--warning {
+  background: #fff8e6;
+  color: #4f3a00;
+  border: 1px solid #f1d58a;
+  margin: 0;
+}
+
+.withdrawly__banner--warning p {
+  margin: 4px 0 0;
+}
+
 .withdrawly__banner--success {
   background: #f0f7f0;
   color: #1a1a1a;

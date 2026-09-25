@@ -39,7 +39,13 @@ const STEP_NUMBERS = { [STEP_DETAILS]: 1, [STEP_CONFIRM]: 2, [STEP_DONE]: 3 };
 // both sides of the form are backed by real, live data instead of the admin
 // preview's sample order.
 export default function WithdrawalForm() {
-  const [status, setStatus] = useState("loading"); // loading | ready | hidden
+  // Set when the merchant is looking at this block in the checkout/customer
+  // account editor. There the form always renders (or explains why it
+  // can't), instead of vanishing like it does for an ineligible buyer.
+  const inEditor = Boolean(shopify.extension?.editor);
+  const [status, setStatus] = useState("loading"); // loading | ready | hidden | error
+  // Why the backend reported the form as off (form_disabled | surface_disabled).
+  const [disabledReason, setDisabledReason] = useState(/** @type {string | null} */ (null));
   const [settings, setSettings] = useState(null);
   // The form starts as a compact card (title + description + start button)
   // so it doesn't crowd out the actual order details on the page — the full
@@ -83,6 +89,7 @@ export default function WithdrawalForm() {
           setSettings(data);
           setStatus("ready");
         } else {
+          setDisabledReason(data.disabledReason ?? "surface_disabled");
           setStatus("hidden");
         }
       })
@@ -91,7 +98,7 @@ export default function WithdrawalForm() {
         // error for a feature they may not even know exists. Developers can
         // still see what went wrong in the console.
         console.error("[withdrawal-form] Couldn't load form settings", error);
-        if (!cancelled) setStatus("hidden");
+        if (!cancelled) setStatus("error");
       });
 
     return () => {
@@ -179,16 +186,23 @@ export default function WithdrawalForm() {
     shopify.localization.country.value?.isoCode ??
     shopify.shippingAddress?.value?.countryCode ??
     shopify.billingAddress?.value?.countryCode;
+  // The editor previews the form on a sample order, so the per-order gates
+  // (country, deadline, existing request) are skipped there — the merchant
+  // should see what customers get, not whether that sample order qualifies.
   const isEligibleCountry =
-    Boolean(buyerCountryCode) && (settings?.euCountries ?? []).includes(buyerCountryCode);
+    inEditor ||
+    (Boolean(buyerCountryCode) && (settings?.euCountries ?? []).includes(buyerCountryCode));
+  const effectiveEligibility = inEditor
+    ? { isEligible: true, code: null, message: "", stage: eligibility?.stage ?? "before_delivery" }
+    : eligibility;
 
   // The settings the whole flow renders from, with the delivered copy swapped
   // in once the order has arrived. Everything downstream reads `settings.labels`
   // by its base key names, so no step component needs to know about stages.
   const stagedSettings = useMemo(() => {
     if (!settings) return null;
-    return { ...settings, labels: resolveLabels(settings.labels, eligibility?.stage) };
-  }, [settings, eligibility?.stage]);
+    return { ...settings, labels: resolveLabels(settings.labels, effectiveEligibility?.stage) };
+  }, [settings, effectiveEligibility?.stage]);
 
   // Whether the compact entry card (the withdrawal "button") is actually on
   // screen — same condition as the render guards below. This is what a
@@ -196,20 +210,21 @@ export default function WithdrawalForm() {
   // component mounted.
   const buttonVisible =
     status === "ready" &&
-    Boolean(eligibility?.isEligible) &&
+    Boolean(effectiveEligibility?.isEligible) &&
     lines.length > 0 &&
     isEligibleCountry &&
     !started;
 
   useEffect(() => {
-    if (buttonVisible && orderId && !buttonViewedSent.current) {
+    // Merchant previews in the editor aren't customer funnel activity.
+    if (buttonVisible && orderId && !inEditor && !buttonViewedSent.current) {
       buttonViewedSent.current = true;
       recordFormEvent({ orderId, type: "button_viewed", sessionId: sessionId.current });
     }
-  }, [buttonVisible, orderId]);
+  }, [buttonVisible, orderId, inEditor]);
 
   function startForm() {
-    if (!formOpenedSent.current) {
+    if (!inEditor && !formOpenedSent.current) {
       formOpenedSent.current = true;
       recordFormEvent({ orderId, type: "form_opened", sessionId: sessionId.current });
     }
@@ -295,18 +310,41 @@ export default function WithdrawalForm() {
   // Waiting on `eligibility` matters beyond loading etiquette: rendering
   // before the stage is known would show the pre-delivery heading and then
   // swap it, which is the flicker this whole path exists to avoid.
-  if (status !== "ready" || !eligibility || lines.length === 0 || !isEligibleCountry) {
+  //
+  // In the editor, a form that's switched off (or unreachable) explains
+  // itself to the merchant rather than leaving an empty block.
+  if (inEditor && status === "hidden") {
+    const key = disabledReason === "form_disabled" ? "form_disabled" : "surface_disabled";
+    return (
+      <s-section>
+        <s-banner tone="warning" heading={t(`editor.${key}.heading`)}>
+          {t(`editor.${key}.body`)}
+        </s-banner>
+      </s-section>
+    );
+  }
+  if (inEditor && status === "error") {
+    return (
+      <s-section>
+        <s-banner tone="critical" heading={t("editor.unreachable.heading")}>
+          {t("editor.unreachable.body")}
+        </s-banner>
+      </s-section>
+    );
+  }
+
+  if (status !== "ready" || !effectiveEligibility || lines.length === 0 || !isEligibleCountry) {
     return null;
   }
 
   // Past the deadline, already requested, order cancelled — the form is gone
   // and the reason takes its place. Submitting is blocked server-side too, so
   // this is the explanation rather than the enforcement.
-  if (!eligibility.isEligible) {
-    if (!eligibility.message) return null;
+  if (!effectiveEligibility.isEligible) {
+    if (!effectiveEligibility.message) return null;
     return (
       <s-section>
-        <s-banner tone="info">{eligibility.message}</s-banner>
+        <s-banner tone="info">{effectiveEligibility.message}</s-banner>
       </s-section>
     );
   }
