@@ -17,16 +17,29 @@
 (function () {
   "use strict";
 
-  // Fallback only. The real base comes from the block’s "App proxy subpath"
-  // setting (data-proxy-base): each app — withdrawal-easy, withdrawal-mr and
-  // withdrawal-rm — is proxied under its own subpath, and all can be
-  // installed on the same dev store.
-  const DEFAULT_PROXY_BASE = "/apps/withdrawal-easy";
+  // The same extension ships with all three apps (EU withdrawal easy,
+  // staging, RM), each proxied under its own subpath (see app_proxy in
+  // shopify.app*.toml). Only the installed app's proxy exists on a store, so
+  // the widget probes these in order and uses the first that isn't a 404.
+  const PROXY_BASES = ["/apps/withdrawal-easy", "/apps/withdrawal-mr", "/apps/withdrawal-rm"];
+  const PROXY_BASE_CACHE_KEY = "withdrawly:proxy-base";
   const OTHER_REASON_VALUE = "__other__";
 
-  function trimTrailingSlash(value) {
-    const base = String(value);
-    return base.endsWith("/") ? base.slice(0, -1) : base;
+  function readCachedProxyBase() {
+    try {
+      const cached = sessionStorage.getItem(PROXY_BASE_CACHE_KEY);
+      return PROXY_BASES.includes(cached) ? cached : null;
+    } catch {
+      return null;
+    }
+  }
+
+  function writeCachedProxyBase(base) {
+    try {
+      sessionStorage.setItem(PROXY_BASE_CACHE_KEY, base);
+    } catch {
+      // Storage unavailable (private mode etc.) — just probe again next time.
+    }
   }
 
   // Copied verbatim from extensions/withdrawal-order-status/locales/en.default.json
@@ -113,6 +126,7 @@
     if (!response.ok) {
       const error = new Error(data.error || `Request failed (${response.status})`);
       error.code = data.code || null;
+      error.status = response.status;
       throw error;
     }
     return data;
@@ -142,7 +156,7 @@
   class WithdrawalWidget {
     constructor(root) {
       this.root = root;
-      this.proxyBase = trimTrailingSlash(root.dataset.proxyBase || DEFAULT_PROXY_BASE);
+      this.proxyBase = null;
       this.settings = null;
       this.order = null;
       this.stage = "before_delivery";
@@ -163,8 +177,7 @@
 
     async init() {
       try {
-        const params = new URLSearchParams({ locale: (document.documentElement.lang || "en").split("-")[0] });
-        const data = await fetchJson(`${this.proxyBase}/form-settings?${params}`);
+        const data = await this.loadFormSettings();
         if (!data.enabled) {
           this.root.remove();
           return;
@@ -178,6 +191,31 @@
         console.error("[withdrawly] couldn't load form settings", error);
         this.root.remove();
       }
+    }
+
+    // Fetches /form-settings from whichever app's proxy exists on this store
+    // and remembers that base for the lookup and submit calls. Tries the
+    // subpath that worked last time first, so it's usually one request.
+    async loadFormSettings() {
+      const params = new URLSearchParams({ locale: (document.documentElement.lang || "en").split("-")[0] });
+      const cached = readCachedProxyBase();
+      const candidates = cached ? [cached, ...PROXY_BASES.filter((base) => base !== cached)] : PROXY_BASES;
+
+      let lastError = null;
+      for (const base of candidates) {
+        try {
+          const data = await fetchJson(`${base}/form-settings?${params}`);
+          this.proxyBase = base;
+          writeCachedProxyBase(base);
+          return data;
+        } catch (error) {
+          // 404 = no app proxy at this subpath on this store; try the next.
+          // Anything else means we reached the app and it failed, so stop.
+          if (error.status !== 404) throw error;
+          lastError = error;
+        }
+      }
+      throw lastError ?? new Error("No withdrawal app proxy found");
     }
 
     // Mirrors resolveLabels() in extensions/withdrawal-order-status/src/lib/labels.js
