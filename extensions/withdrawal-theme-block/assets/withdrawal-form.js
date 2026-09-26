@@ -18,10 +18,10 @@
   "use strict";
 
   // Fallback only. The real base comes from the block’s "App proxy subpath"
-  // setting (data-proxy-base): each app — withdrawl-easy-rm and
-  // withdrawl-easy-mr — is proxied under its own subpath, and both can be
+  // setting (data-proxy-base): each app — withdrawal-easy, withdrawal-mr and
+  // withdrawal-rm — is proxied under its own subpath, and all can be
   // installed on the same dev store.
-  const DEFAULT_PROXY_BASE = "/apps/withdrawl-easy";
+  const DEFAULT_PROXY_BASE = "/apps/withdrawal-easy";
   const OTHER_REASON_VALUE = "__other__";
 
   function trimTrailingSlash(value) {
