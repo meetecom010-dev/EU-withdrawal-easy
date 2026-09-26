@@ -64,9 +64,6 @@ function buildSetupSteps({
         "Turns the form on and picks where customers see it. Sensible defaults are already filled in — customize the fields, reasons and wording anytime from Form Setup.",
       complete: Boolean(formEnabled),
       checkboxLabel: "Enable the withdrawal form",
-      // Renders as a switch, not a checkbox — matches the onboarding
-      // wizard's WithdrawalStep, which this step mirrors.
-      useSwitch: true,
       onToggle: onFormToggle,
       ctaLabel: "Go to Form Setup",
       ctaHref: "/form-setup",
@@ -96,17 +93,17 @@ function buildSetupSteps({
         },
       ],
     },
-    ...(blockSurfaces.length > 0
-      ? [
-          {
-            key: "blocks",
-            label: "Add the required app blocks",
-            description: "Add the block for each place you chose above.",
-            complete: blockSurfaces.some((surface) => surface.added),
-            surfaces: blockSurfaces,
-          },
-        ]
-      : []),
+    {
+      key: "blocks",
+      label: "Add the required app blocks",
+      description: "Add the block for each place you chose above.",
+      // Stays in the guide even before step 2 is done, so a merchant sees
+      // what's still ahead instead of the step just vanishing — it just has
+      // nothing to check off (and says so) until a placement is picked.
+      locked: !formEnabled || blockSurfaces.length === 0,
+      complete: blockSurfaces.some((surface) => surface.added),
+      surfaces: blockSurfaces,
+    },
   ];
 }
 

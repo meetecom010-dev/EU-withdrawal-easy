@@ -10,7 +10,7 @@
 <div
   data-withdrawly-widget
   data-proxy-base="/apps/{{ proxy_subpath }}"
-  style="--withdrawly-accent: {{ block.settings.accent_color }};"
+  style="--withdrawly-accent: {{ block.settings.accent_color | default: '#2b45a8' }};"
   {{ block.shopify_attributes }}
 ></div>
 

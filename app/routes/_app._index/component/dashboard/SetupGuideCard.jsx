@@ -28,30 +28,32 @@ export default function SetupGuideCard({
     <s-section>
       <s-grid gap="base">
         <s-grid gap="small-200">
-          <s-grid
-            gridTemplateColumns="1fr auto auto"
-            gap="small-300"
-            alignItems="center"
-          >
-            <s-heading>Set up guide</s-heading>
-            <s-button
-              accessibilityLabel="Dismiss guide"
-              variant="tertiary"
-              tone="neutral"
-              icon="x"
-              onClick={onDismissed}
-            ></s-button>
-            <s-button
-              accessibilityLabel="Toggle setup guide"
-              variant="tertiary"
-              tone="neutral"
-              icon={guideExpanded ? "chevron-up" : "chevron-down"}
-              onClick={() => setGuideExpanded((current) => !current)}
-            ></s-button>
-          </s-grid>
-          <s-paragraph color="subdued">
-            Use this guide to get your withdrawal form live on your storefront.
-          </s-paragraph>
+          <s-stack direction="block" gap="small-500">
+            <s-grid
+              gridTemplateColumns="1fr auto auto"
+              gap="small-300"
+              alignItems="center"
+            >
+              <s-heading>Set up guide</s-heading>
+              <s-button
+                accessibilityLabel="Dismiss guide"
+                variant="tertiary"
+                tone="neutral"
+                icon="x"
+                onClick={onDismissed}
+              ></s-button>
+              <s-button
+                accessibilityLabel="Toggle setup guide"
+                variant="tertiary"
+                tone="neutral"
+                icon={guideExpanded ? "chevron-up" : "chevron-down"}
+                onClick={() => setGuideExpanded((current) => !current)}
+              ></s-button>
+            </s-grid>
+            <s-paragraph color="subdued">
+              Use this guide to get your withdrawal form live on your storefront.
+            </s-paragraph>
+          </s-stack>
           <s-text color="subdued">
             {completedCount} of {setupSteps.length} tasks complete
           </s-text>
@@ -93,7 +95,14 @@ export default function SetupGuideCard({
                   {isStepExpanded && (
                     <s-box padding="small" paddingBlockStart="none">
                       <s-stack direction="block" gap="small-200">
-                        {step.key === "blocks" ? (
+                        {step.key === "blocks" ? step.locked ? (
+                          <s-box padding="base" background="subdued" borderRadius="base">
+                            <s-paragraph color="subdued">
+                              Complete step 2 (configure your withdrawal form and pick where it
+                              shows) to see what to add here.
+                            </s-paragraph>
+                          </s-box>
+                        ) : (
                           <s-stack direction="block" gap="base">
                             {step.surfaces.map((surface) => (
                               <s-box

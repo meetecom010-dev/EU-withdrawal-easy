@@ -290,7 +290,7 @@ export default function LivePreview({ settings, activeTab, activeLocale }) {
               <s-heading>{labels.step1Title}</s-heading>
               <s-paragraph color="subdued">{labels.step1Description}</s-paragraph>
               <s-stack direction="inline">
-                <s-button onClick={() => setPreviewStep(isTheme ? "lookup" : "step1")}>
+                <s-button variant="primary" onClick={() => setPreviewStep(isTheme ? "lookup" : "step1")}>
                   Start withdrawal request
                 </s-button>
               </s-stack>

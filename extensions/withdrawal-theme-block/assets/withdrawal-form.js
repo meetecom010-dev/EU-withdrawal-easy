@@ -220,8 +220,8 @@
           <div class="withdrawly__card">
             <h2 class="withdrawly__heading">${escapeHtml(labels.title)}</h2>
             <p class="withdrawly__sub">${escapeHtml(labels.description)}</p>
-            <div class="withdrawly__actions">
-              <button type="button" class="withdrawly__btn" data-start>${escapeHtml(STRINGS.entryStart)}</button>
+            <div class="withdrawly__actions withdrawly__actions--start">
+              <button type="button" class="withdrawly__btn withdrawly__btn--primary" data-start>${escapeHtml(STRINGS.entryStart)}</button>
             </div>
           </div>
         </div>
@@ -391,7 +391,7 @@
             ${this.lockedFieldHtml(STRINGS.fieldOrderNumber, this.order.name)}
             ${this.reasonFieldHtml()}
             <p class="withdrawly__hint" data-hint ${this.selected.size > 0 ? "hidden" : ""}>${escapeHtml(STRINGS.selectItem)}</p>
-            <div class="withdrawly__actions">
+            <div class="withdrawly__actions withdrawly__actions--start">
               <button type="button" class="withdrawly__btn withdrawly__btn--primary" data-continue ${this.selected.size === 0 ? "disabled" : ""}>${escapeHtml(labels.step1ButtonLabel)}</button>
             </div>
           </div>
