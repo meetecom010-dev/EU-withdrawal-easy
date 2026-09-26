@@ -13,6 +13,7 @@ import StepProgress from "./components/StepProgress.jsx";
 import StepDetails, { OTHER_REASON_VALUE } from "./components/StepDetails.jsx";
 import StepConfirm from "./components/StepConfirm.jsx";
 import StepDone from "./components/StepDone.jsx";
+import WithdrawalFormSkeleton from "./components/WithdrawalFormSkeleton.jsx";
 
 // A per-mount id so the pre-submission funnel (button_viewed -> form_opened ->
 // form_submitted) can be stitched together on the backend before a withdrawal
@@ -303,14 +304,6 @@ export default function WithdrawalForm() {
     }
   }
 
-  // Render nothing while loading — most customers will never see this form
-  // (disabled, wrong country, ...), so a spinner that pops in and vanishes
-  // again would just be layout noise on the order status page.
-  //
-  // Waiting on `eligibility` matters beyond loading etiquette: rendering
-  // before the stage is known would show the pre-delivery heading and then
-  // swap it, which is the flicker this whole path exists to avoid.
-  //
   // In the editor, a form that's switched off (or unreachable) explains
   // itself to the merchant rather than leaving an empty block.
   if (inEditor && status === "hidden") {
@@ -333,6 +326,20 @@ export default function WithdrawalForm() {
     );
   }
 
+  // While settings/eligibility are still being fetched, whether the form
+  // applies at all is unknown — show a skeleton shaped like the compact
+  // entry card instead of blank space. Waiting on eligibility also keeps the
+  // pre-delivery heading from flashing before the stage is known.
+  // lines.length and isEligibleCountry don't depend on either fetch, so
+  // they're never part of "loading".
+  if (status === "loading" || (status === "ready" && !effectiveEligibility)) {
+    return <WithdrawalFormSkeleton />;
+  }
+
+  // Past this point the form's applicability is fully determined — disabled,
+  // wrong country, no lines — so nothing renders rather than a skeleton that
+  // would just vanish again for the majority of customers who won't see the
+  // form at all.
   if (status !== "ready" || !effectiveEligibility || lines.length === 0 || !isEligibleCountry) {
     return null;
   }

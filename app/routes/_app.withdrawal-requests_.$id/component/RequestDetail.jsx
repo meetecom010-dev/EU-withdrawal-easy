@@ -608,7 +608,7 @@ export default function RequestDetail({
         onConfirm={confirmRefund}
       />
       <s-modal id={CANCEL_MODAL_ID} heading="Cancel order">
-        <s-stack direction="block" gap="base">
+        <s-stack direction="block" gap="base" padding="base none base none">
           <s-banner tone="warning">
             This cancels the whole order in Shopify and refunds it to the original payment method.
             It can&apos;t be undone.

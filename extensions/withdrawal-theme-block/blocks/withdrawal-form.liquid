@@ -1,17 +1,9 @@
-{%- liquid
-  assign proxy_subpath = block.settings.proxy_subpath | strip | split: '/' | last
-  if proxy_subpath == blank
-    assign proxy_subpath = 'withdrawal-easy'
-  endif
--%}
-
 {{ 'withdrawal-form.css' | asset_url | stylesheet_tag }}
 
 <div
   data-withdrawly-widget
-  data-proxy-base="/apps/{{ proxy_subpath }}"
   {% if request.design_mode %}data-design-mode="true"{% endif %}
-  style="--withdrawly-accent: {{ block.settings.accent_color }};"
+  style="--withdrawly-accent: {{ block.settings.accent_color | default: '#2b45a8' }};"
   {{ block.shopify_attributes }}
 ></div>
 
@@ -22,13 +14,6 @@
   "name": "Withdrawal form",
   "target": "section",
   "settings": [
-    {
-      "type": "text",
-      "id": "proxy_subpath",
-      "label": "App proxy subpath",
-      "info": "Must match the app_proxy subpath in this app's shopify.app.*.toml (for example withdrawl-easy-rm).",
-      "default": "withdrawal-easy"
-    },
     {
       "type": "color",
       "id": "accent_color",

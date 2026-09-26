@@ -4,6 +4,7 @@
 const HELP_CENTER_URL = "https://example.com/help";
 const SUPPORT_EMAIL = "support@withdrawaleasy.com";
 const FAQ_URL = "/faqs";
+const FEATURE_REQUEST_URL = "/feature-request";
 
 function HelpCard({ title, description, linkLabel, href, external }) {
   return (
@@ -22,7 +23,7 @@ function HelpCard({ title, description, linkLabel, href, external }) {
 export default function HelpResourcesCard() {
   return (
     <s-section heading="Help & resources">
-      <s-grid gridTemplateColumns="1fr 1fr 1fr" gap="base">
+      <s-grid gridTemplateColumns="repeat(auto-fit, minmax(220px, 1fr))" gap="base">
         {/* <HelpCard
           title="Help center"
           description="Step-by-step guides for setup, daily use, and troubleshooting."
@@ -41,6 +42,12 @@ export default function HelpResourcesCard() {
           description="Answers to common questions about setting up and using the app."
           linkLabel="Open FAQ"
           href={FAQ_URL}
+        />
+        <HelpCard
+          title="Feature request"
+          description="Have an idea for the app? Let us know what you'd like to see."
+          linkLabel="Request a feature"
+          href={FEATURE_REQUEST_URL}
         />
       </s-grid>
     </s-section>

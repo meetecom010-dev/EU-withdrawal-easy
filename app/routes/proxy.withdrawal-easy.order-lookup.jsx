@@ -7,7 +7,7 @@ const GENERIC_NOT_FOUND = {
   code: "order_not_found",
 };
 
-// POST /apps/withdrawl-easy/order-lookup -> looks up an order by order number +
+// POST /apps/<subpath>/order-lookup -> looks up an order by order number +
 // email (the only identifying facts a storefront visitor has, with no
 // session token or confirmation number available the way the order-status
 // extension has) and, if it matches, returns the order's eligible line items

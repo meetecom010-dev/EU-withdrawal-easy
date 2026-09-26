@@ -10,7 +10,7 @@ api_version = "2026-10"
 
 [app_proxy]
 url = "https://example.com/proxy/withdrawal-easy"
-subpath = "withdrawal-easy-mr"
+subpath = "withdrawal-mr"
 prefix = "apps"
 
 [access_scopes]

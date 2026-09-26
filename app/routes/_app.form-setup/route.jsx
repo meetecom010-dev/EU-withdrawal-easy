@@ -252,7 +252,7 @@ export default function FormSetup() {
                 dismissError={dismissError}
               />
             </s-stack>
-            <div style={{ position: "sticky", top: "16px", alignSelf: "start" }}>
+            <div style={{ position: "sticky", top: "16px", alignSelf: "start", minWidth: 0 }}>
               <LivePreview settings={settings} activeTab={activeTab} activeLocale={activeLocale} />
             </div>
           </s-grid>
