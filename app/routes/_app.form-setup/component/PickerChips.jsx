@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types -- plain JS project, no prop-types package installed */
 import { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 // Inline searchable multi-select: type to filter, check items in the
 // dropdown to add them, remove via the chip's own "x". Shared by EU
@@ -14,6 +15,7 @@ export default function PickerChips({
   error,
   onDismissError,
 }) {
+  const { t } = useTranslation();
   const [query, setQuery] = useState("");
   const [open, setOpen] = useState(false);
   const containerRef = useRef(null);
@@ -67,7 +69,7 @@ export default function PickerChips({
             <s-box border="base" borderRadius="base" padding="small-200">
               <s-stack direction="block" gap="small-200">
                 {filtered.length === 0 && (
-                  <s-text color="subdued">No matches for &quot;{query}&quot;.</s-text>
+                  <s-text color="subdued">{t("common.noMatches", { query })}</s-text>
                 )}
                 {filtered.map((item) => (
                   <s-checkbox

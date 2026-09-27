@@ -1,6 +1,8 @@
 /* eslint-disable react/prop-types -- plain JS project, no prop-types package installed */
 import { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { resolveLabelsForLocale } from "../constants";
+import { useFormatters } from "../../../i18n/react";
 
 // Mirrors extensions/withdrawal-order-status 1:1 — same states (compact entry
 // card, three steps with a progress bar), same rows (thumbnail + quantity
@@ -14,29 +16,33 @@ import { resolveLabelsForLocale } from "../constants";
 // name/email/order number on an unnumbered "Find your order" screen, and
 // Details then shows those values instead of the ones the order status page
 // already knows. The dropdown picks which of the two surfaces to preview.
+//
+// The form's own copy comes from the merchant's settings. The fixed storefront
+// strings around it (field labels, buttons) are under formSetup.preview.storefront
+// in en.json, mirroring the extensions' locale files.
 
+// Labels are formSetup.preview.surfaces.<labelKey>.
 const SURFACES = [
-  { value: "order-status", label: "Order status page" },
-  { value: "theme", label: "Storefront page (theme block)" },
+  { value: "order-status", labelKey: "orderStatus" },
+  { value: "theme", labelKey: "theme" },
 ];
 
 // Sample order lines shaped like the extension's `shopify.lines` data, using
-// a real product image so the preview reads like an actual order.
+// a real product image so the preview reads like an actual order. Titles and
+// variants are formSetup.preview.sample.items.<sampleKey>.
 const SAMPLE_IMAGE =
   "https://cdn.shopify.com/s/files/1/0682/4787/9778/files/AAUvwnj0ICORVuxs41ODOvnhvedArLiSV20df7r8XBjEUQ_s900-c-k-c0x00ffffff-no-rj.jpg";
 const SAMPLE_ITEMS = [
   {
     id: "1",
-    title: "Fjord Table Lamp",
-    variant: "Oak / Large",
+    sampleKey: "lamp",
     quantity: 1,
     price: 89.00,
     image: SAMPLE_IMAGE,
   },
   {
     id: "2",
-    title: "Tind Candle Holder",
-    variant: "Brass",
+    sampleKey: "candleHolder",
     quantity: 2,
     price: 29.45,
     image: SAMPLE_IMAGE,
@@ -44,18 +50,30 @@ const SAMPLE_ITEMS = [
 ];
 
 // The buyer the order status page already knows, and the values the theme
-// block's lookup screen starts prefilled with.
+// block's lookup screen starts prefilled with. The name is translated
+// (formSetup.preview.sample.customerName) where it's used.
 const SAMPLE_CUSTOMER = {
-  name: "Jane Doe",
   email: "jane@example.com",
   orderNumber: "#1001",
 };
 
-const STEP_LABELS = { step1: "Details", confirm: "Confirm", done: "Done" };
 const STEP_NUMBERS = { step1: 1, confirm: 2, done: 3 };
+const STEP_COUNT = 3;
 
-function formatEUR(amount) {
-  return `€${amount.toFixed(2)}`;
+// Sample prices are in euros, the currency of the EU stores the form is for.
+function useFormatEUR() {
+  const { formatMoney } = useFormatters();
+  return (amount) => formatMoney({ amount, currencyCode: "EUR" });
+}
+
+// The sample items with their translated title/variant.
+function useSampleItems() {
+  const { t } = useTranslation();
+  return SAMPLE_ITEMS.map((item) => ({
+    ...item,
+    title: t(`formSetup.preview.sample.items.${item.sampleKey}.title`),
+    variant: t(`formSetup.preview.sample.items.${item.sampleKey}.variant`),
+  }));
 }
 
 // Product image with the corner quantity badge, mirroring the extension's
@@ -105,6 +123,7 @@ function ItemThumbnail({ image, title, quantity }) {
 // flex layout so image, title and price stay on one row even in the narrow
 // preview column: title truncates with an ellipsis, price stays pinned right.
 function ItemRow({ item, checked, onToggle, readOnly }) {
+  const formatEUR = useFormatEUR();
   return (
     <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
       {!readOnly && (
@@ -153,19 +172,22 @@ function ItemRow({ item, checked, onToggle, readOnly }) {
 // custom bar rather than s-progress so it matches the customer-account
 // surface's look, not the admin's pill-shaped progress element.
 function StepProgress({ step }) {
-  const percent = (STEP_NUMBERS[step] / 3) * 100;
+  const { t } = useTranslation();
+  const percent = (STEP_NUMBERS[step] / STEP_COUNT) * 100;
+  const label = t(`formSetup.preview.storefront.steps.${step}`);
+  const position = { current: STEP_NUMBERS[step], total: STEP_COUNT };
   return (
     <s-stack direction="block" gap="small-200">
       <s-stack direction="inline" justifyContent="space-between" alignItems="center">
-        <s-text type="strong">{STEP_LABELS[step]}</s-text>
-        <s-text color="subdued">Step {STEP_NUMBERS[step]} of 3</s-text>
+        <s-text type="strong">{label}</s-text>
+        <s-text color="subdued">{t("formSetup.preview.storefront.stepOf", position)}</s-text>
       </s-stack>
       <div
         role="progressbar"
         aria-valuenow={STEP_NUMBERS[step]}
         aria-valuemin={0}
-        aria-valuemax={3}
-        aria-label={`Step ${STEP_NUMBERS[step]} of 3: ${STEP_LABELS[step]}`}
+        aria-valuemax={STEP_COUNT}
+        aria-label={t("formSetup.preview.storefront.stepProgress", { ...position, label })}
         style={{ height: 4, borderRadius: 999, background: "#e3e3e3", overflow: "hidden" }}
       >
         <div
@@ -205,6 +227,11 @@ function ExtensionCard({ children }) {
 // Switching form-builder tabs on the left jumps the preview straight to that
 // step so merchants can edit copy and see it immediately.
 export default function LivePreview({ settings, activeTab, activeLocale }) {
+  const { t } = useTranslation();
+  const { formatDate } = useFormatters();
+  const formatEUR = useFormatEUR();
+  const sampleItems = useSampleItems();
+  const sampleCustomer = { ...SAMPLE_CUSTOMER, name: t("formSetup.preview.sample.customerName") };
   const [surface, setSurface] = useState("order-status");
   const [selectedIds, setSelectedIds] = useState(["1"]);
   // "entry" | "lookup" | "step1" | "confirm" | "done" — "lookup" only exists
@@ -215,7 +242,7 @@ export default function LivePreview({ settings, activeTab, activeLocale }) {
   const [reasonValue, setReasonValue] = useState("");
   // What the theme block's lookup screen collects. The order status page gets
   // the same values from the buyer's session instead of asking for them.
-  const [lookup, setLookup] = useState(SAMPLE_CUSTOMER);
+  const [lookup, setLookup] = useState(sampleCustomer);
   // Don't leave the entry card on mount — only react to actual tab clicks.
   const skippedInitialTab = useRef(false);
 
@@ -238,12 +265,12 @@ export default function LivePreview({ settings, activeTab, activeLocale }) {
   // extension receives it — so the preview shows the translated form live.
   const { labels, reasonField } = resolveLabelsForLocale(settings, activeLocale);
 
-  const selectedItems = SAMPLE_ITEMS.filter((item) => selectedIds.includes(item.id));
+  const selectedItems = sampleItems.filter((item) => selectedIds.includes(item.id));
   const selectedTotal = selectedItems.reduce((total, item) => total + item.price, 0);
   const reasonOptions = reasonField.options ?? [];
   // On the theme block these are whatever the visitor just looked up; on the
   // order status page they're the buyer the session already identified.
-  const buyer = isTheme ? lookup : SAMPLE_CUSTOMER;
+  const buyer = isTheme ? lookup : sampleCustomer;
 
   function toggleItem(id, checked) {
     setSelectedIds((prev) => (checked ? [...prev, id] : prev.filter((x) => x !== id)));
@@ -257,7 +284,7 @@ export default function LivePreview({ settings, activeTab, activeLocale }) {
     setPreviewStep("entry");
     setSelectedIds(["1"]);
     setReasonValue("");
-    setLookup(SAMPLE_CUSTOMER);
+    setLookup(sampleCustomer);
   }
 
   function updateLookup(field, value) {
@@ -268,18 +295,18 @@ export default function LivePreview({ settings, activeTab, activeLocale }) {
     <s-section>
       <s-stack direction="block" gap="base">
         <s-stack direction="inline" gap="small-200" alignItems="center" justifyContent="space-between">
-          <s-text type="strong">Live preview</s-text>
-          <s-badge tone="success">Two-step compliant</s-badge>
+          <s-text type="strong">{t("formSetup.preview.heading")}</s-text>
+          <s-badge tone="success">{t("formSetup.preview.compliantBadge")}</s-badge>
         </s-stack>
 
         <s-select
-          label="Preview"
+          label={t("formSetup.preview.surfaceLabel")}
           value={surface}
           onChange={(e) => changeSurface(e.currentTarget.value)}
         >
           {SURFACES.map((option) => (
             <s-option key={option.value} value={option.value}>
-              {option.label}
+              {t(`formSetup.preview.surfaces.${option.labelKey}`)}
             </s-option>
           ))}
         </s-select>
@@ -291,7 +318,7 @@ export default function LivePreview({ settings, activeTab, activeLocale }) {
               <s-paragraph color="subdued">{labels.step1Description}</s-paragraph>
               <s-stack direction="inline">
                 <s-button variant="primary" onClick={() => setPreviewStep(isTheme ? "lookup" : "step1")}>
-                  Start withdrawal request
+                  {t("formSetup.preview.storefront.start")}
                 </s-button>
               </s-stack>
             </s-stack>
@@ -301,28 +328,26 @@ export default function LivePreview({ settings, activeTab, activeLocale }) {
               the step bar until Details, which is still "Step 1 of 3". */}
           {previewStep === "lookup" && (
             <s-stack direction="block" gap="small">
-              <s-heading>Find your order</s-heading>
-              <s-paragraph color="subdued">
-                Enter your order details to start your withdrawal request.
-              </s-paragraph>
+              <s-heading>{t("formSetup.preview.storefront.findOrderHeading")}</s-heading>
+              <s-paragraph color="subdued">{t("formSetup.preview.storefront.findOrderBody")}</s-paragraph>
               <s-text-field
-                label="Full name"
+                label={t("formSetup.preview.storefront.fullName")}
                 value={lookup.name}
                 onInput={(e) => updateLookup("name", e.currentTarget.value)}
               ></s-text-field>
               <s-text-field
-                label="Email"
+                label={t("formSetup.preview.storefront.email")}
                 value={lookup.email}
                 onInput={(e) => updateLookup("email", e.currentTarget.value)}
               ></s-text-field>
               <s-text-field
-                label="Order number"
+                label={t("formSetup.preview.storefront.orderNumber")}
                 placeholder="#1001"
                 value={lookup.orderNumber}
                 onInput={(e) => updateLookup("orderNumber", e.currentTarget.value)}
               ></s-text-field>
               <s-button variant="primary" onClick={() => setPreviewStep("step1")}>
-                Continue
+                {t("formSetup.preview.storefront.continue")}
               </s-button>
             </s-stack>
           )}
@@ -337,7 +362,7 @@ export default function LivePreview({ settings, activeTab, activeLocale }) {
                   <s-paragraph color="subdued">{labels.step1Description}</s-paragraph>
                   <s-text type="strong">{labels.itemSelectionHeading}</s-text>
                   <s-stack direction="block" gap="small-200">
-                    {SAMPLE_ITEMS.map((item) => (
+                    {sampleItems.map((item) => (
                       <ItemRow
                         key={item.id}
                         item={item}
@@ -346,10 +371,10 @@ export default function LivePreview({ settings, activeTab, activeLocale }) {
                       />
                     ))}
                   </s-stack>
-                  <s-text-field label="Full name" value={buyer.name} disabled></s-text-field>
-                  <s-text-field label="Email" value={buyer.email} disabled></s-text-field>
+                  <s-text-field label={t("formSetup.preview.storefront.fullName")} value={buyer.name} disabled></s-text-field>
+                  <s-text-field label={t("formSetup.preview.storefront.email")} value={buyer.email} disabled></s-text-field>
                   <s-text-field
-                    label="Order number"
+                    label={t("formSetup.preview.storefront.orderNumber")}
                     value={buyer.orderNumber}
                     disabled
                   ></s-text-field>
@@ -357,7 +382,7 @@ export default function LivePreview({ settings, activeTab, activeLocale }) {
                     <>
                       <s-select
                         label={reasonField.label}
-                        placeholder="Select a reason (optional)"
+                        placeholder={t("formSetup.preview.storefront.reasonPlaceholder")}
                         value={reasonValue}
                         onChange={(e) => setReasonValue(e.currentTarget.value)}
                       >
@@ -366,18 +391,18 @@ export default function LivePreview({ settings, activeTab, activeLocale }) {
                             {option}
                           </s-option>
                         ))}
-                        <s-option value="__other__">Other</s-option>
+                        <s-option value="__other__">{t("formSetup.preview.storefront.otherReason")}</s-option>
                       </s-select>
                       {reasonValue === "__other__" && (
                         <s-text-field
-                          label="Your reason"
-                          placeholder="Tell us your reason"
+                          label={t("formSetup.preview.storefront.yourReason")}
+                          placeholder={t("formSetup.preview.storefront.yourReasonPlaceholder")}
                         ></s-text-field>
                       )}
                     </>
                   )}
                   {selectedItems.length === 0 && (
-                    <s-text color="subdued">Select at least one item to continue.</s-text>
+                    <s-text color="subdued">{t("formSetup.preview.storefront.selectItem")}</s-text>
                   )}
                   <s-button
                     variant="primary"
@@ -393,7 +418,9 @@ export default function LivePreview({ settings, activeTab, activeLocale }) {
                 <>
                   <s-heading>{labels.confirmHeading}</s-heading>
                   <s-paragraph color="subdued">{labels.confirmMessage}</s-paragraph>
-                  <s-text type="strong">Items to withdraw ({selectedItems.length})</s-text>
+                  <s-text type="strong">
+                    {t("formSetup.preview.storefront.itemsToWithdraw", { count: selectedItems.length })}
+                  </s-text>
                   <s-stack direction="block" gap="small-200">
                     {selectedItems.map((item) => (
                       <ItemRow key={item.id} item={item} readOnly />
@@ -401,7 +428,7 @@ export default function LivePreview({ settings, activeTab, activeLocale }) {
                   </s-stack>
                   <s-divider></s-divider>
                   <s-stack direction="inline" gap="base" justifyContent="space-between">
-                    <s-text type="strong">Selected items total</s-text>
+                    <s-text type="strong">{t("formSetup.preview.storefront.selectedTotal")}</s-text>
                     <s-text type="strong">{formatEUR(selectedTotal)}</s-text>
                   </s-stack>
                   <s-checkbox
@@ -410,7 +437,7 @@ export default function LivePreview({ settings, activeTab, activeLocale }) {
                     onChange={(e) => setDeclarationAccepted(e.currentTarget.checked)}
                   ></s-checkbox>
                   <s-stack direction="inline" gap="base" justifyContent="space-between">
-                    <s-button onClick={() => setPreviewStep("step1")}>Previous</s-button>
+                    <s-button onClick={() => setPreviewStep("step1")}>{t("formSetup.preview.storefront.previous")}</s-button>
                     <s-button
                       variant="primary"
                       disabled={!declarationAccepted || undefined}
@@ -429,10 +456,12 @@ export default function LivePreview({ settings, activeTab, activeLocale }) {
                   <s-stack direction="inline" gap="small-200" alignItems="center">
                     <s-icon type="check-circle-filled" tone="success" size="small"></s-icon>
                     <s-text color="subdued">
-                      Submitted on {new Date().toLocaleDateString()}
+                      {t("formSetup.preview.storefront.submittedOn", { date: formatDate(new Date()) })}
                     </s-text>
                   </s-stack>
-                  <s-text type="strong">Items to withdraw ({selectedItems.length})</s-text>
+                  <s-text type="strong">
+                    {t("formSetup.preview.storefront.itemsToWithdraw", { count: selectedItems.length })}
+                  </s-text>
                   <s-stack direction="block" gap="small-200">
                     {selectedItems.map((item) => (
                       <ItemRow key={item.id} item={item} readOnly />
@@ -440,7 +469,7 @@ export default function LivePreview({ settings, activeTab, activeLocale }) {
                   </s-stack>
                   <s-divider></s-divider>
                   <s-stack direction="inline" gap="base" justifyContent="space-between">
-                    <s-text type="strong">Selected items total</s-text>
+                    <s-text type="strong">{t("formSetup.preview.storefront.selectedTotal")}</s-text>
                     <s-text type="strong">{formatEUR(selectedTotal)}</s-text>
                   </s-stack>
                 </>
@@ -450,21 +479,19 @@ export default function LivePreview({ settings, activeTab, activeLocale }) {
         </ExtensionCard>
 
         <s-banner tone="info">
-          {isTheme
-            ? "This is the flow customers see in the theme block on your storefront. It adds a “Find your order” step first, because a storefront visitor isn’t signed in."
-            : "This is the exact flow customers see on the order status page. Click through it here, or use the form builder tabs to jump the preview to a step."}
+          {isTheme ? t("formSetup.preview.banner.theme") : t("formSetup.preview.banner.orderStatus")}
         </s-banner>
 
         <s-stack direction="inline" justifyContent="space-between" alignItems="center">
           <s-button variant="tertiary" onClick={() => setPreviewStep("entry")}>
-            Restart preview
+            {t("formSetup.preview.restart")}
           </s-button>
           <s-text color="subdued">
             {previewStep === "entry"
-              ? "Entry card"
+              ? t("formSetup.preview.position.entry")
               : previewStep === "lookup"
-                ? "Find your order"
-                : `Step ${STEP_NUMBERS[previewStep]} of 3`}
+                ? t("formSetup.preview.position.lookup")
+                : t("formSetup.preview.position.step", { current: STEP_NUMBERS[previewStep], total: STEP_COUNT })}
           </s-text>
         </s-stack>
       </s-stack>

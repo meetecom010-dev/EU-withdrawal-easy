@@ -161,7 +161,7 @@
           <span class="withdrawly__stepof">${escapeHtml(STRINGS.stepOf(current, total))}</span>
         </div>
         <div class="withdrawly__progress">
-          <div class="withdrawly__progress-fill" style="width:${percent}%"></div>
+          <div class="withdrawly__progress-fill" data-progress="${percent}" style="width:${percent}%"></div>
         </div>
       </div>
     `;
@@ -191,6 +191,23 @@
       // as StepConfirm.jsx's local declarationAccepted state) — only reset
       // when actually navigating back to Details, not on a retry.
       this.declarationAccepted = false;
+      // Width the progress bar was last shown at, so the next step's bar can
+      // grow (or shrink, going back) from there instead of appearing at its
+      // final width — every step replaces the widget's HTML wholesale.
+      this.progressPercent = 0;
+    }
+
+    // Call right after rendering a step that includes stepHeaderHtml(). Snaps
+    // the fresh bar back to the previous width, forces a layout so the
+    // browser commits it, then sets the target so the CSS transition runs.
+    animateProgress() {
+      const fill = this.root.querySelector(".withdrawly__progress-fill");
+      if (!fill) return;
+      const target = Number(fill.dataset.progress) || 0;
+      fill.style.width = `${this.progressPercent}%`;
+      void fill.offsetWidth;
+      fill.style.width = `${target}%`;
+      this.progressPercent = target;
     }
 
     async init() {
@@ -473,6 +490,7 @@
           </div>
         </div>
       `;
+      this.animateProgress();
 
       this.root.querySelectorAll("[data-item-checkbox]").forEach((checkbox) => {
         checkbox.addEventListener("change", () => {
@@ -539,6 +557,7 @@
           </div>
         </div>
       `;
+      this.animateProgress();
 
       this.root.querySelector("[data-back]").addEventListener("click", () => {
         this.declarationAccepted = false;
@@ -627,6 +646,7 @@
           </div>
         </div>
       `;
+      this.animateProgress();
     }
   }
 

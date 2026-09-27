@@ -1,10 +1,14 @@
 /* eslint-disable react/prop-types -- plain JS project, no prop-types package installed */
+import { Trans, useTranslation } from "react-i18next";
+
 export default function OnboardingSidebar({
   steps,
   currentIndex,
   onOpenGuide,
   onContactSupport,
 }) {
+  const { t } = useTranslation();
+
   return (
     <s-stack direction="block" gap="base">
       <s-box padding="small-200" borderWidth="base" borderRadius="large" background="base">
@@ -22,9 +26,11 @@ export default function OnboardingSidebar({
                   </s-badge>
                   <s-stack direction="block">
                     <s-text>
-                      <strong>{step.title}</strong>
+                      <strong>{t(`onboarding.steps.${step.key}.title`)}</strong>
                     </s-text>
-                    <s-text color="subdued">{step.description}</s-text>
+                    <s-text color="subdued">
+                      {t(`onboarding.steps.${step.key}.description`)}
+                    </s-text>
                   </s-stack>
                 </s-grid>
               </s-box>
@@ -38,32 +44,34 @@ export default function OnboardingSidebar({
           <s-grid gridTemplateColumns="auto 1fr" gap="small-500">
             <s-icon type="question-circle-filled" tone="critical"></s-icon>
             <s-text>
-              <strong>Need help?</strong>
+              <strong>{t("onboarding.help.heading")}</strong>
             </s-text>
           </s-grid>
-            <s-text color="subdued">
-              Read our{" "}
-              <s-link
-                href="#"
-                onClick={(event) => {
-                  event.preventDefault();
-                  onOpenGuide?.();
-                }}
-              >
-                guide
-              </s-link>{" "}
-              or{" "}
-              <s-link
-                href="#"
-                onClick={(event) => {
-                  event.preventDefault();
-                  onContactSupport?.();
-                }}
-              >
-                contact support
-              </s-link>
-              .
-            </s-text>
+          <s-text color="subdued">
+            <Trans
+              i18nKey="onboarding.help.body"
+              components={{
+                guideLink: (
+                  <s-link
+                    href="#"
+                    onClick={(event) => {
+                      event.preventDefault();
+                      onOpenGuide?.();
+                    }}
+                  />
+                ),
+                supportLink: (
+                  <s-link
+                    href="#"
+                    onClick={(event) => {
+                      event.preventDefault();
+                      onContactSupport?.();
+                    }}
+                  />
+                ),
+              }}
+            />
+          </s-text>
         </s-stack>
       </s-box>
     </s-stack>

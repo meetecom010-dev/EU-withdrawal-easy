@@ -60,7 +60,14 @@ const automationLogEntrySchema = new Schema(
     at: { type: Date, default: Date.now },
     action: { type: String, required: true },
     outcome: { type: String, enum: ["success", "skipped", "failed"], required: true },
+    // Default-locale text, kept for the event stream, alerts, and entries
+    // written before messageKey existed.
     message: { type: String, default: "" },
+    // requestDetail.activity.messages.<messageKey> in the admin translations,
+    // rendered with messageValues in the merchant's language. Null when the
+    // message is raw text with no translation (e.g. a Shopify error).
+    messageKey: { type: String, default: null },
+    messageValues: { type: Schema.Types.Mixed, default: null },
     // Shopify ids, user errors, anything worth having when debugging a
     // merchant's "why didn't this hold?" ticket.
     data: { type: Schema.Types.Mixed, default: null },

@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types -- plain JS project, no prop-types package installed */
+import { useTranslation } from "react-i18next";
 import SkeletonBox from "../../../components/skeleton/SkeletonBox";
 
 // Mirrors the real form-setup layout 1:1 (see route.jsx): the same responsive
@@ -66,8 +67,9 @@ function ChipCloudSkeleton() {
 }
 
 export default function FormSetupSkeleton() {
+  const { t } = useTranslation();
   return (
-    <s-page heading="Form setup">
+    <s-page heading={t("formSetup.pageTitle")}>
       <s-query-container>
         <s-grid
           gridTemplateColumns="@container (inline-size > 700px) 2fr 1fr, 1fr"

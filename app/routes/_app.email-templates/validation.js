@@ -1,10 +1,12 @@
 // Central validation for the email settings object. Returns a flat map of
-// dot-path -> error message for every field currently invalid; an empty object
+// dot-path -> message descriptor ({ key, values }, see i18n/errors.js) for
+// every field currently invalid; an empty object
 // means it's safe to save. Shared by the client (route.jsx) and the server
 // (services/app-settings.server) so the API can't be used to bypass it. Keys
 // are the dot-paths the UI writes through `update()`, e.g. "sender.replyTo" or
 // "templates.withdrawalApproved.subject".
 
+import { message } from "../../i18n/errors";
 import { SUBJECT_MAX, TEMPLATE_META } from "./constants";
 
 // Deliberately loose — enough to catch a typo'd address, not a full RFC 5322
@@ -17,7 +19,7 @@ export function validateEmailSettings(settings) {
 
   const replyTo = settings.sender?.replyTo?.trim() ?? "";
   if (replyTo && !EMAIL_RE.test(replyTo)) {
-    errors["sender.replyTo"] = "Enter a valid email address.";
+    errors["sender.replyTo"] = message("emailTemplates.validation.email");
   }
 
   // Subject + body rules, applied identically to the English base and every
@@ -25,12 +27,12 @@ export function validateEmailSettings(settings) {
   const checkCopy = (copy, at) => {
     const subject = copy.subject?.trim() ?? "";
     if (!subject) {
-      errors[at("subject")] = "Enter a subject line.";
+      errors[at("subject")] = message("emailTemplates.validation.subjectRequired");
     } else if (subject.length > SUBJECT_MAX) {
-      errors[at("subject")] = `Keep the subject under ${SUBJECT_MAX} characters.`;
+      errors[at("subject")] = message("emailTemplates.validation.subjectTooLong", { max: SUBJECT_MAX });
     }
     if (!copy.bodyHtml?.trim()) {
-      errors[at("bodyHtml")] = "The email body can't be empty.";
+      errors[at("bodyHtml")] = message("emailTemplates.validation.bodyRequired");
     }
   };
 

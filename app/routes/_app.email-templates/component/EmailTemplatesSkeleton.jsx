@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types -- plain JS project, no prop-types package installed */
+import { useTranslation } from "react-i18next";
 import SkeletonBox from "../../../components/skeleton/SkeletonBox";
 
 function FieldSkeleton({ labelWidth = "35%", height = "36px" }) {
@@ -11,8 +12,9 @@ function FieldSkeleton({ labelWidth = "35%", height = "36px" }) {
 }
 
 export default function EmailTemplatesSkeleton() {
+  const { t } = useTranslation();
   return (
-    <s-page heading="Email templates">
+    <s-page heading={t("emailTemplates.pageTitle")}>
       <s-stack direction="block" gap="base">
         <s-section>
           <s-stack direction="block" gap="base">

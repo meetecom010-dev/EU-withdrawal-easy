@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Trans, useTranslation } from "react-i18next";
 import { useShop } from "../context/ShopContext";
 import { getCheckoutProfile } from "../utils/api/checkoutProfile";
 
@@ -13,6 +14,7 @@ const CHECKOUT_EDITOR_FALLBACK_URL = "https://admin.shopify.com/settings/checkou
 // app/components/OrderStatusExtensionSync.jsx. Shared by the Form Setup
 // route and the onboarding withdrawal-form step.
 export default function OrderStatusExtensionStatus() {
+  const { t } = useTranslation();
   const { shop, orderStatusBlockAdded } = useShop();
   const [checkoutProfileId, setCheckoutProfileId] = useState(null);
 
@@ -43,27 +45,27 @@ export default function OrderStatusExtensionStatus() {
       : `https://admin.shopify.com/store/${storeHandle}/settings/checkout`
     : CHECKOUT_EDITOR_FALLBACK_URL;
 
+  // Step names must match what the checkout editor shows — "Withdrawal form"
+  // is the extension name from extensions/withdrawal-order-status's toml.
+  const steps = ["open", "add", "choose", "save"];
+
   return (
-    <s-banner tone="warning" heading="Order status page extension block not added">
+    <s-banner tone="warning" heading={t("blockSetup.orderStatus.heading")}>
       <s-stack direction="block" gap="small-200">
-        <s-paragraph>
-          Customers won&apos;t see the withdrawal form on the order status page until the app
-          block is added. Here&apos;s how:
-        </s-paragraph>
+        <s-paragraph>{t("blockSetup.orderStatus.body")}</s-paragraph>
         <s-ordered-list>
-          <s-list-item>
-            Click &quot;Add app block&quot; below — it will open the Order status page in
-            Shopify&apos;s checkout editor.
-          </s-list-item>
-          <s-list-item>Click &quot;Add app block&quot; in the left sidebar.</s-list-item>
-          <s-list-item>Choose &quot;EU Withdrawal Form&quot;.</s-list-item>
-          <s-list-item>Click &quot;Save&quot;.</s-list-item>
+          {steps.map((step) => (
+            <s-list-item key={step}>
+              <Trans
+                i18nKey={`blockSetup.orderStatus.steps.${step}`}
+                components={{ strong: <s-text type="strong" /> }}
+              />
+            </s-list-item>
+          ))}
         </s-ordered-list>
-        <s-paragraph color="subdued">
-          This warning updates automatically within a few seconds of the block being saved.
-        </s-paragraph>
+        <s-paragraph color="subdued">{t("blockSetup.autoUpdate")}</s-paragraph>
         <s-button href={addExtensionBlockUrl} target="_blank">
-          Add app block
+          {t("blockSetup.addAppBlock")}
         </s-button>
       </s-stack>
     </s-banner>

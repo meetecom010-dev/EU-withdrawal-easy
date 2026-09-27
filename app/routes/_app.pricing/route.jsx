@@ -1,8 +1,10 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useAppBridge } from "@shopify/app-bridge-react";
 import { authenticate } from "../../shopify.server";
 import { updateShopPlan } from "../../utils/api/shop";
 import { useShop, useRefreshShop } from "../../context/ShopContext";
+import { useFormatters } from "../../i18n/react";
 import PlanCard from "./component/PlanCard";
 
 export const loader = async ({ request }) => {
@@ -10,26 +12,20 @@ export const loader = async ({ request }) => {
   return null;
 };
 
-// Dummy plan catalog until real billing is wired up.
+// Dummy plan catalog until real billing is wired up. `name` is the value
+// stored on the Shop document; display names and features are
+// pricing.plans.<key> in en.json.
 const PLANS = [
-  {
-    name: "Free",
-    price: "$0/mo",
-    features: ["Up to 10 withdrawal requests/mo", "Email notifications"],
-  },
-  {
-    name: "Starter",
-    price: "$9/mo",
-    features: ["Unlimited withdrawal requests", "Custom form fields", "Email notifications"],
-  },
-  {
-    name: "Pro",
-    price: "$29/mo",
-    features: ["Everything in Starter", "Priority support", "Automated refunds"],
-  },
+  { key: "free", name: "Free", price: 0 },
+  { key: "starter", name: "Starter", price: 9 },
+  { key: "pro", name: "Pro", price: 29 },
 ];
 
+const PLAN_CURRENCY = "USD";
+
 export default function Pricing() {
+  const { t } = useTranslation();
+  const { formatMoney } = useFormatters();
   const shopify = useAppBridge();
   const shop = useShop();
   const refreshShop = useRefreshShop();
@@ -39,13 +35,10 @@ export default function Pricing() {
   async function handleSelect(plan) {
     setSelecting(plan.name);
     try {
-      const { shop: updatedShop } = await updateShopPlan({
-        name: plan.name,
-        price: Number(plan.price.replace(/[^0-9.]/g, "")),
-      });
+      const { shop: updatedShop } = await updateShopPlan({ name: plan.name, price: plan.price });
       setCurrentPlan(updatedShop.plan.name);
       refreshShop();
-      shopify.toast.show(`Switched to ${plan.name}`);
+      shopify.toast.show(t("pricing.switchedToast", { plan: t(`pricing.plans.${plan.key}.name`) }));
     } catch (error) {
       shopify.toast.show(error.message, { isError: true });
     } finally {
@@ -54,14 +47,16 @@ export default function Pricing() {
   }
 
   return (
-    <s-page heading="Pricing">
+    <s-page heading={t("pricing.pageTitle")}>
       <s-grid gridTemplateColumns="1fr 1fr 1fr" gap="base">
         {PLANS.map((plan) => (
           <PlanCard
-            key={plan.name}
-            name={plan.name}
-            price={plan.price}
-            features={plan.features}
+            key={plan.key}
+            name={t(`pricing.plans.${plan.key}.name`)}
+            price={t("pricing.pricePerMonth", {
+              price: formatMoney({ amount: plan.price, currencyCode: PLAN_CURRENCY }),
+            })}
+            features={t(`pricing.plans.${plan.key}.features`, { returnObjects: true })}
             isCurrent={currentPlan === plan.name}
             isSelecting={selecting === plan.name}
             onSelect={() => handleSelect(plan)}

@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types -- plain JS project, no prop-types package installed */
+import { useTranslation } from "react-i18next";
 import SkeletonBox from "../../../components/skeleton/SkeletonBox";
 
 // Mirrors the real RequestDetail layout (see RequestDetail.jsx): left column
@@ -52,8 +53,9 @@ function SideCardSkeleton({ headingWidth = "100px", rows = 3 }) {
 }
 
 export default function RequestDetailSkeleton() {
+  const { t } = useTranslation();
   return (
-    <s-page heading="Withdrawal request">
+    <s-page heading={t("requestDetail.pageTitle")}>
       <s-stack direction="block" gap="large-100">
         <SkeletonBox width="50%" height="13px" />
 

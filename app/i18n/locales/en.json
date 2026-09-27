@@ -1,0 +1,1118 @@
+{
+  "common": {
+    "add": "Add",
+    "backToHome": "Back to Home",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "discard": "Discard",
+    "done": "Done",
+    "emptyValue": "—",
+    "noMatches": "No results for “{{query}}”.",
+    "preview": "Preview",
+    "remove": "Remove",
+    "save": "Save",
+    "verified": "Verified"
+  },
+  "nav": {
+    "home": "Home",
+    "formSetup": "Form setup",
+    "withdrawalRequests": "Withdrawal requests",
+    "emailTemplates": "Email templates",
+    "pricing": "Pricing"
+  },
+  "errors": {
+    "generic": "Something went wrong. Try again.",
+    "requestFailed": "Something went wrong (error {{status}}). Try again.",
+    "methodNotAllowed": "This action isn't supported.",
+    "unknownAction": "This action isn't supported.",
+    "noValidFields": "There's nothing to update.",
+    "emailServiceUnavailable": "We couldn't connect to the email service. Try again in a few minutes.",
+    "emailServiceNotConfigured": "Email sending isn't set up yet. Contact support for help.",
+    "requestNotFound": "This withdrawal request doesn't exist or was deleted.",
+    "unknownDecision": "Choose whether to approve or reject this request.",
+    "invalidStatus": "Choose a valid status for this request.",
+    "noteRequired": "Enter a note.",
+    "orderNotFound": "This order can't be found in Shopify.",
+    "invalidEmail": "Enter a valid email address.",
+    "featureRequestIncomplete": "Fill in all fields before you send your request.",
+    "senderCodeRequired": "Enter the verification code from your email.",
+    "senderNotFound": "We couldn't find this sender email. Remove it and add it again to get a new code.",
+    "senderNotStarted": "Verify your sender email first.",
+    "senderIdMissing": "We couldn't register this sender email. Try again.",
+    "domainInvalid": "Enter a valid domain, like yourstore.com.",
+    "domainFreeProvider": "Free email providers like Gmail and Yahoo can't be authenticated. Use your store's domain instead."
+  },
+  "auth": {
+    "login": {
+      "heading": "Log in",
+      "shopLabel": "Store domain",
+      "shopDetails": "example.myshopify.com",
+      "submit": "Log in",
+      "missingShop": "Enter your store domain to log in.",
+      "invalidShop": "Enter a valid store domain, like example.myshopify.com."
+    }
+  },
+  "status": {
+    "pending": "Pending",
+    "approved": "Approved",
+    "rejected": "Rejected"
+  },
+  "sourceInline": {
+    "order_status": "the order status page",
+    "standalone_page": "your storefront page"
+  },
+  "placements": {
+    "orderStatus": {
+      "label": "Order status page",
+      "details": "Show the withdrawal form on the order status page that customers see after checkout."
+    },
+    "storefront": {
+      "label": "Storefront page",
+      "details": "Show the withdrawal form on its own page in your theme, so customers can find it outside the order status page."
+    }
+  },
+  "orderStatus": {
+    "financial": {
+      "PENDING": "Payment pending",
+      "AUTHORIZED": "Authorized",
+      "PARTIALLY_PAID": "Partially paid",
+      "PAID": "Paid",
+      "PARTIALLY_REFUNDED": "Partially refunded",
+      "REFUNDED": "Refunded",
+      "VOIDED": "Voided",
+      "EXPIRED": "Expired"
+    },
+    "fulfillment": {
+      "UNFULFILLED": "Unfulfilled",
+      "PENDING_FULFILLMENT": "Pending fulfillment",
+      "OPEN": "Open",
+      "IN_PROGRESS": "In progress",
+      "ON_HOLD": "On hold",
+      "PARTIALLY_FULFILLED": "Partially fulfilled",
+      "FULFILLED": "Fulfilled",
+      "RESTOCKED": "Restocked",
+      "SCHEDULED": "Scheduled"
+    },
+    "return": {
+      "REQUESTED": "Requested",
+      "OPEN": "Open",
+      "CLOSED": "Closed",
+      "DECLINED": "Declined",
+      "CANCELED": "Canceled"
+    }
+  },
+  "stats": {
+    "heading": "Overview",
+    "description": "A snapshot of your withdrawal requests",
+    "viewRequests": "View requests",
+    "total": "Total requests",
+    "today": "Submitted today",
+    "pending": "Pending",
+    "closed": "Closed",
+    "requestCount_one": "{{count}} request",
+    "requestCount_other": "{{count}} requests"
+  },
+  "home": {
+    "pageTitle": "Home",
+    "loadError": "Couldn't load your dashboard",
+    "setupBanner": {
+      "heading_one": "{{count}} setup step left",
+      "heading_other": "{{count}} setup steps left",
+      "body": "Customers can't submit withdrawal requests from your storefront until you finish these steps: {{steps}}."
+    },
+    "setupGuide": {
+      "heading": "Setup guide",
+      "description": "Use this guide to get your withdrawal form live on your storefront.",
+      "progress": "{{completed}} of {{total}} tasks completed",
+      "dismiss": "Dismiss setup guide",
+      "collapse": "Collapse setup guide",
+      "expand": "Expand setup guide",
+      "showStep": "Show details for {{step}}",
+      "hideStep": "Hide details for {{step}}",
+      "steps": {
+        "dpa": {
+          "label": "Accept the Data Processing Agreement",
+          "description": "The app can't process withdrawal requests for your store until you accept this agreement.",
+          "checkbox": "I accept the Data Processing Agreement"
+        },
+        "form": {
+          "label": "Turn on your withdrawal form",
+          "description": "Turn on the form and choose where customers see it. The fields, reasons, and wording already have default text. You can change them anytime in Form setup.",
+          "checkbox": "Turn on withdrawal form",
+          "cta": "Go to Form setup",
+          "placementHeading": "Choose where customers see the form",
+          "placementDescription": "Select at least one place. Each place needs its app block before customers can see the form."
+        },
+        "blocks": {
+          "label": "Add the app blocks to your store",
+          "description": "Add an app block for each place you chose in the previous step.",
+          "locked": "Complete step 2 to choose where the form appears. Then you can add the app blocks here.",
+          "surfaces": {
+            "orderStatus": "Order status page",
+            "theme": "Storefront page"
+          },
+          "live": {
+            "orderStatus": "The app block is live on your order status page.",
+            "theme": "The app block is live on your storefront page."
+          }
+        }
+      }
+    },
+    "help": {
+      "heading": "Help and resources",
+      "support": {
+        "title": "Email support",
+        "description": "Have a question? Our support team can help.",
+        "link": "Contact support"
+      },
+      "faqs": {
+        "title": "FAQs",
+        "description": "Find answers to common questions about setting up and using the app.",
+        "link": "View FAQs"
+      },
+      "featureRequest": {
+        "title": "Feature requests",
+        "description": "Have an idea for the app? Tell us what you'd like to see.",
+        "link": "Request a feature"
+      }
+    }
+  },
+  "blockSetup": {
+    "autoUpdate": "This message goes away on its own a few seconds after you save the app block.",
+    "addAppBlock": "Add app block",
+    "orderStatus": {
+      "heading": "Add the app block to your order status page",
+      "body": "Customers can't see the withdrawal form on the order status page until you add the app block. To add it:",
+      "steps": {
+        "open": "Select <strong>Add app block</strong> below. The order status page opens in the checkout editor.",
+        "add": "In the sidebar, select <strong>Add app block</strong>.",
+        "choose": "Select <strong>Withdrawal form</strong>.",
+        "save": "Select <strong>Save</strong>."
+      }
+    },
+    "storefront": {
+      "heading": "Add the app block to a storefront page",
+      "body": "Choose a page template, then select Add app block. The theme editor opens with the withdrawal form already added as a section.",
+      "templateLabel": "Page template",
+      "templates": {
+        "page": "Default page",
+        "index": "Home page",
+        "product": "Product pages",
+        "collection": "Collection pages",
+        "cart": "Cart page"
+      },
+      "steps": {
+        "open": "Select <strong>Add app block</strong> to open the theme editor with the section added.",
+        "move": "Drag the section to where you want it on the page.",
+        "save": "Select <strong>Save</strong>."
+      }
+    }
+  },
+  "onboarding": {
+    "pageTitle": "Get started",
+    "heading": "Get your store ready for EU withdrawals",
+    "intro": "Complete these 3 steps to give your EU customers a compliant way to withdraw from a purchase.",
+    "stepBadge": "Step {{current}} of {{total}}",
+    "completedToast": "Setup completed",
+    "steps": {
+      "welcome": {
+        "title": "Welcome",
+        "description": "What the app does"
+      },
+      "dpa": {
+        "title": "Data Processing Agreement",
+        "description": "Accept to continue"
+      },
+      "form": {
+        "title": "Withdrawal form",
+        "description": "Turn on your form"
+      }
+    },
+    "actions": {
+      "getStarted": "Get started",
+      "continue": "Continue",
+      "finish": "Finish setup",
+      "skip": "Skip for now",
+      "back": "Back"
+    },
+    "help": {
+      "heading": "Need help?",
+      "body": "Read our <guideLink>setup guide</guideLink> or <supportLink>contact support</supportLink>.",
+      "guidePlaceholder": "The setup guide opens in a new tab (demo)",
+      "supportPlaceholder": "Support chat opens (demo)"
+    },
+    "welcome": {
+      "heading": "Welcome to {{appName}}",
+      "setupTime": "Takes about 1 minute",
+      "law": "Since June 19, 2026, EU law (Directive 2023/2673, Article 11a) requires stores that sell to EU customers to offer a 2-step withdrawal function for every order. A returns policy alone isn't enough.",
+      "app": "{{appName}} adds a withdrawal button to your customers' order status page. It handles the 2-step confirmation and sends the required confirmation email. You can manage all requests in one place.",
+      "imageAlt": "A customer withdrawing from an order",
+      "requirementsHeading": "What the law requires",
+      "requirements": {
+        "button": "A clear withdrawal button that's always available on the order status page",
+        "twoStep": "A 2-step process: customers submit their withdrawal, then confirm it",
+        "email": "An automatic confirmation email that customers can keep"
+      },
+      "penaltyHeading": "Penalty for non-compliance",
+      "penalty": "If the withdrawal function is missing or broken, the law extends the 14-day withdrawal period. Customers then get 12 months and 14 days to withdraw from each affected order."
+    },
+    "dpa": {
+      "heading": "Data Processing Agreement",
+      "body": "The app uses personal data to handle withdrawal requests for you. This includes customer names, email addresses, and order details. Under the GDPR, you need to accept our Data Processing Agreement (DPA) before the app can use this data.",
+      "viewLink": "View Data Processing Agreement",
+      "viewPlaceholder": "The DPA opens in a new tab (demo)",
+      "checkbox": "I accept the Data Processing Agreement",
+      "later": "You can accept the DPA later from Home, but the app can't process withdrawal requests until you do."
+    },
+    "form": {
+      "heading": "Turn on your withdrawal form",
+      "body": "Customers submit their withdrawal, then confirm it in a separate step, as EU law requires. The form comes with default legal wording. Customers get 14 days to withdraw, starting from delivery.",
+      "switch": "Turn on withdrawal form",
+      "later": "You can change the wording, languages, deadlines, automation, and placement anytime in Form setup."
+    }
+  },
+  "formSetup": {
+    "pageTitle": "Form setup",
+    "loadError": "Couldn't load form settings",
+    "saveError": "Couldn't save form settings",
+    "savedToast": "Form settings saved",
+    "enable": {
+      "heading": "Withdrawal form",
+      "description": "Choose whether customers can submit withdrawal requests, and where they see the form.",
+      "checkbox": "Turn on withdrawal form",
+      "details": "Customers can submit a withdrawal request if their order ships to one of your eligible countries.",
+      "orderStatus": "Show on order status page",
+      "storefront": "Show on a storefront page"
+    },
+    "countries": {
+      "heading": "Eligible countries",
+      "description": "Customers only see the withdrawal form if their order ships to one of these countries.",
+      "all": "All {{count}} EU countries (recommended)",
+      "allDetails": "The right of withdrawal applies across the EU.",
+      "specific": "Specific countries",
+      "specificDetails": "Choose countries below. You can change this anytime.",
+      "pickerLabel": "Countries",
+      "pickerPlaceholder": "Search countries"
+    },
+    "content": {
+      "heading": "Form content",
+      "tabs": {
+        "step1": "1. Details",
+        "confirm": "2. Confirm",
+        "done": "3. Done"
+      },
+      "language": "Language",
+      "languageDetails": "Choose a language to edit the form content in that language. Each language is saved separately.",
+      "beforeFulfillment": {
+        "heading": "Before fulfillment",
+        "description": "Shown when a customer opens the form before their order ships."
+      },
+      "afterDelivery": {
+        "heading": "After delivery",
+        "description": "Shown instead when the order has already been delivered."
+      },
+      "title": "Title",
+      "description": "Description",
+      "itemHeading": "Item selection heading",
+      "customerDetails": {
+        "heading": "Customer details",
+        "description": "Filled in from the order. Customers can't edit these fields.",
+        "locked": "Locked",
+        "fullName": "Full name",
+        "email": "Email",
+        "orderNumber": "Order number"
+      },
+      "reason": {
+        "heading": "Reason for withdrawal",
+        "checkbox": "Ask for a reason",
+        "details": "Customers never have to give a reason. EU law requires this field to be optional.",
+        "label": "Reason field label",
+        "optionsHeading": "Reason options",
+        "optionsHelp": "Customers choose from this list. Add, remove, or reword the options to match your store.",
+        "removeOption": "Remove {{option}}",
+        "addLabel": "Add a reason",
+        "addPlaceholder": "For example, Ordered by mistake",
+        "translatedHelp": "Translate each option. To add or remove options, switch to English.",
+        "translatedEmpty": "Add reason options in English first."
+      },
+      "continueButton": "Continue button label",
+      "confirm": {
+        "heading": "Confirmation heading",
+        "messageBefore": "Message before fulfillment",
+        "messageAfter": "Message after delivery",
+        "declaration": "Declaration",
+        "button": "Confirm button label"
+      },
+      "done": {
+        "titleBefore": "Title before fulfillment",
+        "messageBefore": "Message before fulfillment",
+        "titleAfter": "Title after delivery",
+        "messageAfter": "Message after delivery"
+      }
+    },
+    "automation": {
+      "heading": "Automation",
+      "description": "Choose what the app does when a customer submits a withdrawal request.",
+      "beforeShip": {
+        "heading": "Before the order ships",
+        "hold": "Hold fulfillment for review",
+        "holdDetails": "Pause fulfillment until your staff reviews the request.",
+        "tagDetails": "Tag orders that get a request before they ship, so your staff can find them in your orders list."
+      },
+      "fallback": {
+        "label": "If no one reviews the request",
+        "hold": "Keep the hold until staff take action",
+        "cancelNow": "Cancel and refund the order immediately",
+        "releaseN": "Release the hold after a set number of days",
+        "cancelN": "Cancel and refund after a set number of days",
+        "days": "Number of days"
+      },
+      "afterDelivery": {
+        "heading": "After delivery",
+        "description": "Choose what happens when a request arrives after the customer might already have the items. Every request still appears in Withdrawal requests.",
+        "createReturn": "Create a return",
+        "createReturnDetails": "Create a return in Shopify for the requested items.",
+        "tagDetails": "Tag orders that get a request after delivery."
+      },
+      "tag": {
+        "checkbox": "Tag the order",
+        "label": "Order tags",
+        "placeholder": "Add a tag"
+      }
+    },
+    "deadline": {
+      "heading": "Withdrawal deadline",
+      "description": "The withdrawal period starts when the order is delivered, not when it's placed. EU law requires at least 14 days.",
+      "days": "Days to withdraw after delivery",
+      "daysDetails": "How long customers have to withdraw after their order arrives.",
+      "transit": "Estimated transit time (days)",
+      "transitDetails": "Used to estimate the delivery date when the carrier doesn't provide one."
+    },
+    "validation": {
+      "countryMode": "Choose which countries are eligible.",
+      "euCountries": "Select at least one country.",
+      "title": "Enter a title.",
+      "description": "Enter a description.",
+      "itemHeading": "Enter a heading for the item list.",
+      "continueButton": "Enter a label for the continue button.",
+      "heading": "Enter a heading.",
+      "confirmMessage": "Enter a confirmation message.",
+      "declaration": "Enter the declaration customers must accept.",
+      "confirmButton": "Enter a label for the confirm button.",
+      "message": "Enter a message.",
+      "reasonLabel": "Enter a label for the reason field.",
+      "reasonOptions": "Add at least one reason.",
+      "reasonOptionTranslation": "Enter a translation for this reason.",
+      "fallback": "Choose what happens if no one reviews the request.",
+      "daysRange": "Enter a number of days from {{min}} to {{max}}.",
+      "tags": "Add at least one tag, or turn off tagging.",
+      "afterDeliveryAction": "Choose what happens after delivery."
+    },
+    "preview": {
+      "heading": "Live preview",
+      "compliantBadge": "2-step compliant",
+      "surfaceLabel": "Preview",
+      "surfaces": {
+        "orderStatus": "Order status page",
+        "theme": "Storefront page"
+      },
+      "banner": {
+        "orderStatus": "This is the flow customers see on the order status page. Select the buttons to try it, or use the tabs in Form content to go to a specific step.",
+        "theme": "This is the flow customers see on your storefront page. It starts with a “Find your order” step, because storefront visitors aren't logged in."
+      },
+      "restart": "Restart preview",
+      "position": {
+        "entry": "Entry card",
+        "lookup": "Find your order",
+        "step": "Step {{current}} of {{total}}"
+      },
+      "storefront": {
+        "start": "Start withdrawal request",
+        "findOrderHeading": "Find your order",
+        "findOrderBody": "Enter your order details to start your withdrawal request.",
+        "fullName": "Full name",
+        "email": "Email",
+        "orderNumber": "Order number",
+        "continue": "Continue",
+        "steps": {
+          "step1": "Details",
+          "confirm": "Confirm",
+          "done": "Done"
+        },
+        "stepOf": "Step {{current}} of {{total}}",
+        "stepProgress": "Step {{current}} of {{total}}: {{label}}",
+        "reasonPlaceholder": "Select a reason (optional)",
+        "otherReason": "Other",
+        "yourReason": "Your reason",
+        "yourReasonPlaceholder": "Tell us your reason",
+        "selectItem": "Select at least one item to continue.",
+        "itemsToWithdraw": "Items to withdraw ({{count}})",
+        "selectedTotal": "Selected items total",
+        "previous": "Previous",
+        "submittedOn": "Submitted on {{date}}"
+      },
+      "sample": {
+        "customerName": "Jane Doe",
+        "items": {
+          "lamp": {
+            "title": "Fjord Table Lamp",
+            "variant": "Oak / Large"
+          },
+          "candleHolder": {
+            "title": "Tind Candle Holder",
+            "variant": "Brass"
+          }
+        }
+      }
+    }
+  },
+  "requests": {
+    "pageTitle": "Withdrawal requests",
+    "searchLabel": "Search withdrawal requests",
+    "searchPlaceholder": "Search by order number, customer name, or email",
+    "export": "Export",
+    "exportSelected": "Export selected",
+    "tabs": {
+      "all": "All",
+      "withCount": "{{label}} ({{count}})"
+    },
+    "empty": {
+      "imageAlt": "",
+      "heading": "No withdrawal requests yet",
+      "body": "Withdrawal requests from your customers will appear here.",
+      "filteredHeading": "No withdrawal requests found",
+      "filteredBody": "Try changing the search term or filter."
+    },
+    "table": {
+      "selectAll": "Select all withdrawal requests",
+      "selectRow": "Select order {{order}}",
+      "selectedCount": "{{count}} selected",
+      "order": "Order",
+      "customer": "Customer",
+      "items": "Items",
+      "value": "Value",
+      "status": "Status",
+      "submitted": "Submitted",
+      "actions": "Actions",
+      "itemCount_one": "{{count}} item",
+      "itemCount_other": "{{count}} items",
+      "viewRow": "View request for order {{order}}",
+      "deleteRow": "Delete request for order {{order}}"
+    },
+    "delete": {
+      "heading_one": "Delete withdrawal request?",
+      "heading_other": "Delete {{count}} withdrawal requests?",
+      "body_one": "This withdrawal request will be permanently deleted. This can't be undone.",
+      "body_other": "These {{count}} withdrawal requests will be permanently deleted. This can't be undone.",
+      "confirm_one": "Delete request",
+      "confirm_other": "Delete requests",
+      "toast_one": "Withdrawal request deleted",
+      "toast_other": "{{count}} withdrawal requests deleted"
+    },
+    "csv": {
+      "order": "Order",
+      "customerName": "Customer name",
+      "customerEmail": "Customer email",
+      "country": "Country",
+      "items": "Items",
+      "value": "Value",
+      "reason": "Reason",
+      "status": "Status",
+      "submitted": "Submitted",
+      "decided": "Decided"
+    }
+  },
+  "requestDetail": {
+    "pageTitle": "Withdrawal request",
+    "backLink": "Withdrawal requests",
+    "submittedLine": "Submitted {{date}} from {{source}}",
+    "previous": "Previous request",
+    "next": "Next request",
+    "badges": {
+      "canceled": "Canceled",
+      "onHold": "On hold",
+      "return": "Return: {{status}}"
+    },
+    "actions": {
+      "refund": "Refund",
+      "more": "More actions",
+      "cancelOrder": "Cancel order",
+      "placeHold": "Hold fulfillment",
+      "releaseHold": "Release fulfillment hold",
+      "createReturn": "Create return",
+      "refreshReturn": "Refresh return status",
+      "viewOrder": "View order",
+      "evidencePack": "Export evidence pack",
+      "evidencePackComingSoon": "Evidence pack export is coming soon"
+    },
+    "banners": {
+      "orderUnavailableHeading": "Order details unavailable",
+      "orderUnavailableBody": "{{error}} You can't use order actions until the order details load.",
+      "canceled": "This order was canceled. Order actions are no longer available."
+    },
+    "deadline": {
+      "heading": "Refund deadline",
+      "pendingLabel": "Time left to decide and refund",
+      "decidedLabel": "Decision",
+      "badges": {
+        "overdue": "Overdue",
+        "actionNeeded": "Action needed",
+        "onTime": "On time"
+      },
+      "daysLeft_one": "{{count}} day left",
+      "daysLeft_other": "{{count}} days left",
+      "daysOverdue_one": "{{count}} day overdue",
+      "daysOverdue_other": "{{count}} days overdue",
+      "daysEarly_one": "{{count}} day before the deadline",
+      "daysEarly_other": "{{count}} days before the deadline",
+      "daysLate_one": "{{count}} day after the deadline",
+      "daysLate_other": "{{count}} days after the deadline",
+      "pending": "You have 14 days from when the request was submitted to decide and refund. The deadline is {{date}}.",
+      "pendingOverdue": "The deadline passed on {{date}}. Refund the customer as soon as possible.",
+      "decidedOnTime": "Decided within the 14-day refund period. The deadline was {{date}}.",
+      "decidedLate": "Decided after the refund deadline of {{date}}."
+    },
+    "items": {
+      "heading": "Withdrawn items",
+      "reject": "Reject",
+      "approve": "Approve",
+      "total": "Total withdrawn",
+      "sku": "SKU: {{sku}}",
+      "quantity": "Quantity: {{count}}"
+    },
+    "return": {
+      "heading": "Return",
+      "status": "Status",
+      "created": "Created",
+      "body": "A return was created in Shopify for the withdrawn items. To get its latest status, go to More actions and select Refresh return status."
+    },
+    "payment": {
+      "heading": "Payment",
+      "status": "Payment status",
+      "subtotal": "Withdrawal subtotal",
+      "shipping": "Order shipping",
+      "total": "Order total",
+      "refunded": "Refunded",
+      "unavailable": "Payment details aren't available right now."
+    },
+    "activity": {
+      "heading": "Activity",
+      "noteLabel": "Add a note",
+      "notePlaceholder": "Add a note…",
+      "post": "Post",
+      "noteHelp": "Only you and your staff can see notes. Customers never see them.",
+      "submitted": "Withdrawal request submitted from {{source}}",
+      "decided": {
+        "approved": "Request approved",
+        "rejected": "Request rejected"
+      },
+      "note": "Note: {{body}}",
+      "entry": "{{label}}: {{message}}",
+      "actions": {
+        "resolve_branch": "Automation started",
+        "run_automation": "Automation",
+        "automation_completed": "Automation finished",
+        "hold_fulfillment": "Fulfillment hold",
+        "schedule_fallback": "Scheduled follow-up",
+        "release_hold": "Fulfillment hold released",
+        "cancel_order_immediate": "Order canceled and refunded",
+        "cancel_order_scheduled": "Order canceled and refunded",
+        "cancel_order_manual": "Order canceled and refunded",
+        "cancel_order": "Order canceled and refunded",
+        "refund": "Refund",
+        "tag_before_ship": "Order tagged",
+        "tag_after_delivery": "Order tagged",
+        "order_tag_add": "Order tags added",
+        "order_tag_remove": "Order tags removed",
+        "create_return": "Return",
+        "refresh_return": "Return status refreshed",
+        "fetch_shop_contact": "Store contact lookup",
+        "customer_email": "Customer confirmation email",
+        "merchant_email": "New request notification",
+        "notify_customer": "Decision email",
+        "notify_merchant": "You were notified"
+      },
+      "messages": {
+        "noTags": "No tags are set up",
+        "tagged": "Tagged order with {{tags}}",
+        "noHoldableOrders": "This order has no fulfillment orders that can be held",
+        "held": "Held fulfillment order {{id}}",
+        "holdOff": "Hold for review is turned off",
+        "tagBeforeShipOff": "Tagging before shipping is turned off",
+        "tagAfterDeliveryOff": "Tagging after delivery is turned off",
+        "fallbackHold": "Order stays on hold until staff take action",
+        "fallbackInvalidDays": "Couldn't schedule the follow-up. The number of days isn't valid.",
+        "scheduledRelease": "Hold release scheduled for {{date}}",
+        "scheduledCancel": "Cancellation and refund scheduled for {{date}}",
+        "canceled": "Order canceled and refunded",
+        "returnCreated": "Return created in Shopify",
+        "returnNoMatch": "None of the requested items match an item on this order that can be returned",
+        "notifiedByEmail": "Notified in the app and by email",
+        "notifiedEmailFailed": "Notified in the app. The notification email failed: {{error}}",
+        "notifiedInAppOnly": "Notified in the app. The notification email wasn't sent.",
+        "emailSent": "Sent",
+        "emailFailed": "Failed: {{error}}",
+        "emailNotSent": "Not sent because there's no recipient or email isn't set up",
+        "orderNotFound": "Order {{id}} can't be found in Shopify",
+        "alreadyCanceled": "Order was already canceled",
+        "branchBeforeShip": "Order isn't fulfilled yet, so the before-shipping steps ran",
+        "branchAfterDelivery": "Order is fulfilled, so the after-delivery steps ran",
+        "runCompleted": "Automation completed",
+        "runFailed": "One or more automation steps failed",
+        "runSkipped": "Automation skipped",
+        "scheduledSkippedApproved": "Request was already approved, so the scheduled action didn't run",
+        "scheduledSkippedRejected": "Request was already rejected, so the scheduled action didn't run",
+        "noHoldsPlaced": "No holds were placed for this request",
+        "holdsAlreadyReleased": "Holds were already released",
+        "holdReleased": "Released hold on {{id}}",
+        "holdExists": "A hold is already in place for this request",
+        "decisionSkipped": "Staff chose not to email the customer",
+        "decisionSent": "Customer emailed about the decision",
+        "decisionFailed": "Decision email failed: {{error}}",
+        "decisionNotConfigured": "Decision email wasn't sent because email isn't set up",
+        "refunded": "Refunded {{amount}}",
+        "noReturn": "There's no return for this request",
+        "returnStatus": "Return status: {{status}}",
+        "tagsRemoved": "Removed order tags: {{tags}}",
+        "tagsAdded": "Added order tags: {{tags}}"
+      }
+    },
+    "order": {
+      "heading": "Order",
+      "order": "Order",
+      "placed": "Placed",
+      "payment": "Payment",
+      "fulfillment": "Fulfillment"
+    },
+    "customer": {
+      "heading": "Customer",
+      "avatarFallback": "Customer",
+      "contactHeading": "Contact information",
+      "email": "Email",
+      "language": "Language",
+      "shippingHeading": "Shipping address"
+    },
+    "automation": {
+      "heading": "Automation",
+      "stage": "Stage",
+      "stages": {
+        "before_ship": "Before shipping",
+        "after_delivery": "After delivery"
+      },
+      "hold": "Fulfillment hold",
+      "holdStates": {
+        "onHold": "On hold",
+        "released": "Released",
+        "none": "None"
+      },
+      "canceled": "Canceled",
+      "return": "Return"
+    },
+    "emails": {
+      "heading": "Email history",
+      "customerConfirmation": "Customer withdrawal confirmation",
+      "merchantNotification": "New request notification",
+      "decision": "Decision email",
+      "statuses": {
+        "sent": "Sent",
+        "failed": "Failed",
+        "notSent": "Not sent"
+      }
+    },
+    "tags": {
+      "heading": "Order tags",
+      "label": "Add order tag",
+      "placeholder": "Add a tag",
+      "remove": "Remove tag {{tag}}",
+      "savedToast": "Order tags saved"
+    },
+    "reason": {
+      "heading": "Reason for withdrawal",
+      "quoted": "“{{reason}}”",
+      "none": "No reason given"
+    },
+    "decidedToast": {
+      "approved": "Withdrawal request approved",
+      "rejected": "Withdrawal request rejected"
+    },
+    "cancelModal": {
+      "heading": "Cancel order?",
+      "body": "This cancels the entire order in Shopify and refunds the customer to their original payment method. This can't be undone.",
+      "keep": "Keep order",
+      "confirm": "Cancel and refund order"
+    },
+    "decisionModal": {
+      "headingApprove": "Approve withdrawal request?",
+      "headingReject": "Reject withdrawal request?",
+      "approveAndSend": "Approve and send email",
+      "rejectAndSend": "Reject and send email",
+      "approve": "Approve",
+      "reject": "Reject",
+      "loadingLabel": "Loading email preview",
+      "loading": "Preparing the customer email…",
+      "sendEmail": "Send email to customer",
+      "language": "This email is in {{language}}, the customer's language. Your changes only apply to this email.",
+      "subject": "Subject",
+      "body": "Email body",
+      "editHtml": "Edit HTML",
+      "htmlLabel": "Email HTML",
+      "previewTitle": "Email preview",
+      "templateUnchanged": "Your changes only apply to this email. Your saved template won't change.",
+      "noEmail": "The customer won't get an email. You can contact them separately if you need to."
+    },
+    "refundModal": {
+      "heading": "Refund withdrawn items",
+      "calculatingLabel": "Calculating refund",
+      "calculating": "Calculating the refund amount…",
+      "nothingToRefund": "There's nothing to refund on this order. The withdrawn items might already be refunded, or the order might be canceled.",
+      "amount": "Refund amount",
+      "body": "The withdrawn items are refunded to the original payment method. Items are restocked where possible.",
+      "includesShipping": "This is a full withdrawal, so the original shipping cost is included.",
+      "irreversible": "This can't be undone.",
+      "confirmAmount": "Refund {{amount}}",
+      "confirm": "Refund"
+    },
+    "shopifyNotes": {
+      "holdAutomatic": "Withdrawal request for order {{order}} is waiting for staff review",
+      "holdManual": "Withdrawal request for order {{order}} was held by staff",
+      "canceled": "Canceled by {{appName}} because the customer withdrew from the purchase (request {{id}}).",
+      "refunded": "Refunded by {{appName}} because the customer withdrew from the purchase (request {{id}}).",
+      "returnReason": "Withdrawal request: {{reason}}",
+      "returnReasonNone": "Statutory withdrawal request"
+    }
+  },
+  "emailTemplates": {
+    "pageTitle": "Email templates",
+    "loadError": "Couldn't load email templates",
+    "saveError": "Couldn't save email templates",
+    "savedToast": "Email templates saved",
+    "resetToast": "{{name}} reset to default",
+    "sender": {
+      "heading": "Sender",
+      "description": "These settings apply to every email the app sends for your store. Send from your own verified address, and choose where customer replies go.",
+      "emailLabel": "Sender email",
+      "emailPlaceholder": "notifications@withdrawaleasy.com",
+      "detailsVerified": "Emails are sent from this address.",
+      "detailsPending": "Enter the code we sent to this address to verify it.",
+      "detailsDefault": "If you leave this blank, emails are sent from {{email}}.",
+      "detailsDefaultFallback": "If you leave this blank, emails are sent from the app's default address.",
+      "freeProviderWarning": "Free email providers like Gmail and Yahoo can't be authenticated. Customers will see “via brevosend.com” on emails from this address. For a more professional look, use an address on your store's domain.",
+      "codeLabel": "Verification code",
+      "codeDetails": "Enter the 6-digit code from the email we sent you.",
+      "verifyCode": "Verify code",
+      "checkStatus": "Check verification status",
+      "verifyEmail": "Verify email",
+      "codeSent": "We sent a verification code to {{email}}.",
+      "notVerifiedYet": "This email isn't verified yet. Check your inbox for the code, then try again.",
+      "replyToLabel": "Reply-to email",
+      "replyToPlaceholder": "support@yourstore.com",
+      "replyToDetails": "Customer replies go to your store email by default. To send replies somewhere else, enter a different address."
+    },
+    "domain": {
+      "heading": "Domain authentication",
+      "description": "Authenticate your domain so customers don't see “via brevosend.com” on your emails. This is optional, but we recommend it if you send from your store's domain.",
+      "label": "Domain",
+      "placeholder": "yourstore.com",
+      "details": "Enter the domain you send emails from, not your myshopify.com domain.",
+      "freeProviderWarning": "Free email providers like Gmail and Yahoo can't be authenticated. Enter your store's domain instead.",
+      "columns": {
+        "record": "Record",
+        "type": "Type",
+        "host": "Host",
+        "value": "Value"
+      },
+      "records": {
+        "brevo_code": "Domain ownership",
+        "dkim_record": "DKIM",
+        "dkim1Record": "DKIM 1",
+        "dkim2Record": "DKIM 2",
+        "dmarc_record": "DMARC"
+      },
+      "copyHost": "Copy host",
+      "copyValue": "Copy value",
+      "verifyRecords": "Verify DNS records",
+      "authenticate": "Authenticate domain",
+      "pendingInfo": "Add these records with your domain provider, then select Verify DNS records.",
+      "notVerifiedYet": "Your domain isn't verified yet. DNS changes can take some time to update, so try again later."
+    },
+    "notification": {
+      "heading": "Email template",
+      "emailLabel": "Email",
+      "language": "Language",
+      "languageDetails": "Choose a language to edit this email in that language. Each language is saved separately. Customers get emails in their own language.",
+      "send": "Send this email",
+      "requiredDetails": "EU law requires this email, so it can't be turned off.",
+      "optionalDetails": "Turn off to stop sending this email.",
+      "subject": "Subject",
+      "reset": "Reset to default",
+      "customized": "Customized"
+    },
+    "templates": {
+      "customerConfirmation": {
+        "name": "Customer withdrawal confirmation",
+        "description": "Sent to customers as soon as they submit a withdrawal request."
+      },
+      "merchantNotification": {
+        "name": "New request notification",
+        "description": "Sent to you when a customer submits a new withdrawal request."
+      },
+      "withdrawalApproved": {
+        "name": "Withdrawal approved",
+        "description": "Sent to customers when you approve their withdrawal request."
+      },
+      "withdrawalRejected": {
+        "name": "Withdrawal rejected",
+        "description": "Sent to customers when you reject their withdrawal request."
+      }
+    },
+    "body": {
+      "heading": "Email body",
+      "editCode": "Edit code",
+      "htmlLabel": "Email HTML body",
+      "previewHeading": "Email preview"
+    },
+    "variables": {
+      "heading": "Variables",
+      "help": "Select a variable to insert it at your cursor.",
+      "insert": "Insert {{label}}: {{description}}",
+      "groups": {
+        "customer": "Customer",
+        "order": "Order",
+        "withdrawal": "Withdrawal",
+        "request": "Request",
+        "shop": "Store"
+      },
+      "tokens": {
+        "customer": {
+          "first_name": {
+            "label": "First name",
+            "description": "The customer's first name"
+          },
+          "last_name": {
+            "label": "Last name",
+            "description": "The customer's last name"
+          },
+          "email": {
+            "label": "Email",
+            "description": "The customer's email address"
+          }
+        },
+        "order": {
+          "name": {
+            "label": "Order number",
+            "description": "The order number, like #2138"
+          },
+          "id": {
+            "label": "Order ID",
+            "description": "The order's internal ID"
+          }
+        },
+        "withdrawal": {
+          "request_id": {
+            "label": "Reference number",
+            "description": "The withdrawal request's reference number"
+          },
+          "submitted_at": {
+            "label": "Submission date",
+            "description": "The date and time the request was submitted"
+          },
+          "reason": {
+            "label": "Reason",
+            "description": "The reason the customer gave, if any"
+          },
+          "selected_products": {
+            "label": "Selected products (text)",
+            "description": "The requested items as a comma-separated list"
+          }
+        },
+        "request": {
+          "status": {
+            "label": "Status",
+            "description": "The request's current status"
+          },
+          "url": {
+            "label": "Request link",
+            "description": "A link to the request in the app"
+          }
+        },
+        "shop": {
+          "name": {
+            "label": "Store name",
+            "description": "Your store's name"
+          },
+          "email": {
+            "label": "Store email",
+            "description": "Your store's contact email address"
+          }
+        }
+      }
+    },
+    "validation": {
+      "email": "Enter a valid email address.",
+      "subjectRequired": "Enter a subject.",
+      "subjectTooLong": "Subject must be {{max}} characters or fewer.",
+      "bodyRequired": "Enter an email body."
+    }
+  },
+  "faqs": {
+    "pageTitle": "FAQs",
+    "intro": "Answers to the {{count}} questions we're asked most often.",
+    "expandAll": "Expand all",
+    "collapseAll": "Collapse all",
+    "showAnswer": "Show answer: {{question}}",
+    "hideAnswer": "Hide answer: {{question}}",
+    "stillStuck": {
+      "heading": "Still have questions?",
+      "body": "If you can't find your answer here, email us. Our team reads and answers every message.",
+      "link": "Contact support"
+    },
+    "items": {
+      "what-it-does": {
+        "question": "What does the app do?",
+        "paragraphs": [
+          "It gives your EU customers a compliant withdrawal form. It also gives you one place to manage the requests that come in.",
+          "Customers open the form from their order, select the items they want to withdraw from, and confirm. Each request appears in Withdrawal requests with the order, items, reason, and refund deadline. The related emails are sent automatically."
+        ]
+      },
+      "where-form-appears": {
+        "question": "Where do customers see the withdrawal form?",
+        "paragraphs": [
+          "The form can appear in 2 places, and you can use either one or both. Choose them in Form setup:"
+        ],
+        "bullets": [
+          "Order status page: the page customers see after checkout, and again when they open the link in their order confirmation email.",
+          "Storefront page: a dedicated page in your theme, for customers who look for the form later."
+        ],
+        "closing": "Each place also needs its app block added once in the editor. The setup guide on Home shows whether each block is added and links you to the right editor."
+      },
+      "form-not-showing": {
+        "question": "A customer says the form isn't showing. What should I check?",
+        "paragraphs": [
+          "Check these in order. The most common causes are first:"
+        ],
+        "bullets": [
+          "The withdrawal form is turned off, or the place the customer is using isn't turned on in Form setup.",
+          "The app block hasn't been added to that page in the editor yet.",
+          "The order's country isn't one of your eligible countries. Check whether you've selected all EU countries or only specific ones.",
+          "The withdrawal period for the order has already ended. See the question about the withdrawal deadline.",
+          "The order was canceled, or it already has a pending withdrawal request. Each order can only have 1 pending request."
+        ]
+      },
+      "deadline": {
+        "question": "How is the withdrawal deadline calculated?",
+        "paragraphs": [
+          "Under EU law, the withdrawal period starts when the customer receives the items, not when they place the order. Customers can also withdraw anytime before the items arrive. The app works out the deadline like this:"
+        ],
+        "bullets": [
+          "Not fulfilled yet: the withdrawal period hasn't started, so the order is always eligible.",
+          "Delivered with a delivery date from the carrier: the period starts on that date and lasts for the number of days you set in Form setup (14 by default).",
+          "Shipped without a delivery date: the app uses the carrier's estimated delivery date. If there isn't one, it uses the ship date plus your estimated transit time."
+        ],
+        "closing": "If an order ships in more than 1 package, the period starts when the last package arrives."
+      },
+      "transit-days": {
+        "question": "What is the estimated transit time for?",
+        "paragraphs": [
+          "Many carriers don't send a delivery date to Shopify. Without one, the app can't tell when the withdrawal period starts, so it uses the ship date plus the estimated transit time you set.",
+          "Set it to about how long your packages usually take to arrive. If it's too short, a customer's withdrawal period can end early, so it's better to set a longer time if you're not sure."
+        ]
+      },
+      "countries-languages": {
+        "question": "Which countries and languages are supported?",
+        "paragraphs": [
+          "All EU countries are eligible by default. If you only sell to some EU countries, select Specific countries in Form setup and choose them.",
+          "The form is available in 11 languages: English, German, French, Dutch, Italian, Spanish, Polish, Swedish, Portuguese, Lithuanian, and Finnish. Customers automatically see the form in their own language.",
+          "English is the base language. If you leave a translated field blank, the form shows the English text for that field instead, so customers never see an empty label."
+        ]
+      },
+      "after-submit": {
+        "question": "What happens after a customer submits a request?",
+        "paragraphs": [
+          "These 4 things happen, in this order:"
+        ],
+        "bullets": [
+          "The request is saved with the Pending status and appears in Withdrawal requests.",
+          "The customer gets a confirmation email. This email is always sent, because it's the legal confirmation of their withdrawal.",
+          "You get a notification email if the New request notification email is turned on.",
+          "Your automation settings run. For example, the app can hold fulfillment or tag the order."
+        ]
+      },
+      "automation": {
+        "question": "What do the automation settings do?",
+        "paragraphs": [
+          "The settings depend on where the order is when the request arrives. Different actions are possible before and after shipping."
+        ],
+        "bullets": [
+          "Before the order ships: the app can hold fulfillment so the package doesn't ship while you review the request, and choose what happens if no one reviews it. It can also tag the order.",
+          "After delivery: the customer already has the items, so fulfillment can't be held. The app can create a return in Shopify and tag the order."
+        ],
+        "closing": "Automation never makes decisions for you. You always approve, reject, and refund requests yourself."
+      },
+      "emails": {
+        "question": "Which emails does the app send, and can I edit them?",
+        "paragraphs": [
+          "The app sends 4 emails, and you can edit all of them in Email templates:"
+        ],
+        "bullets": [
+          "Customer withdrawal confirmation: sent when a customer submits a request. This email is always on.",
+          "New request notification: sent to you. You can turn it off.",
+          "Withdrawal approved: sent to the customer when you approve a request. You can turn it off.",
+          "Withdrawal rejected: sent to the customer when you reject a request. You can turn it off."
+        ],
+        "closing": "You can edit the subject and body of each email in every supported language. You can also add variables, like the order number, the customer's name, or the requested items. The preview shows your changes as you type."
+      },
+      "approve-reject": {
+        "question": "How do I approve, reject, and refund a request?",
+        "paragraphs": [
+          "Open the request from Withdrawal requests. The request page shows the items the customer selected, their reason, the order's status in Shopify, and your notes.",
+          "Approve or reject the request from that page. You can also refund the requested items there. If the order hasn't shipped yet, you can cancel and refund the whole order instead.",
+          "The refund deadline is shown at the top of the page. Under EU rules, you need to refund within 14 days of the withdrawal. The page shows how much time is left and flags the request if the deadline has passed."
+        ]
+      }
+    }
+  },
+  "featureRequest": {
+    "pageTitle": "Request a feature",
+    "intro": "Tell us what you'd like to see in the app. We read every request.",
+    "sentHeading": "Feature request sent",
+    "sentBody": "Thanks for sharing your idea with our team.",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "email": "Email",
+    "request": "What feature would you like?",
+    "requestPlaceholder": "Describe the feature and how it would help your store",
+    "submit": "Send request"
+  },
+  "pricing": {
+    "pageTitle": "Pricing",
+    "pricePerMonth": "{{price}}/month",
+    "currentPlan": "Current plan",
+    "choosePlan": "Choose {{plan}}",
+    "switchedToast": "Switched to the {{plan}} plan",
+    "plans": {
+      "free": {
+        "name": "Free",
+        "features": [
+          "Up to 10 withdrawal requests per month",
+          "Email notifications"
+        ]
+      },
+      "starter": {
+        "name": "Starter",
+        "features": [
+          "Unlimited withdrawal requests",
+          "Custom form fields",
+          "Email notifications"
+        ]
+      },
+      "pro": {
+        "name": "Pro",
+        "features": [
+          "Everything in Starter",
+          "Priority support",
+          "Automated refunds"
+        ]
+      }
+    }
+  }
+}

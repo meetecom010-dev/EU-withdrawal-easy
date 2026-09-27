@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types -- plain JS project, no prop-types package installed */
 import SkeletonBox from "../../../../components/skeleton/SkeletonBox";
+import { useTranslation } from "react-i18next";
 
 // Mirrors the real Home dashboard (see dashboard.jsx): the setup-incomplete
 // banner, the four-tile "Withdrawal requests" stats, and the full-width setup
@@ -35,8 +36,9 @@ function ChecklistRowSkeleton({ withDivider }) {
 }
 
 export default function DashboardSkeleton() {
+  const { t } = useTranslation();
   return (
-    <s-page heading="Home">
+    <s-page heading={t("home.pageTitle")}>
       <s-stack direction="block" gap="large-100">
         {/* Setup-incomplete warning banner */}
         <SkeletonBox width="100%" height="56px" radius="base" />

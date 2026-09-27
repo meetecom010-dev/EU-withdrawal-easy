@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useAppBridge } from "@shopify/app-bridge-react";
 import { authenticate } from "../../shopify.server";
 import { getFormSettings, saveFormSettings } from "../../utils/api/formSettings";
@@ -10,6 +11,7 @@ import AutomationCard from "./component/AutomationCard";
 import DeadlineCard from "./component/DeadlineCard";
 import FormSetupSkeleton from "./component/FormSetupSkeleton";
 import { validateFormSettings } from "./validation";
+import { translateMessages } from "../../i18n/errors";
 import { dirtyFingerprint } from "./fieldValue";
 
 export const loader = async ({ request }) => {
@@ -36,6 +38,7 @@ function setPath(obj, path, value) {
 const SAVE_BAR_ID = "form-setup-save-bar";
 
 export default function FormSetup() {
+  const { t } = useTranslation();
   const shopify = useAppBridge();
   const [settings, setSettings] = useState(null);
   // The last-saved (or last-loaded) state — the Discard button reverts to
@@ -88,10 +91,13 @@ export default function FormSetup() {
 
   const displayedErrors = useMemo(() => {
     if (!showErrors) return {};
-    return Object.fromEntries(
-      Object.entries(errors).filter(([path]) => !dismissedErrors.includes(path)),
+    return translateMessages(
+      Object.fromEntries(
+        Object.entries(errors).filter(([path]) => !dismissedErrors.includes(path)),
+      ),
+      t,
     );
-  }, [errors, showErrors, dismissedErrors]);
+  }, [errors, showErrors, dismissedErrors, t]);
 
   const dismissError = useCallback((path) => {
     setDismissedErrors((prev) => (prev.includes(path) ? prev : [...prev, path]));
@@ -155,7 +161,7 @@ export default function FormSetup() {
       setSavedSettings(formSettings);
       setShowErrors(false);
       setDismissedErrors([]);
-      shopify.toast.show("Form settings saved");
+      shopify.toast.show(t("formSetup.savedToast"));
     } catch (error) {
       setSaveError(error.message);
     } finally {
@@ -169,8 +175,8 @@ export default function FormSetup() {
 
   if (loadError) {
     return (
-      <s-page heading="Form setup">
-        <s-banner tone="critical" heading="Couldn't load form settings">
+      <s-page heading={t("formSetup.pageTitle")}>
+        <s-banner tone="critical" heading={t("formSetup.loadError")}>
           <s-paragraph>{loadError}</s-paragraph>
         </s-banner>
       </s-page>
@@ -178,8 +184,8 @@ export default function FormSetup() {
   }
 
   return (
-    <s-page heading="Form setup">
-      <s-button slot="breadcrumb-actions" href="/" accessibilityLabel="Back to dashboard" />
+    <s-page heading={t("formSetup.pageTitle")}>
+      <s-button slot="breadcrumb-actions" href="/" accessibilityLabel={t("common.backToHome")} />
 
       {/* Shopify's native contextual save bar — shows automatically only
           while `settings` differs from `savedSettings`. Discard reverts the
@@ -193,17 +199,17 @@ export default function FormSetup() {
           disabled={isSaving || undefined}
           loading={isSaving || undefined}
         >
-          Save
+          {t("common.save")}
         </button>
         <button onClick={handleDiscard} disabled={isSaving || undefined}>
-          Discard
+          {t("common.discard")}
         </button>
       </ui-save-bar>
       <s-stack gap="base">
         {saveError && (
           <s-banner
             tone="critical"
-            heading="Couldn't save form settings"
+            heading={t("formSetup.saveError")}
             dismissible
             onDismiss={() => setSaveError(null)}
           >

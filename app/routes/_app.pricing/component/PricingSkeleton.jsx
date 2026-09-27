@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import SkeletonBox from "../../../components/skeleton/SkeletonBox";
 
 function PlanCardSkeleton() {
@@ -18,8 +19,9 @@ function PlanCardSkeleton() {
 }
 
 export default function PricingSkeleton() {
+  const { t } = useTranslation();
   return (
-    <s-page heading="Pricing">
+    <s-page heading={t("pricing.pageTitle")}>
       <s-grid gridTemplateColumns="1fr 1fr 1fr" gap="base">
         <PlanCardSkeleton />
         <PlanCardSkeleton />

@@ -1,4 +1,7 @@
 import connectDB from "../db.server";
+import { APP_NAME } from "../constants";
+import { tDefault } from "../i18n/config";
+import { message as msg } from "../i18n/errors";
 import WithdrawalRequest from "../models/withdrawal-request.server";
 import {
   getOrCreateAppSettings,
@@ -38,8 +41,23 @@ const DAY_MS = 24 * 60 * 60 * 1000;
 // The same entry is buffered for the formEvents stream (flushed once per run by
 // flushEvents). Writing both from this one place is what keeps the embedded log
 // and the event stream from ever disagreeing.
+//
+// `message` is either a msg() descriptor — a requestDetail.activity.messages.*
+// key the admin renders in the merchant's language — or raw text with no
+// translation (an error message from Shopify or the email provider).
 function log(request, action, outcome, message, data = null) {
-  const entry = { at: new Date(), action, outcome, message, data };
+  const described = typeof message === "object" && message !== null;
+  const entry = {
+    at: new Date(),
+    action,
+    outcome,
+    message: described
+      ? tDefault(`requestDetail.activity.messages.${message.key}`, activityValues(message.values))
+      : message,
+    messageKey: described ? message.key : null,
+    messageValues: described ? message.values ?? null : null,
+    data,
+  };
   request.automation.log.push(entry);
   (request.__events ??= []).push(entry);
 }
@@ -54,6 +72,17 @@ async function flushEvents(request) {
   await recordAutomationEvents(request.shop, request.orderId, buffered, {
     withdrawalRequestId: request._id,
   });
+}
+
+// Values as they read in the default-locale `message`. The stored
+// messageValues stay raw (tag arrays, ISO dates, amount + currency) so the
+// admin can format them for the merchant's locale.
+function activityValues(values) {
+  if (!values) return values;
+  const out = { ...values };
+  if (Array.isArray(out.tags)) out.tags = out.tags.join(", ");
+  if (out.currencyCode) out.amount = `${out.amount} ${out.currencyCode}`;
+  return out;
 }
 
 // Pulls whatever diagnostic detail an error carries: Shopify user errors and
@@ -77,11 +106,13 @@ async function step(request, action, fn) {
     const result = await fn();
     return { ok: true, result };
   } catch (error) {
+    // A step can attach a translatable `activityMessage` for failures it
+    // explains itself; anything else is raw Shopify/provider text.
     log(
       request,
       action,
       "failed",
-      error.message,
+      error.activityMessage ?? error.message,
       errorLogData(error),
     );
     return { ok: false, error };
@@ -90,7 +121,7 @@ async function step(request, action, fn) {
 
 async function applyTags(admin, request, action, tags) {
   if (!tags || tags.length === 0) {
-    log(request, action, "skipped", "No tags configured");
+    log(request, action, "skipped", msg("noTags"));
     return;
   }
 
@@ -101,7 +132,7 @@ async function applyTags(admin, request, action, tags) {
     request.automation.tagsAdded = [
       ...new Set([...request.automation.tagsAdded, ...outcome.result]),
     ];
-    log(request, action, "success", `Tagged order with ${outcome.result.join(", ")}`, {
+    log(request, action, "success", msg("tagged", { tags: outcome.result }), {
       tags: outcome.result,
     });
   }
@@ -114,14 +145,16 @@ async function runBeforeShip(admin, request, automation) {
     const holdable = request.__orderContext.holdableFulfillmentOrders;
 
     if (holdable.length === 0) {
-      log(request, "hold_fulfillment", "skipped", "No holdable fulfillment orders on this order");
+      log(request, "hold_fulfillment", "skipped", msg("noHoldableOrders"));
     } else {
       for (const fulfillmentOrder of holdable) {
         const outcome = await step(request, "hold_fulfillment", () =>
           holdFulfillmentOrder(admin, {
             fulfillmentOrderId: fulfillmentOrder.id,
             requestId: request._id,
-            reasonNotes: `Withdrawal request ${request.orderName || request.orderId} awaiting staff review`,
+            reasonNotes: tDefault("requestDetail.shopifyNotes.holdAutomatic", {
+              order: request.orderName || request.orderId,
+            }),
           }),
         );
         if (outcome.ok) {
@@ -129,7 +162,7 @@ async function runBeforeShip(admin, request, automation) {
             fulfillmentOrderId: outcome.result.fulfillmentOrderId,
             holdIds: outcome.result.holdIds,
           });
-          log(request, "hold_fulfillment", "success", `Held ${fulfillmentOrder.id}`, {
+          log(request, "hold_fulfillment", "success", msg("held", { id: fulfillmentOrder.id }), {
             fulfillmentOrderId: outcome.result.fulfillmentOrderId,
             holdIds: outcome.result.holdIds,
           });
@@ -139,13 +172,13 @@ async function runBeforeShip(admin, request, automation) {
 
     await scheduleFallback(admin, request, automation);
   } else {
-    log(request, "hold_fulfillment", "skipped", "Hold for staff review is turned off");
+    log(request, "hold_fulfillment", "skipped", msg("holdOff"));
   }
 
   if (automation.tagBeforeShip) {
     await applyTags(admin, request, "tag_before_ship", automation.beforeShipTags);
   } else {
-    log(request, "tag_before_ship", "skipped", "Tagging before ship is turned off");
+    log(request, "tag_before_ship", "skipped", msg("tagBeforeShipOff"));
   }
 }
 
@@ -158,7 +191,7 @@ async function scheduleFallback(admin, request, automation) {
   request.automation.fallbackAction = fallback;
 
   if (fallback === "hold") {
-    log(request, "schedule_fallback", "skipped", "Fallback is to hold until staff act");
+    log(request, "schedule_fallback", "skipped", msg("fallbackHold"));
     return;
   }
 
@@ -171,7 +204,7 @@ async function scheduleFallback(admin, request, automation) {
   }
 
   if (!Number.isFinite(days) || days <= 0) {
-    log(request, "schedule_fallback", "failed", `Fallback ${fallback} has no valid day count`);
+    log(request, "schedule_fallback", "failed", msg("fallbackInvalidDays"), { fallback });
     return;
   }
 
@@ -189,7 +222,9 @@ async function scheduleFallback(admin, request, automation) {
     request,
     "schedule_fallback",
     "success",
-    `Scheduled ${type} for ${dueAt.toISOString()}`,
+    msg(type === "release_hold" ? "scheduledRelease" : "scheduledCancel", {
+      date: dueAt.toISOString(),
+    }),
     { type, dueAt, jobId: job ? String(job._id) : null },
   );
 }
@@ -197,7 +232,10 @@ async function scheduleFallback(admin, request, automation) {
 export async function cancelForWithdrawal(admin, request, action) {
   const outcome = await step(request, action, () =>
     cancelOrderWithRefund(admin, request.orderId, {
-      staffNote: `Cancelled by EU Withdrawly: customer withdrew from the purchase (request ${request._id}).`,
+      staffNote: tDefault("requestDetail.shopifyNotes.canceled", {
+        appName: APP_NAME,
+        id: String(request._id),
+      }),
     }),
   );
 
@@ -208,7 +246,7 @@ export async function cancelForWithdrawal(admin, request, action) {
     // that no longer exists.
     request.automation.holdsReleasedAt = new Date();
     request.automation.holdsReleasedBy = "cancelled";
-    log(request, action, "success", "Order cancelled and refunded", {
+    log(request, action, "success", msg("canceled"), {
       jobId: outcome.result?.id ?? null,
     });
   }
@@ -226,7 +264,7 @@ async function runAfterDelivery(admin, request, automation) {
   if (automation.tagAfterDelivery) {
     await applyTags(admin, request, "tag_after_delivery", automation.afterDeliveryTags);
   } else {
-    log(request, "tag_after_delivery", "skipped", "Tagging after delivery is turned off");
+    log(request, "tag_after_delivery", "skipped", msg("tagAfterDeliveryOff"));
   }
 }
 
@@ -236,17 +274,16 @@ async function createReturnForRequest(admin, request) {
 
     const { returnLineItems, unreturnable } = buildReturnLineItems(request.items, returnable, {
       returnReasonNote: request.reason
-        ? `Withdrawal request: ${request.reason}`
-        : "Statutory withdrawal request",
+        ? tDefault("requestDetail.shopifyNotes.returnReason", { reason: request.reason })
+        : tDefault("requestDetail.shopifyNotes.returnReasonNone"),
     });
 
     if (returnLineItems.length === 0) {
       // Not a silent skip: the merchant configured "Create return" and no
       // return exists. Both sides of the failed match are attached so the
       // reason is visible without reproducing it.
-      const error = new Error(
-        "Create return: none of the submitted items matched a returnable line item on this order",
-      );
+      const error = new Error(tDefault("requestDetail.activity.messages.returnNoMatch"));
+      error.activityMessage = msg("returnNoMatch");
       error.logData = {
         submitted: request.items.map((item) => ({
           title: item.title,
@@ -283,7 +320,7 @@ async function createReturnForRequest(admin, request) {
   request.automation.returnStatus = created?.status ?? null;
   request.automation.returnCreatedAt = new Date();
 
-  log(request, "create_return", "success", `Created return ${created?.id}`, {
+  log(request, "create_return", "success", msg("returnCreated"), {
     returnId: created?.id ?? null,
     status: created?.status ?? null,
     lineItemCount: returnLineItems.length,
@@ -311,10 +348,10 @@ function notifyForRequest(request) {
     "notify_merchant",
     "success",
     merchant?.sent
-      ? "Merchant notified in app and by email"
+      ? msg("notifiedByEmail")
       : merchant?.error
-        ? `Recorded in app; merchant email failed (${merchant.error})`
-        : "Recorded in app; merchant email not sent",
+        ? msg("notifiedEmailFailed", { error: merchant.error })
+        : msg("notifiedInAppOnly"),
     { channels, emailError: merchant?.error ?? null },
   );
 }
@@ -359,10 +396,10 @@ async function sendSubmissionEmails(request, shopContact) {
 function logEmailOutcome(request, action, outcome) {
   const status = outcome.error ? "failed" : outcome.sent ? "success" : "skipped";
   const message = outcome.sent
-    ? "Sent"
+    ? msg("emailSent")
     : outcome.error
-      ? `Failed: ${outcome.error}`
-      : "Not sent (no recipient or email not configured)";
+      ? msg("emailFailed", { error: outcome.error })
+      : msg("emailNotSent");
   log(request, action, status, message, {
     sent: outcome.sent,
     messageId: outcome.messageId,
@@ -394,10 +431,14 @@ export async function runWithdrawalAutomation(shop, requestId) {
     const orderContext = await fetchOrderContext(admin, request.orderId);
 
     if (!orderContext) {
-      throw new Error(`Order ${request.orderId} not found`);
+      const error = new Error(
+        tDefault("requestDetail.activity.messages.orderNotFound", { id: request.orderId }),
+      );
+      error.activityMessage = msg("orderNotFound", { id: request.orderId });
+      throw error;
     }
     if (orderContext.cancelledAt) {
-      log(request, "resolve_branch", "skipped", "Order is already cancelled");
+      log(request, "resolve_branch", "skipped", msg("alreadyCanceled"));
       request.automation.status = "skipped";
       request.automation.completedAt = new Date();
       await request.save();
@@ -415,9 +456,7 @@ export async function runWithdrawalAutomation(shop, requestId) {
       request,
       "resolve_branch",
       "success",
-      branch === "before_ship"
-        ? "Order not fulfilled yet — running the before-ship automation"
-        : "Order already fulfilled — running the after-delivery automation",
+      branch === "before_ship" ? msg("branchBeforeShip") : msg("branchAfterDelivery"),
       { displayFulfillmentStatus: orderContext.displayFulfillmentStatus },
     );
 
@@ -446,7 +485,7 @@ export async function runWithdrawalAutomation(shop, requestId) {
     );
     request.automation.status = failed ? "failed" : "completed";
     if (failed) {
-      request.automation.error = "One or more automation steps failed — see the log";
+      request.automation.error = tDefault("requestDetail.activity.messages.runFailed");
     }
   } catch (error) {
     request.automation.status = "failed";
@@ -455,7 +494,7 @@ export async function runWithdrawalAutomation(shop, requestId) {
       request,
       "run_automation",
       "failed",
-      error.message,
+      error.activityMessage ?? error.message,
       errorLogData(error),
     );
   }
@@ -467,7 +506,11 @@ export async function runWithdrawalAutomation(shop, requestId) {
     request,
     "automation_completed",
     request.automation.status === "completed" ? "success" : request.automation.status,
-    `Automation ${request.automation.status}`,
+    request.automation.status === "completed"
+      ? msg("runCompleted")
+      : request.automation.status === "skipped"
+        ? msg("runSkipped")
+        : msg("runFailed"),
     { branch: request.automation.branch },
   );
   delete request.__orderContext;
@@ -496,7 +539,7 @@ export async function runScheduledAutomationJob(job) {
       request,
       job.type,
       "skipped",
-      `Request was already ${request.status} — scheduled ${job.type} not run`,
+      msg(request.status === "approved" ? "scheduledSkippedApproved" : "scheduledSkippedRejected"),
     );
     await request.save();
     await flushEvents(request);
@@ -529,11 +572,11 @@ export async function runScheduledAutomationJob(job) {
 export async function releaseHoldsForRequest(admin, request, releasedBy) {
   const holds = request.automation.holds ?? [];
   if (holds.length === 0) {
-    log(request, "release_hold", "skipped", "No holds were placed for this request");
+    log(request, "release_hold", "skipped", msg("noHoldsPlaced"));
     return;
   }
   if (request.automation.holdsReleasedAt) {
-    log(request, "release_hold", "skipped", "Holds were already released");
+    log(request, "release_hold", "skipped", msg("holdsAlreadyReleased"));
     return;
   }
 
@@ -548,7 +591,7 @@ export async function releaseHoldsForRequest(admin, request, releasedBy) {
     );
     if (outcome.ok) {
       released += 1;
-      log(request, "release_hold", "success", `Released hold on ${hold.fulfillmentOrderId}`, {
+      log(request, "release_hold", "success", msg("holdReleased", { id: hold.fulfillmentOrderId }), {
         fulfillmentOrderId: hold.fulfillmentOrderId,
         holdIds: hold.holdIds,
         releasedBy,
@@ -600,7 +643,7 @@ export async function handleManualDecision(shop, requestId, { email } = {}) {
 // logged, never thrown, so the decision itself still succeeds.
 async function sendDecisionEmailForRequest(request, shop, email) {
   if (!email?.send) {
-    log(request, "notify_customer", "skipped", "Customer decision email skipped by staff");
+    log(request, "notify_customer", "skipped", msg("decisionSkipped"));
     return;
   }
   try {
@@ -620,14 +663,14 @@ async function sendDecisionEmailForRequest(request, shop, email) {
       "notify_customer",
       result.sent ? "success" : result.error ? "failed" : "skipped",
       result.sent
-        ? "Customer notified of the decision by email"
+        ? msg("decisionSent")
         : result.error
-          ? `Customer decision email failed (${result.error})`
-          : "Customer decision email not sent (email not configured)",
+          ? msg("decisionFailed", { error: result.error })
+          : msg("decisionNotConfigured"),
       { emailError: result.error ?? null },
     );
   } catch (error) {
-    log(request, "notify_customer", "failed", `Customer decision email failed (${error.message})`, {
+    log(request, "notify_customer", "failed", msg("decisionFailed", { error: error.message }), {
       emailError: error.message,
     });
   }
@@ -653,13 +696,13 @@ async function runManualAction(shop, requestId, fn) {
 export async function placeHoldForRequest(shop, requestId) {
   return runManualAction(shop, requestId, async (admin, request) => {
     if ((request.automation.holds ?? []).length > 0 && !request.automation.holdsReleasedAt) {
-      log(request, "hold_fulfillment", "skipped", "A hold is already in place for this request");
+      log(request, "hold_fulfillment", "skipped", msg("holdExists"));
       return;
     }
     const orderContext = await fetchOrderContext(admin, request.orderId);
     const holdable = orderContext?.holdableFulfillmentOrders ?? [];
     if (holdable.length === 0) {
-      log(request, "hold_fulfillment", "skipped", "No holdable fulfillment orders on this order");
+      log(request, "hold_fulfillment", "skipped", msg("noHoldableOrders"));
       return;
     }
     for (const fulfillmentOrder of holdable) {
@@ -667,7 +710,9 @@ export async function placeHoldForRequest(shop, requestId) {
         holdFulfillmentOrder(admin, {
           fulfillmentOrderId: fulfillmentOrder.id,
           requestId: request._id,
-          reasonNotes: `Withdrawal request ${request.orderName || request.orderId} held by staff`,
+          reasonNotes: tDefault("requestDetail.shopifyNotes.holdManual", {
+            order: request.orderName || request.orderId,
+          }),
         }),
       );
       if (outcome.ok) {
@@ -679,7 +724,7 @@ export async function placeHoldForRequest(shop, requestId) {
         // state reads as "held" again.
         request.automation.holdsReleasedAt = null;
         request.automation.holdsReleasedBy = null;
-        log(request, "hold_fulfillment", "success", `Held ${fulfillmentOrder.id}`, {
+        log(request, "hold_fulfillment", "success", msg("held", { id: fulfillmentOrder.id }), {
           fulfillmentOrderId: outcome.result.fulfillmentOrderId,
           holdIds: outcome.result.holdIds,
         });
@@ -715,7 +760,10 @@ export async function refundForRequest(shop, requestId) {
       createWithdrawalRefund(admin, request.orderId, {
         items: request.items,
         isFullWithdrawal: fullWithdrawal,
-        note: `Refunded by EU Withdrawly: customer withdrew from the purchase (request ${request._id}).`,
+        note: tDefault("requestDetail.shopifyNotes.refunded", {
+          appName: APP_NAME,
+          id: String(request._id),
+        }),
       }),
     );
     if (outcome.ok) {
@@ -723,7 +771,10 @@ export async function refundForRequest(shop, requestId) {
         request,
         "refund",
         "success",
-        `Refunded ${outcome.result.amount} ${outcome.result.currencyCode ?? ""}`.trim(),
+        msg("refunded", {
+          amount: outcome.result.amount,
+          currencyCode: outcome.result.currencyCode ?? null,
+        }),
         {
           refundId: outcome.result.refundId,
           amount: outcome.result.amount,
@@ -743,13 +794,13 @@ export async function refreshReturnStatusForRequest(shop, requestId) {
   return runManualAction(shop, requestId, async (admin, request) => {
     const returnId = request.automation.returnId;
     if (!returnId) {
-      log(request, "refresh_return", "skipped", "No return exists for this request");
+      log(request, "refresh_return", "skipped", msg("noReturn"));
       return;
     }
     const outcome = await step(request, "refresh_return", () => fetchReturnStatus(admin, returnId));
     if (outcome.ok && outcome.result) {
       request.automation.returnStatus = outcome.result.status ?? request.automation.returnStatus;
-      log(request, "refresh_return", "success", `Return status: ${outcome.result.status}`, {
+      log(request, "refresh_return", "success", msg("returnStatus", { status: outcome.result.status }), {
         status: outcome.result.status,
       });
     }
@@ -766,7 +817,7 @@ export async function syncOrderTagsForRequest(shop, requestId, { added = [], rem
         removeOrderTags(admin, request.orderId, removed),
       );
       if (outcome.ok && outcome.result.length) {
-        log(request, "order_tag_remove", "success", `Removed order tag "${outcome.result.join(", ")}"`, {
+        log(request, "order_tag_remove", "success", msg("tagsRemoved", { tags: outcome.result }), {
           tags: outcome.result,
         });
       }
@@ -776,7 +827,7 @@ export async function syncOrderTagsForRequest(shop, requestId, { added = [], rem
         addOrderTags(admin, request.orderId, added),
       );
       if (outcome.ok && outcome.result.length) {
-        log(request, "order_tag_add", "success", `Added order tag "${outcome.result.join(", ")}"`, {
+        log(request, "order_tag_add", "success", msg("tagsAdded", { tags: outcome.result }), {
           tags: outcome.result,
         });
       }

@@ -1,6 +1,7 @@
 import connectDB from "../db.server";
 import AppSettings from "../models/app-settings.server";
 import { AVAILABLE_LANGUAGES, resolveFormSettings } from "../routes/_app.form-setup/constants";
+import { firstMessageError } from "../i18n/errors";
 import { validateFormSettings } from "../routes/_app.form-setup/validation";
 import { validateEmailSettings } from "../routes/_app.email-templates/validation";
 import {
@@ -39,10 +40,9 @@ export function serializeFormSettings(doc) {
 // frontend always sends the complete object (see route.jsx's single `settings`
 // state), so a full overwrite is safe and keeps this simple.
 export async function saveFormSettings(shop, formSettings) {
-  const errors = validateFormSettings(formSettings);
-  const firstError = Object.values(errors)[0];
-  if (firstError) {
-    throw new Error(firstError);
+  const validationError = firstMessageError(validateFormSettings(formSettings));
+  if (validationError) {
+    throw validationError;
   }
 
   await connectDB();
@@ -145,10 +145,9 @@ export function serializeEmailSettings(doc) {
 // override per template — anything equal to the current default is dropped, so
 // resetting a template removes its override entirely.
 export async function saveEmailSettings(shop, emailSettings) {
-  const errors = validateEmailSettings(emailSettings);
-  const firstError = Object.values(errors)[0];
-  if (firstError) {
-    throw new Error(firstError);
+  const validationError = firstMessageError(validateEmailSettings(emailSettings));
+  if (validationError) {
+    throw validationError;
   }
 
   const sender = {

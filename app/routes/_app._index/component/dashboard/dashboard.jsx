@@ -1,10 +1,14 @@
 /* eslint-disable react/prop-types -- plain JS project, no prop-types package installed */
+import { useTranslation } from "react-i18next";
 import StatsGrid from "../../../../components/StatsGrid";
 import SetupGuideCard from "./SetupGuideCard";
 import HelpResourcesCard from "./HelpResourcesCard";
 import { useSetupGuideDismissed, useDismissSetupGuide } from "../../../../context/ShopContext";
+import { useFormatters } from "../../../../i18n/react";
 
 export default function Dashboard({ shopDomain, stats, setupSteps, completedCount, showSetupGuide }) {
+  const { t } = useTranslation();
+  const { formatList } = useFormatters();
   // Lives in ShopContext (not sessionStorage) so a dismissal survives Home
   // unmounting/remounting on tab switches, but resets on an actual page
   // reload — the guide should keep coming back until every step is done.
@@ -17,14 +21,13 @@ export default function Dashboard({ shopDomain, stats, setupSteps, completedCoun
   const isSetupGuideVisible = showSetupGuide && !isDismissed;
 
   return (
-    <s-page heading="Home">
+    <s-page heading={t("home.pageTitle")}>
       {!isFullyCompliant && (
-        <s-banner
-          heading={`${stepsRemaining} step${stepsRemaining === 1 ? "" : "s"} left to finish setup`}
-          tone="warning"
-        >
+        <s-banner heading={t("home.setupBanner.heading", { count: stepsRemaining })} tone="warning">
           <s-paragraph>
-            {`Still pending: ${pendingSteps.map((step) => step.label).join(", ")}. Customers can't submit withdrawal requests from your storefront until these are done.`}
+            {t("home.setupBanner.body", {
+              steps: formatList(pendingSteps.map((step) => step.label)),
+            })}
           </s-paragraph>
         </s-banner>
       )}

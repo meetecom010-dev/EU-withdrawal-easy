@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types -- plain JS project, no prop-types package installed */
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useAppBridge } from "@shopify/app-bridge-react";
 
 export const DECISION_MODAL_ID = "decision-modal";
@@ -10,6 +11,7 @@ export const DECISION_MODAL_ID = "decision-modal";
 // covers the "decide without emailing" case. Confirming both sets the status and
 // sends the reviewed email.
 export default function DecisionModal({ decision, preview, loading, deciding, language, onConfirm }) {
+  const { t } = useTranslation();
   const shopify = useAppBridge();
   const [subject, setSubject] = useState("");
   const [html, setHtml] = useState("");
@@ -31,14 +33,14 @@ export default function DecisionModal({ decision, preview, loading, deciding, la
   }, [decision]);
 
   const approve = decision === "approved";
-  const heading = approve ? "Approve withdrawal request" : "Reject withdrawal request";
+  const heading = approve ? t("requestDetail.decisionModal.headingApprove") : t("requestDetail.decisionModal.headingReject");
   const confirmLabel = sendEmail
     ? approve
-      ? "Approve & send"
-      : "Reject & send"
+      ? t("requestDetail.decisionModal.approveAndSend")
+      : t("requestDetail.decisionModal.rejectAndSend")
     : approve
-      ? "Approve"
-      : "Reject";
+      ? t("requestDetail.decisionModal.approve")
+      : t("requestDetail.decisionModal.reject");
 
   function confirm() {
     onConfirm({ subject, html, sendEmail });
@@ -49,13 +51,13 @@ export default function DecisionModal({ decision, preview, loading, deciding, la
     <s-modal id={DECISION_MODAL_ID} heading={heading} size="large">
       {loading || !preview ? (
         <s-stack direction="inline" gap="base" alignItems="center">
-          <s-spinner size="base" accessibilityLabel="Loading email preview"></s-spinner>
-          <s-text color="subdued">Preparing the customer email…</s-text>
+          <s-spinner size="base" accessibilityLabel={t("requestDetail.decisionModal.loadingLabel")}></s-spinner>
+          <s-text color="subdued">{t("requestDetail.decisionModal.loading")}</s-text>
         </s-stack>
       ) : (
         <s-stack direction="block" gap="base">
           <s-checkbox
-            label="Send this email to the customer"
+            label={t("requestDetail.decisionModal.sendEmail")}
             checked={sendEmail}
             onChange={(e) => setSendEmail(e.currentTarget.checked)}
           ></s-checkbox>
@@ -63,21 +65,18 @@ export default function DecisionModal({ decision, preview, loading, deciding, la
           {sendEmail ? (
             <>
               {language && (
-                <s-banner tone="info">
-                  This email is written in {language} — the customer&apos;s language. Edits below
-                  apply to this send only.
-                </s-banner>
+                <s-banner tone="info">{t("requestDetail.decisionModal.language", { language })}</s-banner>
               )}
               <s-text-field
-                label="Subject"
+                label={t("requestDetail.decisionModal.subject")}
                 value={subject}
                 onChange={(e) => setSubject(e.currentTarget.value)}
               ></s-text-field>
 
               <s-stack direction="inline" gap="base" alignItems="center" justifyContent="space-between">
-                <s-text type="strong">Email body</s-text>
+                <s-text type="strong">{t("requestDetail.decisionModal.body")}</s-text>
                 <s-button variant="tertiary" onClick={() => setEditing((prev) => !prev)}>
-                  {editing ? "Preview" : "Edit"}
+                  {editing ? t("common.preview") : t("requestDetail.decisionModal.editHtml")}
                 </s-button>
               </s-stack>
 
@@ -86,7 +85,7 @@ export default function DecisionModal({ decision, preview, loading, deciding, la
                   value={html}
                   spellCheck={false}
                   onChange={(e) => setHtml(e.currentTarget.value)}
-                  aria-label="Email HTML for this send"
+                  aria-label={t("requestDetail.decisionModal.htmlLabel")}
                   style={{
                     width: "100%",
                     minHeight: "320px",
@@ -104,7 +103,7 @@ export default function DecisionModal({ decision, preview, loading, deciding, la
                 />
               ) : (
                 <iframe
-                  title="Decision email preview"
+                  title={t("requestDetail.decisionModal.previewTitle")}
                   srcDoc={html}
                   style={{
                     width: "100%",
@@ -116,18 +115,16 @@ export default function DecisionModal({ decision, preview, loading, deciding, la
                 />
               )}
 
-              <s-text color="subdued">
-                Edits apply to this email only — your saved template isn&apos;t changed.
-              </s-text>
+              <s-text color="subdued">{t("requestDetail.decisionModal.templateUnchanged")}</s-text>
             </>
           ) : (
-            <s-text color="subdued">
-              No email will be sent to the customer. You can contact them separately if needed.
-            </s-text>
+            <s-text color="subdued">{t("requestDetail.decisionModal.noEmail")}</s-text>
           )}
 
           <s-stack direction="inline" gap="base" alignItems="center" justifyContent="end">
-            <s-button onClick={() => shopify.modal.hide(DECISION_MODAL_ID)}>Cancel</s-button>
+            <s-button onClick={() => shopify.modal.hide(DECISION_MODAL_ID)}>
+              {t("common.cancel")}
+            </s-button>
             <s-button
               variant="primary"
               tone={approve ? "auto" : "critical"}

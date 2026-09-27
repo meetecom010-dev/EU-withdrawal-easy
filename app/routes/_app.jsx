@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types -- plain JS project, no prop-types package installed */
 import { Outlet, useLoaderData, useNavigation, useRouteError } from "react-router";
+import { useTranslation } from "react-i18next";
 import { boundary } from "@shopify/shopify-app-react-router/server";
 import { AppProvider } from "@shopify/shopify-app-react-router/react";
 import { authenticate } from "../shopify.server";
@@ -45,6 +46,7 @@ export const loader = async ({ request }) => {
 // session (nav included) even though onboardingCompleted is still false in
 // the database, so onboarding comes back next time they open the app.
 function AppShell({ pendingSkeleton }) {
+  const { t } = useTranslation();
   const shop = useShop();
   const onboardingDismissed = useOnboardingDismissed();
   const showApp = shop.onboardingCompleted || onboardingDismissed;
@@ -53,10 +55,13 @@ function AppShell({ pendingSkeleton }) {
     <>
       {showApp && (
         <s-app-nav>
-          <s-link href="/form-setup">Form Setup</s-link>
-          <s-link href="/withdrawal-requests">Withdrawal Requests</s-link>
-          <s-link href="/email-templates">Email Templates</s-link>
-          {/* <s-link href="/pricing">Pricing</s-link> */}
+          <s-link href="/" rel="home">
+            {t("nav.home")}
+          </s-link>
+          <s-link href="/form-setup">{t("nav.formSetup")}</s-link>
+          <s-link href="/withdrawal-requests">{t("nav.withdrawalRequests")}</s-link>
+          <s-link href="/email-templates">{t("nav.emailTemplates")}</s-link>
+          {/* <s-link href="/pricing">{t("nav.pricing")}</s-link> */}
         </s-app-nav>
       )}
       <OrderStatusExtensionSync />

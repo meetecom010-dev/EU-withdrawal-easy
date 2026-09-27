@@ -1,4 +1,6 @@
 import { authenticate } from "../../shopify.server";
+import { translateError } from "../../i18n/errors";
+import { getRequestT } from "../../i18n/server";
 import {
   startDomainAuth,
   refreshDomainAuth,
@@ -11,6 +13,7 @@ import {
 //   { intent: "remove" }         -> delete the domain and revert to none
 export const action = async ({ request }) => {
   const { session } = await authenticate.admin(request);
+  const t = getRequestT(request);
   const body = await request.json().catch(() => ({}));
 
   try {
@@ -22,9 +25,9 @@ export const action = async ({ request }) => {
       case "remove":
         return Response.json(await removeDomainAuth(session.shop));
       default:
-        return Response.json({ error: "Unknown intent" }, { status: 400 });
+        return Response.json({ error: t("errors.unknownAction") }, { status: 400 });
     }
   } catch (error) {
-    return Response.json({ error: error.message }, { status: 400 });
+    return Response.json({ error: translateError(error, t) }, { status: 400 });
   }
 };

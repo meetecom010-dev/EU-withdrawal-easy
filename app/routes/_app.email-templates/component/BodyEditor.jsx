@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types -- plain JS project, no prop-types package installed */
 import { useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useAppBridge } from "@shopify/app-bridge-react";
 import { applyLiquid, buildLiquidData, SAMPLE_REQUEST_VARS } from "../../../services/email/variables";
 import VariablePanel from "./VariablePanel";
@@ -13,6 +14,7 @@ const PREVIEW_MODAL_ID = "email-preview-modal";
 // the email in a modal with sample data. The body is the merchant's own HTML —
 // stored and sent verbatim, with {{ liquid }} filled in at send time.
 export default function BodyEditor({ value, onChange, error, onFocus, locale = "en" }) {
+  const { t } = useTranslation();
   const shopify = useAppBridge();
   const [editing, setEditing] = useState(false);
   const textareaRef = useRef(null);
@@ -49,13 +51,13 @@ export default function BodyEditor({ value, onChange, error, onFocus, locale = "
   return (
     <s-stack direction="block" gap="small-300">
       <s-stack direction="inline" gap="base" alignItems="center" justifyContent="space-between">
-        <s-text type="strong">Email body</s-text>
+        <s-text type="strong">{t("emailTemplates.body.heading")}</s-text>
         <s-stack direction="inline" gap="small-200" alignItems="center">
           <s-button variant="tertiary" onClick={() => shopify.modal.show(PREVIEW_MODAL_ID)}>
-            Preview
+            {t("common.preview")}
           </s-button>
           <s-button variant="secondary" onClick={() => setEditing((prev) => !prev)}>
-            {editing ? "Done" : "Edit code"}
+            {editing ? t("common.done") : t("emailTemplates.body.editCode")}
           </s-button>
         </s-stack>
       </s-stack>
@@ -75,7 +77,7 @@ export default function BodyEditor({ value, onChange, error, onFocus, locale = "
               spellCheck={false}
               onChange={(event) => onChange(event.currentTarget.value)}
               onFocus={onFocus}
-              aria-label="Email HTML body"
+              aria-label={t("emailTemplates.body.htmlLabel")}
               style={{
                 width: "100%",
                 minHeight: "440px",
@@ -98,7 +100,7 @@ export default function BodyEditor({ value, onChange, error, onFocus, locale = "
         <RenderedEmail html={previewHtml} />
       )}
 
-      <s-modal id={PREVIEW_MODAL_ID} heading="Email preview" size="large">
+      <s-modal id={PREVIEW_MODAL_ID} heading={t("emailTemplates.body.previewHeading")} size="large">
         <RenderedEmail html={previewHtml} height="70vh" />
       </s-modal>
     </s-stack>

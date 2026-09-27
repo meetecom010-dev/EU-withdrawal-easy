@@ -1,7 +1,8 @@
 // Translatable copy for the three customer-facing emails, in every language the
 // form offers. The registry (registry.js) feeds each language's strings through
 // the same builder functions, so the English default and every translation
-// share one structure — only the words change. Pure data, no imports.
+// share one structure — only the words change. Pure data; the only import is
+// the app name, which stays the same in every language.
 //
 // Backtick strings so apostrophes and the mailto anchor's quotes need no
 // escaping. {{ liquid.paths }} are filled at render time (variables.js); leave
@@ -10,13 +11,15 @@
 // `contact` is one <a> away from plain text — keep the anchor markup intact and
 // only translate the words around it.
 
+import { APP_NAME } from "../../constants";
+
 export const EMAIL_STRING_LOCALES = ["de", "fr", "nl", "it", "es", "pl", "sv", "pt", "lt", "fi"];
 
 const link = `<a href="mailto:{{ shop.email }}" style="color:#2c6ecb">{{ shop.email }}</a>`;
 
 export const EMAIL_STRINGS = {
   en: {
-    footer: `This email was sent by EU Withdrawly on behalf of {{ shop.name }}.`,
+    footer: `This email was sent by ${APP_NAME} on behalf of {{ shop.name }}.`,
     labels: {
       referenceNumber: `Reference number`,
       orderNumber: `Order number`,
@@ -62,7 +65,7 @@ export const EMAIL_STRINGS = {
   },
 
   de: {
-    footer: `Diese E-Mail wurde von EU Withdrawly im Auftrag von {{ shop.name }} gesendet.`,
+    footer: `Diese E-Mail wurde von ${APP_NAME} im Auftrag von {{ shop.name }} gesendet.`,
     labels: {
       referenceNumber: `Referenznummer`,
       orderNumber: `Bestellnummer`,
@@ -108,7 +111,7 @@ export const EMAIL_STRINGS = {
   },
 
   fr: {
-    footer: `Cet e-mail a été envoyé par EU Withdrawly au nom de {{ shop.name }}.`,
+    footer: `Cet e-mail a été envoyé par ${APP_NAME} au nom de {{ shop.name }}.`,
     labels: {
       referenceNumber: `Numéro de référence`,
       orderNumber: `Numéro de commande`,
@@ -154,7 +157,7 @@ export const EMAIL_STRINGS = {
   },
 
   nl: {
-    footer: `Deze e-mail is verzonden door EU Withdrawly namens {{ shop.name }}.`,
+    footer: `Deze e-mail is verzonden door ${APP_NAME} namens {{ shop.name }}.`,
     labels: {
       referenceNumber: `Referentienummer`,
       orderNumber: `Bestelnummer`,
@@ -200,7 +203,7 @@ export const EMAIL_STRINGS = {
   },
 
   it: {
-    footer: `Questa e-mail è stata inviata da EU Withdrawly per conto di {{ shop.name }}.`,
+    footer: `Questa e-mail è stata inviata da ${APP_NAME} per conto di {{ shop.name }}.`,
     labels: {
       referenceNumber: `Numero di riferimento`,
       orderNumber: `Numero d'ordine`,
@@ -246,7 +249,7 @@ export const EMAIL_STRINGS = {
   },
 
   es: {
-    footer: `Este correo fue enviado por EU Withdrawly en nombre de {{ shop.name }}.`,
+    footer: `Este correo fue enviado por ${APP_NAME} en nombre de {{ shop.name }}.`,
     labels: {
       referenceNumber: `Número de referencia`,
       orderNumber: `Número de pedido`,
@@ -292,7 +295,7 @@ export const EMAIL_STRINGS = {
   },
 
   pl: {
-    footer: `Ta wiadomość została wysłana przez EU Withdrawly w imieniu {{ shop.name }}.`,
+    footer: `Ta wiadomość została wysłana przez ${APP_NAME} w imieniu {{ shop.name }}.`,
     labels: {
       referenceNumber: `Numer referencyjny`,
       orderNumber: `Numer zamówienia`,
@@ -338,7 +341,7 @@ export const EMAIL_STRINGS = {
   },
 
   sv: {
-    footer: `Detta e-postmeddelande skickades av EU Withdrawly på uppdrag av {{ shop.name }}.`,
+    footer: `Detta e-postmeddelande skickades av ${APP_NAME} på uppdrag av {{ shop.name }}.`,
     labels: {
       referenceNumber: `Referensnummer`,
       orderNumber: `Ordernummer`,
@@ -384,7 +387,7 @@ export const EMAIL_STRINGS = {
   },
 
   pt: {
-    footer: `Este e-mail foi enviado pela EU Withdrawly em nome de {{ shop.name }}.`,
+    footer: `Este e-mail foi enviado pela ${APP_NAME} em nome de {{ shop.name }}.`,
     labels: {
       referenceNumber: `Número de referência`,
       orderNumber: `Número da encomenda`,
@@ -430,7 +433,7 @@ export const EMAIL_STRINGS = {
   },
 
   lt: {
-    footer: `Šį el. laišką išsiuntė EU Withdrawly {{ shop.name }} vardu.`,
+    footer: `Šį el. laišką išsiuntė ${APP_NAME} {{ shop.name }} vardu.`,
     labels: {
       referenceNumber: `Nuorodos numeris`,
       orderNumber: `Užsakymo numeris`,
@@ -476,7 +479,7 @@ export const EMAIL_STRINGS = {
   },
 
   fi: {
-    footer: `Tämän sähköpostin on lähettänyt EU Withdrawly kaupan {{ shop.name }} puolesta.`,
+    footer: `Tämän sähköpostin on lähettänyt ${APP_NAME} kaupan {{ shop.name }} puolesta.`,
     labels: {
       referenceNumber: `Viitenumero`,
       orderNumber: `Tilausnumero`,

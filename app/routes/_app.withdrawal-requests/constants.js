@@ -1,39 +1,18 @@
-export const STATUS_TABS = [
-  { key: "all", label: "All" },
-  { key: "pending", label: "New" },
-  { key: "approved", label: "Approved" },
-  { key: "rejected", label: "Rejected" },
-];
+import {
+  formatDateTime,
+  formatMoney as formatMoneyForLocale,
+  regionName,
+} from "../../i18n/format";
+
+// Status filter tabs. Labels are `status.<key>` in en.json ("all" is
+// requests.tabs.all).
+export const STATUS_TABS = ["all", "pending", "approved", "rejected"];
 
 export const STATUS_TONE = {
   pending: "warning",
   approved: "success",
   rejected: "critical",
 };
-
-export const STATUS_LABEL = {
-  pending: "New",
-  approved: "Approved",
-  rejected: "Rejected",
-};
-
-// Where the customer submitted the withdrawal form. `order_status` is the order
-// status page extension; `standalone_page` is the storefront theme app
-// extension (the "theme page"). Mirrors the surfaces in
-// services/withdrawal-eligibility.server.js.
-export const SOURCE_LABEL = {
-  order_status: "Order status page",
-  standalone_page: "Theme page",
-};
-
-// Whether every line item on the order was requested for withdrawal (vs a
-// subset). `orderLineCount` is only known for requests submitted after this
-// field was added — older requests fall back to just counting items,
-// which reads as "Withdrawal request" rather than claiming full/partial.
-export function withdrawalType(request) {
-  if (!request.orderLineCount) return null;
-  return request.items.length >= request.orderLineCount ? "Full withdrawal" : "Partial withdrawal";
-}
 
 // Sums a withdrawal request's line items into a single { amount, currencyCode }
 // total. Each item's price is already the line's total (quantity-inclusive —
@@ -50,79 +29,38 @@ export function requestTotal(items) {
   };
 }
 
-export function formatMoney(money) {
-  if (!money) return "—";
-  try {
-    return new Intl.NumberFormat(undefined, {
-      style: "currency",
-      currency: money.currencyCode,
-    }).format(money.amount);
-  } catch {
-    return `${money.amount} ${money.currencyCode}`;
-  }
-}
-
-export function formatDateTime(value) {
-  return new Date(value).toLocaleString(undefined, {
-    dateStyle: "medium",
-    timeStyle: "short",
-  });
-}
-
-// A longer, sentence-style timestamp for the request header line, e.g.
-// "September 21, 2026 at 11:29 am".
-export function formatSubmittedAt(value) {
-  const date = new Date(value);
-  const day = date.toLocaleDateString(undefined, {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
-  const time = date
-    .toLocaleTimeString(undefined, { hour: "numeric", minute: "2-digit" })
-    .toLowerCase();
-  return `${day} at ${time}`;
-}
-
-export function countryName(countryCode) {
-  if (!countryCode) return null;
-  try {
-    return new Intl.DisplayNames(["en"], { type: "region" }).of(countryCode) ?? countryCode;
-  } catch {
-    return countryCode;
-  }
-}
-
 function csvEscape(value) {
   const str = value === null || value === undefined ? "" : String(value);
   return /[",\r\n]/.test(str) ? `"${str.replace(/"/g, '""')}"` : str;
 }
 
+// Column headers are requests.csv.<key>; values are formatted for the
+// merchant's locale so the export reads the same as the table.
 const CSV_COLUMNS = [
-  { header: "Order", value: (r) => r.orderName },
-  { header: "Customer name", value: (r) => r.customerName },
-  { header: "Customer email", value: (r) => r.customerEmail },
-  { header: "Country", value: (r) => countryName(r.countryCode) },
-  { header: "Items", value: (r) => r.items.length },
-  { header: "Value", value: (r) => formatMoney(requestTotal(r.items)) },
-  { header: "Reason", value: (r) => r.reason },
-  { header: "Status", value: (r) => STATUS_LABEL[r.status] },
-  { header: "Submitted", value: (r) => formatDateTime(r.submittedAt) },
-  { header: "Decided", value: (r) => (r.decidedAt ? formatDateTime(r.decidedAt) : "") },
+  { key: "order", value: (r) => r.orderName },
+  { key: "customerName", value: (r) => r.customerName },
+  { key: "customerEmail", value: (r) => r.customerEmail },
+  { key: "country", value: (r, { locale }) => regionName(r.countryCode, locale) },
+  { key: "items", value: (r) => r.items.length },
+  { key: "value", value: (r, { locale }) => formatMoneyForLocale(requestTotal(r.items), locale) },
+  { key: "reason", value: (r) => r.reason },
+  { key: "status", value: (r, { t }) => t(`status.${r.status}`) },
+  { key: "submitted", value: (r, { locale }) => formatDateTime(r.submittedAt, locale) },
+  { key: "decided", value: (r, { locale }) => (r.decidedAt ? formatDateTime(r.decidedAt, locale) : "") },
 ];
 
-export function requestsToCsv(requests) {
-  const rows = [CSV_COLUMNS.map((col) => col.header)];
+export function requestsToCsv(requests, { t, locale }) {
+  const rows = [CSV_COLUMNS.map((col) => t(`requests.csv.${col.key}`))];
   for (const request of requests) {
-    rows.push(CSV_COLUMNS.map((col) => csvEscape(col.value(request))));
+    rows.push(CSV_COLUMNS.map((col) => csvEscape(col.value(request, { t, locale }))));
   }
   return rows.map((row) => row.join(",")).join("\r\n");
 }
 
 // Builds the CSV in-browser from the already-loaded requests (no extra
 // server round trip) and triggers a download via a throwaway object URL.
-export function downloadRequestsCsv(requests) {
-  const csv = requestsToCsv(requests);
+export function downloadRequestsCsv(requests, { t, locale }) {
+  const csv = requestsToCsv(requests, { t, locale });
   const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
   const url = URL.createObjectURL(blob);
   const link = document.createElement("a");
@@ -132,19 +70,6 @@ export function downloadRequestsCsv(requests) {
   link.click();
   document.body.removeChild(link);
   URL.revokeObjectURL(url);
-}
-
-// The customer's language in English (for staff), from the locale captured at
-// submission ("de-DE" -> "German"). Drives the language the decision emails are
-// sent in.
-export function languageName(locale) {
-  if (!locale) return null;
-  const lang = String(locale).toLowerCase().split(/[-_]/)[0];
-  try {
-    return new Intl.DisplayNames(["en"], { type: "language" }).of(lang) ?? lang.toUpperCase();
-  } catch {
-    return lang.toUpperCase();
-  }
 }
 
 // Under the EU right of withdrawal (Directive 2011/83/EU, Art. 13), a trader

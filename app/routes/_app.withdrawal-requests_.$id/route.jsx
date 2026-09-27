@@ -1,5 +1,7 @@
 import { data, useLoaderData } from "react-router";
 import { authenticate } from "../../shopify.server";
+import { translateError } from "../../i18n/errors";
+import { getRequestT } from "../../i18n/server";
 import {
   addWithdrawalRequestNote,
   getWithdrawalRequestById,
@@ -29,13 +31,14 @@ const DECISION_TEMPLATE = { approved: "withdrawalApproved", rejected: "withdrawa
 
 export const loader = async ({ request, params }) => {
   const { admin, session } = await authenticate.admin(request);
+  const t = getRequestT(request);
   const [withdrawalRequest, allRequests] = await Promise.all([
     getWithdrawalRequestById(session.shop, params.id),
     listWithdrawalRequests(session.shop),
   ]);
 
   if (!withdrawalRequest) {
-    throw data({ error: "Withdrawal request not found" }, { status: 404 });
+    throw data({ error: t("errors.requestNotFound") }, { status: 404 });
   }
 
   // Live order state drives the contextual actions and keeps the Order tags in
@@ -45,9 +48,9 @@ export const loader = async ({ request, params }) => {
   let orderStateError = null;
   try {
     orderState = await fetchOrderAdminState(admin, withdrawalRequest.orderId);
-    if (!orderState) orderStateError = "This order could no longer be found in Shopify.";
+    if (!orderState) orderStateError = t("errors.orderNotFound");
   } catch (error) {
-    orderStateError = error.message;
+    orderStateError = translateError(error, t);
   }
 
   const index = allRequests.findIndex((r) => r.id === withdrawalRequest.id);
@@ -67,6 +70,7 @@ export const loader = async ({ request, params }) => {
 // useFetcher.
 export const action = async ({ request, params }) => {
   const { admin, session } = await authenticate.admin(request);
+  const t = getRequestT(request);
   const formData = await request.formData();
   const intent = formData.get("intent");
 
@@ -77,7 +81,7 @@ export const action = async ({ request, params }) => {
     const status = formData.get("status");
     const templateKey = DECISION_TEMPLATE[status];
     if (!templateKey) {
-      return data({ error: "Unknown decision" }, { status: 400 });
+      return data({ error: t("errors.unknownDecision") }, { status: 400 });
     }
     const [reqDoc, contact, appSettings] = await Promise.all([
       getWithdrawalRequestById(session.shop, params.id),
@@ -85,7 +89,7 @@ export const action = async ({ request, params }) => {
       getOrCreateAppSettings(session.shop),
     ]);
     if (!reqDoc) {
-      return data({ error: "Withdrawal request not found" }, { status: 404 });
+      return data({ error: t("errors.requestNotFound") }, { status: 404 });
     }
     const emailSettings = serializeEmailSettings(appSettings);
     const vars = buildEmailVariables(reqDoc, {
@@ -150,7 +154,7 @@ export const action = async ({ request, params }) => {
   // actual refund from `refund`.
   if (intent === "refund-preview") {
     const reqDoc = await getWithdrawalRequestById(session.shop, params.id);
-    if (!reqDoc) return data({ error: "Withdrawal request not found" }, { status: 404 });
+    if (!reqDoc) return data({ error: t("errors.requestNotFound") }, { status: 404 });
     const fullWithdrawal =
       Boolean(reqDoc.orderLineCount) && reqDoc.items.length >= reqDoc.orderLineCount;
     try {
@@ -160,7 +164,7 @@ export const action = async ({ request, params }) => {
       });
       return { refundPreview: { ...preview, fullWithdrawal } };
     } catch (error) {
-      return { refundPreview: { error: error.message } };
+      return { refundPreview: { error: translateError(error, t) } };
     }
   }
   if (intent === "refund") {
@@ -188,7 +192,7 @@ export const action = async ({ request, params }) => {
         email: { send: sendEmail, subject: emailSubject, html: emailHtml },
       });
     } catch (error) {
-      automationError = error.message;
+      automationError = translateError(error, t);
     }
   }
 

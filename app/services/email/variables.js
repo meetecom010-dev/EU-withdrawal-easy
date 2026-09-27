@@ -14,9 +14,12 @@ import { escapeHtml, formatMoney, formatDateTime } from "./format";
 
 // Grouped for the variable panel. `sample` values power the live preview so a
 // merchant sees a realistic email; they mirror the prototype's demo store.
+// `label`/`description` are the default-locale copy; the admin shows
+// emailTemplates.variables.groups.<id> and
+// emailTemplates.variables.tokens.<token>.label/description instead.
 export const EMAIL_VARIABLE_GROUPS = [
   {
-    category: "Customer",
+    id: "customer",
     variables: [
       { token: "customer.first_name", label: "First name", description: "The customer's first name", sample: "Lena" },
       { token: "customer.last_name", label: "Last name", description: "The customer's last name", sample: "Hoffmann" },
@@ -24,14 +27,14 @@ export const EMAIL_VARIABLE_GROUPS = [
     ],
   },
   {
-    category: "Order",
+    id: "order",
     variables: [
       { token: "order.name", label: "Order number", description: "The order number, e.g. #2138", sample: "#2138" },
       { token: "order.id", label: "Order ID", description: "The order's internal ID", sample: "1234567890" },
     ],
   },
   {
-    category: "Withdrawal",
+    id: "withdrawal",
     variables: [
       { token: "withdrawal.request_id", label: "Reference number", description: "The withdrawal request reference", sample: "b5238240-5af0-479f-a16d-b1522cf35458" },
       { token: "withdrawal.submitted_at", label: "Submission date", description: "When the request was submitted, with time", sample: "24 July 2026 at 23:30" },
@@ -40,17 +43,17 @@ export const EMAIL_VARIABLE_GROUPS = [
     ],
   },
   {
-    category: "Request",
+    id: "request",
     variables: [
       { token: "request.status", label: "Status", description: "The current status of the request", sample: "Pending review" },
       { token: "request.url", label: "View request link", description: "Link to the request in your app admin", sample: "https://admin.shopify.com/…/withdrawal-requests/…" },
     ],
   },
   {
-    category: "Shop",
+    id: "shop",
     variables: [
-      { token: "shop.name", label: "Shop name", description: "Your store's name", sample: "Nordlys Living" },
-      { token: "shop.email", label: "Contact email", description: "Your store's contact email address", sample: "hello@nordlysliving.example" },
+      { token: "shop.name", label: "Store name", description: "Your store's name", sample: "Nordlys Living" },
+      { token: "shop.email", label: "Store email", description: "Your store's contact email address", sample: "hello@nordlysliving.example" },
     ],
   },
 ];

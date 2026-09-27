@@ -1,5 +1,9 @@
 /* eslint-disable react/prop-types -- plain JS project, no prop-types package installed */
+import { useTranslation } from "react-i18next";
+
 export default function PlanCard({ name, price, features, isCurrent, onSelect, isSelecting }) {
+  const { t } = useTranslation();
+
   return (
     <s-section heading={name}>
       <s-stack direction="block" gap="base">
@@ -10,14 +14,14 @@ export default function PlanCard({ name, price, features, isCurrent, onSelect, i
           ))}
         </s-unordered-list>
         {isCurrent ? (
-          <s-badge tone="success">Current plan</s-badge>
+          <s-badge tone="success">{t("pricing.currentPlan")}</s-badge>
         ) : (
           <s-button
             variant="primary"
             onClick={onSelect}
             {...(isSelecting ? { loading: true } : {})}
           >
-            Choose plan
+            {t("pricing.choosePlan", { plan: name })}
           </s-button>
         )}
       </s-stack>

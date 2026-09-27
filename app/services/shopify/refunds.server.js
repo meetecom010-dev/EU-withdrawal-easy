@@ -1,4 +1,5 @@
 import { adminMutation, adminQuery } from "./client.server";
+import { APP_NAME } from "../../constants";
 
 // Guided refund for a withdrawal: refund exactly the withdrawn items (mapped to
 // the order's refundable line items by product variant, the same join key
@@ -172,7 +173,7 @@ export async function createWithdrawalRefund(admin, orderId, { items, isFullWith
   const input = {
     orderId,
     currency: suggested.amountSet?.presentmentMoney?.currencyCode,
-    note: note ?? "Refunded by EU Withdrawly: customer withdrew from the purchase.",
+    note: note ?? `Refunded by ${APP_NAME} because the customer withdrew from the purchase.`,
     notify: true,
     refundLineItems: (suggested.refundLineItems ?? []).map((line) => ({
       lineItemId: line.lineItem.id,

@@ -1,28 +1,23 @@
 /* eslint-disable react/prop-types -- plain JS project, no prop-types package installed */
 import { useEffect, useState } from "react";
 import { useFetcher, useNavigate } from "react-router";
+import { useTranslation } from "react-i18next";
 import { useAppBridge } from "@shopify/app-bridge-react";
 import {
   STATUS_TONE,
-  STATUS_LABEL,
-  SOURCE_LABEL,
   requestTotal,
-  formatMoney,
-  formatDateTime,
-  formatSubmittedAt,
-  countryName,
-  languageName,
   withdrawalDeadline,
 } from "../../_app.withdrawal-requests/constants";
+import { useFormatters } from "../../../i18n/react";
 import DecisionModal, { DECISION_MODAL_ID } from "./DecisionModal";
 import RefundModal, { REFUND_MODAL_ID } from "./RefundModal";
 
 const CANCEL_MODAL_ID = "cancel-order-modal";
 const ORDER_TAGS_SAVE_BAR_ID = "order-tags-save-bar";
 
-// "PARTIALLY_REFUNDED" -> "Partially refunded"
+// "PARTIALLY_REFUNDED" -> "Partially refunded". Fallback for Shopify enum
+// values that have no translation under orderStatus.* yet.
 function humanize(value) {
-  if (!value) return "—";
   const text = String(value).replace(/_/g, " ").toLowerCase();
   return text.charAt(0).toUpperCase() + text.slice(1);
 }
@@ -73,6 +68,34 @@ const RETURN_TONE = {
   CANCELED: "neutral",
 };
 
+// Translates a Shopify status enum (orderStatus.<group>.<VALUE>), falling back
+// to a humanized version of the raw value for anything not in en.json.
+function useStatusLabel() {
+  const { t } = useTranslation();
+  return (group, value) => {
+    if (!value) return t("common.emptyValue");
+    return t(`orderStatus.${group}.${value}`, { defaultValue: humanize(value) });
+  };
+}
+
+// The text for one automation log entry. Entries written with a messageKey are
+// rendered in the merchant's language; older entries and raw Shopify/provider
+// errors only have their stored `message`.
+function useActivityMessage() {
+  const { t } = useTranslation();
+  const { formatDateTime, formatMoney } = useFormatters();
+  return (entry) => {
+    if (!entry.messageKey) return entry.message;
+    const values = { ...(entry.messageValues ?? {}) };
+    if (values.date) values.date = formatDateTime(values.date);
+    if (values.currencyCode) {
+      values.amount = formatMoney({ amount: values.amount, currencyCode: values.currencyCode });
+    }
+    if (Array.isArray(values.tags)) values.tags = values.tags.join(", ");
+    return t(`requestDetail.activity.messages.${entry.messageKey}`, values);
+  };
+}
+
 // A label/value row, the building block of the summary-style side cards.
 function Row({ label, children }) {
   return (
@@ -84,6 +107,9 @@ function Row({ label, children }) {
 }
 
 function ItemRow({ item }) {
+  const { t } = useTranslation();
+  const { formatMoney } = useFormatters();
+
   return (
     <s-stack direction="inline" gap="base" alignItems="start" justifyContent="space-between">
       <s-stack direction="inline" gap="base" alignItems="center">
@@ -101,47 +127,34 @@ function ItemRow({ item }) {
         <s-stack direction="block" gap="small-500">
           <s-text type="strong">{item.title}</s-text>
           {item.variantTitle && <s-text color="subdued">{item.variantTitle}</s-text>}
-          {item.sku && <s-text color="subdued">SKU {item.sku}</s-text>}
+          {item.sku && (
+            <s-text color="subdued">{t("requestDetail.items.sku", { sku: item.sku })}</s-text>
+          )}
         </s-stack>
       </s-stack>
       <s-stack direction="block" gap="small-500" alignItems="end">
         <s-text type="strong">{formatMoney(item.price)}</s-text>
-        <s-text color="subdued">Qty {item.quantity}</s-text>
+        <s-text color="subdued">
+          {t("requestDetail.items.quantity", { count: item.quantity })}
+        </s-text>
       </s-stack>
     </s-stack>
   );
 }
 
-// What each automation/manual step is called in the activity history.
-const AUTOMATION_LABEL = {
-  resolve_branch: "Automation started",
-  hold_fulfillment: "Fulfillment hold",
-  schedule_fallback: "Scheduled follow-up",
-  release_hold: "Fulfillment hold released",
-  cancel_order_immediate: "Order cancelled and refunded",
-  cancel_order_scheduled: "Order cancelled and refunded",
-  cancel_order_manual: "Order cancelled and refunded",
-  refund: "Refund issued",
-  tag_before_ship: "Order tagged",
-  tag_after_delivery: "Order tagged",
-  order_tag_add: "Order tag added",
-  order_tag_remove: "Order tag removed",
-  create_return: "Shopify return",
-  refresh_return: "Return status refreshed",
-  fetch_shop_contact: "Store contact lookup",
-  customer_email: "Customer confirmation email",
-  merchant_email: "Merchant notification email",
-  notify_customer: "Customer decision email",
-  notify_merchant: "Merchant notified",
-};
-
 const OUTCOME_TONE = { success: "success", failed: "critical", skipped: undefined };
 
-function buildTimeline(withdrawalRequest) {
+function useTimeline(withdrawalRequest) {
+  const { t } = useTranslation();
+  const activityMessage = useActivityMessage();
+
+  const source = withdrawalRequest.source ?? "order_status";
   const events = [
     {
       key: "submitted",
-      text: "Withdrawal request submitted via order status page",
+      text: t("requestDetail.activity.submitted", {
+        source: t(`sourceInline.${source}`, { defaultValue: t("sourceInline.order_status") }),
+      }),
       time: new Date(withdrawalRequest.submittedAt),
       muted: true,
     },
@@ -151,10 +164,14 @@ function buildTimeline(withdrawalRequest) {
     // Skipped steps are no-ops (a turned-off setting, nothing to act on) — they
     // add noise without telling staff anything actionable, so they're left out.
     if (entry.outcome === "skipped") continue;
-    const label = AUTOMATION_LABEL[entry.action] ?? entry.action;
     events.push({
       key: `automation-${index}`,
-      text: `${label}: ${entry.message}`,
+      text: t("requestDetail.activity.entry", {
+        label: t(`requestDetail.activity.actions.${entry.action}`, {
+          defaultValue: humanize(entry.action),
+        }),
+        message: activityMessage(entry),
+      }),
       time: new Date(entry.at),
       tone: OUTCOME_TONE[entry.outcome],
       muted: entry.outcome === "skipped",
@@ -164,7 +181,7 @@ function buildTimeline(withdrawalRequest) {
   if (withdrawalRequest.decidedAt) {
     events.push({
       key: "decided",
-      text: `Request marked as ${STATUS_LABEL[withdrawalRequest.status].toLowerCase()}`,
+      text: t(`requestDetail.activity.decided.${withdrawalRequest.status}`),
       time: new Date(withdrawalRequest.decidedAt),
       tone: STATUS_TONE[withdrawalRequest.status],
     });
@@ -172,7 +189,7 @@ function buildTimeline(withdrawalRequest) {
   for (const [index, note] of withdrawalRequest.notes.entries()) {
     events.push({
       key: `note-${index}`,
-      text: `Note: ${note.body}`,
+      text: t("requestDetail.activity.note", { body: note.body }),
       time: new Date(note.createdAt),
     });
   }
@@ -180,6 +197,8 @@ function buildTimeline(withdrawalRequest) {
 }
 
 function TimelineRow({ event }) {
+  const { formatDateTime } = useFormatters();
+
   return (
     <s-stack direction="inline" gap="small-200" alignItems="start">
       <s-icon type="check-circle" tone={event.tone} color={event.tone ? undefined : "subdued"}></s-icon>
@@ -203,8 +222,12 @@ function TimelineRow({ event }) {
 }
 
 function DeadlineSection({ withdrawalRequest }) {
+  const { t } = useTranslation();
+  const { formatDateTime } = useFormatters();
   const { deadline, daysLeft, overdue } = withdrawalDeadline(withdrawalRequest);
   const pending = withdrawalRequest.status === "pending";
+  const days = Math.abs(daysLeft);
+  const date = formatDateTime(deadline);
   // Fraction of the 14-day window still remaining — a full bar means the whole
   // window is left, and it empties (and shifts warning → critical) as the
   // deadline nears. Colours are hard-coded because s-box backgrounds only
@@ -212,18 +235,27 @@ function DeadlineSection({ withdrawalRequest }) {
   const remaining = Math.max(0, Math.min(1, daysLeft / 14));
   const barColor = overdue ? "#d72c0d" : daysLeft <= 3 ? "#b98900" : "#1a7f52";
 
+  const D = "requestDetail.deadline.";
+  const daysText = pending
+    ? t(overdue ? `${D}daysOverdue` : `${D}daysLeft`, { count: days })
+    : t(overdue ? `${D}daysLate` : `${D}daysEarly`, { count: days });
+  const explanation = pending
+    ? t(overdue ? `${D}pendingOverdue` : `${D}pending`, { date })
+    : t(overdue ? `${D}decidedLate` : `${D}decidedOnTime`, { date });
+
   return (
-    <s-section heading="Deadline">
+    <s-section heading={t(`${D}heading`)}>
       <s-stack direction="block" gap="small-200">
-        <Row label={pending ? "Decide & refund by" : "Refund deadline"}>
+        <Row label={pending ? t(`${D}pendingLabel`) : t(`${D}decidedLabel`)}>
           <s-badge tone={overdue ? "critical" : daysLeft <= 3 ? "warning" : "success"}>
-            {overdue ? "Overdue" : pending ? "Act now" : "On time"}
+            {overdue
+              ? t(`${D}badges.overdue`)
+              : pending
+                ? t(`${D}badges.actionNeeded`)
+                : t(`${D}badges.onTime`)}
           </s-badge>
         </Row>
-        <s-heading>
-          {Math.abs(daysLeft)} day{Math.abs(daysLeft) === 1 ? "" : "s"}
-          {pending && !overdue ? " left" : ""}
-        </s-heading>
+        <s-heading>{daysText}</s-heading>
         <div
           style={{
             height: "8px",
@@ -241,15 +273,7 @@ function DeadlineSection({ withdrawalRequest }) {
             }}
           />
         </div>
-        <s-paragraph color="subdued">
-          {pending
-            ? overdue
-              ? `Deadline passed ${formatDateTime(deadline)} — refund as soon as possible.`
-              : `Left to decide & refund. The 14-day window runs from when this request was submitted.`
-            : overdue
-              ? `Decided after the ${formatDateTime(deadline)} refund deadline.`
-              : `Decided within the 14-day refund window (deadline was ${formatDateTime(deadline)}).`}
-        </s-paragraph>
+        <s-paragraph color="subdued">{explanation}</s-paragraph>
       </s-stack>
     </s-section>
   );
@@ -258,13 +282,15 @@ function DeadlineSection({ withdrawalRequest }) {
 // Live Shopify order tags — edits stage locally and only write to the order
 // when the contextual save bar's Save is clicked (see ORDER_TAGS_SAVE_BAR_ID).
 function OrderTagsSection({ tags, tagText, onTagTextChange, onRemove, disabled }) {
+  const { t } = useTranslation();
+
   return (
-    <s-section heading="Order tags">
+    <s-section heading={t("requestDetail.tags.heading")}>
       <s-stack direction="block" gap="small-200">
         <s-text-field
-          label="Add order tag"
+          label={t("requestDetail.tags.label")}
           labelAccessibilityVisibility="exclusive"
-          placeholder="Add order tag"
+          placeholder={t("requestDetail.tags.placeholder")}
           value={tagText}
           disabled={disabled || undefined}
           onInput={(event) => onTagTextChange(event.currentTarget.value)}
@@ -275,7 +301,7 @@ function OrderTagsSection({ tags, tagText, onTagTextChange, onRemove, disabled }
               <s-clickable-chip
                 key={tag}
                 removable={!disabled || undefined}
-                accessibilityLabel={`Remove order tag ${tag}`}
+                accessibilityLabel={t("requestDetail.tags.remove", { tag })}
                 onRemove={() => onRemove(tag)}
               >
                 {tag}
@@ -283,7 +309,6 @@ function OrderTagsSection({ tags, tagText, onTagTextChange, onRemove, disabled }
             ))}
           </s-stack>
         )}
-   
       </s-stack>
     </s-section>
   );
@@ -292,15 +317,18 @@ function OrderTagsSection({ tags, tagText, onTagTextChange, onRemove, disabled }
 // Customer confirmation, merchant notification, and any decision emails, from
 // the automation state + log.
 function EmailHistorySection({ withdrawalRequest }) {
+  const { t } = useTranslation();
+  const { formatDateTime } = useFormatters();
+  const E = "requestDetail.emails.";
   const emails = withdrawalRequest.automation?.emails ?? {};
   const rows = [
-    { label: "Customer confirmation", ...emails.customer },
-    { label: "Merchant notification", ...emails.merchant },
+    { label: t(`${E}customerConfirmation`), ...emails.customer },
+    { label: t(`${E}merchantNotification`), ...emails.merchant },
   ];
   for (const [index, entry] of (withdrawalRequest.automation?.log ?? []).entries()) {
     if (entry.action !== "notify_customer") continue;
     rows.push({
-      label: "Customer decision email",
+      label: t(`${E}decision`),
       sent: entry.outcome === "success",
       failed: entry.outcome === "failed",
       at: entry.at,
@@ -310,10 +338,14 @@ function EmailHistorySection({ withdrawalRequest }) {
 
   const tone = (row) => (row.failed || row.error ? "critical" : row.sent ? "success" : undefined);
   const status = (row) =>
-    row.failed || row.error ? "Failed" : row.sent ? "Sent" : "Not sent";
+    row.failed || row.error
+      ? t(`${E}statuses.failed`)
+      : row.sent
+        ? t(`${E}statuses.sent`)
+        : t(`${E}statuses.notSent`);
 
   return (
-    <s-section heading="Email history">
+    <s-section heading={t(`${E}heading`)}>
       <s-stack direction="block" gap="base">
         {rows.map((row, index) => (
           <s-stack key={row.key ?? index} direction="block" gap="small-500">
@@ -337,6 +369,11 @@ export default function RequestDetail({
   prevId,
   nextId,
 }) {
+  const { t } = useTranslation();
+  const { formatMoney, formatDateTime, formatLongDateTime, regionName, languageName } =
+    useFormatters();
+  const statusLabel = useStatusLabel();
+  const activityMessage = useActivityMessage();
   const shopify = useAppBridge();
   const navigate = useNavigate();
   const decideFetcher = useFetcher();
@@ -354,8 +391,10 @@ export default function RequestDetail({
   const deciding = decideFetcher.state !== "idle";
   const actionBusy = actionFetcher.state !== "idle";
   const total = requestTotal(withdrawalRequest.items);
-  const timeline = buildTimeline(withdrawalRequest);
+  const timeline = useTimeline(withdrawalRequest);
   const orderNumericId = withdrawalRequest.orderId?.split("/").pop();
+  const customerLanguage = languageName(withdrawalRequest.locale);
+  const customerCountry = regionName(withdrawalRequest.countryCode);
 
   const hasHold =
     (withdrawalRequest.automation?.holds ?? []).length > 0 &&
@@ -381,10 +420,13 @@ export default function RequestDetail({
 
   // The Shopify-order-page style subtitle shown under the order number: when
   // and where the customer submitted the withdrawal, e.g.
-  // "September 21, 2026 at 11:29 am from Order status page".
-  const submittedLine = `${formatSubmittedAt(withdrawalRequest.submittedAt)} from ${
-    SOURCE_LABEL[withdrawalRequest.source] ?? SOURCE_LABEL.order_status
-  }`;
+  // "Submitted September 21, 2026 at 11:29 AM from the order status page".
+  const submittedLine = t("requestDetail.submittedLine", {
+    date: formatLongDateTime(withdrawalRequest.submittedAt),
+    source: t(`sourceInline.${withdrawalRequest.source ?? "order_status"}`, {
+      defaultValue: t("sourceInline.order_status"),
+    }),
+  });
 
   // The order's live tags, keyed as a string so the effect below only fires
   // when the actual tag list changes (e.g. after a save) — not on every
@@ -421,13 +463,15 @@ export default function RequestDetail({
 
   useEffect(() => {
     if (orderTagFetcher.state !== "idle" || !orderTagFetcher.data?.withdrawalRequest) return;
-    shopify.toast.show("Order tags saved");
+    shopify.toast.show(t("requestDetail.tags.savedToast"));
     // eslint-disable-next-line react-hooks/exhaustive-deps -- only react to the order-tag fetcher settling
   }, [orderTagFetcher.state, orderTagFetcher.data]);
 
   useEffect(() => {
     if (decideFetcher.state === "idle" && decideFetcher.data?.decided) {
-      shopify.toast.show(`Request marked as ${decideFetcher.data.withdrawalRequest.status}`);
+      shopify.toast.show(
+        t(`requestDetail.decidedToast.${decideFetcher.data.withdrawalRequest.status}`),
+      );
       navigate("/withdrawal-requests");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps -- only react to the decide fetcher settling
@@ -439,7 +483,7 @@ export default function RequestDetail({
     if (actionFetcher.state !== "idle" || !actionFetcher.data?.withdrawalRequest) return;
     const log = actionFetcher.data.withdrawalRequest.automation?.log ?? [];
     const last = log[log.length - 1];
-    if (last) shopify.toast.show(last.message, { isError: last.outcome === "failed" });
+    if (last) shopify.toast.show(activityMessage(last), { isError: last.outcome === "failed" });
     shopify.modal.hide(REFUND_MODAL_ID);
     shopify.modal.hide(CANCEL_MODAL_ID);
     // eslint-disable-next-line react-hooks/exhaustive-deps -- only react to the action fetcher settling
@@ -468,7 +512,7 @@ export default function RequestDetail({
   // Order tag edits stage locally — nothing is written to Shopify until
   // saveOrderTags runs, matching the Form setup save bar's behavior.
   function removeOrderTag(tag) {
-    setOrderTags((current) => current.filter((t) => t !== tag));
+    setOrderTags((current) => current.filter((existing) => existing !== tag));
   }
   function discardOrderTags() {
     setOrderTags(savedOrderTags);
@@ -501,8 +545,10 @@ export default function RequestDetail({
   }
 
   function showEvidencePackComingSoon() {
-    shopify.toast.show("Evidence pack export is coming soon");
+    shopify.toast.show(t("requestDetail.actions.evidencePackComingSoon"));
   }
+
+  const A = "requestDetail.actions.";
 
   return (
     <s-page heading={withdrawalRequest.orderName}>
@@ -510,34 +556,36 @@ export default function RequestDetail({
           payment / fulfillment / hold / return state, mirroring Shopify's own
           order page. */}
       <s-badge slot="accessory" tone={STATUS_TONE[withdrawalRequest.status]}>
-        {STATUS_LABEL[withdrawalRequest.status]}
+        {t(`status.${withdrawalRequest.status}`)}
       </s-badge>
       {cancelled && (
         <s-badge slot="accessory" tone="critical">
-          Cancelled
+          {t("requestDetail.badges.canceled")}
         </s-badge>
       )}
       {orderState?.financialStatus && (
         <s-badge slot="accessory" tone={FINANCIAL_TONE[orderState.financialStatus] ?? "neutral"}>
-          {humanize(orderState.financialStatus)}
+          {statusLabel("financial", orderState.financialStatus)}
         </s-badge>
       )}
       {orderState?.fulfillmentStatus && (
         <s-badge slot="accessory" tone={FULFILLMENT_TONE[orderState.fulfillmentStatus] ?? "neutral"}>
-          {humanize(orderState.fulfillmentStatus)}
+          {statusLabel("fulfillment", orderState.fulfillmentStatus)}
         </s-badge>
       )}
       {hasHold && (
         <s-badge slot="accessory" tone="warning">
-          On hold
+          {t("requestDetail.badges.onHold")}
         </s-badge>
       )}
       {returnId && (
         <s-badge slot="accessory" tone={RETURN_TONE[returnStatus] ?? "info"}>
-          Return {humanize(returnStatus)}
+          {t("requestDetail.badges.return", { status: statusLabel("return", returnStatus) })}
         </s-badge>
       )}
-      <s-link slot="breadcrumb-actions" href="/withdrawal-requests">Back to withdrawals</s-link>
+      <s-link slot="breadcrumb-actions" href="/withdrawal-requests">
+        {t("requestDetail.backLink")}
+      </s-link>
 
       {/* Order-level operations live in the title bar. Refund is surfaced as
           its own button; everything else (Cancel order, holds, returns, view)
@@ -548,48 +596,48 @@ export default function RequestDetail({
           disabled={actionBusy || undefined}
           onClick={openRefund}
         >
-          Refund
+          {t(`${A}refund`)}
         </s-button>
       )}
       <s-button slot="secondary-actions" commandFor="more-actions-menu">
-        More actions
+        {t(`${A}more`)}
       </s-button>
-      <s-menu id="more-actions-menu" accessibilityLabel="More actions">
+      <s-menu id="more-actions-menu" accessibilityLabel={t(`${A}more`)}>
         {orderActionsAvailable && beforeShip && (
           <s-button
             disabled={actionBusy || undefined}
             onClick={() => shopify.modal.show(CANCEL_MODAL_ID)}
           >
-            Cancel order
+            {t(`${A}cancelOrder`)}
           </s-button>
         )}
         {orderActionsAvailable && beforeShip && holdable && !hasHold && (
           <s-button disabled={actionBusy || undefined} onClick={() => runAction("place-hold")}>
-            Place fulfillment hold
+            {t(`${A}placeHold`)}
           </s-button>
         )}
         {orderActionsAvailable && beforeShip && hasHold && (
           <s-button disabled={actionBusy || undefined} onClick={() => runAction("release-hold")}>
-            Release fulfillment hold
+            {t(`${A}releaseHold`)}
           </s-button>
         )}
         {orderActionsAvailable && !beforeShip && !returnId && (
           <s-button disabled={actionBusy || undefined} onClick={() => runAction("create-return")}>
-            Create Shopify return
+            {t(`${A}createReturn`)}
           </s-button>
         )}
         {orderActionsAvailable && !beforeShip && returnId && (
           <s-button disabled={actionBusy || undefined} onClick={() => runAction("refresh-return")}>
-            Refresh return status
+            {t(`${A}refreshReturn`)}
           </s-button>
         )}
         {shopDomain && orderNumericId && (
           <s-button href={`https://${shopDomain}/admin/orders/${orderNumericId}`} target="_blank">
-            View order in Shopify
+            {t(`${A}viewOrder`)}
           </s-button>
         )}
         <s-button icon="export" onClick={showEvidencePackComingSoon}>
-          Evidence pack
+          {t(`${A}evidencePack`)}
         </s-button>
       </s-menu>
 
@@ -598,7 +646,7 @@ export default function RequestDetail({
         preview={previewFetcher.data?.preview ?? null}
         loading={previewFetcher.state !== "idle"}
         deciding={deciding}
-        language={languageName(withdrawalRequest.locale)}
+        language={customerLanguage}
         onConfirm={confirmDecision}
       />
       <RefundModal
@@ -607,22 +655,21 @@ export default function RequestDetail({
         refunding={actionBusy}
         onConfirm={confirmRefund}
       />
-      <s-modal id={CANCEL_MODAL_ID} heading="Cancel order">
+      <s-modal id={CANCEL_MODAL_ID} heading={t("requestDetail.cancelModal.heading")}>
         <s-stack direction="block" gap="base" padding="base none base none">
-          <s-banner tone="warning">
-            This cancels the whole order in Shopify and refunds it to the original payment method.
-            It can&apos;t be undone.
-          </s-banner>
+          <s-banner tone="warning">{t("requestDetail.cancelModal.body")}</s-banner>
         </s-stack>
         <s-stack direction="inline" gap="base" alignItems="center" justifyContent="end">
-          <s-button onClick={() => shopify.modal.hide(CANCEL_MODAL_ID)}>Keep order</s-button>
+          <s-button onClick={() => shopify.modal.hide(CANCEL_MODAL_ID)}>
+            {t("requestDetail.cancelModal.keep")}
+          </s-button>
           <s-button
             variant="primary"
             tone="critical"
             loading={actionBusy || undefined}
             onClick={() => runAction("cancel-order")}
           >
-            Cancel & refund order
+            {t("requestDetail.cancelModal.confirm")}
           </s-button>
         </s-stack>
       </s-modal>
@@ -638,24 +685,24 @@ export default function RequestDetail({
           disabled={orderTagFetcher.state !== "idle" || undefined}
           loading={orderTagFetcher.state !== "idle" || undefined}
         >
-          Save
+          {t("common.save")}
         </button>
         <button onClick={discardOrderTags} disabled={orderTagFetcher.state !== "idle" || undefined}>
-          Discard
+          {t("common.discard")}
         </button>
       </ui-save-bar>
 
       <s-button
         slot="secondary-actions"
         icon="chevron-left"
-        accessibilityLabel="Previous request"
+        accessibilityLabel={t("requestDetail.previous")}
         href={prevId ? `/withdrawal-requests/${prevId}` : undefined}
         disabled={!prevId}
       ></s-button>
       <s-button
         slot="secondary-actions"
         icon="chevron-right"
-        accessibilityLabel="Next request"
+        accessibilityLabel={t("requestDetail.next")}
         href={nextId ? `/withdrawal-requests/${nextId}` : undefined}
         disabled={!nextId}
       ></s-button>
@@ -667,16 +714,12 @@ export default function RequestDetail({
         <s-text color="subdued">{submittedLine}</s-text>
 
         {orderStateError && (
-          <s-banner tone="warning" heading="Live order state unavailable">
-            {orderStateError} Order actions are disabled until it loads.
+          <s-banner tone="warning" heading={t("requestDetail.banners.orderUnavailableHeading")}>
+            {t("requestDetail.banners.orderUnavailableBody", { error: orderStateError })}
           </s-banner>
         )}
 
-        {cancelled && (
-          <s-banner tone="info">
-            This order has been cancelled — no further order actions apply.
-          </s-banner>
-        )}
+        {cancelled && <s-banner tone="info">{t("requestDetail.banners.canceled")}</s-banner>}
 
         <s-query-container>
           <s-grid gridTemplateColumns="@container (inline-size > 720px) 2fr 1fr, 1fr" gap="base" alignItems="start">
@@ -688,7 +731,7 @@ export default function RequestDetail({
               {/* No `heading` prop: the card renders its own header row so the
                   Reject / Approve decision buttons can sit on the right (section
                   header action slots don't render in this App Bridge version). */}
-              <s-section accessibilityLabel="Withdrawn items">
+              <s-section accessibilityLabel={t("requestDetail.items.heading")}>
                 <s-stack direction="block" gap="base">
                   <s-stack
                     direction="inline"
@@ -696,14 +739,14 @@ export default function RequestDetail({
                     alignItems="center"
                     gap="base"
                   >
-                    <s-heading>Withdrawn items</s-heading>
+                    <s-heading>{t("requestDetail.items.heading")}</s-heading>
                     <s-stack direction="inline" gap="small-200">
                       <s-button
                         tone="critical"
                         onClick={() => openDecision("rejected")}
                         disabled={!isPending || deciding || undefined}
                       >
-                        Reject
+                        {t("requestDetail.items.reject")}
                       </s-button>
                       <s-button
                         variant="primary"
@@ -711,7 +754,7 @@ export default function RequestDetail({
                         disabled={!isPending || deciding || undefined}
                         loading={deciding || undefined}
                       >
-                        Approve
+                        {t("requestDetail.items.approve")}
                       </s-button>
                     </s-stack>
                   </s-stack>
@@ -721,67 +764,68 @@ export default function RequestDetail({
                   ))}
                   <s-divider></s-divider>
                   <s-stack direction="inline" justifyContent="space-between">
-                    <s-text type="strong">Total withdrawn</s-text>
+                    <s-text type="strong">{t("requestDetail.items.total")}</s-text>
                     <s-text type="strong">{formatMoney(total)}</s-text>
                   </s-stack>
                 </s-stack>
               </s-section>
 
               {returnId && (
-                <s-section heading="Return">
+                <s-section heading={t("requestDetail.return.heading")}>
                   <s-stack direction="block" gap="small-200">
-                    <Row label="Status">
+                    <Row label={t("requestDetail.return.status")}>
                       <s-badge tone={RETURN_TONE[returnStatus] ?? "info"}>
-                        {humanize(returnStatus) ?? "Open"}
+                        {statusLabel("return", returnStatus)}
                       </s-badge>
                     </Row>
                     {withdrawalRequest.automation?.returnCreatedAt && (
-                      <Row label="Created">
+                      <Row label={t("requestDetail.return.created")}>
                         {formatDateTime(new Date(withdrawalRequest.automation.returnCreatedAt))}
                       </Row>
                     )}
-                    <s-text color="subdued">
-                      A Shopify return was created for the withdrawn items. Refresh to pull its latest
-                      status from Shopify.
-                    </s-text>
+                    <s-text color="subdued">{t("requestDetail.return.body")}</s-text>
                   </s-stack>
                 </s-section>
               )}
 
-              <s-section heading="Payment">
+              <s-section heading={t("requestDetail.payment.heading")}>
                 <s-stack direction="block" gap="small-200">
                   {orderState ? (
                     <>
-                      <Row label="Payment status">
+                      <Row label={t("requestDetail.payment.status")}>
                         <s-badge tone={FINANCIAL_TONE[orderState.financialStatus] ?? "neutral"}>
-                          {humanize(orderState.financialStatus)}
+                          {statusLabel("financial", orderState.financialStatus)}
                         </s-badge>
                       </Row>
                       <s-divider></s-divider>
-                      <Row label="Withdrawal subtotal">{formatMoney(total)}</Row>
-                      <Row label="Order shipping">{money(orderState.totalShipping)}</Row>
+                      <Row label={t("requestDetail.payment.subtotal")}>{formatMoney(total)}</Row>
+                      <Row label={t("requestDetail.payment.shipping")}>
+                        {money(orderState.totalShipping)}
+                      </Row>
                       <s-divider></s-divider>
                       <s-stack direction="inline" justifyContent="space-between" alignItems="center">
-                        <s-text type="strong">Order total</s-text>
+                        <s-text type="strong">{t("requestDetail.payment.total")}</s-text>
                         <s-text type="strong">{money(orderState.totalPrice)}</s-text>
                       </s-stack>
                       {orderState.totalRefunded > 0 && (
-                        <Row label="Refunded">{money(orderState.totalRefunded)}</Row>
+                        <Row label={t("requestDetail.payment.refunded")}>
+                          {money(orderState.totalRefunded)}
+                        </Row>
                       )}
                     </>
                   ) : (
-                    <s-text color="subdued">Payment state is unavailable right now.</s-text>
+                    <s-text color="subdued">{t("requestDetail.payment.unavailable")}</s-text>
                   )}
                 </s-stack>
               </s-section>
 
-              <s-section heading="Activity history">
+              <s-section heading={t("requestDetail.activity.heading")}>
                 <s-stack direction="block" gap="base">
                   <s-grid gridTemplateColumns="1fr auto" gap="small-200" alignItems="start">
                     <s-text-field
-                      label="Leave an internal note"
+                      label={t("requestDetail.activity.noteLabel")}
                       labelAccessibilityVisibility="exclusive"
-                      placeholder="Leave an internal note…"
+                      placeholder={t("requestDetail.activity.notePlaceholder")}
                       value={noteText}
                       onChange={(event) => setNoteText(event.currentTarget.value)}
                       onKeyDown={(event) => {
@@ -792,12 +836,10 @@ export default function RequestDetail({
                       }}
                     ></s-text-field>
                     <s-button onClick={submitNote} disabled={!noteText.trim() || undefined}>
-                      Post
+                      {t("requestDetail.activity.post")}
                     </s-button>
                   </s-grid>
-                  <s-text color="subdued">
-                    Only you and staff can see notes — they&apos;re never shown to the customer.
-                  </s-text>
+                  <s-text color="subdued">{t("requestDetail.activity.noteHelp")}</s-text>
                   <s-divider></s-divider>
                   <s-stack direction="block" gap="base">
                     {timeline.map((event) => (
@@ -809,9 +851,9 @@ export default function RequestDetail({
             </s-stack>
 
             <s-stack direction="block" gap="large-100">
-              <s-section heading="Order">
+              <s-section heading={t("requestDetail.order.heading")}>
                 <s-stack direction="block" gap="small-200">
-                  <Row label="Order">
+                  <Row label={t("requestDetail.order.order")}>
                     {shopDomain && orderNumericId ? (
                       <s-link href={`https://${shopDomain}/admin/orders/${orderNumericId}`} target="_blank">
                         {withdrawalRequest.orderName}
@@ -821,18 +863,20 @@ export default function RequestDetail({
                     )}
                   </Row>
                   {orderState?.createdAt && (
-                    <Row label="Placed">{formatDateTime(new Date(orderState.createdAt))}</Row>
+                    <Row label={t("requestDetail.order.placed")}>
+                      {formatDateTime(new Date(orderState.createdAt))}
+                    </Row>
                   )}
                   {orderState && (
                     <>
-                      <Row label="Payment">
+                      <Row label={t("requestDetail.order.payment")}>
                         <s-badge tone={FINANCIAL_TONE[orderState.financialStatus] ?? "neutral"}>
-                          {humanize(orderState.financialStatus)}
+                          {statusLabel("financial", orderState.financialStatus)}
                         </s-badge>
                       </Row>
-                      <Row label="Fulfillment">
+                      <Row label={t("requestDetail.order.fulfillment")}>
                         <s-badge tone={FULFILLMENT_TONE[orderState.fulfillmentStatus] ?? "neutral"}>
-                          {humanize(orderState.fulfillmentStatus)}
+                          {statusLabel("fulfillment", orderState.fulfillmentStatus)}
                         </s-badge>
                       </Row>
                     </>
@@ -840,22 +884,24 @@ export default function RequestDetail({
                 </s-stack>
               </s-section>
 
-              <s-section heading="Customer">
+              <s-section heading={t("requestDetail.customer.heading")}>
                 <s-stack direction="block" gap="base">
                   <s-stack direction="inline" gap="base" alignItems="center">
                     <s-avatar
                       initials={initials(withdrawalRequest.customerName)}
-                      alt={withdrawalRequest.customerName || "Customer"}
+                      alt={withdrawalRequest.customerName || t("requestDetail.customer.avatarFallback")}
                       size="base"
                     ></s-avatar>
                     <s-stack direction="block" gap="small-500">
-                      <s-text type="strong">{withdrawalRequest.customerName || "—"}</s-text>
-                      {countryName(withdrawalRequest.countryCode) && (
+                      <s-text type="strong">
+                        {withdrawalRequest.customerName || t("common.emptyValue")}
+                      </s-text>
+                      {customerCountry && (
                         <s-stack direction="inline" gap="small-500" alignItems="center">
                           {withdrawalRequest.countryCode && (
                             <s-badge>{withdrawalRequest.countryCode}</s-badge>
                           )}
-                          <s-text color="subdued">{countryName(withdrawalRequest.countryCode)}</s-text>
+                          <s-text color="subdued">{customerCountry}</s-text>
                         </s-stack>
                       )}
                     </s-stack>
@@ -864,18 +910,18 @@ export default function RequestDetail({
                   <s-divider></s-divider>
 
                   <s-stack direction="block" gap="small-200">
-                    <s-heading>Contact information</s-heading>
-                    <Row label="Email">
+                    <s-heading>{t("requestDetail.customer.contactHeading")}</s-heading>
+                    <Row label={t("requestDetail.customer.email")}>
                       {withdrawalRequest.customerEmail ? (
                         <s-link href={`mailto:${withdrawalRequest.customerEmail}`}>
                           {withdrawalRequest.customerEmail}
                         </s-link>
                       ) : (
-                        <s-text>—</s-text>
+                        <s-text>{t("common.emptyValue")}</s-text>
                       )}
                     </Row>
-                    {languageName(withdrawalRequest.locale) && (
-                      <Row label="Language">{languageName(withdrawalRequest.locale)}</Row>
+                    {customerLanguage && (
+                      <Row label={t("requestDetail.customer.language")}>{customerLanguage}</Row>
                     )}
                   </s-stack>
 
@@ -883,7 +929,7 @@ export default function RequestDetail({
                     <>
                       <s-divider></s-divider>
                       <s-stack direction="block" gap="small-200">
-                        <s-heading>Shipping address</s-heading>
+                        <s-heading>{t("requestDetail.customer.shippingHeading")}</s-heading>
                         <s-stack direction="block" gap="small-500">
                           {withdrawalRequest.shippingAddress
                             .split(",")
@@ -899,28 +945,37 @@ export default function RequestDetail({
                 </s-stack>
               </s-section>
 
-              <s-section heading="Automation status">
+              <s-section heading={t("requestDetail.automation.heading")}>
                 <s-stack direction="block" gap="small-200">
-                  <Row label="Stage">
-                    {withdrawalRequest.automation?.branch
-                      ? humanize(withdrawalRequest.automation.branch)
-                      : orderState
-                        ? humanize(orderState.branch)
-                        : "—"}
+                  <Row label={t("requestDetail.automation.stage")}>
+                    {(() => {
+                      const branch = withdrawalRequest.automation?.branch ?? orderState?.branch;
+                      return branch
+                        ? t(`requestDetail.automation.stages.${branch}`, {
+                            defaultValue: humanize(branch),
+                          })
+                        : t("common.emptyValue");
+                    })()}
                   </Row>
-                  <Row label="Hold">
+                  <Row label={t("requestDetail.automation.hold")}>
                     <s-badge tone={hasHold ? "warning" : "neutral"}>
-                      {hasHold ? "On hold" : withdrawalRequest.automation?.holdsReleasedAt ? "Released" : "None"}
+                      {hasHold
+                        ? t("requestDetail.automation.holdStates.onHold")
+                        : withdrawalRequest.automation?.holdsReleasedAt
+                          ? t("requestDetail.automation.holdStates.released")
+                          : t("requestDetail.automation.holdStates.none")}
                     </s-badge>
                   </Row>
                   {withdrawalRequest.automation?.cancelledAt && (
-                    <Row label="Cancelled">
+                    <Row label={t("requestDetail.automation.canceled")}>
                       {formatDateTime(new Date(withdrawalRequest.automation.cancelledAt))}
                     </Row>
                   )}
                   {returnId && (
-                    <Row label="Return">
-                      <s-badge tone={RETURN_TONE[returnStatus] ?? "info"}>{humanize(returnStatus)}</s-badge>
+                    <Row label={t("requestDetail.automation.return")}>
+                      <s-badge tone={RETURN_TONE[returnStatus] ?? "info"}>
+                        {statusLabel("return", returnStatus)}
+                      </s-badge>
                     </Row>
                   )}
                 </s-stack>
@@ -936,11 +991,13 @@ export default function RequestDetail({
                 disabled={!orderState || cancelled}
               />
 
-              <s-section heading="Reason given">
+              <s-section heading={t("requestDetail.reason.heading")}>
                 <s-stack direction="block" gap="small-200">
                   <s-box background="subdued" borderRadius="base" padding="base">
                     <s-paragraph>
-                      {withdrawalRequest.reason ? `"${withdrawalRequest.reason}"` : "No reason given."}
+                      {withdrawalRequest.reason
+                        ? t("requestDetail.reason.quoted", { reason: withdrawalRequest.reason })
+                        : t("requestDetail.reason.none")}
                     </s-paragraph>
                   </s-box>
                 </s-stack>

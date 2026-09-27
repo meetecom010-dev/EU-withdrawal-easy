@@ -1,6 +1,8 @@
 // Central validation for the form-setup settings object. Returns a flat map
-// of dot-path -> error message for every field currently invalid; an empty
-// object means the settings are safe to save. Shared by the client
+// of dot-path -> message descriptor ({ key, values }, see i18n/errors.js) for
+// every field currently invalid; an empty object means the settings are safe
+// to save. Descriptors rather than strings so each side translates them for
+// its own locale. Shared by the client
 // (route.jsx, to block Save and show inline errors on the relevant field)
 // and the server (services/app-settings.server.js, so the API can't be used
 // to bypass it).
@@ -9,6 +11,7 @@
 // what lets a field find its own message and dismiss it when the merchant
 // returns to that field.
 
+import { message } from "../../i18n/errors";
 import { AFTER_DELIVERY_ACTIONS, BASE_LOCALE, FALLBACK_OPTIONS } from "./constants";
 
 const FALLBACK_DAYS_RANGE = { min: 1, max: 90 };
@@ -21,24 +24,24 @@ const FALLBACK_VALUES = FALLBACK_OPTIONS.map((option) => option.value);
 // verbatim, so a blank one ships a heading with no words or a button with no
 // text to the shopper. All of them are required, and each message names what
 // the field is for — the two "Title" fields only differ by which step they
-// belong to.
+// belong to. Values are formSetup.validation.* translation keys.
 const REQUIRED_LABELS = {
-  step1Title: "Enter a title.",
-  step1Description: "Enter a description.",
-  itemSelectionHeading: "Enter a heading for the item list.",
-  deliveredTitle: "Enter a title.",
-  deliveredDescription: "Enter a description.",
-  deliveredItemSelectionHeading: "Enter a heading for the item list.",
-  step1ButtonLabel: "Enter a label for the continue button.",
-  confirmHeading: "Enter a heading.",
-  confirmMessage: "Enter a confirmation message.",
-  deliveredConfirmMessage: "Enter a confirmation message.",
-  declaration: "Enter the declaration customers have to accept.",
-  confirmButtonLabel: "Enter a label for the confirm button.",
-  submittedTitle: "Enter a title.",
-  submittedMessage: "Enter a message.",
-  deliveredSubmittedTitle: "Enter a title.",
-  deliveredSubmittedMessage: "Enter a message.",
+  step1Title: "formSetup.validation.title",
+  step1Description: "formSetup.validation.description",
+  itemSelectionHeading: "formSetup.validation.itemHeading",
+  deliveredTitle: "formSetup.validation.title",
+  deliveredDescription: "formSetup.validation.description",
+  deliveredItemSelectionHeading: "formSetup.validation.itemHeading",
+  step1ButtonLabel: "formSetup.validation.continueButton",
+  confirmHeading: "formSetup.validation.heading",
+  confirmMessage: "formSetup.validation.confirmMessage",
+  deliveredConfirmMessage: "formSetup.validation.confirmMessage",
+  declaration: "formSetup.validation.declaration",
+  confirmButtonLabel: "formSetup.validation.confirmButton",
+  submittedTitle: "formSetup.validation.title",
+  submittedMessage: "formSetup.validation.message",
+  deliveredSubmittedTitle: "formSetup.validation.title",
+  deliveredSubmittedMessage: "formSetup.validation.message",
 };
 
 function isValidNumber(value, { min = -Infinity, max = Infinity } = {}) {
@@ -59,23 +62,23 @@ export function validateFormSettings(settings) {
   // Ordered to follow the page top to bottom, so the first error is also the
   // highest one on screen.
   if (settings.countryMode !== "all" && settings.countryMode !== "specific") {
-    errors.countryMode = "Choose which countries are eligible.";
+    errors.countryMode = message("formSetup.validation.countryMode");
   } else if (settings.countryMode === "specific" && (settings.euCountries ?? []).length === 0) {
-    errors.euCountries = "Select at least one country.";
+    errors.euCountries = message("formSetup.validation.euCountries");
   }
 
-  for (const [key, message] of Object.entries(REQUIRED_LABELS)) {
+  for (const [key, messageKey] of Object.entries(REQUIRED_LABELS)) {
     if (isBlank(labels[key])) {
-      errors[`labels.${key}`] = message;
+      errors[`labels.${key}`] = message(messageKey);
     }
   }
 
   if (reasonField.enabled) {
     if (isBlank(reasonField.label)) {
-      errors["reasonField.label"] = "Enter a label for the reason field.";
+      errors["reasonField.label"] = message("formSetup.validation.reasonLabel");
     }
     if ((reasonField.options ?? []).length === 0) {
-      errors["reasonField.options"] = "Add at least one reason option.";
+      errors["reasonField.options"] = message("formSetup.validation.reasonOptions");
     }
   }
 
@@ -90,19 +93,19 @@ export function validateFormSettings(settings) {
     if (lang === BASE_LOCALE) continue;
     const t = translations[lang] ?? {};
     const tLabels = t.labels ?? {};
-    for (const [key, message] of Object.entries(REQUIRED_LABELS)) {
+    for (const [key, messageKey] of Object.entries(REQUIRED_LABELS)) {
       if (isBlank(tLabels[key])) {
-        errors[`translations.${lang}.labels.${key}`] = message;
+        errors[`translations.${lang}.labels.${key}`] = message(messageKey);
       }
     }
     if (reasonField.enabled) {
       if (isBlank(t.reasonLabel)) {
-        errors[`translations.${lang}.reasonLabel`] = "Enter a label for the reason field.";
+        errors[`translations.${lang}.reasonLabel`] = message("formSetup.validation.reasonLabel");
       }
       const tOptions = t.reasonOptions ?? [];
       (reasonField.options ?? []).forEach((_, index) => {
         if (isBlank(tOptions[index])) {
-          errors[`translations.${lang}.reasonOptions.${index}`] = "Translate this reason option.";
+          errors[`translations.${lang}.reasonOptions.${index}`] = message("formSetup.validation.reasonOptionTranslation");
         }
       });
     }
@@ -110,38 +113,34 @@ export function validateFormSettings(settings) {
 
   if (automation.holdFulfillment) {
     if (!FALLBACK_VALUES.includes(automation.unshippedFallback)) {
-      errors["automation.unshippedFallback"] =
-        "Choose what happens if no one reviews the request in time.";
+      errors["automation.unshippedFallback"] = message("formSetup.validation.fallback");
     } else if (
       (automation.unshippedFallback === "release-n" ||
         automation.unshippedFallback === "cancel-n") &&
       !isValidNumber(automation.unshippedFallbackDays, FALLBACK_DAYS_RANGE)
     ) {
-      errors["automation.unshippedFallbackDays"] =
-        `Enter a number of days between ${FALLBACK_DAYS_RANGE.min} and ${FALLBACK_DAYS_RANGE.max}.`;
+      errors["automation.unshippedFallbackDays"] = message("formSetup.validation.daysRange", FALLBACK_DAYS_RANGE);
     }
   }
 
   if (automation.tagBeforeShip && (automation.beforeShipTags ?? []).length === 0) {
-    errors["automation.beforeShipTags"] = "Add at least one tag, or turn off tagging.";
+    errors["automation.beforeShipTags"] = message("formSetup.validation.tags");
   }
 
   if (!AFTER_DELIVERY_ACTIONS.includes(automation.afterDeliveryAction)) {
-    errors["automation.afterDeliveryAction"] = "Choose what happens after delivery.";
+    errors["automation.afterDeliveryAction"] = message("formSetup.validation.afterDeliveryAction");
   }
 
   if (automation.tagAfterDelivery && (automation.afterDeliveryTags ?? []).length === 0) {
-    errors["automation.afterDeliveryTags"] = "Add at least one tag, or turn off tagging.";
+    errors["automation.afterDeliveryTags"] = message("formSetup.validation.tags");
   }
 
   if (!isValidNumber(deadline.daysAfterDelivery, DEADLINE_DAYS_RANGE)) {
-    errors["deadline.daysAfterDelivery"] =
-      `Enter a number of days between ${DEADLINE_DAYS_RANGE.min} and ${DEADLINE_DAYS_RANGE.max}.`;
+    errors["deadline.daysAfterDelivery"] = message("formSetup.validation.daysRange", DEADLINE_DAYS_RANGE);
   }
 
   if (!isValidNumber(deadline.estimatedTransitDays, TRANSIT_DAYS_RANGE)) {
-    errors["deadline.estimatedTransitDays"] =
-      `Enter a number of days between ${TRANSIT_DAYS_RANGE.min} and ${TRANSIT_DAYS_RANGE.max}.`;
+    errors["deadline.estimatedTransitDays"] = message("formSetup.validation.daysRange", TRANSIT_DAYS_RANGE);
   }
 
   return errors;

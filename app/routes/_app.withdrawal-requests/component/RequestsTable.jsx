@@ -1,20 +1,17 @@
 /* eslint-disable react/prop-types -- plain JS project, no prop-types package installed */
 import { useEffect, useMemo, useState } from "react";
 import { useFetcher } from "react-router";
+import { useTranslation } from "react-i18next";
 import { useAppBridge } from "@shopify/app-bridge-react";
-import {
-  STATUS_TABS,
-  STATUS_TONE,
-  STATUS_LABEL,
-  requestTotal,
-  formatMoney,
-  downloadRequestsCsv,
-} from "../constants";
+import { STATUS_TABS, STATUS_TONE, requestTotal, downloadRequestsCsv } from "../constants";
+import { useFormatters } from "../../../i18n/react";
 
 const PAGE_SIZE = 5;
 const DELETE_MODAL_ID = "delete-requests-modal";
 
 export default function RequestsTable({ requests }) {
+  const { t } = useTranslation();
+  const { locale, formatMoney, formatDate } = useFormatters();
   const shopify = useAppBridge();
   const deleteFetcher = useFetcher();
   const [statusFilter, setStatusFilter] = useState("all");
@@ -58,8 +55,7 @@ export default function RequestsTable({ requests }) {
   useEffect(() => {
     if (deleteFetcher.state === "idle" && deleteFetcher.data?.deleted != null) {
       shopify.modal.hide(DELETE_MODAL_ID);
-      const n = deleteFetcher.data.deleted;
-      shopify.toast.show(`Deleted ${n} request${n === 1 ? "" : "s"}`);
+      shopify.toast.show(t("requests.delete.toast", { count: deleteFetcher.data.deleted }));
       setSelectedIds([]);
       setDeleteIds([]);
     }
@@ -89,7 +85,7 @@ export default function RequestsTable({ requests }) {
       selectedIds.length > 0
         ? requests.filter((request) => selectedIds.includes(request.id))
         : filtered;
-    downloadRequestsCsv(rows);
+    downloadRequestsCsv(rows, { t, locale });
   }
   function openDelete(ids) {
     setDeleteIds(ids);
@@ -109,24 +105,27 @@ export default function RequestsTable({ requests }) {
           <s-stack direction="block" gap="base">
             <s-grid gridTemplateColumns="1fr auto" gap="base" alignItems="center">
               <s-search-field
-                label="Search requests"
+                label={t("requests.searchLabel")}
                 labelAccessibilityVisibility="exclusive"
-                placeholder="Search order or customer"
+                placeholder={t("requests.searchPlaceholder")}
                 value={search}
                 onInput={(event) => setSearch(event.currentTarget.value)}
               ></s-search-field>
               <s-button onClick={exportSelected}>
-                {selectedIds.length > 0 ? "Export selected" : "Export"}
+                {selectedIds.length > 0 ? t("requests.exportSelected") : t("requests.export")}
               </s-button>
             </s-grid>
             <s-stack direction="inline" gap="small-200">
               {STATUS_TABS.map((tab) => (
                 <s-button
-                  key={tab.key}
-                  variant={statusFilter === tab.key ? "primary" : "secondary"}
-                  onClick={() => setStatusFilter(tab.key)}
+                  key={tab}
+                  variant={statusFilter === tab ? "primary" : "secondary"}
+                  onClick={() => setStatusFilter(tab)}
                 >
-                  {tab.label} ({counts[tab.key] ?? 0})
+                  {t("requests.tabs.withCount", {
+                    label: tab === "all" ? t("requests.tabs.all") : t(`status.${tab}`),
+                    count: counts[tab] ?? 0,
+                  })}
                 </s-button>
               ))}
             </s-stack>
@@ -136,22 +135,22 @@ export default function RequestsTable({ requests }) {
         {filtered.length === 0 ? (
           <>
             <s-divider></s-divider>
-            <s-section accessibilityLabel="Empty state section">
+            <s-section>
               <s-grid gap="base" justifyItems="center" paddingBlock="large-400">
                 <s-box maxInlineSize="200px" maxBlockSize="200px">
                   <s-image
                     aspectRatio="1/0.5"
                     src="https://cdn.shopify.com/static/images/polaris/patterns/callout.png"
-                    alt="No withdrawal requests"
+                    alt={t("requests.empty.imageAlt")}
                   />
                 </s-box>
                 <s-grid justifyItems="center" maxInlineSize="450px" gap="base">
                   <s-stack alignItems="center">
-                    <s-heading>No withdrawal requests found</s-heading>
+                    <s-heading>
+                      {isFiltered ? t("requests.empty.filteredHeading") : t("requests.empty.heading")}
+                    </s-heading>
                     <s-paragraph>
-                      {isFiltered
-                        ? "Try changing your search or filter to find what you're looking for."
-                        : "Withdrawal requests submitted by customers will show up here."}
+                      {isFiltered ? t("requests.empty.filteredBody") : t("requests.empty.body")}
                     </s-paragraph>
                   </s-stack>
                 </s-grid>
@@ -171,7 +170,7 @@ export default function RequestsTable({ requests }) {
               <s-table-header-row>
                 <s-table-header>
                   <s-checkbox
-                    accessibilityLabel="Select all requests"
+                    accessibilityLabel={t("requests.table.selectAll")}
                     checked={allSelected}
                     indeterminate={someSelected || undefined}
                     onChange={(event) => toggleAll(event.currentTarget.checked)}
@@ -179,16 +178,18 @@ export default function RequestsTable({ requests }) {
                 </s-table-header>
                 <s-table-header>
                   {selectedIds.length > 0 ? (
-                    <s-text type="strong">{selectedIds.length} selected</s-text>
+                    <s-text type="strong">
+                      {t("requests.table.selectedCount", { count: selectedIds.length })}
+                    </s-text>
                   ) : (
-                    "Order"
+                    t("requests.table.order")
                   )}
                 </s-table-header>
-                <s-table-header>{selectedIds.length === 0 ? "Customer name" : ""}</s-table-header>
-                <s-table-header>{selectedIds.length === 0 ? "Items" : ""}</s-table-header>
-                <s-table-header>{selectedIds.length === 0 ? "Value" : ""}</s-table-header>
-                <s-table-header>{selectedIds.length === 0 ? "Status" : ""}</s-table-header>
-                <s-table-header>{selectedIds.length === 0 ? "Submitted" : ""}</s-table-header>
+                <s-table-header>{selectedIds.length === 0 ? t("requests.table.customer") : ""}</s-table-header>
+                <s-table-header>{selectedIds.length === 0 ? t("requests.table.items") : ""}</s-table-header>
+                <s-table-header>{selectedIds.length === 0 ? t("requests.table.value") : ""}</s-table-header>
+                <s-table-header>{selectedIds.length === 0 ? t("requests.table.status") : ""}</s-table-header>
+                <s-table-header>{selectedIds.length === 0 ? t("requests.table.submitted") : ""}</s-table-header>
                 <s-table-header>
                   <s-box minBlockSize="2rem">
                     <s-stack direction="inline" justifyContent="end">
@@ -198,10 +199,10 @@ export default function RequestsTable({ requests }) {
                           disabled={deleting || undefined}
                           onClick={() => openDelete(selectedIds)}
                         >
-                          Delete
+                          {t("common.delete")}
                         </s-button>
                       ) : (
-                        "Actions"
+                        t("requests.table.actions")
                       )}
                     </s-stack>
                   </s-box>
@@ -212,7 +213,7 @@ export default function RequestsTable({ requests }) {
                 <s-table-row key={request.id}>
                   <s-table-cell>
                     <s-checkbox
-                      accessibilityLabel={`Select ${request.orderName}`}
+                      accessibilityLabel={t("requests.table.selectRow", { order: request.orderName })}
                       checked={selectedIds.includes(request.id)}
                       onChange={(event) => toggleRow(request.id, event.currentTarget.checked)}
                     ></s-checkbox>
@@ -223,31 +224,31 @@ export default function RequestsTable({ requests }) {
                     </s-link>
                   </s-table-cell>
                   <s-table-cell>
-                    <s-text type="strong">{request.customerName || "—"}</s-text>
+                    <s-text type="strong">{request.customerName || t("common.emptyValue")}</s-text>
                   </s-table-cell>
                   <s-table-cell>
-                    {request.items.length} item{request.items.length === 1 ? "" : "s"}
+                    {t("requests.table.itemCount", { count: request.items.length })}
                   </s-table-cell>
                   <s-table-cell>{formatMoney(requestTotal(request.items))}</s-table-cell>
                   <s-table-cell>
                     <s-badge tone={STATUS_TONE[request.status]}>
-                      {STATUS_LABEL[request.status]}
+                      {t(`status.${request.status}`)}
                     </s-badge>
                   </s-table-cell>
-                  <s-table-cell>{new Date(request.submittedAt).toLocaleDateString()}</s-table-cell>
+                  <s-table-cell>{formatDate(request.submittedAt)}</s-table-cell>
                   <s-table-cell>
                     <s-stack direction="inline" gap="small-200" justifyContent="end">
                       <s-button
-                        icon="edit"
+                        icon="view"
                         variant="tertiary"
-                        accessibilityLabel={`Edit ${request.orderName}`}
+                        accessibilityLabel={t("requests.table.viewRow", { order: request.orderName })}
                         href={`/withdrawal-requests/${request.id}`}
                       ></s-button>
                       <s-button
                         icon="delete"
                         variant="tertiary"
                         tone="critical"
-                        accessibilityLabel={`Delete ${request.orderName}`}
+                        accessibilityLabel={t("requests.table.deleteRow", { order: request.orderName })}
                         disabled={deleting || undefined}
                         onClick={() => openDelete([request.id])}
                       ></s-button>
@@ -262,25 +263,21 @@ export default function RequestsTable({ requests }) {
 
         <s-modal
           id={DELETE_MODAL_ID}
-          heading={`Delete ${deleteIds.length === 1 ? "1 request" : `${deleteIds.length} requests`}?`}
+          heading={t("requests.delete.heading", { count: deleteIds.length })}
         >
           <s-stack direction="block" gap="large-100">
-            <s-paragraph>
-              Are you sure you want to permanently delete{" "}
-              {deleteIds.length === 1
-                ? "this withdrawal request"
-                : `these ${deleteIds.length} withdrawal requests`}
-              ? This can&apos;t be undone.
-            </s-paragraph>
+            <s-paragraph>{t("requests.delete.body", { count: deleteIds.length })}</s-paragraph>
             <s-stack direction="inline" gap="small-200" alignItems="center" justifyContent="end">
-              <s-button onClick={() => shopify.modal.hide(DELETE_MODAL_ID)}>Cancel</s-button>
+              <s-button onClick={() => shopify.modal.hide(DELETE_MODAL_ID)}>
+                {t("common.cancel")}
+              </s-button>
               <s-button
                 variant="primary"
                 tone="critical"
                 loading={deleting || undefined}
                 onClick={confirmDelete}
               >
-                Delete
+                {t("requests.delete.confirm", { count: deleteIds.length })}
               </s-button>
             </s-stack>
           </s-stack>

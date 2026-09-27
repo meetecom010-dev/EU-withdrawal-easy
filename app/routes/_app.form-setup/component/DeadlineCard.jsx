@@ -1,18 +1,18 @@
 /* eslint-disable react/prop-types -- plain JS project, no prop-types package installed */
+import { useTranslation } from "react-i18next";
 import { toNumberValue } from "../fieldValue";
 
 export default function DeadlineCard({ settings, update, errors = {}, dismissError }) {
+  const { t } = useTranslation();
+
   return (
-    <s-section heading="Withdrawal deadline">
+    <s-section heading={t("formSetup.deadline.heading")}>
       <s-stack direction="block" gap="base">
-        <s-paragraph color="subdued">
-          The withdrawal window starts on the day the order is delivered, not the day it was
-          placed. EU law requires at least 14 days.
-        </s-paragraph>
+        <s-paragraph color="subdued">{t("formSetup.deadline.description")}</s-paragraph>
         <s-grid gridTemplateColumns="1fr 1fr" gap="large-100">
           <s-number-field
-            label="Days available after delivery"
-            details="How long customers can withdraw once the order arrives."
+            label={t("formSetup.deadline.days")}
+            details={t("formSetup.deadline.daysDetails")}
             value={String(settings.deadline.daysAfterDelivery)}
             min={1}
             max={365}
@@ -23,8 +23,8 @@ export default function DeadlineCard({ settings, update, errors = {}, dismissErr
             onFocus={() => dismissError("deadline.daysAfterDelivery")}
           ></s-number-field>
           <s-number-field
-            label="Estimated transit days"
-            details="Used to estimate the delivery date when the carrier doesn't confirm one."
+            label={t("formSetup.deadline.transit")}
+            details={t("formSetup.deadline.transitDetails")}
             value={String(settings.deadline.estimatedTransitDays)}
             min={0}
             max={90}

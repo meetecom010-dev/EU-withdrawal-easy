@@ -1,19 +1,12 @@
 /* eslint-disable react/prop-types -- plain JS project, no prop-types package installed */
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import {
   startDomainAuth,
   refreshDomainAuth,
   removeDomainAuth,
 } from "../../../utils/api/emailSettings";
 import { isFreeEmailDomain } from "../../../utils/freeEmailDomains";
-
-const RECORD_LABELS = {
-  brevo_code: "Domain ownership",
-  dkim_record: "DKIM",
-  dkim1Record: "DKIM 1",
-  dkim2Record: "DKIM 2",
-  dmarc_record: "DMARC",
-};
 
 async function copyToClipboard(text) {
   try {
@@ -32,6 +25,7 @@ async function copyToClipboard(text) {
 // SenderSettings: this persists immediately via its own API calls rather
 // than through the parent route's `settings`/save flow.
 export default function DomainSettings({ domain }) {
+  const { t } = useTranslation();
   const [status, setStatus] = useState(domain?.status || "none");
   const [domainName, setDomainName] = useState(domain?.name || "");
   const [domainInput, setDomainInput] = useState(domain?.name || "");
@@ -61,7 +55,7 @@ export default function DomainSettings({ domain }) {
     setStatus(result.status);
     setDnsRecords(result.dnsRecords);
     if (result.status === "pending") {
-      setInfo("Add the records below at your domain's DNS provider, then come back and verify.");
+      setInfo(t("emailTemplates.domain.pendingInfo"));
     }
   }
 
@@ -71,7 +65,7 @@ export default function DomainSettings({ domain }) {
     setStatus(result.status);
     setDnsRecords(result.dnsRecords);
     if (result.status !== "verified") {
-      setInfo("Not verified yet — DNS changes can take a while to propagate. Try again shortly.");
+      setInfo(t("emailTemplates.domain.notVerifiedYet"));
     }
   }
 
@@ -87,13 +81,9 @@ export default function DomainSettings({ domain }) {
   const showFreeProviderWarning = status === "none" && isFreeEmailDomain(domainInput);
 
   return (
-    <s-section heading="Domain authentication">
+    <s-section heading={t("emailTemplates.domain.heading")}>
       <s-stack direction="block" gap="base">
-        <s-paragraph color="subdued">
-          Authenticating your own domain stops emails from showing &quot;via brevosend.com&quot; to
-          your customers. Optional, but recommended if you&apos;re sending from your own
-          store&apos;s domain.
-        </s-paragraph>
+        <s-paragraph color="subdued">{t("emailTemplates.domain.description")}</s-paragraph>
 
         {error && (
           <s-banner tone="critical" dismissible onDismiss={() => setError(null)}>
@@ -107,43 +97,42 @@ export default function DomainSettings({ domain }) {
         )}
 
         <s-text-field
-          label="Your domain"
+          label={t("emailTemplates.domain.label")}
           value={status === "none" ? domainInput : domainName}
           disabled={status !== "none" || undefined}
-          placeholder="yourstore.com"
-          details="Enter the domain your store's emails should send from — not the myshopify.com address."
+          placeholder={t("emailTemplates.domain.placeholder")}
+          details={t("emailTemplates.domain.details")}
           onInput={(e) => setDomainInput(e.currentTarget.value)}
         ></s-text-field>
 
         {showFreeProviderWarning && (
           <s-banner tone="warning">
-            <s-paragraph>
-              Free providers like Gmail or Yahoo can&apos;t be authenticated — enter your own
-              store&apos;s domain instead.
-            </s-paragraph>
+            <s-paragraph>{t("emailTemplates.domain.freeProviderWarning")}</s-paragraph>
           </s-banner>
         )}
 
         {status === "verified" ? (
           <s-stack direction="inline" gap="small-200" alignItems="center">
-            <s-badge tone="success">Verified</s-badge>
+            <s-badge tone="success">{t("common.verified")}</s-badge>
             <s-button variant="tertiary" tone="critical" loading={busy || undefined} onClick={onRemove}>
-              Remove
+              {t("common.remove")}
             </s-button>
           </s-stack>
         ) : status === "pending" ? (
           <s-stack direction="block" gap="small-300">
             <s-table variant="auto">
               <s-table-header-row>
-                <s-table-header>Record</s-table-header>
-                <s-table-header>Type</s-table-header>
-                <s-table-header>Host</s-table-header>
-                <s-table-header>Value</s-table-header>
+                <s-table-header>{t("emailTemplates.domain.columns.record")}</s-table-header>
+                <s-table-header>{t("emailTemplates.domain.columns.type")}</s-table-header>
+                <s-table-header>{t("emailTemplates.domain.columns.host")}</s-table-header>
+                <s-table-header>{t("emailTemplates.domain.columns.value")}</s-table-header>
               </s-table-header-row>
               <s-table-body>
                 {dnsRecords.map((record) => (
                   <s-table-row key={record.recordType}>
-                    <s-table-cell>{RECORD_LABELS[record.recordType] ?? record.recordType}</s-table-cell>
+                    <s-table-cell>
+                      {t(`emailTemplates.domain.records.${record.recordType}`, { defaultValue: record.recordType })}
+                    </s-table-cell>
                     <s-table-cell>{record.type}</s-table-cell>
                     <s-table-cell>
                       <s-stack direction="inline" gap="small-200" alignItems="center">
@@ -151,7 +140,7 @@ export default function DomainSettings({ domain }) {
                         <s-button
                           variant="tertiary"
                           icon="duplicate"
-                          accessibilityLabel="Copy host"
+                          accessibilityLabel={t("emailTemplates.domain.copyHost")}
                           onClick={() => copyToClipboard(record.hostName)}
                         ></s-button>
                       </s-stack>
@@ -162,7 +151,7 @@ export default function DomainSettings({ domain }) {
                         <s-button
                           variant="tertiary"
                           icon="duplicate"
-                          accessibilityLabel="Copy value"
+                          accessibilityLabel={t("emailTemplates.domain.copyValue")}
                           onClick={() => copyToClipboard(record.value)}
                         ></s-button>
                       </s-stack>
@@ -173,10 +162,10 @@ export default function DomainSettings({ domain }) {
             </s-table>
             <s-stack direction="inline" gap="base">
               <s-button variant="primary" loading={busy || undefined} onClick={onRefresh}>
-                I&apos;ve added these records
+                {t("emailTemplates.domain.verifyRecords")}
               </s-button>
               <s-button variant="tertiary" tone="critical" loading={busy || undefined} onClick={onRemove}>
-                Cancel
+                {t("common.cancel")}
               </s-button>
             </s-stack>
           </s-stack>
@@ -188,7 +177,7 @@ export default function DomainSettings({ domain }) {
               disabled={!domainInput.trim() || undefined}
               onClick={onStart}
             >
-              Authenticate domain
+              {t("emailTemplates.domain.authenticate")}
             </s-button>
           </s-stack>
         )}

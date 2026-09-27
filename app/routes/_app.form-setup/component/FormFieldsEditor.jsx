@@ -1,14 +1,14 @@
 /* eslint-disable react/prop-types -- plain JS project, no prop-types package installed */
 import { useState } from "react";
-import { AVAILABLE_LANGUAGES, BASE_LOCALE } from "../constants";
+import { useTranslation } from "react-i18next";
+import { BASE_LOCALE } from "../constants";
+import { useFormatters } from "../../../i18n/react";
 
-const FORM_TABS = [
-  { key: "step1", label: "1. Details" },
-  { key: "confirm", label: "2. Confirm" },
-  { key: "done", label: "3. Done" },
-];
+// Tab labels are formSetup.content.tabs.<key> in en.json.
+const FORM_TABS = ["step1", "confirm", "done"];
 
-const LOCKED_FIELDS = ["Full name", "Email", "Order number"];
+// Read-only customer fields, labelled by formSetup.content.customerDetails.<key>.
+const LOCKED_FIELDS = ["fullName", "email", "orderNumber"];
 
 // Which tab each validatable field sits on. A save attempt uses this to open
 // the tab holding the first problem — otherwise an invalid field on a closed
@@ -65,10 +65,6 @@ export function localeForErrorPath(path) {
   return match ? match[1] : BASE_LOCALE;
 }
 
-function languageName(code) {
-  return AVAILABLE_LANGUAGES.find((lang) => lang.code === code)?.name ?? code.toUpperCase();
-}
-
 export default function FormFieldsEditor({
   settings,
   update,
@@ -79,6 +75,8 @@ export default function FormFieldsEditor({
   errors = {},
   dismissError,
 }) {
+  const { t } = useTranslation();
+  const { languageName } = useFormatters();
   const [newReason, setNewReason] = useState("");
   const options = settings.reasonField.options ?? [];
 
@@ -155,15 +153,15 @@ export default function FormFieldsEditor({
     <s-section>
       <s-stack direction="block" gap="base">
         <s-stack direction="inline" gap="base" alignItems="center" justifyContent="space-between">
-          <s-heading>Form builder</s-heading>
+          <s-heading>{t("formSetup.content.heading")}</s-heading>
           <s-stack direction="inline" gap="small-200">
             {FORM_TABS.map((tab) => (
               <s-button
-                key={tab.key}
-                variant={activeTab === tab.key ? "primary" : "secondary"}
-                onClick={() => onTabChange(tab.key)}
+                key={tab}
+                variant={activeTab === tab ? "primary" : "secondary"}
+                onClick={() => onTabChange(tab)}
               >
-                {tab.label}
+                {t(`formSetup.content.tabs.${tab}`)}
               </s-button>
             ))}
           </s-stack>
@@ -174,8 +172,8 @@ export default function FormFieldsEditor({
             field below at that language's translation; English is always the
             base and always selected by default. */}
         <s-select
-          label="Language"
-          details="Select a language to edit the withdrawal form content for that language. Changes are saved separately for each language."
+          label={t("formSetup.content.language")}
+          details={t("formSetup.content.languageDetails")}
           value={activeLocale}
           onChange={(event) =>
             onLocaleChange(/** @type {HTMLSelectElement} */ (event.currentTarget).value)
@@ -191,39 +189,35 @@ export default function FormFieldsEditor({
         {activeTab === "step1" && (
           <s-stack direction="block" gap="base">
             <s-stack direction="block" gap="small-500">
-              <s-heading>Before fulfillment</s-heading>
-              <s-text color="subdued">
-                Shown when the customer opens the form before their order ships.
-              </s-text>
+              <s-heading>{t("formSetup.content.beforeFulfillment.heading")}</s-heading>
+              <s-text color="subdued">{t("formSetup.content.beforeFulfillment.description")}</s-text>
             </s-stack>
             <s-stack gap="small-200">
-              <s-text-field label="Title" {...labelField("step1Title")}></s-text-field>
+              <s-text-field label={t("formSetup.content.title")} {...labelField("step1Title")}></s-text-field>
               <s-text-area
-                label="Description"
+                label={t("formSetup.content.description")}
                 rows={2}
                 {...labelField("step1Description")}
               ></s-text-area>
               <s-text-field
-                label="Item selection heading"
+                label={t("formSetup.content.itemHeading")}
                 {...labelField("itemSelectionHeading")}
               ></s-text-field>
             </s-stack>
             <s-divider></s-divider>
             <s-stack direction="block" gap="small-500">
-              <s-heading>After delivery</s-heading>
-              <s-text color="subdued">
-                Shown instead when the order has already been delivered.
-              </s-text>
+              <s-heading>{t("formSetup.content.afterDelivery.heading")}</s-heading>
+              <s-text color="subdued">{t("formSetup.content.afterDelivery.description")}</s-text>
             </s-stack>
-             <s-stack gap="small-200">
-              <s-text-field label="Title" {...labelField("deliveredTitle")}></s-text-field>
+            <s-stack gap="small-200">
+              <s-text-field label={t("formSetup.content.title")} {...labelField("deliveredTitle")}></s-text-field>
               <s-text-area
-                label="Description"
+                label={t("formSetup.content.description")}
                 rows={2}
                 {...labelField("deliveredDescription")}
               ></s-text-area>
               <s-text-field
-                label="Delivered item selection heading"
+                label={t("formSetup.content.itemHeading")}
                 {...labelField("deliveredItemSelectionHeading")}
               ></s-text-field>
             </s-stack>
@@ -232,10 +226,8 @@ export default function FormFieldsEditor({
               <>
                 <s-divider></s-divider>
                 <s-stack direction="block" gap="small-500">
-                  <s-heading>Customer details</s-heading>
-                  <s-text color="subdued">
-                    Pre-filled from the order — customers can&apos;t edit them.
-                  </s-text>
+                  <s-heading>{t("formSetup.content.customerDetails.heading")}</s-heading>
+                  <s-text color="subdued">{t("formSetup.content.customerDetails.description")}</s-text>
                 </s-stack>
                 <s-box border="base" borderRadius="base" padding="small-200">
                   <s-stack direction="block" gap="small-200">
@@ -247,8 +239,8 @@ export default function FormFieldsEditor({
                           alignItems="center"
                           justifyContent="space-between"
                         >
-                          <s-text>{field}</s-text>
-                          <s-badge>Locked</s-badge>
+                          <s-text>{t(`formSetup.content.customerDetails.${field}`)}</s-text>
+                          <s-badge>{t("formSetup.content.customerDetails.locked")}</s-badge>
                         </s-stack>
                       </s-stack>
                     ))}
@@ -259,11 +251,11 @@ export default function FormFieldsEditor({
 
             <s-divider></s-divider>
             <s-stack gap="small-200">
-              <s-heading>Optional reason field</s-heading>
+              <s-heading>{t("formSetup.content.reason.heading")}</s-heading>
               {isBase && (
                 <s-checkbox
-                  label="Ask for a reason"
-                  details="Customers aren't required to give one — the field stays optional to remain compliant."
+                  label={t("formSetup.content.reason.checkbox")}
+                  details={t("formSetup.content.reason.details")}
                   checked={settings.reasonField.enabled}
                   onChange={(e) => update("reasonField.enabled", e.currentTarget.checked)}
                 ></s-checkbox>
@@ -273,7 +265,7 @@ export default function FormFieldsEditor({
                 (isBase ? (
                   <s-stack direction="block" gap="base">
                     <s-text-field
-                      label="Reason field label"
+                      label={t("formSetup.content.reason.label")}
                       value={settings.reasonField.label}
                       error={errors["reasonField.label"]}
                       onInput={(e) => update("reasonField.label", e.currentTarget.value)}
@@ -281,11 +273,8 @@ export default function FormFieldsEditor({
                     ></s-text-field>
 
                     <s-stack direction="block" gap="small-200">
-                      <s-text type="strong">Reason options</s-text>
-                      <s-text color="subdued">
-                        Shoppers pick from this list. Add, remove, or reword the options to match
-                        your store.
-                      </s-text>
+                      <s-text type="strong">{t("formSetup.content.reason.optionsHeading")}</s-text>
+                      <s-text color="subdued">{t("formSetup.content.reason.optionsHelp")}</s-text>
                       {options.length > 0 && (
                         <s-box border="base" borderRadius="base" padding="small-200">
                           <s-stack direction="block" gap="small-200">
@@ -301,10 +290,10 @@ export default function FormFieldsEditor({
                                   <s-button
                                     variant="tertiary"
                                     tone="critical"
-                                    accessibilityLabel={`Remove ${option}`}
+                                    accessibilityLabel={t("formSetup.content.reason.removeOption", { option })}
                                     onClick={() => removeReason(index)}
                                   >
-                                    Remove
+                                    {t("common.remove")}
                                   </s-button>
                                 </s-stack>
                               </s-stack>
@@ -315,9 +304,9 @@ export default function FormFieldsEditor({
 
                       <s-grid gridTemplateColumns="1fr auto" gap="small-200" alignItems="start">
                         <s-text-field
-                          label="Add a reason"
+                          label={t("formSetup.content.reason.addLabel")}
                           labelAccessibilityVisibility="exclusive"
-                          placeholder='Add a reason, e.g. "Ordered by mistake"'
+                          placeholder={t("formSetup.content.reason.addPlaceholder")}
                           value={newReason}
                           // "Add at least one reason option" belongs to the list,
                           // and this composer is the control that fixes it.
@@ -332,7 +321,7 @@ export default function FormFieldsEditor({
                           }}
                         ></s-text-field>
                         <s-button onClick={addReason} disabled={!newReason.trim() || undefined}>
-                          Add
+                          {t("common.add")}
                         </s-button>
                       </s-grid>
                     </s-stack>
@@ -340,7 +329,7 @@ export default function FormFieldsEditor({
                 ) : (
                   <s-stack direction="block" gap="base">
                     <s-text-field
-                      label="Reason field label"
+                      label={t("formSetup.content.reason.label")}
                       value={translation.reasonLabel ?? ""}
                       placeholder={settings.reasonField.label}
                       error={errors[`translations.${activeLocale}.reasonLabel`]}
@@ -351,12 +340,10 @@ export default function FormFieldsEditor({
                     ></s-text-field>
 
                     <s-stack direction="block" gap="small-200">
-                      <s-text type="strong">Reason options</s-text>
-                      <s-text color="subdued">
-                        Translate each option. The list itself is managed on the English tab.
-                      </s-text>
+                      <s-text type="strong">{t("formSetup.content.reason.optionsHeading")}</s-text>
+                      <s-text color="subdued">{t("formSetup.content.reason.translatedHelp")}</s-text>
                       {options.length === 0 ? (
-                        <s-text color="subdued">Add reason options on the English tab first.</s-text>
+                        <s-text color="subdued">{t("formSetup.content.reason.translatedEmpty")}</s-text>
                       ) : (
                         options.map((option, index) => (
                           <s-text-field
@@ -379,7 +366,7 @@ export default function FormFieldsEditor({
             <s-divider></s-divider>
 
             <s-text-field
-              label="Continue button label"
+              label={t("formSetup.content.continueButton")}
               {...labelField("step1ButtonLabel")}
             ></s-text-field>
           </s-stack>
@@ -388,26 +375,26 @@ export default function FormFieldsEditor({
         {activeTab === "confirm" && (
           <s-stack direction="block" gap="small-200">
             <s-text-field
-              label="Confirmation heading"
+              label={t("formSetup.content.confirm.heading")}
               {...labelField("confirmHeading")}
             ></s-text-field>
             <s-text-area
-              label="Pre-fulfillment confirmation message"
+              label={t("formSetup.content.confirm.messageBefore")}
               rows={3}
               {...labelField("confirmMessage")}
             ></s-text-area>
             <s-text-area
-              label="Delivered-order confirmation message"
+              label={t("formSetup.content.confirm.messageAfter")}
               rows={3}
               {...labelField("deliveredConfirmMessage")}
             ></s-text-area>
             <s-text-area
-              label="Declaration"
+              label={t("formSetup.content.confirm.declaration")}
               rows={2}
               {...labelField("declaration")}
             ></s-text-area>
             <s-text-field
-              label="Confirm button label"
+              label={t("formSetup.content.confirm.button")}
               {...labelField("confirmButtonLabel")}
             ></s-text-field>
           </s-stack>
@@ -415,18 +402,21 @@ export default function FormFieldsEditor({
 
         {activeTab === "done" && (
           <s-stack direction="block" gap="small-200">
-            <s-text-field label="Submitted title" {...labelField("submittedTitle")}></s-text-field>
+            <s-text-field
+              label={t("formSetup.content.done.titleBefore")}
+              {...labelField("submittedTitle")}
+            ></s-text-field>
             <s-text-area
-              label="Submitted message"
+              label={t("formSetup.content.done.messageBefore")}
               rows={2}
               {...labelField("submittedMessage")}
             ></s-text-area>
             <s-text-field
-              label="Delivered submitted title"
+              label={t("formSetup.content.done.titleAfter")}
               {...labelField("deliveredSubmittedTitle")}
             ></s-text-field>
             <s-text-area
-              label="Delivered submitted message"
+              label={t("formSetup.content.done.messageAfter")}
               rows={2}
               {...labelField("deliveredSubmittedMessage")}
             ></s-text-area>

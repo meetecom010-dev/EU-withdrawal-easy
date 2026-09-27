@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import connectDB from "../db.server";
+import { TranslatableError } from "../i18n/errors";
 import WithdrawalRequest from "../models/withdrawal-request.server";
 import { requestTotal } from "../routes/_app.withdrawal-requests/constants";
 
@@ -81,7 +82,7 @@ export async function getWithdrawalRequestById(shop, id) {
 
 export async function updateWithdrawalRequestStatus(shop, id, status) {
   if (!STATUSES.includes(status)) {
-    throw new Error(`Invalid status: ${status}`);
+    throw new TranslatableError("errors.invalidStatus");
   }
   if (!mongoose.isValidObjectId(id)) return null;
 
@@ -109,7 +110,7 @@ export async function deleteWithdrawalRequests(shop, ids) {
 export async function addWithdrawalRequestNote(shop, id, body) {
   const trimmed = body?.trim();
   if (!trimmed) {
-    throw new Error("Note body is required");
+    throw new TranslatableError("errors.noteRequired");
   }
   if (!mongoose.isValidObjectId(id)) return null;
 

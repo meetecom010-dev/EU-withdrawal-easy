@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types -- plain JS project, no prop-types package installed */
+import { useTranslation } from "react-i18next";
 import { EMAIL_VARIABLE_GROUPS } from "../../../services/email/variables";
 
 // The grouped list of Liquid variables shown beside the code editor. Clicking
@@ -9,6 +10,9 @@ import { EMAIL_VARIABLE_GROUPS } from "../../../services/email/variables";
 const TOKEN_FONT = "ui-monospace, SFMono-Regular, Menlo, Consolas, monospace";
 
 export default function VariablePanel({ onInsert }) {
+  const { t } = useTranslation();
+  const V = "emailTemplates.variables.";
+
   return (
     <div
       style={{
@@ -22,15 +26,17 @@ export default function VariablePanel({ onInsert }) {
       }}
     >
       <div style={{ padding: "12px 14px 8px" }}>
-        <div style={{ fontSize: "13px", fontWeight: 600, color: "#202223" }}>Variables</div>
+        <div style={{ fontSize: "13px", fontWeight: 600, color: "#202223" }}>
+          {t(`${V}heading`)}
+        </div>
         <div style={{ fontSize: "12px", color: "#6d7175", marginTop: "2px", lineHeight: 1.4 }}>
-          Click to insert at your cursor.
+          {t(`${V}help`)}
         </div>
       </div>
 
       <div style={{ overflow: "auto", flex: 1, padding: "0 8px 10px" }}>
         {EMAIL_VARIABLE_GROUPS.map((group) => (
-          <div key={group.category} style={{ marginTop: "10px" }}>
+          <div key={group.id} style={{ marginTop: "10px" }}>
             <div
               style={{
                 fontSize: "10.5px",
@@ -41,29 +47,35 @@ export default function VariablePanel({ onInsert }) {
                 padding: "0 6px 3px",
               }}
             >
-              {group.category}
+              {t(`${V}groups.${group.id}`)}
             </div>
-            {group.variables.map((variable) => (
-              <span key={variable.token} title={variable.description} style={{ display: "block" }}>
-                <s-clickable
-                  onClick={() => onInsert(variable.token)}
-                  accessibilityLabel={`Insert ${variable.label}: ${variable.description}`}
-                >
-                  <div style={{ padding: "3px 6px", borderRadius: "6px" }}>
-                    <span
-                      style={{
-                        fontFamily: TOKEN_FONT,
-                        fontSize: "12px",
-                        color: "#2c6ecb",
-                        whiteSpace: "nowrap",
-                      }}
-                    >
-                      {`{{ ${variable.token} }}`}
-                    </span>
-                  </div>
-                </s-clickable>
-              </span>
-            ))}
+            {group.variables.map((variable) => {
+              const label = t(`${V}tokens.${variable.token}.label`, { defaultValue: variable.label });
+              const description = t(`${V}tokens.${variable.token}.description`, {
+                defaultValue: variable.description,
+              });
+              return (
+                <span key={variable.token} title={description} style={{ display: "block" }}>
+                  <s-clickable
+                    onClick={() => onInsert(variable.token)}
+                    accessibilityLabel={t(`${V}insert`, { label, description })}
+                  >
+                    <div style={{ padding: "3px 6px", borderRadius: "6px" }}>
+                      <span
+                        style={{
+                          fontFamily: TOKEN_FONT,
+                          fontSize: "12px",
+                          color: "#2c6ecb",
+                          whiteSpace: "nowrap",
+                        }}
+                      >
+                        {`{{ ${variable.token} }}`}
+                      </span>
+                    </div>
+                  </s-clickable>
+                </span>
+              );
+            })}
           </div>
         ))}
       </div>

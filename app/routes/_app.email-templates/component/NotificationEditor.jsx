@@ -1,13 +1,10 @@
 /* eslint-disable react/prop-types -- plain JS project, no prop-types package installed */
+import { useTranslation } from "react-i18next";
 import { SUBJECT_MAX, TEMPLATE_LIST, TEMPLATE_META } from "../constants";
-import { AVAILABLE_LANGUAGES } from "../../_app.form-setup/constants";
+import { useFormatters } from "../../../i18n/react";
 import BodyEditor from "./BodyEditor";
 
 const BASE_LOCALE = "en";
-
-function languageName(code) {
-  return AVAILABLE_LANGUAGES.find((lang) => lang.code === code)?.name ?? code.toUpperCase();
-}
 
 // The notification configuration: which email is being edited, whether it's on,
 // its subject, and its HTML/Liquid body. A compact select switches templates so
@@ -27,6 +24,8 @@ export default function NotificationEditor({
   errors,
   onReset,
 }) {
+  const { t } = useTranslation();
+  const { languageName } = useFormatters();
   const meta = TEMPLATE_META[selectedKey];
   const template = templates[selectedKey];
 
@@ -51,26 +50,28 @@ export default function NotificationEditor({
       : `templates.${selectedKey}.translations.${locale}.${field}`;
 
   return (
-    <s-section heading="Notification">
+    <s-section heading={t("emailTemplates.notification.heading")}>
       <s-stack direction="block" gap="base">
         <s-select
-          label="Email"
+          label={t("emailTemplates.notification.emailLabel")}
           value={selectedKey}
           onChange={(e) => onSelect(e.currentTarget.value)}
         >
           {TEMPLATE_LIST.map((m) => (
             <s-option key={m.key} value={m.key}>
-              {m.name}
+              {t(`emailTemplates.templates.${m.key}.name`)}
             </s-option>
           ))}
         </s-select>
 
-        <s-paragraph color="subdued">{meta.description}</s-paragraph>
+        <s-paragraph color="subdued">
+          {t(`emailTemplates.templates.${meta.key}.description`)}
+        </s-paragraph>
 
         {localeTabs.length > 1 && (
           <s-select
-            label="Language"
-            details="Select a language to edit this email for that language. Changes are saved separately for each language, and buyers receive their own language automatically."
+            label={t("emailTemplates.notification.language")}
+            details={t("emailTemplates.notification.languageDetails")}
             value={locale}
             onChange={(e) => onLocaleChange(e.currentTarget.value)}
           >
@@ -85,19 +86,15 @@ export default function NotificationEditor({
         {/* The enable toggle is shop-wide (not per language), so it always writes
             the template's base `enabled`. */}
         <s-checkbox
-          label="Send this email"
+          label={t("emailTemplates.notification.send")}
           checked={meta.required || template.enabled}
           disabled={meta.required || undefined}
-          details={
-            meta.required
-              ? "Always on — this confirmation is required by EU law and can't be turned off."
-              : "Turn off to stop sending this notification."
-          }
+          details={meta.required ? t("emailTemplates.notification.requiredDetails") : t("emailTemplates.notification.optionalDetails")}
           onChange={(e) => update(`templates.${selectedKey}.enabled`, e.currentTarget.checked)}
         ></s-checkbox>
 
         <s-text-field
-          label="Subject"
+          label={t("emailTemplates.notification.subject")}
           value={copy.subject}
           maxLength={SUBJECT_MAX}
           error={errors[at("subject")]}
@@ -121,9 +118,9 @@ export default function NotificationEditor({
             disabled={!copy.customized || undefined}
             onClick={onReset}
           >
-            Reset to default
+            {t("emailTemplates.notification.reset")}
           </s-button>
-          {copy.customized && <s-badge tone="info">Customized</s-badge>}
+          {copy.customized && <s-badge tone="info">{t("emailTemplates.notification.customized")}</s-badge>}
         </s-stack>
       </s-stack>
     </s-section>

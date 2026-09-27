@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useRouteError } from "react-router";
+import { useTranslation } from "react-i18next";
 import { boundary } from "@shopify/shopify-app-react-router/server";
 import { useAppBridge } from "@shopify/app-bridge-react";
 import { authenticate } from "../../shopify.server";
@@ -24,70 +25,84 @@ export const loader = async ({ request }) => {
 // can only be observed live via *ExtensionSync, not set by checking a box,
 // so those checkboxes are status indicators, not controls (see
 // SetupGuideCard.jsx).
-function buildSetupSteps({
-  dpaAccepted,
-  formEnabled,
-  showOnOrderStatus,
-  showOnStandalonePage,
-  orderStatusBlockAdded,
-  themeBlockAdded,
-  onDpaToggle,
-  onFormToggle,
-  onToggleOrderStatus,
-  onToggleStandalone,
-}) {
+function buildSetupSteps(
+  t,
+  {
+    dpaAccepted,
+    formEnabled,
+    showOnOrderStatus,
+    showOnStandalonePage,
+    orderStatusBlockAdded,
+    themeBlockAdded,
+    onDpaToggle,
+    onFormToggle,
+    onToggleOrderStatus,
+    onToggleStandalone,
+  },
+) {
   // Only surfaces the merchant actually picked get a block-setup entry —
   // otherwise the final step would show an unavoidable, always-incomplete
   // task for a surface nobody asked for.
   const blockSurfaces = [
     ...(showOnOrderStatus
-      ? [{ key: "orderStatus", label: "Order Status Page", added: Boolean(orderStatusBlockAdded) }]
+      ? [
+          {
+            key: "orderStatus",
+            label: t("home.setupGuide.steps.blocks.surfaces.orderStatus"),
+            liveMessage: t("home.setupGuide.steps.blocks.live.orderStatus"),
+            added: Boolean(orderStatusBlockAdded),
+          },
+        ]
       : []),
     ...(showOnStandalonePage
-      ? [{ key: "theme", label: "Theme Block", added: Boolean(themeBlockAdded) }]
+      ? [
+          {
+            key: "theme",
+            label: t("home.setupGuide.steps.blocks.surfaces.theme"),
+            liveMessage: t("home.setupGuide.steps.blocks.live.theme"),
+            added: Boolean(themeBlockAdded),
+          },
+        ]
       : []),
   ];
 
   return [
     {
       key: "dpa",
-      label: "Accept the Data Processing Agreement",
-      description: "Required before we can process withdrawal requests on your behalf.",
+      label: t("home.setupGuide.steps.dpa.label"),
+      description: t("home.setupGuide.steps.dpa.description"),
       complete: Boolean(dpaAccepted),
-      checkboxLabel: "I accept the Data Processing Agreement",
+      checkboxLabel: t("home.setupGuide.steps.dpa.checkbox"),
       onToggle: onDpaToggle,
     },
     {
       key: "form",
-      label: "Configure your withdrawal form",
-      description:
-        "Turns the form on and picks where customers see it. Sensible defaults are already filled in — customize the fields, reasons and wording anytime from Form Setup.",
+      label: t("home.setupGuide.steps.form.label"),
+      description: t("home.setupGuide.steps.form.description"),
       complete: Boolean(formEnabled),
-      checkboxLabel: "Enable the withdrawal form",
+      checkboxLabel: t("home.setupGuide.steps.form.checkbox"),
       onToggle: onFormToggle,
-      ctaLabel: "Go to Form Setup",
+      ctaLabel: t("home.setupGuide.steps.form.cta"),
       ctaHref: "/form-setup",
       // Where to show it — a merchant can pick one or both. The next step
       // (blockSurfaces above) only shows setup instructions for what's
-      // picked here. Heading/description/details copy matches
-      // onboarding/steps/WithdrawalStep.jsx so the two flows read as the
-      // same feature.
-      placementHeading: "Show it on your storefront",
-      placementDescription:
-        "The button needs to be placed on the order status page before customers can see it.",
+      // picked here. Option labels/details are the shared `placements.*`
+      // copy that onboarding/steps/WithdrawalStep.jsx uses too, so the two
+      // flows read as the same feature.
+      placementHeading: t("home.setupGuide.steps.form.placementHeading"),
+      placementDescription: t("home.setupGuide.steps.form.placementDescription"),
       placementOptions: [
         {
           key: "orderStatus",
-          label: "Order status page",
-          details: "Display the withdrawal form on Shopify's Order Status page after checkout.",
+          label: t("placements.orderStatus.label"),
+          details: t("placements.orderStatus.details"),
           checked: Boolean(showOnOrderStatus),
           onToggle: onToggleOrderStatus,
         },
         {
           key: "theme",
-          label: "Standalone storefront page",
-          details:
-            "Let customers start a withdrawal from a dedicated page on your storefront theme, via the Withdrawly theme app extension.",
+          label: t("placements.storefront.label"),
+          details: t("placements.storefront.details"),
           checked: Boolean(showOnStandalonePage),
           onToggle: onToggleStandalone,
         },
@@ -95,8 +110,8 @@ function buildSetupSteps({
     },
     {
       key: "blocks",
-      label: "Add the required app blocks",
-      description: "Add the block for each place you chose above.",
+      label: t("home.setupGuide.steps.blocks.label"),
+      description: t("home.setupGuide.steps.blocks.description"),
       // Stays in the guide even before step 2 is done, so a merchant sees
       // what's still ahead instead of the step just vanishing — it just has
       // nothing to check off (and says so) until a placement is picked.
@@ -111,8 +126,9 @@ function buildSetupSteps({
 // complete OR dismissed for the session — a merchant can land here without
 // ever having accepted the DPA or turned the form on, so the setup guide's
 // checkboxes below let them finish both right here instead of hunting for
-// onboarding or Form Setup again.
+// onboarding or Form setup again.
 export default function Home() {
+  const { t } = useTranslation();
   const shopify = useAppBridge();
   const shop = useShop();
   const patchShop = usePatchShop();
@@ -132,7 +148,7 @@ export default function Home() {
   }, []);
 
   function notify(message) {
-    shopify.toast.show(message);
+    shopify.toast.show(message, { isError: true });
   }
 
   async function handleDpaToggle(accepted) {
@@ -183,15 +199,15 @@ export default function Home() {
 
   if (loadError) {
     return (
-      <s-page heading="Home">
-        <s-banner tone="critical" heading="Couldn't load dashboard stats">
+      <s-page heading={t("home.pageTitle")}>
+        <s-banner tone="critical" heading={t("home.loadError")}>
           <s-paragraph>{loadError}</s-paragraph>
         </s-banner>
       </s-page>
     );
   }
 
-  const setupSteps = buildSetupSteps({
+  const setupSteps = buildSetupSteps(t, {
     dpaAccepted: shop.dpaAccepted,
     formEnabled: formSettings.masterEnabled,
     showOnOrderStatus: formSettings.showOnOrderStatus,

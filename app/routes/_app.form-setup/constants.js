@@ -52,14 +52,16 @@ export const AVAILABLE_LANGUAGES = [
 // The automation choices, kept here rather than in AutomationCard.jsx because
 // validation.js runs on the server too (see services/app-settings.server.js)
 // and can't pull in a component module to find out which values are legal.
+// Labels are formSetup.automation.fallback.<labelKey> in en.json.
 export const FALLBACK_OPTIONS = [
-  { value: "hold", label: "Do nothing — hold until staff act" },
-  { value: "cancel-now", label: "Cancel and refund immediately" },
+  { value: "hold", labelKey: "hold" },
+  { value: "cancel-now", labelKey: "cancelNow" },
   // Hidden before app submission. The backend automation, the "Number of days"
-  // field (AutomationCard), and validation all still support these values — to
-  // offer the timed auto-actions again, just uncomment these two options.
-  // { value: "release-n", label: "Release the hold after N days" },
-  // { value: "cancel-n", label: "Cancel and refund after N days" },
+  // field (AutomationCard), validation, and the copy in en.json all still
+  // support these values — to offer the timed auto-actions again, just
+  // uncomment these two options.
+  // { value: "release-n", labelKey: "releaseN" },
+  // { value: "cancel-n", labelKey: "cancelN" },
 ];
 
 export const AFTER_DELIVERY_ACTIONS = ["notify_only", "create_return"];

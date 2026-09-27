@@ -6,6 +6,8 @@
 // .eslintrc, runs it under the node env so process.env is available without a
 // per-line disable. It's the project's convention for server-only modules.
 
+import { APP_NAME } from "../../constants";
+
 const BREVO_ENDPOINT = "https://api.brevo.com/v3/smtp/email";
 
 // Thrown when Brevo rejects a send. Carries the HTTP status and Brevo's own
@@ -26,7 +28,7 @@ export class BrevoError extends Error {
 export function brevoConfig() {
   const apiKey = process.env.BREVO_API_KEY;
   const senderEmail = process.env.BREVO_SENDER_EMAIL;
-  const senderName = process.env.BREVO_SENDER_NAME || "EU Withdrawly";
+  const senderName = process.env.BREVO_SENDER_NAME || APP_NAME;
   if (!apiKey || !senderEmail) return null;
   return { apiKey, sender: { email: senderEmail, name: senderName } };
 }

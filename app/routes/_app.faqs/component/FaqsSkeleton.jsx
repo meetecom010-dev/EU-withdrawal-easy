@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import SkeletonBox from "../../../components/skeleton/SkeletonBox";
 
 // Collapsed rows only — that's how the real page first renders, every answer
@@ -14,8 +15,9 @@ function FaqRowSkeleton() {
 }
 
 export default function FaqsSkeleton() {
+  const { t } = useTranslation();
   return (
-    <s-page heading="FAQs">
+    <s-page heading={t("faqs.pageTitle")}>
       <s-section>
         <s-stack direction="block" gap="base">
           <s-stack direction="inline" gap="base" alignItems="center" justifyContent="space-between">

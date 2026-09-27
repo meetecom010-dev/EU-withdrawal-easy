@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types -- plain JS project, no prop-types package installed */
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { FALLBACK_OPTIONS } from "../constants";
 import { toNumberValue } from "../fieldValue";
 
@@ -13,11 +14,12 @@ function FallbackControl({
   daysError,
   onDismissDaysError,
 }) {
+  const { t } = useTranslation();
   const showDays = value === "release-n" || value === "cancel-n";
   return (
     <s-stack direction="block" gap="base">
       <s-select
-        label="If no one reviews the request in time"
+        label={t("formSetup.automation.fallback.label")}
         value={value}
         error={error}
         onChange={(e) => onChange(e.currentTarget.value)}
@@ -25,13 +27,13 @@ function FallbackControl({
       >
         {FALLBACK_OPTIONS.map((option) => (
           <s-option key={option.value} value={option.value}>
-            {option.label}
+            {t(`formSetup.automation.fallback.${option.labelKey}`)}
           </s-option>
         ))}
       </s-select>
       {showDays && (
         <s-number-field
-          label="Number of days"
+          label={t("formSetup.automation.fallback.days")}
           value={String(days)}
           min={1}
           max={90}
@@ -45,6 +47,7 @@ function FallbackControl({
 }
 
 function TagInput({ tags = [], onChange, error, onDismissError }) {
+  const { t } = useTranslation();
   const [value, setValue] = useState("");
 
   const addTag = () => {
@@ -68,12 +71,12 @@ function TagInput({ tags = [], onChange, error, onDismissError }) {
 
   return (
     <s-stack direction="block" gap="small-200">
-      <s-text type="strong">Order tags</s-text>
+      <s-text type="strong">{t("formSetup.automation.tag.label")}</s-text>
 
       <s-text-field
-        label="Order tags"
+        label={t("formSetup.automation.tag.label")}
         labelAccessibilityVisibility="exclusive"
-        placeholder="Add tag"
+        placeholder={t("formSetup.automation.tag.placeholder")}
         value={value}
         // "Add at least one tag" belongs to the tag list, and this composer is
         // the control that fixes it.
@@ -115,7 +118,7 @@ function TagInput({ tags = [], onChange, error, onDismissError }) {
   );
 }
 
-// The "Add tag on submission" toggle + tag input is identical before-ship
+// The "Tag the order" toggle + tag input is identical before-ship
 // and after-delivery, differing only in which settings path they read/write.
 function TagOnSubmission({
   description,
@@ -126,10 +129,11 @@ function TagOnSubmission({
   error,
   onDismissError,
 }) {
+  const { t } = useTranslation();
   return (
     <>
       <s-checkbox
-        label="Add tag on submission"
+        label={t("formSetup.automation.tag.checkbox")}
         details={description}
         checked={checked}
         onChange={onToggle}
@@ -147,17 +151,17 @@ function TagOnSubmission({
 }
 
 export default function AutomationCard({ settings, update, errors = {}, dismissError }) {
+  const { t } = useTranslation();
+
   return (
-    <s-section heading="Automation">
+    <s-section heading={t("formSetup.automation.heading")}>
       <s-stack direction="block" gap="base">
-        <s-paragraph color="subdued">
-          What happens automatically when a withdrawal request is submitted.
-        </s-paragraph>
+        <s-paragraph color="subdued">{t("formSetup.automation.description")}</s-paragraph>
         <s-stack gap="small-200">
-          <s-heading>Before the order ships</s-heading>
+          <s-heading>{t("formSetup.automation.beforeShip.heading")}</s-heading>
           <s-checkbox
-            label="Hold order for staff review on submission"
-            details="Pause fulfillment until your team reviews the request, before the order ships."
+            label={t("formSetup.automation.beforeShip.hold")}
+            details={t("formSetup.automation.beforeShip.holdDetails")}
             checked={settings.automation.holdFulfillment}
             onChange={(e) => update("automation.holdFulfillment", e.currentTarget.checked)}
           ></s-checkbox>
@@ -174,7 +178,7 @@ export default function AutomationCard({ settings, update, errors = {}, dismissE
             />
           )}
           <TagOnSubmission
-            description="Tag the order when a request arrives before it ships, so your team can spot it in the order list."
+            description={t("formSetup.automation.beforeShip.tagDetails")}
             checked={settings.automation.tagBeforeShip}
             onToggle={(e) => update("automation.tagBeforeShip", e.currentTarget.checked)}
             tags={settings.automation.beforeShipTags}
@@ -187,19 +191,16 @@ export default function AutomationCard({ settings, update, errors = {}, dismissE
         <s-divider></s-divider>
         <s-stack gap="small-200">
           <s-stack direction="block" gap="small-500">
-            <s-heading>After delivery</s-heading>
-            <s-text color="subdued">
-              What happens when a request comes in after the goods may already be with the customer.
-              Your team is emailed about every request either way.
-            </s-text>
+            <s-heading>{t("formSetup.automation.afterDelivery.heading")}</s-heading>
+            <s-text color="subdued">{t("formSetup.automation.afterDelivery.description")}</s-text>
           </s-stack>
 
           {/* Still stored as "create_return" / "notify_only" — the automation and the
               request history read those values. Unchecked is "notify_only", which is
               just the absence of a return: the merchant email goes out regardless. */}
           <s-checkbox
-            label="Create return"
-            details="Automatically create a Shopify return for the selected items."
+            label={t("formSetup.automation.afterDelivery.createReturn")}
+            details={t("formSetup.automation.afterDelivery.createReturnDetails")}
             checked={settings.automation.afterDeliveryAction === "create_return"}
             error={errors["automation.afterDeliveryAction"]}
             onChange={(e) =>
@@ -211,7 +212,7 @@ export default function AutomationCard({ settings, update, errors = {}, dismissE
           ></s-checkbox>
 
           <TagOnSubmission
-            description="Tag the order when a request arrives after delivery."
+            description={t("formSetup.automation.afterDelivery.tagDetails")}
             checked={settings.automation.tagAfterDelivery}
             onToggle={(e) => update("automation.tagAfterDelivery", e.currentTarget.checked)}
             tags={settings.automation.afterDeliveryTags}

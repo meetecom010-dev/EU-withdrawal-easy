@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types -- plain JS project, no prop-types package installed */
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import OrderStatusExtensionStatus from "../../../../components/OrderStatusExtensionStatus";
 import StandalonePageStatus from "../../../../components/StandalonePageStatus";
 
@@ -16,6 +17,7 @@ export default function SetupGuideCard({
   completedCount,
   onDismissed,
 }) {
+  const { t } = useTranslation();
   const [guideExpanded, setGuideExpanded] = useState(true);
   // Auto-expand the first incomplete step once on mount — after that, the
   // merchant's own expand/collapse choice takes over, even as steps
@@ -34,28 +36,31 @@ export default function SetupGuideCard({
               gap="small-300"
               alignItems="center"
             >
-              <s-heading>Set up guide</s-heading>
+              <s-heading>{t("home.setupGuide.heading")}</s-heading>
               <s-button
-                accessibilityLabel="Dismiss guide"
+                accessibilityLabel={t("home.setupGuide.dismiss")}
                 variant="tertiary"
                 tone="neutral"
                 icon="x"
                 onClick={onDismissed}
               ></s-button>
               <s-button
-                accessibilityLabel="Toggle setup guide"
+                accessibilityLabel={
+                  guideExpanded ? t("home.setupGuide.collapse") : t("home.setupGuide.expand")
+                }
                 variant="tertiary"
                 tone="neutral"
                 icon={guideExpanded ? "chevron-up" : "chevron-down"}
                 onClick={() => setGuideExpanded((current) => !current)}
               ></s-button>
             </s-grid>
-            <s-paragraph color="subdued">
-              Use this guide to get your withdrawal form live on your storefront.
-            </s-paragraph>
+            <s-paragraph color="subdued">{t("home.setupGuide.description")}</s-paragraph>
           </s-stack>
           <s-text color="subdued">
-            {completedCount} of {setupSteps.length} tasks complete
+            {t("home.setupGuide.progress", {
+              completed: completedCount,
+              total: setupSteps.length,
+            })}
           </s-text>
         </s-grid>
 
@@ -80,7 +85,11 @@ export default function SetupGuideCard({
                       {step.label}
                     </s-text>
                     <s-button
-                      accessibilityLabel={`Toggle ${step.label} details`}
+                      accessibilityLabel={
+                        isStepExpanded
+                          ? t("home.setupGuide.hideStep", { step: step.label })
+                          : t("home.setupGuide.showStep", { step: step.label })
+                      }
                       variant="tertiary"
                       tone="neutral"
                       icon={isStepExpanded ? "chevron-up" : "chevron-down"}
@@ -98,12 +107,12 @@ export default function SetupGuideCard({
                         {step.key === "blocks" ? step.locked ? (
                           <s-box padding="base" background="subdued" borderRadius="base">
                             <s-paragraph color="subdued">
-                              Complete step 2 (configure your withdrawal form and pick where it
-                              shows) to see what to add here.
+                              {t("home.setupGuide.steps.blocks.locked")}
                             </s-paragraph>
                           </s-box>
                         ) : (
                           <s-stack direction="block" gap="base">
+                            <s-paragraph color="subdued">{step.description}</s-paragraph>
                             {step.surfaces.map((surface) => (
                               <s-box
                                 key={surface.key}
@@ -121,9 +130,7 @@ export default function SetupGuideCard({
                                     disabled
                                   ></s-checkbox>
                                   {surface.added ? (
-                                    <s-banner tone="success">
-                                      The {surface.label} block is live.
-                                    </s-banner>
+                                    <s-banner tone="success">{surface.liveMessage}</s-banner>
                                   ) : surface.key === "orderStatus" ? (
                                     <OrderStatusExtensionStatus />
                                   ) : (

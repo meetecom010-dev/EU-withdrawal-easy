@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types -- plain JS project, no prop-types package installed */
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useAppBridge } from "@shopify/app-bridge-react";
 import OnboardingSidebar from "./OnboardingSidebar";
 import WelcomeStep from "./steps/WelcomeStep";
@@ -8,15 +9,17 @@ import WithdrawalStep from "./steps/WithdrawalStep";
 import { updateOnboardingStatus } from "../../../../utils/api/shop";
 import { useRefreshShop, useDismissOnboarding } from "../../../../context/ShopContext";
 
-const STEPS = [
-  { key: "welcome", title: "Welcome", description: "Overview & what's included" },
-  { key: "dpa", title: "Data Agreement", description: "Accept DPA to continue" },
-  { key: "form", title: "Withdrawal Form", description: "Configure your form" },
+// Titles/descriptions live in en.json under onboarding.steps.<key>.
+const STEPS = [{ key: "welcome" }, { key: "dpa" }, { key: "form" }];
+
+const PRIMARY_LABEL_KEYS = [
+  "onboarding.actions.getStarted",
+  "onboarding.actions.continue",
+  "onboarding.actions.finish",
 ];
 
-const PRIMARY_LABEL = ["Get started", "Continue", "Finish setup"];
-
 export default function Onboarding({ onComplete }) {
+  const { t } = useTranslation();
   const shopify = useAppBridge();
   const refreshShop = useRefreshShop();
   const dismissOnboarding = useDismissOnboarding();
@@ -30,8 +33,8 @@ export default function Onboarding({ onComplete }) {
   const isLast = stepIndex === STEPS.length - 1;
   const isPrimaryDisabled = stepIndex === 1 && !dpaAccepted;
 
-  function notify(message) {
-    shopify.toast.show(message);
+  function notify(message, options) {
+    shopify.toast.show(message, options);
   }
 
   async function persistOnboardingStatus() {
@@ -39,7 +42,7 @@ export default function Onboarding({ onComplete }) {
       await updateOnboardingStatus({ onboardingCompleted: true, dpaAccepted });
       refreshShop();
     } catch (error) {
-      notify(error.message);
+      notify(error.message, { isError: true });
     }
   }
 
@@ -51,7 +54,7 @@ export default function Onboarding({ onComplete }) {
     if (isLast) {
       await persistOnboardingStatus();
       onComplete?.();
-      notify("Setup complete — you're ready for EU withdrawals 🎉");
+      notify(t("onboarding.completedToast"));
       return;
     }
     setStepIndex((current) => current + 1);
@@ -72,33 +75,34 @@ export default function Onboarding({ onComplete }) {
   }
 
   return (
-    <s-page heading="Get started">
+    <s-page heading={t("onboarding.pageTitle")}>
       <s-stack direction="block" gap="large">
-        <s-stack direction="block" gap="small-200" alignItems="left" mar>
-          <s-heading>Let&rsquo;s get you EU compliant 👋</s-heading>
-          <s-paragraph color="subdued">
-            This 3-step setup will help you enable a compliant withdrawal
-            process for your EU customers.
-          </s-paragraph>
+        <s-stack direction="block" gap="small-200" alignItems="left">
+          <s-heading>{t("onboarding.heading")}</s-heading>
+          <s-paragraph color="subdued">{t("onboarding.intro")}</s-paragraph>
         </s-stack>
         <s-grid gridTemplateColumns="230px minmax(0, 1fr)" gap="base" alignItems="start">
           <OnboardingSidebar
             steps={STEPS}
             currentIndex={stepIndex}
-            onOpenGuide={() => notify("Guide opens in a new tab (demo)")}
-            onContactSupport={() => notify("Support chat opens (demo)")}
+            // TODO: placeholders until the setup guide and support chat exist.
+            onOpenGuide={() => notify(t("onboarding.help.guidePlaceholder"))}
+            onContactSupport={() => notify(t("onboarding.help.supportPlaceholder"))}
           />
 
           <s-box padding="large-100" borderWidth="base" borderRadius="large" background="base">
             <s-stack direction="block" gap="base">
-              <s-badge tone="success">{`Step ${stepIndex + 1} of ${STEPS.length}`}</s-badge>
+              <s-badge tone="success">
+                {t("onboarding.stepBadge", { current: stepIndex + 1, total: STEPS.length })}
+              </s-badge>
 
               {stepIndex === 0 && <WelcomeStep />}
               {stepIndex === 1 && (
                 <DpaStep
                   accepted={dpaAccepted}
                   onAcceptedChange={setDpaAccepted}
-                  onViewAgreement={() => notify("DPA opens in a new tab (demo)")}
+                  // TODO: placeholder until the DPA document is hosted.
+                  onViewAgreement={() => notify(t("onboarding.dpa.viewPlaceholder"))}
                 />
               )}
               {stepIndex === 2 && (
@@ -119,19 +123,19 @@ export default function Onboarding({ onComplete }) {
                   <s-text></s-text>
                 ) : (
                   <s-button variant="tertiary" onClick={handleBack}>
-                    Back
+                    {t("onboarding.actions.back")}
                   </s-button>
                 )}
                 <s-stack direction="inline" gap="base">
                   <s-button variant="tertiary" onClick={handleSkip}>
-                    Skip for now
+                    {t("onboarding.actions.skip")}
                   </s-button>
                   <s-button
                     variant="primary"
                     onClick={handlePrimary}
                     {...(isPrimaryDisabled ? { disabled: true } : {})}
                   >
-                    {PRIMARY_LABEL[stepIndex]}
+                    {t(PRIMARY_LABEL_KEYS[stepIndex])}
                   </s-button>
                 </s-stack>
               </s-stack>

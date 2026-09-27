@@ -1,4 +1,6 @@
 import { authenticate } from "../../shopify.server";
+import { translateError } from "../../i18n/errors";
+import { getRequestT } from "../../i18n/server";
 import {
   startSenderVerification,
   confirmSenderVerification,
@@ -13,6 +15,7 @@ import {
 //   { intent: "remove" }              -> revert to the app default
 export const action = async ({ request }) => {
   const { session } = await authenticate.admin(request);
+  const t = getRequestT(request);
   const body = await request.json().catch(() => ({}));
 
   try {
@@ -28,9 +31,9 @@ export const action = async ({ request }) => {
       case "remove":
         return Response.json(await removeCustomSender(session.shop));
       default:
-        return Response.json({ error: "Unknown intent" }, { status: 400 });
+        return Response.json({ error: t("errors.unknownAction") }, { status: 400 });
     }
   } catch (error) {
-    return Response.json({ error: error.message }, { status: 400 });
+    return Response.json({ error: translateError(error, t) }, { status: 400 });
   }
 };

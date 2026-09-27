@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types -- plain JS project, no prop-types package installed */
+import { useTranslation } from "react-i18next";
 import OrderStatusExtensionStatus from "../../../../../components/OrderStatusExtensionStatus";
 import StandalonePageStatus from "../../../../../components/StandalonePageStatus";
 
@@ -10,18 +11,15 @@ export default function WithdrawalStep({
   showOnStandalonePage,
   onShowOnStandalonePageChange,
 }) {
+  const { t } = useTranslation();
+
   return (
     <s-stack direction="block" gap="base">
-      <s-heading>Turn on your withdrawal form 📝</s-heading>
-      <s-paragraph color="subdued">
-        Customers submit their intent to withdraw, then give a separate
-        explicit confirmation — exactly what Article 11a requires. Sensible
-        defaults are already filled in: legal wording and a 14-day timeline
-        from delivery.
-      </s-paragraph>
+      <s-heading>{t("onboarding.form.heading")}</s-heading>
+      <s-paragraph color="subdued">{t("onboarding.form.body")}</s-paragraph>
 
       <s-switch
-        label="Enable the withdrawal form"
+        label={t("onboarding.form.switch")}
         checked={enabled}
         onChange={(event) => onEnabledChange(event.target.checked)}
       ></s-switch>
@@ -29,21 +27,22 @@ export default function WithdrawalStep({
       {enabled && (
         <s-box padding="base" borderWidth="base" borderRadius="base">
           <s-stack direction="block" gap="small-200">
-            <s-heading>Show it on your storefront</s-heading>
+            {/* Same copy as the setup guide on Home, so both flows read as
+                the same feature. */}
+            <s-heading>{t("home.setupGuide.steps.form.placementHeading")}</s-heading>
             <s-paragraph color="subdued">
-              The button needs to be placed on the order status page before
-              customers can see it.
+              {t("home.setupGuide.steps.form.placementDescription")}
             </s-paragraph>
             <s-checkbox
-              label="Order status page"
-              details="Display the withdrawal form on Shopify's Order Status page after checkout."
+              label={t("placements.orderStatus.label")}
+              details={t("placements.orderStatus.details")}
               checked={showOnOrderStatus}
               onChange={(event) => onShowOnOrderStatusChange(event.target.checked)}
             ></s-checkbox>
             {showOnOrderStatus && <OrderStatusExtensionStatus />}
             <s-checkbox
-              label="Standalone storefront page"
-              details="Let customers start a withdrawal from a dedicated page on your storefront theme, via the Withdrawly theme app extension."
+              label={t("placements.storefront.label")}
+              details={t("placements.storefront.details")}
               checked={showOnStandalonePage}
               onChange={(event) => onShowOnStandalonePageChange(event.target.checked)}
             ></s-checkbox>
@@ -53,10 +52,7 @@ export default function WithdrawalStep({
       )}
 
       <s-banner tone="info">
-        <s-paragraph>
-          Nothing here is final — wording, languages, deadlines, automation,
-          and placement can all be changed anytime from Form Setup.
-        </s-paragraph>
+        <s-paragraph>{t("onboarding.form.later")}</s-paragraph>
       </s-banner>
     </s-stack>
   );

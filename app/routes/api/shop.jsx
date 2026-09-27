@@ -1,4 +1,5 @@
 import { authenticate } from "../../shopify.server";
+import { getRequestT } from "../../i18n/server";
 import connectDB from "../../db.server";
 import Shop from "../../models/shop.server";
 import { getOrCreateShop } from "../../services/shop.server";
@@ -49,7 +50,7 @@ export const action = async ({ request }) => {
 
     if (Object.keys(update).length === 0) {
       return Response.json(
-        { error: "No valid fields provided" },
+        { error: getRequestT(request)("errors.noValidFields") },
         { status: 400 },
       );
     }
@@ -62,5 +63,5 @@ export const action = async ({ request }) => {
     return Response.json({ shop });
   }
 
-  return Response.json({ error: "Method not allowed" }, { status: 405 });
+  return Response.json({ error: getRequestT(request)("errors.methodNotAllowed") }, { status: 405 });
 };

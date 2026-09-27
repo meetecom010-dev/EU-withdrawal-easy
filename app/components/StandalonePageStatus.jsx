@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Trans, useTranslation } from "react-i18next";
 import { useShop } from "../context/ShopContext";
 
 // The theme app extension's block identity, used to build the deep link
@@ -20,13 +21,8 @@ const THEME_BLOCK_HANDLE = "withdrawal-form";
 // by hand first, with no way to deep-link that creation step) is what makes
 // this a single click: Shopify's `addAppBlockId` param auto-inserts the block
 // as its own new section on that template, so all that's left is Save.
-const TEMPLATE_OPTIONS = [
-  { value: "page", label: "Pages (default page template)" },
-  { value: "index", label: "Home page" },
-  { value: "product", label: "Product pages" },
-  { value: "collection", label: "Collection pages" },
-  { value: "cart", label: "Cart page" },
-];
+// Labels live in en.json under blockSetup.storefront.templates.<value>.
+const TEMPLATE_OPTIONS = ["page", "index", "product", "collection", "cart"];
 
 const THEME_EDITOR_FALLBACK_URL = "https://admin.shopify.com/themes";
 
@@ -36,8 +32,9 @@ const THEME_EDITOR_FALLBACK_URL = "https://admin.shopify.com/themes";
 // routes/_app.jsx), via shopify.app.extensions() — confirmed working against
 // a live response, no manual confirmation needed.
 export default function StandalonePageStatus() {
+  const { t } = useTranslation();
   const { shop, themeBlockAdded } = useShop();
-  const [template, setTemplate] = useState(TEMPLATE_OPTIONS[0].value);
+  const [template, setTemplate] = useState(TEMPLATE_OPTIONS[0]);
 
   if (themeBlockAdded) {
     return null;
@@ -53,43 +50,38 @@ export default function StandalonePageStatus() {
     : THEME_EDITOR_FALLBACK_URL;
 
   return (
-    <s-banner tone="warning" heading="Standalone withdrawal page not set up yet">
+    <s-banner tone="warning" heading={t("blockSetup.storefront.heading")}>
       <s-stack direction="block" gap="small-200">
-        <s-paragraph>
-          Choose where the withdrawal button should appear, then click Activate — the theme
-          editor opens with the button already added as a section on that template.
-        </s-paragraph>
+        <s-paragraph>{t("blockSetup.storefront.body")}</s-paragraph>
 
         <s-select
-          label="Where should it appear?"
+          label={t("blockSetup.storefront.templateLabel")}
           value={template}
           onChange={(e) => setTemplate(e.currentTarget.value)}
         >
-          {TEMPLATE_OPTIONS.map((option) => (
-            <s-option key={option.value} value={option.value}>
-              {option.label}
+          {TEMPLATE_OPTIONS.map((value) => (
+            <s-option key={value} value={value}>
+              {t(`blockSetup.storefront.templates.${value}`)}
             </s-option>
           ))}
         </s-select>
 
         <s-ordered-list>
-          <s-list-item>
-            Click <s-text type="strong">Activate</s-text> — the theme editor opens and the button
-            is added as a section.
-          </s-list-item>
-          <s-list-item>Drag the section to where you want it on the page.</s-list-item>
-          <s-list-item>
-            Click <s-text type="strong">Save</s-text> in the top right.
-          </s-list-item>
+          {["open", "move", "save"].map((step) => (
+            <s-list-item key={step}>
+              <Trans
+                i18nKey={`blockSetup.storefront.steps.${step}`}
+                components={{ strong: <s-text type="strong" /> }}
+              />
+            </s-list-item>
+          ))}
         </s-ordered-list>
 
-        <s-paragraph color="subdued">
-          This warning updates automatically within a few seconds of the block being saved.
-        </s-paragraph>
+        <s-paragraph color="subdued">{t("blockSetup.autoUpdate")}</s-paragraph>
 
         <s-stack direction="inline" gap="small-200">
           <s-button href={activateUrl} target="_blank">
-            Activate
+            {t("blockSetup.addAppBlock")}
           </s-button>
         </s-stack>
       </s-stack>

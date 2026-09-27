@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useRouteError } from "react-router";
+import { useTranslation } from "react-i18next";
 import { boundary } from "@shopify/shopify-app-react-router/server";
 import { authenticate } from "../../shopify.server";
 import { submitFeatureRequest } from "../../utils/api/featureRequests";
@@ -11,8 +12,9 @@ export const loader = async ({ request }) => {
 
 const EMPTY_FORM = { firstName: "", lastName: "", email: "", request: "" };
 
-// Reachable from the "Feature request" card in Help & resources on Home.
+// Reachable from the "Feature requests" card in Help and resources on Home.
 export default function FeatureRequest() {
+  const { t } = useTranslation();
   const [form, setForm] = useState(EMPTY_FORM);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState(null);
@@ -41,16 +43,19 @@ export default function FeatureRequest() {
   }
 
   return (
-    <s-page heading="Request a feature">
-      <s-button slot="breadcrumb-actions" href="/" accessibilityLabel="Back to dashboard" />
+    <s-page heading={t("featureRequest.pageTitle")}>
+      <s-button slot="breadcrumb-actions" href="/" accessibilityLabel={t("common.backToHome")} />
 
       <s-section>
         <s-stack direction="block" gap="base">
           {submitted && (
-            <s-banner tone="success" dismissible onDismiss={() => setSubmitted(false)}>
-              <s-paragraph>
-                Thanks! Your feature request has been sent to our team.
-              </s-paragraph>
+            <s-banner
+              tone="success"
+              heading={t("featureRequest.sentHeading")}
+              dismissible
+              onDismiss={() => setSubmitted(false)}
+            >
+              <s-paragraph>{t("featureRequest.sentBody")}</s-paragraph>
             </s-banner>
           )}
 
@@ -60,19 +65,17 @@ export default function FeatureRequest() {
             </s-banner>
           )}
 
-          <s-paragraph color="subdued">
-            Tell us what you&apos;d like to see in the app — we read every submission.
-          </s-paragraph>
+          <s-paragraph color="subdued">{t("featureRequest.intro")}</s-paragraph>
 
           <s-grid gridTemplateColumns="1fr 1fr" gap="base">
             <s-text-field
-              label="First name"
+              label={t("featureRequest.firstName")}
               value={form.firstName}
               onInput={(e) => update("firstName", e.currentTarget.value)}
               required
             ></s-text-field>
             <s-text-field
-              label="Last name"
+              label={t("featureRequest.lastName")}
               value={form.lastName}
               onInput={(e) => update("lastName", e.currentTarget.value)}
               required
@@ -80,15 +83,15 @@ export default function FeatureRequest() {
           </s-grid>
 
           <s-email-field
-            label="Email"
+            label={t("featureRequest.email")}
             value={form.email}
             onInput={(e) => update("email", e.currentTarget.value)}
             required
           ></s-email-field>
 
           <s-text-area
-            label="What feature would you like to see?"
-            placeholder="Describe the feature you're looking for…"
+            label={t("featureRequest.request")}
+            placeholder={t("featureRequest.requestPlaceholder")}
             value={form.request}
             onInput={(e) => update("request", e.currentTarget.value)}
             rows={5}
@@ -102,7 +105,7 @@ export default function FeatureRequest() {
               disabled={!canSubmit || isSubmitting || undefined}
               loading={isSubmitting || undefined}
             >
-              Submit request
+              {t("featureRequest.submit")}
             </s-button>
           </s-stack>
         </s-stack>

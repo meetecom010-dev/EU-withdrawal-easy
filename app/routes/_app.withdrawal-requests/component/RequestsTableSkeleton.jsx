@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import SkeletonBox from "../../../components/skeleton/SkeletonBox";
 
 // Mirrors the loaded Withdrawal requests page: the shared StatsGrid tiles
@@ -53,8 +54,9 @@ function RowSkeleton() {
 }
 
 export default function RequestsTableSkeleton() {
+  const { t } = useTranslation();
   return (
-    <s-page heading="Withdrawal requests">
+    <s-page heading={t("requests.pageTitle")}>
       <s-stack direction="block" gap="large-100">
         {/* StatsGrid — "Overview" header (no View requests button here) + four tiles */}
         <s-section>

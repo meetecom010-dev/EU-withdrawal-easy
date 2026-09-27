@@ -8,6 +8,7 @@
 // brevoSenderId) and is managed here, separate from the template Save bar.
 
 import connectDB from "../db.server";
+import { TranslatableError } from "../i18n/errors";
 import AppSettings from "../models/app-settings.server";
 import {
   createBrevoSender,
@@ -36,7 +37,7 @@ async function setSenderFields(shop, fields) {
 export async function startSenderVerification(shop, { email, name }) {
   const clean = String(email ?? "").trim();
   if (!EMAIL_RE.test(clean)) {
-    throw new Error("Enter a valid email address.");
+    throw new TranslatableError("errors.invalidEmail");
   }
 
   const { id, active } = await createBrevoSender({ email: clean, name });
@@ -54,7 +55,7 @@ export async function startSenderVerification(shop, { email, name }) {
 export async function confirmSenderVerification(shop, { otp }) {
   const code = String(otp ?? "").trim();
   if (!code) {
-    throw new Error("Enter the verification code from your email.");
+    throw new TranslatableError("errors.senderCodeRequired");
   }
 
   await connectDB();
@@ -73,11 +74,7 @@ export async function confirmSenderVerification(shop, { otp }) {
     }
   }
   if (!senderId) {
-    throw new Error(
-      email
-        ? "We couldn't find this sender in Brevo. Remove the email and add it again to get a fresh code."
-        : "Start email verification first.",
-    );
+    throw new TranslatableError(email ? "errors.senderNotFound" : "errors.senderNotStarted");
   }
 
   await validateBrevoSender({ senderId, otp: code });

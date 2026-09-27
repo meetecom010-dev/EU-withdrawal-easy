@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types -- plain JS project, no prop-types package installed */
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 // Polaris web components have no disclosure/accordion primitive, so the
 // collapsible row is built here from s-clickable (which takes box props, so it
@@ -8,6 +9,7 @@ import { useState } from "react";
 // closing one answer to open another would only get in the way.
 
 function FaqItem({ faq, isOpen, onToggle }) {
+  const { t } = useTranslation();
   const answerId = `faq-answer-${faq.id}`;
 
   return (
@@ -17,7 +19,9 @@ function FaqItem({ faq, isOpen, onToggle }) {
         padding="base"
         inlineSize="100%"
         borderRadius="base"
-        accessibilityLabel={`${isOpen ? "Hide" : "Show"} answer: ${faq.question}`}
+        accessibilityLabel={t(isOpen ? "faqs.hideAnswer" : "faqs.showAnswer", {
+          question: faq.question,
+        })}
         aria-expanded={isOpen}
         aria-controls={answerId}
       >
@@ -55,6 +59,7 @@ function FaqItem({ faq, isOpen, onToggle }) {
 }
 
 export default function FaqAccordion({ faqs }) {
+  const { t } = useTranslation();
   const [openIds, setOpenIds] = useState([]);
   const allOpen = openIds.length === faqs.length;
 
@@ -67,11 +72,9 @@ export default function FaqAccordion({ faqs }) {
   return (
     <s-stack direction="block" gap="base">
       <s-stack direction="inline" gap="base" alignItems="center" justifyContent="space-between">
-        <s-text color="subdued">
-          {`${faqs.length} answers to the questions we're asked most.`}
-        </s-text>
+        <s-text color="subdued">{t("faqs.intro", { count: faqs.length })}</s-text>
         <s-button variant="tertiary" onClick={() => setOpenIds(allOpen ? [] : faqs.map((faq) => faq.id))}>
-          {allOpen ? "Collapse all" : "Expand all"}
+          {allOpen ? t("faqs.collapseAll") : t("faqs.expandAll")}
         </s-button>
       </s-stack>
 

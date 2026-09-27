@@ -1,10 +1,12 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useAppBridge } from "@shopify/app-bridge-react";
 import { authenticate } from "../../shopify.server";
 import { getEmailSettings, saveEmailSettings } from "../../utils/api/emailSettings";
 import { templateDefault } from "../../services/email/registry";
-import { TEMPLATE_META, TEMPLATE_LIST } from "./constants";
+import { TEMPLATE_LIST } from "./constants";
 import { validateEmailSettings } from "./validation";
+import { translateMessages } from "../../i18n/errors";
 import SenderSettings from "./component/SenderSettings";
 import DomainSettings from "./component/DomainSettings";
 import NotificationEditor from "./component/NotificationEditor";
@@ -48,6 +50,7 @@ const SAVE_BAR_ID = "email-templates-save-bar";
 const DEFAULT_KEY = TEMPLATE_LIST[0].key;
 
 export default function EmailTemplates() {
+  const { t } = useTranslation();
   const shopify = useAppBridge();
   const [settings, setSettings] = useState(null);
   const [savedSettings, setSavedSettings] = useState(null);
@@ -85,10 +88,13 @@ export default function EmailTemplates() {
 
   const displayedErrors = useMemo(() => {
     if (!showErrors) return {};
-    return Object.fromEntries(
-      Object.entries(errors).filter(([path]) => !dismissedErrors.includes(path)),
+    return translateMessages(
+      Object.fromEntries(
+        Object.entries(errors).filter(([path]) => !dismissedErrors.includes(path)),
+      ),
+      t,
     );
-  }, [errors, showErrors, dismissedErrors]);
+  }, [errors, showErrors, dismissedErrors, t]);
 
   const dismissError = useCallback((path) => {
     setDismissedErrors((prev) => (prev.includes(path) ? prev : [...prev, path]));
@@ -145,8 +151,10 @@ export default function EmailTemplates() {
         },
       };
     });
-    shopify?.toast?.show(`${TEMPLATE_META[selectedKey].name} reset to default`);
-  }, [selectedKey, activeLocale, shopify]);
+    shopify?.toast?.show(
+      t("emailTemplates.resetToast", { name: t(`emailTemplates.templates.${selectedKey}.name`) }),
+    );
+  }, [selectedKey, activeLocale, shopify, t]);
 
   function handleDiscard() {
     setSettings(savedSettings);
@@ -196,7 +204,7 @@ export default function EmailTemplates() {
       setSavedSettings(emailSettings);
       setShowErrors(false);
       setDismissedErrors([]);
-      shopify.toast.show("Email templates saved");
+      shopify.toast.show(t("emailTemplates.savedToast"));
     } catch (error) {
       setSaveError(error.message);
     } finally {
@@ -210,8 +218,8 @@ export default function EmailTemplates() {
 
   if (loadError) {
     return (
-      <s-page heading="Email templates">
-        <s-banner tone="critical" heading="Couldn't load email templates">
+      <s-page heading={t("emailTemplates.pageTitle")}>
+        <s-banner tone="critical" heading={t("emailTemplates.loadError")}>
           <s-paragraph>{loadError}</s-paragraph>
         </s-banner>
       </s-page>
@@ -219,8 +227,8 @@ export default function EmailTemplates() {
   }
 
   return (
-    <s-page heading="Email templates">
-      <s-button slot="breadcrumb-actions" href="/" accessibilityLabel="Back to dashboard" />
+    <s-page heading={t("emailTemplates.pageTitle")}>
+      <s-button slot="breadcrumb-actions" href="/" accessibilityLabel={t("common.backToHome")} />
 
       <ui-save-bar id={SAVE_BAR_ID}>
         <button
@@ -229,10 +237,10 @@ export default function EmailTemplates() {
           disabled={isSaving || undefined}
           loading={isSaving || undefined}
         >
-          Save
+          {t("common.save")}
         </button>
         <button onClick={handleDiscard} disabled={isSaving || undefined}>
-          Discard
+          {t("common.discard")}
         </button>
       </ui-save-bar>
 
@@ -240,7 +248,7 @@ export default function EmailTemplates() {
         {saveError && (
           <s-banner
             tone="critical"
-            heading="Couldn't save email templates"
+            heading={t("emailTemplates.saveError")}
             dismissible
             onDismiss={() => setSaveError(null)}
           >

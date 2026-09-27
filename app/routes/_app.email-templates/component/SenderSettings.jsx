@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types -- plain JS project, no prop-types package installed */
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import {
   startSenderVerification,
   confirmSenderVerification,
@@ -14,6 +15,7 @@ import { isFreeEmailDomain } from "../../../utils/freeEmailDomains";
 // Brevo, confirm the emailed code, then we send from it. Until verified, emails
 // go from the app's default address.
 export default function SenderSettings({ sender, defaultFromEmail, update, dismissError, errors }) {
+  const { t } = useTranslation();
   const [status, setStatus] = useState(sender.fromEmailStatus || "none");
   const [customEmail, setCustomEmail] = useState(sender.fromEmail || "");
   const [emailInput, setEmailInput] = useState(sender.fromEmail || "");
@@ -42,7 +44,7 @@ export default function SenderSettings({ sender, defaultFromEmail, update, dismi
     setCustomEmail(result.fromEmail);
     setStatus(result.fromEmailStatus);
     if (result.fromEmailStatus === "pending") {
-      setInfo(`We've emailed a verification code to ${result.fromEmail}.`);
+      setInfo(t("emailTemplates.sender.codeSent", { email: result.fromEmail }));
     }
   }
 
@@ -58,7 +60,7 @@ export default function SenderSettings({ sender, defaultFromEmail, update, dismi
     if (!result) return;
     setStatus(result.fromEmailStatus);
     if (result.fromEmailStatus !== "verified") {
-      setInfo("Not verified yet — check your inbox for the code, then try again.");
+      setInfo(t("emailTemplates.sender.notVerifiedYet"));
     }
   }
 
@@ -73,20 +75,19 @@ export default function SenderSettings({ sender, defaultFromEmail, update, dismi
 
   const senderDetails =
     status === "verified"
-      ? "Emails are sent from this address."
+      ? t("emailTemplates.sender.detailsVerified")
       : status === "pending"
-        ? "Enter the code we emailed to verify this address."
-        : `Leave blank to use ${defaultFromEmail || "the app's verified address"}, or add your own.`;
+        ? t("emailTemplates.sender.detailsPending")
+        : defaultFromEmail
+          ? t("emailTemplates.sender.detailsDefault", { email: defaultFromEmail })
+          : t("emailTemplates.sender.detailsDefaultFallback");
 
   const showFreeProviderWarning = status === "none" && isFreeEmailDomain(emailInput);
 
   return (
-    <s-section heading="Email settings">
+    <s-section heading={t("emailTemplates.sender.heading")}>
       <s-stack direction="block" gap="base">
-        <s-paragraph color="subdued">
-          These apply to every email your store sends. Send from your own verified address, and set
-          where customer replies go.
-        </s-paragraph>
+        <s-paragraph color="subdued">{t("emailTemplates.sender.description")}</s-paragraph>
 
         {error && (
           <s-banner tone="critical" dismissible onDismiss={() => setError(null)}>
@@ -108,43 +109,39 @@ export default function SenderSettings({ sender, defaultFromEmail, update, dismi
             {/* Left: sender email + its verify flow */}
             <s-stack direction="block" gap="small-300">
               <s-email-field
-                label="Sender email address"
+                label={t("emailTemplates.sender.emailLabel")}
                 value={status === "none" ? emailInput : customEmail}
                 disabled={status !== "none" || undefined}
-                placeholder="notifications@withdrawaleasy.com"
+                placeholder={t("emailTemplates.sender.emailPlaceholder")}
                 details={senderDetails}
                 onInput={(e) => setEmailInput(e.currentTarget.value)}
               ></s-email-field>
 
               {showFreeProviderWarning && (
                 <s-banner tone="warning">
-                  <s-paragraph>
-                    Free providers like Gmail or Yahoo can&apos;t be authenticated — verified emails
-                    from this address will show recipients &quot;via brevosend.com&quot;. For a
-                    professional look, use an address on your own store&apos;s domain instead.
-                  </s-paragraph>
+                  <s-paragraph>{t("emailTemplates.sender.freeProviderWarning")}</s-paragraph>
                 </s-banner>
               )}
 
               {status === "verified" ? (
                 <s-stack direction="inline" gap="small-200" alignItems="center">
-                  <s-badge tone="success">Verified</s-badge>
+                  <s-badge tone="success">{t("common.verified")}</s-badge>
                   <s-button
                     variant="tertiary"
                     tone="critical"
                     loading={busy || undefined}
                     onClick={onRemove}
                   >
-                    Remove
+                    {t("common.remove")}
                   </s-button>
                 </s-stack>
               ) : status === "pending" ? (
                 <s-stack direction="block" gap="small-300">
                   <s-text-field
-                    label="Verification code"
+                    label={t("emailTemplates.sender.codeLabel")}
                     value={otp}
                     placeholder="123456"
-                    details="The 6-digit code from the email we just sent."
+                    details={t("emailTemplates.sender.codeDetails")}
                     onInput={(e) => setOtp(e.currentTarget.value)}
                   ></s-text-field>
                   <s-stack direction="inline" gap="base">
@@ -154,10 +151,10 @@ export default function SenderSettings({ sender, defaultFromEmail, update, dismi
                       disabled={!otp.trim() || undefined}
                       onClick={onConfirm}
                     >
-                      Confirm
+                      {t("emailTemplates.sender.verifyCode")}
                     </s-button>
                     <s-button variant="tertiary" loading={busy || undefined} onClick={onRefresh}>
-                      I verified via email
+                      {t("emailTemplates.sender.checkStatus")}
                     </s-button>
                     <s-button
                       variant="tertiary"
@@ -165,7 +162,7 @@ export default function SenderSettings({ sender, defaultFromEmail, update, dismi
                       loading={busy || undefined}
                       onClick={onRemove}
                     >
-                      Cancel
+                      {t("common.cancel")}
                     </s-button>
                   </s-stack>
                 </s-stack>
@@ -177,7 +174,7 @@ export default function SenderSettings({ sender, defaultFromEmail, update, dismi
                     disabled={!emailInput.trim() || undefined}
                     onClick={onStart}
                   >
-                    Verify email
+                    {t("emailTemplates.sender.verifyEmail")}
                   </s-button>
                 </s-stack>
               )}
@@ -185,11 +182,11 @@ export default function SenderSettings({ sender, defaultFromEmail, update, dismi
 
             {/* Right: reply-to */}
             <s-email-field
-              label="Reply-to email"
+              label={t("emailTemplates.sender.replyToLabel")}
               value={sender.replyTo}
               error={errors["sender.replyTo"]}
-              placeholder="support@yourstore.com"
-              details="By default we use your store email for replies. Change it to route replies elsewhere."
+              placeholder={t("emailTemplates.sender.replyToPlaceholder")}
+              details={t("emailTemplates.sender.replyToDetails")}
               onInput={(e) => update("sender.replyTo", e.currentTarget.value)}
               onFocus={() => dismissError("sender.replyTo")}
             ></s-email-field>

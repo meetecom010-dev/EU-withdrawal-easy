@@ -73,6 +73,14 @@
   color: var(--withdrawly-text-subdued);
 }
 
+/* The fill is an empty <div>, and many themes (Dawn and its descendants)
+   ship `div:empty { display: none }`, which hid it and left only the grey
+   track. Scoped under .withdrawly so the override outranks that rule. */
+.withdrawly .withdrawly__progress,
+.withdrawly .withdrawly__progress-fill {
+  display: block;
+}
+
 .withdrawly__progress {
   height: 4px;
   border-radius: 999px;
@@ -85,7 +93,13 @@
   min-width: 4px;
   background: var(--withdrawly-accent, #2b45a8);
   border-radius: 999px;
-  transition: width 0.2s ease;
+  transition: width 0.35s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .withdrawly__progress-fill {
+    transition: none;
+  }
 }
 
 /* ---- headings ------------------------------------------------------------ */

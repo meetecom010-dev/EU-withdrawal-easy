@@ -1,7 +1,8 @@
 /* eslint-disable react/prop-types -- plain JS project, no prop-types package installed */
+import { useTranslation } from "react-i18next";
 
-// TODO: swap HELP_CENTER_URL for the app's real destination once it exists.
-const HELP_CENTER_URL = "https://example.com/help";
+// TODO: add a "Help center" card (with its copy under home.help in en.json)
+// once the app has a real help center URL.
 const SUPPORT_EMAIL = "support@withdrawaleasy.com";
 const FAQ_URL = "/faqs";
 const FEATURE_REQUEST_URL = "/feature-request";
@@ -21,32 +22,27 @@ function HelpCard({ title, description, linkLabel, href, external }) {
 }
 
 export default function HelpResourcesCard() {
+  const { t } = useTranslation();
+
   return (
-    <s-section heading="Help & resources">
+    <s-section heading={t("home.help.heading")}>
       <s-grid gridTemplateColumns="repeat(auto-fit, minmax(220px, 1fr))" gap="base">
-        {/* <HelpCard
-          title="Help center"
-          description="Step-by-step guides for setup, daily use, and troubleshooting."
-          linkLabel="Open help center"
-          href={HELP_CENTER_URL}
-          external
-        /> */}
         <HelpCard
-          title="Email support"
-          description="Questions? Our support team is here to help."
-          linkLabel="Contact support"
+          title={t("home.help.support.title")}
+          description={t("home.help.support.description")}
+          linkLabel={t("home.help.support.link")}
           href={`mailto:${SUPPORT_EMAIL}`}
         />
         <HelpCard
-          title="FAQs"
-          description="Answers to common questions about setting up and using the app."
-          linkLabel="Open FAQ"
+          title={t("home.help.faqs.title")}
+          description={t("home.help.faqs.description")}
+          linkLabel={t("home.help.faqs.link")}
           href={FAQ_URL}
         />
         <HelpCard
-          title="Feature request"
-          description="Have an idea for the app? Let us know what you'd like to see."
-          linkLabel="Request a feature"
+          title={t("home.help.featureRequest.title")}
+          description={t("home.help.featureRequest.description")}
+          linkLabel={t("home.help.featureRequest.link")}
           href={FEATURE_REQUEST_URL}
         />
       </s-grid>

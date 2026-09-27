@@ -1,4 +1,6 @@
 import { authenticate } from "../../shopify.server";
+import { translateError } from "../../i18n/errors";
+import { getRequestT } from "../../i18n/server";
 import {
   getOrCreateAppSettings,
   serializeFormSettings,
@@ -15,6 +17,7 @@ export const loader = async ({ request }) => {
 // PUT/PATCH /api/form-settings -> replace the withdrawal form configuration
 export const action = async ({ request }) => {
   const { session } = await authenticate.admin(request);
+  const t = getRequestT(request);
 
   if (request.method === "PUT" || request.method === "PATCH") {
     const body = await request.json();
@@ -22,9 +25,9 @@ export const action = async ({ request }) => {
       const formSettings = await saveFormSettings(session.shop, body);
       return Response.json({ formSettings });
     } catch (error) {
-      return Response.json({ error: error.message }, { status: 400 });
+      return Response.json({ error: translateError(error, t) }, { status: 400 });
     }
   }
 
-  return Response.json({ error: "Method not allowed" }, { status: 405 });
+  return Response.json({ error: t("errors.methodNotAllowed") }, { status: 405 });
 };

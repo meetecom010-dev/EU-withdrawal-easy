@@ -11,6 +11,7 @@
 // managed here, separate from the template Save bar and from `sender`.
 
 import connectDB from "../db.server";
+import { TranslatableError } from "../i18n/errors";
 import AppSettings from "../models/app-settings.server";
 import {
   createBrevoDomain,
@@ -57,10 +58,10 @@ function normalizeDnsRecords(dnsRecords) {
 export async function startDomainAuth(shop, { domain }) {
   const clean = String(domain ?? "").trim().toLowerCase();
   if (!DOMAIN_RE.test(clean)) {
-    throw new Error("Enter a valid domain, like yourstore.com.");
+    throw new TranslatableError("errors.domainInvalid");
   }
   if (isFreeEmailDomain(clean)) {
-    throw new Error("Free email providers (Gmail, Yahoo, etc.) can't be authenticated — use your own domain.");
+    throw new TranslatableError("errors.domainFreeProvider");
   }
 
   await createBrevoDomain({ name: clean }).catch(() => {
