@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 
 // Mirrors the real Home dashboard (see dashboard.jsx): the setup-incomplete
 // banner, the four-tile "Withdrawal requests" stats, and the full-width setup
-// guide with its three checklist rows — so the skeleton doesn't shift into a
+// guide with its two checklist rows — so the skeleton doesn't shift into a
 // different layout when the content loads.
 
 function StatTileSkeleton() {
@@ -68,7 +68,6 @@ export default function DashboardSkeleton() {
             <SkeletonBox width="150px" height="12px" />
             <s-box border="base" borderRadius="base">
               <ChecklistRowSkeleton />
-              <ChecklistRowSkeleton withDivider />
               <ChecklistRowSkeleton withDivider />
             </s-box>
           </s-stack>

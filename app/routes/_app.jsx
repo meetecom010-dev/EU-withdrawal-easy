@@ -61,8 +61,8 @@ function AppShell({ pendingSkeleton }) {
             {t("nav.home")}
           </s-link>
           {/* Most-used page first. Labels match each page's title. */}
-          <s-link href="/withdrawal-requests">{t("nav.withdrawalRequests")}</s-link>
           <s-link href="/form-setup">{t("nav.formSetup")}</s-link>
+          <s-link href="/withdrawal-requests">{t("nav.withdrawalRequests")}</s-link>
           <s-link href="/email-templates">{t("nav.emailTemplates")}</s-link>
           {/* <s-link href="/pricing">{t("nav.pricing")}</s-link> */}
         </s-app-nav>

@@ -3,6 +3,9 @@
 // it use an {{appName}} placeholder filled with this value.
 export const APP_NAME = "EU withdrawal easy";
 
+// Where merchants email for help (Home, FAQs, onboarding).
+export const SUPPORT_EMAIL = "support@withdrawaleasy.com";
+
 // The EU minimum withdrawal period (Directive 2011/83/EU, Art. 9), in days.
 // Merchant-facing copy quotes it through {{days}} placeholders.
 export const LEGAL_MIN_WITHDRAWAL_DAYS = 14;

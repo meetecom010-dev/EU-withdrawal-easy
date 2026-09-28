@@ -394,6 +394,9 @@ export default function RequestDetail({
   const [orderTags, setOrderTags] = useState(() => orderState?.tags ?? []);
   const [orderTagText, setOrderTagText] = useState("");
   const [decision, setDecision] = useState(null);
+  // A failed order action shows in a banner at the top of the page; toasts are
+  // only for results that worked.
+  const [actionError, setActionError] = useState(null);
 
   const deciding = decideFetcher.state !== "idle";
   const actionBusy = actionFetcher.state !== "idle";
@@ -484,13 +487,18 @@ export default function RequestDetail({
     // eslint-disable-next-line react-hooks/exhaustive-deps -- only react to the decide fetcher settling
   }, [decideFetcher.state, decideFetcher.data]);
 
-  // Toast the newest audit entry after any order action, and close the money
-  // modals once their action has settled.
+  // Report the newest audit entry after any order action — a toast when it
+  // worked, a banner when it failed — and close the money modals once their
+  // action has settled.
   useEffect(() => {
     if (actionFetcher.state !== "idle" || !actionFetcher.data?.withdrawalRequest) return;
     const log = actionFetcher.data.withdrawalRequest.automation?.log ?? [];
     const last = log[log.length - 1];
-    if (last) shopify.toast.show(activityMessage(last), { isError: last.outcome === "failed" });
+    if (last?.outcome === "failed") {
+      setActionError(activityMessage(last));
+    } else if (last) {
+      shopify.toast.show(activityMessage(last));
+    }
     shopify.modal.hide(REFUND_MODAL_ID);
     shopify.modal.hide(CANCEL_MODAL_ID);
     // eslint-disable-next-line react-hooks/exhaustive-deps -- only react to the action fetcher settling
@@ -540,6 +548,7 @@ export default function RequestDetail({
   }
 
   function runAction(intent) {
+    setActionError(null);
     actionFetcher.submit({ intent }, { method: "post" });
   }
 
@@ -548,6 +557,7 @@ export default function RequestDetail({
     shopify.modal.show(REFUND_MODAL_ID);
   }
   function confirmRefund() {
+    setActionError(null);
     actionFetcher.submit({ intent: "refund" }, { method: "post" });
   }
 
@@ -724,6 +734,18 @@ export default function RequestDetail({
         {orderStateError && (
           <s-banner tone="warning" heading={t("requestDetail.banners.orderUnavailableHeading")}>
             {t("requestDetail.banners.orderUnavailableBody", { error: orderStateError })}
+          </s-banner>
+        )}
+
+        {actionError && (
+          <s-banner
+            tone="critical"
+            heading={t("requestDetail.banners.actionFailedHeading")}
+            dismissible
+            onDismiss={() => setActionError(null)}
+          >
+            <s-paragraph>{actionError}</s-paragraph>
+            <s-paragraph>{t("requestDetail.banners.actionFailedAction")}</s-paragraph>
           </s-banner>
         )}
 

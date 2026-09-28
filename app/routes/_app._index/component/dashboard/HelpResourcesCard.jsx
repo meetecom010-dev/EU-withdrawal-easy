@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types -- plain JS project, no prop-types package installed */
 import { useTranslation } from "react-i18next";
+import { SUPPORT_EMAIL } from "../../../../constants";
 
 // TODO: add a "Help center" card (with its copy under home.help in en.json)
 // once the app has a real help center URL.
-const SUPPORT_EMAIL = "support@withdrawaleasy.com";
 const FAQ_URL = "/faqs";
 const FEATURE_REQUEST_URL = "/feature-request";
 

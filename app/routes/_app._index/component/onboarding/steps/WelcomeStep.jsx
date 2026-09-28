@@ -19,7 +19,7 @@ export default function WelcomeStep() {
           <s-stack gap="base">
             <s-stack direction="block" gap="small-500">
               <s-heading>{t("onboarding.welcome.heading", { appName: APP_NAME })}</s-heading>
-              <s-badge tone="success">{t("onboarding.welcome.setupTime")}</s-badge>
+              <s-text color="subdued">{t("onboarding.welcome.setupTime")}</s-text>
             </s-stack>
             <s-paragraph color="subdued">{t("onboarding.welcome.law")}</s-paragraph>
             <s-paragraph color="subdued">{t("onboarding.welcome.app", { appName: APP_NAME })}</s-paragraph>
@@ -48,7 +48,9 @@ export default function WelcomeStep() {
           ))}
         </s-stack>
       </s-stack>
-      <s-banner heading={t("onboarding.welcome.penaltyHeading")} tone="warning">
+      {/* Info, not warning: nothing is wrong with the store yet — this explains
+          why setup matters. */}
+      <s-banner heading={t("onboarding.welcome.penaltyHeading")} tone="info">
         <s-paragraph>
           {t("onboarding.welcome.penalty", { days: LEGAL_MIN_WITHDRAWAL_DAYS })}
         </s-paragraph>

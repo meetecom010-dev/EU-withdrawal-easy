@@ -62,7 +62,6 @@ export function serializeShop(shopDoc) {
     isActive: shopDoc.isActive,
     installedAt: shopDoc.installedAt,
     onboardingCompleted: shopDoc.onboardingCompleted,
-    dpaAccepted: shopDoc.dpaAccepted,
     orderStatusBlockAdded: shopDoc.orderStatusBlockAdded,
     themeBlockAdded: shopDoc.themeBlockAdded,
     plan: {

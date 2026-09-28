@@ -2,12 +2,10 @@ import { useEffect, useState } from "react";
 import { useRouteError } from "react-router";
 import { useTranslation } from "react-i18next";
 import { boundary } from "@shopify/shopify-app-react-router/server";
-import { useAppBridge } from "@shopify/app-bridge-react";
 import { authenticate } from "../../shopify.server";
-import { useShop, usePatchShop } from "../../context/ShopContext";
+import { useShop } from "../../context/ShopContext";
 import { getDashboardStats } from "../../utils/api/dashboardStats";
 import { getFormSettings, saveFormSettings } from "../../utils/api/formSettings";
-import { updateDpaAccepted } from "../../utils/api/shop";
 import Dashboard from "./component/dashboard/dashboard";
 import DashboardSkeleton from "./component/dashboard/DashboardSkeleton";
 
@@ -18,9 +16,9 @@ export const loader = async ({ request }) => {
 
 // Builds the setup-guide steps from real, live state instead of a hardcoded
 // guess. Order matters here — it's the order a merchant should reasonably
-// complete them in: accept the DPA, turn the form on and pick where it shows,
-// then add the block(s) for whichever surfaces were picked. dpa/form/the
-// two placement checkboxes are directly actionable right in the guide (see
+// complete them in: turn the form on and pick where it shows, then add the
+// block(s) for whichever surfaces were picked. The form toggle and the two
+// placement checkboxes are directly actionable right in the guide (see
 // onToggle); the "blocks" step isn't — whether a block is actually placed
 // can only be observed live via *ExtensionSync, not set by checking a box,
 // so those checkboxes are status indicators, not controls (see
@@ -28,13 +26,11 @@ export const loader = async ({ request }) => {
 function buildSetupSteps(
   t,
   {
-    dpaAccepted,
     formEnabled,
     showOnOrderStatus,
     showOnStandalonePage,
     orderStatusBlockAdded,
     themeBlockAdded,
-    onDpaToggle,
     onFormToggle,
     onToggleOrderStatus,
     onToggleStandalone,
@@ -67,14 +63,6 @@ function buildSetupSteps(
   ];
 
   return [
-    {
-      key: "dpa",
-      label: t("home.setupGuide.steps.dpa.label"),
-      description: t("home.setupGuide.steps.dpa.description"),
-      complete: Boolean(dpaAccepted),
-      checkboxLabel: t("home.setupGuide.steps.dpa.checkbox"),
-      onToggle: onDpaToggle,
-    },
     {
       key: "form",
       label: t("home.setupGuide.steps.form.label"),
@@ -124,14 +112,11 @@ function buildSetupSteps(
 
 // This route only renders once routes/_app.jsx has confirmed onboarding is
 // complete OR dismissed for the session — a merchant can land here without
-// ever having accepted the DPA or turned the form on, so the setup guide's
-// checkboxes below let them finish both right here instead of hunting for
-// onboarding or Form setup again.
+// ever having turned the form on, so the setup guide's checkboxes below let
+// them finish right here instead of hunting for onboarding or Settings again.
 export default function Home() {
   const { t } = useTranslation();
-  const shopify = useAppBridge();
   const shop = useShop();
-  const patchShop = usePatchShop();
   const [stats, setStats] = useState(null);
   const [formSettings, setFormSettings] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -147,22 +132,16 @@ export default function Home() {
       .finally(() => setLoading(false));
   }, []);
 
-  function notify(message) {
-    shopify.toast.show(message, { isError: true });
-  }
+  // Save failures show in a banner at the top of Home (not a toast, which
+  // disappears before the merchant can act on it).
+  const [actionError, setActionError] = useState(null);
 
-  async function handleDpaToggle(accepted) {
-    const previous = shop.dpaAccepted;
-    patchShop({ dpaAccepted: accepted });
-    try {
-      await updateDpaAccepted(accepted);
-    } catch (error) {
-      patchShop({ dpaAccepted: previous });
-      notify(error.message);
-    }
+  function notify(message) {
+    setActionError(message);
   }
 
   async function handleFormEnabledToggle(enabled) {
+    setActionError(null);
     const previous = formSettings;
     const next = { ...formSettings, masterEnabled: enabled };
     setFormSettings(next);
@@ -178,6 +157,7 @@ export default function Home() {
   // Shared by both placement checkboxes below — same optimistic-update-then-
   // save shape as handleFormEnabledToggle, just targeting a different field.
   async function handlePlacementToggle(field, value) {
+    setActionError(null);
     const previous = formSettings;
     const next = { ...formSettings, [field]: value };
     setFormSettings(next);
@@ -208,13 +188,11 @@ export default function Home() {
   }
 
   const setupSteps = buildSetupSteps(t, {
-    dpaAccepted: shop.dpaAccepted,
     formEnabled: formSettings.masterEnabled,
     showOnOrderStatus: formSettings.showOnOrderStatus,
     showOnStandalonePage: formSettings.showOnStandalonePage,
     orderStatusBlockAdded: shop.orderStatusBlockAdded,
     themeBlockAdded: shop.themeBlockAdded,
-    onDpaToggle: handleDpaToggle,
     onFormToggle: handleFormEnabledToggle,
     onToggleOrderStatus: handleToggleOrderStatus,
     onToggleStandalone: handleToggleStandalone,
@@ -223,7 +201,8 @@ export default function Home() {
 
   return (
     <Dashboard
-      shopDomain={shop.shop}
+      actionError={actionError}
+      onDismissActionError={() => setActionError(null)}
       stats={stats}
       setupSteps={setupSteps}
       completedCount={completedCount}

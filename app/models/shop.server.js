@@ -36,7 +36,6 @@ const shopSchema = new Schema(
     installedAt: { type: Date, default: Date.now },
     uninstalledAt: { type: Date, default: null },
     onboardingCompleted: { type: Boolean, default: false },
-    dpaAccepted: { type: Boolean, default: false },
     orderStatusBlockAdded: { type: Boolean, default: false },
     // Manually confirmed by the merchant (see StandalonePageStatus.jsx) —
     // unlike orderStatusBlockAdded, there's no App Bridge API to poll a theme

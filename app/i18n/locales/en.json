@@ -117,6 +117,8 @@
   "home": {
     "pageTitle": "Home",
     "loadError": "Couldn't load your dashboard",
+    "saveErrorHeading": "Couldn't save your change",
+    "saveErrorAction": "Try again, or make the change in Settings.",
     "setupBanner": {
       "heading_one": "{{count}} setup step left",
       "heading_other": "{{count}} setup steps left",
@@ -132,11 +134,6 @@
       "showStep": "Show details for {{step}}",
       "hideStep": "Hide details for {{step}}",
       "steps": {
-        "dpa": {
-          "label": "Accept the Data Processing Agreement",
-          "description": "Accept this agreement so the app can handle your customers' personal data, as the GDPR requires.",
-          "checkbox": "I accept the Data Processing Agreement"
-        },
         "form": {
           "label": "Turn on your withdrawal form",
           "description": "Turn on the form and choose where customers see it. The fields, reasons, and wording already have default text. You can change them anytime in Settings.",
@@ -222,10 +219,6 @@
         "title": "Welcome",
         "description": "What the app does"
       },
-      "dpa": {
-        "title": "Data Processing Agreement",
-        "description": "Accept to continue"
-      },
       "form": {
         "title": "Withdrawal form",
         "description": "Turn on your form"
@@ -240,41 +233,34 @@
     },
     "help": {
       "heading": "Need help?",
-      "body": "Read our <guideLink>setup guide</guideLink> or <supportLink>contact support</supportLink>.",
-      "guidePlaceholder": "The setup guide opens in a new tab (demo)",
-      "supportPlaceholder": "Support chat opens (demo)"
+      "body": "Have a question? <supportLink>Contact support</supportLink>."
     },
     "welcome": {
       "heading": "Welcome to {{appName}}",
       "setupTime": "Takes about 1 minute",
       "law": "Since June 19, 2026, EU law (Directive 2023/2673, Article 11a) requires stores that sell to EU customers to offer a 2-step withdrawal function for every order. A returns policy alone isn't enough.",
-      "app": "{{appName}} adds a withdrawal button to your customers' order status page. It handles the 2-step confirmation and sends the required confirmation email. You can manage all requests in one place.",
+      "app": "{{appName}} adds a withdrawal button to your order status page, a page in your online store, or both. It handles the 2-step confirmation and sends the required confirmation email. You can manage all requests in one place.",
       "imageAlt": "A customer withdrawing from an order",
       "requirementsHeading": "What the law requires",
       "requirements": {
-        "button": "A clear withdrawal button that's always available on the order status page",
+        "button": "A clearly labeled withdrawal button that customers can easily find",
         "twoStep": "A 2-step process: customers submit their withdrawal, then confirm it",
         "email": "An automatic confirmation email that customers can keep"
       },
       "penaltyHeading": "Penalty for non-compliance",
       "penalty": "If the withdrawal function is missing or broken, the law extends the {{days}}-day withdrawal period. Customers then get 12 months and {{days}} days to withdraw from each affected order."
     },
-    "dpa": {
-      "heading": "Data Processing Agreement",
-      "body": "The app uses personal data to handle withdrawal requests for you. This includes customer names, email addresses, and order details. Under the GDPR, you need a Data Processing Agreement (DPA) with us for this.",
-      "viewLink": "View Data Processing Agreement",
-      "viewPlaceholder": "The DPA opens in a new tab (demo)",
-      "checkbox": "I accept the Data Processing Agreement",
-      "later": "You can accept the DPA later from Home."
-    },
     "form": {
       "heading": "Turn on your withdrawal form",
       "body": "Customers submit their withdrawal, then confirm it in a separate step, as EU law requires. The form comes with default legal wording. Customers get {{days}} to withdraw, starting from delivery.",
       "switch": "Turn on withdrawal form",
       "later": "You can change all of this later in Settings.",
-      "loadError": "Couldn't load your settings. Your choices on this step won't be saved.",
-      "saveError": "Couldn't save your form choices. You can set them in Settings."
-    }
+      "loadError": "Couldn't load your form settings. You can finish setup now and turn on the form later in Settings.",
+      "saveError": "Couldn't save your form choices. Try again, or finish setup without them and set them later in Settings.",
+      "finishWithoutSaving": "Finish without saving",
+      "placementError": "Select at least one place, or turn off the form."
+    },
+    "finishError": "Couldn't finish setup. Try again."
   },
   "formSetup": {
     "pageTitle": "Settings",
@@ -548,6 +534,8 @@
     "banners": {
       "orderUnavailableHeading": "Order details unavailable",
       "orderUnavailableBody": "{{error}} You can't use order actions until the order details load.",
+      "actionFailedHeading": "Couldn't complete this action",
+      "actionFailedAction": "The activity history below has the details.",
       "canceled": "This order was canceled. Order actions are no longer available."
     },
     "deadline": {
@@ -1145,6 +1133,7 @@
           "Automated refunds"
         ]
       }
-    }
+    },
+    "switchError": "Couldn't change your plan"
   }
 }

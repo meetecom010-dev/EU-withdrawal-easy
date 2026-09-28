@@ -7,10 +7,9 @@ import { TEMPLATE_KEYS } from "../../services/email/registry";
 import { AVAILABLE_LANGUAGES } from "../_app.form-setup/constants";
 import { REFUND_WINDOW_DAYS } from "../_app.withdrawal-requests/constants";
 import { useFormatters } from "../../i18n/react";
+import { SUPPORT_EMAIL } from "../../constants";
 import { FAQ_IDS } from "./faqs";
 import FaqAccordion from "./component/FaqAccordion";
-
-const SUPPORT_EMAIL = "support@withdrawaleasy.com";
 
 // The answers quote this shop's own deadline settings, so the FAQ always
 // matches what Form setup is actually configured to do.

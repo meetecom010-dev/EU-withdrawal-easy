@@ -4,20 +4,14 @@ import { useTranslation } from "react-i18next";
 import { useAppBridge } from "@shopify/app-bridge-react";
 import OnboardingSidebar from "./OnboardingSidebar";
 import WelcomeStep from "./steps/WelcomeStep";
-import DpaStep from "./steps/DpaStep";
 import WithdrawalStep from "./steps/WithdrawalStep";
 import { updateOnboardingStatus } from "../../../../utils/api/shop";
 import { getFormSettings, saveFormSettings } from "../../../../utils/api/formSettings";
 import { useRefreshShop, useDismissOnboarding } from "../../../../context/ShopContext";
 
-// Titles/descriptions live in en.json under onboarding.steps.<key>.
-const STEPS = [{ key: "welcome" }, { key: "dpa" }, { key: "form" }];
-
-const PRIMARY_LABEL_KEYS = [
-  "onboarding.actions.getStarted",
-  "onboarding.actions.continue",
-  "onboarding.actions.finish",
-];
+// Titles/descriptions live in en.json under onboarding.steps.<key>. Steps are
+// rendered by key, so adding or removing one doesn't renumber anything.
+const STEPS = [{ key: "welcome" }, { key: "form" }];
 
 export default function Onboarding({ onComplete }) {
   const { t } = useTranslation();
@@ -25,10 +19,9 @@ export default function Onboarding({ onComplete }) {
   const refreshShop = useRefreshShop();
   const dismissOnboarding = useDismissOnboarding();
   const [stepIndex, setStepIndex] = useState(0);
-  const [dpaAccepted, setDpaAccepted] = useState(false);
-  // Step 3 edits real form settings: the placement boxes start from what's
-  // saved, and "Finish setup" writes all three back (the same fields the Home
-  // setup guide and Form setup edit). The switch starts on because turning
+  // The form step edits real form settings: the placement boxes start from
+  // what's saved, and "Finish setup" writes all three back (the same fields the
+  // Home setup guide and Settings edit). The switch starts on because turning
   // the form on is what this step is for.
   const [formSettings, setFormSettings] = useState(null);
   const [settingsStatus, setSettingsStatus] = useState("loading");
@@ -36,6 +29,11 @@ export default function Onboarding({ onComplete }) {
   const [formEnabled, setFormEnabled] = useState(true);
   const [showOnOrderStatus, setShowOnOrderStatus] = useState(false);
   const [showOnStandalonePage, setShowOnStandalonePage] = useState(false);
+  const [placementError, setPlacementError] = useState(false);
+  // Errors show in a banner inside the step card, next to the action that
+  // failed — not a toast, which disappears before the merchant can act on it.
+  // `canFinishWithoutForm` adds a way forward when only the form save failed.
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     getFormSettings()
@@ -48,118 +46,140 @@ export default function Onboarding({ onComplete }) {
       .catch(() => setSettingsStatus("error"));
   }, []);
 
+  const currentStep = STEPS[stepIndex].key;
   const isFirst = stepIndex === 0;
   const isLast = stepIndex === STEPS.length - 1;
-  const isPrimaryDisabled =
-    (stepIndex === 1 && !dpaAccepted) || (isLast && settingsStatus === "loading") || saving;
+  const isPrimaryDisabled = (isLast && settingsStatus === "loading") || saving;
+  const primaryLabel = isLast
+    ? t("onboarding.actions.finish")
+    : isFirst
+      ? t("onboarding.actions.getStarted")
+      : t("onboarding.actions.continue");
 
-  function notify(message, options) {
-    shopify.toast.show(message, options);
+  function goToStep(index) {
+    setError(null);
+    setStepIndex(index);
   }
 
-  async function persistOnboardingStatus() {
+  function handlePlacementChange(setter) {
+    return (checked) => {
+      setter(checked);
+      if (checked) setPlacementError(false);
+    };
+  }
+
+  async function finishSetup({ saveForm = true } = {}) {
+    setError(null);
+    const shouldSaveForm = saveForm && Boolean(formSettings);
+    // Turning the form on with no place picked would leave it on but hidden
+    // everywhere, so ask for a place first.
+    if (shouldSaveForm && formEnabled && !showOnOrderStatus && !showOnStandalonePage) {
+      setPlacementError(true);
+      return;
+    }
+
+    setSaving(true);
     try {
-      await updateOnboardingStatus({ onboardingCompleted: true, dpaAccepted });
-      refreshShop();
-    } catch (error) {
-      notify(error.message, { isError: true });
-    }
-  }
-
-  function handleBack() {
-    setStepIndex((current) => Math.max(0, current - 1));
-  }
-
-  async function handlePrimary() {
-    if (isLast) {
-      setSaving(true);
-      try {
-        if (formSettings) {
-          try {
-            await saveFormSettings({
-              ...formSettings,
-              masterEnabled: formEnabled,
-              showOnOrderStatus,
-              showOnStandalonePage,
-            });
-          } catch {
-            // Don't block finishing: settings that fail validation (e.g. an
-            // older shop with a blank label) can't be fixed from this step.
-            // The Home setup guide still shows the form step as unfinished.
-            notify(t("onboarding.form.saveError"), { isError: true });
-          }
+      if (shouldSaveForm) {
+        try {
+          await saveFormSettings({
+            ...formSettings,
+            masterEnabled: formEnabled,
+            showOnOrderStatus,
+            showOnStandalonePage,
+          });
+        } catch {
+          // Settings that fail validation (e.g. an older shop with a blank
+          // label) can't be fixed from this step, so offer to finish without
+          // them. The Home setup guide still shows the form step as unfinished.
+          setError({ message: t("onboarding.form.saveError"), canFinishWithoutForm: true });
+          return;
         }
-        await persistOnboardingStatus();
-        onComplete?.();
-        notify(t("onboarding.completedToast"));
-      } finally {
-        setSaving(false);
       }
-      return;
+
+      try {
+        await updateOnboardingStatus({ onboardingCompleted: true });
+      } catch {
+        setError({ message: t("onboarding.finishError") });
+        return;
+      }
+
+      refreshShop();
+      onComplete?.();
+      shopify.toast.show(t("onboarding.completedToast"));
+    } finally {
+      setSaving(false);
     }
-    setStepIndex((current) => current + 1);
   }
 
-  // On any step but the last, skip just moves past this one step. On the
-  // last step, "Skip for now" instead of "Finish setup" means the merchant
-  // doesn't want to commit yet — unlike the primary action, it never writes
-  // onboardingCompleted to the database, only hides onboarding for the rest
-  // of this session (see ShopContext's onboardingDismissed), so it comes
-  // back next time the merchant opens the app.
-  function handleSkip() {
+  function handlePrimary() {
     if (isLast) {
-      dismissOnboarding();
+      finishSetup();
       return;
     }
-    setStepIndex((current) => current + 1);
+    goToStep(stepIndex + 1);
+  }
+
+  // "Skip for now" means the same thing on every step: leave setup for this
+  // session. It never writes onboardingCompleted, so setup comes back next time
+  // the app is opened (see ShopContext's onboardingDismissed). The form step's
+  // choices aren't saved.
+  function handleSkip() {
+    dismissOnboarding();
   }
 
   return (
     <s-page heading={t("onboarding.pageTitle")}>
       <s-stack direction="block" gap="large">
-        <s-stack direction="block" gap="small-200" alignItems="left">
+        <s-stack direction="block" gap="small-500" alignItems="start">
           <s-heading>{t("onboarding.heading")}</s-heading>
           <s-paragraph color="subdued">
             {t("onboarding.intro", { count: STEPS.length })}
           </s-paragraph>
         </s-stack>
         <s-grid gridTemplateColumns="230px minmax(0, 1fr)" gap="base" alignItems="start">
-          <OnboardingSidebar
-            steps={STEPS}
-            currentIndex={stepIndex}
-            // TODO: placeholders until the setup guide and support chat exist.
-            onOpenGuide={() => notify(t("onboarding.help.guidePlaceholder"))}
-            onContactSupport={() => notify(t("onboarding.help.supportPlaceholder"))}
-          />
+          <OnboardingSidebar steps={STEPS} currentIndex={stepIndex} />
 
           <s-box padding="large-100" borderWidth="base" borderRadius="large" background="base">
             <s-stack direction="block" gap="base">
-              <s-badge tone="success">
+              <s-text color="subdued">
                 {t("onboarding.stepBadge", { current: stepIndex + 1, total: STEPS.length })}
-              </s-badge>
+              </s-text>
 
-              {stepIndex === 0 && <WelcomeStep />}
-              {stepIndex === 1 && (
-                <DpaStep
-                  accepted={dpaAccepted}
-                  onAcceptedChange={setDpaAccepted}
-                  // TODO: placeholder until the DPA document is hosted.
-                  onViewAgreement={() => notify(t("onboarding.dpa.viewPlaceholder"))}
-                />
+              {error && (
+                <s-banner tone="critical" dismissible onDismiss={() => setError(null)}>
+                  <s-paragraph>{error.message}</s-paragraph>
+                  {error.canFinishWithoutForm && (
+                    <s-button
+                      slot="secondary-actions"
+                      onClick={() => finishSetup({ saveForm: false })}
+                    >
+                      {t("onboarding.form.finishWithoutSaving")}
+                    </s-button>
+                  )}
+                </s-banner>
               )}
-              {stepIndex === 2 && settingsStatus === "error" && (
-                <s-banner tone="warning">{t("onboarding.form.loadError")}</s-banner>
-              )}
-              {stepIndex === 2 && (
-                <WithdrawalStep
-                  enabled={formEnabled}
-                  onEnabledChange={setFormEnabled}
-                  showOnOrderStatus={showOnOrderStatus}
-                  onShowOnOrderStatusChange={setShowOnOrderStatus}
-                  showOnStandalonePage={showOnStandalonePage}
-                  onShowOnStandalonePageChange={setShowOnStandalonePage}
-                />
-              )}
+
+              {currentStep === "welcome" && <WelcomeStep />}
+              {currentStep === "form" &&
+                (settingsStatus === "error" ? (
+                  <s-banner tone="critical">
+                    <s-paragraph>{t("onboarding.form.loadError")}</s-paragraph>
+                  </s-banner>
+                ) : (
+                  <WithdrawalStep
+                    enabled={formEnabled}
+                    onEnabledChange={(enabled) => {
+                      setFormEnabled(enabled);
+                      if (!enabled) setPlacementError(false);
+                    }}
+                    showOnOrderStatus={showOnOrderStatus}
+                    onShowOnOrderStatusChange={handlePlacementChange(setShowOnOrderStatus)}
+                    showOnStandalonePage={showOnStandalonePage}
+                    onShowOnStandalonePageChange={handlePlacementChange(setShowOnStandalonePage)}
+                    placementError={placementError}
+                  />
+                ))}
 
               <s-divider></s-divider>
 
@@ -167,7 +187,7 @@ export default function Onboarding({ onComplete }) {
                 {isFirst ? (
                   <s-text></s-text>
                 ) : (
-                  <s-button variant="tertiary" onClick={handleBack}>
+                  <s-button variant="tertiary" onClick={() => goToStep(stepIndex - 1)}>
                     {t("onboarding.actions.back")}
                   </s-button>
                 )}
@@ -181,7 +201,7 @@ export default function Onboarding({ onComplete }) {
                     loading={saving || undefined}
                     {...(isPrimaryDisabled ? { disabled: true } : {})}
                   >
-                    {t(PRIMARY_LABEL_KEYS[stepIndex])}
+                    {primaryLabel}
                   </s-button>
                 </s-stack>
               </s-stack>

@@ -7,7 +7,6 @@ import { getOrCreateShop } from "../../services/shop.server";
 const ALLOWED_PLAN_FIELDS = ["name", "price", "currency", "interval"];
 const ALLOWED_SHOP_FIELDS = [
   "onboardingCompleted",
-  "dpaAccepted",
   "orderStatusBlockAdded",
   "themeBlockAdded",
 ];

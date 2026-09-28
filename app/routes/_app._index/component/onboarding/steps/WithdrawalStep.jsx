@@ -11,6 +11,7 @@ export default function WithdrawalStep({
   onShowOnOrderStatusChange,
   showOnStandalonePage,
   onShowOnStandalonePageChange,
+  placementError,
 }) {
   const { t } = useTranslation();
 
@@ -52,13 +53,14 @@ export default function WithdrawalStep({
               onChange={(event) => onShowOnStandalonePageChange(event.target.checked)}
             ></s-checkbox>
             {showOnStandalonePage && <StandalonePageStatus />}
+            {placementError && (
+              <s-text tone="critical">{t("onboarding.form.placementError")}</s-text>
+            )}
           </s-stack>
         </s-box>
       )}
 
-      <s-banner tone="info">
-        <s-paragraph>{t("onboarding.form.later")}</s-paragraph>
-      </s-banner>
+      <s-paragraph color="subdued">{t("onboarding.form.later")}</s-paragraph>
     </s-stack>
   );
 }

@@ -6,7 +6,14 @@ import HelpResourcesCard from "./HelpResourcesCard";
 import { useSetupGuideDismissed, useDismissSetupGuide } from "../../../../context/ShopContext";
 import { useFormatters } from "../../../../i18n/react";
 
-export default function Dashboard({ shopDomain, stats, setupSteps, completedCount, showSetupGuide }) {
+export default function Dashboard({
+  stats,
+  setupSteps,
+  completedCount,
+  showSetupGuide,
+  actionError,
+  onDismissActionError,
+}) {
   const { t } = useTranslation();
   const { formatList } = useFormatters();
   // Lives in ShopContext (not sessionStorage) so a dismissal survives Home
@@ -22,6 +29,18 @@ export default function Dashboard({ shopDomain, stats, setupSteps, completedCoun
 
   return (
     <s-page heading={t("home.pageTitle")}>
+      {actionError && (
+        <s-banner
+          tone="critical"
+          heading={t("home.saveErrorHeading")}
+          dismissible
+          onDismiss={onDismissActionError}
+        >
+          <s-paragraph>{actionError}</s-paragraph>
+          <s-paragraph>{t("home.saveErrorAction")}</s-paragraph>
+        </s-banner>
+      )}
+
       {!isFullyCompliant && (
         <s-banner heading={t("home.setupBanner.heading", { count: stepsRemaining })} tone="warning">
           <s-paragraph>

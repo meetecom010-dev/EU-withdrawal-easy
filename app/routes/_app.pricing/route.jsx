@@ -31,16 +31,18 @@ export default function Pricing() {
   const refreshShop = useRefreshShop();
   const [currentPlan, setCurrentPlan] = useState(shop.plan.name);
   const [selecting, setSelecting] = useState(null);
+  const [switchError, setSwitchError] = useState(null);
 
   async function handleSelect(plan) {
     setSelecting(plan.name);
+    setSwitchError(null);
     try {
       const { shop: updatedShop } = await updateShopPlan({ name: plan.name, price: plan.price });
       setCurrentPlan(updatedShop.plan.name);
       refreshShop();
       shopify.toast.show(t("pricing.switchedToast", { plan: t(`pricing.plans.${plan.key}.name`) }));
     } catch (error) {
-      shopify.toast.show(error.message, { isError: true });
+      setSwitchError(error.message);
     } finally {
       setSelecting(null);
     }
@@ -48,6 +50,16 @@ export default function Pricing() {
 
   return (
     <s-page heading={t("pricing.pageTitle")}>
+      {switchError && (
+        <s-banner
+          tone="critical"
+          heading={t("pricing.switchError")}
+          dismissible
+          onDismiss={() => setSwitchError(null)}
+        >
+          <s-paragraph>{switchError}</s-paragraph>
+        </s-banner>
+      )}
       <s-grid gridTemplateColumns="1fr 1fr 1fr" gap="base">
         {PLANS.map((plan) => (
           <PlanCard

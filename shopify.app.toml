@@ -3,7 +3,7 @@
 client_id = "5d7f87aa33802d02b496148727ede58a"
 application_url = "https://eu-withdrawal-easy.fly.dev"
 embedded = true
-name = "EU withdrawal easy"
+name = "Meet: EU withdrawal"
 
 [webhooks]
 api_version = "2026-07"
