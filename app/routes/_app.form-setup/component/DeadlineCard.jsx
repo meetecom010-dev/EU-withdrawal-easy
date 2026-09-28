@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types -- plain JS project, no prop-types package installed */
 import { useTranslation } from "react-i18next";
 import { toNumberValue } from "../fieldValue";
+import { LEGAL_MIN_WITHDRAWAL_DAYS } from "../../../constants";
 
 export default function DeadlineCard({ settings, update, errors = {}, dismissError }) {
   const { t } = useTranslation();
@@ -8,7 +9,11 @@ export default function DeadlineCard({ settings, update, errors = {}, dismissErr
   return (
     <s-section heading={t("formSetup.deadline.heading")}>
       <s-stack direction="block" gap="base">
-        <s-paragraph color="subdued">{t("formSetup.deadline.description")}</s-paragraph>
+        <s-paragraph color="subdued">
+          {t("formSetup.deadline.description", {
+            days: t("common.dayCount", { count: LEGAL_MIN_WITHDRAWAL_DAYS }),
+          })}
+        </s-paragraph>
         <s-grid gridTemplateColumns="1fr 1fr" gap="large-100">
           <s-number-field
             label={t("formSetup.deadline.days")}

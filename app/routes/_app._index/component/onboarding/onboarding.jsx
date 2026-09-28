@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types -- plain JS project, no prop-types package installed */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useAppBridge } from "@shopify/app-bridge-react";
 import OnboardingSidebar from "./OnboardingSidebar";
@@ -7,6 +7,7 @@ import WelcomeStep from "./steps/WelcomeStep";
 import DpaStep from "./steps/DpaStep";
 import WithdrawalStep from "./steps/WithdrawalStep";
 import { updateOnboardingStatus } from "../../../../utils/api/shop";
+import { getFormSettings, saveFormSettings } from "../../../../utils/api/formSettings";
 import { useRefreshShop, useDismissOnboarding } from "../../../../context/ShopContext";
 
 // Titles/descriptions live in en.json under onboarding.steps.<key>.
@@ -25,13 +26,32 @@ export default function Onboarding({ onComplete }) {
   const dismissOnboarding = useDismissOnboarding();
   const [stepIndex, setStepIndex] = useState(0);
   const [dpaAccepted, setDpaAccepted] = useState(false);
+  // Step 3 edits real form settings: the placement boxes start from what's
+  // saved, and "Finish setup" writes all three back (the same fields the Home
+  // setup guide and Form setup edit). The switch starts on because turning
+  // the form on is what this step is for.
+  const [formSettings, setFormSettings] = useState(null);
+  const [settingsStatus, setSettingsStatus] = useState("loading");
+  const [saving, setSaving] = useState(false);
   const [formEnabled, setFormEnabled] = useState(true);
   const [showOnOrderStatus, setShowOnOrderStatus] = useState(false);
   const [showOnStandalonePage, setShowOnStandalonePage] = useState(false);
 
+  useEffect(() => {
+    getFormSettings()
+      .then(({ formSettings: loaded }) => {
+        setFormSettings(loaded);
+        setShowOnOrderStatus(Boolean(loaded.showOnOrderStatus));
+        setShowOnStandalonePage(Boolean(loaded.showOnStandalonePage));
+        setSettingsStatus("ready");
+      })
+      .catch(() => setSettingsStatus("error"));
+  }, []);
+
   const isFirst = stepIndex === 0;
   const isLast = stepIndex === STEPS.length - 1;
-  const isPrimaryDisabled = stepIndex === 1 && !dpaAccepted;
+  const isPrimaryDisabled =
+    (stepIndex === 1 && !dpaAccepted) || (isLast && settingsStatus === "loading") || saving;
 
   function notify(message, options) {
     shopify.toast.show(message, options);
@@ -52,9 +72,29 @@ export default function Onboarding({ onComplete }) {
 
   async function handlePrimary() {
     if (isLast) {
-      await persistOnboardingStatus();
-      onComplete?.();
-      notify(t("onboarding.completedToast"));
+      setSaving(true);
+      try {
+        if (formSettings) {
+          try {
+            await saveFormSettings({
+              ...formSettings,
+              masterEnabled: formEnabled,
+              showOnOrderStatus,
+              showOnStandalonePage,
+            });
+          } catch {
+            // Don't block finishing: settings that fail validation (e.g. an
+            // older shop with a blank label) can't be fixed from this step.
+            // The Home setup guide still shows the form step as unfinished.
+            notify(t("onboarding.form.saveError"), { isError: true });
+          }
+        }
+        await persistOnboardingStatus();
+        onComplete?.();
+        notify(t("onboarding.completedToast"));
+      } finally {
+        setSaving(false);
+      }
       return;
     }
     setStepIndex((current) => current + 1);
@@ -79,7 +119,9 @@ export default function Onboarding({ onComplete }) {
       <s-stack direction="block" gap="large">
         <s-stack direction="block" gap="small-200" alignItems="left">
           <s-heading>{t("onboarding.heading")}</s-heading>
-          <s-paragraph color="subdued">{t("onboarding.intro")}</s-paragraph>
+          <s-paragraph color="subdued">
+            {t("onboarding.intro", { count: STEPS.length })}
+          </s-paragraph>
         </s-stack>
         <s-grid gridTemplateColumns="230px minmax(0, 1fr)" gap="base" alignItems="start">
           <OnboardingSidebar
@@ -104,6 +146,9 @@ export default function Onboarding({ onComplete }) {
                   // TODO: placeholder until the DPA document is hosted.
                   onViewAgreement={() => notify(t("onboarding.dpa.viewPlaceholder"))}
                 />
+              )}
+              {stepIndex === 2 && settingsStatus === "error" && (
+                <s-banner tone="warning">{t("onboarding.form.loadError")}</s-banner>
               )}
               {stepIndex === 2 && (
                 <WithdrawalStep
@@ -133,6 +178,7 @@ export default function Onboarding({ onComplete }) {
                   <s-button
                     variant="primary"
                     onClick={handlePrimary}
+                    loading={saving || undefined}
                     {...(isPrimaryDisabled ? { disabled: true } : {})}
                   >
                     {t(PRIMARY_LABEL_KEYS[stepIndex])}

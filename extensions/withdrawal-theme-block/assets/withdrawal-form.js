@@ -80,11 +80,11 @@
   const EDITOR_NOTICES = {
     form_disabled: {
       heading: "Withdrawal form is turned off",
-      body: 'Customers can\'t see this block yet. In the app, open Form setup and turn on "Enable withdrawal form" and "Show on a standalone storefront page".',
+      body: 'Customers can\'t see this block yet. In the app, go to Settings and select "Turn on withdrawal form" and "Show on a storefront page".',
     },
     surface_disabled: {
-      heading: "Standalone storefront page is turned off",
-      body: 'Customers can\'t see this block yet. In the app, open Form setup and turn on "Show on a standalone storefront page".',
+      heading: "Storefront page form is turned off",
+      body: 'Customers can\'t see this block yet. In the app, go to Settings and select "Show on a storefront page".',
     },
     unreachable: {
       heading: "Couldn't reach the app",

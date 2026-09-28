@@ -14,6 +14,7 @@
 // and every translation share a single structure and only the words differ.
 
 import { EMAIL_STRINGS, EMAIL_STRING_LOCALES } from "./email-strings";
+import { tDefault } from "../../i18n/config";
 
 // English is the base language every email falls back to.
 export const BASE_EMAIL_LOCALE = "en";
@@ -193,7 +194,7 @@ function rejectedBody(s) {
 // Builds a customer template's defaults (English) plus a translation per
 // language, all from the same builder + strings so they can never structurally
 // drift.
-function customerTemplate({ key, name, description, required, section, build }) {
+function customerTemplate({ key, required, section, build }) {
   const forLocale = (locale) => {
     const s = EMAIL_STRINGS[locale];
     return { subject: s[section].subject, bodyHtml: build(s) };
@@ -202,12 +203,38 @@ function customerTemplate({ key, name, description, required, section, build }) 
   for (const locale of EMAIL_STRING_LOCALES) translations[locale] = forLocale(locale);
   return {
     key,
-    name,
-    description,
-    audience: "Customer",
     required,
     defaults: forLocale(BASE_EMAIL_LOCALE),
     translations,
+  };
+}
+
+// The merchant notification's default subject/body, built from the admin
+// translations in the default locale. Deterministic on purpose: diffOverride()
+// compares saved templates against these defaults.
+function merchantNotificationDefaults() {
+  const M = "emailTemplates.merchantDefaults.";
+  const t = tDefault;
+  return {
+    subject: t(`${M}subject`, { order: "{{ order.name }}" }),
+    bodyHtml: shell(
+      [
+        heading(t(`${M}heading`)),
+        paragraph(t(`${M}intro`)),
+        summaryBox([
+          summaryRow(t(`${M}rows.name`), "{{ customer.first_name }} {{ customer.last_name }}"),
+          summaryRow(t(`${M}rows.email`), "<a href=\"mailto:{{ customer.email }}\" style=\"color:#2c6ecb\">{{ customer.email }}</a>"),
+          summaryRow(t(`${M}rows.date`), "{{ withdrawal.submitted_at }}"),
+          summaryRow(t(`${M}rows.orderNumber`), "{{ order.name }}"),
+          summaryRow(t(`${M}rows.reference`), "{{ withdrawal.request_id }}"),
+          summaryRow(t(`${M}rows.reason`), "{{ withdrawal.reason }}"),
+        ]),
+        button(t(`${M}button`), "{{ request.url }}"),
+        sectionHeading(t(`${M}itemsHeading`)),
+        LINE_ITEMS,
+        smallPrint(t(`${M}footnote`)),
+      ].join("\n"),
+    ),
   };
 }
 
@@ -216,8 +243,6 @@ function customerTemplate({ key, name, description, required, section, build }) 
 export const EMAIL_TEMPLATES = {
   customerConfirmation: customerTemplate({
     key: "customerConfirmation",
-    name: "Customer withdrawal confirmation",
-    description: "Sent to the customer the moment they submit a withdrawal request.",
     required: true, // legal acknowledgement — always sent
     section: "confirmation",
     build: confirmationBody,
@@ -225,41 +250,16 @@ export const EMAIL_TEMPLATES = {
 
   merchantNotification: {
     key: "merchantNotification",
-    name: "New request notification",
-    description: "Alerts you by email whenever a new withdrawal request comes in.",
-    audience: "You",
     required: false,
     // Sent to the merchant, not the buyer, so it stays in one language (no
-    // translations map — the send path falls back to these defaults).
-    defaults: {
-      subject: "New withdrawal request — order {{ order.name }}",
-      bodyHtml: shell(
-        [
-          heading("New withdrawal request"),
-          paragraph("A customer has submitted a withdrawal request. Here's everything you need to review it."),
-          summaryBox([
-            summaryRow("Name", "{{ customer.first_name }} {{ customer.last_name }}"),
-            summaryRow("Email", "<a href=\"mailto:{{ customer.email }}\" style=\"color:#2c6ecb\">{{ customer.email }}</a>"),
-            summaryRow("Date", "{{ withdrawal.submitted_at }}"),
-            summaryRow("Order number", "{{ order.name }}"),
-            summaryRow("Reference number", "{{ withdrawal.request_id }}"),
-            summaryRow("Reason", "{{ withdrawal.reason }}"),
-          ]),
-          button("View request", "{{ request.url }}"),
-          sectionHeading("Items requested"),
-          LINE_ITEMS,
-          smallPrint(
-            "Open the request in your admin to approve or reject it. Refund and return deadlines are tracked there automatically.",
-          ),
-        ].join("\n"),
-      ),
-    },
+    // translations map — the send path falls back to these defaults). The copy
+    // is the admin's emailTemplates.merchantDefaults; the {{ liquid }} tokens
+    // stay here and are passed in as values, so i18next never parses them.
+    defaults: merchantNotificationDefaults(),
   },
 
   withdrawalApproved: customerTemplate({
     key: "withdrawalApproved",
-    name: "Withdrawal approved",
-    description: "Sent to the customer when you approve their withdrawal request.",
     required: false,
     section: "approved",
     build: approvedBody,
@@ -267,8 +267,6 @@ export const EMAIL_TEMPLATES = {
 
   withdrawalRejected: customerTemplate({
     key: "withdrawalRejected",
-    name: "Withdrawal rejected",
-    description: "Sent to the customer when you reject their withdrawal request.",
     required: false,
     section: "rejected",
     build: rejectedBody,
@@ -278,10 +276,11 @@ export const EMAIL_TEMPLATES = {
 // The template keys, in display order.
 export const TEMPLATE_KEYS = Object.keys(EMAIL_TEMPLATES);
 
-// Metadata list for the UI (no bodies).
+// Metadata list for the UI (no bodies). Names and descriptions are admin
+// translations: emailTemplates.templates.<key>.name/description.
 export const TEMPLATE_LIST = TEMPLATE_KEYS.map((key) => {
-  const { name, description, audience, required } = EMAIL_TEMPLATES[key];
-  return { key, name, description, audience, required };
+  const { required } = EMAIL_TEMPLATES[key];
+  return { key, required };
 });
 
 // "de-DE" / "de_DE" -> "de". Buyer locales arrive region-tagged.

@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types -- plain JS project, no prop-types package installed */
 import { useTranslation } from "react-i18next";
+import { DEFAULT_WITHDRAWAL_DAYS } from "../../../../../constants";
 import OrderStatusExtensionStatus from "../../../../../components/OrderStatusExtensionStatus";
 import StandalonePageStatus from "../../../../../components/StandalonePageStatus";
 
@@ -16,7 +17,11 @@ export default function WithdrawalStep({
   return (
     <s-stack direction="block" gap="base">
       <s-heading>{t("onboarding.form.heading")}</s-heading>
-      <s-paragraph color="subdued">{t("onboarding.form.body")}</s-paragraph>
+      <s-paragraph color="subdued">
+        {t("onboarding.form.body", {
+          days: t("common.dayCount", { count: DEFAULT_WITHDRAWAL_DAYS }),
+        })}
+      </s-paragraph>
 
       <s-switch
         label={t("onboarding.form.switch")}

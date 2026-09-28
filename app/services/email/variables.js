@@ -12,49 +12,40 @@
 
 import { escapeHtml, formatMoney, formatDateTime } from "./format";
 
-// Grouped for the variable panel. `sample` values power the live preview so a
-// merchant sees a realistic email; they mirror the prototype's demo store.
-// `label`/`description` are the default-locale copy; the admin shows
-// emailTemplates.variables.groups.<id> and
-// emailTemplates.variables.tokens.<token>.label/description instead.
+// Grouped for the variable panel. Only the tokens live here: the panel's
+// group names and each variable's label/description are admin translations
+// (emailTemplates.variables.groups.<id> and
+// emailTemplates.variables.tokens.<token>.label/description). The live preview
+// fills the tokens from SAMPLE_REQUEST_VARS below.
 export const EMAIL_VARIABLE_GROUPS = [
   {
     id: "customer",
     variables: [
-      { token: "customer.first_name", label: "First name", description: "The customer's first name", sample: "Lena" },
-      { token: "customer.last_name", label: "Last name", description: "The customer's last name", sample: "Hoffmann" },
-      { token: "customer.email", label: "Email", description: "The customer's email address", sample: "lena.hoffmann@example.com" },
+      { token: "customer.first_name" },
+      { token: "customer.last_name" },
+      { token: "customer.email" },
     ],
   },
   {
     id: "order",
-    variables: [
-      { token: "order.name", label: "Order number", description: "The order number, e.g. #2138", sample: "#2138" },
-      { token: "order.id", label: "Order ID", description: "The order's internal ID", sample: "1234567890" },
-    ],
+    variables: [{ token: "order.name" }, { token: "order.id" }],
   },
   {
     id: "withdrawal",
     variables: [
-      { token: "withdrawal.request_id", label: "Reference number", description: "The withdrawal request reference", sample: "b5238240-5af0-479f-a16d-b1522cf35458" },
-      { token: "withdrawal.submitted_at", label: "Submission date", description: "When the request was submitted, with time", sample: "24 July 2026 at 23:30" },
-      { token: "withdrawal.reason", label: "Reason", description: "The reason the customer gave, if any", sample: "Changed my mind" },
-      { token: "withdrawal.selected_products", label: "Selected products (text)", description: "The items as a comma-separated list", sample: "Fjord Table Lamp — Oak × 1, Tind Candle Holder × 2" },
+      { token: "withdrawal.request_id" },
+      { token: "withdrawal.submitted_at" },
+      { token: "withdrawal.reason" },
+      { token: "withdrawal.selected_products" },
     ],
   },
   {
     id: "request",
-    variables: [
-      { token: "request.status", label: "Status", description: "The current status of the request", sample: "Pending review" },
-      { token: "request.url", label: "View request link", description: "Link to the request in your app admin", sample: "https://admin.shopify.com/…/withdrawal-requests/…" },
-    ],
+    variables: [{ token: "request.status" }, { token: "request.url" }],
   },
   {
     id: "shop",
-    variables: [
-      { token: "shop.name", label: "Store name", description: "Your store's name", sample: "Nordlys Living" },
-      { token: "shop.email", label: "Store email", description: "Your store's contact email address", sample: "hello@nordlysliving.example" },
-    ],
+    variables: [{ token: "shop.name" }, { token: "shop.email" }],
   },
 ];
 
@@ -86,12 +77,14 @@ export const SAMPLE_REQUEST_VARS = {
   requestId: "b5238240-5af0-479f-a16d-b1522cf35458",
   submissionDate: "2026-07-24T23:30:00",
   status: "pending",
+  // Translated by the admin preview (sample.reason); kept here as the raw shape.
   reason: "Changed my mind",
   shopName: "Nordlys Living",
   merchantEmail: "hello@nordlysliving.example",
   reviewUrl: "https://admin.shopify.com/apps/eu-withdrawly/withdrawal-requests/b5238240-5af0-479f-a16d-b1522cf35458",
   items: [
     {
+      sampleKey: "lamp",
       title: "Fjord Table Lamp",
       variantTitle: "Oak / Large",
       sku: "LMP-FJ-OAK",
@@ -101,6 +94,7 @@ export const SAMPLE_REQUEST_VARS = {
         "https://cdn.shopify.com/s/files/1/0682/4787/9778/files/AAUvwnj0ICORVuxs41ODOvnhvedArLiSV20df7r8XBjEUQ_s900-c-k-c0x00ffffff-no-rj.jpg",
     },
     {
+      sampleKey: "candleHolder",
       title: "Tind Candle Holder",
       variantTitle: "Brass",
       sku: "CND-TND-02",
@@ -122,15 +116,19 @@ export const SAMPLE_REQUEST_VARS = {
 // body — the line-item card's "Qty" / empty-state text and the status label —
 // translated so the whole email reads in one language. Keyed by language code;
 // unknown locales fall back to English.
+// `item` is the fallback name for a line with no product title.
 const LINE_ITEM_STRINGS = {
-  en: { qty: "Qty", none: "No items listed." },
-  de: { qty: "Menge", none: "Keine Artikel aufgeführt." },
-  fr: { qty: "Qté", none: "Aucun article répertorié." },
-  nl: { qty: "Aantal", none: "Geen artikelen vermeld." },
-  it: { qty: "Qtà", none: "Nessun articolo elencato." },
-  es: { qty: "Cant.", none: "No hay artículos." },
-  pl: { qty: "Ilość", none: "Brak produktów." },
-  sv: { qty: "Antal", none: "Inga artiklar angivna." },
+  en: { qty: "Qty", none: "No items listed.", item: "Item" },
+  de: { qty: "Menge", none: "Keine Artikel aufgeführt.", item: "Artikel" },
+  fr: { qty: "Qté", none: "Aucun article répertorié.", item: "Article" },
+  nl: { qty: "Aantal", none: "Geen artikelen vermeld.", item: "Artikel" },
+  it: { qty: "Qtà", none: "Nessun articolo elencato.", item: "Articolo" },
+  es: { qty: "Cant.", none: "No hay artículos.", item: "Artículo" },
+  pl: { qty: "Ilość", none: "Brak produktów.", item: "Produkt" },
+  sv: { qty: "Antal", none: "Inga artiklar angivna.", item: "Artikel" },
+  pt: { qty: "Qtd.", none: "Nenhum artigo indicado.", item: "Artigo" },
+  lt: { qty: "Kiekis", none: "Prekių nenurodyta.", item: "Prekė" },
+  fi: { qty: "Määrä", none: "Ei tuotteita.", item: "Tuote" },
 };
 
 const STATUS_LABELS_BY_LOCALE = {
@@ -142,6 +140,9 @@ const STATUS_LABELS_BY_LOCALE = {
   es: { pending: "En revisión", approved: "Aprobada", rejected: "Rechazada" },
   pl: { pending: "W trakcie rozpatrywania", approved: "Zatwierdzony", rejected: "Odrzucony" },
   sv: { pending: "Under granskning", approved: "Godkänd", rejected: "Avvisad" },
+  pt: { pending: "Em análise", approved: "Aprovado", rejected: "Recusado" },
+  lt: { pending: "Peržiūrimas", approved: "Patvirtintas", rejected: "Atmestas" },
+  fi: { pending: "Käsittelyssä", approved: "Hyväksytty", rejected: "Hylätty" },
 };
 
 // "de-DE" -> "de", with a fallback to English for anything unsupported.
@@ -156,7 +157,7 @@ function renderLineItemsHtml(items = [], strings = LINE_ITEM_STRINGS.en) {
   }
   return items
     .map((item) => {
-      const title = escapeHtml(item.title || "Item");
+      const title = escapeHtml(item.title || strings.item);
       const qty = item.quantity ?? 1;
       const variant = item.variantTitle ? escapeHtml(item.variantTitle) : "";
       const price = escapeHtml(formatMoney(item.price));
@@ -189,10 +190,10 @@ function statusLabel(status, locale) {
 export function buildLiquidData(vars = {}) {
   const fullName = (vars.customerName || "").trim();
   const [firstName, ...rest] = fullName.split(/\s+/);
-  const products = (vars.items ?? [])
-    .map((item) => `${item.title ?? "Item"} × ${item.quantity ?? 1}`)
-    .join(", ");
   const lineItemStrings = localeStrings(LINE_ITEM_STRINGS, vars.locale);
+  const products = (vars.items ?? [])
+    .map((item) => `${item.title ?? lineItemStrings.item} × ${item.quantity ?? 1}`)
+    .join(", ");
 
   return {
     customer: {

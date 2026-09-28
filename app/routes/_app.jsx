@@ -15,6 +15,7 @@ import RequestsTableSkeleton from "./_app.withdrawal-requests/component/Requests
 import RequestDetailSkeleton from "./_app.withdrawal-requests_.$id/component/RequestDetailSkeleton";
 import PricingSkeleton from "./_app.pricing/component/PricingSkeleton";
 import EmailTemplatesSkeleton from "./_app.email-templates/component/EmailTemplatesSkeleton";
+import FaqsSkeleton from "./_app.faqs/component/FaqsSkeleton";
 
 // Picks the skeleton that matches the tab being navigated to, so the switch
 // between tabs shows a shape close to the real page instead of the previous
@@ -26,6 +27,7 @@ function routeSkeletonFor(pathname) {
   if (pathname.startsWith("/withdrawal-requests")) return <RequestsTableSkeleton />;
   if (pathname.startsWith("/pricing")) return <PricingSkeleton />;
   if (pathname.startsWith("/email-templates")) return <EmailTemplatesSkeleton />;
+  if (pathname.startsWith("/faqs")) return <FaqsSkeleton />;
   if (pathname === "/") return <DashboardSkeleton />;
   return null;
 }
@@ -58,8 +60,9 @@ function AppShell({ pendingSkeleton }) {
           <s-link href="/" rel="home">
             {t("nav.home")}
           </s-link>
-          <s-link href="/form-setup">{t("nav.formSetup")}</s-link>
+          {/* Most-used page first. Labels match each page's title. */}
           <s-link href="/withdrawal-requests">{t("nav.withdrawalRequests")}</s-link>
+          <s-link href="/form-setup">{t("nav.formSetup")}</s-link>
           <s-link href="/email-templates">{t("nav.emailTemplates")}</s-link>
           {/* <s-link href="/pricing">{t("nav.pricing")}</s-link> */}
         </s-app-nav>

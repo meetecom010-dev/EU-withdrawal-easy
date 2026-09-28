@@ -89,7 +89,13 @@ export default function NotificationEditor({
           label={t("emailTemplates.notification.send")}
           checked={meta.required || template.enabled}
           disabled={meta.required || undefined}
-          details={meta.required ? t("emailTemplates.notification.requiredDetails") : t("emailTemplates.notification.optionalDetails")}
+          details={
+            meta.required
+              ? t("emailTemplates.notification.requiredDetails")
+              : selectedKey === "merchantNotification"
+                ? t("emailTemplates.notification.merchantDetails")
+                : t("emailTemplates.notification.decisionDetails")
+          }
           onChange={(e) => update(`templates.${selectedKey}.enabled`, e.currentTarget.checked)}
         ></s-checkbox>
 

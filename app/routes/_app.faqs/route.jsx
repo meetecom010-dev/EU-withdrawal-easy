@@ -1,24 +1,50 @@
-import { useRouteError } from "react-router";
+import { useLoaderData, useRouteError } from "react-router";
 import { useTranslation } from "react-i18next";
 import { boundary } from "@shopify/shopify-app-react-router/server";
 import { authenticate } from "../../shopify.server";
+import { getOrCreateAppSettings, serializeFormSettings } from "../../services/app-settings.server";
+import { TEMPLATE_KEYS } from "../../services/email/registry";
+import { AVAILABLE_LANGUAGES } from "../_app.form-setup/constants";
+import { REFUND_WINDOW_DAYS } from "../_app.withdrawal-requests/constants";
+import { useFormatters } from "../../i18n/react";
 import { FAQ_IDS } from "./faqs";
 import FaqAccordion from "./component/FaqAccordion";
 
 const SUPPORT_EMAIL = "support@withdrawaleasy.com";
 
+// The answers quote this shop's own deadline settings, so the FAQ always
+// matches what Form setup is actually configured to do.
 export const loader = async ({ request }) => {
-  await authenticate.admin(request);
-  return null;
+  const { session } = await authenticate.admin(request);
+  const { deadline } = serializeFormSettings(await getOrCreateAppSettings(session.shop));
+  return {
+    withdrawalDays: deadline.daysAfterDelivery,
+    transitDays: deadline.estimatedTransitDays,
+    // Counted here so the email registry and storefront translations stay
+    // out of this page's client bundle.
+    emailCount: TEMPLATE_KEYS.length,
+    languageCodes: AVAILABLE_LANGUAGES.map((lang) => lang.code),
+  };
 };
 
-// Static content, so there's nothing to fetch and no skeleton state — the page
-// is reachable from the FAQs card in Help and resources on Home.
 export default function Faqs() {
   const { t } = useTranslation();
+  const { languageName, formatList } = useFormatters();
+  const { withdrawalDays, transitDays, emailCount, languageCodes } = useLoaderData();
+
+  // Values the answers interpolate — settings, and the app's real email and
+  // language lists — so no number in the copy is hardcoded.
+  const values = {
+    withdrawalDays: t("common.dayCount", { count: withdrawalDays }),
+    transitDays: t("common.dayCount", { count: transitDays }),
+    refundDays: t("common.dayCount", { count: REFUND_WINDOW_DAYS }),
+    emailCount,
+    languageCount: languageCodes.length,
+    languages: formatList(languageCodes.map((code) => languageName(code))),
+  };
   const faqs = FAQ_IDS.map((id) => ({
     id,
-    ...t(`faqs.items.${id}`, { returnObjects: true }),
+    ...t(`faqs.items.${id}`, { returnObjects: true, ...values }),
   }));
 
   return (

@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { APP_NAME } from "../../../../../constants";
+import { APP_NAME, LEGAL_MIN_WITHDRAWAL_DAYS } from "../../../../../constants";
 
 // Copy lives in en.json under onboarding.welcome.requirements.<key>.
 const LAW_ITEMS = [
@@ -49,7 +49,9 @@ export default function WelcomeStep() {
         </s-stack>
       </s-stack>
       <s-banner heading={t("onboarding.welcome.penaltyHeading")} tone="warning">
-        <s-paragraph>{t("onboarding.welcome.penalty")}</s-paragraph>
+        <s-paragraph>
+          {t("onboarding.welcome.penalty", { days: LEGAL_MIN_WITHDRAWAL_DAYS })}
+        </s-paragraph>
       </s-banner>
     </s-stack>
   );

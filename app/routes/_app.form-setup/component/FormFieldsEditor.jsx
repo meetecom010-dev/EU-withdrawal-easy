@@ -189,8 +189,8 @@ export default function FormFieldsEditor({
         {activeTab === "step1" && (
           <s-stack direction="block" gap="base">
             <s-stack direction="block" gap="small-500">
-              <s-heading>{t("formSetup.content.beforeFulfillment.heading")}</s-heading>
-              <s-text color="subdued">{t("formSetup.content.beforeFulfillment.description")}</s-text>
+              <s-heading>{t("formSetup.content.beforeDelivery.heading")}</s-heading>
+              <s-text color="subdued">{t("formSetup.content.beforeDelivery.description")}</s-text>
             </s-stack>
             <s-stack gap="small-200">
               <s-text-field label={t("formSetup.content.title")} {...labelField("step1Title")}></s-text-field>

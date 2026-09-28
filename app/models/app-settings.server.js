@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { DEFAULT_WITHDRAWAL_DAYS } from "../constants";
 
 const { Schema } = mongoose;
 
@@ -73,7 +74,7 @@ const automationSchema = new Schema(
 
 const deadlineSchema = new Schema(
   {
-    daysAfterDelivery: { type: Number, default: 14 },
+    daysAfterDelivery: { type: Number, default: DEFAULT_WITHDRAWAL_DAYS },
     estimatedTransitDays: { type: Number, default: 0 },
   },
   { _id: false },

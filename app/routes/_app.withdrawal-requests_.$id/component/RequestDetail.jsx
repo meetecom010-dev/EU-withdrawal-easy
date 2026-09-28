@@ -4,6 +4,7 @@ import { useFetcher, useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 import { useAppBridge } from "@shopify/app-bridge-react";
 import {
+  REFUND_WINDOW_DAYS,
   STATUS_TONE,
   requestTotal,
   withdrawalDeadline,
@@ -228,11 +229,11 @@ function DeadlineSection({ withdrawalRequest }) {
   const pending = withdrawalRequest.status === "pending";
   const days = Math.abs(daysLeft);
   const date = formatDateTime(deadline);
-  // Fraction of the 14-day window still remaining — a full bar means the whole
+  // Fraction of the refund window still remaining — a full bar means the whole
   // window is left, and it empties (and shifts warning → critical) as the
   // deadline nears. Colours are hard-coded because s-box backgrounds only
   // expose neutral tones, not semantic ones.
-  const remaining = Math.max(0, Math.min(1, daysLeft / 14));
+  const remaining = Math.max(0, Math.min(1, daysLeft / REFUND_WINDOW_DAYS));
   const barColor = overdue ? "#d72c0d" : daysLeft <= 3 ? "#b98900" : "#1a7f52";
 
   const D = "requestDetail.deadline.";
@@ -240,8 +241,14 @@ function DeadlineSection({ withdrawalRequest }) {
     ? t(overdue ? `${D}daysOverdue` : `${D}daysLeft`, { count: days })
     : t(overdue ? `${D}daysLate` : `${D}daysEarly`, { count: days });
   const explanation = pending
-    ? t(overdue ? `${D}pendingOverdue` : `${D}pending`, { date })
-    : t(overdue ? `${D}decidedLate` : `${D}decidedOnTime`, { date });
+    ? t(overdue ? `${D}pendingOverdue` : `${D}pending`, {
+        date,
+        days: t("common.dayCount", { count: REFUND_WINDOW_DAYS }),
+      })
+    : t(overdue ? `${D}decidedLate` : `${D}decidedOnTime`, {
+        date,
+        windowDays: REFUND_WINDOW_DAYS,
+      });
 
   return (
     <s-section heading={t(`${D}heading`)}>
@@ -647,6 +654,7 @@ export default function RequestDetail({
         loading={previewFetcher.state !== "idle"}
         deciding={deciding}
         language={customerLanguage}
+        releasesHold={hasHold}
         onConfirm={confirmDecision}
       />
       <RefundModal

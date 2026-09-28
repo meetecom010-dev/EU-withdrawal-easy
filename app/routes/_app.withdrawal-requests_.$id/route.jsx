@@ -98,9 +98,12 @@ export const action = async ({ request, params }) => {
     });
     // Render the decision email in the buyer's language so staff review (and the
     // customer receives) the message in the same language as the rest of the flow.
-    const localized = pickTemplateForLocale(emailSettings.templates[templateKey], reqDoc.locale);
+    const template = emailSettings.templates[templateKey];
+    const localized = pickTemplateForLocale(template, reqDoc.locale);
     const { subject, html } = renderEmailTemplate(localized, vars);
-    return { preview: { subject, html } };
+    // The template's "Send this email" switch in Email templates sets whether
+    // the modal starts with the email checked; staff can still change it.
+    return { preview: { subject, html, enabled: template.enabled !== false } };
   }
 
   if (intent === "note") {

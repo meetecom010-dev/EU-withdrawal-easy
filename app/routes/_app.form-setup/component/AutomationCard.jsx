@@ -16,10 +16,14 @@ function FallbackControl({
 }) {
   const { t } = useTranslation();
   const showDays = value === "release-n" || value === "cancel-n";
+  // Cancelling refunds the whole order, not just the withdrawn items — say so
+  // right where the merchant picks it.
+  const cancels = value === "cancel-now" || value === "cancel-n";
   return (
     <s-stack direction="block" gap="base">
       <s-select
         label={t("formSetup.automation.fallback.label")}
+        details={cancels ? t("formSetup.automation.fallback.cancelWarning") : undefined}
         value={value}
         error={error}
         onChange={(e) => onChange(e.currentTarget.value)}
@@ -158,7 +162,10 @@ export default function AutomationCard({ settings, update, errors = {}, dismissE
       <s-stack direction="block" gap="base">
         <s-paragraph color="subdued">{t("formSetup.automation.description")}</s-paragraph>
         <s-stack gap="small-200">
-          <s-heading>{t("formSetup.automation.beforeShip.heading")}</s-heading>
+          <s-stack direction="block" gap="small-500">
+            <s-heading>{t("formSetup.automation.beforeShip.heading")}</s-heading>
+            <s-text color="subdued">{t("formSetup.automation.beforeShip.description")}</s-text>
+          </s-stack>
           <s-checkbox
             label={t("formSetup.automation.beforeShip.hold")}
             details={t("formSetup.automation.beforeShip.holdDetails")}

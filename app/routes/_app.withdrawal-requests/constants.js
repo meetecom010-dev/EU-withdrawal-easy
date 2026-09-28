@@ -65,7 +65,7 @@ export function downloadRequestsCsv(requests, { t, locale }) {
   const url = URL.createObjectURL(blob);
   const link = document.createElement("a");
   link.href = url;
-  link.download = `withdrawal-requests-${new Date().toISOString().slice(0, 10)}.csv`;
+  link.download = t("requests.csv.filename", { date: new Date().toISOString().slice(0, 10) });
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
@@ -79,7 +79,7 @@ export function downloadRequestsCsv(requests, { t, locale }) {
 // "now"; for a decided one it's a fixed comparison against `decidedAt`, so
 // the badge reflects whether the decision landed inside or outside the
 // window instead of continuing to count down.
-const REFUND_WINDOW_DAYS = 14;
+export const REFUND_WINDOW_DAYS = 14;
 
 export function withdrawalDeadline(request) {
   const deadline = new Date(request.submittedAt);

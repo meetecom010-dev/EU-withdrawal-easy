@@ -50,10 +50,8 @@ export default function VariablePanel({ onInsert }) {
               {t(`${V}groups.${group.id}`)}
             </div>
             {group.variables.map((variable) => {
-              const label = t(`${V}tokens.${variable.token}.label`, { defaultValue: variable.label });
-              const description = t(`${V}tokens.${variable.token}.description`, {
-                defaultValue: variable.description,
-              });
+              const label = t(`${V}tokens.${variable.token}.label`);
+              const description = t(`${V}tokens.${variable.token}.description`);
               return (
                 <span key={variable.token} title={description} style={{ display: "block" }}>
                   <s-clickable

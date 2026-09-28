@@ -10,7 +10,15 @@ export const DECISION_MODAL_ID = "decision-modal";
 // subject/body for this one send (the saved template is untouched). A checkbox
 // covers the "decide without emailing" case. Confirming both sets the status and
 // sends the reviewed email.
-export default function DecisionModal({ decision, preview, loading, deciding, language, onConfirm }) {
+export default function DecisionModal({
+  decision,
+  preview,
+  loading,
+  deciding,
+  language,
+  releasesHold,
+  onConfirm,
+}) {
   const { t } = useTranslation();
   const shopify = useAppBridge();
   const [subject, setSubject] = useState("");
@@ -18,18 +26,22 @@ export default function DecisionModal({ decision, preview, loading, deciding, la
   const [editing, setEditing] = useState(false);
   const [sendEmail, setSendEmail] = useState(true);
 
-  // Seed the editable fields whenever a freshly rendered email arrives.
+  // Seed the editable fields whenever a freshly rendered email arrives, and
+  // start "Send email" in the state the template's switch in Email templates
+  // is set to.
   useEffect(() => {
     if (preview) {
       setSubject(preview.subject ?? "");
       setHtml(preview.html ?? "");
+      setSendEmail(preview.enabled !== false);
     }
   }, [preview]);
 
-  // Reset the transient controls each time a new decision is opened.
+  // Reset the editor each time a new decision is opened. "Send email" isn't
+  // reset here: it's set from the freshly loaded preview above, and the
+  // checkbox is hidden until that preview arrives.
   useEffect(() => {
     setEditing(false);
-    setSendEmail(true);
   }, [decision]);
 
   const approve = decision === "approved";
@@ -119,6 +131,10 @@ export default function DecisionModal({ decision, preview, loading, deciding, la
             </>
           ) : (
             <s-text color="subdued">{t("requestDetail.decisionModal.noEmail")}</s-text>
+          )}
+
+          {releasesHold && (
+            <s-text color="subdued">{t("requestDetail.decisionModal.holdReleased")}</s-text>
           )}
 
           <s-stack direction="inline" gap="base" alignItems="center" justifyContent="end">

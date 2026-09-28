@@ -107,7 +107,9 @@ export default function SetupGuideCard({
                         {step.key === "blocks" ? step.locked ? (
                           <s-box padding="base" background="subdued" borderRadius="base">
                             <s-paragraph color="subdued">
-                              {t("home.setupGuide.steps.blocks.locked")}
+                              {t("home.setupGuide.steps.blocks.locked", {
+                                step: setupSteps.findIndex((s) => s.key === "form") + 1,
+                              })}
                             </s-paragraph>
                           </s-box>
                         ) : (

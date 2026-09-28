@@ -22,7 +22,10 @@ export async function sendMerchantTemplate(templateKey, request, context = {}) {
     return { sent: false, messageId: null, error: null };
   }
 
-  const vars = buildEmailVariables(request, context);
+  // Merchant templates are single-language (no translations), so the
+  // app-generated bits (line-item "Qty", status label) render in that base
+  // language too — not the customer's, which would mix languages in one email.
+  const vars = { ...buildEmailVariables(request, context), locale: "" };
   const { subject, html } = renderEmailTemplate(template, vars);
   const sender = context.emailSettings?.sender ?? {};
   const senderName = sender.fromName || context.shopName || undefined;

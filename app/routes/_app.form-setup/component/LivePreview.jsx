@@ -27,9 +27,35 @@ const SURFACES = [
   { value: "theme", labelKey: "theme" },
 ];
 
+// Which set of merchant copy to preview. The storefront shows the "After
+// delivery" fields once Shopify marks the order delivered, and the base fields
+// before that. Labels are formSetup.preview.stages.<value>.
+const STAGES = ["beforeDelivery", "delivered"];
+
+// Same mapping as the extension's lib/labels.js DELIVERED_OVERRIDES — keep in
+// sync. Only these labels have a delivered version; the rest are shared.
+const DELIVERED_OVERRIDES = {
+  step1Title: "deliveredTitle",
+  step1Description: "deliveredDescription",
+  itemSelectionHeading: "deliveredItemSelectionHeading",
+  confirmMessage: "deliveredConfirmMessage",
+  submittedTitle: "deliveredSubmittedTitle",
+  submittedMessage: "deliveredSubmittedMessage",
+};
+
+function labelsForStage(labels, stage) {
+  if (stage !== "delivered") return labels;
+  const resolved = { ...labels };
+  for (const [baseKey, deliveredKey] of Object.entries(DELIVERED_OVERRIDES)) {
+    const value = labels[deliveredKey];
+    if (typeof value === "string" && value.trim() !== "") resolved[baseKey] = value;
+  }
+  return resolved;
+}
+
 // Sample order lines shaped like the extension's `shopify.lines` data, using
 // a real product image so the preview reads like an actual order. Titles and
-// variants are formSetup.preview.sample.items.<sampleKey>.
+// variants are sample.items.<sampleKey>.
 const SAMPLE_IMAGE =
   "https://cdn.shopify.com/s/files/1/0682/4787/9778/files/AAUvwnj0ICORVuxs41ODOvnhvedArLiSV20df7r8XBjEUQ_s900-c-k-c0x00ffffff-no-rj.jpg";
 const SAMPLE_ITEMS = [
@@ -51,7 +77,7 @@ const SAMPLE_ITEMS = [
 
 // The buyer the order status page already knows, and the values the theme
 // block's lookup screen starts prefilled with. The name is translated
-// (formSetup.preview.sample.customerName) where it's used.
+// (sample.customerName) where it's used.
 const SAMPLE_CUSTOMER = {
   email: "jane@example.com",
   orderNumber: "#1001",
@@ -71,8 +97,8 @@ function useSampleItems() {
   const { t } = useTranslation();
   return SAMPLE_ITEMS.map((item) => ({
     ...item,
-    title: t(`formSetup.preview.sample.items.${item.sampleKey}.title`),
-    variant: t(`formSetup.preview.sample.items.${item.sampleKey}.variant`),
+    title: t(`sample.items.${item.sampleKey}.title`),
+    variant: t(`sample.items.${item.sampleKey}.variant`),
   }));
 }
 
@@ -231,8 +257,9 @@ export default function LivePreview({ settings, activeTab, activeLocale }) {
   const { formatDate } = useFormatters();
   const formatEUR = useFormatEUR();
   const sampleItems = useSampleItems();
-  const sampleCustomer = { ...SAMPLE_CUSTOMER, name: t("formSetup.preview.sample.customerName") };
+  const sampleCustomer = { ...SAMPLE_CUSTOMER, name: t("sample.customerName") };
   const [surface, setSurface] = useState("order-status");
+  const [stage, setStage] = useState("beforeDelivery");
   const [selectedIds, setSelectedIds] = useState(["1"]);
   // "entry" | "lookup" | "step1" | "confirm" | "done" — "lookup" only exists
   // on the theme block.
@@ -263,7 +290,9 @@ export default function LivePreview({ settings, activeTab, activeLocale }) {
   // Resolve the copy to the language tab the merchant is editing — English base
   // with that locale's translation merged on top, exactly as the storefront
   // extension receives it — so the preview shows the translated form live.
-  const { labels, reasonField } = resolveLabelsForLocale(settings, activeLocale);
+  const resolved = resolveLabelsForLocale(settings, activeLocale);
+  const labels = labelsForStage(resolved.labels, stage);
+  const { reasonField } = resolved;
 
   const selectedItems = sampleItems.filter((item) => selectedIds.includes(item.id));
   const selectedTotal = selectedItems.reduce((total, item) => total + item.price, 0);
@@ -307,6 +336,18 @@ export default function LivePreview({ settings, activeTab, activeLocale }) {
           {SURFACES.map((option) => (
             <s-option key={option.value} value={option.value}>
               {t(`formSetup.preview.surfaces.${option.labelKey}`)}
+            </s-option>
+          ))}
+        </s-select>
+
+        <s-select
+          label={t("formSetup.preview.stageLabel")}
+          value={stage}
+          onChange={(e) => setStage(e.currentTarget.value)}
+        >
+          {STAGES.map((value) => (
+            <s-option key={value} value={value}>
+              {t(`formSetup.preview.stages.${value}`)}
             </s-option>
           ))}
         </s-select>

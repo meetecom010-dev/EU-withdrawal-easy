@@ -21,8 +21,19 @@ export default function BodyEditor({ value, onChange, error, onFocus, locale = "
 
   // Preview always uses sample data so the merchant sees a realistic email —
   // built for the active language so the app-generated bits (line-item "Qty",
-  // status label) match the language being edited.
-  const previewHtml = applyLiquid(value, buildLiquidData({ ...SAMPLE_REQUEST_VARS, locale }));
+  // status label) match the language being edited. The sample's own words
+  // (reason, product names) come from the admin translations.
+  const sampleVars = {
+    ...SAMPLE_REQUEST_VARS,
+    reason: t("sample.reason"),
+    items: SAMPLE_REQUEST_VARS.items.map((item) => ({
+      ...item,
+      title: t(`sample.items.${item.sampleKey}.title`),
+      variantTitle: t(`sample.items.${item.sampleKey}.variant`),
+    })),
+    locale,
+  };
+  const previewHtml = applyLiquid(value, buildLiquidData(sampleVars));
 
   // Inserts a Liquid tag at the caret of the code editor, restoring the caret
   // after React re-renders the controlled textarea. Falls back to appending if

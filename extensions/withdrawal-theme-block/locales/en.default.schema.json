@@ -1,1 +1,12 @@
-{}
+{
+  "blocks": {
+    "withdrawal_form": {
+      "name": "Withdrawal form",
+      "settings": {
+        "accent_color": {
+          "label": "Accent color"
+        }
+      }
+    }
+  }
+}
