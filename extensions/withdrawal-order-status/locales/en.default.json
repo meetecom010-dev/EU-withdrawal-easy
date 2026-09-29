@@ -26,5 +26,5 @@
   "editor.surface_disabled.heading": "Order status page form is turned off",
   "editor.surface_disabled.body": "Customers can't see this block yet. In the app, go to Settings and select \"Show on order status page\".",
   "editor.unreachable.heading": "Couldn't reach the app",
-  "editor.unreachable.body": "The withdrawal form couldn't load its settings. Check that the app is installed and its server is running."
+  "editor.unreachable.body": "The withdrawal form couldn't load its settings. Check that the app is still installed, then try again in a few minutes. If this keeps happening, contact support."
 }

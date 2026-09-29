@@ -1,5 +1,6 @@
 import { adminMutation, adminQuery } from "./client.server";
 import { APP_NAME } from "../../constants";
+import { message as msg } from "../../i18n/errors";
 
 // Guided refund for a withdrawal: refund exactly the withdrawn items (mapped to
 // the order's refundable line items by product variant, the same join key
@@ -90,9 +91,14 @@ function mapItemsToRefundInput(items, refundable) {
 
   const claimed = new Map();
   const refundLineItems = [];
+  // Per withdrawn item, how many units the refund actually covers — what the
+  // confirm dialog lists, so already-refunded units drop out of the list the
+  // same way they drop out of the amount.
+  const coveredItems = [];
   for (const item of items) {
     const candidates = item.variantId ? byVariant.get(item.variantId) ?? [] : [];
-    let remaining = Math.max(1, item.quantity ?? 1);
+    const requested = Math.max(1, item.quantity ?? 1);
+    let remaining = requested;
     for (const candidate of candidates) {
       if (remaining <= 0) break;
       const already = claimed.get(candidate.id) ?? 0;
@@ -103,8 +109,11 @@ function mapItemsToRefundInput(items, refundable) {
       refundLineItems.push({ lineItemId: candidate.id, quantity });
       remaining -= quantity;
     }
+    if (remaining < requested) {
+      coveredItems.push({ lineId: item.lineId, quantity: requested - remaining });
+    }
   }
-  return refundLineItems;
+  return { refundLineItems, coveredItems };
 }
 
 // The refund line input for the withdrawn items, plus shipping only when the
@@ -112,8 +121,10 @@ function mapItemsToRefundInput(items, refundable) {
 // over-refund a partial withdrawal — only the withdrawn lines are ever included.
 async function buildRefundPlan(admin, orderId, { items, isFullWithdrawal }) {
   const refundable = await fetchRefundableLineItems(admin, orderId);
+  const { refundLineItems, coveredItems } = mapItemsToRefundInput(items, refundable);
   return {
-    refundLineItems: mapItemsToRefundInput(items, refundable),
+    refundLineItems,
+    coveredItems,
     // suggestedRefund.refundShipping is a Boolean — true asks Shopify to include
     // a full shipping refund in the suggestion (the RefundShippingInput shape is
     // only for the refundCreate mutation's `shipping` field).
@@ -134,9 +145,12 @@ async function fetchSuggestedRefund(admin, orderId, { refundLineItems, refundShi
 export async function previewWithdrawalRefund(admin, orderId, { items, isFullWithdrawal }) {
   const plan = await buildRefundPlan(admin, orderId, { items, isFullWithdrawal });
   if (plan.refundLineItems.length === 0) {
-    return { refundable: false, amount: 0, currencyCode: null };
+    return { refundable: false, amount: 0, currencyCode: null, items: [] };
   }
-  const suggested = await fetchSuggestedRefund(admin, orderId, plan);
+  const suggested = await fetchSuggestedRefund(admin, orderId, {
+    refundLineItems: plan.refundLineItems,
+    refundShipping: plan.refundShipping,
+  });
   const shippingAmount = Number(suggested?.shipping?.amountSet?.presentmentMoney?.amount ?? 0);
   return {
     refundable: true,
@@ -145,6 +159,8 @@ export async function previewWithdrawalRefund(admin, orderId, { items, isFullWit
     includesShipping: Boolean(isFullWithdrawal && shippingAmount > 0),
     shippingAmount,
     lineCount: plan.refundLineItems.length,
+    // { lineId, quantity } per withdrawn item the refund covers.
+    items: plan.coveredItems,
   };
 }
 
@@ -155,13 +171,16 @@ export async function createWithdrawalRefund(admin, orderId, { items, isFullWith
   const plan = await buildRefundPlan(admin, orderId, { items, isFullWithdrawal });
   if (plan.refundLineItems.length === 0) {
     const error = new Error("Refund: none of the items on this request are refundable");
+    error.activityMessage = msg("refundNothingRefundable");
     error.logData = { items: items?.map((i) => ({ title: i.title, variantId: i.variantId })) };
     throw error;
   }
 
   const suggested = await fetchSuggestedRefund(admin, orderId, plan);
   if (!suggested) {
-    throw new Error("Refund: Shopify returned no suggested refund for these items");
+    const error = new Error("Refund: Shopify returned no suggested refund for these items");
+    error.activityMessage = msg("refundNoSuggestion");
+    throw error;
   }
 
   // Every amount below is presentment money — what the customer actually paid

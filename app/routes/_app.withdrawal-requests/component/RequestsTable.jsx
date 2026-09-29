@@ -239,7 +239,7 @@ export default function RequestsTable({ requests }) {
                   <s-table-cell>
                     <s-stack direction="inline" gap="small-200" justifyContent="end">
                       <s-button
-                        icon="view"
+                        icon="edit"
                         variant="tertiary"
                         accessibilityLabel={t("requests.table.viewRow", { order: request.orderName })}
                         href={`/withdrawal-requests/${request.id}`}

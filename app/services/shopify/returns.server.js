@@ -1,4 +1,5 @@
 import { adminMutation, adminQuery } from "./client.server";
+import { message as msg } from "../../i18n/errors";
 
 // returnCreate works in FulfillmentLineItem ids, so submitted items have to be
 // translated. The join key is the *product variant*, not the line id: what the
@@ -185,27 +186,6 @@ export function buildReturnLineItems(items, returnable, { returnReasonNote }) {
   return { returnLineItems, unreturnable };
 }
 
-const RETURN_STATUS_QUERY = `#graphql
-  query WithdrawalReturnStatus($id: ID!) {
-    return(id: $id) {
-      id
-      name
-      status
-    }
-  }
-`;
-
-// Re-reads a return's live status so the detail page can show whether it's still
-// open, closed, or declined after the merchant (or customer) acts on it in
-// Shopify.
-export async function fetchReturnStatus(admin, returnId) {
-  const data = await adminQuery(admin, {
-    operation: "WithdrawalReturnStatus",
-    query: RETURN_STATUS_QUERY,
-    variables: { id: returnId },
-  });
-  return data.return ?? null;
-}
 
 // ReturnInput.notifyCustomer is deprecated and ignored by Shopify, so it isn't
 // passed — the customer already knows, they just submitted the form, and the
@@ -219,4 +199,226 @@ export async function createReturn(admin, { orderId, returnLineItems }) {
   });
 
   return payload.return ?? null;
+}
+
+// ── Processing a return (receive + refund in one step) ──────────────────────
+// The same thing Shopify's own "Process and refund" button on the order page
+// does: returnProcess marks the returned units processed and, through
+// financialTransfer, refunds them to the original payment method. The amount
+// comes from the return's suggestedFinancialOutcome, so staff confirm the exact
+// figure Shopify will move.
+
+// What's on a return and how much of each line is still waiting to be
+// processed. fulfillmentLineItem links a return line back to its order line,
+// which is how the refund button knows which units the return already covers.
+const RETURN_DETAIL_QUERY = `#graphql
+  query WithdrawalReturnDetail($id: ID!) {
+    return(id: $id) {
+      id
+      name
+      status
+      returnLineItems(first: 50) {
+        nodes {
+          id
+          quantity
+          processableQuantity
+          unprocessedQuantity
+          ... on ReturnLineItem {
+            fulfillmentLineItem {
+              lineItem {
+                id
+                title
+                variant {
+                  id
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
+const RETURN_OUTCOME_QUERY = `#graphql
+  query WithdrawalReturnOutcome(
+    $id: ID!
+    $returnLineItems: [SuggestedOutcomeReturnLineItemInput!]!
+    $refundShipping: RefundShippingInput
+  ) {
+    return(id: $id) {
+      suggestedFinancialOutcome(
+        returnLineItems: $returnLineItems
+        exchangeLineItems: []
+        refundShipping: $refundShipping
+      ) {
+        shipping {
+          amountSet { presentmentMoney { amount currencyCode } }
+        }
+        financialTransfer {
+          ... on RefundReturnOutcome {
+            suggestedTransactions {
+              amountSet { presentmentMoney { amount currencyCode } }
+              parentTransaction { id }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
+const RETURN_PROCESS_MUTATION = `#graphql
+  mutation WithdrawalReturnProcess($input: ReturnProcessInput!) {
+    returnProcess(input: $input) {
+      return {
+        id
+        status
+      }
+      userErrors {
+        field
+        message
+        code
+      }
+    }
+  }
+`;
+
+export async function fetchReturnDetail(admin, returnId) {
+  const data = await adminQuery(admin, {
+    operation: "WithdrawalReturnDetail",
+    query: RETURN_DETAIL_QUERY,
+    variables: { id: returnId },
+  });
+  const ret = data.return;
+  if (!ret) return null;
+
+  return {
+    id: ret.id,
+    name: ret.name,
+    status: ret.status,
+    lines: (ret.returnLineItems?.nodes ?? []).map((line) => ({
+      id: line.id,
+      quantity: line.quantity,
+      processableQuantity: line.processableQuantity ?? 0,
+      unprocessedQuantity: line.unprocessedQuantity ?? 0,
+      lineItemId: line.fulfillmentLineItem?.lineItem?.id ?? null,
+      variantId: line.fulfillmentLineItem?.lineItem?.variant?.id ?? null,
+      title: line.fulfillmentLineItem?.lineItem?.title ?? "",
+    })),
+  };
+}
+
+/**
+ * What processing the return would do, with no side effects: the lines still
+ * to process and the refund Shopify suggests for them. `includeShipping` asks
+ * for the original delivery charge too (a full withdrawal); Shopify only ever
+ * suggests what's still refundable, so it can't be refunded twice.
+ */
+export async function previewReturnProcess(admin, returnId, { includeShipping = false } = {}) {
+  const detail = await fetchReturnDetail(admin, returnId);
+  if (!detail) return { processable: false, status: null, lines: [] };
+
+  const lines = detail.lines.filter((line) => line.processableQuantity > 0);
+  if (detail.status !== "OPEN" || lines.length === 0) {
+    return { processable: false, status: detail.status, name: detail.name, lines: [] };
+  }
+
+  const data = await adminQuery(admin, {
+    operation: "WithdrawalReturnOutcome",
+    query: RETURN_OUTCOME_QUERY,
+    variables: {
+      id: returnId,
+      returnLineItems: lines.map((line) => ({ id: line.id, quantity: line.processableQuantity })),
+      refundShipping: includeShipping ? { fullRefund: true } : null,
+    },
+  });
+  const outcome = data.return?.suggestedFinancialOutcome;
+  const suggested = (outcome?.financialTransfer?.suggestedTransactions ?? [])
+    .map((transaction) => ({
+      parentId: transaction.parentTransaction?.id ?? null,
+      amount: Number(transaction.amountSet?.presentmentMoney?.amount ?? 0),
+      currencyCode: transaction.amountSet?.presentmentMoney?.currencyCode ?? null,
+    }))
+    .filter((transaction) => transaction.amount > 0);
+  const transactions = suggested.filter((transaction) => transaction.parentId);
+  // A suggested refund with no parent transaction can't be issued through
+  // returnProcess. Processing anyway would close the return having refunded
+  // only part of the amount (or none of it), so the whole refund is refused
+  // and staff process it in Shopify instead.
+  const refundSupported = transactions.length === suggested.length;
+  const shippingAmount = Number(outcome?.shipping?.amountSet?.presentmentMoney?.amount ?? 0);
+
+  return {
+    processable: true,
+    status: detail.status,
+    name: detail.name,
+    lines: lines.map((line) => ({ ...line, quantity: line.processableQuantity })),
+    amount: transactions.reduce((sum, transaction) => sum + transaction.amount, 0),
+    currencyCode:
+      transactions[0]?.currencyCode ?? outcome?.shipping?.amountSet?.presentmentMoney?.currencyCode ?? null,
+    includesShipping: includeShipping && shippingAmount > 0,
+    shippingAmount: includeShipping ? shippingAmount : 0,
+    refundSupported,
+    transactions,
+  };
+}
+
+// Processes every still-processable line on the return and refunds it, the
+// customer notified by Shopify. Recomputes the plan rather than trusting the
+// preview the dialog showed, so a return touched in the meantime can't be
+// over-refunded.
+export async function processReturnWithRefund(admin, returnId, { includeShipping, note }) {
+  const plan = await previewReturnProcess(admin, returnId, { includeShipping });
+  if (!plan.processable) {
+    const error = new Error("Return: there's nothing left to process on this return");
+    error.activityMessage = msg("returnNothingToProcess");
+    error.logData = { returnId, status: plan.status };
+    throw error;
+  }
+  // "Process and refund" must refund. With nothing to refund (already paid
+  // back some other way) or a payment it can't refund, processing would close
+  // the return without the customer getting their money from this action.
+  if (!(plan.amount > 0) || !plan.refundSupported) {
+    const error = new Error(
+      plan.refundSupported
+        ? "Return: there's nothing left to refund on this return"
+        : "Return: this payment can't be refunded from the app. Process the return in Shopify.",
+    );
+    error.activityMessage = msg(
+      plan.refundSupported ? "returnNothingToRefund" : "returnPaymentUnsupported",
+    );
+    error.logData = { returnId, amount: plan.amount, refundSupported: plan.refundSupported };
+    throw error;
+  }
+
+  const input = {
+    returnId,
+    returnLineItems: plan.lines.map((line) => ({ id: line.id, quantity: line.quantity })),
+    notifyCustomer: true,
+    note,
+  };
+  if (plan.includesShipping) input.refundShipping = { fullRefund: true };
+  input.financialTransfer = {
+    issueRefund: {
+      orderTransactions: plan.transactions.map((transaction) => ({
+        parentId: transaction.parentId,
+        transactionAmount: { amount: transaction.amount, currencyCode: transaction.currencyCode },
+      })),
+    },
+  };
+
+  const payload = await adminMutation(admin, {
+    operation: "WithdrawalReturnProcess",
+    query: RETURN_PROCESS_MUTATION,
+    variables: { input },
+    payloadKey: "returnProcess",
+  });
+
+  return {
+    status: payload.return?.status ?? null,
+    amount: plan.amount,
+    currencyCode: plan.currencyCode,
+    lineCount: plan.lines.length,
+  };
 }

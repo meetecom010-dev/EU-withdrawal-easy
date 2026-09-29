@@ -31,6 +31,7 @@
     "emailServiceUnavailable": "We couldn't connect to the email service. Try again in a few minutes.",
     "emailServiceNotConfigured": "Email sending isn't set up yet. Contact support for help.",
     "requestNotFound": "This withdrawal request doesn't exist or was deleted.",
+    "requestDecided": "This request has already been approved or rejected, so order actions are no longer available.",
     "unknownDecision": "Choose whether to approve or reject this request.",
     "invalidStatus": "Choose a valid status for this request.",
     "noteRequired": "Enter a note.",
@@ -238,7 +239,7 @@
     "welcome": {
       "heading": "Welcome to {{appName}}",
       "setupTime": "Takes about 1 minute",
-      "law": "Since June 19, 2026, EU law (Directive 2023/2673, Article 11a) requires stores that sell to EU customers to offer a 2-step withdrawal function for every order. A returns policy alone isn't enough.",
+      "law": "Since June 19, 2026, stores that sell to EU customers must offer a 2-step way to withdraw from every order (EU Directive 2023/2673, Article 11a). A returns policy alone isn't enough.",
       "app": "{{appName}} adds a withdrawal button to your order status page, a page in your online store, or both. It handles the 2-step confirmation and sends the required confirmation email. You can manage all requests in one place.",
       "imageAlt": "A customer withdrawing from an order",
       "requirementsHeading": "What the law requires",
@@ -247,8 +248,8 @@
         "twoStep": "A 2-step process: customers submit their withdrawal, then confirm it",
         "email": "An automatic confirmation email that customers can keep"
       },
-      "penaltyHeading": "Penalty for non-compliance",
-      "penalty": "If the withdrawal function is missing or broken, the law extends the {{days}}-day withdrawal period. Customers then get 12 months and {{days}} days to withdraw from each affected order."
+      "penaltyHeading": "What happens if you don't comply",
+      "penalty": "If the withdrawal button is missing or doesn't work, the law extends the {{days}}-day withdrawal period. Customers then get 12 months and {{days}} days to withdraw from each affected order."
     },
     "form": {
       "heading": "Turn on your withdrawal form",
@@ -415,8 +416,8 @@
         "delivered": "Delivered"
       },
       "banner": {
-        "orderStatus": "This is the flow customers see on the order status page. Select the buttons to try it, or use the tabs in Form content to go to a specific step.",
-        "theme": "This is the flow customers see on your storefront page. It starts with a “Find your order” step, because storefront visitors aren't logged in."
+        "orderStatus": "This is what customers see on the order status page. Select the buttons to try it, or use the tabs in Form content to go to a specific step.",
+        "theme": "This is what customers see on your storefront page. It starts with a “Find your order” step, because storefront visitors aren't logged in."
       },
       "restart": "Restart preview",
       "position": {
@@ -526,16 +527,14 @@
       "placeHold": "Hold fulfillment",
       "releaseHold": "Release fulfillment hold",
       "createReturn": "Create return",
-      "refreshReturn": "Refresh return status",
-      "viewOrder": "View order",
-      "evidencePack": "Export evidence pack",
-      "evidencePackComingSoon": "Evidence pack export is coming soon"
+      "processReturn": "Process and refund",
+      "viewOrder": "View order"
     },
     "banners": {
       "orderUnavailableHeading": "Order details unavailable",
       "orderUnavailableBody": "{{error}} You can't use order actions until the order details load.",
       "actionFailedHeading": "Couldn't complete this action",
-      "actionFailedAction": "The activity history below has the details.",
+      "actionFailedAction": "Check Activity below for details.",
       "canceled": "This order was canceled. Order actions are no longer available."
     },
     "deadline": {
@@ -566,13 +565,35 @@
       "approve": "Approve",
       "total": "Total withdrawn",
       "sku": "SKU: {{sku}}",
-      "quantity": "Quantity: {{count}}"
+      "quantity": "Quantity: {{count}}",
+      "shipping": {
+        "notShipped": "Not shipped yet",
+        "partlyShipped": "Partially shipped",
+        "shipped": "Shipped"
+      },
+      "partiallyShippedBanner": "Part of this order has shipped. Items that haven't shipped yet can still be held, and shipped items need a return."
     },
     "return": {
       "heading": "Return",
       "status": "Status",
       "created": "Created",
-      "body": "A return was created in Shopify for the withdrawn items. To get its latest status, go to More actions and select Refresh return status."
+      "body": "A return was created in Shopify for the withdrawn items.",
+      "openBody": "When the items are back, select Process and refund. That refunds the customer for the returned items and closes the return.",
+      "alreadyRefundedBody": "The items in this return have already been refunded. Close the return in Shopify once they're back."
+    },
+    "processReturnModal": {
+      "heading": "Process return and refund",
+      "calculating": "Calculating the refund amount…",
+      "nothingToProcess": "There's nothing left to process on this return. It might already be processed or closed in Shopify.",
+      "nothingToRefund": "The items in this return have already been refunded, so there's nothing left to refund.",
+      "unsupportedPayment": "This order's payment can't be refunded from the app. Process the return and refund it in Shopify instead.",
+      "itemsHeading": "Items in return {{name}}",
+      "subtotal": "Items subtotal",
+      "shippingLine": "Original shipping",
+      "total": "Total refund",
+      "body": "This marks the returned items as processed, refunds them to the original payment method, and closes the return. Shopify emails the customer a refund receipt. This can't be undone.",
+      "confirmAmount": "Refund {{amount}}",
+      "confirm": "Process and refund"
     },
     "payment": {
       "heading": "Payment",
@@ -614,7 +635,8 @@
         "order_tag_remove": "Order tags removed",
         "create_return": "Return",
         "refresh_return": "Return status refreshed",
-        "fetch_shop_contact": "Store contact lookup",
+        "process_return": "Process and refund",
+        "fetch_shop_contact": "Store contact details",
         "customer_email": "Customer confirmation email",
         "merchant_email": "New request notification",
         "notify_customer": "Decision email",
@@ -623,28 +645,32 @@
       "messages": {
         "noTags": "No tags are set up",
         "tagged": "Tagged order with {{tags}}",
-        "noHoldableOrders": "This order has no fulfillment orders that can be held",
-        "held": "Held fulfillment order {{id}}",
-        "holdOff": "Hold for review is turned off",
+        "noHoldableOrders": "Nothing on this order can be held right now",
+        "held": "Items put on hold so they don't ship",
+        "holdOff": "Holding fulfillment for review is turned off",
         "tagBeforeShipOff": "Tagging before shipping is turned off",
-        "tagAfterDeliveryOff": "Tagging after delivery is turned off",
-        "fallbackHold": "Order stays on hold until staff take action",
+        "tagAfterDeliveryOff": "Tagging after shipping is turned off",
+        "fallbackHold": "Order stays on hold until you approve or reject the request",
         "fallbackInvalidDays": "Couldn't schedule the follow-up. The number of days isn't valid.",
         "scheduledRelease": "Hold release scheduled for {{date}}",
         "scheduledCancel": "Cancellation and refund scheduled for {{date}}",
         "canceled": "Order canceled and refunded",
         "returnCreated": "Return created in Shopify",
-        "returnNoMatch": "None of the requested items match an item on this order that can be returned",
+        "returnNoMatch": "None of the requested items can be returned",
         "notifiedByEmail": "Notified in the app and by email",
         "notifiedEmailFailed": "Notified in the app. The notification email failed: {{error}}",
         "notifiedInAppOnly": "Notified in the app. The notification email wasn't sent.",
         "emailSent": "Sent",
         "emailFailed": "Failed: {{error}}",
         "emailNotSent": "Not sent because there's no recipient or email isn't set up",
-        "orderNotFound": "Order {{id}} can't be found in Shopify",
+        "orderNotFound": "This order can't be found in Shopify",
         "alreadyCanceled": "Order was already canceled",
-        "branchBeforeShip": "Order isn't fulfilled yet, so the before-shipping steps ran",
-        "branchAfterDelivery": "Order is fulfilled, so the after-delivery steps ran",
+        "branchBeforeShip": "Order hasn't shipped yet, so the before-shipping steps ran",
+        "branchAfterDelivery": "Order has shipped, so the after-shipping steps ran",
+        "branchPartiallyShipped": "Order is partially shipped, so the steps for shipped and unshipped items ran",
+        "noUnshippedItemsRequested": "None of the requested items are waiting to ship, so nothing was held",
+        "fallbackCancelPartiallyShipped": "Order is partially shipped, so it can't be canceled as a whole. The requested items stay on hold until you approve or reject the request.",
+        "returnNothingShipped": "None of the requested items have shipped, so no return was needed",
         "runCompleted": "Automation completed",
         "runFailed": "One or more automation steps failed",
         "runSkipped": "Automation skipped",
@@ -652,7 +678,7 @@
         "scheduledSkippedRejected": "Request was already rejected, so the scheduled action didn't run",
         "noHoldsPlaced": "No holds were placed for this request",
         "holdsAlreadyReleased": "Holds were already released",
-        "holdReleased": "Released hold on {{id}}",
+        "holdReleased": "The order can be fulfilled again",
         "holdExists": "A hold is already in place for this request",
         "decisionSkipped": "Staff chose not to email the customer",
         "decisionSent": "Customer emailed about the decision",
@@ -661,6 +687,13 @@
         "refunded": "Refunded {{amount}}",
         "noReturn": "There's no return for this request",
         "returnStatus": "Return status: {{status}}",
+        "returnProcessed": "Return processed and {{amount}} refunded",
+        "returnNothingToProcess": "There's nothing left to process on this return",
+        "returnNothingToRefund": "The items in this return have already been refunded",
+        "returnPaymentUnsupported": "This payment can't be refunded from the app. Process the return in Shopify.",
+        "refundNothingRefundable": "None of the requested items can be refunded. They might already be refunded.",
+        "refundNoSuggestion": "Shopify couldn't work out a refund for these items. Refund them in Shopify instead.",
+        "refundCoveredByReturn": "All withdrawn items are in the open return. Use Process and refund on the return to refund them.",
         "tagsRemoved": "Removed order tags: {{tags}}",
         "tagsAdded": "Added order tags: {{tags}}"
       }
@@ -685,7 +718,8 @@
       "stage": "Stage",
       "stages": {
         "before_ship": "Before shipping",
-        "after_delivery": "After delivery"
+        "partially_shipped": "Partially shipped",
+        "after_delivery": "After shipping"
       },
       "hold": "Fulfillment hold",
       "holdStates": {
@@ -733,7 +767,13 @@
       "heading": "Create return for withdrawn items",
       "itemsHeading": "Items to return",
       "subtotal": "Items subtotal",
-      "body": "This creates a return in Shopify for the items below. It doesn't refund the customer — issue the refund separately once the return is processed.",
+      "checking": "Checking which items can be returned…",
+      "nothingToReturn": "None of the withdrawn items have shipped yet, so there's nothing to return. Hold them so they don't ship, or refund them to remove them from the order.",
+      "notShipped_one": "{{count}} withdrawn item isn't included because it hasn't shipped yet.",
+      "notShipped_other": "{{count}} withdrawn items aren't included because they haven't shipped yet.",
+      "notReturnable_one": "{{count}} withdrawn item isn't included because it's already been returned.",
+      "notReturnable_other": "{{count}} withdrawn items aren't included because they've already been returned.",
+      "body": "This creates a return in Shopify for the items above. It doesn't refund the customer. When the items are back, select Process and refund on the return.",
       "cancel": "Cancel",
       "confirm": "Create return"
     },
@@ -768,7 +808,11 @@
       "amount": "Refund amount",
       "total": "Total refund",
       "body": "The withdrawn items are refunded to the original payment method and restocked where possible. Shopify emails the customer a refund receipt.",
-      "includesShipping": "This is a full withdrawal, so the original shipping cost is included.",
+      "includesShipping": "The customer withdrew from the whole order, so the original shipping cost is included.",
+      "unshippedItems": "Items that haven't shipped yet are removed from the order, so they won't be sent.",
+      "inReturn_one": "{{count}} withdrawn item isn't included because it's in return {{name}}. Refund it with Process and refund on the return.",
+      "inReturn_other": "{{count}} withdrawn items aren't included because they're in return {{name}}. Refund them with Process and refund on the return.",
+      "allInReturn": "All the withdrawn items are in return {{name}}. Refund them with Process and refund on the return, which also closes it.",
       "irreversible": "This can't be undone.",
       "confirmAmount": "Refund {{amount}}",
       "confirm": "Refund"
@@ -779,7 +823,7 @@
       "canceled": "Canceled by {{appName}} because the customer withdrew from the purchase (request {{id}}).",
       "refunded": "Refunded by {{appName}} because the customer withdrew from the purchase (request {{id}}).",
       "returnReason": "Withdrawal request: {{reason}}",
-      "returnReasonNone": "Statutory withdrawal request"
+      "returnReasonNone": "Withdrawal request (no reason given)"
     }
   },
   "emailTemplates": {
@@ -881,7 +925,7 @@
       },
       "button": "View request",
       "itemsHeading": "Items requested",
-      "footnote": "Open the request in your admin to approve or reject it. Refund and return deadlines are tracked there automatically."
+      "footnote": "Open the request in your admin to approve or reject it. The refund deadline is tracked there automatically."
     },
     "body": {
       "heading": "Email body",
@@ -1036,11 +1080,11 @@
           "Under EU law, the withdrawal period starts when the customer receives the items, not when they place the order. Customers can also withdraw anytime before the items arrive. The app works out the deadline like this:"
         ],
         "bullets": [
-          "Not fulfilled yet: the withdrawal period hasn't started, so the order is always eligible.",
+          "Not shipped yet: the withdrawal period hasn't started, so the order is always eligible.",
           "Delivered with a delivery date from the carrier: the period starts on that date and lasts for the number of days you set in Settings. Right now, that's {{withdrawalDays}}.",
           "Shipped without a delivery date: the app uses the carrier's estimated delivery date. If there isn't one, it uses the ship date plus your estimated transit time."
         ],
-        "closing": "If an order ships in more than 1 package, the period starts when the last package arrives."
+        "closing": "If an order ships in more than 1 package, the period starts when the last package arrives. Items that are held because the customer withdrew them don't count."
       },
       "transit-days": {
         "question": "What is the estimated transit time for?",
@@ -1076,7 +1120,8 @@
         ],
         "bullets": [
           "Before the order ships: the app can hold fulfillment so nothing ships while you review the request. It can also cancel and refund the whole order right away, and tag the order.",
-          "After the order ships: the items are on the way or delivered, so fulfillment can't be held. The app can create a return in Shopify and tag the order."
+          "After the order ships: the items are on the way or delivered, so fulfillment can't be held. The app can create a return in Shopify and tag the order.",
+          "Partially shipped: both apply. The app holds only the requested items that haven't shipped, and creates a return for the ones that have. It never cancels the whole order."
         ],
         "closing": "Automation never makes decisions for you. You always approve, reject, and refund requests yourself."
       },
@@ -1097,7 +1142,8 @@
         "question": "How do I approve, reject, and refund a request?",
         "paragraphs": [
           "Open the request from the Requests page. The request page shows the items the customer selected, their reason, the order's status in Shopify, and your notes.",
-          "Approve or reject the request from that page. This also releases any fulfillment hold. You can refund the requested items there too. If the order hasn't shipped yet, you can cancel and refund the whole order instead.",
+          "Refund first. Select Refund for items that haven't been returned, or Process and refund on the return once returned items are back. If the order hasn't shipped yet, you can cancel and refund the whole order instead.",
+          "Then approve or reject the request. This releases any fulfillment hold. After you decide, the order actions are turned off.",
           "The refund deadline is shown at the top of the page. Under EU rules, you need to refund within {{refundDays}} of the withdrawal. The page shows how much time is left and flags the request if the deadline has passed."
         ]
       }
@@ -1117,7 +1163,7 @@
   },
   "pricing": {
     "pageTitle": "Pricing",
-    "pricePerMonth": "{{price}}/month",
+    "pricePerMonth": "{{price}} per month",
     "currentPlan": "Current plan",
     "choosePlan": "Choose {{plan}}",
     "switchedToast": "Switched to the {{plan}} plan",

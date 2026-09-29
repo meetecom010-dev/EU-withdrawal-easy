@@ -24,11 +24,11 @@ export default function WithdrawalStep({
         })}
       </s-paragraph>
 
-      <s-switch
+      <s-checkbox
         label={t("onboarding.form.switch")}
         checked={enabled}
         onChange={(event) => onEnabledChange(event.target.checked)}
-      ></s-switch>
+      ></s-checkbox>
 
       {enabled && (
         <s-box padding="base" borderWidth="base" borderRadius="base">

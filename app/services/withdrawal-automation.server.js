@@ -13,6 +13,7 @@ import {
   addOrderTags,
   cancelOrderWithRefund,
   fetchOrderContext,
+  fetchUnshippedLines,
   removeOrderTags,
 } from "./shopify/orders.server";
 import {
@@ -23,9 +24,11 @@ import {
   buildReturnLineItems,
   createReturn,
   fetchReturnableLines,
-  fetchReturnStatus,
+  fetchReturnDetail,
+  previewReturnProcess,
+  processReturnWithRefund,
 } from "./shopify/returns.server";
-import { createWithdrawalRefund } from "./shopify/refunds.server";
+import { createWithdrawalRefund, previewWithdrawalRefund } from "./shopify/refunds.server";
 import { fetchShopContact } from "./shopify/shop.server";
 import { cancelJobsForRequest, scheduleJob } from "./automation-jobs.server";
 import { sendWithdrawalEmails, sendCustomerRawEmail } from "./email/index.server";
@@ -138,38 +141,147 @@ async function applyTags(admin, request, action, tags) {
   }
 }
 
+// Records a hold Shopify accepted, so it can be released precisely later.
+// Clearing the released markers matters when staff re-hold after a release:
+// the state has to read as "held" again.
+function recordHold(request, result, lineItems = null) {
+  request.automation.holds.push({
+    fulfillmentOrderId: result.fulfillmentOrderId,
+    holdIds: result.holdIds,
+  });
+  request.automation.holdsReleasedAt = null;
+  request.automation.holdsReleasedBy = null;
+  log(request, "hold_fulfillment", "success", msg("held", { id: result.fulfillmentOrderId }), {
+    fulfillmentOrderId: result.fulfillmentOrderId,
+    holdIds: result.holdIds,
+    lineItems,
+  });
+}
+
+function holdNote(request, noteKey) {
+  return tDefault(`requestDetail.shopifyNotes.${noteKey}`, {
+    order: request.orderName || request.orderId,
+  });
+}
+
+// Holds every open fulfillment order on the order: the whole-order hold used
+// when nothing has shipped yet.
+async function holdAllFulfillmentOrders(admin, request, holdable, noteKey) {
+  if (holdable.length === 0) {
+    log(request, "hold_fulfillment", "skipped", msg("noHoldableOrders"));
+    return;
+  }
+  for (const fulfillmentOrder of holdable) {
+    const outcome = await step(request, "hold_fulfillment", () =>
+      holdFulfillmentOrder(admin, {
+        fulfillmentOrderId: fulfillmentOrder.id,
+        requestId: request._id,
+        reasonNotes: holdNote(request, noteKey),
+      }),
+    );
+    if (outcome.ok) recordHold(request, outcome.result);
+  }
+}
+
+function itemWithQuantity(item, quantity) {
+  return { lineId: item.lineId, variantId: item.variantId, title: item.title, quantity };
+}
+
+// Splits the withdrawn items into units that haven't shipped and units that
+// have. Requested units are matched to unshipped ones first: a hold is
+// reversible and costs the customer nothing, while a return makes them send a
+// parcel back. Only what's left over counts as shipped (and goes to a return).
+//
+// Matching mirrors buildReturnLineItems: variant first (the only id the order
+// status extension gives that means the same thing on both sides), then the
+// LineItem id the storefront page submits.
+//
+// `holdsByFulfillmentOrder` covers only lines that can take a hold; units
+// already on hold are still counted as unshipped, since they can't be returned.
+export function splitWithdrawnItems(items, unshippedLines) {
+  const available = new Map(
+    unshippedLines.map((line) => [line.fulfillmentOrderLineItemId, line.remainingQuantity]),
+  );
+  const holdsByFulfillmentOrder = new Map();
+  const unshippedItems = [];
+  const shippedItems = [];
+
+  for (const item of items) {
+    const byVariant = item.variantId
+      ? unshippedLines.filter((line) => line.variantId === item.variantId)
+      : [];
+    const candidates = byVariant.length
+      ? byVariant
+      : unshippedLines.filter((line) => item.lineId && line.lineItemId === item.lineId);
+    const requested = Math.max(1, item.quantity ?? 1);
+    let remaining = requested;
+
+    for (const line of candidates) {
+      if (remaining <= 0) break;
+      const free = available.get(line.fulfillmentOrderLineItemId) ?? 0;
+      const quantity = Math.min(remaining, free);
+      if (quantity <= 0) continue;
+      available.set(line.fulfillmentOrderLineItemId, free - quantity);
+      if (line.holdable !== false) {
+        const lines = holdsByFulfillmentOrder.get(line.fulfillmentOrderId) ?? [];
+        lines.push({ id: line.fulfillmentOrderLineItemId, quantity });
+        holdsByFulfillmentOrder.set(line.fulfillmentOrderId, lines);
+      }
+      remaining -= quantity;
+    }
+
+    if (remaining < requested) unshippedItems.push(itemWithQuantity(item, requested - remaining));
+    if (remaining > 0) shippedItems.push(itemWithQuantity(item, remaining));
+  }
+
+  return { holdsByFulfillmentOrder, unshippedItems, shippedItems };
+}
+
+// Fetches what's still waiting to ship and splits the request against it.
+// Null if Shopify couldn't be reached; the failure is logged under `action`.
+async function splitRequestItems(admin, request, action) {
+  const fetched = await step(request, action, () => fetchUnshippedLines(admin, request.orderId));
+  return fetched.ok ? splitWithdrawnItems(request.items, fetched.result) : null;
+}
+
+// Holds only the withdrawn units that haven't shipped, leaving everything the
+// customer is keeping free to ship. Returns whether anything was held.
+async function holdUnshippedItems(admin, request, noteKey, split) {
+  if (!split) return false;
+  const { holdsByFulfillmentOrder } = split;
+  if (holdsByFulfillmentOrder.size === 0) {
+    log(request, "hold_fulfillment", "skipped", msg("noUnshippedItemsRequested"));
+    return false;
+  }
+
+  let held = false;
+  for (const [fulfillmentOrderId, lineItems] of holdsByFulfillmentOrder) {
+    const outcome = await step(request, "hold_fulfillment", () =>
+      holdFulfillmentOrder(admin, {
+        fulfillmentOrderId,
+        requestId: request._id,
+        reasonNotes: holdNote(request, noteKey),
+        lineItems,
+      }),
+    );
+    if (outcome.ok) {
+      recordHold(request, outcome.result, lineItems);
+      held = true;
+    }
+  }
+  return held;
+}
+
 // "Before the order ships": hold the fulfillment for staff review, then set up
 // whatever the merchant chose to happen if nobody reviews it.
 async function runBeforeShip(admin, request, automation) {
   if (automation.holdFulfillment) {
-    const holdable = request.__orderContext.holdableFulfillmentOrders;
-
-    if (holdable.length === 0) {
-      log(request, "hold_fulfillment", "skipped", msg("noHoldableOrders"));
-    } else {
-      for (const fulfillmentOrder of holdable) {
-        const outcome = await step(request, "hold_fulfillment", () =>
-          holdFulfillmentOrder(admin, {
-            fulfillmentOrderId: fulfillmentOrder.id,
-            requestId: request._id,
-            reasonNotes: tDefault("requestDetail.shopifyNotes.holdAutomatic", {
-              order: request.orderName || request.orderId,
-            }),
-          }),
-        );
-        if (outcome.ok) {
-          request.automation.holds.push({
-            fulfillmentOrderId: outcome.result.fulfillmentOrderId,
-            holdIds: outcome.result.holdIds,
-          });
-          log(request, "hold_fulfillment", "success", msg("held", { id: fulfillmentOrder.id }), {
-            fulfillmentOrderId: outcome.result.fulfillmentOrderId,
-            holdIds: outcome.result.holdIds,
-          });
-        }
-      }
-    }
-
+    await holdAllFulfillmentOrders(
+      admin,
+      request,
+      request.__orderContext.holdableFulfillmentOrders,
+      "holdAutomatic",
+    );
     await scheduleFallback(admin, request, automation);
   } else {
     log(request, "hold_fulfillment", "skipped", msg("holdOff"));
@@ -185,13 +297,25 @@ async function runBeforeShip(admin, request, automation) {
 // The "if no one reviews the request in time" choice. Only meaningful
 // alongside a hold, which is also the only time the merchant can see the
 // control in the settings UI.
-async function scheduleFallback(admin, request, automation) {
+//
+// On a partly shipped order the cancel options fall back to keeping the hold:
+// orderCancel takes the whole order, including goods the customer already has
+// and isn't withdrawing from.
+async function scheduleFallback(admin, request, automation, { partiallyShipped = false } = {}) {
   const fallback = automation.unshippedFallback;
   const days = Number(automation.unshippedFallbackDays);
   request.automation.fallbackAction = fallback;
 
   if (fallback === "hold") {
     log(request, "schedule_fallback", "skipped", msg("fallbackHold"));
+    return;
+  }
+
+  if (partiallyShipped && fallback !== "release-n") {
+    request.automation.fallbackAction = "hold";
+    log(request, "schedule_fallback", "skipped", msg("fallbackCancelPartiallyShipped"), {
+      fallback,
+    });
     return;
   }
 
@@ -268,15 +392,73 @@ async function runAfterDelivery(admin, request, automation) {
   }
 }
 
-async function createReturnForRequest(admin, request) {
+// Part of the order has shipped and part hasn't. Each half of the merchant's
+// settings runs on its own share of the withdrawn items: units still waiting
+// to ship are held (only those units, so the rest of the order keeps moving),
+// and units already sent go to a return.
+async function runPartiallyShipped(admin, request, automation) {
+  // One split drives both halves, so the hold and the return never claim the
+  // same unit. If it can't be fetched, nothing is held and the return falls
+  // back to every withdrawn item (Shopify only accepts the shipped ones).
+  const split = await splitRequestItems(admin, request, "hold_fulfillment");
+
+  if (automation.holdFulfillment) {
+    const held = await holdUnshippedItems(admin, request, "holdAutomatic", split);
+    if (held) {
+      await scheduleFallback(admin, request, automation, { partiallyShipped: true });
+    }
+  } else {
+    log(request, "hold_fulfillment", "skipped", msg("holdOff"));
+  }
+
+  if (automation.afterDeliveryAction === "create_return") {
+    await createReturnForRequest(admin, request, {
+      items: split ? split.shippedItems : request.items,
+      partiallyShipped: true,
+    });
+  } else {
+    notifyForRequest(request);
+  }
+
+  // Both halves apply to this order, so both sets of tags do too.
+  if (automation.tagBeforeShip) {
+    await applyTags(admin, request, "tag_before_ship", automation.beforeShipTags);
+  } else {
+    log(request, "tag_before_ship", "skipped", msg("tagBeforeShipOff"));
+  }
+  if (automation.tagAfterDelivery) {
+    await applyTags(admin, request, "tag_after_delivery", automation.afterDeliveryTags);
+  } else {
+    log(request, "tag_after_delivery", "skipped", msg("tagAfterDeliveryOff"));
+  }
+}
+
+// `items` defaults to everything the customer withdrew; the partly shipped
+// branch passes only what the hold didn't cover. There, finding nothing to
+// return is expected (the customer only picked unshipped items), so it's a
+// skip rather than a failure.
+async function createReturnForRequest(
+  admin,
+  request,
+  { items = request.items, partiallyShipped = false } = {},
+) {
+  if (items.length === 0) {
+    log(request, "create_return", "skipped", msg("returnNothingShipped"));
+    return;
+  }
+
   const outcome = await step(request, "create_return", async () => {
     const returnable = await fetchReturnableLines(admin, request.orderId);
 
-    const { returnLineItems, unreturnable } = buildReturnLineItems(request.items, returnable, {
+    const { returnLineItems, unreturnable } = buildReturnLineItems(items, returnable, {
       returnReasonNote: request.reason
         ? tDefault("requestDetail.shopifyNotes.returnReason", { reason: request.reason })
         : tDefault("requestDetail.shopifyNotes.returnReasonNone"),
     });
+
+    if (returnLineItems.length === 0 && partiallyShipped) {
+      return { skipped: true, unreturnable };
+    }
 
     if (returnLineItems.length === 0) {
       // Not a silent skip: the merchant configured "Create return" and no
@@ -285,7 +467,7 @@ async function createReturnForRequest(admin, request) {
       const error = new Error(tDefault("requestDetail.activity.messages.returnNoMatch"));
       error.activityMessage = msg("returnNoMatch");
       error.logData = {
-        submitted: request.items.map((item) => ({
+        submitted: items.map((item) => ({
           title: item.title,
           quantity: item.quantity,
           variantId: item.variantId || null,
@@ -311,6 +493,13 @@ async function createReturnForRequest(admin, request) {
     // return they asked for couldn't be made. The notification email already
     // went out at submission; this records that fact against the fallback.
     notifyForRequest(request);
+    return;
+  }
+
+  if (outcome.result.skipped) {
+    log(request, "create_return", "skipped", msg("returnNothingShipped"), {
+      unreturnable: outcome.result.unreturnable,
+    });
     return;
   }
 
@@ -407,6 +596,12 @@ function logEmailOutcome(request, action, outcome) {
   });
 }
 
+const BRANCH_MESSAGES = {
+  before_ship: "branchBeforeShip",
+  partially_shipped: "branchPartiallyShipped",
+  after_delivery: "branchAfterDelivery",
+};
+
 /**
  * Runs the merchant's configured automation for a freshly submitted request.
  *
@@ -450,15 +645,11 @@ export async function runWithdrawalAutomation(shop, requestId) {
     // read-only request-scoped context, dropped before the document is saved.
     request.__orderContext = orderContext;
 
-    const branch = orderContext.isFulfilled ? "after_delivery" : "before_ship";
+    const branch = orderContext.branch;
     request.automation.branch = branch;
-    log(
-      request,
-      "resolve_branch",
-      "success",
-      branch === "before_ship" ? msg("branchBeforeShip") : msg("branchAfterDelivery"),
-      { displayFulfillmentStatus: orderContext.displayFulfillmentStatus },
-    );
+    log(request, "resolve_branch", "success", msg(BRANCH_MESSAGES[branch]), {
+      displayFulfillmentStatus: orderContext.displayFulfillmentStatus,
+    });
 
     // Confirmation to the customer and notification to the merchant go out for
     // every submission, before the branch runs, so notify-only can reference
@@ -469,6 +660,8 @@ export async function runWithdrawalAutomation(shop, requestId) {
 
     if (branch === "before_ship") {
       await runBeforeShip(admin, request, automation);
+    } else if (branch === "partially_shipped") {
+      await runPartiallyShipped(admin, request, automation);
     } else {
       await runAfterDelivery(admin, request, automation);
     }
@@ -700,36 +893,20 @@ export async function placeHoldForRequest(shop, requestId) {
       return;
     }
     const orderContext = await fetchOrderContext(admin, request.orderId);
-    const holdable = orderContext?.holdableFulfillmentOrders ?? [];
-    if (holdable.length === 0) {
-      log(request, "hold_fulfillment", "skipped", msg("noHoldableOrders"));
+    // On a partly shipped order, hold only the withdrawn units still waiting to
+    // ship. Holding whole fulfillment orders would also stop items the customer
+    // is keeping.
+    if (orderContext?.branch === "partially_shipped") {
+      const split = await splitRequestItems(admin, request, "hold_fulfillment");
+      await holdUnshippedItems(admin, request, "holdManual", split);
       return;
     }
-    for (const fulfillmentOrder of holdable) {
-      const outcome = await step(request, "hold_fulfillment", () =>
-        holdFulfillmentOrder(admin, {
-          fulfillmentOrderId: fulfillmentOrder.id,
-          requestId: request._id,
-          reasonNotes: tDefault("requestDetail.shopifyNotes.holdManual", {
-            order: request.orderName || request.orderId,
-          }),
-        }),
-      );
-      if (outcome.ok) {
-        request.automation.holds.push({
-          fulfillmentOrderId: outcome.result.fulfillmentOrderId,
-          holdIds: outcome.result.holdIds,
-        });
-        // Re-holding after an earlier release: clear the released markers so the
-        // state reads as "held" again.
-        request.automation.holdsReleasedAt = null;
-        request.automation.holdsReleasedBy = null;
-        log(request, "hold_fulfillment", "success", msg("held", { id: fulfillmentOrder.id }), {
-          fulfillmentOrderId: outcome.result.fulfillmentOrderId,
-          holdIds: outcome.result.holdIds,
-        });
-      }
-    }
+    await holdAllFulfillmentOrders(
+      admin,
+      request,
+      orderContext?.holdableFulfillmentOrders ?? [],
+      "holdManual",
+    );
   });
 }
 
@@ -753,12 +930,91 @@ function isFullWithdrawal(request) {
   return Boolean(request.orderLineCount) && request.items.length >= request.orderLineCount;
 }
 
+// The open return this request created, with the units on it that haven't
+// been processed yet. Empty once the return is closed (or if there isn't one):
+// processed units are refunded already and simply stop being refundable.
+async function openReturnLines(admin, request) {
+  const returnId = request.automation.returnId;
+  if (!returnId) return { name: null, lines: [] };
+  const detail = await fetchReturnDetail(admin, returnId);
+  if (!detail || detail.status !== "OPEN") return { name: detail?.name ?? null, lines: [] };
+  return {
+    name: detail.name,
+    lines: detail.lines.filter((line) => line.unprocessedQuantity > 0),
+  };
+}
+
+// The withdrawn units the plain Refund button covers: everything except what's
+// waiting in the open return. Those are refunded by processing the return
+// ("Process and refund"), which also closes it. Refunding them here would
+// leave the return open for goods that were already paid back, and let the
+// same unit be refunded twice.
+export function itemsOutsideReturn(items, returnLines) {
+  const left = new Map(returnLines.map((line) => [line.id, line.unprocessedQuantity]));
+  const outside = [];
+  let inReturn = 0;
+
+  for (const item of items) {
+    const byVariant = item.variantId
+      ? returnLines.filter((line) => line.variantId === item.variantId)
+      : [];
+    const candidates = byVariant.length
+      ? byVariant
+      : returnLines.filter((line) => item.lineId && line.lineItemId === item.lineId);
+    let remaining = Math.max(1, item.quantity ?? 1);
+
+    for (const line of candidates) {
+      const covered = Math.min(remaining, left.get(line.id) ?? 0);
+      if (covered <= 0) continue;
+      left.set(line.id, left.get(line.id) - covered);
+      remaining -= covered;
+      inReturn += covered;
+    }
+    if (remaining > 0) outside.push(itemWithQuantity(item, remaining));
+  }
+
+  return { items: outside, inReturn };
+}
+
+/**
+ * The refund the Refund button would issue, for its confirmation dialog.
+ * `items` ({ lineId, quantity }) is exactly what's refunded; `inReturn` counts
+ * withdrawn units left out because the open return (`returnName`) covers them.
+ */
+export async function previewRefundForRequest(shop, requestId) {
+  await connectDB();
+  const request = await WithdrawalRequest.findOne({ shop, _id: requestId });
+  if (!request) return null;
+  const admin = await adminClientFor(shop);
+
+  const openReturn = await openReturnLines(admin, request);
+  const { items, inReturn } = itemsOutsideReturn(request.items, openReturn.lines);
+  const fullWithdrawal = isFullWithdrawal(request);
+  const preview = items.length
+    ? await previewWithdrawalRefund(admin, request.orderId, {
+        items,
+        isFullWithdrawal: fullWithdrawal,
+      })
+    : { refundable: false, amount: 0, currencyCode: null, items: [] };
+
+  // preview.items is what the refund actually covers: outside the open return
+  // and still refundable in Shopify (already-refunded units drop out).
+  return { ...preview, fullWithdrawal, inReturn, returnName: openReturn.name };
+}
+
 export async function refundForRequest(shop, requestId) {
   return runManualAction(shop, requestId, async (admin, request) => {
     const fullWithdrawal = isFullWithdrawal(request);
+    const scoped = await step(request, "refund", () => openReturnLines(admin, request));
+    if (!scoped.ok) return;
+    const { items } = itemsOutsideReturn(request.items, scoped.result.lines);
+    if (items.length === 0) {
+      log(request, "refund", "skipped", msg("refundCoveredByReturn"));
+      return;
+    }
     const outcome = await step(request, "refund", () =>
       createWithdrawalRefund(admin, request.orderId, {
-        items: request.items,
+        items,
         isFullWithdrawal: fullWithdrawal,
         note: tDefault("requestDetail.shopifyNotes.refunded", {
           appName: APP_NAME,
@@ -786,26 +1042,116 @@ export async function refundForRequest(shop, requestId) {
   });
 }
 
-export async function createReturnForRequestManual(shop, requestId) {
-  return runManualAction(shop, requestId, (admin, request) => createReturnForRequest(admin, request));
+/**
+ * What "Process and refund" would do on this request's return: the lines still
+ * to process and the refund Shopify suggests for them (plus the original
+ * shipping on a full withdrawal, if it hasn't been refunded already).
+ */
+export async function previewReturnRefundForRequest(shop, requestId) {
+  await connectDB();
+  const request = await WithdrawalRequest.findOne({ shop, _id: requestId });
+  if (!request) return null;
+  if (!request.automation.returnId) return { processable: false, status: null, lines: [] };
+  const admin = await adminClientFor(shop);
+  const preview = await previewReturnProcess(admin, request.automation.returnId, {
+    includeShipping: isFullWithdrawal(request),
+  });
+  // Transactions stay server-side; the dialog only needs the figures.
+  // eslint-disable-next-line no-unused-vars -- dropped on purpose
+  const { transactions, ...shown } = preview;
+  return shown;
 }
 
-export async function refreshReturnStatusForRequest(shop, requestId) {
+// Shopify's "Process and refund" for the return this request created: marks
+// the returned units processed, refunds them to the original payment method
+// and closes the return, in one step.
+export async function processReturnForRequest(shop, requestId) {
   return runManualAction(shop, requestId, async (admin, request) => {
     const returnId = request.automation.returnId;
     if (!returnId) {
-      log(request, "refresh_return", "skipped", msg("noReturn"));
+      log(request, "process_return", "skipped", msg("noReturn"));
       return;
     }
-    const outcome = await step(request, "refresh_return", () => fetchReturnStatus(admin, returnId));
-    if (outcome.ok && outcome.result) {
-      request.automation.returnStatus = outcome.result.status ?? request.automation.returnStatus;
-      log(request, "refresh_return", "success", msg("returnStatus", { status: outcome.result.status }), {
-        status: outcome.result.status,
-      });
-    }
+    const outcome = await step(request, "process_return", () =>
+      processReturnWithRefund(admin, returnId, {
+        includeShipping: isFullWithdrawal(request),
+        note: tDefault("requestDetail.shopifyNotes.refunded", {
+          appName: APP_NAME,
+          id: String(request._id),
+        }),
+      }),
+    );
+    if (!outcome.ok) return;
+
+    const { status, amount, currencyCode } = outcome.result;
+    if (status) request.automation.returnStatus = status;
+    log(
+      request,
+      "process_return",
+      "success",
+      msg("returnProcessed", { amount, currencyCode: currencyCode ?? null }),
+      { returnId, status, amount, currencyCode },
+    );
   });
 }
+
+// Returns only the withdrawn units that have shipped, the same set
+// previewReturnForRequest showed staff in the confirmation dialog.
+export async function createReturnForRequestManual(shop, requestId) {
+  return runManualAction(shop, requestId, async (admin, request) => {
+    const split = await splitRequestItems(admin, request, "create_return");
+    if (!split) return;
+    await createReturnForRequest(admin, request, {
+      items: split.shippedItems,
+      partiallyShipped: split.unshippedItems.length > 0,
+    });
+  });
+}
+
+/**
+ * Exactly what "Create return" would put in the return, without creating it,
+ * so the confirmation dialog lists only the units Shopify will take back. Uses
+ * the same split and matching as createReturnForRequestManual.
+ *
+ * Each list holds { lineId, quantity } against the request's items:
+ * `items` go in the return, `notShipped` haven't shipped yet (nothing to send
+ * back), `notReturnable` shipped but can't be returned (e.g. already returned).
+ */
+export async function previewReturnForRequest(shop, requestId) {
+  await connectDB();
+  const request = await WithdrawalRequest.findOne({ shop, _id: requestId });
+  if (!request) return null;
+  const admin = await adminClientFor(shop);
+
+  // Independent reads, so they run side by side.
+  const [unshippedLines, returnable] = await Promise.all([
+    fetchUnshippedLines(admin, request.orderId),
+    fetchReturnableLines(admin, request.orderId),
+  ]);
+  const split = splitWithdrawnItems(request.items, unshippedLines);
+  const { unreturnable } = buildReturnLineItems(split.shippedItems, returnable, {
+    returnReasonNote: "",
+  });
+  // A missing shortfall means none of that item matched.
+  const shortfalls = new Map(unreturnable.map((entry) => [entry.lineId, entry.shortfall]));
+
+  const items = [];
+  const notReturnable = [];
+  for (const item of split.shippedItems) {
+    const short = shortfalls.has(item.lineId)
+      ? shortfalls.get(item.lineId) ?? item.quantity
+      : 0;
+    if (item.quantity > short) items.push({ lineId: item.lineId, quantity: item.quantity - short });
+    if (short > 0) notReturnable.push({ lineId: item.lineId, quantity: short });
+  }
+
+  return {
+    items,
+    notShipped: split.unshippedItems.map(({ lineId, quantity }) => ({ lineId, quantity })),
+    notReturnable,
+  };
+}
+
 
 // Applies a staged batch of order tag adds/removes in one round trip — the
 // detail page's save bar collects edits locally and sends the whole diff here

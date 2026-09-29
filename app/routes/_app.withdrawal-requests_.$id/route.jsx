@@ -15,7 +15,10 @@ import {
   cancelOrderForRequest,
   refundForRequest,
   createReturnForRequestManual,
-  refreshReturnStatusForRequest,
+  previewReturnForRequest,
+  previewRefundForRequest,
+  previewReturnRefundForRequest,
+  processReturnForRequest,
   syncOrderTagsForRequest,
 } from "../../services/withdrawal-automation.server";
 import { getOrCreateAppSettings, serializeEmailSettings } from "../../services/app-settings.server";
@@ -24,10 +27,23 @@ import { renderEmailTemplate } from "../../services/email/render";
 import { pickTemplateForLocale } from "../../services/email/registry";
 import { fetchShopContact } from "../../services/shopify/shop.server";
 import { fetchOrderAdminState } from "../../services/shopify/orders.server";
-import { previewWithdrawalRefund } from "../../services/shopify/refunds.server";
+import { fetchReturnDetail } from "../../services/shopify/returns.server";
 import RequestDetail from "./component/RequestDetail";
 
 const DECISION_TEMPLATE = { approved: "withdrawalApproved", rejected: "withdrawalRejected" };
+
+// Not "release-hold": a hold this app placed must stay releasable after a
+// decision, in case the automatic release on approve/reject failed.
+const ORDER_ACTION_INTENTS = new Set([
+  "place-hold",
+  "cancel-order",
+  "refund-preview",
+  "refund",
+  "return-preview",
+  "create-return",
+  "return-refund-preview",
+  "process-return",
+]);
 
 export const loader = async ({ request, params }) => {
   const { admin, session } = await authenticate.admin(request);
@@ -53,11 +69,32 @@ export const loader = async ({ request, params }) => {
     orderStateError = translateError(error, t);
   }
 
+  // Whether "Process and refund" has anything left to refund: at least one
+  // unprocessed item on the open return must still be refundable on the order.
+  // It may not be, e.g. when the item was already refunded from Shopify admin.
+  // Null when it couldn't be checked; the page then keeps the button and the
+  // dialog's own preview shows the real figure.
+  let returnRefundAvailable = null;
+  const returnId = withdrawalRequest.automation?.returnId;
+  const liveReturn = returnId ? orderState?.returns?.find((ret) => ret.id === returnId) : null;
+  if (liveReturn?.status === "OPEN") {
+    try {
+      const detail = await fetchReturnDetail(admin, returnId);
+      returnRefundAvailable = (detail?.lines ?? []).some((line) => {
+        const orderLine = orderState.lineItems.find((item) => item.id === line.lineItemId);
+        return line.unprocessedQuantity > 0 && (orderLine?.refundableQuantity ?? 0) > 0;
+      });
+    } catch {
+      returnRefundAvailable = null;
+    }
+  }
+
   const index = allRequests.findIndex((r) => r.id === withdrawalRequest.id);
   return {
     withdrawalRequest,
     orderState,
     orderStateError,
+    returnRefundAvailable,
     shopDomain: session.shop,
     prevId: index > 0 ? allRequests[index - 1].id : null,
     nextId: index >= 0 && index < allRequests.length - 1 ? allRequests[index + 1].id : null,
@@ -73,6 +110,17 @@ export const action = async ({ request, params }) => {
   const t = getRequestT(request);
   const formData = await request.formData();
   const intent = formData.get("intent");
+
+  // Order actions only apply while the request is pending. Once it's approved
+  // or rejected the page disables them, and this refuses them too, so a stale
+  // tab can't refund, cancel, hold or return against a decided request.
+  if (ORDER_ACTION_INTENTS.has(intent)) {
+    const reqDoc = await getWithdrawalRequestById(session.shop, params.id);
+    if (!reqDoc) return data({ error: t("errors.requestNotFound") }, { status: 404 });
+    if (reqDoc.status !== "pending") {
+      return data({ error: t("errors.requestDecided") }, { status: 409 });
+    }
+  }
 
   // Renders the approved/rejected email for this request with real data, so the
   // decision modal can show (and let staff edit) the exact message before it's
@@ -135,13 +183,19 @@ export const action = async ({ request, params }) => {
     return { withdrawalRequest };
   }
 
-  // Return (after-delivery).
+  // Return (after-delivery). The preview lists exactly the units the return
+  // will cover (only what has shipped), for the confirm dialog.
+  if (intent === "return-preview") {
+    try {
+      const returnPreview = await previewReturnForRequest(session.shop, params.id);
+      if (!returnPreview) return data({ error: t("errors.requestNotFound") }, { status: 404 });
+      return { returnPreview };
+    } catch (error) {
+      return { returnPreview: { error: translateError(error, t) } };
+    }
+  }
   if (intent === "create-return") {
     const withdrawalRequest = await createReturnForRequestManual(session.shop, params.id);
-    return { withdrawalRequest };
-  }
-  if (intent === "refresh-return") {
-    const withdrawalRequest = await refreshReturnStatusForRequest(session.shop, params.id);
     return { withdrawalRequest };
   }
 
@@ -156,19 +210,31 @@ export const action = async ({ request, params }) => {
   // confirm dialog comes from `refund-preview` (Shopify's suggested refund), the
   // actual refund from `refund`.
   if (intent === "refund-preview") {
-    const reqDoc = await getWithdrawalRequestById(session.shop, params.id);
-    if (!reqDoc) return data({ error: t("errors.requestNotFound") }, { status: 404 });
-    const fullWithdrawal =
-      Boolean(reqDoc.orderLineCount) && reqDoc.items.length >= reqDoc.orderLineCount;
     try {
-      const preview = await previewWithdrawalRefund(admin, reqDoc.orderId, {
-        items: reqDoc.items,
-        isFullWithdrawal: fullWithdrawal,
-      });
-      return { refundPreview: { ...preview, fullWithdrawal } };
+      const refundPreview = await previewRefundForRequest(session.shop, params.id);
+      if (!refundPreview) return data({ error: t("errors.requestNotFound") }, { status: 404 });
+      return { refundPreview };
     } catch (error) {
       return { refundPreview: { error: translateError(error, t) } };
     }
+  }
+
+  // "Process and refund" on the return this request created: the preview for
+  // the confirm dialog, then the real thing (returnProcess with a refund).
+  if (intent === "return-refund-preview") {
+    try {
+      const returnRefundPreview = await previewReturnRefundForRequest(session.shop, params.id);
+      if (!returnRefundPreview) {
+        return data({ error: t("errors.requestNotFound") }, { status: 404 });
+      }
+      return { returnRefundPreview };
+    } catch (error) {
+      return { returnRefundPreview: { error: translateError(error, t) } };
+    }
+  }
+  if (intent === "process-return") {
+    const withdrawalRequest = await processReturnForRequest(session.shop, params.id);
+    return { withdrawalRequest };
   }
   if (intent === "refund") {
     const withdrawalRequest = await refundForRequest(session.shop, params.id);
@@ -203,14 +269,22 @@ export const action = async ({ request, params }) => {
 };
 
 export default function WithdrawalRequestDetail() {
-  const { withdrawalRequest, orderState, orderStateError, shopDomain, prevId, nextId } =
-    useLoaderData();
+  const {
+    withdrawalRequest,
+    orderState,
+    orderStateError,
+    returnRefundAvailable,
+    shopDomain,
+    prevId,
+    nextId,
+  } = useLoaderData();
 
   return (
     <RequestDetail
       withdrawalRequest={withdrawalRequest}
       orderState={orderState}
       orderStateError={orderStateError}
+      returnRefundAvailable={returnRefundAvailable}
       shopDomain={shopDomain}
       prevId={prevId}
       nextId={nextId}

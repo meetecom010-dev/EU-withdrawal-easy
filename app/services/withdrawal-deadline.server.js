@@ -5,6 +5,8 @@
 // may also withdraw at any point before receipt. That shapes the rules here:
 //
 //   not fulfilled yet  -> the window hasn't started; always eligible
+//   partly fulfilled   -> the window hasn't started either: for goods sent in
+//                         several parcels it runs from receipt of the last one
 //   fulfilled, delivery date known    -> deliveredAt + daysAfterDelivery
 //   fulfilled, delivery date unknown  -> estimate it, then + daysAfterDelivery
 //
@@ -58,7 +60,7 @@ function resolveDeliveryDate(fulfillments, estimatedTransitDays) {
 }
 
 /**
- * @param {{ fulfillments?: Array<object>, isFulfilled?: boolean }} orderContext
+ * @param {{ fulfillments?: Array<object>, awaitingDelivery?: boolean }} orderContext
  * @param {{ daysAfterDelivery: number, estimatedTransitDays: number }} deadline
  * @param {Date} [now]
  */
@@ -80,6 +82,21 @@ export function resolveWithdrawalWindow(orderContext, deadline, now = new Date()
   }
 
   const fulfillments = orderContext?.fulfillments ?? [];
+
+  // Some goods are still waiting to ship. Counting from the parcels that have
+  // already arrived would close the window before the customer has received
+  // everything, e.g. one item delivered and the rest on backorder for weeks.
+  if (fulfillments.length > 0 && orderContext?.awaitingDelivery) {
+    return {
+      isEligible: true,
+      hasStarted: false,
+      basis: "awaiting_remaining_items",
+      deliveryDate: null,
+      expiresAt: null,
+      daysRemaining: null,
+    };
+  }
+
   const delivery = resolveDeliveryDate(
     fulfillments,
     Number.isFinite(estimatedTransitDays) && estimatedTransitDays >= 0 ? estimatedTransitDays : 0,

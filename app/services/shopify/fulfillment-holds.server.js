@@ -13,6 +13,9 @@ const HOLD_MUTATION = `#graphql
           handle
         }
       }
+      remainingFulfillmentOrder {
+        id
+      }
       userErrors {
         field
         message
@@ -41,13 +44,18 @@ const RELEASE_HOLD_MUTATION = `#graphql
 // apps have placed. Shopify allows 10 active holds per app per fulfillment
 // order, and the handle also makes a retried hold idempotent rather than
 // stacking a second one.
+export const HOLD_HANDLE_PREFIX = "eu-withdrawly-";
+
 export function holdHandleFor(requestId) {
-  return `eu-withdrawly-${requestId}`;
+  return `${HOLD_HANDLE_PREFIX}${requestId}`;
 }
 
+// `lineItems` ([{ id, quantity }] of FulfillmentOrderLineItem ids) holds only
+// those units: Shopify splits them into their own fulfillment order and leaves
+// the rest free to ship. Omitted, the whole fulfillment order is held.
 export async function holdFulfillmentOrder(
   admin,
-  { fulfillmentOrderId, requestId, reasonNotes },
+  { fulfillmentOrderId, requestId, reasonNotes, lineItems },
 ) {
   const handle = holdHandleFor(requestId);
   const payload = await adminMutation(admin, {
@@ -66,6 +74,7 @@ export async function holdFulfillmentOrder(
         // Surfaces the hold in the merchant's own notifications rather than
         // relying on them to notice a held order.
         notifyMerchant: true,
+        ...(lineItems?.length ? { fulfillmentOrderLineItems: lineItems } : {}),
       },
     },
     payloadKey: "fulfillmentOrderHold",
@@ -86,7 +95,9 @@ export async function holdFulfillmentOrder(
   }
 
   return {
-    fulfillmentOrderId,
+    // After a line-level hold the held units live on a new fulfillment order,
+    // and that's the one the release has to target.
+    fulfillmentOrderId: fulfillmentOrder?.id ?? fulfillmentOrderId,
     holdIds: holds.map((hold) => hold.id),
     status: fulfillmentOrder?.status ?? null,
   };

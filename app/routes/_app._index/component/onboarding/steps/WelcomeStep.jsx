@@ -15,7 +15,7 @@ export default function WelcomeStep() {
     <s-stack direction="block" gap="large-100">
       <s-stack direction="block" gap="small-200">
 
-        <s-grid gridTemplateColumns="1fr 150px" gap="large-500">
+        <s-grid gridTemplateColumns="1fr 240px" gap="large-500">
           <s-stack gap="base">
             <s-stack direction="block" gap="small-500">
               <s-heading>{t("onboarding.welcome.heading", { appName: APP_NAME })}</s-heading>
@@ -26,10 +26,10 @@ export default function WelcomeStep() {
           </s-stack>
           <s-stack>
             <s-image
-              src="https://cdn.shopify.com/s/files/1/0644/8149/3130/files/onboarding-image.png?v=1783251888"
+              src="https://cdn.shopify.com/s/files/1/0766/7233/5970/files/onboarding_image.png?v=1790622585"
               alt={t("onboarding.welcome.imageAlt")}
-              aspectRatio="1/1"
-              objectFit="cover"
+              aspectRatio="3/2"
+              objectFit="contain"
               borderRadius="base"
               inlineSize="fill"
             />

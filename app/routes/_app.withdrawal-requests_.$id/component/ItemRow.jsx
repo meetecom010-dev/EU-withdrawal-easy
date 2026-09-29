@@ -2,11 +2,14 @@
 import { useTranslation } from "react-i18next";
 import { useFormatters } from "../../../i18n/react";
 
+const SHIPPING_TONE = { notShipped: "attention", partlyShipped: "warning", shipped: "success" };
+
 // One withdrawn line item: thumbnail, title/variant/SKU, and its price
 // (already the line's total, quantity-inclusive) with the quantity withdrawn.
 // Shared between the request detail page's item list and the refund modal's
-// itemized breakdown.
-export default function ItemRow({ item }) {
+// itemized breakdown. `shipping` is optional ("notShipped" | "partlyShipped" |
+// "shipped"); the detail page passes it on split orders to badge each item.
+export default function ItemRow({ item, shipping }) {
   const { t } = useTranslation();
   const { formatMoney } = useFormatters();
 
@@ -29,6 +32,11 @@ export default function ItemRow({ item }) {
           {item.variantTitle && <s-text color="subdued">{item.variantTitle}</s-text>}
           {item.sku && (
             <s-text color="subdued">{t("requestDetail.items.sku", { sku: item.sku })}</s-text>
+          )}
+          {shipping && (
+            <s-badge tone={SHIPPING_TONE[shipping]}>
+              {t(`requestDetail.items.shipping.${shipping}`)}
+            </s-badge>
           )}
         </s-stack>
       </s-stack>

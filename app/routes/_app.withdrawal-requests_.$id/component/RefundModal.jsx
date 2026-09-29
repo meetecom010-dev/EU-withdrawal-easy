@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useAppBridge } from "@shopify/app-bridge-react";
 import { useFormatters } from "../../../i18n/react";
 import ItemRow from "./ItemRow";
+import { resolveItems } from "./itemQuantities";
 
 export const REFUND_MODAL_ID = "refund-modal";
 
@@ -13,7 +14,20 @@ export const REFUND_MODAL_ID = "refund-modal";
 // The item list (with price/quantity per line) and the subtotal/shipping/total
 // breakdown make the math behind a multi-product withdrawal auditable at a
 // glance, instead of showing a single opaque total.
-export default function RefundModal({ items, preview, loadingPreview, refunding, onConfirm }) {
+// `shippingFor(item)` badges each item on a split order, so it's clear which
+// refunded items have been delivered and which are simply taken off the order.
+//
+// The list comes from the preview (`preview.items`), not the whole request:
+// units waiting in an open return are left out, because "Process and refund"
+// on the return refunds those.
+export default function RefundModal({
+  items,
+  shippingFor,
+  preview,
+  loadingPreview,
+  refunding,
+  onConfirm,
+}) {
   const { t } = useTranslation();
   const { formatMoney } = useFormatters();
   const shopify = useAppBridge();
@@ -35,6 +49,12 @@ export default function RefundModal({ items, preview, loadingPreview, refunding,
   const subtotalLabel = ready
     ? formatMoney({ amount: preview.amount - shippingAmount, currencyCode: preview.currencyCode })
     : null;
+  const refundItems = preview?.items ? resolveItems(items, preview.items) : items;
+  const inReturn = preview?.inReturn ?? 0;
+  const hasUnshippedItems = refundItems.some((item) => {
+    const state = shippingFor?.(item);
+    return state === "notShipped" || state === "partlyShipped";
+  });
   const shippingLabel =
     ready && preview.includesShipping
       ? formatMoney({ amount: shippingAmount, currencyCode: preview.currencyCode })
@@ -50,15 +70,25 @@ export default function RefundModal({ items, preview, loadingPreview, refunding,
       ) : preview.error ? (
         <s-banner tone="critical">{preview.error}</s-banner>
       ) : !preview.refundable ? (
-        <s-banner tone="info">{t(`${R}nothingToRefund`)}</s-banner>
+        <s-banner tone="info">
+          {inReturn > 0
+            ? t(`${R}allInReturn`, { name: preview.returnName ?? "" })
+            : t(`${R}nothingToRefund`)}
+        </s-banner>
       ) : (
         <s-stack direction="block" gap="base">
           <s-stack direction="block" gap="base">
             <s-text type="strong">{t(`${R}itemsHeading`)}</s-text>
-            {items.map((item) => (
-              <ItemRow key={item.lineId} item={item} />
+            {refundItems.map((item) => (
+              <ItemRow key={item.lineId} item={item} shipping={shippingFor?.(item) ?? null} />
             ))}
           </s-stack>
+
+          {inReturn > 0 && (
+            <s-text color="subdued">
+              {t(`${R}inReturn`, { count: inReturn, name: preview.returnName ?? "" })}
+            </s-text>
+          )}
 
           <s-divider></s-divider>
 
@@ -82,6 +112,7 @@ export default function RefundModal({ items, preview, loadingPreview, refunding,
           <s-text color="subdued">
             {[
               t(`${R}body`),
+              hasUnshippedItems ? t(`${R}unshippedItems`) : null,
               preview.includesShipping ? t(`${R}includesShipping`) : null,
               t(`${R}irreversible`),
             ]
@@ -91,18 +122,20 @@ export default function RefundModal({ items, preview, loadingPreview, refunding,
         </s-stack>
       )}
 
-      <s-stack direction="inline" gap="base" alignItems="center" justifyContent="end">
-        <s-button onClick={() => shopify.modal.hide(REFUND_MODAL_ID)}>{t("common.cancel")}</s-button>
-        <s-button
-          variant="primary"
-          tone="critical"
-          disabled={!ready || refunding || undefined}
-          loading={loadingPreview || refunding || undefined}
-          onClick={onConfirm}
-        >
-          {totalLabel ? t(`${R}confirmAmount`, { amount: totalLabel }) : t(`${R}confirm`)}
-        </s-button>
-      </s-stack>
+      {/* Footer slots: pinned below the scrolling content. */}
+      <s-button slot="secondary-actions" onClick={() => shopify.modal.hide(REFUND_MODAL_ID)}>
+        {t("common.cancel")}
+      </s-button>
+      <s-button
+        slot="primary-action"
+        variant="primary"
+        tone="critical"
+        disabled={!ready || refunding || undefined}
+        loading={loadingPreview || refunding || undefined}
+        onClick={onConfirm}
+      >
+        {totalLabel ? t(`${R}confirmAmount`, { amount: totalLabel }) : t(`${R}confirm`)}
+      </s-button>
     </s-modal>
   );
 }

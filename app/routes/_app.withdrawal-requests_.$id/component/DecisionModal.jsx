@@ -136,22 +136,23 @@ export default function DecisionModal({
           {releasesHold && (
             <s-text color="subdued">{t("requestDetail.decisionModal.holdReleased")}</s-text>
           )}
-
-          <s-stack direction="inline" gap="base" alignItems="center" justifyContent="end">
-            <s-button onClick={() => shopify.modal.hide(DECISION_MODAL_ID)}>
-              {t("common.cancel")}
-            </s-button>
-            <s-button
-              variant="primary"
-              tone={approve ? "auto" : "critical"}
-              loading={deciding || undefined}
-              onClick={confirm}
-            >
-              {confirmLabel}
-            </s-button>
-          </s-stack>
         </s-stack>
       )}
+
+      {/* Footer slots: pinned below the scrolling content. */}
+      <s-button slot="secondary-actions" onClick={() => shopify.modal.hide(DECISION_MODAL_ID)}>
+        {t("common.cancel")}
+      </s-button>
+      <s-button
+        slot="primary-action"
+        variant="primary"
+        tone={approve ? "auto" : "critical"}
+        disabled={loading || !preview || undefined}
+        loading={deciding || undefined}
+        onClick={confirm}
+      >
+        {confirmLabel}
+      </s-button>
     </s-modal>
   );
 }

@@ -83,11 +83,18 @@ const automationStateSchema = new Schema(
       default: "pending",
     },
     // Which half of the merchant's settings applied. Decided from the order's
-    // fulfillment state at submission time, not from the clock: anything not
-    // yet fulfilled is "before_ship", anything fulfilled — in transit included
-    // — is "after_delivery", because a hold is impossible once the goods have
-    // left and returnCreate accepts fulfilled-but-undelivered lines.
-    branch: { type: String, enum: ["before_ship", "after_delivery"], default: null },
+    // fulfillment state at submission time, not from the clock: nothing
+    // fulfilled yet is "before_ship", everything fulfilled — in transit
+    // included — is "after_delivery", because a hold is impossible once the
+    // goods have left and returnCreate accepts fulfilled-but-undelivered lines.
+    // A split order with some items shipped and some not is
+    // "partially_shipped": unshipped withdrawn units are held, shipped ones
+    // returned.
+    branch: {
+      type: String,
+      enum: ["before_ship", "partially_shipped", "after_delivery"],
+      default: null,
+    },
     startedAt: { type: Date, default: null },
     completedAt: { type: Date, default: null },
     error: { type: String, default: null },

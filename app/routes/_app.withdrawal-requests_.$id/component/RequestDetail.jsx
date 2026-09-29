@@ -13,6 +13,7 @@ import { useFormatters } from "../../../i18n/react";
 import DecisionModal, { DECISION_MODAL_ID } from "./DecisionModal";
 import RefundModal, { REFUND_MODAL_ID } from "./RefundModal";
 import CreateReturnModal, { CREATE_RETURN_MODAL_ID } from "./CreateReturnModal";
+import ProcessReturnModal, { PROCESS_RETURN_MODAL_ID } from "./ProcessReturnModal";
 import ItemRow from "./ItemRow";
 
 const CANCEL_MODAL_ID = "cancel-order-modal";
@@ -109,6 +110,32 @@ function Row({ label, children }) {
   );
 }
 
+// Where a withdrawn item stands on a split order, matched to the live order
+// line the same way the automation matches it: variant first, then the
+// LineItem id the storefront page submits. Null when there's nothing useful to
+// show (no match, or an item that never ships).
+function itemShippingState(item, orderLines) {
+  const line =
+    (item.variantId && orderLines.find((candidate) => candidate.variantId === item.variantId)) ||
+    orderLines.find((candidate) => candidate.id === item.lineId);
+  if (!line || line.unshippedQuantity == null) return null;
+  if (line.unshippedQuantity <= 0) return "shipped";
+  // Against the current quantity, not the original: units removed or refunded
+  // off the line aren't "shipped", and counting them would badge an entirely
+  // unshipped line as partly shipped.
+  const onOrder = line.currentQuantity ?? line.quantity;
+  return line.unshippedQuantity >= onOrder ? "notShipped" : "partlyShipped";
+}
+
+// A preview fetcher's result, or a top-level `{ error }` the action returned
+// instead (e.g. the request was decided in another tab) turned into
+// `{ error }` so the modal shows it rather than spinning forever.
+function previewData(fetcher, key) {
+  const data = fetcher.data;
+  if (!data) return null;
+  return data[key] ?? (data.error ? { error: data.error } : null);
+}
+
 const OUTCOME_TONE = { success: "success", failed: "critical", skipped: undefined };
 
 function useTimeline(withdrawalRequest) {
@@ -166,8 +193,11 @@ function useTimeline(withdrawalRequest) {
 function TimelineRow({ event }) {
   const { formatDateTime } = useFormatters();
 
+  // A grid rather than an inline stack: an inline stack wraps a long message
+  // onto its own line below the icon, while the fixed icon column keeps the
+  // text indented and wrapping in place.
   return (
-    <s-stack direction="inline" gap="small-200" alignItems="start">
+    <s-grid gridTemplateColumns="auto 1fr" gap="small-200" alignItems="start">
       <s-icon type="check-circle" tone={event.tone} color={event.tone ? undefined : "subdued"}></s-icon>
       <s-stack direction="block" gap="small-500">
         <s-text color={event.muted ? "subdued" : undefined} tone={event.tone}>
@@ -184,7 +214,7 @@ function TimelineRow({ event }) {
         )}
         <s-text color="subdued">{formatDateTime(event.time)}</s-text>
       </s-stack>
-    </s-stack>
+    </s-grid>
   );
 }
 
@@ -338,6 +368,7 @@ export default function RequestDetail({
   withdrawalRequest,
   orderState,
   orderStateError,
+  returnRefundAvailable,
   shopDomain,
   prevId,
   nextId,
@@ -355,6 +386,8 @@ export default function RequestDetail({
   const orderTagFetcher = useFetcher();
   const actionFetcher = useFetcher();
   const refundPreviewFetcher = useFetcher();
+  const returnPreviewFetcher = useFetcher();
+  const returnRefundPreviewFetcher = useFetcher();
 
   const [noteText, setNoteText] = useState("");
   const [orderTags, setOrderTags] = useState(() => orderState?.tags ?? []);
@@ -376,7 +409,17 @@ export default function RequestDetail({
     (withdrawalRequest.automation?.holds ?? []).length > 0 &&
     !withdrawalRequest.automation?.holdsReleasedAt;
   const returnId = withdrawalRequest.automation?.returnId;
-  const returnStatus = withdrawalRequest.automation?.returnStatus;
+  // The order's live return list wins over our stored status: the merchant
+  // may have processed or closed the return in Shopify since we last looked.
+  const returnStatus =
+    orderState?.returns?.find((ret) => ret.id === returnId)?.status ??
+    withdrawalRequest.automation?.returnStatus;
+  const returnOpen = Boolean(returnId) && returnStatus === "OPEN";
+  // "Process and refund" only shows while the open return still has something
+  // to refund. False means its items were already refunded (e.g. in Shopify
+  // admin); null means the loader couldn't check, so the button stays and the
+  // dialog's preview shows the real figure.
+  const canProcessReturn = returnOpen && returnRefundAvailable !== false;
   // Shopify cancels orders as a background job, so orderState.cancelledAt can
   // lag a few seconds behind reality. Our own record is set the moment
   // Shopify accepts the cancellation, so it's trusted first — the banner and
@@ -390,9 +433,31 @@ export default function RequestDetail({
   // Only meaningful while the order is live and not cancelled.
   const orderActionsAvailable = Boolean(orderState) && !cancelled;
   const beforeShip = orderState?.branch === "before_ship";
+  // Some items shipped, some not: the unshipped ones can still be held and the
+  // shipped ones returned, so both sets of actions apply. Cancel doesn't — it
+  // would cancel goods the customer already has.
+  const partiallyShipped = orderState?.branch === "partially_shipped";
+  const canHold = beforeShip || partiallyShipped;
+  // Per-item shipping state on a split order, shared by the item list and the
+  // refund modal badges.
+  const shippingFor = (item) =>
+    partiallyShipped ? itemShippingState(item, orderState?.lineItems ?? []) : null;
+  // A return needs at least one withdrawn item that has actually shipped. On a
+  // split order where the customer only picked unshipped items, there's
+  // nothing to return, so the action isn't offered at all.
+  const hasShippedItems =
+    !partiallyShipped ||
+    withdrawalRequest.items.some((item) => {
+      const state = shippingFor(item);
+      return state === "shipped" || state === "partlyShipped";
+    });
   const holdable = (orderState?.holdableFulfillmentOrders ?? []).length > 0;
   const canRefund = Boolean(orderState?.hasRefundableItems);
   const isPending = withdrawalRequest.status === "pending";
+  // Once a request is approved or rejected it's finished: every order action
+  // (refund, cancel, hold, return) stays visible but disabled, so nothing can
+  // change the order on a decided request. The server refuses them too.
+  const actionsLocked = actionBusy || !isPending;
 
   // The Shopify-order-page style subtitle shown under the order number: when
   // and where the customer submitted the withdrawal, e.g.
@@ -457,7 +522,18 @@ export default function RequestDetail({
   // worked, a banner when it failed — and close the money modals once their
   // action has settled.
   useEffect(() => {
-    if (actionFetcher.state !== "idle" || !actionFetcher.data?.withdrawalRequest) return;
+    if (actionFetcher.state !== "idle" || !actionFetcher.data) return;
+    // Refused before it ran (e.g. the request was decided in another tab):
+    // show why in the banner instead of silently doing nothing.
+    if (actionFetcher.data.error && !actionFetcher.data.withdrawalRequest) {
+      setActionError(actionFetcher.data.error);
+      shopify.modal.hide(REFUND_MODAL_ID);
+      shopify.modal.hide(CANCEL_MODAL_ID);
+      shopify.modal.hide(CREATE_RETURN_MODAL_ID);
+      shopify.modal.hide(PROCESS_RETURN_MODAL_ID);
+      return;
+    }
+    if (!actionFetcher.data.withdrawalRequest) return;
     const log = actionFetcher.data.withdrawalRequest.automation?.log ?? [];
     const last = log[log.length - 1];
     if (last?.outcome === "failed") {
@@ -468,6 +544,7 @@ export default function RequestDetail({
     shopify.modal.hide(REFUND_MODAL_ID);
     shopify.modal.hide(CANCEL_MODAL_ID);
     shopify.modal.hide(CREATE_RETURN_MODAL_ID);
+    shopify.modal.hide(PROCESS_RETURN_MODAL_ID);
     // eslint-disable-next-line react-hooks/exhaustive-deps -- only react to the action fetcher settling
   }, [actionFetcher.state, actionFetcher.data]);
 
@@ -528,13 +605,22 @@ export default function RequestDetail({
     actionFetcher.submit({ intent: "refund" }, { method: "post" });
   }
 
+  function openProcessReturn() {
+    returnRefundPreviewFetcher.submit({ intent: "return-refund-preview" }, { method: "post" });
+    shopify.modal.show(PROCESS_RETURN_MODAL_ID);
+  }
+  function confirmProcessReturn() {
+    setActionError(null);
+    actionFetcher.submit({ intent: "process-return" }, { method: "post" });
+  }
+
+  function openCreateReturn() {
+    returnPreviewFetcher.submit({ intent: "return-preview" }, { method: "post" });
+    shopify.modal.show(CREATE_RETURN_MODAL_ID);
+  }
   function confirmCreateReturn() {
     setActionError(null);
     actionFetcher.submit({ intent: "create-return" }, { method: "post" });
-  }
-
-  function showEvidencePackComingSoon() {
-    shopify.toast.show(t("requestDetail.actions.evidencePackComingSoon"));
   }
 
   const A = "requestDetail.actions.";
@@ -582,7 +668,7 @@ export default function RequestDetail({
       {orderActionsAvailable && canRefund && (
         <s-button
           slot="secondary-actions"
-          disabled={actionBusy || undefined}
+          disabled={actionsLocked || undefined}
           onClick={openRefund}
         >
           {t(`${A}refund`)}
@@ -594,33 +680,34 @@ export default function RequestDetail({
       <s-menu id="more-actions-menu" accessibilityLabel={t(`${A}more`)}>
         {orderActionsAvailable && beforeShip && (
           <s-button
-            disabled={actionBusy || undefined}
+            disabled={actionsLocked || undefined}
             onClick={() => shopify.modal.show(CANCEL_MODAL_ID)}
           >
             {t(`${A}cancelOrder`)}
           </s-button>
         )}
-        {orderActionsAvailable && beforeShip && holdable && !hasHold && (
-          <s-button disabled={actionBusy || undefined} onClick={() => runAction("place-hold")}>
+        {orderActionsAvailable && canHold && holdable && !hasHold && (
+          <s-button disabled={actionsLocked || undefined} onClick={() => runAction("place-hold")}>
             {t(`${A}placeHold`)}
           </s-button>
         )}
-        {orderActionsAvailable && beforeShip && hasHold && (
+        {/* Not gated on the branch or the decision: a hold this app placed
+            must always be releasable. Deciding a request releases the app's
+            holds, but if that release failed, this is the only way left to
+            free the order, so it isn't disabled by actionsLocked. */}
+        {orderActionsAvailable && hasHold && (
           <s-button disabled={actionBusy || undefined} onClick={() => runAction("release-hold")}>
             {t(`${A}releaseHold`)}
           </s-button>
         )}
-        {orderActionsAvailable && !beforeShip && !returnId && (
-          <s-button
-            disabled={actionBusy || undefined}
-            onClick={() => shopify.modal.show(CREATE_RETURN_MODAL_ID)}
-          >
+        {orderActionsAvailable && !beforeShip && !returnId && hasShippedItems && (
+          <s-button disabled={actionsLocked || undefined} onClick={openCreateReturn}>
             {t(`${A}createReturn`)}
           </s-button>
         )}
-        {orderActionsAvailable && !beforeShip && returnId && (
-          <s-button disabled={actionBusy || undefined} onClick={() => runAction("refresh-return")}>
-            {t(`${A}refreshReturn`)}
+        {orderActionsAvailable && canProcessReturn && (
+          <s-button disabled={actionsLocked || undefined} onClick={openProcessReturn}>
+            {t(`${A}processReturn`)}
           </s-button>
         )}
         {shopDomain && orderNumericId && (
@@ -628,9 +715,6 @@ export default function RequestDetail({
             {t(`${A}viewOrder`)}
           </s-button>
         )}
-        <s-button icon="export" onClick={showEvidencePackComingSoon}>
-          {t(`${A}evidencePack`)}
-        </s-button>
       </s-menu>
 
       <DecisionModal
@@ -644,13 +728,23 @@ export default function RequestDetail({
       />
       <RefundModal
         items={withdrawalRequest.items}
-        preview={refundPreviewFetcher.data?.refundPreview ?? null}
+        shippingFor={shippingFor}
+        preview={previewData(refundPreviewFetcher, "refundPreview")}
         loadingPreview={refundPreviewFetcher.state !== "idle"}
         refunding={actionBusy}
         onConfirm={confirmRefund}
       />
+      <ProcessReturnModal
+        items={withdrawalRequest.items}
+        preview={previewData(returnRefundPreviewFetcher, "returnRefundPreview")}
+        loading={returnRefundPreviewFetcher.state !== "idle"}
+        processing={actionBusy}
+        onConfirm={confirmProcessReturn}
+      />
       <CreateReturnModal
         items={withdrawalRequest.items}
+        preview={previewData(returnPreviewFetcher, "returnPreview")}
+        loading={returnPreviewFetcher.state !== "idle"}
         creating={actionBusy}
         onConfirm={confirmCreateReturn}
       />
@@ -658,19 +752,18 @@ export default function RequestDetail({
         <s-stack direction="block" gap="base" padding="base none base none">
           <s-banner tone="warning">{t("requestDetail.cancelModal.body")}</s-banner>
         </s-stack>
-        <s-stack direction="inline" gap="base" alignItems="center" justifyContent="end">
-          <s-button onClick={() => shopify.modal.hide(CANCEL_MODAL_ID)}>
-            {t("requestDetail.cancelModal.keep")}
-          </s-button>
-          <s-button
-            variant="primary"
-            tone="critical"
-            loading={actionBusy || undefined}
-            onClick={() => runAction("cancel-order")}
-          >
-            {t("requestDetail.cancelModal.confirm")}
-          </s-button>
-        </s-stack>
+        <s-button slot="secondary-actions" onClick={() => shopify.modal.hide(CANCEL_MODAL_ID)}>
+          {t("requestDetail.cancelModal.keep")}
+        </s-button>
+        <s-button
+          slot="primary-action"
+          variant="primary"
+          tone="critical"
+          loading={actionBusy || undefined}
+          onClick={() => runAction("cancel-order")}
+        >
+          {t("requestDetail.cancelModal.confirm")}
+        </s-button>
       </s-modal>
 
       {/* Shopify's native contextual save bar — shows automatically only
@@ -712,25 +805,32 @@ export default function RequestDetail({
             is the closest place to show when/where the request came from. */}
         <s-text color="subdued">{submittedLine}</s-text>
 
-        {orderStateError && (
-          <s-banner tone="warning" heading={t("requestDetail.banners.orderUnavailableHeading")}>
-            {t("requestDetail.banners.orderUnavailableBody", { error: orderStateError })}
-          </s-banner>
-        )}
+        {/* Page-level banners get their own group with room below, so they
+            don't sit flush against the cards. Rendered only when one shows,
+            so pages without a banner keep their normal spacing. */}
+        {(orderStateError || actionError || cancelled) && (
+          <s-stack direction="block" gap="base" padding="none none base none">
+            {orderStateError && (
+              <s-banner tone="warning" heading={t("requestDetail.banners.orderUnavailableHeading")}>
+                {t("requestDetail.banners.orderUnavailableBody", { error: orderStateError })}
+              </s-banner>
+            )}
 
-        {actionError && (
-          <s-banner
-            tone="critical"
-            heading={t("requestDetail.banners.actionFailedHeading")}
-            dismissible
-            onDismiss={() => setActionError(null)}
-          >
-            <s-paragraph>{actionError}</s-paragraph>
-            <s-paragraph>{t("requestDetail.banners.actionFailedAction")}</s-paragraph>
-          </s-banner>
-        )}
+            {actionError && (
+              <s-banner
+                tone="critical"
+                heading={t("requestDetail.banners.actionFailedHeading")}
+                dismissible
+                onDismiss={() => setActionError(null)}
+              >
+                <s-paragraph>{actionError}</s-paragraph>
+                <s-paragraph>{t("requestDetail.banners.actionFailedAction")}</s-paragraph>
+              </s-banner>
+            )}
 
-        {cancelled && <s-banner tone="info">{t("requestDetail.banners.canceled")}</s-banner>}
+            {cancelled && <s-banner tone="info">{t("requestDetail.banners.canceled")}</s-banner>}
+          </s-stack>
+        )}
 
         <s-query-container>
           <s-grid gridTemplateColumns="@container (inline-size > 720px) 2fr 1fr, 1fr" gap="base" alignItems="start">
@@ -770,8 +870,11 @@ export default function RequestDetail({
                     </s-stack>
                   </s-stack>
 
+                  {partiallyShipped && (
+                    <s-banner tone="info">{t("requestDetail.items.partiallyShippedBanner")}</s-banner>
+                  )}
                   {withdrawalRequest.items.map((item) => (
-                    <ItemRow key={item.lineId} item={item} />
+                    <ItemRow key={item.lineId} item={item} shipping={shippingFor(item)} />
                   ))}
                   <s-divider></s-divider>
                   <s-stack direction="inline" justifyContent="space-between">
@@ -794,7 +897,24 @@ export default function RequestDetail({
                         {formatDateTime(new Date(withdrawalRequest.automation.returnCreatedAt))}
                       </Row>
                     )}
-                    <s-text color="subdued">{t("requestDetail.return.body")}</s-text>
+                    <s-text color="subdued">
+                      {canProcessReturn
+                        ? t("requestDetail.return.openBody")
+                        : returnOpen
+                          ? t("requestDetail.return.alreadyRefundedBody")
+                          : t("requestDetail.return.body")}
+                    </s-text>
+                    {orderActionsAvailable && canProcessReturn && (
+                      <s-stack direction="inline" justifyContent="end">
+                        <s-button
+                          variant="primary"
+                          disabled={actionsLocked || undefined}
+                          onClick={openProcessReturn}
+                        >
+                          {t(`${A}processReturn`)}
+                        </s-button>
+                      </s-stack>
+                    )}
                   </s-stack>
                 </s-section>
               )}

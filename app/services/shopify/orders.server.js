@@ -1,4 +1,5 @@
 import { adminMutation, adminQuery } from "./client.server";
+import { HOLD_HANDLE_PREFIX } from "./fulfillment-holds.server";
 
 // Everything the automation and the deadline calculation need about an order,
 // in one round trip: fulfillment state (which branch applies), delivery dates
@@ -26,6 +27,47 @@ const ORDER_CONTEXT_QUERY = `#graphql
           id
           status
           requestStatus
+          deliveryMethod {
+            methodType
+          }
+          fulfillmentHolds {
+            handle
+          }
+        }
+      }
+    }
+  }
+`;
+
+// The line-level detail of what's still waiting to ship, for holding exactly
+// the withdrawn items on a partly shipped order. Kept out of
+// ORDER_CONTEXT_QUERY because nesting line items under every fulfillment order
+// multiplies the query cost past Shopify's per-query limit, and only the
+// partly shipped path needs it.
+const UNSHIPPED_LINES_QUERY = `#graphql
+  query WithdrawalUnshippedLines($id: ID!) {
+    order(id: $id) {
+      id
+      fulfillmentOrders(first: 10) {
+        nodes {
+          id
+          status
+          deliveryMethod {
+            methodType
+          }
+          lineItems(first: 25) {
+            nodes {
+              id
+              remainingQuantity
+              requiresShipping
+              variant {
+                id
+              }
+              lineItem {
+                id
+              }
+            }
+          }
         }
       }
     }
@@ -79,7 +121,7 @@ const ORDER_ADMIN_STATE_QUERY = `#graphql
         displayStatus
       }
       fulfillmentOrders(first: 20) {
-        nodes { id status requestStatus }
+        nodes { id status requestStatus deliveryMethod { methodType } }
       }
       returns(first: 10) {
         nodes { id name status }
@@ -95,6 +137,9 @@ const ORDER_ADMIN_STATE_QUERY = `#graphql
           title
           quantity
           refundableQuantity
+          currentQuantity
+          unfulfilledQuantity
+          requiresShipping
           variant { id }
           discountedUnitPriceSet { shopMoney { amount currencyCode } presentmentMoney { amount currencyCode } }
         }
@@ -194,6 +239,42 @@ const ORDER_LOOKUP_QUERY = `#graphql
 // impossible or meaningless.
 const HOLDABLE_STATUSES = new Set(["OPEN", "IN_PROGRESS", "SCHEDULED"]);
 
+// Fulfillment orders in these states still have goods that haven't left.
+// ON_HOLD counts: a held item is exactly one that's waiting to ship.
+const AWAITING_SHIPMENT_STATUSES = new Set(["OPEN", "IN_PROGRESS", "SCHEDULED", "ON_HOLD"]);
+
+// Whether a fulfillment order still has physical goods to send. Digital and
+// other no-shipping items (delivery method NONE) are skipped: they often never
+// get a fulfillment, and counting them would keep a split order "waiting" for
+// a parcel that will never exist.
+function isAwaitingShipment(fulfillmentOrder) {
+  return (
+    AWAITING_SHIPMENT_STATUSES.has(fulfillmentOrder.status) &&
+    fulfillmentOrder.deliveryMethod?.methodType !== "NONE"
+  );
+}
+
+// Held by this app for a withdrawal: the goods in it were withdrawn, so the
+// customer isn't waiting for them.
+function isHeldForWithdrawal(fulfillmentOrder) {
+  return (fulfillmentOrder.fulfillmentHolds ?? []).some((hold) =>
+    hold.handle?.startsWith(HOLD_HANDLE_PREFIX),
+  );
+}
+
+/**
+ * Which half of the merchant's automation applies to an order:
+ *
+ *   nothing fulfilled                  -> "before_ship"
+ *   some fulfilled, some still to ship -> "partially_shipped" (both halves,
+ *                                         each scoped to the matching items)
+ *   everything fulfilled               -> "after_delivery"
+ */
+export function fulfillmentBranch({ isFulfilled, hasUnshippedItems }) {
+  if (!isFulfilled) return "before_ship";
+  return hasUnshippedItems ? "partially_shipped" : "after_delivery";
+}
+
 // "1001" / "#1001" / " 1001 " -> "#1001" — the format Shopify's order search
 // query expects and the only one worth guessing at from free-text customer
 // input.
@@ -282,6 +363,9 @@ export async function fetchOrderContext(admin, orderId) {
   if (!order) return null;
 
   const fulfillments = order.fulfillments ?? [];
+  const fulfillmentOrders = order.fulfillmentOrders?.nodes ?? [];
+  const isFulfilled = fulfillments.length > 0;
+  const hasUnshippedItems = fulfillmentOrders.some(isAwaitingShipment);
   // Delivery is per-fulfillment — the order-level displayFulfillmentStatus
   // only goes as far as FULFILLED and never reports delivery. Both signals are
   // checked because carriers are inconsistent: some report a deliveredAt
@@ -299,9 +383,9 @@ export async function fetchOrderContext(admin, orderId) {
     cancelledAt: order.cancelledAt,
     displayFulfillmentStatus: order.displayFulfillmentStatus,
     fulfillments,
-    // Anything already fulfilled means the goods have left, so the hold branch
-    // no longer applies even if the order isn't marked delivered yet.
-    isFulfilled: fulfillments.length > 0,
+    // Anything already fulfilled means those goods have left. What's still
+    // unshipped on a split order is covered by hasUnshippedItems below.
+    isFulfilled,
     // Whether the customer has goods in hand, which is what decides the copy
     // the order status page shows. Deliberately a different question from
     // isFulfilled: an in-transit order runs the after-delivery *automation*
@@ -313,10 +397,54 @@ export async function fetchOrderContext(admin, orderId) {
     // arrived would be plainly wrong.
     isDelivered: deliveredFulfillments.length > 0,
     deliveredAt: deliveredFulfillments[0]?.deliveredAt ?? null,
-    holdableFulfillmentOrders: (order.fulfillmentOrders?.nodes ?? []).filter((fulfillmentOrder) =>
+    // Goods that haven't shipped yet, which is what the partly shipped
+    // automation holds.
+    hasUnshippedItems,
+    // Unshipped goods the customer is still waiting to receive. This keeps the
+    // withdrawal window open on a split order (it runs from receipt of the
+    // *last* item). Items this app held because they were withdrawn don't
+    // count: they'll never be sent, and counting them would keep the window
+    // open forever for the goods that were delivered.
+    awaitingDelivery: fulfillmentOrders.some(
+      (fulfillmentOrder) =>
+        isAwaitingShipment(fulfillmentOrder) && !isHeldForWithdrawal(fulfillmentOrder),
+    ),
+    branch: fulfillmentBranch({ isFulfilled, hasUnshippedItems }),
+    holdableFulfillmentOrders: fulfillmentOrders.filter((fulfillmentOrder) =>
       HOLDABLE_STATUSES.has(fulfillmentOrder.status),
     ),
   };
+}
+
+/**
+ * The individual fulfillment order lines still waiting to ship, with the ids a
+ * line-level hold needs. Lines already on hold are included (they haven't
+ * shipped, so they can't be returned) but flagged `holdable: false`, since a
+ * second hold isn't what they need.
+ */
+export async function fetchUnshippedLines(admin, orderId) {
+  const data = await adminQuery(admin, {
+    operation: "WithdrawalUnshippedLines",
+    query: UNSHIPPED_LINES_QUERY,
+    variables: { id: orderId },
+  });
+
+  const lines = [];
+  for (const fulfillmentOrder of data.order?.fulfillmentOrders?.nodes ?? []) {
+    if (!isAwaitingShipment(fulfillmentOrder)) continue;
+    for (const line of fulfillmentOrder.lineItems?.nodes ?? []) {
+      if (!line.requiresShipping || line.remainingQuantity <= 0) continue;
+      lines.push({
+        fulfillmentOrderId: fulfillmentOrder.id,
+        fulfillmentOrderLineItemId: line.id,
+        remainingQuantity: line.remainingQuantity,
+        holdable: HOLDABLE_STATUSES.has(fulfillmentOrder.status),
+        variantId: line.variant?.id ?? null,
+        lineItemId: line.lineItem?.id ?? null,
+      });
+    }
+  }
+  return lines;
 }
 
 export async function addOrderTags(admin, orderId, tags) {
@@ -378,15 +506,22 @@ export async function fetchOrderAdminState(admin, orderId) {
   const deliveredFulfillments = fulfillments.filter(
     (fulfillment) => Boolean(fulfillment.deliveredAt) || fulfillment.displayStatus === "DELIVERED",
   );
-  // Anything fulfilled means the goods have left, so the hold branch no longer
-  // applies — same rule the automation uses (fetchOrderContext).
+  // Same rules the automation uses (fetchOrderContext), so the page offers the
+  // actions for the branch the automation actually ran.
   const isFulfilled = fulfillments.length > 0;
+  const fulfillmentOrders = order.fulfillmentOrders?.nodes ?? [];
+  const hasUnshippedItems = fulfillmentOrders.some(isAwaitingShipment);
 
   const lineItems = (order.lineItems?.nodes ?? []).map((line) => ({
     id: line.id,
     title: line.title,
     quantity: line.quantity,
     refundableQuantity: line.refundableQuantity ?? 0,
+    // Units still on the order (quantity minus removed/refunded units) and how
+    // many of those haven't been sent, for the per-item shipping badge on a
+    // split order. Null for items that never ship (digital goods): no badge.
+    currentQuantity: line.currentQuantity ?? line.quantity,
+    unshippedQuantity: line.requiresShipping ? line.unfulfilledQuantity ?? 0 : null,
     variantId: line.variant?.id ?? null,
     unitAmount: moneyAmount(line.discountedUnitPriceSet),
     currencyCode: moneyCurrency(line.discountedUnitPriceSet),
@@ -411,8 +546,9 @@ export async function fetchOrderAdminState(admin, orderId) {
     isFulfilled,
     isDelivered: deliveredFulfillments.length > 0,
     deliveredAt: deliveredFulfillments[0]?.deliveredAt ?? null,
-    branch: isFulfilled ? "after_delivery" : "before_ship",
-    holdableFulfillmentOrders: (order.fulfillmentOrders?.nodes ?? []).filter((fulfillmentOrder) =>
+    hasUnshippedItems,
+    branch: fulfillmentBranch({ isFulfilled, hasUnshippedItems }),
+    holdableFulfillmentOrders: fulfillmentOrders.filter((fulfillmentOrder) =>
       HOLDABLE_STATUSES.has(fulfillmentOrder.status),
     ),
     returns: (order.returns?.nodes ?? []).map((ret) => ({
