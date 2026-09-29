@@ -8,7 +8,7 @@ import { AVAILABLE_LANGUAGES } from "../_app.form-setup/constants";
 import { REFUND_WINDOW_DAYS } from "../_app.withdrawal-requests/constants";
 import { useFormatters } from "../../i18n/react";
 import { SUPPORT_EMAIL } from "../../constants";
-import { FAQ_IDS } from "./faqs";
+import { FAQ_ACTIONS, FAQ_GROUPS } from "./faqs";
 import FaqAccordion from "./component/FaqAccordion";
 
 // The answers quote this shop's own deadline settings, so the FAQ always
@@ -41,23 +41,26 @@ export default function Faqs() {
     languageCount: languageCodes.length,
     languages: formatList(languageCodes.map((code) => languageName(code))),
   };
-  const faqs = FAQ_IDS.map((id) => ({
-    id,
-    ...t(`faqs.items.${id}`, { returnObjects: true, ...values }),
+  const groups = FAQ_GROUPS.map((group) => ({
+    id: group.id,
+    heading: t(`faqs.groups.${group.id}`),
+    faqs: group.faqs.map((id) => ({
+      id,
+      ...t(`faqs.items.${id}`, { returnObjects: true, ...values }),
+      action: FAQ_ACTIONS[id] ?? null,
+    })),
   }));
 
   return (
     <s-page heading={t("faqs.pageTitle")}>
       <s-button slot="breadcrumb-actions" href="/" accessibilityLabel={t("common.backToHome")} />
 
-      <s-section>
-        <FaqAccordion faqs={faqs} />
-      </s-section>
+      <FaqAccordion groups={groups} />
 
       <s-section heading={t("faqs.stillStuck.heading")}>
-        <s-stack direction="block" gap="small-200">
-          <s-text color="subdued">{t("faqs.stillStuck.body")}</s-text>
-          <s-link href={`mailto:${SUPPORT_EMAIL}`}>{t("faqs.stillStuck.link")}</s-link>
+        <s-stack direction="block" gap="base" alignItems="start">
+          <s-paragraph>{t("faqs.stillStuck.body")}</s-paragraph>
+          <s-button href={`mailto:${SUPPORT_EMAIL}`}>{t("faqs.stillStuck.link")}</s-button>
         </s-stack>
       </s-section>
     </s-page>

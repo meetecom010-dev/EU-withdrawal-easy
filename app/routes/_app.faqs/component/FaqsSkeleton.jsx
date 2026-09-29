@@ -1,16 +1,26 @@
+/* eslint-disable react/prop-types -- plain JS project, no prop-types package installed */
 import { useTranslation } from "react-i18next";
 import SkeletonBox from "../../../components/skeleton/SkeletonBox";
 
-// Collapsed rows only — that's how the real page first renders, every answer
-// shut until the merchant opens one.
-function FaqRowSkeleton() {
+// Mirrors the real page's first render: the search field, then topic cards of
+// collapsed rows (every answer shut until the merchant opens one).
+function FaqGroupSkeleton({ rows }) {
   return (
-    <s-box border="base" borderRadius="base" padding="base">
-      <s-stack direction="inline" gap="base" alignItems="center" justifyContent="space-between">
-        <SkeletonBox width="60%" height="14px" />
-        <SkeletonBox width="16px" height="16px" />
+    <s-section>
+      <s-stack direction="block" gap="base">
+        <SkeletonBox width="160px" height="14px" />
+        <s-stack direction="block" gap="small-200">
+          {Array.from({ length: rows }, (_, index) => (
+            <s-box key={index} paddingBlock="small-200" paddingInline="base">
+              <s-grid gridTemplateColumns="1fr auto" gap="base" alignItems="center">
+                <SkeletonBox width="60%" height="14px" />
+                <SkeletonBox width="16px" height="16px" />
+              </s-grid>
+            </s-box>
+          ))}
+        </s-stack>
       </s-stack>
-    </s-box>
+    </s-section>
   );
 }
 
@@ -19,16 +29,10 @@ export default function FaqsSkeleton() {
   return (
     <s-page heading={t("faqs.pageTitle")}>
       <s-section>
-        <s-stack direction="block" gap="base">
-          <s-stack direction="inline" gap="base" alignItems="center" justifyContent="space-between">
-            <SkeletonBox width="240px" height="12px" />
-            <SkeletonBox width="90px" height="28px" radius="8px" />
-          </s-stack>
-          {Array.from({ length: 6 }, (_, index) => (
-            <FaqRowSkeleton key={index} />
-          ))}
-        </s-stack>
+        <SkeletonBox width="100%" height="32px" radius="8px" />
       </s-section>
+      <FaqGroupSkeleton rows={3} />
+      <FaqGroupSkeleton rows={3} />
     </s-page>
   );
 }

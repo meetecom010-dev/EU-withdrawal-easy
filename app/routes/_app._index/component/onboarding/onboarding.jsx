@@ -120,12 +120,19 @@ export default function Onboarding({ onComplete }) {
     goToStep(stepIndex + 1);
   }
 
-  // "Skip for now" means the same thing on every step: leave setup for this
-  // session. It never writes onboardingCompleted, so setup comes back next time
-  // the app is opened (see ShopContext's onboardingDismissed). The form step's
-  // choices aren't saved.
+  // Skipping closes onboarding for good, the same as finishing: it's only
+  // shown once, after install. Anything left undone still appears in the Home
+  // setup guide, which reads the real settings, so nothing is lost. The form
+  // step's choices aren't saved.
+  //
+  // The app opens right away; the flag is saved in the background. If that
+  // save fails, onboarding only stays hidden for this session and shows once
+  // more next time, the same as before this was saved at all.
   function handleSkip() {
     dismissOnboarding();
+    updateOnboardingStatus({ onboardingCompleted: true })
+      .then(() => refreshShop())
+      .catch(() => {});
   }
 
   return (
@@ -187,12 +194,12 @@ export default function Onboarding({ onComplete }) {
                 {isFirst ? (
                   <s-text></s-text>
                 ) : (
-                  <s-button variant="tertiary" onClick={() => goToStep(stepIndex - 1)}>
+                  <s-button variant="secondary" onClick={() => goToStep(stepIndex - 1)}>
                     {t("onboarding.actions.back")}
                   </s-button>
                 )}
                 <s-stack direction="inline" gap="base">
-                  <s-button variant="tertiary" onClick={handleSkip}>
+                  <s-button variant="secondary" onClick={handleSkip}>
                     {t("onboarding.actions.skip")}
                   </s-button>
                   <s-button

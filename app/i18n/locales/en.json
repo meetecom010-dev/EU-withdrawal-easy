@@ -229,7 +229,7 @@
       "getStarted": "Get started",
       "continue": "Continue",
       "finish": "Finish setup",
-      "skip": "Skip for now",
+      "skip": "Skip setup",
       "back": "Back"
     },
     "help": {
@@ -1032,119 +1032,172 @@
   },
   "faqs": {
     "pageTitle": "FAQs",
-    "intro": "Answers to the {{count}} questions we're asked most often.",
-    "expandAll": "Expand all",
-    "collapseAll": "Collapse all",
+    "searchLabel": "Search FAQs",
+    "searchPlaceholder": "Search questions, like “refund” or “deadline”",
+    "noResults": "No questions match “{{query}}”",
+    "noResultsHelp": "Try a different word, or contact support below.",
     "showAnswer": "Show answer: {{question}}",
     "hideAnswer": "Hide answer: {{question}}",
+    "groups": {
+      "gettingStarted": "Getting started",
+      "deadline": "Withdrawal deadline",
+      "requests": "Handling requests",
+      "emailsLanguages": "Emails and languages"
+    },
+    "actions": {
+      "goToSettings": "Go to Settings",
+      "goToRequests": "Go to Requests",
+      "goToNotifications": "Go to Notifications"
+    },
     "stillStuck": {
       "heading": "Still have questions?",
-      "body": "If you can't find your answer here, email us. Our team reads and answers every message.",
+      "body": "Our support team reads and answers every email.",
       "link": "Contact support"
     },
     "items": {
       "what-it-does": {
         "question": "What does the app do?",
         "paragraphs": [
-          "It gives your EU customers a compliant withdrawal form. It also gives you one place to manage the requests that come in.",
-          "Customers open the form from their order, select the items they want to withdraw from, and confirm. Each request appears on the Requests page with the order, items, reason, and refund deadline. The related emails are sent automatically."
+          "It gives your EU customers a clear way to withdraw from a purchase, as EU law requires. It also gives you one place to manage every request.",
+          "Customers open the form from their order, choose the items they want to withdraw from, and confirm. Each request then appears on the Requests page with the items, the reason, and your refund deadline. The app sends the required emails for you."
         ]
       },
       "where-form-appears": {
-        "question": "Where do customers see the withdrawal form?",
+        "question": "Where do customers find the withdrawal form?",
         "paragraphs": [
-          "The form can appear in 2 places, and you can use either one or both. Choose them in Settings:"
+          "You can show the form in 2 places. Use one or both:"
         ],
         "bullets": [
-          "Order status page: the page customers see after checkout, and again when they open the link in their order confirmation email.",
-          "Storefront page: a dedicated page in your theme, for customers who look for the form later."
+          "Order status page: the page customers see after checkout, and when they open the link in their order confirmation email.",
+          "Storefront page: a page in your online store, for customers who come back later. They find their order with their order number and email."
         ],
-        "closing": "Each place also needs its app block added once in the editor. The setup guide on Home shows whether each block is added and links you to the right editor."
+        "closing": "Turn on each place in Settings, then add its app block once. The setup guide on Home shows which blocks are added."
       },
       "form-not-showing": {
-        "question": "A customer says the form isn't showing. What should I check?",
+        "question": "Why can't a customer see the withdrawal form?",
         "paragraphs": [
-          "Check these in order. The most common causes are first:"
+          "Check these, starting with the most common:"
         ],
         "bullets": [
-          "The withdrawal form is turned off, or the place the customer is using isn't turned on in Settings.",
-          "The app block hasn't been added to that page in the editor yet.",
-          "The order's country isn't one of your eligible countries. Check whether you've selected all EU countries or only specific ones.",
-          "The withdrawal period for the order has already ended. See the question about the withdrawal deadline.",
-          "The order was canceled, or it already has a pending withdrawal request. Each order can only have 1 pending request."
+          "The form is turned off, or the place the customer is using isn't turned on in Settings.",
+          "The app block isn't added to that page yet.",
+          "The order doesn't ship to one of your eligible countries.",
+          "The withdrawal period for the order has ended.",
+          "The order was canceled, or it already has a pending request. Each order can have only 1 pending request at a time."
         ]
       },
       "deadline": {
-        "question": "How is the withdrawal deadline calculated?",
+        "question": "When does the withdrawal period start and end?",
         "paragraphs": [
-          "Under EU law, the withdrawal period starts when the customer receives the items, not when they place the order. Customers can also withdraw anytime before the items arrive. The app works out the deadline like this:"
+          "Under EU law, the period starts when the customer receives the items, not when they order. Customers can also withdraw at any time before the items arrive."
         ],
         "bullets": [
-          "Not shipped yet: the withdrawal period hasn't started, so the order is always eligible.",
-          "Delivered with a delivery date from the carrier: the period starts on that date and lasts for the number of days you set in Settings. Right now, that's {{withdrawalDays}}.",
-          "Shipped without a delivery date: the app uses the carrier's estimated delivery date. If there isn't one, it uses the ship date plus your estimated transit time."
-        ],
-        "closing": "If an order ships in more than 1 package, the period starts when the last package arrives. Items that are held because the customer withdrew them don't count."
+          "Not shipped yet: the period hasn't started, so customers can always withdraw.",
+          "Delivered: the period starts on the delivery date from the carrier and lasts {{withdrawalDays}}. You can change the number of days in Settings.",
+          "Shipped, but no delivery date: the app uses the carrier's estimated delivery date. If there isn't one, it uses the ship date plus your estimated transit time."
+        ]
       },
       "transit-days": {
-        "question": "What is the estimated transit time for?",
+        "question": "What is estimated transit time used for?",
         "paragraphs": [
-          "Many carriers don't send a delivery date to Shopify. Without one, the app can't tell when the withdrawal period starts, so it uses the ship date plus the estimated transit time you set.",
-          "Set it to about how long your packages usually take to arrive. Right now, it's {{transitDays}}. If it's too short, a customer's withdrawal period can end early, so it's better to set a longer time if you're not sure."
+          "Many carriers don't send a delivery date to Shopify. Without it, the app can't tell when the withdrawal period starts, so it adds your estimated transit time to the ship date.",
+          "Set it to about how long your packages take to arrive. Right now, it's {{transitDays}}. If you're not sure, choose a longer time. A time that's too short can end a customer's withdrawal period early."
         ]
       },
-      "countries-languages": {
-        "question": "Which countries and languages are supported?",
+      "split-shipments": {
+        "question": "What if an order ships in more than 1 package?",
         "paragraphs": [
-          "All EU countries are eligible by default. If you only sell to some EU countries, select Specific countries in Settings and choose them.",
-          "The form is available in {{languageCount}} languages: {{languages}}. Customers automatically see the form in their own language.",
-          "English is the base language. If you leave a translated field blank, the form shows the English text for that field instead, so customers never see an empty label."
-        ]
+          "The withdrawal period starts when the last package arrives. Items the app is holding because the customer withdrew them don't count, since they won't ship.",
+          "If a customer withdraws while only part of the order has shipped, the app handles each part separately:"
+        ],
+        "bullets": [
+          "Items that haven't shipped: the app can hold them so they don't ship.",
+          "Items that have shipped: the app can create a return for them."
+        ],
+        "closing": "The app never cancels a partially shipped order, because that would also cancel items the customer already has."
       },
       "after-submit": {
         "question": "What happens after a customer submits a request?",
         "paragraphs": [
-          "These 4 things happen, in this order:"
+          "These things happen, in this order:"
         ],
         "bullets": [
-          "The request is saved with the Pending status and appears on the Requests page.",
-          "The customer gets a confirmation email. It's always sent, because it's the legal proof of their withdrawal.",
-          "You get an email too, if the New request notification email is turned on.",
+          "The request appears on the Requests page as Pending.",
+          "The customer gets a confirmation email. It's always sent, because it's their proof of withdrawal.",
+          "You get an email too, if the New request notification is turned on.",
           "Your automation settings run. For example, the app can hold fulfillment or tag the order."
         ]
       },
       "automation": {
         "question": "What do the automation settings do?",
         "paragraphs": [
-          "The settings depend on whether any items have shipped when the request arrives. Different actions are possible in each case."
+          "They run when a request comes in. What the app can do depends on whether the order has shipped:"
         ],
         "bullets": [
-          "Before the order ships: the app can hold fulfillment so nothing ships while you review the request. It can also cancel and refund the whole order right away, and tag the order.",
-          "After the order ships: the items are on the way or delivered, so fulfillment can't be held. The app can create a return in Shopify and tag the order.",
-          "Partially shipped: both apply. The app holds only the requested items that haven't shipped, and creates a return for the ones that have. It never cancels the whole order."
+          "Before the order ships: hold fulfillment so nothing ships while you review the request. You can also have the app cancel and refund the whole order right away.",
+          "After the order ships: create a return in Shopify for the shipped items.",
+          "Partially shipped: both apply. The app holds only the requested items that haven't shipped, and creates a return for the ones that have."
         ],
-        "closing": "Automation never makes decisions for you. You always approve, reject, and refund requests yourself."
+        "closing": "In each case, the app can also tag the order. Automation never approves or rejects a request. You always decide."
+      },
+      "partial-withdrawal": {
+        "question": "Can a customer withdraw from only some items?",
+        "paragraphs": [
+          "Yes. Customers choose which items to withdraw from. The request, the refund, and any return only include those items. The original shipping cost is refunded only when the customer withdraws from the whole order.",
+          "Each order can have 1 pending request at a time. After you approve or reject it, the customer can send a new request for other items."
+        ]
+      },
+      "reason": {
+        "question": "Do customers have to give a reason?",
+        "paragraphs": [
+          "No. Under EU law, customers don't need a reason to withdraw, so the reason field is always optional. In Settings, you can choose which reasons to offer, or stop asking for one."
+        ]
+      },
+      "refund": {
+        "question": "How do I refund a withdrawal?",
+        "paragraphs": [
+          "Open the request from the Requests page. How you refund depends on where the items are:"
+        ],
+        "bullets": [
+          "Items that aren't in a return: select Refund. Items that haven't shipped yet are removed from the order, so they won't be sent.",
+          "Items in a return: when they're back, select Process and refund on the return. This refunds the customer and closes the return.",
+          "Nothing has shipped yet: you can also cancel and refund the whole order from More actions."
+        ],
+        "closing": "EU law gives you {{refundDays}} from the withdrawal to refund. The request page shows how much time is left. Refund before you approve the request."
+      },
+      "returns": {
+        "question": "How do returns work?",
+        "paragraphs": [
+          "A return tells Shopify which items the customer is sending back. The app can create one when a request comes in, or you can select Create return on the request page.",
+          "A return only includes items that have shipped. Creating it doesn't refund the customer. When the items are back, select Process and refund on the return."
+        ]
+      },
+      "decision-lock": {
+        "question": "Why are order actions turned off after I approve or reject a request?",
+        "paragraphs": [
+          "Approving or rejecting finishes the request. After that, refunds, holds, returns, and cancellations are turned off, so the order can't be changed by mistake. That's why you should refund before you approve.",
+          "Deciding also releases any fulfillment hold the app placed. If that release fails, you can still select Release fulfillment hold."
+        ]
       },
       "emails": {
         "question": "Which emails does the app send, and can I edit them?",
         "paragraphs": [
-          "The app sends {{emailCount}} emails, and you can edit all of them on the Notifications page:"
+          "The app sends {{emailCount}} emails. You can edit all of them on the Notifications page:"
         ],
         "bullets": [
-          "Customer withdrawal confirmation: sent when a customer submits a request. This email is always on.",
+          "Customer withdrawal confirmation: sent when a customer submits a request. It's always on.",
           "New request notification: sent to your store's contact email. You can turn it off.",
           "Withdrawal approved: sent to the customer when you approve a request. You can review it first, or turn it off.",
           "Withdrawal rejected: sent to the customer when you reject a request. You can review it first, or turn it off."
         ],
-        "closing": "You can edit the subject and body of each email in every supported language. You can also add variables, like the order number, the customer's name, or the requested items. The preview shows your changes as you type."
+        "closing": "You can edit the subject and body of each email in every language, and add variables like the order number or the customer's name. The preview updates as you type."
       },
-      "approve-reject": {
-        "question": "How do I approve, reject, and refund a request?",
+      "countries-languages": {
+        "question": "Which countries and languages does the app support?",
         "paragraphs": [
-          "Open the request from the Requests page. The request page shows the items the customer selected, their reason, the order's status in Shopify, and your notes.",
-          "Refund first. Select Refund for items that haven't been returned, or Process and refund on the return once returned items are back. If the order hasn't shipped yet, you can cancel and refund the whole order instead.",
-          "Then approve or reject the request. This releases any fulfillment hold. After you decide, the order actions are turned off.",
-          "The refund deadline is shown at the top of the page. Under EU rules, you need to refund within {{refundDays}} of the withdrawal. The page shows how much time is left and flags the request if the deadline has passed."
+          "All EU countries are eligible by default. If you only sell to some of them, select Specific countries in Settings.",
+          "The form comes in {{languageCount}} languages: {{languages}}. Customers see it in their own language.",
+          "English is the base language. If you leave a translated field blank, customers see the English text for it instead."
         ]
       }
     }

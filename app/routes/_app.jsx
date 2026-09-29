@@ -43,10 +43,10 @@ export const loader = async ({ request }) => {
   };
 };
 
-// Rendered inside ShopProvider so it can read onboardingDismissed — a
-// merchant who clicks "Skip for now" sees the real app for the rest of this
-// session (nav included) even though onboardingCompleted is still false in
-// the database, so onboarding comes back next time they open the app.
+// Rendered inside ShopProvider so it can read onboardingDismissed. Onboarding
+// shows only once, after install: finishing or skipping saves
+// onboardingCompleted, and onboardingDismissed opens the app straight away
+// while that save is in flight.
 function AppShell({ pendingSkeleton }) {
   const { t } = useTranslation();
   const shop = useShop();

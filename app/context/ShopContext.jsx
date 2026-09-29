@@ -12,10 +12,11 @@ const ShopContext = createContext(null);
 export function ShopProvider({ shop: shopFromLoader, children }) {
   const revalidator = useRevalidator();
   const [shop, setShop] = useState(shopFromLoader);
-  // Session-only — "Skip for now" sets this instead of persisting
-  // onboardingCompleted to the database, so onboarding shows again next
-  // time the app is opened. Plain in-memory state (not sessionStorage) so
-  // it resets on a fresh page load, exactly like a closed dialog would.
+  // Set by "Skip" so the app opens immediately, while onboardingCompleted is
+  // being saved in the background. Once that save lands, the loader's
+  // onboardingCompleted keeps onboarding closed for good; this flag only
+  // matters if the save fails, when it keeps onboarding hidden for the rest
+  // of the session.
   const [onboardingDismissed, setOnboardingDismissed] = useState(false);
   // Same idea for the Home dashboard's setup guide card: dismissing it
   // shouldn't be permanent or survive a reload, only client-side tab
