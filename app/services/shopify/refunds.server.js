@@ -137,13 +137,13 @@ export async function previewWithdrawalRefund(admin, orderId, { items, isFullWit
     return { refundable: false, amount: 0, currencyCode: null };
   }
   const suggested = await fetchSuggestedRefund(admin, orderId, plan);
+  const shippingAmount = Number(suggested?.shipping?.amountSet?.presentmentMoney?.amount ?? 0);
   return {
     refundable: true,
     amount: Number(suggested?.amountSet?.presentmentMoney?.amount ?? 0),
     currencyCode: suggested?.amountSet?.presentmentMoney?.currencyCode ?? null,
-    includesShipping: Boolean(
-      isFullWithdrawal && Number(suggested?.shipping?.amountSet?.presentmentMoney?.amount ?? 0) > 0,
-    ),
+    includesShipping: Boolean(isFullWithdrawal && shippingAmount > 0),
+    shippingAmount,
     lineCount: plan.refundLineItems.length,
   };
 }

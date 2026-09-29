@@ -2,6 +2,7 @@
 import { useTranslation } from "react-i18next";
 import { useAppBridge } from "@shopify/app-bridge-react";
 import { useFormatters } from "../../../i18n/react";
+import ItemRow from "./ItemRow";
 
 export const REFUND_MODAL_ID = "refund-modal";
 
@@ -9,16 +10,35 @@ export const REFUND_MODAL_ID = "refund-modal";
 // refund for the withdrawn items (fetched into `preview`), so staff approve a
 // real figure — refunds are irreversible. Only the withdrawn items are ever
 // refunded; on a full withdrawal the original delivery charge is included too.
-export default function RefundModal({ preview, loadingPreview, refunding, onConfirm }) {
+// The item list (with price/quantity per line) and the subtotal/shipping/total
+// breakdown make the math behind a multi-product withdrawal auditable at a
+// glance, instead of showing a single opaque total.
+export default function RefundModal({ items, preview, loadingPreview, refunding, onConfirm }) {
   const { t } = useTranslation();
   const { formatMoney } = useFormatters();
   const shopify = useAppBridge();
   const R = "requestDetail.refundModal.";
 
-  const ready = preview && !preview.error && preview.refundable;
-  const amountLabel = ready
+  // Gated on !loadingPreview too: a fetcher keeps its previous `.data` while a
+  // new submission is in flight (e.g. reopening the modal re-triggers the
+  // preview), so without this the button would read as ready — enabled, with
+  // a stale amount — even while a fresh calculation is running.
+  const ready = Boolean(preview) && !preview.error && preview.refundable && !loadingPreview;
+  const totalLabel = ready
     ? formatMoney({ amount: preview.amount, currencyCode: preview.currencyCode })
     : null;
+  // The subtotal is derived from Shopify's own suggested total minus shipping,
+  // rather than re-summed from the request's stored item prices, so it always
+  // reconciles exactly with the total shown below (and with what Shopify will
+  // actually move) even if an item is no longer fully refundable.
+  const shippingAmount = preview?.shippingAmount ?? 0;
+  const subtotalLabel = ready
+    ? formatMoney({ amount: preview.amount - shippingAmount, currencyCode: preview.currencyCode })
+    : null;
+  const shippingLabel =
+    ready && preview.includesShipping
+      ? formatMoney({ amount: shippingAmount, currencyCode: preview.currencyCode })
+      : null;
 
   return (
     <s-modal id={REFUND_MODAL_ID} heading={t(`${R}heading`)}>
@@ -33,10 +53,32 @@ export default function RefundModal({ preview, loadingPreview, refunding, onConf
         <s-banner tone="info">{t(`${R}nothingToRefund`)}</s-banner>
       ) : (
         <s-stack direction="block" gap="base">
-          <s-stack direction="inline" gap="base" justifyContent="space-between" alignItems="center">
-            <s-text type="strong">{t(`${R}amount`)}</s-text>
-            <s-heading>{amountLabel}</s-heading>
+          <s-stack direction="block" gap="base">
+            <s-text type="strong">{t(`${R}itemsHeading`)}</s-text>
+            {items.map((item) => (
+              <ItemRow key={item.lineId} item={item} />
+            ))}
           </s-stack>
+
+          <s-divider></s-divider>
+
+          <s-stack direction="block" gap="small-200">
+            <s-stack direction="inline" justifyContent="space-between">
+              <s-text color="subdued">{t(`${R}subtotal`)}</s-text>
+              <s-text>{subtotalLabel}</s-text>
+            </s-stack>
+            {shippingLabel && (
+              <s-stack direction="inline" justifyContent="space-between">
+                <s-text color="subdued">{t(`${R}shippingLine`)}</s-text>
+                <s-text>{shippingLabel}</s-text>
+              </s-stack>
+            )}
+            <s-stack direction="inline" gap="base" justifyContent="space-between" alignItems="center">
+              <s-text type="strong">{t(`${R}total`)}</s-text>
+              <s-heading>{totalLabel}</s-heading>
+            </s-stack>
+          </s-stack>
+
           <s-text color="subdued">
             {[
               t(`${R}body`),
@@ -55,10 +97,10 @@ export default function RefundModal({ preview, loadingPreview, refunding, onConf
           variant="primary"
           tone="critical"
           disabled={!ready || refunding || undefined}
-          loading={refunding || undefined}
+          loading={loadingPreview || refunding || undefined}
           onClick={onConfirm}
         >
-          {amountLabel ? t(`${R}confirmAmount`, { amount: amountLabel }) : t(`${R}confirm`)}
+          {totalLabel ? t(`${R}confirmAmount`, { amount: totalLabel }) : t(`${R}confirm`)}
         </s-button>
       </s-stack>
     </s-modal>

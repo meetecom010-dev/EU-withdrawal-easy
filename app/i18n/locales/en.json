@@ -729,6 +729,14 @@
       "keep": "Keep order",
       "confirm": "Cancel and refund order"
     },
+    "createReturnModal": {
+      "heading": "Create return for withdrawn items",
+      "itemsHeading": "Items to return",
+      "subtotal": "Items subtotal",
+      "body": "This creates a return in Shopify for the items below. It doesn't refund the customer — issue the refund separately once the return is processed.",
+      "cancel": "Cancel",
+      "confirm": "Create return"
+    },
     "decisionModal": {
       "headingApprove": "Approve withdrawal request?",
       "headingReject": "Reject withdrawal request?",
@@ -754,7 +762,11 @@
       "calculatingLabel": "Calculating refund",
       "calculating": "Calculating the refund amount…",
       "nothingToRefund": "There's nothing to refund on this order. The withdrawn items might already be refunded, or the order might be canceled.",
+      "itemsHeading": "Items to refund",
+      "subtotal": "Items subtotal",
+      "shippingLine": "Original shipping",
       "amount": "Refund amount",
+      "total": "Total refund",
       "body": "The withdrawn items are refunded to the original payment method and restocked where possible. Shopify emails the customer a refund receipt.",
       "includesShipping": "This is a full withdrawal, so the original shipping cost is included.",
       "irreversible": "This can't be undone.",
