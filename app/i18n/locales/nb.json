@@ -1,0 +1,1250 @@
+{
+  "common": {
+    "add": "Legg til",
+    "backToHome": "Tilbake til Hjem",
+    "cancel": "Avbryt",
+    "delete": "Slett",
+    "discard": "Forkast",
+    "done": "Ferdig",
+    "dayCount_one": "{{count}} dag",
+    "dayCount_other": "{{count}} dager",
+    "emptyValue": "—",
+    "noMatches": "Ingen resultater for «{{query}}».",
+    "preview": "Forhåndsvis",
+    "remove": "Fjern",
+    "save": "Lagre",
+    "verified": "Bekreftet"
+  },
+  "nav": {
+    "home": "Hjem",
+    "withdrawalRequests": "Forespørsler",
+    "formSetup": "Innstillinger",
+    "emailTemplates": "Varsler",
+    "pricing": "Priser"
+  },
+  "errors": {
+    "generic": "Noe gikk galt. Prøv igjen.",
+    "requestFailed": "Noe gikk galt (feil {{status}}). Prøv igjen.",
+    "methodNotAllowed": "Denne handlingen støttes ikke.",
+    "unknownAction": "Denne handlingen støttes ikke.",
+    "noValidFields": "Det er ingenting å oppdatere.",
+    "emailServiceUnavailable": "Vi kunne ikke koble til e-posttjenesten. Prøv igjen om noen minutter.",
+    "emailServiceNotConfigured": "Utsending av e-post er ikke konfigurert ennå. Kontakt kundestøtte for hjelp.",
+    "requestNotFound": "Denne angreforespørselen finnes ikke eller er slettet.",
+    "requestDecided": "Denne forespørselen er allerede godkjent eller avvist, så ordrehandlinger er ikke lenger tilgjengelige.",
+    "unknownDecision": "Velg om du vil godkjenne eller avvise denne forespørselen.",
+    "invalidStatus": "Velg en gyldig status for denne forespørselen.",
+    "noteRequired": "Skriv inn et notat.",
+    "orderNotFound": "Denne ordren finnes ikke i Shopify.",
+    "invalidEmail": "Skriv inn en gyldig e-postadresse.",
+    "featureRequestIncomplete": "Fyll ut alle feltene før du sender forespørselen.",
+    "senderCodeRequired": "Skriv inn bekreftelseskoden fra e-posten din.",
+    "senderNotFound": "Vi fant ikke denne avsenderadressen. Fjern den og legg den til på nytt for å få en ny kode.",
+    "senderNotStarted": "Bekreft avsenderadressen din først.",
+    "senderIdMissing": "Vi kunne ikke registrere denne avsenderadressen. Prøv igjen.",
+    "domainInvalid": "Skriv inn et gyldig domene, for eksempel dinbutikk.no.",
+    "domainFreeProvider": "Gratis e-postleverandører som Gmail og Yahoo kan ikke autentiseres. Bruk butikkens domene i stedet."
+  },
+  "auth": {
+    "login": {
+      "heading": "Logg inn",
+      "shopLabel": "Butikkdomene",
+      "shopDetails": "example.myshopify.com",
+      "submit": "Logg inn",
+      "missingShop": "Skriv inn butikkdomenet ditt for å logge inn.",
+      "invalidShop": "Skriv inn et gyldig butikkdomene, for eksempel example.myshopify.com."
+    }
+  },
+  "status": {
+    "pending": "Venter",
+    "approved": "Godkjent",
+    "rejected": "Avvist"
+  },
+  "sourceInline": {
+    "order_status": "ordrestatussiden",
+    "standalone_page": "butikksiden din"
+  },
+  "placements": {
+    "orderStatus": {
+      "label": "Ordrestatusside",
+      "details": "Vis angreskjemaet på ordrestatussiden som kundene ser etter kassen."
+    },
+    "storefront": {
+      "label": "Butikkside",
+      "details": "Vis angreskjemaet på en egen side i temaet ditt, slik at kundene finner det utenfor ordrestatussiden."
+    }
+  },
+  "orderStatus": {
+    "financial": {
+      "PENDING": "Betaling venter",
+      "AUTHORIZED": "Autorisert",
+      "PARTIALLY_PAID": "Delvis betalt",
+      "PAID": "Betalt",
+      "PARTIALLY_REFUNDED": "Delvis refundert",
+      "REFUNDED": "Refundert",
+      "VOIDED": "Annullert",
+      "EXPIRED": "Utløpt"
+    },
+    "fulfillment": {
+      "UNFULFILLED": "Ikke oppfylt",
+      "PENDING_FULFILLMENT": "Oppfyllelse venter",
+      "OPEN": "Åpen",
+      "IN_PROGRESS": "Pågår",
+      "ON_HOLD": "Holdt tilbake",
+      "PARTIALLY_FULFILLED": "Delvis oppfylt",
+      "FULFILLED": "Oppfylt",
+      "RESTOCKED": "Lagt tilbake på lager",
+      "SCHEDULED": "Planlagt"
+    },
+    "return": {
+      "REQUESTED": "Forespurt",
+      "OPEN": "Åpen",
+      "CLOSED": "Lukket",
+      "DECLINED": "Avslått",
+      "CANCELED": "Kansellert"
+    }
+  },
+  "stats": {
+    "heading": "Oversikt",
+    "description": "Et øyeblikksbilde av angreforespørslene dine",
+    "viewRequests": "Se forespørsler",
+    "total": "Forespørsler totalt",
+    "today": "Sendt i dag",
+    "pending": "Venter",
+    "closed": "Avsluttet",
+    "requestCount_one": "{{count}} forespørsel",
+    "requestCount_other": "{{count}} forespørsler"
+  },
+  "home": {
+    "pageTitle": "Hjem",
+    "loadError": "Kunne ikke laste inn kontrollpanelet",
+    "saveErrorHeading": "Kunne ikke lagre endringen",
+    "saveErrorAction": "Prøv igjen, eller gjør endringen i Innstillinger.",
+    "setupBanner": {
+      "heading_one": "{{count}} oppsettstrinn gjenstår",
+      "heading_other": "{{count}} oppsettstrinn gjenstår",
+      "body": "Fullfør disse trinnene for å gjøre angreskjemaet klart: {{steps}}."
+    },
+    "setupGuide": {
+      "heading": "Oppsettsveiledning",
+      "description": "Bruk denne veiledningen for å publisere angreskjemaet i butikken din.",
+      "progress": "{{completed}} av {{total}} oppgaver fullført",
+      "dismiss": "Lukk oppsettsveiledningen",
+      "collapse": "Skjul oppsettsveiledningen",
+      "expand": "Vis oppsettsveiledningen",
+      "showStep": "Vis detaljer for {{step}}",
+      "hideStep": "Skjul detaljer for {{step}}",
+      "steps": {
+        "form": {
+          "label": "Aktiver angreskjemaet",
+          "description": "Aktiver skjemaet og velg hvor kundene ser det. Feltene, årsakene og tekstene har allerede standardtekst. Du kan endre dem når som helst i Innstillinger.",
+          "checkbox": "Aktiver angreskjema",
+          "cta": "Gå til Innstillinger",
+          "placementHeading": "Velg hvor kundene ser skjemaet",
+          "placementDescription": "Velg minst ett sted. Hvert sted trenger sin appblokk før kundene kan se skjemaet."
+        },
+        "blocks": {
+          "label": "Legg til appblokkene i butikken",
+          "description": "Legg til en appblokk for hvert sted du valgte i forrige trinn.",
+          "locked": "Fullfør trinn {{step}} for å velge hvor skjemaet vises. Deretter kan du legge til appblokkene her.",
+          "surfaces": {
+            "orderStatus": "Ordrestatusside",
+            "theme": "Butikkside"
+          },
+          "live": {
+            "orderStatus": "Appblokken er publisert på ordrestatussiden.",
+            "theme": "Appblokken er publisert på butikksiden."
+          }
+        }
+      }
+    },
+    "help": {
+      "heading": "Hjelp og ressurser",
+      "support": {
+        "title": "Kundestøtte på e-post",
+        "description": "Har du et spørsmål? Kundestøtteteamet vårt kan hjelpe.",
+        "link": "Kontakt kundestøtte"
+      },
+      "faqs": {
+        "title": "Vanlige spørsmål",
+        "description": "Finn svar på vanlige spørsmål om oppsett og bruk av appen.",
+        "link": "Se vanlige spørsmål"
+      },
+      "featureRequest": {
+        "title": "Funksjonsforslag",
+        "description": "Har du en idé til appen? Fortell oss hva du ønsker deg.",
+        "link": "Foreslå en funksjon"
+      }
+    }
+  },
+  "blockSetup": {
+    "autoUpdate": "Denne meldingen forsvinner av seg selv noen sekunder etter at du har lagret appblokken.",
+    "addAppBlock": "Legg til appblokk",
+    "orderStatus": {
+      "heading": "Legg til appblokken på ordrestatussiden",
+      "body": "Kundene ser ikke angreskjemaet på ordrestatussiden før du legger til appblokken. Slik legger du den til:",
+      "steps": {
+        "open": "Velg <strong>Legg til appblokk</strong> nedenfor. Ordrestatussiden åpnes i kasseredigeringsprogrammet.",
+        "add": "Velg <strong>Legg til appblokk</strong> i sidefeltet.",
+        "choose": "Velg <strong>Angreskjema</strong>.",
+        "save": "Velg <strong>Lagre</strong>."
+      }
+    },
+    "storefront": {
+      "heading": "Legg til appblokken på en butikkside",
+      "body": "Velg en sidemal, og velg deretter Legg til appblokk. Temaredigeringsprogrammet åpnes med angreskjemaet allerede lagt til som en seksjon.",
+      "templateLabel": "Sidemal",
+      "templates": {
+        "page": "Standardside",
+        "index": "Hjemmeside",
+        "product": "Produktsider",
+        "collection": "Kolleksjonssider",
+        "cart": "Handlekurvside"
+      },
+      "steps": {
+        "open": "Velg <strong>Legg til appblokk</strong> for å åpne temaredigeringsprogrammet med seksjonen lagt til.",
+        "move": "Dra seksjonen dit du vil ha den på siden.",
+        "save": "Velg <strong>Lagre</strong>."
+      }
+    }
+  },
+  "onboarding": {
+    "pageTitle": "Kom i gang",
+    "heading": "Gjør butikken klar for angrerett i EU",
+    "intro_one": "Fullfør dette {{count}} trinnet for å gi EU-kundene dine en lovlig måte å angre et kjøp på.",
+    "intro_other": "Fullfør disse {{count}} trinnene for å gi EU-kundene dine en lovlig måte å angre et kjøp på.",
+    "stepBadge": "Trinn {{current}} av {{total}}",
+    "completedToast": "Oppsettet er fullført",
+    "steps": {
+      "welcome": {
+        "title": "Velkommen",
+        "description": "Hva appen gjør"
+      },
+      "form": {
+        "title": "Angreskjema",
+        "description": "Aktiver skjemaet"
+      }
+    },
+    "actions": {
+      "getStarted": "Kom i gang",
+      "continue": "Fortsett",
+      "finish": "Fullfør oppsettet",
+      "skip": "Hopp over oppsettet",
+      "back": "Tilbake"
+    },
+    "help": {
+      "heading": "Trenger du hjelp?",
+      "body": "Har du et spørsmål? <supportLink>Kontakt kundestøtte</supportLink>."
+    },
+    "welcome": {
+      "heading": "Velkommen til {{appName}}",
+      "setupTime": "Tar omtrent 1 minutt",
+      "law": "Siden 19. juni 2026 må butikker som selger til kunder i EU, tilby en måte å angre hver ordre på i 2 trinn (EU-direktiv 2023/2673, artikkel 11a). Det er ikke nok med bare en returpolicy.",
+      "app": "{{appName}} legger til en angreknapp på ordrestatussiden, en side i nettbutikken eller begge deler. Appen håndterer bekreftelsen i 2 trinn og sender den påkrevde bekreftelses-e-posten. Du administrerer alle forespørsler på ett sted.",
+      "imageAlt": "En kunde som angrer en ordre",
+      "requirementsHeading": "Hva loven krever",
+      "requirements": {
+        "button": "En tydelig merket angreknapp som kundene lett finner",
+        "twoStep": "En prosess i 2 trinn: kundene sender inn angringen og bekrefter den deretter",
+        "email": "En automatisk bekreftelses-e-post som kundene kan ta vare på"
+      },
+      "penaltyHeading": "Hva som skjer hvis du ikke følger reglene",
+      "penalty": "Hvis angreknappen mangler eller ikke fungerer, forlenger loven angrefristen på {{days}} dager. Kundene får da 12 måneder og {{days}} dager på å angre hver berørt ordre."
+    },
+    "form": {
+      "heading": "Aktiver angreskjemaet",
+      "body": "Kundene sender inn angringen og bekrefter den i et eget trinn, slik EU-retten krever. Skjemaet har juridisk standardtekst. Kundene har {{days}} på å angre, regnet fra levering.",
+      "switch": "Aktiver angreskjema",
+      "later": "Du kan endre alt dette senere i Innstillinger.",
+      "loadError": "Kunne ikke laste inn skjemainnstillingene. Du kan fullføre oppsettet nå og aktivere skjemaet senere i Innstillinger.",
+      "saveError": "Kunne ikke lagre skjemavalgene. Prøv igjen, eller fullfør oppsettet uten dem og angi dem senere i Innstillinger.",
+      "finishWithoutSaving": "Fullfør uten å lagre",
+      "placementError": "Velg minst ett sted, eller deaktiver skjemaet."
+    },
+    "finishError": "Kunne ikke fullføre oppsettet. Prøv igjen."
+  },
+  "formSetup": {
+    "pageTitle": "Innstillinger",
+    "loadError": "Kunne ikke laste inn innstillingene",
+    "saveError": "Kunne ikke lagre innstillingene",
+    "savedToast": "Innstillingene er lagret",
+    "enable": {
+      "heading": "Angreskjema",
+      "description": "Velg om kundene kan sende inn angreforespørsler, og hvor de ser skjemaet.",
+      "checkbox": "Aktiver angreskjema",
+      "details": "Når dette er deaktivert, kan ikke kundene sende inn angreforespørsler noe sted.",
+      "orderStatus": "Vis på ordrestatussiden",
+      "storefront": "Vis på en butikkside"
+    },
+    "countries": {
+      "heading": "Kvalifiserte land",
+      "description": "Kundene ser bare angreskjemaet hvis ordren sendes til ett av disse landene.",
+      "all": "Alle {{count}} EU-land (anbefales)",
+      "allDetails": "Angreretten gjelder i hele EU.",
+      "specific": "Bestemte land",
+      "specificDetails": "Velg land nedenfor. Du kan endre dette når som helst.",
+      "pickerLabel": "Land",
+      "pickerPlaceholder": "Søk etter land"
+    },
+    "content": {
+      "heading": "Skjemainnhold",
+      "tabs": {
+        "step1": "1. Detaljer",
+        "confirm": "2. Bekreft",
+        "done": "3. Ferdig"
+      },
+      "language": "Språk",
+      "languageDetails": "Velg et språk for å redigere skjemainnholdet på det språket. Hvert språk lagres separat.",
+      "beforeDelivery": {
+        "heading": "Før levering",
+        "description": "Vises på skjemaets første skjermbilde og i trinnet Detaljer til ordren er levert, også mens den er underveis."
+      },
+      "afterDelivery": {
+        "heading": "Etter levering",
+        "description": "Vises i stedet når Shopify merker ordren som levert."
+      },
+      "title": "Tittel",
+      "description": "Beskrivelse",
+      "itemHeading": "Overskrift for varevalg",
+      "customerDetails": {
+        "heading": "Kundeopplysninger",
+        "description": "Fylles ut fra ordren. Kundene kan ikke redigere disse feltene.",
+        "locked": "Låst",
+        "fullName": "Fullt navn",
+        "email": "E-post",
+        "orderNumber": "Ordrenummer"
+      },
+      "reason": {
+        "heading": "Årsak til angring",
+        "checkbox": "Spør om en årsak",
+        "details": "Kundene trenger aldri å oppgi en årsak. Ifølge EU-retten må dette feltet være valgfritt.",
+        "label": "Etikett for årsaksfeltet",
+        "optionsHeading": "Årsaksalternativer",
+        "optionsHelp": "Kundene velger fra denne listen. Legg til, fjern eller omformuler alternativene slik at de passer butikken din. Et alternativ «Annet» med et tekstfelt legges alltid til sist.",
+        "removeOption": "Fjern {{option}}",
+        "addLabel": "Legg til en årsak",
+        "addPlaceholder": "For eksempel: Bestilte ved en feil",
+        "translatedHelp": "Oversett hvert alternativ. Bytt til engelsk for å legge til eller fjerne alternativer.",
+        "translatedEmpty": "Legg først til årsaksalternativer på engelsk."
+      },
+      "continueButton": "Etikett for Fortsett-knappen",
+      "confirm": {
+        "heading": "Overskrift for bekreftelse",
+        "messageBefore": "Melding før levering",
+        "messageAfter": "Melding etter levering",
+        "declaration": "Erklæring",
+        "button": "Etikett for Bekreft-knappen"
+      },
+      "done": {
+        "titleBefore": "Tittel før levering",
+        "messageBefore": "Melding før levering",
+        "titleAfter": "Tittel etter levering",
+        "messageAfter": "Melding etter levering"
+      }
+    },
+    "automation": {
+      "heading": "Automatisering",
+      "description": "Velg hva appen gjør når en kunde sender inn en angreforespørsel.",
+      "beforeShip": {
+        "heading": "Før ordren sendes",
+        "description": "Gjelder når en forespørsel kommer inn før noen varer er sendt.",
+        "hold": "Hold tilbake oppfyllelse for gjennomgang",
+        "holdDetails": "Sett oppfyllelsen på pause til du godkjenner eller avviser forespørselen. Tilbakeholdelsen oppheves når du tar en beslutning.",
+        "tagDetails": "Merk ordrer som får en forespørsel før de sendes, slik at de ansatte finner dem i ordrelisten."
+      },
+      "fallback": {
+        "label": "Hva som skjer med ordren",
+        "hold": "Hold den tilbake til du godkjenner eller avviser forespørselen",
+        "cancelNow": "Kanseller hele ordren og refunder den med en gang",
+        "releaseN": "Opphev tilbakeholdelsen etter et bestemt antall dager",
+        "cancelN": "Kanseller hele ordren og refunder den etter et bestemt antall dager",
+        "cancelWarning": "Dette kansellerer og refunderer hele ordren, selv om kunden bare har angret noen av varene. Shopify sender kunden en e-post om kanselleringen.",
+        "days": "Antall dager"
+      },
+      "afterDelivery": {
+        "heading": "Etter at ordren er sendt",
+        "description": "Gjelder når en forespørsel kommer inn etter at minst én vare er sendt, selv om den ikke er levert ennå. Alle forespørsler vises fortsatt på siden Forespørsler.",
+        "createReturn": "Opprett en retur",
+        "createReturnDetails": "Opprett en retur i Shopify for de forespurte varene som er sendt.",
+        "tagDetails": "Merk ordrer som får en forespørsel etter at de er sendt."
+      },
+      "tag": {
+        "checkbox": "Merk ordren",
+        "label": "Ordremerker",
+        "placeholder": "Legg til et merke"
+      }
+    },
+    "deadline": {
+      "heading": "Angrefrist",
+      "description": "Angrefristen starter når ordren leveres, ikke når den legges inn. EU-retten krever minst {{days}}.",
+      "days": "Dager til å angre etter levering",
+      "daysDetails": "Hvor lang tid kundene har på å angre etter at ordren er levert.",
+      "transit": "Beregnet transporttid (dager)",
+      "transitDetails": "Brukes når fraktselskapet ikke deler en leveringsdato eller et estimat. Appen legger disse dagene til sendingsdatoen."
+    },
+    "validation": {
+      "countryMode": "Velg hvilke land som er kvalifisert.",
+      "euCountries": "Velg minst ett land.",
+      "title": "Skriv inn en tittel.",
+      "description": "Skriv inn en beskrivelse.",
+      "itemHeading": "Skriv inn en overskrift for varelisten.",
+      "continueButton": "Skriv inn en etikett for Fortsett-knappen.",
+      "heading": "Skriv inn en overskrift.",
+      "confirmMessage": "Skriv inn en bekreftelsesmelding.",
+      "declaration": "Skriv inn erklæringen kundene må godta.",
+      "confirmButton": "Skriv inn en etikett for Bekreft-knappen.",
+      "message": "Skriv inn en melding.",
+      "reasonLabel": "Skriv inn en etikett for årsaksfeltet.",
+      "reasonOptions": "Legg til minst én årsak.",
+      "reasonOptionTranslation": "Skriv inn en oversettelse av denne årsaken.",
+      "fallback": "Velg hva som skjer med ordren.",
+      "daysRange": "Skriv inn et antall dager fra {{min}} til {{max}}.",
+      "tags": "Legg til minst ett merke, eller deaktiver merking.",
+      "afterDeliveryAction": "Velg hva som skjer etter at ordren er sendt."
+    },
+    "preview": {
+      "heading": "Direkte forhåndsvisning",
+      "compliantBadge": "Oppfyller 2-trinnskravet",
+      "surfaceLabel": "Forhåndsvisning",
+      "surfaces": {
+        "orderStatus": "Ordrestatusside",
+        "theme": "Butikkside"
+      },
+      "stageLabel": "Leveringsstatus",
+      "stages": {
+        "beforeDelivery": "Ikke levert ennå",
+        "delivered": "Levert"
+      },
+      "banner": {
+        "orderStatus": "Slik ser kundene det på ordrestatussiden. Velg knappene for å prøve, eller bruk fanene i Skjemainnhold for å gå til et bestemt trinn.",
+        "theme": "Slik ser kundene det på butikksiden din. Det starter med trinnet «Finn ordren din», fordi besøkende i butikken ikke er logget inn."
+      },
+      "restart": "Start forhåndsvisningen på nytt",
+      "position": {
+        "entry": "Startkort",
+        "lookup": "Finn ordren din",
+        "step": "Trinn {{current}} av {{total}}"
+      },
+      "storefront": {
+        "start": "Start angreforespørsel",
+        "findOrderHeading": "Finn ordren din",
+        "findOrderBody": "Skriv inn ordreopplysningene dine for å starte angreforespørselen.",
+        "fullName": "Fullt navn",
+        "email": "E-post",
+        "orderNumber": "Ordrenummer",
+        "continue": "Fortsett",
+        "steps": {
+          "step1": "Detaljer",
+          "confirm": "Bekreft",
+          "done": "Ferdig"
+        },
+        "stepOf": "Trinn {{current}} av {{total}}",
+        "stepProgress": "Trinn {{current}} av {{total}}: {{label}}",
+        "reasonPlaceholder": "Velg en årsak (valgfritt)",
+        "otherReason": "Annet",
+        "yourReason": "Din årsak",
+        "yourReasonPlaceholder": "Fortell oss årsaken",
+        "selectItem": "Velg minst én vare for å fortsette.",
+        "itemsToWithdraw": "Varer som angres ({{count}})",
+        "selectedTotal": "Sum for valgte varer",
+        "previous": "Forrige",
+        "submittedOn": "Sendt {{date}}"
+      }
+    }
+  },
+  "requests": {
+    "pageTitle": "Forespørsler",
+    "searchLabel": "Søk i angreforespørsler",
+    "searchPlaceholder": "Søk etter ordrenummer, kundenavn eller e-post",
+    "export": "Eksporter",
+    "exportSelected": "Eksporter valgte",
+    "tabs": {
+      "all": "Alle",
+      "withCount": "{{label}} ({{count}})"
+    },
+    "empty": {
+      "imageAlt": "",
+      "heading": "Ingen angreforespørsler ennå",
+      "body": "Angreforespørsler fra kundene dine vises her.",
+      "filteredHeading": "Fant ingen angreforespørsler",
+      "filteredBody": "Prøv å endre søkeordet eller filteret."
+    },
+    "table": {
+      "selectAll": "Velg alle angreforespørsler",
+      "selectRow": "Velg ordre {{order}}",
+      "selectedCount": "{{count}} valgt",
+      "order": "Ordre",
+      "customer": "Kunde",
+      "items": "Varer",
+      "value": "Verdi",
+      "status": "Status",
+      "submitted": "Sendt",
+      "actions": "Handlinger",
+      "itemCount_one": "{{count}} vare",
+      "itemCount_other": "{{count}} varer",
+      "viewRow": "Se forespørsel for ordre {{order}}",
+      "deleteRow": "Slett forespørsel for ordre {{order}}"
+    },
+    "delete": {
+      "heading_one": "Vil du slette angreforespørselen?",
+      "heading_other": "Vil du slette {{count}} angreforespørsler?",
+      "body_one": "Denne angreforespørselen slettes permanent. Dette kan ikke angres.",
+      "body_other": "Disse {{count}} angreforespørslene slettes permanent. Dette kan ikke angres.",
+      "confirm_one": "Slett forespørsel",
+      "confirm_other": "Slett forespørsler",
+      "toast_one": "Angreforespørselen er slettet",
+      "toast_other": "{{count}} angreforespørsler er slettet"
+    },
+    "csv": {
+      "filename": "angreforesporsler-{{date}}.csv",
+      "order": "Ordre",
+      "customerName": "Kundenavn",
+      "customerEmail": "Kundens e-post",
+      "country": "Land",
+      "items": "Varer",
+      "value": "Verdi",
+      "reason": "Årsak",
+      "status": "Status",
+      "submitted": "Sendt",
+      "decided": "Avgjort"
+    }
+  },
+  "requestDetail": {
+    "pageTitle": "Angreforespørsel",
+    "backLink": "Forespørsler",
+    "submittedLine": "Sendt {{date}} fra {{source}}",
+    "previous": "Forrige forespørsel",
+    "next": "Neste forespørsel",
+    "badges": {
+      "canceled": "Kansellert",
+      "onHold": "Holdt tilbake",
+      "return": "Retur: {{status}}"
+    },
+    "actions": {
+      "refund": "Refunder",
+      "more": "Flere handlinger",
+      "cancelOrder": "Kanseller ordre",
+      "placeHold": "Hold tilbake oppfyllelse",
+      "releaseHold": "Opphev tilbakeholdelse av oppfyllelse",
+      "createReturn": "Opprett retur",
+      "processReturn": "Behandle og refundere",
+      "viewOrder": "Se ordre"
+    },
+    "banners": {
+      "orderUnavailableHeading": "Ordreopplysningene er ikke tilgjengelige",
+      "orderUnavailableBody": "{{error}} Du kan ikke bruke ordrehandlinger før ordreopplysningene er lastet inn.",
+      "actionFailedHeading": "Kunne ikke fullføre denne handlingen",
+      "actionFailedAction": "Se Aktivitet nedenfor for mer informasjon.",
+      "canceled": "Denne ordren er kansellert. Ordrehandlinger er ikke lenger tilgjengelige."
+    },
+    "deadline": {
+      "heading": "Refusjonsfrist",
+      "pendingLabel": "Gjenstående tid til å avgjøre og refundere",
+      "decidedLabel": "Avgjørelse",
+      "badges": {
+        "overdue": "Forsinket",
+        "actionNeeded": "Handling kreves",
+        "onTime": "I tide"
+      },
+      "daysLeft_one": "{{count}} dag igjen",
+      "daysLeft_other": "{{count}} dager igjen",
+      "daysOverdue_one": "{{count}} dag over fristen",
+      "daysOverdue_other": "{{count}} dager over fristen",
+      "daysEarly_one": "{{count}} dag før fristen",
+      "daysEarly_other": "{{count}} dager før fristen",
+      "daysLate_one": "{{count}} dag etter fristen",
+      "daysLate_other": "{{count}} dager etter fristen",
+      "pending": "Du har {{days}} fra forespørselen ble sendt, til å avgjøre og refundere. Fristen er {{date}}.",
+      "pendingOverdue": "Fristen gikk ut {{date}}. Refunder kunden så snart som mulig.",
+      "decidedOnTime": "Avgjort innenfor refusjonsfristen på {{windowDays}} dager. Fristen var {{date}}.",
+      "decidedLate": "Avgjort etter refusjonsfristen {{date}}."
+    },
+    "items": {
+      "heading": "Angrede varer",
+      "reject": "Avvis",
+      "approve": "Godkjenn",
+      "total": "Totalt angret",
+      "sku": "Varenummer: {{sku}}",
+      "quantity": "Antall: {{count}}",
+      "shipping": {
+        "notShipped": "Ikke sendt ennå",
+        "partlyShipped": "Delvis sendt",
+        "shipped": "Sendt"
+      },
+      "partiallyShippedBanner": "En del av denne ordren er sendt. Varer som ikke er sendt ennå, kan fortsatt holdes tilbake, og sendte varer trenger en retur."
+    },
+    "return": {
+      "heading": "Retur",
+      "status": "Status",
+      "created": "Opprettet",
+      "body": "Det er opprettet en retur i Shopify for de angrede varene.",
+      "openBody": "Når varene er kommet tilbake, velger du Behandle og refundere. Da refunderes kunden for de returnerte varene, og returen lukkes.",
+      "alreadyRefundedBody": "Varene i denne returen er allerede refundert. Lukk returen i Shopify når de er kommet tilbake."
+    },
+    "processReturnModal": {
+      "heading": "Behandle retur og refundere",
+      "calculating": "Beregner refusjonsbeløpet …",
+      "nothingToProcess": "Det er ikke mer å behandle for denne returen. Den kan allerede være behandlet eller lukket i Shopify.",
+      "nothingToRefund": "Varene i denne returen er allerede refundert, så det er ikke mer å refundere.",
+      "unsupportedPayment": "Betalingen for denne ordren kan ikke refunderes fra appen. Behandle returen og refunder den i Shopify i stedet.",
+      "itemsHeading": "Varer i retur {{name}}",
+      "subtotal": "Delsum for varer",
+      "shippingLine": "Opprinnelig frakt",
+      "total": "Total refusjon",
+      "body": "Dette merker de returnerte varene som behandlet, refunderer dem til den opprinnelige betalingsmåten og lukker returen. Shopify sender kunden en refusjonskvittering på e-post. Dette kan ikke angres.",
+      "confirmAmount": "Refunder {{amount}}",
+      "confirm": "Behandle og refundere"
+    },
+    "payment": {
+      "heading": "Betaling",
+      "status": "Betalingsstatus",
+      "subtotal": "Delsum for angring",
+      "shipping": "Frakt for ordren",
+      "total": "Ordresum",
+      "refunded": "Refundert",
+      "unavailable": "Betalingsopplysningene er ikke tilgjengelige akkurat nå."
+    },
+    "activity": {
+      "heading": "Aktivitet",
+      "noteLabel": "Legg til et notat",
+      "notePlaceholder": "Legg til et notat …",
+      "post": "Publiser",
+      "noteHelp": "Bare du og de ansatte kan se notater. Kundene ser dem aldri.",
+      "submitted": "Angreforespørsel sendt fra {{source}}",
+      "decided": {
+        "approved": "Forespørselen er godkjent",
+        "rejected": "Forespørselen er avvist"
+      },
+      "note": "Notat: {{body}}",
+      "entry": "{{label}}: {{message}}",
+      "actions": {
+        "resolve_branch": "Automatiseringen startet",
+        "run_automation": "Automatisering",
+        "automation_completed": "Automatiseringen er ferdig",
+        "hold_fulfillment": "Tilbakeholdelse av oppfyllelse",
+        "schedule_fallback": "Planlagt oppfølging",
+        "release_hold": "Tilbakeholdelse av oppfyllelse opphevet",
+        "cancel_order_immediate": "Ordren er kansellert og refundert",
+        "cancel_order_scheduled": "Ordren er kansellert og refundert",
+        "cancel_order_manual": "Ordren er kansellert og refundert",
+        "cancel_order": "Ordren er kansellert og refundert",
+        "refund": "Refusjon",
+        "tag_before_ship": "Ordren er merket",
+        "tag_after_delivery": "Ordren er merket",
+        "order_tag_add": "Ordremerker lagt til",
+        "order_tag_remove": "Ordremerker fjernet",
+        "create_return": "Retur",
+        "refresh_return": "Returstatus oppdatert",
+        "process_return": "Behandle og refundere",
+        "fetch_shop_contact": "Butikkens kontaktopplysninger",
+        "customer_email": "Bekreftelses-e-post til kunden",
+        "merchant_email": "Varsel om ny forespørsel",
+        "notify_customer": "E-post om avgjørelse",
+        "notify_merchant": "Du ble varslet"
+      },
+      "messages": {
+        "noTags": "Ingen merker er konfigurert",
+        "tagged": "Ordren er merket med {{tags}}",
+        "noHoldableOrders": "Ingenting i denne ordren kan holdes tilbake akkurat nå",
+        "held": "Varene er holdt tilbake slik at de ikke sendes",
+        "holdOff": "Tilbakeholdelse av oppfyllelse for gjennomgang er deaktivert",
+        "tagBeforeShipOff": "Merking før sending er deaktivert",
+        "tagAfterDeliveryOff": "Merking etter sending er deaktivert",
+        "fallbackHold": "Ordren holdes tilbake til du godkjenner eller avviser forespørselen",
+        "fallbackInvalidDays": "Kunne ikke planlegge oppfølgingen. Antallet dager er ugyldig.",
+        "scheduledRelease": "Oppheving av tilbakeholdelsen planlagt til {{date}}",
+        "scheduledCancel": "Kansellering og refusjon planlagt til {{date}}",
+        "canceled": "Ordren er kansellert og refundert",
+        "returnCreated": "Retur opprettet i Shopify",
+        "returnNoMatch": "Ingen av de forespurte varene kan returneres",
+        "notifiedByEmail": "Varslet i appen og på e-post",
+        "notifiedEmailFailed": "Varslet i appen. Varsel-e-posten mislyktes: {{error}}",
+        "notifiedInAppOnly": "Varslet i appen. Varsel-e-posten ble ikke sendt.",
+        "emailSent": "Sendt",
+        "emailFailed": "Mislyktes: {{error}}",
+        "emailNotSent": "Ikke sendt fordi det ikke finnes noen mottaker eller e-post ikke er konfigurert",
+        "orderNotFound": "Denne ordren finnes ikke i Shopify",
+        "alreadyCanceled": "Ordren var allerede kansellert",
+        "branchBeforeShip": "Ordren er ikke sendt ennå, så trinnene før sending ble kjørt",
+        "branchAfterDelivery": "Ordren er sendt, så trinnene etter sending ble kjørt",
+        "branchPartiallyShipped": "Ordren er delvis sendt, så trinnene for sendte og ikke-sendte varer ble kjørt",
+        "noUnshippedItemsRequested": "Ingen av de forespurte varene venter på sending, så ingenting ble holdt tilbake",
+        "fallbackCancelPartiallyShipped": "Ordren er delvis sendt, så den kan ikke kanselleres i sin helhet. De forespurte varene holdes tilbake til du godkjenner eller avviser forespørselen.",
+        "returnNothingShipped": "Ingen av de forespurte varene er sendt, så det var ikke behov for en retur",
+        "runCompleted": "Automatiseringen er fullført",
+        "runFailed": "Ett eller flere automatiseringstrinn mislyktes",
+        "runSkipped": "Automatiseringen ble hoppet over",
+        "scheduledSkippedApproved": "Forespørselen var allerede godkjent, så den planlagte handlingen ble ikke kjørt",
+        "scheduledSkippedRejected": "Forespørselen var allerede avvist, så den planlagte handlingen ble ikke kjørt",
+        "noHoldsPlaced": "Ingenting ble holdt tilbake for denne forespørselen",
+        "holdsAlreadyReleased": "Tilbakeholdelsene var allerede opphevet",
+        "holdReleased": "Ordren kan oppfylles igjen",
+        "holdExists": "Det finnes allerede en tilbakeholdelse for denne forespørselen",
+        "decisionSkipped": "De ansatte valgte å ikke sende e-post til kunden",
+        "decisionSent": "Kunden fikk e-post om avgjørelsen",
+        "decisionFailed": "E-posten om avgjørelsen mislyktes: {{error}}",
+        "decisionNotConfigured": "E-posten om avgjørelsen ble ikke sendt fordi e-post ikke er konfigurert",
+        "refunded": "Refundert {{amount}}",
+        "noReturn": "Det finnes ingen retur for denne forespørselen",
+        "returnStatus": "Returstatus: {{status}}",
+        "returnProcessed": "Returen er behandlet og {{amount}} er refundert",
+        "returnNothingToProcess": "Det er ikke mer å behandle for denne returen",
+        "returnNothingToRefund": "Varene i denne returen er allerede refundert",
+        "returnPaymentUnsupported": "Denne betalingen kan ikke refunderes fra appen. Behandle returen i Shopify.",
+        "refundNothingRefundable": "Ingen av de forespurte varene kan refunderes. De kan allerede være refundert.",
+        "refundNoSuggestion": "Shopify kunne ikke beregne en refusjon for disse varene. Refunder dem i Shopify i stedet.",
+        "refundCoveredByReturn": "Alle angrede varer er i den åpne returen. Bruk Behandle og refundere på returen for å refundere dem.",
+        "tagsRemoved": "Ordremerker fjernet: {{tags}}",
+        "tagsAdded": "Ordremerker lagt til: {{tags}}"
+      }
+    },
+    "order": {
+      "heading": "Ordre",
+      "order": "Ordre",
+      "placed": "Lagt inn",
+      "payment": "Betaling",
+      "fulfillment": "Oppfyllelse"
+    },
+    "customer": {
+      "heading": "Kunde",
+      "avatarFallback": "Kunde",
+      "contactHeading": "Kontaktinformasjon",
+      "email": "E-post",
+      "language": "Språk",
+      "shippingHeading": "Leveringsadresse"
+    },
+    "automation": {
+      "heading": "Automatisering",
+      "stage": "Fase",
+      "stages": {
+        "before_ship": "Før sending",
+        "partially_shipped": "Delvis sendt",
+        "after_delivery": "Etter sending"
+      },
+      "hold": "Tilbakeholdelse av oppfyllelse",
+      "holdStates": {
+        "onHold": "Holdt tilbake",
+        "released": "Opphevet",
+        "none": "Ingen"
+      },
+      "canceled": "Kansellert",
+      "return": "Retur"
+    },
+    "emails": {
+      "heading": "E-posthistorikk",
+      "customerConfirmation": "Angrebekreftelse til kunden",
+      "merchantNotification": "Varsel om ny forespørsel",
+      "decision": "E-post om avgjørelse",
+      "statuses": {
+        "sent": "Sendt",
+        "failed": "Mislyktes",
+        "notSent": "Ikke sendt"
+      }
+    },
+    "tags": {
+      "heading": "Ordremerker",
+      "label": "Legg til ordremerke",
+      "placeholder": "Legg til et merke",
+      "remove": "Fjern merket {{tag}}",
+      "savedToast": "Ordremerkene er lagret"
+    },
+    "reason": {
+      "heading": "Årsak til angring",
+      "quoted": "«{{reason}}»",
+      "none": "Ingen årsak oppgitt"
+    },
+    "decidedToast": {
+      "approved": "Angreforespørselen er godkjent",
+      "rejected": "Angreforespørselen er avvist"
+    },
+    "cancelModal": {
+      "heading": "Vil du kansellere ordren?",
+      "body": "Dette kansellerer hele ordren i Shopify, inkludert varer kunden ikke har angret. Ordren refunderes til den opprinnelige betalingsmåten og legges tilbake på lager, og Shopify sender kunden en e-post. Dette kan ikke angres.",
+      "keep": "Behold ordren",
+      "confirm": "Kanseller og refunder ordren"
+    },
+    "createReturnModal": {
+      "heading": "Opprett retur for angrede varer",
+      "itemsHeading": "Varer som skal returneres",
+      "subtotal": "Delsum for varer",
+      "checking": "Sjekker hvilke varer som kan returneres …",
+      "nothingToReturn": "Ingen av de angrede varene er sendt ennå, så det er ingenting å returnere. Hold dem tilbake slik at de ikke sendes, eller refunder dem for å fjerne dem fra ordren.",
+      "notShipped_one": "{{count}} angret vare er ikke inkludert fordi den ikke er sendt ennå.",
+      "notShipped_other": "{{count}} angrede varer er ikke inkludert fordi de ikke er sendt ennå.",
+      "notReturnable_one": "{{count}} angret vare er ikke inkludert fordi den allerede er returnert.",
+      "notReturnable_other": "{{count}} angrede varer er ikke inkludert fordi de allerede er returnert.",
+      "body": "Dette oppretter en retur i Shopify for varene ovenfor. Kunden refunderes ikke. Når varene er kommet tilbake, velger du Behandle og refundere på returen.",
+      "cancel": "Avbryt",
+      "confirm": "Opprett retur"
+    },
+    "decisionModal": {
+      "headingApprove": "Vil du godkjenne angreforespørselen?",
+      "headingReject": "Vil du avvise angreforespørselen?",
+      "approveAndSend": "Godkjenn og send e-post",
+      "rejectAndSend": "Avvis og send e-post",
+      "approve": "Godkjenn",
+      "reject": "Avvis",
+      "loadingLabel": "Laster inn forhåndsvisning av e-posten",
+      "loading": "Forbereder e-posten til kunden …",
+      "sendEmail": "Send e-post til kunden",
+      "language": "Denne e-posten er på {{language}}, som er kundens språk. Endringene dine gjelder bare denne e-posten.",
+      "subject": "Emne",
+      "body": "E-posttekst",
+      "editHtml": "Rediger HTML",
+      "htmlLabel": "E-postens HTML",
+      "previewTitle": "Forhåndsvisning av e-post",
+      "templateUnchanged": "Endringene dine gjelder bare denne e-posten. Den lagrede malen endres ikke.",
+      "noEmail": "Kunden får ingen e-post. Du kan kontakte kunden separat om nødvendig.",
+      "holdReleased": "Dette opphever også tilbakeholdelsen av oppfyllelsen for denne ordren, slik at den kan oppfylles igjen."
+    },
+    "refundModal": {
+      "heading": "Refunder angrede varer",
+      "calculatingLabel": "Beregner refusjon",
+      "calculating": "Beregner refusjonsbeløpet …",
+      "nothingToRefund": "Det er ingenting å refundere for denne ordren. De angrede varene kan allerede være refundert, eller ordren kan være kansellert.",
+      "itemsHeading": "Varer som skal refunderes",
+      "subtotal": "Delsum for varer",
+      "shippingLine": "Opprinnelig frakt",
+      "amount": "Refusjonsbeløp",
+      "total": "Total refusjon",
+      "body": "De angrede varene refunderes til den opprinnelige betalingsmåten og legges tilbake på lager når det er mulig. Shopify sender kunden en refusjonskvittering på e-post.",
+      "includesShipping": "Kunden har angret hele ordren, så den opprinnelige fraktkostnaden er inkludert.",
+      "unshippedItems": "Varer som ikke er sendt ennå, fjernes fra ordren og sendes derfor ikke.",
+      "inReturn_one": "{{count}} angret vare er ikke inkludert fordi den er i retur {{name}}. Refunder den med Behandle og refundere på returen.",
+      "inReturn_other": "{{count}} angrede varer er ikke inkludert fordi de er i retur {{name}}. Refunder dem med Behandle og refundere på returen.",
+      "allInReturn": "Alle de angrede varene er i retur {{name}}. Refunder dem med Behandle og refundere på returen, som også lukker den.",
+      "irreversible": "Dette kan ikke angres.",
+      "confirmAmount": "Refunder {{amount}}",
+      "confirm": "Refunder"
+    },
+    "shopifyNotes": {
+      "holdAutomatic": "Angreforespørsel for ordre {{order}} venter på gjennomgang av de ansatte",
+      "holdManual": "Angreforespørsel for ordre {{order}} ble holdt tilbake av de ansatte",
+      "canceled": "Kansellert av {{appName}} fordi kunden angret kjøpet (forespørsel {{id}}).",
+      "refunded": "Refundert av {{appName}} fordi kunden angret kjøpet (forespørsel {{id}}).",
+      "returnReason": "Angreforespørsel: {{reason}}",
+      "returnReasonNone": "Angreforespørsel (ingen årsak oppgitt)"
+    }
+  },
+  "emailTemplates": {
+    "pageTitle": "Varsler",
+    "loadError": "Kunne ikke laste inn varslene",
+    "saveError": "Kunne ikke lagre varslene",
+    "savedToast": "Varslene er lagret",
+    "resetToast": "{{name}} er tilbakestilt til standard",
+    "sender": {
+      "heading": "Avsender",
+      "description": "Disse innstillingene gjelder for all e-post appen sender for butikken din. Send fra din egen bekreftede adresse, og velg hvor svar fra kunder skal gå.",
+      "emailLabel": "Avsenderadresse",
+      "emailPlaceholder": "notifications@withdrawaleasy.com",
+      "detailsVerified": "E-post sendes fra denne adressen.",
+      "detailsPending": "Skriv inn koden vi sendte til denne adressen, for å bekrefte den.",
+      "detailsDefault": "Hvis du lar feltet stå tomt, sendes e-post fra {{email}}.",
+      "detailsDefaultFallback": "Hvis du lar feltet stå tomt, sendes e-post fra appens standardadresse.",
+      "freeProviderWarning": "Gratis e-postleverandører som Gmail og Yahoo kan ikke autentiseres. Kundene ser «via brevosend.com» i e-post fra denne adressen. For et mer profesjonelt inntrykk bør du bruke en adresse på butikkens domene.",
+      "codeLabel": "Bekreftelseskode",
+      "codeDetails": "Skriv inn den 6-sifrede koden fra e-posten vi sendte deg.",
+      "verifyCode": "Bekreft koden",
+      "checkStatus": "Sjekk bekreftelsesstatus",
+      "verifyEmail": "Bekreft e-postadressen",
+      "codeSent": "Vi har sendt en bekreftelseskode til {{email}}.",
+      "notVerifiedYet": "Denne e-postadressen er ikke bekreftet ennå. Se etter koden i innboksen, og prøv igjen.",
+      "replyToLabel": "Svaradresse",
+      "replyToPlaceholder": "support@dinbutikk.no",
+      "replyToDetails": "Svar fra kunder går som standard til butikkens e-postadresse. Skriv inn en annen adresse hvis svarene skal gå et annet sted."
+    },
+    "domain": {
+      "heading": "Domeneautentisering",
+      "description": "Autentiser domenet ditt slik at kundene ikke ser «via brevosend.com» i e-postene dine. Dette er valgfritt, men vi anbefaler det hvis du sender fra butikkens domene.",
+      "label": "Domene",
+      "placeholder": "dinbutikk.no",
+      "details": "Skriv inn domenet du sender e-post fra, ikke myshopify.com-domenet ditt.",
+      "freeProviderWarning": "Gratis e-postleverandører som Gmail og Yahoo kan ikke autentiseres. Skriv inn butikkens domene i stedet.",
+      "columns": {
+        "record": "Post",
+        "type": "Type",
+        "host": "Vert",
+        "value": "Verdi"
+      },
+      "records": {
+        "brevo_code": "Eierskap til domenet",
+        "dkim_record": "DKIM",
+        "dkim1Record": "DKIM 1",
+        "dkim2Record": "DKIM 2",
+        "dmarc_record": "DMARC"
+      },
+      "copyHost": "Kopier vert",
+      "copyValue": "Kopier verdi",
+      "verifyRecords": "Bekreft DNS-poster",
+      "authenticate": "Autentiser domenet",
+      "pendingInfo": "Legg til disse postene hos domeneleverandøren din, og velg deretter Bekreft DNS-poster.",
+      "notVerifiedYet": "Domenet ditt er ikke bekreftet ennå. DNS-endringer kan ta litt tid å oppdateres, så prøv igjen senere."
+    },
+    "notification": {
+      "heading": "E-postmal",
+      "emailLabel": "E-post",
+      "language": "Språk",
+      "languageDetails": "Velg et språk for å redigere denne e-posten på det språket. Hvert språk lagres separat. Kundene får e-post på sitt eget språk.",
+      "send": "Send denne e-posten",
+      "requiredDetails": "EU-retten krever denne e-posten, så den kan ikke deaktiveres.",
+      "merchantDetails": "Deaktiver for å slutte å motta denne e-posten.",
+      "decisionDetails": "Deaktiver for å slutte å sende denne e-posten som standard. Du kan fortsatt velge å sende den når du godkjenner eller avviser en enkelt forespørsel.",
+      "subject": "Emne",
+      "reset": "Tilbakestill til standard",
+      "customized": "Tilpasset"
+    },
+    "templates": {
+      "customerConfirmation": {
+        "name": "Angrebekreftelse til kunden",
+        "description": "Sendes til kundene så snart de sender inn en angreforespørsel."
+      },
+      "merchantNotification": {
+        "name": "Varsel om ny forespørsel",
+        "description": "Sendes til butikkens kontaktadresse når en kunde sender inn en ny angreforespørsel. Svar på den for å sende e-post til kunden."
+      },
+      "withdrawalApproved": {
+        "name": "Angring godkjent",
+        "description": "Sendes til kundene når du godkjenner angreforespørselen deres. Du kan gå gjennom og redigere den før den sendes."
+      },
+      "withdrawalRejected": {
+        "name": "Angring avvist",
+        "description": "Sendes til kundene når du avviser angreforespørselen deres. Du kan gå gjennom og redigere den før den sendes."
+      }
+    },
+    "merchantDefaults": {
+      "subject": "Ny angreforespørsel – ordre {{order}}",
+      "heading": "Ny angreforespørsel",
+      "intro": "En kunde har sendt inn en angreforespørsel. Her er alt du trenger for å gå gjennom den.",
+      "rows": {
+        "name": "Navn",
+        "email": "E-post",
+        "date": "Dato",
+        "orderNumber": "Ordrenummer",
+        "reference": "Referansenummer",
+        "reason": "Årsak"
+      },
+      "button": "Se forespørsel",
+      "itemsHeading": "Forespurte varer",
+      "footnote": "Åpne forespørselen i administrasjonen for å godkjenne eller avvise den. Refusjonsfristen følges automatisk opp der."
+    },
+    "body": {
+      "heading": "E-posttekst",
+      "editCode": "Rediger kode",
+      "htmlLabel": "HTML-tekst for e-posten",
+      "previewHeading": "Forhåndsvisning av e-post"
+    },
+    "variables": {
+      "heading": "Variabler",
+      "help": "Velg en variabel for å sette den inn ved markøren.",
+      "insert": "Sett inn {{label}}: {{description}}",
+      "groups": {
+        "customer": "Kunde",
+        "order": "Ordre",
+        "withdrawal": "Angring",
+        "request": "Forespørsel",
+        "shop": "Butikk"
+      },
+      "tokens": {
+        "customer": {
+          "first_name": {
+            "label": "Fornavn",
+            "description": "Kundens fornavn"
+          },
+          "last_name": {
+            "label": "Etternavn",
+            "description": "Kundens etternavn"
+          },
+          "email": {
+            "label": "E-post",
+            "description": "Kundens e-postadresse"
+          }
+        },
+        "order": {
+          "name": {
+            "label": "Ordrenummer",
+            "description": "Ordrenummeret, for eksempel #2138"
+          },
+          "id": {
+            "label": "Ordre-ID",
+            "description": "Ordrens interne ID"
+          }
+        },
+        "withdrawal": {
+          "request_id": {
+            "label": "Referansenummer",
+            "description": "Angreforespørselens referansenummer"
+          },
+          "submitted_at": {
+            "label": "Innsendingsdato",
+            "description": "Dato og klokkeslett da forespørselen ble sendt"
+          },
+          "reason": {
+            "label": "Årsak",
+            "description": "Årsaken kunden oppga, hvis noen"
+          },
+          "selected_products": {
+            "label": "Valgte produkter (tekst)",
+            "description": "De forespurte varene som en kommadelt liste"
+          }
+        },
+        "request": {
+          "status": {
+            "label": "Status",
+            "description": "Forespørselens nåværende status"
+          },
+          "url": {
+            "label": "Kobling til forespørselen",
+            "description": "En kobling til forespørselen i appen"
+          }
+        },
+        "shop": {
+          "name": {
+            "label": "Butikknavn",
+            "description": "Navnet på butikken din"
+          },
+          "email": {
+            "label": "Butikkens e-post",
+            "description": "Butikkens kontaktadresse"
+          }
+        }
+      }
+    },
+    "validation": {
+      "email": "Skriv inn en gyldig e-postadresse.",
+      "subjectRequired": "Skriv inn et emne.",
+      "subjectTooLong": "Emnet kan ikke være lengre enn {{max}} tegn.",
+      "bodyRequired": "Skriv inn en e-posttekst."
+    }
+  },
+  "sample": {
+    "customerName": "Kari Nordmann",
+    "items": {
+      "lamp": {
+        "title": "Fjord bordlampe",
+        "variant": "Eik / Stor"
+      },
+      "candleHolder": {
+        "title": "Tind lysestake",
+        "variant": "Messing"
+      }
+    },
+    "reason": "Jeg har ombestemt meg"
+  },
+  "faqs": {
+    "pageTitle": "Vanlige spørsmål",
+    "searchLabel": "Søk i vanlige spørsmål",
+    "searchPlaceholder": "Søk etter spørsmål, for eksempel «refusjon» eller «frist»",
+    "noResults": "Ingen spørsmål samsvarer med «{{query}}»",
+    "noResultsHelp": "Prøv et annet ord, eller kontakt kundestøtte nedenfor.",
+    "showAnswer": "Vis svar: {{question}}",
+    "hideAnswer": "Skjul svar: {{question}}",
+    "groups": {
+      "gettingStarted": "Kom i gang",
+      "deadline": "Angrefrist",
+      "requests": "Håndtering av forespørsler",
+      "emailsLanguages": "E-post og språk"
+    },
+    "actions": {
+      "goToSettings": "Gå til Innstillinger",
+      "goToRequests": "Gå til Forespørsler",
+      "goToNotifications": "Gå til Varsler"
+    },
+    "stillStuck": {
+      "heading": "Har du fortsatt spørsmål?",
+      "body": "Kundestøtteteamet vårt leser og svarer på hver e-post.",
+      "link": "Kontakt kundestøtte"
+    },
+    "items": {
+      "what-it-does": {
+        "question": "Hva gjør appen?",
+        "paragraphs": [
+          "Den gir EU-kundene dine en tydelig måte å angre et kjøp på, slik EU-retten krever. Den gir deg også ett sted der du administrerer alle forespørsler.",
+          "Kundene åpner skjemaet fra ordren sin, velger varene de vil angre, og bekrefter. Hver forespørsel vises deretter på siden Forespørsler med varene, årsaken og refusjonsfristen din. Appen sender de påkrevde e-postene for deg."
+        ]
+      },
+      "where-form-appears": {
+        "question": "Hvor finner kundene angreskjemaet?",
+        "paragraphs": [
+          "Du kan vise skjemaet på 2 steder. Bruk det ene eller begge:"
+        ],
+        "bullets": [
+          "Ordrestatusside: siden kundene ser etter kassen og når de åpner koblingen i ordrebekreftelsen.",
+          "Butikkside: en side i nettbutikken for kunder som kommer tilbake senere. De finner ordren med ordrenummer og e-post."
+        ],
+        "closing": "Aktiver hvert sted i Innstillinger, og legg deretter til appblokken for stedet én gang. Oppsettsveiledningen på Hjem viser hvilke blokker som er lagt til."
+      },
+      "form-not-showing": {
+        "question": "Hvorfor ser ikke en kunde angreskjemaet?",
+        "paragraphs": [
+          "Sjekk disse punktene, med det vanligste først:"
+        ],
+        "bullets": [
+          "Skjemaet er deaktivert, eller stedet kunden bruker, er ikke aktivert i Innstillinger.",
+          "Appblokken er ikke lagt til på den siden ennå.",
+          "Ordren sendes ikke til ett av de kvalifiserte landene dine.",
+          "Angrefristen for ordren er utløpt.",
+          "Ordren er kansellert eller har allerede en ventende forespørsel. Hver ordre kan bare ha 1 ventende forespørsel om gangen."
+        ]
+      },
+      "deadline": {
+        "question": "Når starter og slutter angrefristen?",
+        "paragraphs": [
+          "Ifølge EU-retten starter fristen når kunden mottar varene, ikke når kunden bestiller. Kundene kan også angre når som helst før varene kommer fram."
+        ],
+        "bullets": [
+          "Ikke sendt ennå: fristen har ikke startet, så kundene kan alltid angre.",
+          "Levert: fristen starter på fraktselskapets leveringsdato og varer i {{withdrawalDays}}. Du kan endre antallet dager i Innstillinger.",
+          "Sendt, men uten leveringsdato: appen bruker fraktselskapets beregnede leveringsdato. Hvis det ikke finnes noen, bruker den sendingsdatoen pluss den beregnede transporttiden din."
+        ]
+      },
+      "transit-days": {
+        "question": "Hva brukes den beregnede transporttiden til?",
+        "paragraphs": [
+          "Mange fraktselskaper sender ikke en leveringsdato til Shopify. Uten den kan ikke appen vite når angrefristen starter, så den legger den beregnede transporttiden din til sendingsdatoen.",
+          "Angi omtrent hvor lang tid pakkene dine bruker på å komme fram. Akkurat nå er den {{transitDays}}. Velg en lengre tid hvis du er usikker. En for kort tid kan gjøre at en kundes angrefrist slutter for tidlig."
+        ]
+      },
+      "split-shipments": {
+        "question": "Hva om en ordre sendes i mer enn 1 pakke?",
+        "paragraphs": [
+          "Angrefristen starter når den siste pakken kommer fram. Varer som appen holder tilbake fordi kunden har angret dem, teller ikke, siden de ikke blir sendt.",
+          "Hvis en kunde angrer mens bare en del av ordren er sendt, håndterer appen hver del separat:"
+        ],
+        "bullets": [
+          "Varer som ikke er sendt: appen kan holde dem tilbake slik at de ikke sendes.",
+          "Varer som er sendt: appen kan opprette en retur for dem."
+        ],
+        "closing": "Appen kansellerer aldri en delvis sendt ordre, fordi det også ville kansellert varer kunden allerede har."
+      },
+      "after-submit": {
+        "question": "Hva skjer etter at en kunde har sendt inn en forespørsel?",
+        "paragraphs": [
+          "Dette skjer, i denne rekkefølgen:"
+        ],
+        "bullets": [
+          "Forespørselen vises på siden Forespørsler som Venter.",
+          "Kunden får en bekreftelses-e-post. Den sendes alltid, fordi den er kundens bevis på angringen.",
+          "Du får også en e-post hvis varselet om nye forespørsler er aktivert.",
+          "Automatiseringsinnstillingene dine kjøres. Appen kan for eksempel holde tilbake oppfyllelsen eller merke ordren."
+        ]
+      },
+      "automation": {
+        "question": "Hva gjør automatiseringsinnstillingene?",
+        "paragraphs": [
+          "De kjøres når en forespørsel kommer inn. Hva appen kan gjøre, avhenger av om ordren er sendt:"
+        ],
+        "bullets": [
+          "Før ordren sendes: hold tilbake oppfyllelsen slik at ingenting sendes mens du går gjennom forespørselen. Du kan også la appen kansellere og refundere hele ordren med en gang.",
+          "Etter at ordren er sendt: opprett en retur i Shopify for de sendte varene.",
+          "Delvis sendt: begge deler gjelder. Appen holder bare tilbake de forespurte varene som ikke er sendt, og oppretter en retur for dem som er sendt."
+        ],
+        "closing": "I alle tilfeller kan appen også merke ordren. Automatiseringen godkjenner eller avviser aldri en forespørsel. Det er alltid du som avgjør."
+      },
+      "partial-withdrawal": {
+        "question": "Kan en kunde angre bare noen av varene?",
+        "paragraphs": [
+          "Ja. Kundene velger hvilke varer de angrer. Forespørselen, refusjonen og eventuell retur omfatter bare disse varene. Den opprinnelige fraktkostnaden refunderes bare når kunden angrer hele ordren.",
+          "Hver ordre kan ha 1 ventende forespørsel om gangen. Når du har godkjent eller avvist den, kan kunden sende en ny forespørsel for andre varer."
+        ]
+      },
+      "reason": {
+        "question": "Må kundene oppgi en årsak?",
+        "paragraphs": [
+          "Nei. Ifølge EU-retten trenger ikke kundene en årsak for å angre, så årsaksfeltet er alltid valgfritt. I Innstillinger kan du velge hvilke årsaker som skal tilbys, eller slutte å spørre."
+        ]
+      },
+      "refund": {
+        "question": "Hvordan refunderer jeg en angring?",
+        "paragraphs": [
+          "Åpne forespørselen fra siden Forespørsler. Hvordan du refunderer, avhenger av hvor varene er:"
+        ],
+        "bullets": [
+          "Varer som ikke er i en retur: velg Refunder. Varer som ikke er sendt ennå, fjernes fra ordren og sendes derfor ikke.",
+          "Varer i en retur: når de er kommet tilbake, velger du Behandle og refundere på returen. Da refunderes kunden, og returen lukkes.",
+          "Ingenting er sendt ennå: du kan også kansellere og refundere hele ordren fra Flere handlinger."
+        ],
+        "closing": "EU-retten gir deg {{refundDays}} fra angringen til å refundere. Forespørselssiden viser hvor mye tid som gjenstår. Refunder før du godkjenner forespørselen."
+      },
+      "returns": {
+        "question": "Hvordan fungerer returer?",
+        "paragraphs": [
+          "En retur forteller Shopify hvilke varer kunden sender tilbake. Appen kan opprette en når en forespørsel kommer inn, eller du kan velge Opprett retur på forespørselssiden.",
+          "En retur omfatter bare varer som er sendt. Kunden refunderes ikke når returen opprettes. Når varene er kommet tilbake, velger du Behandle og refundere på returen."
+        ]
+      },
+      "decision-lock": {
+        "question": "Hvorfor deaktiveres ordrehandlingene etter at jeg har godkjent eller avvist en forespørsel?",
+        "paragraphs": [
+          "Når du godkjenner eller avviser, avsluttes forespørselen. Deretter deaktiveres refusjoner, tilbakeholdelser, returer og kanselleringer, slik at ordren ikke endres ved en feil. Derfor bør du refundere før du godkjenner.",
+          "Avgjørelsen opphever også alle tilbakeholdelser av oppfyllelse som appen har lagt inn. Hvis opphevingen mislykkes, kan du fortsatt velge Opphev tilbakeholdelse av oppfyllelse."
+        ]
+      },
+      "emails": {
+        "question": "Hvilke e-poster sender appen, og kan jeg redigere dem?",
+        "paragraphs": [
+          "Appen sender {{emailCount}} e-poster. Du kan redigere alle på siden Varsler:"
+        ],
+        "bullets": [
+          "Angrebekreftelse til kunden: sendes når en kunde sender inn en forespørsel. Den er alltid aktivert.",
+          "Varsel om ny forespørsel: sendes til butikkens kontaktadresse. Du kan deaktivere den.",
+          "Angring godkjent: sendes til kunden når du godkjenner en forespørsel. Du kan gå gjennom den først eller deaktivere den.",
+          "Angring avvist: sendes til kunden når du avviser en forespørsel. Du kan gå gjennom den først eller deaktivere den."
+        ],
+        "closing": "Du kan redigere emnet og teksten i hver e-post på alle språk og legge til variabler som ordrenummeret eller kundens navn. Forhåndsvisningen oppdateres mens du skriver."
+      },
+      "countries-languages": {
+        "question": "Hvilke land og språk støtter appen?",
+        "paragraphs": [
+          "Alle EU-land er kvalifisert som standard. Hvis du bare selger til noen av dem, velger du Bestemte land i Innstillinger.",
+          "Skjemaet finnes på {{languageCount}} språk: {{languages}}. Kundene ser det på sitt eget språk.",
+          "Engelsk er grunnspråket. Hvis du lar et oversatt felt stå tomt, ser kundene den engelske teksten i stedet."
+        ]
+      }
+    }
+  },
+  "featureRequest": {
+    "pageTitle": "Foreslå en funksjon",
+    "intro": "Fortell oss hva du ønsker deg i appen. Vi leser alle forslag.",
+    "sentHeading": "Funksjonsforslaget er sendt",
+    "sentBody": "Takk for at du delte ideen din med teamet vårt.",
+    "firstName": "Fornavn",
+    "lastName": "Etternavn",
+    "email": "E-post",
+    "request": "Hvilken funksjon ønsker du deg?",
+    "requestPlaceholder": "Beskriv funksjonen og hvordan den ville hjelpe butikken din",
+    "submit": "Send forslag"
+  },
+  "pricing": {
+    "pageTitle": "Priser",
+    "pricePerMonth": "{{price}} per måned",
+    "currentPlan": "Nåværende abonnement",
+    "choosePlan": "Velg {{plan}}",
+    "switchedToast": "Byttet til abonnementet {{plan}}",
+    "plans": {
+      "free": {
+        "name": "Free",
+        "features": [
+          "Opptil 10 angreforespørsler per måned",
+          "E-postvarsler"
+        ]
+      },
+      "starter": {
+        "name": "Starter",
+        "features": [
+          "Ubegrenset antall angreforespørsler",
+          "Egendefinerte skjemafelter",
+          "E-postvarsler"
+        ]
+      },
+      "pro": {
+        "name": "Pro",
+        "features": [
+          "Alt i Starter",
+          "Prioritert kundestøtte",
+          "Automatiske refusjoner"
+        ]
+      }
+    },
+    "switchError": "Kunne ikke endre abonnementet"
+  }
+}

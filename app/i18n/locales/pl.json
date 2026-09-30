@@ -1,0 +1,1282 @@
+{
+  "common": {
+    "add": "Dodaj",
+    "backToHome": "Wróć do strony głównej",
+    "cancel": "Anuluj",
+    "delete": "Usuń",
+    "discard": "Odrzuć",
+    "done": "Gotowe",
+    "dayCount_one": "{{count}} dzień",
+    "dayCount_few": "{{count}} dni",
+    "dayCount_many": "{{count}} dni",
+    "dayCount_other": "{{count}} dnia",
+    "emptyValue": "—",
+    "noMatches": "Brak wyników dla „{{query}}”.",
+    "preview": "Podgląd",
+    "remove": "Usuń",
+    "save": "Zapisz",
+    "verified": "Zweryfikowano"
+  },
+  "nav": {
+    "home": "Strona główna",
+    "withdrawalRequests": "Zgłoszenia",
+    "formSetup": "Ustawienia",
+    "emailTemplates": "Powiadomienia",
+    "pricing": "Cennik"
+  },
+  "errors": {
+    "generic": "Coś poszło nie tak. Spróbuj ponownie.",
+    "requestFailed": "Coś poszło nie tak (błąd {{status}}). Spróbuj ponownie.",
+    "methodNotAllowed": "Ta czynność nie jest obsługiwana.",
+    "unknownAction": "Ta czynność nie jest obsługiwana.",
+    "noValidFields": "Nie ma nic do zaktualizowania.",
+    "emailServiceUnavailable": "Nie udało się połączyć z usługą e-mail. Spróbuj ponownie za kilka minut.",
+    "emailServiceNotConfigured": "Wysyłanie e-maili nie zostało jeszcze skonfigurowane. Skontaktuj się z pomocą techniczną.",
+    "requestNotFound": "To zgłoszenie odstąpienia nie istnieje lub zostało usunięte.",
+    "requestDecided": "To zgłoszenie zostało już zatwierdzone lub odrzucone, więc działania na zamówieniu nie są już dostępne.",
+    "unknownDecision": "Wybierz, czy chcesz zatwierdzić, czy odrzucić to zgłoszenie.",
+    "invalidStatus": "Wybierz prawidłowy status tego zgłoszenia.",
+    "noteRequired": "Wpisz notatkę.",
+    "orderNotFound": "Nie można znaleźć tego zamówienia w Shopify.",
+    "invalidEmail": "Wpisz prawidłowy adres e-mail.",
+    "featureRequestIncomplete": "Wypełnij wszystkie pola przed wysłaniem prośby.",
+    "senderCodeRequired": "Wpisz kod weryfikacyjny z e-maila.",
+    "senderNotFound": "Nie udało się znaleźć tego adresu nadawcy. Usuń go i dodaj ponownie, aby otrzymać nowy kod.",
+    "senderNotStarted": "Najpierw zweryfikuj adres e-mail nadawcy.",
+    "senderIdMissing": "Nie udało się zarejestrować tego adresu nadawcy. Spróbuj ponownie.",
+    "domainInvalid": "Wpisz prawidłową domenę, np. twojsklep.pl.",
+    "domainFreeProvider": "Darmowych dostawców poczty, takich jak Gmail i Yahoo, nie można uwierzytelnić. Użyj domeny swojego sklepu."
+  },
+  "auth": {
+    "login": {
+      "heading": "Zaloguj się",
+      "shopLabel": "Domena sklepu",
+      "shopDetails": "example.myshopify.com",
+      "submit": "Zaloguj się",
+      "missingShop": "Wpisz domenę sklepu, aby się zalogować.",
+      "invalidShop": "Wpisz prawidłową domenę sklepu, np. example.myshopify.com."
+    }
+  },
+  "status": {
+    "pending": "Oczekujące",
+    "approved": "Zatwierdzone",
+    "rejected": "Odrzucone"
+  },
+  "sourceInline": {
+    "order_status": "strony statusu zamówienia",
+    "standalone_page": "strony Twojego sklepu"
+  },
+  "placements": {
+    "orderStatus": {
+      "label": "Strona statusu zamówienia",
+      "details": "Pokazuj formularz odstąpienia na stronie statusu zamówienia, którą klienci widzą po złożeniu zamówienia."
+    },
+    "storefront": {
+      "label": "Strona sklepu",
+      "details": "Pokazuj formularz odstąpienia na osobnej stronie w motywie, aby klienci mogli go znaleźć poza stroną statusu zamówienia."
+    }
+  },
+  "orderStatus": {
+    "financial": {
+      "PENDING": "Płatność oczekująca",
+      "AUTHORIZED": "Autoryzowano",
+      "PARTIALLY_PAID": "Częściowo opłacone",
+      "PAID": "Opłacone",
+      "PARTIALLY_REFUNDED": "Częściowo zwrócono środki",
+      "REFUNDED": "Zwrócono środki",
+      "VOIDED": "Unieważniono",
+      "EXPIRED": "Wygasło"
+    },
+    "fulfillment": {
+      "UNFULFILLED": "Niezrealizowane",
+      "PENDING_FULFILLMENT": "Realizacja oczekująca",
+      "OPEN": "Otwarte",
+      "IN_PROGRESS": "W toku",
+      "ON_HOLD": "Wstrzymane",
+      "PARTIALLY_FULFILLED": "Częściowo zrealizowane",
+      "FULFILLED": "Zrealizowane",
+      "RESTOCKED": "Przywrócono do magazynu",
+      "SCHEDULED": "Zaplanowane"
+    },
+    "return": {
+      "REQUESTED": "Zgłoszony",
+      "OPEN": "Otwarty",
+      "CLOSED": "Zamknięty",
+      "DECLINED": "Odrzucony",
+      "CANCELED": "Anulowany"
+    }
+  },
+  "stats": {
+    "heading": "Przegląd",
+    "description": "Podsumowanie Twoich zgłoszeń odstąpienia",
+    "viewRequests": "Zobacz zgłoszenia",
+    "total": "Wszystkie zgłoszenia",
+    "today": "Wysłane dzisiaj",
+    "pending": "Oczekujące",
+    "closed": "Zamknięte",
+    "requestCount_one": "{{count}} zgłoszenie",
+    "requestCount_few": "{{count}} zgłoszenia",
+    "requestCount_many": "{{count}} zgłoszeń",
+    "requestCount_other": "{{count}} zgłoszenia"
+  },
+  "home": {
+    "pageTitle": "Strona główna",
+    "loadError": "Nie udało się wczytać panelu",
+    "saveErrorHeading": "Nie udało się zapisać zmiany",
+    "saveErrorAction": "Spróbuj ponownie lub wprowadź zmianę w Ustawieniach.",
+    "setupBanner": {
+      "heading_one": "Pozostał {{count}} krok konfiguracji",
+      "heading_few": "Pozostały {{count}} kroki konfiguracji",
+      "heading_many": "Pozostało {{count}} kroków konfiguracji",
+      "heading_other": "Pozostało {{count}} kroku konfiguracji",
+      "body": "Wykonaj te kroki, aby przygotować formularz odstąpienia: {{steps}}."
+    },
+    "setupGuide": {
+      "heading": "Przewodnik konfiguracji",
+      "description": "Skorzystaj z tego przewodnika, aby opublikować formularz odstąpienia w swoim sklepie.",
+      "progress": "Ukończono zadania: {{completed}} z {{total}}",
+      "dismiss": "Zamknij przewodnik konfiguracji",
+      "collapse": "Zwiń przewodnik konfiguracji",
+      "expand": "Rozwiń przewodnik konfiguracji",
+      "showStep": "Pokaż szczegóły: {{step}}",
+      "hideStep": "Ukryj szczegóły: {{step}}",
+      "steps": {
+        "form": {
+          "label": "Włącz formularz odstąpienia",
+          "description": "Włącz formularz i wybierz, gdzie klienci go zobaczą. Pola, powody i treści mają już domyślny tekst. Możesz je zmienić w dowolnym momencie w Ustawieniach.",
+          "checkbox": "Włącz formularz odstąpienia",
+          "cta": "Przejdź do Ustawień",
+          "placementHeading": "Wybierz, gdzie klienci zobaczą formularz",
+          "placementDescription": "Wybierz co najmniej jedno miejsce. Każde miejsce wymaga dodania bloku aplikacji, zanim klienci zobaczą formularz."
+        },
+        "blocks": {
+          "label": "Dodaj bloki aplikacji do sklepu",
+          "description": "Dodaj blok aplikacji dla każdego miejsca wybranego w poprzednim kroku.",
+          "locked": "Ukończ krok {{step}}, aby wybrać, gdzie pojawi się formularz. Potem możesz dodać tutaj bloki aplikacji.",
+          "surfaces": {
+            "orderStatus": "Strona statusu zamówienia",
+            "theme": "Strona sklepu"
+          },
+          "live": {
+            "orderStatus": "Blok aplikacji jest aktywny na stronie statusu zamówienia.",
+            "theme": "Blok aplikacji jest aktywny na stronie sklepu."
+          }
+        }
+      }
+    },
+    "help": {
+      "heading": "Pomoc i zasoby",
+      "support": {
+        "title": "Pomoc e-mailowa",
+        "description": "Masz pytanie? Nasz zespół pomocy chętnie pomoże.",
+        "link": "Skontaktuj się z pomocą"
+      },
+      "faqs": {
+        "title": "Często zadawane pytania",
+        "description": "Znajdź odpowiedzi na częste pytania dotyczące konfiguracji i korzystania z aplikacji.",
+        "link": "Zobacz często zadawane pytania"
+      },
+      "featureRequest": {
+        "title": "Propozycje funkcji",
+        "description": "Masz pomysł na aplikację? Powiedz nam, co chcesz zobaczyć.",
+        "link": "Zaproponuj funkcję"
+      }
+    }
+  },
+  "blockSetup": {
+    "autoUpdate": "Ten komunikat zniknie automatycznie kilka sekund po zapisaniu bloku aplikacji.",
+    "addAppBlock": "Dodaj blok aplikacji",
+    "orderStatus": {
+      "heading": "Dodaj blok aplikacji do strony statusu zamówienia",
+      "body": "Klienci nie zobaczą formularza odstąpienia na stronie statusu zamówienia, dopóki nie dodasz bloku aplikacji. Aby go dodać:",
+      "steps": {
+        "open": "Wybierz poniżej <strong>Dodaj blok aplikacji</strong>. Strona statusu zamówienia otworzy się w edytorze kasy.",
+        "add": "Na pasku bocznym wybierz <strong>Dodaj blok aplikacji</strong>.",
+        "choose": "Wybierz <strong>Formularz odstąpienia</strong>.",
+        "save": "Wybierz <strong>Zapisz</strong>."
+      }
+    },
+    "storefront": {
+      "heading": "Dodaj blok aplikacji do strony sklepu",
+      "body": "Wybierz szablon strony, a następnie Dodaj blok aplikacji. Edytor motywu otworzy się z formularzem odstąpienia już dodanym jako sekcja.",
+      "templateLabel": "Szablon strony",
+      "templates": {
+        "page": "Strona domyślna",
+        "index": "Strona główna",
+        "product": "Strony produktów",
+        "collection": "Strony kolekcji",
+        "cart": "Strona koszyka"
+      },
+      "steps": {
+        "open": "Wybierz <strong>Dodaj blok aplikacji</strong>, aby otworzyć edytor motywu z dodaną sekcją.",
+        "move": "Przeciągnij sekcję w wybrane miejsce na stronie.",
+        "save": "Wybierz <strong>Zapisz</strong>."
+      }
+    }
+  },
+  "onboarding": {
+    "pageTitle": "Pierwsze kroki",
+    "heading": "Przygotuj sklep na odstąpienia od umowy w UE",
+    "intro_one": "Wykonaj ten {{count}} krok, aby zapewnić klientom z UE zgodny z prawem sposób odstąpienia od zakupu.",
+    "intro_few": "Wykonaj te {{count}} kroki, aby zapewnić klientom z UE zgodny z prawem sposób odstąpienia od zakupu.",
+    "intro_many": "Wykonaj tych {{count}} kroków, aby zapewnić klientom z UE zgodny z prawem sposób odstąpienia od zakupu.",
+    "intro_other": "Wykonaj te kroki ({{count}}), aby zapewnić klientom z UE zgodny z prawem sposób odstąpienia od zakupu.",
+    "stepBadge": "Krok {{current}} z {{total}}",
+    "completedToast": "Konfiguracja ukończona",
+    "steps": {
+      "welcome": {
+        "title": "Witaj",
+        "description": "Co robi aplikacja"
+      },
+      "form": {
+        "title": "Formularz odstąpienia",
+        "description": "Włącz formularz"
+      }
+    },
+    "actions": {
+      "getStarted": "Zacznij",
+      "continue": "Dalej",
+      "finish": "Zakończ konfigurację",
+      "skip": "Pomiń konfigurację",
+      "back": "Wstecz"
+    },
+    "help": {
+      "heading": "Potrzebujesz pomocy?",
+      "body": "Masz pytanie? <supportLink>Skontaktuj się z pomocą</supportLink>."
+    },
+    "welcome": {
+      "heading": "Witaj w {{appName}}",
+      "setupTime": "Zajmuje około 1 minuty",
+      "law": "Od 19 czerwca 2026 r. sklepy sprzedające klientom z UE muszą zapewnić 2-etapowy sposób odstąpienia od każdego zamówienia (dyrektywa UE 2023/2673, art. 11a). Sama polityka zwrotów nie wystarczy.",
+      "app": "{{appName}} dodaje przycisk odstąpienia do strony statusu zamówienia, strony w sklepie internetowym lub obu tych miejsc. Obsługuje 2-etapowe potwierdzenie i wysyła wymagany e-mail z potwierdzeniem. Wszystkimi zgłoszeniami zarządzasz w jednym miejscu.",
+      "imageAlt": "Klient odstępujący od zamówienia",
+      "requirementsHeading": "Czego wymaga prawo",
+      "requirements": {
+        "button": "Wyraźnie oznaczonego przycisku odstąpienia, który klienci łatwo znajdą",
+        "twoStep": "Procesu 2-etapowego: klienci wysyłają odstąpienie, a następnie je potwierdzają",
+        "email": "Automatycznego e-maila z potwierdzeniem, który klienci mogą zachować"
+      },
+      "penaltyHeading": "Co się stanie, jeśli nie spełnisz wymogów",
+      "penalty": "Jeśli brakuje przycisku odstąpienia lub nie działa, prawo wydłuża {{days}}-dniowy termin na odstąpienie. Klienci mają wtedy 12 miesięcy i {{days}} dni na odstąpienie od każdego takiego zamówienia."
+    },
+    "form": {
+      "heading": "Włącz formularz odstąpienia",
+      "body": "Klienci wysyłają odstąpienie, a następnie potwierdzają je w osobnym kroku, zgodnie z wymogami prawa UE. Formularz zawiera domyślne treści prawne. Klienci mają {{days}} na odstąpienie, licząc od dostawy.",
+      "switch": "Włącz formularz odstąpienia",
+      "later": "Wszystko to możesz później zmienić w Ustawieniach.",
+      "loadError": "Nie udało się wczytać ustawień formularza. Możesz teraz zakończyć konfigurację i włączyć formularz później w Ustawieniach.",
+      "saveError": "Nie udało się zapisać wyborów dotyczących formularza. Spróbuj ponownie albo zakończ konfigurację bez nich i ustaw je później w Ustawieniach.",
+      "finishWithoutSaving": "Zakończ bez zapisywania",
+      "placementError": "Wybierz co najmniej jedno miejsce lub wyłącz formularz."
+    },
+    "finishError": "Nie udało się zakończyć konfiguracji. Spróbuj ponownie."
+  },
+  "formSetup": {
+    "pageTitle": "Ustawienia",
+    "loadError": "Nie udało się wczytać ustawień",
+    "saveError": "Nie udało się zapisać ustawień",
+    "savedToast": "Zapisano ustawienia",
+    "enable": {
+      "heading": "Formularz odstąpienia",
+      "description": "Wybierz, czy klienci mogą wysyłać zgłoszenia odstąpienia i gdzie widzą formularz.",
+      "checkbox": "Włącz formularz odstąpienia",
+      "details": "Gdy ta opcja jest wyłączona, klienci nie mogą nigdzie wysyłać zgłoszeń odstąpienia.",
+      "orderStatus": "Pokazuj na stronie statusu zamówienia",
+      "storefront": "Pokazuj na stronie sklepu"
+    },
+    "countries": {
+      "heading": "Kwalifikujące się kraje",
+      "description": "Klienci widzą formularz odstąpienia tylko wtedy, gdy ich zamówienie jest wysyłane do jednego z tych krajów.",
+      "all": "Wszystkie kraje UE: {{count}} (zalecane)",
+      "allDetails": "Prawo odstąpienia od umowy obowiązuje w całej UE.",
+      "specific": "Wybrane kraje",
+      "specificDetails": "Wybierz kraje poniżej. Możesz to zmienić w dowolnym momencie.",
+      "pickerLabel": "Kraje",
+      "pickerPlaceholder": "Szukaj krajów"
+    },
+    "content": {
+      "heading": "Treść formularza",
+      "tabs": {
+        "step1": "1. Szczegóły",
+        "confirm": "2. Potwierdzenie",
+        "done": "3. Gotowe"
+      },
+      "language": "Język",
+      "languageDetails": "Wybierz język, aby edytować treść formularza w tym języku. Każdy język jest zapisywany osobno.",
+      "beforeDelivery": {
+        "heading": "Przed dostawą",
+        "description": "Wyświetlane na pierwszym ekranie formularza i w kroku Szczegóły do czasu dostarczenia zamówienia, także gdy jest w drodze."
+      },
+      "afterDelivery": {
+        "heading": "Po dostawie",
+        "description": "Wyświetlane zamiast tego, gdy Shopify oznaczy zamówienie jako dostarczone."
+      },
+      "title": "Tytuł",
+      "description": "Opis",
+      "itemHeading": "Nagłówek wyboru produktów",
+      "customerDetails": {
+        "heading": "Dane klienta",
+        "description": "Uzupełniane na podstawie zamówienia. Klienci nie mogą edytować tych pól.",
+        "locked": "Zablokowane",
+        "fullName": "Imię i nazwisko",
+        "email": "E-mail",
+        "orderNumber": "Numer zamówienia"
+      },
+      "reason": {
+        "heading": "Powód odstąpienia",
+        "checkbox": "Pytaj o powód",
+        "details": "Klienci nigdy nie muszą podawać powodu. Prawo UE wymaga, aby to pole było opcjonalne.",
+        "label": "Etykieta pola powodu",
+        "optionsHeading": "Opcje powodu",
+        "optionsHelp": "Klienci wybierają z tej listy. Dodawaj, usuwaj lub przeredaguj opcje, aby pasowały do Twojego sklepu. Na końcu zawsze dodawana jest opcja „Inny” z polem tekstowym.",
+        "removeOption": "Usuń: {{option}}",
+        "addLabel": "Dodaj powód",
+        "addPlaceholder": "Na przykład: Zamówiono przez pomyłkę",
+        "translatedHelp": "Przetłumacz każdą opcję. Aby dodać lub usunąć opcje, przełącz na angielski.",
+        "translatedEmpty": "Najpierw dodaj opcje powodu po angielsku."
+      },
+      "continueButton": "Etykieta przycisku Dalej",
+      "confirm": {
+        "heading": "Nagłówek potwierdzenia",
+        "messageBefore": "Wiadomość przed dostawą",
+        "messageAfter": "Wiadomość po dostawie",
+        "declaration": "Oświadczenie",
+        "button": "Etykieta przycisku Potwierdź"
+      },
+      "done": {
+        "titleBefore": "Tytuł przed dostawą",
+        "messageBefore": "Wiadomość przed dostawą",
+        "titleAfter": "Tytuł po dostawie",
+        "messageAfter": "Wiadomość po dostawie"
+      }
+    },
+    "automation": {
+      "heading": "Automatyzacja",
+      "description": "Wybierz, co robi aplikacja, gdy klient wyśle zgłoszenie odstąpienia.",
+      "beforeShip": {
+        "heading": "Przed wysyłką zamówienia",
+        "description": "Dotyczy zgłoszeń, które wpłyną, zanim jakikolwiek produkt zostanie wysłany.",
+        "hold": "Wstrzymaj realizację do weryfikacji",
+        "holdDetails": "Wstrzymaj realizację, dopóki nie zatwierdzisz lub nie odrzucisz zgłoszenia. Wstrzymanie zostanie zwolnione po podjęciu decyzji.",
+        "tagDetails": "Oznaczaj tagiem zamówienia, dla których zgłoszenie wpłynęło przed wysyłką, aby pracownicy mogli je znaleźć na liście zamówień."
+      },
+      "fallback": {
+        "label": "Co dzieje się z zamówieniem",
+        "hold": "Pozostaw je wstrzymane, dopóki nie zatwierdzisz lub nie odrzucisz zgłoszenia",
+        "cancelNow": "Anuluj całe zamówienie i od razu zwróć środki",
+        "releaseN": "Zwolnij wstrzymanie po określonej liczbie dni",
+        "cancelN": "Anuluj całe zamówienie i zwróć środki po określonej liczbie dni",
+        "cancelWarning": "Spowoduje to anulowanie całego zamówienia i zwrot środków, nawet jeśli klient odstąpił tylko od niektórych produktów. Shopify wyśle klientowi e-mail o anulowaniu.",
+        "days": "Liczba dni"
+      },
+      "afterDelivery": {
+        "heading": "Po wysyłce zamówienia",
+        "description": "Dotyczy zgłoszeń, które wpłyną po wysłaniu co najmniej jednego produktu, nawet jeśli nie został jeszcze dostarczony. Każde zgłoszenie i tak pojawia się na stronie Zgłoszenia.",
+        "createReturn": "Utwórz zwrot",
+        "createReturnDetails": "Utwórz w Shopify zwrot dla zgłoszonych produktów, które zostały wysłane.",
+        "tagDetails": "Oznaczaj tagiem zamówienia, dla których zgłoszenie wpłynęło po wysyłce."
+      },
+      "tag": {
+        "checkbox": "Oznacz zamówienie tagiem",
+        "label": "Tagi zamówienia",
+        "placeholder": "Dodaj tag"
+      }
+    },
+    "deadline": {
+      "heading": "Termin na odstąpienie",
+      "description": "Termin na odstąpienie liczy się od dostawy zamówienia, a nie od jego złożenia. Prawo UE wymaga co najmniej {{days}}.",
+      "days": "Liczba dni na odstąpienie po dostawie",
+      "daysDetails": "Ile czasu mają klienci na odstąpienie po dostarczeniu zamówienia.",
+      "transit": "Szacowany czas transportu (dni)",
+      "transitDetails": "Używany, gdy przewoźnik nie podaje daty dostawy ani jej szacunku. Aplikacja dodaje te dni do daty wysyłki."
+    },
+    "validation": {
+      "countryMode": "Wybierz, które kraje się kwalifikują.",
+      "euCountries": "Wybierz co najmniej jeden kraj.",
+      "title": "Wpisz tytuł.",
+      "description": "Wpisz opis.",
+      "itemHeading": "Wpisz nagłówek listy produktów.",
+      "continueButton": "Wpisz etykietę przycisku Dalej.",
+      "heading": "Wpisz nagłówek.",
+      "confirmMessage": "Wpisz wiadomość potwierdzenia.",
+      "declaration": "Wpisz oświadczenie, które klienci muszą zaakceptować.",
+      "confirmButton": "Wpisz etykietę przycisku Potwierdź.",
+      "message": "Wpisz wiadomość.",
+      "reasonLabel": "Wpisz etykietę pola powodu.",
+      "reasonOptions": "Dodaj co najmniej jeden powód.",
+      "reasonOptionTranslation": "Wpisz tłumaczenie tego powodu.",
+      "fallback": "Wybierz, co dzieje się z zamówieniem.",
+      "daysRange": "Wpisz liczbę dni od {{min}} do {{max}}.",
+      "tags": "Dodaj co najmniej jeden tag lub wyłącz tagowanie.",
+      "afterDeliveryAction": "Wybierz, co dzieje się po wysyłce zamówienia."
+    },
+    "preview": {
+      "heading": "Podgląd na żywo",
+      "compliantBadge": "Zgodne z wymogiem 2 etapów",
+      "surfaceLabel": "Podgląd",
+      "surfaces": {
+        "orderStatus": "Strona statusu zamówienia",
+        "theme": "Strona sklepu"
+      },
+      "stageLabel": "Status dostawy",
+      "stages": {
+        "beforeDelivery": "Jeszcze niedostarczone",
+        "delivered": "Dostarczone"
+      },
+      "banner": {
+        "orderStatus": "Tak klienci widzą formularz na stronie statusu zamówienia. Wybieraj przyciski, aby go wypróbować, lub użyj kart w sekcji Treść formularza, aby przejść do konkretnego kroku.",
+        "theme": "Tak klienci widzą formularz na stronie Twojego sklepu. Zaczyna się od kroku „Znajdź zamówienie”, ponieważ odwiedzający sklep nie są zalogowani."
+      },
+      "restart": "Uruchom podgląd od nowa",
+      "position": {
+        "entry": "Karta startowa",
+        "lookup": "Znajdź zamówienie",
+        "step": "Krok {{current}} z {{total}}"
+      },
+      "storefront": {
+        "start": "Rozpocznij zgłoszenie odstąpienia",
+        "findOrderHeading": "Znajdź zamówienie",
+        "findOrderBody": "Wpisz dane zamówienia, aby rozpocząć zgłoszenie odstąpienia.",
+        "fullName": "Imię i nazwisko",
+        "email": "E-mail",
+        "orderNumber": "Numer zamówienia",
+        "continue": "Dalej",
+        "steps": {
+          "step1": "Szczegóły",
+          "confirm": "Potwierdzenie",
+          "done": "Gotowe"
+        },
+        "stepOf": "Krok {{current}} z {{total}}",
+        "stepProgress": "Krok {{current}} z {{total}}: {{label}}",
+        "reasonPlaceholder": "Wybierz powód (opcjonalnie)",
+        "otherReason": "Inny",
+        "yourReason": "Twój powód",
+        "yourReasonPlaceholder": "Podaj powód",
+        "selectItem": "Wybierz co najmniej jeden produkt, aby kontynuować.",
+        "itemsToWithdraw": "Produkty objęte odstąpieniem ({{count}})",
+        "selectedTotal": "Suma wybranych produktów",
+        "previous": "Wstecz",
+        "submittedOn": "Wysłano {{date}}"
+      }
+    }
+  },
+  "requests": {
+    "pageTitle": "Zgłoszenia",
+    "searchLabel": "Szukaj zgłoszeń odstąpienia",
+    "searchPlaceholder": "Szukaj po numerze zamówienia, nazwisku klienta lub e-mailu",
+    "export": "Eksportuj",
+    "exportSelected": "Eksportuj zaznaczone",
+    "tabs": {
+      "all": "Wszystkie",
+      "withCount": "{{label}} ({{count}})"
+    },
+    "empty": {
+      "imageAlt": "",
+      "heading": "Brak zgłoszeń odstąpienia",
+      "body": "Tutaj pojawią się zgłoszenia odstąpienia od Twoich klientów.",
+      "filteredHeading": "Nie znaleziono zgłoszeń odstąpienia",
+      "filteredBody": "Spróbuj zmienić wyszukiwaną frazę lub filtr."
+    },
+    "table": {
+      "selectAll": "Zaznacz wszystkie zgłoszenia odstąpienia",
+      "selectRow": "Zaznacz zamówienie {{order}}",
+      "selectedCount": "Zaznaczono: {{count}}",
+      "order": "Zamówienie",
+      "customer": "Klient",
+      "items": "Produkty",
+      "value": "Wartość",
+      "status": "Status",
+      "submitted": "Wysłano",
+      "actions": "Działania",
+      "itemCount_one": "{{count}} produkt",
+      "itemCount_few": "{{count}} produkty",
+      "itemCount_many": "{{count}} produktów",
+      "itemCount_other": "{{count}} produktu",
+      "viewRow": "Zobacz zgłoszenie dla zamówienia {{order}}",
+      "deleteRow": "Usuń zgłoszenie dla zamówienia {{order}}"
+    },
+    "delete": {
+      "heading_one": "Usunąć zgłoszenie odstąpienia?",
+      "heading_few": "Usunąć {{count}} zgłoszenia odstąpienia?",
+      "heading_many": "Usunąć {{count}} zgłoszeń odstąpienia?",
+      "heading_other": "Usunąć {{count}} zgłoszenia odstąpienia?",
+      "body_one": "To zgłoszenie odstąpienia zostanie trwale usunięte. Tej operacji nie można cofnąć.",
+      "body_few": "Te {{count}} zgłoszenia odstąpienia zostaną trwale usunięte. Tej operacji nie można cofnąć.",
+      "body_many": "Tych {{count}} zgłoszeń odstąpienia zostanie trwale usuniętych. Tej operacji nie można cofnąć.",
+      "body_other": "Zgłoszenia odstąpienia ({{count}}) zostaną trwale usunięte. Tej operacji nie można cofnąć.",
+      "confirm_one": "Usuń zgłoszenie",
+      "confirm_few": "Usuń zgłoszenia",
+      "confirm_many": "Usuń zgłoszenia",
+      "confirm_other": "Usuń zgłoszenia",
+      "toast_one": "Usunięto zgłoszenie odstąpienia",
+      "toast_few": "Usunięto {{count}} zgłoszenia odstąpienia",
+      "toast_many": "Usunięto {{count}} zgłoszeń odstąpienia",
+      "toast_other": "Usunięto zgłoszenia odstąpienia: {{count}}"
+    },
+    "csv": {
+      "filename": "zgloszenia-odstapienia-{{date}}.csv",
+      "order": "Zamówienie",
+      "customerName": "Imię i nazwisko klienta",
+      "customerEmail": "E-mail klienta",
+      "country": "Kraj",
+      "items": "Produkty",
+      "value": "Wartość",
+      "reason": "Powód",
+      "status": "Status",
+      "submitted": "Wysłano",
+      "decided": "Rozpatrzono"
+    }
+  },
+  "requestDetail": {
+    "pageTitle": "Zgłoszenie odstąpienia",
+    "backLink": "Zgłoszenia",
+    "submittedLine": "Wysłano {{date}} ze {{source}}",
+    "previous": "Poprzednie zgłoszenie",
+    "next": "Następne zgłoszenie",
+    "badges": {
+      "canceled": "Anulowane",
+      "onHold": "Wstrzymane",
+      "return": "Zwrot: {{status}}"
+    },
+    "actions": {
+      "refund": "Zwróć środki",
+      "more": "Więcej działań",
+      "cancelOrder": "Anuluj zamówienie",
+      "placeHold": "Wstrzymaj realizację",
+      "releaseHold": "Zwolnij wstrzymanie realizacji",
+      "createReturn": "Utwórz zwrot",
+      "processReturn": "Przetwórz i zwróć środki",
+      "viewOrder": "Zobacz zamówienie"
+    },
+    "banners": {
+      "orderUnavailableHeading": "Szczegóły zamówienia są niedostępne",
+      "orderUnavailableBody": "{{error}} Działania na zamówieniu będą dostępne dopiero po wczytaniu szczegółów zamówienia.",
+      "actionFailedHeading": "Nie udało się wykonać tego działania",
+      "actionFailedAction": "Szczegóły znajdziesz poniżej w sekcji Aktywność.",
+      "canceled": "To zamówienie zostało anulowane. Działania na zamówieniu nie są już dostępne."
+    },
+    "deadline": {
+      "heading": "Termin zwrotu środków",
+      "pendingLabel": "Pozostały czas na decyzję i zwrot środków",
+      "decidedLabel": "Decyzja",
+      "badges": {
+        "overdue": "Po terminie",
+        "actionNeeded": "Wymaga działania",
+        "onTime": "W terminie"
+      },
+      "daysLeft_one": "Pozostał {{count}} dzień",
+      "daysLeft_few": "Pozostały {{count}} dni",
+      "daysLeft_many": "Pozostało {{count}} dni",
+      "daysLeft_other": "Pozostało {{count}} dnia",
+      "daysOverdue_one": "Opóźnienie: {{count}} dzień",
+      "daysOverdue_few": "Opóźnienie: {{count}} dni",
+      "daysOverdue_many": "Opóźnienie: {{count}} dni",
+      "daysOverdue_other": "Opóźnienie: {{count}} dnia",
+      "daysEarly_one": "{{count}} dzień przed terminem",
+      "daysEarly_few": "{{count}} dni przed terminem",
+      "daysEarly_many": "{{count}} dni przed terminem",
+      "daysEarly_other": "{{count}} dnia przed terminem",
+      "daysLate_one": "{{count}} dzień po terminie",
+      "daysLate_few": "{{count}} dni po terminie",
+      "daysLate_many": "{{count}} dni po terminie",
+      "daysLate_other": "{{count}} dnia po terminie",
+      "pending": "Masz {{days}} od wysłania zgłoszenia na podjęcie decyzji i zwrot środków. Termin upływa {{date}}.",
+      "pendingOverdue": "Termin upłynął {{date}}. Zwróć środki klientowi jak najszybciej.",
+      "decidedOnTime": "Rozpatrzono w {{windowDays}}-dniowym terminie zwrotu środków. Termin upływał {{date}}.",
+      "decidedLate": "Rozpatrzono po upływie terminu zwrotu środków ({{date}})."
+    },
+    "items": {
+      "heading": "Produkty objęte odstąpieniem",
+      "reject": "Odrzuć",
+      "approve": "Zatwierdź",
+      "total": "Łącznie objęte odstąpieniem",
+      "sku": "SKU: {{sku}}",
+      "quantity": "Ilość: {{count}}",
+      "shipping": {
+        "notShipped": "Jeszcze niewysłane",
+        "partlyShipped": "Częściowo wysłane",
+        "shipped": "Wysłane"
+      },
+      "partiallyShippedBanner": "Część tego zamówienia została wysłana. Niewysłane produkty można jeszcze wstrzymać, a dla wysłanych potrzebny jest zwrot."
+    },
+    "return": {
+      "heading": "Zwrot",
+      "status": "Status",
+      "created": "Utworzono",
+      "body": "W Shopify utworzono zwrot dla produktów objętych odstąpieniem.",
+      "openBody": "Gdy produkty wrócą, wybierz Przetwórz i zwróć środki. Klient otrzyma zwrot środków za zwrócone produkty, a zwrot zostanie zamknięty.",
+      "alreadyRefundedBody": "Środki za produkty z tego zwrotu zostały już zwrócone. Zamknij zwrot w Shopify, gdy produkty wrócą."
+    },
+    "processReturnModal": {
+      "heading": "Przetwórz zwrot i zwróć środki",
+      "calculating": "Obliczanie kwoty zwrotu środków…",
+      "nothingToProcess": "W tym zwrocie nie ma już nic do przetworzenia. Mógł zostać już przetworzony lub zamknięty w Shopify.",
+      "nothingToRefund": "Środki za produkty z tego zwrotu zostały już zwrócone, więc nie ma już nic do zwrócenia.",
+      "unsupportedPayment": "Nie można zwrócić środków za to zamówienie z poziomu aplikacji. Przetwórz zwrot i zwróć środki w Shopify.",
+      "itemsHeading": "Produkty w zwrocie {{name}}",
+      "subtotal": "Suma częściowa produktów",
+      "shippingLine": "Pierwotna wysyłka",
+      "total": "Łączny zwrot środków",
+      "body": "Zwrócone produkty zostaną oznaczone jako przetworzone, środki zostaną zwrócone na pierwotną metodę płatności, a zwrot zostanie zamknięty. Shopify wyśle klientowi e-mailem potwierdzenie zwrotu środków. Tej operacji nie można cofnąć.",
+      "confirmAmount": "Zwróć {{amount}}",
+      "confirm": "Przetwórz i zwróć środki"
+    },
+    "payment": {
+      "heading": "Płatność",
+      "status": "Status płatności",
+      "subtotal": "Suma częściowa odstąpienia",
+      "shipping": "Wysyłka zamówienia",
+      "total": "Suma zamówienia",
+      "refunded": "Zwrócono środki",
+      "unavailable": "Szczegóły płatności są teraz niedostępne."
+    },
+    "activity": {
+      "heading": "Aktywność",
+      "noteLabel": "Dodaj notatkę",
+      "notePlaceholder": "Dodaj notatkę…",
+      "post": "Opublikuj",
+      "noteHelp": "Notatki widzisz tylko Ty i Twoi pracownicy. Klienci nigdy ich nie widzą.",
+      "submitted": "Zgłoszenie odstąpienia wysłane ze {{source}}",
+      "decided": {
+        "approved": "Zgłoszenie zatwierdzone",
+        "rejected": "Zgłoszenie odrzucone"
+      },
+      "note": "Notatka: {{body}}",
+      "entry": "{{label}}: {{message}}",
+      "actions": {
+        "resolve_branch": "Uruchomiono automatyzację",
+        "run_automation": "Automatyzacja",
+        "automation_completed": "Automatyzacja zakończona",
+        "hold_fulfillment": "Wstrzymanie realizacji",
+        "schedule_fallback": "Zaplanowane działanie",
+        "release_hold": "Zwolniono wstrzymanie realizacji",
+        "cancel_order_immediate": "Zamówienie anulowane, środki zwrócone",
+        "cancel_order_scheduled": "Zamówienie anulowane, środki zwrócone",
+        "cancel_order_manual": "Zamówienie anulowane, środki zwrócone",
+        "cancel_order": "Zamówienie anulowane, środki zwrócone",
+        "refund": "Zwrot środków",
+        "tag_before_ship": "Oznaczono zamówienie tagiem",
+        "tag_after_delivery": "Oznaczono zamówienie tagiem",
+        "order_tag_add": "Dodano tagi zamówienia",
+        "order_tag_remove": "Usunięto tagi zamówienia",
+        "create_return": "Zwrot",
+        "refresh_return": "Odświeżono status zwrotu",
+        "process_return": "Przetwórz i zwróć środki",
+        "fetch_shop_contact": "Dane kontaktowe sklepu",
+        "customer_email": "E-mail z potwierdzeniem dla klienta",
+        "merchant_email": "Powiadomienie o nowym zgłoszeniu",
+        "notify_customer": "E-mail z decyzją",
+        "notify_merchant": "Otrzymano powiadomienie"
+      },
+      "messages": {
+        "noTags": "Nie skonfigurowano żadnych tagów",
+        "tagged": "Oznaczono zamówienie tagami: {{tags}}",
+        "noHoldableOrders": "W tym zamówieniu nie można teraz niczego wstrzymać",
+        "held": "Wstrzymano produkty, aby nie zostały wysłane",
+        "holdOff": "Wstrzymywanie realizacji do weryfikacji jest wyłączone",
+        "tagBeforeShipOff": "Tagowanie przed wysyłką jest wyłączone",
+        "tagAfterDeliveryOff": "Tagowanie po wysyłce jest wyłączone",
+        "fallbackHold": "Zamówienie pozostaje wstrzymane, dopóki nie zatwierdzisz lub nie odrzucisz zgłoszenia",
+        "fallbackInvalidDays": "Nie udało się zaplanować działania. Liczba dni jest nieprawidłowa.",
+        "scheduledRelease": "Zaplanowano zwolnienie wstrzymania na {{date}}",
+        "scheduledCancel": "Zaplanowano anulowanie i zwrot środków na {{date}}",
+        "canceled": "Zamówienie anulowane, środki zwrócone",
+        "returnCreated": "Utworzono zwrot w Shopify",
+        "returnNoMatch": "Żadnego ze zgłoszonych produktów nie można zwrócić",
+        "notifiedByEmail": "Powiadomiono w aplikacji i e-mailem",
+        "notifiedEmailFailed": "Powiadomiono w aplikacji. Nie udało się wysłać e-maila z powiadomieniem: {{error}}",
+        "notifiedInAppOnly": "Powiadomiono w aplikacji. E-mail z powiadomieniem nie został wysłany.",
+        "emailSent": "Wysłano",
+        "emailFailed": "Niepowodzenie: {{error}}",
+        "emailNotSent": "Nie wysłano, ponieważ brak odbiorcy lub e-mail nie jest skonfigurowany",
+        "orderNotFound": "Nie można znaleźć tego zamówienia w Shopify",
+        "alreadyCanceled": "Zamówienie było już anulowane",
+        "branchBeforeShip": "Zamówienie nie zostało jeszcze wysłane, więc wykonano kroki sprzed wysyłki",
+        "branchAfterDelivery": "Zamówienie zostało wysłane, więc wykonano kroki po wysyłce",
+        "branchPartiallyShipped": "Zamówienie zostało wysłane częściowo, więc wykonano kroki dla wysłanych i niewysłanych produktów",
+        "noUnshippedItemsRequested": "Żaden ze zgłoszonych produktów nie czeka na wysyłkę, więc niczego nie wstrzymano",
+        "fallbackCancelPartiallyShipped": "Zamówienie zostało wysłane częściowo, więc nie można go anulować w całości. Zgłoszone produkty pozostają wstrzymane, dopóki nie zatwierdzisz lub nie odrzucisz zgłoszenia.",
+        "returnNothingShipped": "Żaden ze zgłoszonych produktów nie został wysłany, więc zwrot nie był potrzebny",
+        "runCompleted": "Automatyzacja ukończona",
+        "runFailed": "Co najmniej jeden krok automatyzacji się nie powiódł",
+        "runSkipped": "Pominięto automatyzację",
+        "scheduledSkippedApproved": "Zgłoszenie było już zatwierdzone, więc zaplanowane działanie nie zostało wykonane",
+        "scheduledSkippedRejected": "Zgłoszenie było już odrzucone, więc zaplanowane działanie nie zostało wykonane",
+        "noHoldsPlaced": "Dla tego zgłoszenia niczego nie wstrzymano",
+        "holdsAlreadyReleased": "Wstrzymania były już zwolnione",
+        "holdReleased": "Zamówienie można ponownie realizować",
+        "holdExists": "Dla tego zgłoszenia istnieje już wstrzymanie",
+        "decisionSkipped": "Pracownik zdecydował, że nie wyśle e-maila do klienta",
+        "decisionSent": "Wysłano klientowi e-mail z decyzją",
+        "decisionFailed": "Nie udało się wysłać e-maila z decyzją: {{error}}",
+        "decisionNotConfigured": "Nie wysłano e-maila z decyzją, ponieważ e-mail nie jest skonfigurowany",
+        "refunded": "Zwrócono {{amount}}",
+        "noReturn": "Dla tego zgłoszenia nie ma zwrotu",
+        "returnStatus": "Status zwrotu: {{status}}",
+        "returnProcessed": "Przetworzono zwrot i zwrócono {{amount}}",
+        "returnNothingToProcess": "W tym zwrocie nie ma już nic do przetworzenia",
+        "returnNothingToRefund": "Środki za produkty z tego zwrotu zostały już zwrócone",
+        "returnPaymentUnsupported": "Nie można zwrócić środków za tę płatność z poziomu aplikacji. Przetwórz zwrot w Shopify.",
+        "refundNothingRefundable": "Za żaden ze zgłoszonych produktów nie można zwrócić środków. Mogły już zostać zwrócone.",
+        "refundNoSuggestion": "Shopify nie może wyliczyć zwrotu środków za te produkty. Zwróć środki w Shopify.",
+        "refundCoveredByReturn": "Wszystkie produkty objęte odstąpieniem są w otwartym zwrocie. Użyj opcji Przetwórz i zwróć środki w zwrocie, aby zwrócić za nie środki.",
+        "tagsRemoved": "Usunięto tagi zamówienia: {{tags}}",
+        "tagsAdded": "Dodano tagi zamówienia: {{tags}}"
+      }
+    },
+    "order": {
+      "heading": "Zamówienie",
+      "order": "Zamówienie",
+      "placed": "Złożono",
+      "payment": "Płatność",
+      "fulfillment": "Realizacja"
+    },
+    "customer": {
+      "heading": "Klient",
+      "avatarFallback": "Klient",
+      "contactHeading": "Dane kontaktowe",
+      "email": "E-mail",
+      "language": "Język",
+      "shippingHeading": "Adres wysyłki"
+    },
+    "automation": {
+      "heading": "Automatyzacja",
+      "stage": "Etap",
+      "stages": {
+        "before_ship": "Przed wysyłką",
+        "partially_shipped": "Częściowo wysłane",
+        "after_delivery": "Po wysyłce"
+      },
+      "hold": "Wstrzymanie realizacji",
+      "holdStates": {
+        "onHold": "Wstrzymane",
+        "released": "Zwolnione",
+        "none": "Brak"
+      },
+      "canceled": "Anulowane",
+      "return": "Zwrot"
+    },
+    "emails": {
+      "heading": "Historia e-maili",
+      "customerConfirmation": "Potwierdzenie odstąpienia dla klienta",
+      "merchantNotification": "Powiadomienie o nowym zgłoszeniu",
+      "decision": "E-mail z decyzją",
+      "statuses": {
+        "sent": "Wysłano",
+        "failed": "Niepowodzenie",
+        "notSent": "Nie wysłano"
+      }
+    },
+    "tags": {
+      "heading": "Tagi zamówienia",
+      "label": "Dodaj tag zamówienia",
+      "placeholder": "Dodaj tag",
+      "remove": "Usuń tag {{tag}}",
+      "savedToast": "Zapisano tagi zamówienia"
+    },
+    "reason": {
+      "heading": "Powód odstąpienia",
+      "quoted": "„{{reason}}”",
+      "none": "Nie podano powodu"
+    },
+    "decidedToast": {
+      "approved": "Zatwierdzono zgłoszenie odstąpienia",
+      "rejected": "Odrzucono zgłoszenie odstąpienia"
+    },
+    "cancelModal": {
+      "heading": "Anulować zamówienie?",
+      "body": "Spowoduje to anulowanie całego zamówienia w Shopify, łącznie z produktami, od których klient nie odstąpił. Środki zostaną zwrócone na pierwotną metodę płatności, produkty wrócą do magazynu, a Shopify wyśle klientowi e-mail. Tej operacji nie można cofnąć.",
+      "keep": "Zachowaj zamówienie",
+      "confirm": "Anuluj zamówienie i zwróć środki"
+    },
+    "createReturnModal": {
+      "heading": "Utwórz zwrot produktów objętych odstąpieniem",
+      "itemsHeading": "Produkty do zwrotu",
+      "subtotal": "Suma częściowa produktów",
+      "checking": "Sprawdzanie, które produkty można zwrócić…",
+      "nothingToReturn": "Żaden z produktów objętych odstąpieniem nie został jeszcze wysłany, więc nie ma czego zwracać. Wstrzymaj je, aby nie zostały wysłane, lub zwróć za nie środki, aby usunąć je z zamówienia.",
+      "notShipped_one": "{{count}} produkt objęty odstąpieniem nie został uwzględniony, ponieważ nie został jeszcze wysłany.",
+      "notShipped_few": "{{count}} produkty objęte odstąpieniem nie zostały uwzględnione, ponieważ nie zostały jeszcze wysłane.",
+      "notShipped_many": "{{count}} produktów objętych odstąpieniem nie uwzględniono, ponieważ nie zostały jeszcze wysłane.",
+      "notShipped_other": "Nie uwzględniono produktów objętych odstąpieniem ({{count}}), ponieważ nie zostały jeszcze wysłane.",
+      "notReturnable_one": "{{count}} produkt objęty odstąpieniem nie został uwzględniony, ponieważ został już zwrócony.",
+      "notReturnable_few": "{{count}} produkty objęte odstąpieniem nie zostały uwzględnione, ponieważ zostały już zwrócone.",
+      "notReturnable_many": "{{count}} produktów objętych odstąpieniem nie uwzględniono, ponieważ zostały już zwrócone.",
+      "notReturnable_other": "Nie uwzględniono produktów objętych odstąpieniem ({{count}}), ponieważ zostały już zwrócone.",
+      "body": "Spowoduje to utworzenie w Shopify zwrotu dla powyższych produktów. Klient nie otrzyma przy tym zwrotu środków. Gdy produkty wrócą, wybierz w zwrocie Przetwórz i zwróć środki.",
+      "cancel": "Anuluj",
+      "confirm": "Utwórz zwrot"
+    },
+    "decisionModal": {
+      "headingApprove": "Zatwierdzić zgłoszenie odstąpienia?",
+      "headingReject": "Odrzucić zgłoszenie odstąpienia?",
+      "approveAndSend": "Zatwierdź i wyślij e-mail",
+      "rejectAndSend": "Odrzuć i wyślij e-mail",
+      "approve": "Zatwierdź",
+      "reject": "Odrzuć",
+      "loadingLabel": "Wczytywanie podglądu e-maila",
+      "loading": "Przygotowywanie e-maila do klienta…",
+      "sendEmail": "Wyślij e-mail do klienta",
+      "language": "Ten e-mail jest w języku: {{language}} (język klienta). Twoje zmiany dotyczą tylko tego e-maila.",
+      "subject": "Temat",
+      "body": "Treść e-maila",
+      "editHtml": "Edytuj HTML",
+      "htmlLabel": "HTML e-maila",
+      "previewTitle": "Podgląd e-maila",
+      "templateUnchanged": "Twoje zmiany dotyczą tylko tego e-maila. Zapisany szablon się nie zmieni.",
+      "noEmail": "Klient nie otrzyma e-maila. W razie potrzeby możesz skontaktować się z nim osobno.",
+      "holdReleased": "Spowoduje to również zwolnienie wstrzymania realizacji tego zamówienia, aby można je było ponownie realizować."
+    },
+    "refundModal": {
+      "heading": "Zwróć środki za produkty objęte odstąpieniem",
+      "calculatingLabel": "Obliczanie zwrotu środków",
+      "calculating": "Obliczanie kwoty zwrotu środków…",
+      "nothingToRefund": "W tym zamówieniu nie ma nic do zwrotu. Środki za produkty objęte odstąpieniem mogły już zostać zwrócone lub zamówienie mogło zostać anulowane.",
+      "itemsHeading": "Produkty do zwrotu środków",
+      "subtotal": "Suma częściowa produktów",
+      "shippingLine": "Pierwotna wysyłka",
+      "amount": "Kwota zwrotu środków",
+      "total": "Łączny zwrot środków",
+      "body": "Środki za produkty objęte odstąpieniem zostaną zwrócone na pierwotną metodę płatności, a produkty w miarę możliwości wrócą do magazynu. Shopify wyśle klientowi e-mailem potwierdzenie zwrotu środków.",
+      "includesShipping": "Klient odstąpił od całego zamówienia, więc uwzględniono pierwotny koszt wysyłki.",
+      "unshippedItems": "Niewysłane jeszcze produkty zostaną usunięte z zamówienia, więc nie zostaną wysłane.",
+      "inReturn_one": "{{count}} produkt objęty odstąpieniem nie został uwzględniony, ponieważ jest w zwrocie {{name}}. Zwróć za niego środki przez Przetwórz i zwróć środki w zwrocie.",
+      "inReturn_few": "{{count}} produkty objęte odstąpieniem nie zostały uwzględnione, ponieważ są w zwrocie {{name}}. Zwróć za nie środki przez Przetwórz i zwróć środki w zwrocie.",
+      "inReturn_many": "{{count}} produktów objętych odstąpieniem nie uwzględniono, ponieważ są w zwrocie {{name}}. Zwróć za nie środki przez Przetwórz i zwróć środki w zwrocie.",
+      "inReturn_other": "Nie uwzględniono produktów objętych odstąpieniem ({{count}}), ponieważ są w zwrocie {{name}}. Zwróć za nie środki przez Przetwórz i zwróć środki w zwrocie.",
+      "allInReturn": "Wszystkie produkty objęte odstąpieniem są w zwrocie {{name}}. Zwróć za nie środki przez Przetwórz i zwróć środki w zwrocie, co również go zamknie.",
+      "irreversible": "Tej operacji nie można cofnąć.",
+      "confirmAmount": "Zwróć {{amount}}",
+      "confirm": "Zwróć środki"
+    },
+    "shopifyNotes": {
+      "holdAutomatic": "Zgłoszenie odstąpienia dla zamówienia {{order}} czeka na weryfikację przez pracowników",
+      "holdManual": "Zgłoszenie odstąpienia dla zamówienia {{order}} zostało wstrzymane przez pracowników",
+      "canceled": "Anulowane przez {{appName}}, ponieważ klient odstąpił od zakupu (zgłoszenie {{id}}).",
+      "refunded": "Środki zwrócone przez {{appName}}, ponieważ klient odstąpił od zakupu (zgłoszenie {{id}}).",
+      "returnReason": "Zgłoszenie odstąpienia: {{reason}}",
+      "returnReasonNone": "Zgłoszenie odstąpienia (nie podano powodu)"
+    }
+  },
+  "emailTemplates": {
+    "pageTitle": "Powiadomienia",
+    "loadError": "Nie udało się wczytać powiadomień",
+    "saveError": "Nie udało się zapisać powiadomień",
+    "savedToast": "Zapisano powiadomienia",
+    "resetToast": "Przywrócono domyślne ustawienia: {{name}}",
+    "sender": {
+      "heading": "Nadawca",
+      "description": "Te ustawienia dotyczą każdego e-maila wysyłanego przez aplikację w imieniu Twojego sklepu. Wysyłaj z własnego zweryfikowanego adresu i wybierz, dokąd trafiają odpowiedzi klientów.",
+      "emailLabel": "Adres e-mail nadawcy",
+      "emailPlaceholder": "notifications@withdrawaleasy.com",
+      "detailsVerified": "E-maile są wysyłane z tego adresu.",
+      "detailsPending": "Wpisz kod wysłany na ten adres, aby go zweryfikować.",
+      "detailsDefault": "Jeśli zostawisz to pole puste, e-maile będą wysyłane z adresu {{email}}.",
+      "detailsDefaultFallback": "Jeśli zostawisz to pole puste, e-maile będą wysyłane z domyślnego adresu aplikacji.",
+      "freeProviderWarning": "Darmowych dostawców poczty, takich jak Gmail i Yahoo, nie można uwierzytelnić. Klienci zobaczą „via brevosend.com” w e-mailach z tego adresu. Aby wyglądało to bardziej profesjonalnie, użyj adresu w domenie swojego sklepu.",
+      "codeLabel": "Kod weryfikacyjny",
+      "codeDetails": "Wpisz 6-cyfrowy kod z e-maila, który Ci wysłaliśmy.",
+      "verifyCode": "Zweryfikuj kod",
+      "checkStatus": "Sprawdź status weryfikacji",
+      "verifyEmail": "Zweryfikuj e-mail",
+      "codeSent": "Wysłaliśmy kod weryfikacyjny na adres {{email}}.",
+      "notVerifiedYet": "Ten adres e-mail nie jest jeszcze zweryfikowany. Znajdź kod w skrzynce odbiorczej i spróbuj ponownie.",
+      "replyToLabel": "Adres do odpowiedzi",
+      "replyToPlaceholder": "pomoc@twojsklep.pl",
+      "replyToDetails": "Odpowiedzi klientów domyślnie trafiają na adres e-mail sklepu. Aby kierować je gdzie indziej, wpisz inny adres."
+    },
+    "domain": {
+      "heading": "Uwierzytelnianie domeny",
+      "description": "Uwierzytelnij domenę, aby klienci nie widzieli „via brevosend.com” w Twoich e-mailach. To opcjonalne, ale zalecane, jeśli wysyłasz z domeny sklepu.",
+      "label": "Domena",
+      "placeholder": "twojsklep.pl",
+      "details": "Wpisz domenę, z której wysyłasz e-maile, a nie domenę myshopify.com.",
+      "freeProviderWarning": "Darmowych dostawców poczty, takich jak Gmail i Yahoo, nie można uwierzytelnić. Wpisz domenę swojego sklepu.",
+      "columns": {
+        "record": "Rekord",
+        "type": "Typ",
+        "host": "Host",
+        "value": "Wartość"
+      },
+      "records": {
+        "brevo_code": "Własność domeny",
+        "dkim_record": "DKIM",
+        "dkim1Record": "DKIM 1",
+        "dkim2Record": "DKIM 2",
+        "dmarc_record": "DMARC"
+      },
+      "copyHost": "Kopiuj host",
+      "copyValue": "Kopiuj wartość",
+      "verifyRecords": "Zweryfikuj rekordy DNS",
+      "authenticate": "Uwierzytelnij domenę",
+      "pendingInfo": "Dodaj te rekordy u dostawcy domeny, a następnie wybierz Zweryfikuj rekordy DNS.",
+      "notVerifiedYet": "Twoja domena nie jest jeszcze zweryfikowana. Aktualizacja zmian DNS może trochę potrwać, więc spróbuj ponownie później."
+    },
+    "notification": {
+      "heading": "Szablon e-maila",
+      "emailLabel": "E-mail",
+      "language": "Język",
+      "languageDetails": "Wybierz język, aby edytować ten e-mail w tym języku. Każdy język jest zapisywany osobno. Klienci otrzymują e-maile w swoim języku.",
+      "send": "Wysyłaj ten e-mail",
+      "requiredDetails": "Prawo UE wymaga tego e-maila, więc nie można go wyłączyć.",
+      "merchantDetails": "Wyłącz, aby przestać otrzymywać ten e-mail.",
+      "decisionDetails": "Wyłącz, aby domyślnie nie wysyłać tego e-maila. Nadal możesz go wysłać przy zatwierdzaniu lub odrzucaniu pojedynczego zgłoszenia.",
+      "subject": "Temat",
+      "reset": "Przywróć domyślne",
+      "customized": "Dostosowany"
+    },
+    "templates": {
+      "customerConfirmation": {
+        "name": "Potwierdzenie odstąpienia dla klienta",
+        "description": "Wysyłany do klientów zaraz po wysłaniu zgłoszenia odstąpienia."
+      },
+      "merchantNotification": {
+        "name": "Powiadomienie o nowym zgłoszeniu",
+        "description": "Wysyłany na kontaktowy adres e-mail sklepu, gdy klient wyśle nowe zgłoszenie odstąpienia. Odpowiedz na niego, aby napisać do klienta."
+      },
+      "withdrawalApproved": {
+        "name": "Odstąpienie zatwierdzone",
+        "description": "Wysyłany do klientów, gdy zatwierdzisz ich zgłoszenie odstąpienia. Możesz go przejrzeć i edytować przed wysłaniem."
+      },
+      "withdrawalRejected": {
+        "name": "Odstąpienie odrzucone",
+        "description": "Wysyłany do klientów, gdy odrzucisz ich zgłoszenie odstąpienia. Możesz go przejrzeć i edytować przed wysłaniem."
+      }
+    },
+    "merchantDefaults": {
+      "subject": "Nowe zgłoszenie odstąpienia — zamówienie {{order}}",
+      "heading": "Nowe zgłoszenie odstąpienia",
+      "intro": "Klient wysłał zgłoszenie odstąpienia. Oto wszystko, czego potrzebujesz, aby je rozpatrzyć.",
+      "rows": {
+        "name": "Imię i nazwisko",
+        "email": "E-mail",
+        "date": "Data",
+        "orderNumber": "Numer zamówienia",
+        "reference": "Numer referencyjny",
+        "reason": "Powód"
+      },
+      "button": "Zobacz zgłoszenie",
+      "itemsHeading": "Zgłoszone produkty",
+      "footnote": "Otwórz zgłoszenie w panelu administracyjnym, aby je zatwierdzić lub odrzucić. Termin zwrotu środków jest tam śledzony automatycznie."
+    },
+    "body": {
+      "heading": "Treść e-maila",
+      "editCode": "Edytuj kod",
+      "htmlLabel": "Treść HTML e-maila",
+      "previewHeading": "Podgląd e-maila"
+    },
+    "variables": {
+      "heading": "Zmienne",
+      "help": "Wybierz zmienną, aby wstawić ją w miejscu kursora.",
+      "insert": "Wstaw {{label}}: {{description}}",
+      "groups": {
+        "customer": "Klient",
+        "order": "Zamówienie",
+        "withdrawal": "Odstąpienie",
+        "request": "Zgłoszenie",
+        "shop": "Sklep"
+      },
+      "tokens": {
+        "customer": {
+          "first_name": {
+            "label": "Imię",
+            "description": "Imię klienta"
+          },
+          "last_name": {
+            "label": "Nazwisko",
+            "description": "Nazwisko klienta"
+          },
+          "email": {
+            "label": "E-mail",
+            "description": "Adres e-mail klienta"
+          }
+        },
+        "order": {
+          "name": {
+            "label": "Numer zamówienia",
+            "description": "Numer zamówienia, np. #2138"
+          },
+          "id": {
+            "label": "Identyfikator zamówienia",
+            "description": "Wewnętrzny identyfikator zamówienia"
+          }
+        },
+        "withdrawal": {
+          "request_id": {
+            "label": "Numer referencyjny",
+            "description": "Numer referencyjny zgłoszenia odstąpienia"
+          },
+          "submitted_at": {
+            "label": "Data wysłania",
+            "description": "Data i godzina wysłania zgłoszenia"
+          },
+          "reason": {
+            "label": "Powód",
+            "description": "Powód podany przez klienta, jeśli został podany"
+          },
+          "selected_products": {
+            "label": "Wybrane produkty (tekst)",
+            "description": "Zgłoszone produkty jako lista rozdzielona przecinkami"
+          }
+        },
+        "request": {
+          "status": {
+            "label": "Status",
+            "description": "Bieżący status zgłoszenia"
+          },
+          "url": {
+            "label": "Link do zgłoszenia",
+            "description": "Link do zgłoszenia w aplikacji"
+          }
+        },
+        "shop": {
+          "name": {
+            "label": "Nazwa sklepu",
+            "description": "Nazwa Twojego sklepu"
+          },
+          "email": {
+            "label": "E-mail sklepu",
+            "description": "Kontaktowy adres e-mail Twojego sklepu"
+          }
+        }
+      }
+    },
+    "validation": {
+      "email": "Wpisz prawidłowy adres e-mail.",
+      "subjectRequired": "Wpisz temat.",
+      "subjectTooLong": "Temat może mieć maksymalnie {{max}} znaków.",
+      "bodyRequired": "Wpisz treść e-maila."
+    }
+  },
+  "sample": {
+    "customerName": "Anna Kowalska",
+    "items": {
+      "lamp": {
+        "title": "Lampa stołowa Fjord",
+        "variant": "Dąb / Duża"
+      },
+      "candleHolder": {
+        "title": "Świecznik Tind",
+        "variant": "Mosiądz"
+      }
+    },
+    "reason": "Zmieniłam zdanie"
+  },
+  "faqs": {
+    "pageTitle": "Często zadawane pytania",
+    "searchLabel": "Szukaj w często zadawanych pytaniach",
+    "searchPlaceholder": "Szukaj pytań, np. „zwrot środków” lub „termin”",
+    "noResults": "Brak pytań pasujących do „{{query}}”",
+    "noResultsHelp": "Spróbuj innego słowa lub skontaktuj się z pomocą poniżej.",
+    "showAnswer": "Pokaż odpowiedź: {{question}}",
+    "hideAnswer": "Ukryj odpowiedź: {{question}}",
+    "groups": {
+      "gettingStarted": "Pierwsze kroki",
+      "deadline": "Termin na odstąpienie",
+      "requests": "Obsługa zgłoszeń",
+      "emailsLanguages": "E-maile i języki"
+    },
+    "actions": {
+      "goToSettings": "Przejdź do Ustawień",
+      "goToRequests": "Przejdź do Zgłoszeń",
+      "goToNotifications": "Przejdź do Powiadomień"
+    },
+    "stillStuck": {
+      "heading": "Masz jeszcze pytania?",
+      "body": "Nasz zespół pomocy czyta każdy e-mail i na niego odpowiada.",
+      "link": "Skontaktuj się z pomocą"
+    },
+    "items": {
+      "what-it-does": {
+        "question": "Co robi aplikacja?",
+        "paragraphs": [
+          "Zapewnia klientom z UE czytelny sposób odstąpienia od zakupu, zgodnie z wymogami prawa UE. Daje Ci też jedno miejsce do zarządzania wszystkimi zgłoszeniami.",
+          "Klienci otwierają formularz z poziomu zamówienia, wybierają produkty, od których chcą odstąpić, i potwierdzają. Każde zgłoszenie pojawia się następnie na stronie Zgłoszenia wraz z produktami, powodem i Twoim terminem zwrotu środków. Aplikacja wysyła za Ciebie wymagane e-maile."
+        ]
+      },
+      "where-form-appears": {
+        "question": "Gdzie klienci znajdą formularz odstąpienia?",
+        "paragraphs": [
+          "Formularz możesz pokazać w 2 miejscach. Użyj jednego lub obu:"
+        ],
+        "bullets": [
+          "Strona statusu zamówienia: strona, którą klienci widzą po złożeniu zamówienia i po otwarciu linku w e-mailu z potwierdzeniem zamówienia.",
+          "Strona sklepu: strona w Twoim sklepie internetowym dla klientów, którzy wracają później. Znajdują swoje zamówienie po numerze zamówienia i adresie e-mail."
+        ],
+        "closing": "Włącz każde miejsce w Ustawieniach, a następnie jednorazowo dodaj jego blok aplikacji. Przewodnik konfiguracji na stronie głównej pokazuje, które bloki zostały dodane."
+      },
+      "form-not-showing": {
+        "question": "Dlaczego klient nie widzi formularza odstąpienia?",
+        "paragraphs": [
+          "Sprawdź te punkty, zaczynając od najczęstszego:"
+        ],
+        "bullets": [
+          "Formularz jest wyłączony lub miejsce, z którego korzysta klient, nie jest włączone w Ustawieniach.",
+          "Blok aplikacji nie został jeszcze dodany do tej strony.",
+          "Zamówienie nie jest wysyłane do żadnego z kwalifikujących się krajów.",
+          "Termin na odstąpienie od tego zamówienia upłynął.",
+          "Zamówienie zostało anulowane lub ma już oczekujące zgłoszenie. Każde zamówienie może mieć jednocześnie tylko 1 oczekujące zgłoszenie."
+        ]
+      },
+      "deadline": {
+        "question": "Kiedy zaczyna się i kończy termin na odstąpienie?",
+        "paragraphs": [
+          "Zgodnie z prawem UE termin liczy się od otrzymania produktów przez klienta, a nie od złożenia zamówienia. Klienci mogą też odstąpić w dowolnym momencie przed dotarciem produktów."
+        ],
+        "bullets": [
+          "Jeszcze niewysłane: termin jeszcze nie biegnie, więc klienci zawsze mogą odstąpić.",
+          "Dostarczone: termin biegnie od daty dostawy podanej przez przewoźnika i trwa {{withdrawalDays}}. Liczbę dni możesz zmienić w Ustawieniach.",
+          "Wysłane, ale bez daty dostawy: aplikacja używa szacowanej daty dostawy przewoźnika. Jeśli jej nie ma, używa daty wysyłki powiększonej o szacowany czas transportu."
+        ]
+      },
+      "transit-days": {
+        "question": "Do czego służy szacowany czas transportu?",
+        "paragraphs": [
+          "Wielu przewoźników nie przekazuje daty dostawy do Shopify. Bez niej aplikacja nie wie, kiedy zaczyna się termin na odstąpienie, więc dodaje szacowany czas transportu do daty wysyłki.",
+          "Ustaw go na mniej więcej tyle, ile trwa dostarczenie Twoich paczek. Obecnie wynosi {{transitDays}}. Jeśli nie masz pewności, wybierz dłuższy czas. Zbyt krótki czas może przedwcześnie zakończyć termin na odstąpienie klienta."
+        ]
+      },
+      "split-shipments": {
+        "question": "Co jeśli zamówienie jest wysyłane w więcej niż 1 paczce?",
+        "paragraphs": [
+          "Termin na odstąpienie zaczyna się, gdy dotrze ostatnia paczka. Produkty, które aplikacja wstrzymuje, bo klient od nich odstąpił, się nie liczą, ponieważ nie zostaną wysłane.",
+          "Jeśli klient odstąpi, gdy wysłano tylko część zamówienia, aplikacja obsługuje każdą część osobno:"
+        ],
+        "bullets": [
+          "Produkty niewysłane: aplikacja może je wstrzymać, aby nie zostały wysłane.",
+          "Produkty wysłane: aplikacja może utworzyć dla nich zwrot."
+        ],
+        "closing": "Aplikacja nigdy nie anuluje częściowo wysłanego zamówienia, ponieważ anulowałoby to również produkty, które klient już ma."
+      },
+      "after-submit": {
+        "question": "Co się dzieje po wysłaniu zgłoszenia przez klienta?",
+        "paragraphs": [
+          "Dzieje się to w następującej kolejności:"
+        ],
+        "bullets": [
+          "Zgłoszenie pojawia się na stronie Zgłoszenia ze statusem Oczekujące.",
+          "Klient otrzymuje e-mail z potwierdzeniem. Jest on wysyłany zawsze, ponieważ stanowi dowód odstąpienia.",
+          "Ty też otrzymujesz e-mail, jeśli powiadomienie o nowym zgłoszeniu jest włączone.",
+          "Uruchamiają się ustawienia automatyzacji. Aplikacja może na przykład wstrzymać realizację lub oznaczyć zamówienie tagiem."
+        ]
+      },
+      "automation": {
+        "question": "Co robią ustawienia automatyzacji?",
+        "paragraphs": [
+          "Uruchamiają się, gdy wpłynie zgłoszenie. To, co aplikacja może zrobić, zależy od tego, czy zamówienie zostało wysłane:"
+        ],
+        "bullets": [
+          "Przed wysyłką zamówienia: wstrzymać realizację, aby nic nie zostało wysłane, gdy weryfikujesz zgłoszenie. Możesz też sprawić, by aplikacja od razu anulowała całe zamówienie i zwróciła środki.",
+          "Po wysyłce zamówienia: utworzyć w Shopify zwrot dla wysłanych produktów.",
+          "Częściowo wysłane: obie opcje mają zastosowanie. Aplikacja wstrzymuje tylko zgłoszone produkty, które nie zostały wysłane, i tworzy zwrot dla tych, które zostały wysłane."
+        ],
+        "closing": "W każdym przypadku aplikacja może też oznaczyć zamówienie tagiem. Automatyzacja nigdy nie zatwierdza ani nie odrzuca zgłoszenia. Decyzja zawsze należy do Ciebie."
+      },
+      "partial-withdrawal": {
+        "question": "Czy klient może odstąpić tylko od niektórych produktów?",
+        "paragraphs": [
+          "Tak. Klienci wybierają, od których produktów odstępują. Zgłoszenie, zwrot środków i ewentualny zwrot obejmują tylko te produkty. Pierwotny koszt wysyłki jest zwracany tylko wtedy, gdy klient odstąpi od całego zamówienia.",
+          "Każde zamówienie może mieć jednocześnie 1 oczekujące zgłoszenie. Po jego zatwierdzeniu lub odrzuceniu klient może wysłać nowe zgłoszenie dla innych produktów."
+        ]
+      },
+      "reason": {
+        "question": "Czy klienci muszą podawać powód?",
+        "paragraphs": [
+          "Nie. Zgodnie z prawem UE klienci nie muszą podawać powodu odstąpienia, więc pole powodu jest zawsze opcjonalne. W Ustawieniach możesz wybrać, jakie powody proponować, lub przestać o nie pytać."
+        ]
+      },
+      "refund": {
+        "question": "Jak zwrócić środki za odstąpienie?",
+        "paragraphs": [
+          "Otwórz zgłoszenie na stronie Zgłoszenia. Sposób zwrotu środków zależy od tego, gdzie są produkty:"
+        ],
+        "bullets": [
+          "Produkty, które nie są w zwrocie: wybierz Zwróć środki. Niewysłane jeszcze produkty zostaną usunięte z zamówienia, więc nie zostaną wysłane.",
+          "Produkty w zwrocie: gdy wrócą, wybierz w zwrocie Przetwórz i zwróć środki. Klient otrzyma zwrot środków, a zwrot zostanie zamknięty.",
+          "Nic nie zostało jeszcze wysłane: możesz też anulować całe zamówienie i zwrócić środki w menu Więcej działań."
+        ],
+        "closing": "Prawo UE daje Ci {{refundDays}} od odstąpienia na zwrot środków. Strona zgłoszenia pokazuje, ile czasu zostało. Zwróć środki, zanim zatwierdzisz zgłoszenie."
+      },
+      "returns": {
+        "question": "Jak działają zwroty?",
+        "paragraphs": [
+          "Zwrot informuje Shopify, które produkty klient odsyła. Aplikacja może go utworzyć, gdy wpłynie zgłoszenie, albo możesz wybrać Utwórz zwrot na stronie zgłoszenia.",
+          "Zwrot obejmuje tylko wysłane produkty. Utworzenie go nie zwraca klientowi środków. Gdy produkty wrócą, wybierz w zwrocie Przetwórz i zwróć środki."
+        ]
+      },
+      "decision-lock": {
+        "question": "Dlaczego działania na zamówieniu są wyłączone po zatwierdzeniu lub odrzuceniu zgłoszenia?",
+        "paragraphs": [
+          "Zatwierdzenie lub odrzucenie kończy zgłoszenie. Potem zwroty środków, wstrzymania, zwroty i anulowania są wyłączone, aby zamówienie nie zostało zmienione przez pomyłkę. Dlatego zwróć środki, zanim zatwierdzisz zgłoszenie.",
+          "Decyzja zwalnia też każde wstrzymanie realizacji nałożone przez aplikację. Jeśli to się nie uda, nadal możesz wybrać Zwolnij wstrzymanie realizacji."
+        ]
+      },
+      "emails": {
+        "question": "Jakie e-maile wysyła aplikacja i czy mogę je edytować?",
+        "paragraphs": [
+          "Aplikacja wysyła e-maile ({{emailCount}}). Wszystkie możesz edytować na stronie Powiadomienia:"
+        ],
+        "bullets": [
+          "Potwierdzenie odstąpienia dla klienta: wysyłane, gdy klient wyśle zgłoszenie. Jest zawsze włączone.",
+          "Powiadomienie o nowym zgłoszeniu: wysyłane na kontaktowy adres e-mail sklepu. Możesz je wyłączyć.",
+          "Odstąpienie zatwierdzone: wysyłane do klienta, gdy zatwierdzisz zgłoszenie. Możesz je najpierw przejrzeć lub wyłączyć.",
+          "Odstąpienie odrzucone: wysyłane do klienta, gdy odrzucisz zgłoszenie. Możesz je najpierw przejrzeć lub wyłączyć."
+        ],
+        "closing": "Możesz edytować temat i treść każdego e-maila w każdym języku oraz dodawać zmienne, takie jak numer zamówienia czy imię klienta. Podgląd aktualizuje się podczas pisania."
+      },
+      "countries-languages": {
+        "question": "Jakie kraje i języki obsługuje aplikacja?",
+        "paragraphs": [
+          "Domyślnie kwalifikują się wszystkie kraje UE. Jeśli sprzedajesz tylko do niektórych z nich, wybierz Wybrane kraje w Ustawieniach.",
+          "Formularz jest dostępny w tylu językach: {{languageCount}} ({{languages}}). Klienci widzą go w swoim języku.",
+          "Językiem bazowym jest angielski. Jeśli zostawisz przetłumaczone pole puste, klienci zobaczą w nim tekst angielski."
+        ]
+      }
+    }
+  },
+  "featureRequest": {
+    "pageTitle": "Zaproponuj funkcję",
+    "intro": "Powiedz nam, co chcesz zobaczyć w aplikacji. Czytamy każdą propozycję.",
+    "sentHeading": "Wysłano propozycję funkcji",
+    "sentBody": "Dziękujemy za podzielenie się pomysłem z naszym zespołem.",
+    "firstName": "Imię",
+    "lastName": "Nazwisko",
+    "email": "E-mail",
+    "request": "Jakiej funkcji potrzebujesz?",
+    "requestPlaceholder": "Opisz funkcję i to, jak pomogłaby Twojemu sklepowi",
+    "submit": "Wyślij propozycję"
+  },
+  "pricing": {
+    "pageTitle": "Cennik",
+    "pricePerMonth": "{{price}} miesięcznie",
+    "currentPlan": "Obecny plan",
+    "choosePlan": "Wybierz {{plan}}",
+    "switchedToast": "Zmieniono plan na {{plan}}",
+    "plans": {
+      "free": {
+        "name": "Free",
+        "features": [
+          "Do 10 zgłoszeń odstąpienia miesięcznie",
+          "Powiadomienia e-mail"
+        ]
+      },
+      "starter": {
+        "name": "Starter",
+        "features": [
+          "Nieograniczona liczba zgłoszeń odstąpienia",
+          "Niestandardowe pola formularza",
+          "Powiadomienia e-mail"
+        ]
+      },
+      "pro": {
+        "name": "Pro",
+        "features": [
+          "Wszystko z planu Starter",
+          "Priorytetowa pomoc",
+          "Automatyczne zwroty środków"
+        ]
+      }
+    },
+    "switchError": "Nie udało się zmienić planu"
+  }
+}

@@ -1,0 +1,1234 @@
+{
+  "common": {
+    "add": "新增",
+    "backToHome": "返回首頁",
+    "cancel": "取消",
+    "delete": "刪除",
+    "discard": "捨棄",
+    "done": "完成",
+    "dayCount_other": "{{count}} 天",
+    "emptyValue": "—",
+    "noMatches": "找不到與「{{query}}」相符的結果。",
+    "preview": "預覽",
+    "remove": "移除",
+    "save": "儲存",
+    "verified": "已驗證"
+  },
+  "nav": {
+    "home": "首頁",
+    "withdrawalRequests": "申請",
+    "formSetup": "設定",
+    "emailTemplates": "通知",
+    "pricing": "方案與價格"
+  },
+  "errors": {
+    "generic": "發生錯誤，請再試一次。",
+    "requestFailed": "發生錯誤 (錯誤 {{status}})，請再試一次。",
+    "methodNotAllowed": "不支援此操作。",
+    "unknownAction": "不支援此操作。",
+    "noValidFields": "沒有需要更新的內容。",
+    "emailServiceUnavailable": "無法連線至電子郵件服務，請過幾分鐘再試一次。",
+    "emailServiceNotConfigured": "尚未設定電子郵件寄送功能，請聯絡支援團隊。",
+    "requestNotFound": "此撤回申請不存在或已刪除。",
+    "requestDecided": "此申請已核准或拒絕，因此無法再使用訂單操作。",
+    "unknownDecision": "請選擇要核准或拒絕此申請。",
+    "invalidStatus": "請為此申請選擇有效的狀態。",
+    "noteRequired": "請輸入備註。",
+    "orderNotFound": "在 Shopify 中找不到此訂單。",
+    "invalidEmail": "請輸入有效的電子郵件地址。",
+    "featureRequestIncomplete": "送出申請前請填寫所有欄位。",
+    "senderCodeRequired": "請輸入電子郵件中的驗證碼。",
+    "senderNotFound": "找不到此寄件者電子郵件。請將其移除後重新新增，以取得新的驗證碼。",
+    "senderNotStarted": "請先驗證寄件者電子郵件。",
+    "senderIdMissing": "無法註冊此寄件者電子郵件，請再試一次。",
+    "domainInvalid": "請輸入有效的網域，例如 yourstore.com。",
+    "domainFreeProvider": "Gmail 和 Yahoo 等免費電子郵件服務無法驗證，請改用商店的網域。"
+  },
+  "auth": {
+    "login": {
+      "heading": "登入",
+      "shopLabel": "商店網域",
+      "shopDetails": "example.myshopify.com",
+      "submit": "登入",
+      "missingShop": "請輸入商店網域以登入。",
+      "invalidShop": "請輸入有效的商店網域，例如 example.myshopify.com。"
+    }
+  },
+  "status": {
+    "pending": "待處理",
+    "approved": "已核准",
+    "rejected": "已拒絕"
+  },
+  "sourceInline": {
+    "order_status": "訂單狀態頁面",
+    "standalone_page": "你的商店頁面"
+  },
+  "placements": {
+    "orderStatus": {
+      "label": "訂單狀態頁面",
+      "details": "在顧客結帳後看到的訂單狀態頁面上顯示撤回表單。"
+    },
+    "storefront": {
+      "label": "商店頁面",
+      "details": "在佈景主題中的獨立頁面上顯示撤回表單，讓顧客在訂單狀態頁面以外也能找到。"
+    }
+  },
+  "orderStatus": {
+    "financial": {
+      "PENDING": "付款待處理",
+      "AUTHORIZED": "已授權",
+      "PARTIALLY_PAID": "部分付款",
+      "PAID": "已付款",
+      "PARTIALLY_REFUNDED": "部分退款",
+      "REFUNDED": "已退款",
+      "VOIDED": "已作廢",
+      "EXPIRED": "已過期"
+    },
+    "fulfillment": {
+      "UNFULFILLED": "未出貨",
+      "PENDING_FULFILLMENT": "待出貨",
+      "OPEN": "未完成",
+      "IN_PROGRESS": "處理中",
+      "ON_HOLD": "已暫停",
+      "PARTIALLY_FULFILLED": "部分出貨",
+      "FULFILLED": "已出貨",
+      "RESTOCKED": "已補回庫存",
+      "SCHEDULED": "已排程"
+    },
+    "return": {
+      "REQUESTED": "已申請",
+      "OPEN": "未完成",
+      "CLOSED": "已關閉",
+      "DECLINED": "已婉拒",
+      "CANCELED": "已取消"
+    }
+  },
+  "stats": {
+    "heading": "總覽",
+    "description": "撤回申請概況",
+    "viewRequests": "查看申請",
+    "total": "申請總數",
+    "today": "今日送出",
+    "pending": "待處理",
+    "closed": "已結案",
+    "requestCount_other": "{{count}} 筆申請"
+  },
+  "home": {
+    "pageTitle": "首頁",
+    "loadError": "無法載入資訊主頁",
+    "saveErrorHeading": "無法儲存變更",
+    "saveErrorAction": "請再試一次，或到「設定」中進行變更。",
+    "setupBanner": {
+      "heading_other": "還有 {{count}} 個設定步驟",
+      "body": "完成以下步驟，即可準備好撤回表單：{{steps}}。"
+    },
+    "setupGuide": {
+      "heading": "設定指南",
+      "description": "依照本指南，在商店中上線撤回表單。",
+      "progress": "已完成 {{completed}}/{{total}} 項工作",
+      "dismiss": "關閉設定指南",
+      "collapse": "收合設定指南",
+      "expand": "展開設定指南",
+      "showStep": "顯示「{{step}}」的詳細資料",
+      "hideStep": "隱藏「{{step}}」的詳細資料",
+      "steps": {
+        "form": {
+          "label": "啟用撤回表單",
+          "description": "啟用表單並選擇顧客看到表單的位置。欄位、原因和文字都已預先填入預設內容，你隨時可以在「設定」中變更。",
+          "checkbox": "啟用撤回表單",
+          "cta": "前往「設定」",
+          "placementHeading": "選擇顧客看到表單的位置",
+          "placementDescription": "請至少選擇一個位置。每個位置都需要新增對應的應用程式區塊，顧客才能看到表單。"
+        },
+        "blocks": {
+          "label": "將應用程式區塊新增至商店",
+          "description": "為上一個步驟中選擇的每個位置新增應用程式區塊。",
+          "locked": "完成步驟 {{step}} 以選擇表單的顯示位置，接著就能在這裡新增應用程式區塊。",
+          "surfaces": {
+            "orderStatus": "訂單狀態頁面",
+            "theme": "商店頁面"
+          },
+          "live": {
+            "orderStatus": "應用程式區塊已在訂單狀態頁面上線。",
+            "theme": "應用程式區塊已在商店頁面上線。"
+          }
+        }
+      }
+    },
+    "help": {
+      "heading": "說明與資源",
+      "support": {
+        "title": "電子郵件支援",
+        "description": "有任何問題嗎？我們的支援團隊可以協助你。",
+        "link": "聯絡支援團隊"
+      },
+      "faqs": {
+        "title": "常見問題",
+        "description": "查看設定和使用應用程式的常見問題解答。",
+        "link": "查看常見問題"
+      },
+      "featureRequest": {
+        "title": "功能建議",
+        "description": "對應用程式有想法嗎？告訴我們你希望看到什麼功能。",
+        "link": "提出功能建議"
+      }
+    }
+  },
+  "blockSetup": {
+    "autoUpdate": "儲存應用程式區塊幾秒後，這則訊息會自動消失。",
+    "addAppBlock": "新增應用程式區塊",
+    "orderStatus": {
+      "heading": "將應用程式區塊新增至訂單狀態頁面",
+      "body": "新增應用程式區塊前，顧客無法在訂單狀態頁面上看到撤回表單。新增方式：",
+      "steps": {
+        "open": "選取下方的<strong>新增應用程式區塊</strong>。訂單狀態頁面會在結帳編輯器中開啟。",
+        "add": "在側邊欄中選取<strong>新增應用程式區塊</strong>。",
+        "choose": "選取<strong>撤回表單</strong>。",
+        "save": "選取<strong>儲存</strong>。"
+      }
+    },
+    "storefront": {
+      "heading": "將應用程式區塊新增至商店頁面",
+      "body": "選擇頁面範本，然後選取「新增應用程式區塊」。佈景主題編輯器會開啟，且撤回表單已新增為區段。",
+      "templateLabel": "頁面範本",
+      "templates": {
+        "page": "預設頁面",
+        "index": "首頁",
+        "product": "商品頁面",
+        "collection": "商品系列頁面",
+        "cart": "購物車頁面"
+      },
+      "steps": {
+        "open": "選取<strong>新增應用程式區塊</strong>，開啟已新增區段的佈景主題編輯器。",
+        "move": "將區段拖曳至頁面上的理想位置。",
+        "save": "選取<strong>儲存</strong>。"
+      }
+    }
+  },
+  "onboarding": {
+    "pageTitle": "開始使用",
+    "heading": "讓商店準備好處理歐盟撤回",
+    "intro_other": "完成以下 {{count}} 個步驟，為歐盟顧客提供合規的購買撤回方式。",
+    "stepBadge": "第 {{current}} 步，共 {{total}} 步",
+    "completedToast": "設定已完成",
+    "steps": {
+      "welcome": {
+        "title": "歡迎",
+        "description": "應用程式的功能"
+      },
+      "form": {
+        "title": "撤回表單",
+        "description": "啟用表單"
+      }
+    },
+    "actions": {
+      "getStarted": "開始使用",
+      "continue": "繼續",
+      "finish": "完成設定",
+      "skip": "略過設定",
+      "back": "返回"
+    },
+    "help": {
+      "heading": "需要協助嗎？",
+      "body": "有任何問題嗎？<supportLink>聯絡支援團隊</supportLink>。"
+    },
+    "welcome": {
+      "heading": "歡迎使用 {{appName}}",
+      "setupTime": "約需 1 分鐘",
+      "law": "自 2026 年 6 月 19 日起，向歐盟顧客銷售商品的商店必須為每筆訂單提供兩步驟撤回方式 (歐盟指令 2023/2673 第 11a 條)。只有退貨政策是不夠的。",
+      "app": "{{appName}} 會在訂單狀態頁面、網路商店的頁面或兩者上新增撤回按鈕。它會處理兩步驟確認流程，並寄送必要的確認電子郵件。你可以在同一個地方管理所有申請。",
+      "imageAlt": "正在撤回訂單的顧客",
+      "requirementsHeading": "法律規定",
+      "requirements": {
+        "button": "標示清楚、方便顧客找到的撤回按鈕",
+        "twoStep": "兩步驟流程：顧客先送出撤回，再進行確認",
+        "email": "顧客可以保留的自動確認電子郵件"
+      },
+      "penaltyHeading": "未遵守規定的後果",
+      "penalty": "如果沒有撤回按鈕或按鈕無法使用，法律會延長 {{days}} 天的撤回期。屆時顧客將有 12 個月又 {{days}} 天的時間撤回每筆受影響的訂單。"
+    },
+    "form": {
+      "heading": "啟用撤回表單",
+      "body": "依照歐盟法律規定，顧客會先送出撤回，再於另一個步驟中確認。表單內含預設的法律文字。顧客可在收到商品後 {{days}}內撤回。",
+      "switch": "啟用撤回表單",
+      "later": "你之後可以在「設定」中變更所有內容。",
+      "loadError": "無法載入表單設定。你可以現在完成設定，之後再到「設定」中啟用表單。",
+      "saveError": "無法儲存表單選項。請再試一次，或略過這些選項完成設定，之後再到「設定」中設定。",
+      "finishWithoutSaving": "不儲存並完成",
+      "placementError": "請至少選擇一個位置，或停用表單。"
+    },
+    "finishError": "無法完成設定，請再試一次。"
+  },
+  "formSetup": {
+    "pageTitle": "設定",
+    "loadError": "無法載入設定",
+    "saveError": "無法儲存設定",
+    "savedToast": "設定已儲存",
+    "enable": {
+      "heading": "撤回表單",
+      "description": "選擇顧客是否可以送出撤回申請，以及顧客看到表單的位置。",
+      "checkbox": "啟用撤回表單",
+      "details": "停用後，顧客將無法在任何地方送出撤回申請。",
+      "orderStatus": "在訂單狀態頁面上顯示",
+      "storefront": "在商店頁面上顯示"
+    },
+    "countries": {
+      "heading": "適用國家/地區",
+      "description": "只有當訂單寄送至以下國家/地區之一時，顧客才會看到撤回表單。",
+      "all": "全部 {{count}} 個歐盟國家/地區 (建議)",
+      "allDetails": "撤回權適用於整個歐盟。",
+      "specific": "特定國家/地區",
+      "specificDetails": "請在下方選擇國家/地區，你隨時可以變更。",
+      "pickerLabel": "國家/地區",
+      "pickerPlaceholder": "搜尋國家/地區"
+    },
+    "content": {
+      "heading": "表單內容",
+      "tabs": {
+        "step1": "1. 詳細資料",
+        "confirm": "2. 確認",
+        "done": "3. 完成"
+      },
+      "language": "語言",
+      "languageDetails": "選擇語言以編輯該語言的表單內容。每種語言會分別儲存。",
+      "beforeDelivery": {
+        "heading": "送達前",
+        "description": "在訂單送達前 (包括運送途中)，顯示在表單的第一個畫面和「詳細資料」步驟中。"
+      },
+      "afterDelivery": {
+        "heading": "送達後",
+        "description": "Shopify 將訂單標示為已送達後，會改為顯示此內容。"
+      },
+      "title": "標題",
+      "description": "說明",
+      "itemHeading": "商品選擇標題",
+      "customerDetails": {
+        "heading": "顧客資料",
+        "description": "依訂單自動填入，顧客無法編輯這些欄位。",
+        "locked": "已鎖定",
+        "fullName": "全名",
+        "email": "電子郵件",
+        "orderNumber": "訂單編號"
+      },
+      "reason": {
+        "heading": "撤回原因",
+        "checkbox": "詢問原因",
+        "details": "顧客不需要提供原因。歐盟法律規定此欄位必須為選填。",
+        "label": "原因欄位標籤",
+        "optionsHeading": "原因選項",
+        "optionsHelp": "顧客會從這份清單中選擇。你可以依商店需求新增、移除或改寫選項。清單最後一定會加入附有文字方塊的「其他」選項。",
+        "removeOption": "移除「{{option}}」",
+        "addLabel": "新增原因",
+        "addPlaceholder": "例如：誤下訂單",
+        "translatedHelp": "請翻譯每個選項。若要新增或移除選項，請切換為英文。",
+        "translatedEmpty": "請先以英文新增原因選項。"
+      },
+      "continueButton": "「繼續」按鈕標籤",
+      "confirm": {
+        "heading": "確認標題",
+        "messageBefore": "送達前訊息",
+        "messageAfter": "送達後訊息",
+        "declaration": "聲明",
+        "button": "「確認」按鈕標籤"
+      },
+      "done": {
+        "titleBefore": "送達前標題",
+        "messageBefore": "送達前訊息",
+        "titleAfter": "送達後標題",
+        "messageAfter": "送達後訊息"
+      }
+    },
+    "automation": {
+      "heading": "自動化",
+      "description": "選擇顧客送出撤回申請時，應用程式要執行的操作。",
+      "beforeShip": {
+        "heading": "訂單出貨前",
+        "description": "適用於在任何商品出貨前收到的申請。",
+        "hold": "暫停出貨以便審核",
+        "holdDetails": "在你核准或拒絕申請前暫停出貨。你做出決定後，暫停就會解除。",
+        "tagDetails": "為出貨前收到申請的訂單加上標籤，方便員工在訂單清單中找到。"
+      },
+      "fallback": {
+        "label": "訂單的處理方式",
+        "hold": "保持暫停，直到你核准或拒絕申請",
+        "cancelNow": "立即取消整筆訂單並退款",
+        "releaseN": "在設定的天數後解除暫停",
+        "cancelN": "在設定的天數後取消整筆訂單並退款",
+        "cancelWarning": "即使顧客只撤回部分商品，此操作也會取消整筆訂單並退款。Shopify 會寄送取消通知電子郵件給顧客。",
+        "days": "天數"
+      },
+      "afterDelivery": {
+        "heading": "訂單出貨後",
+        "description": "適用於至少一件商品出貨後收到的申請，即使商品尚未送達。所有申請仍會顯示在「申請」頁面上。",
+        "createReturn": "建立退貨",
+        "createReturnDetails": "在 Shopify 中為已出貨的申請商品建立退貨。",
+        "tagDetails": "為出貨後收到申請的訂單加上標籤。"
+      },
+      "tag": {
+        "checkbox": "為訂單加上標籤",
+        "label": "訂單標籤",
+        "placeholder": "新增標籤"
+      }
+    },
+    "deadline": {
+      "heading": "撤回期限",
+      "description": "撤回期從訂單送達時開始計算，而不是從下單時開始。歐盟法律規定至少 {{days}}。",
+      "days": "送達後可撤回天數",
+      "daysDetails": "訂單送達後，顧客可以撤回的期間。",
+      "transit": "預估運送時間 (天)",
+      "transitDetails": "物流業者未提供送達日期或預估日期時使用。應用程式會將這些天數加到出貨日期上。"
+    },
+    "validation": {
+      "countryMode": "請選擇適用的國家/地區。",
+      "euCountries": "請至少選擇一個國家/地區。",
+      "title": "請輸入標題。",
+      "description": "請輸入說明。",
+      "itemHeading": "請輸入商品清單的標題。",
+      "continueButton": "請輸入「繼續」按鈕的標籤。",
+      "heading": "請輸入標題。",
+      "confirmMessage": "請輸入確認訊息。",
+      "declaration": "請輸入顧客必須接受的聲明。",
+      "confirmButton": "請輸入「確認」按鈕的標籤。",
+      "message": "請輸入訊息。",
+      "reasonLabel": "請輸入原因欄位的標籤。",
+      "reasonOptions": "請至少新增一個原因。",
+      "reasonOptionTranslation": "請輸入此原因的翻譯。",
+      "fallback": "請選擇訂單的處理方式。",
+      "daysRange": "請輸入 {{min}} 到 {{max}} 之間的天數。",
+      "tags": "請至少新增一個標籤，或關閉加上標籤功能。",
+      "afterDeliveryAction": "請選擇訂單出貨後的處理方式。"
+    },
+    "preview": {
+      "heading": "即時預覽",
+      "compliantBadge": "符合兩步驟規定",
+      "surfaceLabel": "預覽",
+      "surfaces": {
+        "orderStatus": "訂單狀態頁面",
+        "theme": "商店頁面"
+      },
+      "stageLabel": "送達狀態",
+      "stages": {
+        "beforeDelivery": "尚未送達",
+        "delivered": "已送達"
+      },
+      "banner": {
+        "orderStatus": "這是顧客在訂單狀態頁面上看到的內容。選取按鈕試用，或使用「表單內容」中的分頁前往特定步驟。",
+        "theme": "這是顧客在商店頁面上看到的內容。由於商店訪客未登入，因此會從「尋找訂單」步驟開始。"
+      },
+      "restart": "重新開始預覽",
+      "position": {
+        "entry": "入口卡片",
+        "lookup": "尋找訂單",
+        "step": "第 {{current}} 步，共 {{total}} 步"
+      },
+      "storefront": {
+        "start": "開始撤回申請",
+        "findOrderHeading": "尋找訂單",
+        "findOrderBody": "輸入訂單資料以開始撤回申請。",
+        "fullName": "全名",
+        "email": "電子郵件",
+        "orderNumber": "訂單編號",
+        "continue": "繼續",
+        "steps": {
+          "step1": "詳細資料",
+          "confirm": "確認",
+          "done": "完成"
+        },
+        "stepOf": "第 {{current}} 步，共 {{total}} 步",
+        "stepProgress": "第 {{current}} 步，共 {{total}} 步：{{label}}",
+        "reasonPlaceholder": "選擇原因 (選填)",
+        "otherReason": "其他",
+        "yourReason": "你的原因",
+        "yourReasonPlaceholder": "告訴我們原因",
+        "selectItem": "請至少選擇一件商品以繼續。",
+        "itemsToWithdraw": "要撤回的商品 ({{count}})",
+        "selectedTotal": "所選商品總計",
+        "previous": "上一步",
+        "submittedOn": "送出日期：{{date}}"
+      }
+    }
+  },
+  "requests": {
+    "pageTitle": "申請",
+    "searchLabel": "搜尋撤回申請",
+    "searchPlaceholder": "依訂單編號、顧客姓名或電子郵件搜尋",
+    "export": "匯出",
+    "exportSelected": "匯出所選項目",
+    "tabs": {
+      "all": "全部",
+      "withCount": "{{label}} ({{count}})"
+    },
+    "empty": {
+      "imageAlt": "",
+      "heading": "尚無撤回申請",
+      "body": "顧客的撤回申請會顯示在這裡。",
+      "filteredHeading": "找不到撤回申請",
+      "filteredBody": "請嘗試變更搜尋字詞或篩選條件。"
+    },
+    "table": {
+      "selectAll": "選取所有撤回申請",
+      "selectRow": "選取訂單 {{order}}",
+      "selectedCount": "已選取 {{count}} 筆",
+      "order": "訂單",
+      "customer": "顧客",
+      "items": "商品",
+      "value": "金額",
+      "status": "狀態",
+      "submitted": "送出時間",
+      "actions": "操作",
+      "itemCount_other": "{{count}} 件商品",
+      "viewRow": "查看訂單 {{order}} 的申請",
+      "deleteRow": "刪除訂單 {{order}} 的申請"
+    },
+    "delete": {
+      "heading_other": "要刪除 {{count}} 筆撤回申請嗎？",
+      "body_other": "這 {{count}} 筆撤回申請將永久刪除，此操作無法復原。",
+      "confirm_other": "刪除",
+      "toast_other": "已刪除 {{count}} 筆撤回申請"
+    },
+    "csv": {
+      "filename": "withdrawal-requests-{{date}}.csv",
+      "order": "訂單",
+      "customerName": "顧客姓名",
+      "customerEmail": "顧客電子郵件",
+      "country": "國家/地區",
+      "items": "商品",
+      "value": "金額",
+      "reason": "原因",
+      "status": "狀態",
+      "submitted": "送出時間",
+      "decided": "處理時間"
+    }
+  },
+  "requestDetail": {
+    "pageTitle": "撤回申請",
+    "backLink": "申請",
+    "submittedLine": "於 {{date}} 從{{source}}送出",
+    "previous": "上一筆申請",
+    "next": "下一筆申請",
+    "badges": {
+      "canceled": "已取消",
+      "onHold": "已暫停",
+      "return": "退貨：{{status}}"
+    },
+    "actions": {
+      "refund": "退款",
+      "more": "更多操作",
+      "cancelOrder": "取消訂單",
+      "placeHold": "暫停出貨",
+      "releaseHold": "解除出貨暫停",
+      "createReturn": "建立退貨",
+      "processReturn": "處理並退款",
+      "viewOrder": "查看訂單"
+    },
+    "banners": {
+      "orderUnavailableHeading": "無法取得訂單詳細資料",
+      "orderUnavailableBody": "{{error}} 訂單詳細資料載入完成前，無法使用訂單操作。",
+      "actionFailedHeading": "無法完成此操作",
+      "actionFailedAction": "詳情請參閱下方的「活動」。",
+      "canceled": "此訂單已取消，無法再使用訂單操作。"
+    },
+    "deadline": {
+      "heading": "退款期限",
+      "pendingLabel": "決定和退款的剩餘時間",
+      "decidedLabel": "決定",
+      "badges": {
+        "overdue": "已逾期",
+        "actionNeeded": "需要處理",
+        "onTime": "如期"
+      },
+      "daysLeft_other": "剩餘 {{count}} 天",
+      "daysOverdue_other": "已逾期 {{count}} 天",
+      "daysEarly_other": "截止日期前 {{count}} 天",
+      "daysLate_other": "截止日期後 {{count}} 天",
+      "pending": "從申請送出起算，你有 {{days}}的時間做出決定並退款。截止日期為 {{date}}。",
+      "pendingOverdue": "截止日期已於 {{date}} 過期，請盡快為顧客退款。",
+      "decidedOnTime": "已在 {{windowDays}} 天的退款期內做出決定。截止日期為 {{date}}。",
+      "decidedLate": "在退款截止日期 {{date}} 之後才做出決定。"
+    },
+    "items": {
+      "heading": "撤回的商品",
+      "reject": "拒絕",
+      "approve": "核准",
+      "total": "撤回總計",
+      "sku": "SKU：{{sku}}",
+      "quantity": "數量：{{count}}",
+      "shipping": {
+        "notShipped": "尚未出貨",
+        "partlyShipped": "部分出貨",
+        "shipped": "已出貨"
+      },
+      "partiallyShippedBanner": "此訂單已有部分商品出貨。尚未出貨的商品仍可暫停，已出貨的商品則需要退貨。"
+    },
+    "return": {
+      "heading": "退貨",
+      "status": "狀態",
+      "created": "建立時間",
+      "body": "已在 Shopify 中為撤回的商品建立退貨。",
+      "openBody": "商品寄回後，請選取「處理並退款」。這會為退回的商品向顧客退款並關閉退貨。",
+      "alreadyRefundedBody": "此退貨中的商品已退款。商品寄回後，請在 Shopify 中關閉退貨。"
+    },
+    "processReturnModal": {
+      "heading": "處理退貨並退款",
+      "calculating": "正在計算退款金額…",
+      "nothingToProcess": "此退貨已沒有需要處理的內容，可能已在 Shopify 中處理或關閉。",
+      "nothingToRefund": "此退貨中的商品已退款，因此沒有可退款的內容。",
+      "unsupportedPayment": "此訂單的付款無法透過應用程式退款，請改在 Shopify 中處理退貨並退款。",
+      "itemsHeading": "退貨 {{name}} 中的商品",
+      "subtotal": "商品小計",
+      "shippingLine": "原運費",
+      "total": "退款總額",
+      "body": "此操作會將退回的商品標示為已處理、退款至原付款方式，並關閉退貨。Shopify 會以電子郵件寄送退款收據給顧客。此操作無法復原。",
+      "confirmAmount": "退款 {{amount}}",
+      "confirm": "處理並退款"
+    },
+    "payment": {
+      "heading": "付款",
+      "status": "付款狀態",
+      "subtotal": "撤回小計",
+      "shipping": "訂單運費",
+      "total": "訂單總額",
+      "refunded": "已退款",
+      "unavailable": "目前無法取得付款詳細資料。"
+    },
+    "activity": {
+      "heading": "活動",
+      "noteLabel": "新增備註",
+      "notePlaceholder": "新增備註…",
+      "post": "發佈",
+      "noteHelp": "只有你和員工可以看到備註，顧客永遠看不到。",
+      "submitted": "撤回申請從{{source}}送出",
+      "decided": {
+        "approved": "申請已核准",
+        "rejected": "申請已拒絕"
+      },
+      "note": "備註：{{body}}",
+      "entry": "{{label}}：{{message}}",
+      "actions": {
+        "resolve_branch": "自動化已開始",
+        "run_automation": "自動化",
+        "automation_completed": "自動化已完成",
+        "hold_fulfillment": "出貨暫停",
+        "schedule_fallback": "排定的後續操作",
+        "release_hold": "已解除出貨暫停",
+        "cancel_order_immediate": "訂單已取消並退款",
+        "cancel_order_scheduled": "訂單已取消並退款",
+        "cancel_order_manual": "訂單已取消並退款",
+        "cancel_order": "訂單已取消並退款",
+        "refund": "退款",
+        "tag_before_ship": "已為訂單加上標籤",
+        "tag_after_delivery": "已為訂單加上標籤",
+        "order_tag_add": "已新增訂單標籤",
+        "order_tag_remove": "已移除訂單標籤",
+        "create_return": "退貨",
+        "refresh_return": "已重新整理退貨狀態",
+        "process_return": "處理並退款",
+        "fetch_shop_contact": "商店聯絡資訊",
+        "customer_email": "顧客確認電子郵件",
+        "merchant_email": "新申請通知",
+        "notify_customer": "決定通知電子郵件",
+        "notify_merchant": "你已收到通知"
+      },
+      "messages": {
+        "noTags": "尚未設定任何標籤",
+        "tagged": "已為訂單加上標籤 {{tags}}",
+        "noHoldableOrders": "此訂單目前沒有可暫停的項目",
+        "held": "已暫停商品，避免出貨",
+        "holdOff": "「暫停出貨以便審核」已關閉",
+        "tagBeforeShipOff": "出貨前加上標籤已關閉",
+        "tagAfterDeliveryOff": "出貨後加上標籤已關閉",
+        "fallbackHold": "在你核准或拒絕申請前，訂單會保持暫停",
+        "fallbackInvalidDays": "無法排定後續操作，天數無效。",
+        "scheduledRelease": "已排定於 {{date}} 解除暫停",
+        "scheduledCancel": "已排定於 {{date}} 取消並退款",
+        "canceled": "訂單已取消並退款",
+        "returnCreated": "已在 Shopify 中建立退貨",
+        "returnNoMatch": "申請的商品皆無法退貨",
+        "notifiedByEmail": "已透過應用程式和電子郵件通知",
+        "notifiedEmailFailed": "已在應用程式中通知。通知電子郵件寄送失敗：{{error}}",
+        "notifiedInAppOnly": "已在應用程式中通知，未寄送通知電子郵件。",
+        "emailSent": "已寄送",
+        "emailFailed": "失敗：{{error}}",
+        "emailNotSent": "由於沒有收件者或尚未設定電子郵件，因此未寄送",
+        "orderNotFound": "在 Shopify 中找不到此訂單",
+        "alreadyCanceled": "訂單已取消",
+        "branchBeforeShip": "訂單尚未出貨，因此執行了出貨前步驟",
+        "branchAfterDelivery": "訂單已出貨，因此執行了出貨後步驟",
+        "branchPartiallyShipped": "訂單已部分出貨，因此針對已出貨和未出貨商品分別執行了相應步驟",
+        "noUnshippedItemsRequested": "申請的商品中沒有等待出貨的商品，因此未暫停任何項目",
+        "fallbackCancelPartiallyShipped": "訂單已部分出貨，因此無法整筆取消。在你核准或拒絕申請前，申請的商品會保持暫停。",
+        "returnNothingShipped": "申請的商品皆尚未出貨，因此不需要退貨",
+        "runCompleted": "自動化已完成",
+        "runFailed": "一或多個自動化步驟失敗",
+        "runSkipped": "已略過自動化",
+        "scheduledSkippedApproved": "申請已核准，因此未執行排定的操作",
+        "scheduledSkippedRejected": "申請已拒絕，因此未執行排定的操作",
+        "noHoldsPlaced": "此申請未設定任何暫停",
+        "holdsAlreadyReleased": "暫停已解除",
+        "holdReleased": "訂單可以重新出貨",
+        "holdExists": "此申請已設定暫停",
+        "decisionSkipped": "員工選擇不寄送電子郵件給顧客",
+        "decisionSent": "已寄送決定通知電子郵件給顧客",
+        "decisionFailed": "決定通知電子郵件寄送失敗：{{error}}",
+        "decisionNotConfigured": "尚未設定電子郵件，因此未寄送決定通知電子郵件",
+        "refunded": "已退款 {{amount}}",
+        "noReturn": "此申請沒有退貨",
+        "returnStatus": "退貨狀態：{{status}}",
+        "returnProcessed": "退貨已處理，已退款 {{amount}}",
+        "returnNothingToProcess": "此退貨已沒有需要處理的內容",
+        "returnNothingToRefund": "此退貨中的商品已退款",
+        "returnPaymentUnsupported": "此付款無法透過應用程式退款，請在 Shopify 中處理退貨。",
+        "refundNothingRefundable": "申請的商品皆無法退款，可能已經退款。",
+        "refundNoSuggestion": "Shopify 無法計算這些商品的退款，請改在 Shopify 中退款。",
+        "refundCoveredByReturn": "所有撤回的商品都在未完成的退貨中。請在退貨中使用「處理並退款」進行退款。",
+        "tagsRemoved": "已移除訂單標籤：{{tags}}",
+        "tagsAdded": "已新增訂單標籤：{{tags}}"
+      }
+    },
+    "order": {
+      "heading": "訂單",
+      "order": "訂單",
+      "placed": "下單時間",
+      "payment": "付款",
+      "fulfillment": "出貨"
+    },
+    "customer": {
+      "heading": "顧客",
+      "avatarFallback": "顧客",
+      "contactHeading": "聯絡資訊",
+      "email": "電子郵件",
+      "language": "語言",
+      "shippingHeading": "運送地址"
+    },
+    "automation": {
+      "heading": "自動化",
+      "stage": "階段",
+      "stages": {
+        "before_ship": "出貨前",
+        "partially_shipped": "部分出貨",
+        "after_delivery": "出貨後"
+      },
+      "hold": "出貨暫停",
+      "holdStates": {
+        "onHold": "已暫停",
+        "released": "已解除",
+        "none": "無"
+      },
+      "canceled": "已取消",
+      "return": "退貨"
+    },
+    "emails": {
+      "heading": "電子郵件記錄",
+      "customerConfirmation": "顧客撤回確認",
+      "merchantNotification": "新申請通知",
+      "decision": "決定通知電子郵件",
+      "statuses": {
+        "sent": "已寄送",
+        "failed": "失敗",
+        "notSent": "未寄送"
+      }
+    },
+    "tags": {
+      "heading": "訂單標籤",
+      "label": "新增訂單標籤",
+      "placeholder": "新增標籤",
+      "remove": "移除標籤 {{tag}}",
+      "savedToast": "訂單標籤已儲存"
+    },
+    "reason": {
+      "heading": "撤回原因",
+      "quoted": "「{{reason}}」",
+      "none": "未提供原因"
+    },
+    "decidedToast": {
+      "approved": "撤回申請已核准",
+      "rejected": "撤回申請已拒絕"
+    },
+    "cancelModal": {
+      "heading": "要取消訂單嗎？",
+      "body": "此操作會在 Shopify 中取消整筆訂單，包括顧客未撤回的商品。訂單會退款至原付款方式並補回庫存，Shopify 也會寄送電子郵件給顧客。此操作無法復原。",
+      "keep": "保留訂單",
+      "confirm": "取消訂單並退款"
+    },
+    "createReturnModal": {
+      "heading": "為撤回的商品建立退貨",
+      "itemsHeading": "要退貨的商品",
+      "subtotal": "商品小計",
+      "checking": "正在檢查可退貨的商品…",
+      "nothingToReturn": "撤回的商品皆尚未出貨，因此沒有可退貨的商品。請暫停這些商品以免出貨，或為其退款以從訂單中移除。",
+      "notShipped_other": "有 {{count}} 件撤回的商品尚未出貨，因此未包含在內。",
+      "notReturnable_other": "有 {{count}} 件撤回的商品已退貨，因此未包含在內。",
+      "body": "此操作會在 Shopify 中為上述商品建立退貨，但不會向顧客退款。商品寄回後，請在退貨中選取「處理並退款」。",
+      "cancel": "取消",
+      "confirm": "建立退貨"
+    },
+    "decisionModal": {
+      "headingApprove": "要核准撤回申請嗎？",
+      "headingReject": "要拒絕撤回申請嗎？",
+      "approveAndSend": "核准並寄送電子郵件",
+      "rejectAndSend": "拒絕並寄送電子郵件",
+      "approve": "核准",
+      "reject": "拒絕",
+      "loadingLabel": "正在載入電子郵件預覽",
+      "loading": "正在準備顧客電子郵件…",
+      "sendEmail": "寄送電子郵件給顧客",
+      "language": "此電子郵件使用顧客的語言 ({{language}})。你的變更只會套用到此電子郵件。",
+      "subject": "主旨",
+      "body": "電子郵件內文",
+      "editHtml": "編輯 HTML",
+      "htmlLabel": "電子郵件 HTML",
+      "previewTitle": "電子郵件預覽",
+      "templateUnchanged": "你的變更只會套用到此電子郵件，已儲存的範本不會變更。",
+      "noEmail": "顧客不會收到電子郵件。如有需要，你可以另外聯絡顧客。",
+      "holdReleased": "此操作也會解除此訂單的出貨暫停，讓訂單可以重新出貨。"
+    },
+    "refundModal": {
+      "heading": "為撤回的商品退款",
+      "calculatingLabel": "正在計算退款",
+      "calculating": "正在計算退款金額…",
+      "nothingToRefund": "此訂單沒有可退款的內容。撤回的商品可能已經退款，或訂單可能已取消。",
+      "itemsHeading": "要退款的商品",
+      "subtotal": "商品小計",
+      "shippingLine": "原運費",
+      "amount": "退款金額",
+      "total": "退款總額",
+      "body": "撤回的商品會退款至原付款方式，並盡可能補回庫存。Shopify 會以電子郵件寄送退款收據給顧客。",
+      "includesShipping": "顧客撤回了整筆訂單，因此包含原運費。",
+      "unshippedItems": "尚未出貨的商品會從訂單中移除，因此不會寄出。",
+      "inReturn_other": "有 {{count}} 件撤回的商品在退貨 {{name}} 中，因此未包含在內。請在退貨中使用「處理並退款」為其退款。",
+      "allInReturn": "所有撤回的商品都在退貨 {{name}} 中。請在退貨中使用「處理並退款」為其退款，這也會關閉該退貨。",
+      "irreversible": "此操作無法復原。",
+      "confirmAmount": "退款 {{amount}}",
+      "confirm": "退款"
+    },
+    "shopifyNotes": {
+      "holdAutomatic": "訂單 {{order}} 的撤回申請正在等待員工審核",
+      "holdManual": "訂單 {{order}} 的撤回申請已由員工暫停",
+      "canceled": "由於顧客撤回購買，{{appName}} 已取消訂單 (申請 {{id}})。",
+      "refunded": "由於顧客撤回購買，{{appName}} 已退款 (申請 {{id}})。",
+      "returnReason": "撤回申請：{{reason}}",
+      "returnReasonNone": "撤回申請 (未提供原因)"
+    }
+  },
+  "emailTemplates": {
+    "pageTitle": "通知",
+    "loadError": "無法載入通知",
+    "saveError": "無法儲存通知",
+    "savedToast": "通知已儲存",
+    "resetToast": "{{name}}已重設為預設值",
+    "sender": {
+      "heading": "寄件者",
+      "description": "這些設定適用於應用程式代表商店寄送的所有電子郵件。請使用你自己已驗證的地址寄送，並選擇顧客回覆的收件地址。",
+      "emailLabel": "寄件者電子郵件",
+      "emailPlaceholder": "notifications@withdrawaleasy.com",
+      "detailsVerified": "電子郵件會從此地址寄出。",
+      "detailsPending": "輸入我們寄到此地址的驗證碼以完成驗證。",
+      "detailsDefault": "如果留空，電子郵件會從 {{email}} 寄出。",
+      "detailsDefaultFallback": "如果留空，電子郵件會從應用程式的預設地址寄出。",
+      "freeProviderWarning": "Gmail 和 Yahoo 等免費電子郵件服務無法驗證。顧客會在此地址寄出的電子郵件中看到「via brevosend.com」。若想看起來更專業，請使用商店網域的地址。",
+      "codeLabel": "驗證碼",
+      "codeDetails": "請輸入我們寄給你的電子郵件中的 6 位數驗證碼。",
+      "verifyCode": "驗證驗證碼",
+      "checkStatus": "檢查驗證狀態",
+      "verifyEmail": "驗證電子郵件",
+      "codeSent": "我們已將驗證碼寄到 {{email}}。",
+      "notVerifiedYet": "此電子郵件尚未驗證。請在收件匣中找到驗證碼，然後再試一次。",
+      "replyToLabel": "回覆電子郵件",
+      "replyToPlaceholder": "support@yourstore.com",
+      "replyToDetails": "根據預設，顧客回覆會寄到商店的電子郵件。若要改寄到其他地方，請輸入不同的地址。"
+    },
+    "domain": {
+      "heading": "網域驗證",
+      "description": "驗證網域後，顧客就不會在你的電子郵件中看到「via brevosend.com」。此步驟為選填，但若你使用商店網域寄送，我們建議進行驗證。",
+      "label": "網域",
+      "placeholder": "yourstore.com",
+      "details": "請輸入你用來寄送電子郵件的網域，而不是 myshopify.com 網域。",
+      "freeProviderWarning": "Gmail 和 Yahoo 等免費電子郵件服務無法驗證，請改為輸入商店的網域。",
+      "columns": {
+        "record": "記錄",
+        "type": "類型",
+        "host": "主機",
+        "value": "值"
+      },
+      "records": {
+        "brevo_code": "網域擁有權",
+        "dkim_record": "DKIM",
+        "dkim1Record": "DKIM 1",
+        "dkim2Record": "DKIM 2",
+        "dmarc_record": "DMARC"
+      },
+      "copyHost": "複製主機",
+      "copyValue": "複製值",
+      "verifyRecords": "驗證 DNS 記錄",
+      "authenticate": "驗證網域",
+      "pendingInfo": "請在網域供應商處新增這些記錄，然後選取「驗證 DNS 記錄」。",
+      "notVerifiedYet": "你的網域尚未驗證。DNS 變更可能需要一段時間才會生效，請稍後再試。"
+    },
+    "notification": {
+      "heading": "電子郵件範本",
+      "emailLabel": "電子郵件",
+      "language": "語言",
+      "languageDetails": "選擇語言以編輯該語言的電子郵件。每種語言會分別儲存。顧客會收到自己語言的電子郵件。",
+      "send": "寄送此電子郵件",
+      "requiredDetails": "歐盟法律規定必須寄送此電子郵件，因此無法關閉。",
+      "merchantDetails": "關閉後將不再收到此電子郵件。",
+      "decisionDetails": "關閉後預設不再寄送此電子郵件。核准或拒絕個別申請時，你仍可選擇寄送。",
+      "subject": "主旨",
+      "reset": "重設為預設值",
+      "customized": "已自訂"
+    },
+    "templates": {
+      "customerConfirmation": {
+        "name": "顧客撤回確認",
+        "description": "顧客送出撤回申請後立即寄給顧客。"
+      },
+      "merchantNotification": {
+        "name": "新申請通知",
+        "description": "顧客送出新的撤回申請時寄到商店的聯絡電子郵件。回覆此電子郵件即可寄信給顧客。"
+      },
+      "withdrawalApproved": {
+        "name": "撤回已核准",
+        "description": "你核准顧客的撤回申請時寄給顧客。你可以在寄送前審閱和編輯。"
+      },
+      "withdrawalRejected": {
+        "name": "撤回已拒絕",
+        "description": "你拒絕顧客的撤回申請時寄給顧客。你可以在寄送前審閱和編輯。"
+      }
+    },
+    "merchantDefaults": {
+      "subject": "新撤回申請 — 訂單 {{order}}",
+      "heading": "新撤回申請",
+      "intro": "有顧客送出了撤回申請。以下是審核所需的所有資訊。",
+      "rows": {
+        "name": "姓名",
+        "email": "電子郵件",
+        "date": "日期",
+        "orderNumber": "訂單編號",
+        "reference": "參考編號",
+        "reason": "原因"
+      },
+      "button": "查看申請",
+      "itemsHeading": "申請的商品",
+      "footnote": "在管理介面中開啟申請以核准或拒絕。退款期限會在管理介面中自動追蹤。"
+    },
+    "body": {
+      "heading": "電子郵件內文",
+      "editCode": "編輯程式碼",
+      "htmlLabel": "電子郵件 HTML 內文",
+      "previewHeading": "電子郵件預覽"
+    },
+    "variables": {
+      "heading": "變數",
+      "help": "選取變數以將其插入游標位置。",
+      "insert": "插入{{label}}：{{description}}",
+      "groups": {
+        "customer": "顧客",
+        "order": "訂單",
+        "withdrawal": "撤回",
+        "request": "申請",
+        "shop": "商店"
+      },
+      "tokens": {
+        "customer": {
+          "first_name": {
+            "label": "名字",
+            "description": "顧客的名字"
+          },
+          "last_name": {
+            "label": "姓氏",
+            "description": "顧客的姓氏"
+          },
+          "email": {
+            "label": "電子郵件",
+            "description": "顧客的電子郵件地址"
+          }
+        },
+        "order": {
+          "name": {
+            "label": "訂單編號",
+            "description": "訂單編號，例如 #2138"
+          },
+          "id": {
+            "label": "訂單 ID",
+            "description": "訂單的內部 ID"
+          }
+        },
+        "withdrawal": {
+          "request_id": {
+            "label": "參考編號",
+            "description": "撤回申請的參考編號"
+          },
+          "submitted_at": {
+            "label": "送出日期",
+            "description": "申請送出的日期和時間"
+          },
+          "reason": {
+            "label": "原因",
+            "description": "顧客提供的原因 (如有)"
+          },
+          "selected_products": {
+            "label": "所選商品 (文字)",
+            "description": "以逗號分隔的申請商品清單"
+          }
+        },
+        "request": {
+          "status": {
+            "label": "狀態",
+            "description": "申請目前的狀態"
+          },
+          "url": {
+            "label": "申請連結",
+            "description": "應用程式中該申請的連結"
+          }
+        },
+        "shop": {
+          "name": {
+            "label": "商店名稱",
+            "description": "你的商店名稱"
+          },
+          "email": {
+            "label": "商店電子郵件",
+            "description": "商店的聯絡電子郵件地址"
+          }
+        }
+      }
+    },
+    "validation": {
+      "email": "請輸入有效的電子郵件地址。",
+      "subjectRequired": "請輸入主旨。",
+      "subjectTooLong": "主旨不得超過 {{max}} 個字元。",
+      "bodyRequired": "請輸入電子郵件內文。"
+    }
+  },
+  "sample": {
+    "customerName": "陳怡君",
+    "items": {
+      "lamp": {
+        "title": "Fjord 桌燈",
+        "variant": "橡木 / 大"
+      },
+      "candleHolder": {
+        "title": "Tind 燭台",
+        "variant": "黃銅"
+      }
+    },
+    "reason": "改變心意了"
+  },
+  "faqs": {
+    "pageTitle": "常見問題",
+    "searchLabel": "搜尋常見問題",
+    "searchPlaceholder": "搜尋問題，例如「退款」或「期限」",
+    "noResults": "沒有與「{{query}}」相符的問題",
+    "noResultsHelp": "請嘗試其他字詞，或透過下方聯絡支援團隊。",
+    "showAnswer": "顯示答案：{{question}}",
+    "hideAnswer": "隱藏答案：{{question}}",
+    "groups": {
+      "gettingStarted": "開始使用",
+      "deadline": "撤回期限",
+      "requests": "處理申請",
+      "emailsLanguages": "電子郵件和語言"
+    },
+    "actions": {
+      "goToSettings": "前往「設定」",
+      "goToRequests": "前往「申請」",
+      "goToNotifications": "前往「通知」"
+    },
+    "stillStuck": {
+      "heading": "還有其他問題嗎？",
+      "body": "我們的支援團隊會閱讀並回覆每一封電子郵件。",
+      "link": "聯絡支援團隊"
+    },
+    "items": {
+      "what-it-does": {
+        "question": "這個應用程式有什麼功能？",
+        "paragraphs": [
+          "它依照歐盟法律規定，為歐盟顧客提供清楚的購買撤回方式，也讓你在同一個地方管理所有申請。",
+          "顧客從訂單開啟表單、選擇要撤回的商品並確認。每筆申請接著會顯示在「申請」頁面上，包括商品、原因和你的退款期限。應用程式會代你寄送必要的電子郵件。"
+        ]
+      },
+      "where-form-appears": {
+        "question": "顧客可以在哪裡找到撤回表單？",
+        "paragraphs": [
+          "你可以在 2 個位置顯示表單，可擇一使用或同時使用："
+        ],
+        "bullets": [
+          "訂單狀態頁面：顧客結帳後，以及開啟訂單確認電子郵件中的連結時看到的頁面。",
+          "商店頁面：網路商店中的頁面，供之後再回來的顧客使用。顧客會用訂單編號和電子郵件尋找訂單。"
+        ],
+        "closing": "在「設定」中啟用每個位置，然後新增一次對應的應用程式區塊。「首頁」上的設定指南會顯示已新增的區塊。"
+      },
+      "form-not-showing": {
+        "question": "為什麼顧客看不到撤回表單？",
+        "paragraphs": [
+          "請從最常見的原因開始檢查以下項目："
+        ],
+        "bullets": [
+          "表單已停用，或顧客使用的位置未在「設定」中啟用。",
+          "尚未在該頁面新增應用程式區塊。",
+          "訂單未寄送至你的適用國家/地區之一。",
+          "訂單的撤回期已結束。",
+          "訂單已取消，或已有待處理的申請。每筆訂單同一時間只能有 1 筆待處理的申請。"
+        ]
+      },
+      "deadline": {
+        "question": "撤回期何時開始、何時結束？",
+        "paragraphs": [
+          "根據歐盟法律，撤回期從顧客收到商品時開始，而不是從下單時開始。顧客也可以在商品送達前隨時撤回。"
+        ],
+        "bullets": [
+          "尚未出貨：撤回期尚未開始，因此顧客隨時可以撤回。",
+          "已送達：撤回期從物流業者提供的送達日期開始，為期 {{withdrawalDays}}。你可以在「設定」中變更天數。",
+          "已出貨但沒有送達日期：應用程式會使用物流業者的預計送達日期。若沒有預計日期，則使用出貨日期加上你的預估運送時間。"
+        ]
+      },
+      "transit-days": {
+        "question": "預估運送時間的用途是什麼？",
+        "paragraphs": [
+          "許多物流業者不會將送達日期傳送給 Shopify。沒有送達日期，應用程式就無法得知撤回期何時開始，因此會將你的預估運送時間加到出貨日期上。",
+          "請設定為包裹送達大約需要的時間。目前為 {{transitDays}}。若不確定，請選擇較長的時間。時間太短可能會讓顧客的撤回期提早結束。"
+        ]
+      },
+      "split-shipments": {
+        "question": "如果訂單分成多個包裹寄出怎麼辦？",
+        "paragraphs": [
+          "撤回期從最後一個包裹送達時開始。因顧客撤回而被應用程式暫停的商品不會寄出，因此不列入計算。",
+          "如果顧客在訂單只有部分出貨時撤回，應用程式會分別處理每個部分："
+        ],
+        "bullets": [
+          "未出貨的商品：應用程式可以暫停這些商品，避免寄出。",
+          "已出貨的商品：應用程式可以為其建立退貨。"
+        ],
+        "closing": "應用程式絕不會取消部分出貨的訂單，因為這樣也會取消顧客已經收到的商品。"
+      },
+      "after-submit": {
+        "question": "顧客送出申請後會發生什麼事？",
+        "paragraphs": [
+          "會依照以下順序進行："
+        ],
+        "bullets": [
+          "申請會以「待處理」狀態顯示在「申請」頁面上。",
+          "顧客會收到確認電子郵件。此電子郵件一定會寄送，因為這是顧客撤回的證明。",
+          "如果已開啟新申請通知，你也會收到電子郵件。",
+          "你的自動化設定會開始執行。例如，應用程式可以暫停出貨或為訂單加上標籤。"
+        ]
+      },
+      "automation": {
+        "question": "自動化設定有什麼作用？",
+        "paragraphs": [
+          "這些設定會在收到申請時執行。應用程式能執行的操作取決於訂單是否已出貨："
+        ],
+        "bullets": [
+          "訂單出貨前：暫停出貨，在你審核申請期間不會寄出任何商品。你也可以讓應用程式立即取消整筆訂單並退款。",
+          "訂單出貨後：在 Shopify 中為已出貨的商品建立退貨。",
+          "部分出貨：兩者皆適用。應用程式只會暫停申請中尚未出貨的商品，並為已出貨的商品建立退貨。"
+        ],
+        "closing": "在每種情況下，應用程式也都可以為訂單加上標籤。自動化絕不會核准或拒絕申請，一律由你做出決定。"
+      },
+      "partial-withdrawal": {
+        "question": "顧客可以只撤回部分商品嗎？",
+        "paragraphs": [
+          "可以。顧客可以選擇要撤回的商品。申請、退款和退貨只會包含這些商品。只有在顧客撤回整筆訂單時，才會退還原運費。",
+          "每筆訂單同一時間可以有 1 筆待處理的申請。你核准或拒絕後，顧客就可以為其他商品送出新的申請。"
+        ]
+      },
+      "reason": {
+        "question": "顧客必須提供原因嗎？",
+        "paragraphs": [
+          "不需要。根據歐盟法律，顧客撤回時不需要提供原因，因此原因欄位一律為選填。你可以在「設定」中選擇要提供哪些原因，或不再詢問原因。"
+        ]
+      },
+      "refund": {
+        "question": "要如何為撤回退款？",
+        "paragraphs": [
+          "從「申請」頁面開啟申請。退款方式取決於商品所在位置："
+        ],
+        "bullets": [
+          "不在退貨中的商品：選取「退款」。尚未出貨的商品會從訂單中移除，因此不會寄出。",
+          "退貨中的商品：商品寄回後，在退貨中選取「處理並退款」。這會為顧客退款並關閉退貨。",
+          "尚未寄出任何商品：你也可以透過「更多操作」取消整筆訂單並退款。"
+        ],
+        "closing": "歐盟法律規定，你必須在撤回後 {{refundDays}}內完成退款。申請頁面會顯示剩餘時間。請在核准申請前退款。"
+      },
+      "returns": {
+        "question": "退貨是如何運作的？",
+        "paragraphs": [
+          "退貨是用來告知 Shopify 顧客要寄回哪些商品。應用程式可以在收到申請時建立退貨，你也可以在申請頁面上選取「建立退貨」。",
+          "退貨只包含已出貨的商品。建立退貨不會向顧客退款。商品寄回後，請在退貨中選取「處理並退款」。"
+        ]
+      },
+      "decision-lock": {
+        "question": "為什麼核准或拒絕申請後，訂單操作就會關閉？",
+        "paragraphs": [
+          "核准或拒絕即代表申請已結案。之後，退款、暫停、退貨和取消都會關閉，以免訂單遭到誤改。因此，你應該在核准前完成退款。",
+          "做出決定也會解除應用程式設定的所有出貨暫停。如果解除失敗，你仍然可以選取「解除出貨暫停」。"
+        ]
+      },
+      "emails": {
+        "question": "應用程式會寄送哪些電子郵件？我可以編輯嗎？",
+        "paragraphs": [
+          "應用程式會寄送 {{emailCount}} 種電子郵件，你可以在「通知」頁面編輯所有電子郵件："
+        ],
+        "bullets": [
+          "顧客撤回確認：顧客送出申請時寄送，一律為開啟狀態。",
+          "新申請通知：寄到商店的聯絡電子郵件，你可以關閉此電子郵件。",
+          "撤回已核准：你核准申請時寄給顧客。你可以先審閱，或關閉此電子郵件。",
+          "撤回已拒絕：你拒絕申請時寄給顧客。你可以先審閱，或關閉此電子郵件。"
+        ],
+        "closing": "你可以用每種語言編輯每封電子郵件的主旨和內文，並加入訂單編號或顧客姓名等變數。預覽會隨著你的輸入即時更新。"
+      },
+      "countries-languages": {
+        "question": "應用程式支援哪些國家/地區和語言？",
+        "paragraphs": [
+          "根據預設，所有歐盟國家/地區皆適用。如果你只銷售到其中部分國家/地區，請在「設定」中選擇「特定國家/地區」。",
+          "表單提供 {{languageCount}} 種語言：{{languages}}。顧客會看到自己語言的表單。",
+          "英文為基礎語言。如果你將某個翻譯欄位留空，顧客會看到對應的英文文字。"
+        ]
+      }
+    }
+  },
+  "featureRequest": {
+    "pageTitle": "提出功能建議",
+    "intro": "告訴我們你希望應用程式新增哪些功能。我們會閱讀每一則建議。",
+    "sentHeading": "已送出功能建議",
+    "sentBody": "感謝你與我們的團隊分享想法。",
+    "firstName": "名字",
+    "lastName": "姓氏",
+    "email": "電子郵件",
+    "request": "你希望新增什麼功能？",
+    "requestPlaceholder": "請說明這項功能，以及它能如何幫助你的商店",
+    "submit": "送出建議"
+  },
+  "pricing": {
+    "pageTitle": "方案與價格",
+    "pricePerMonth": "每月 {{price}}",
+    "currentPlan": "目前方案",
+    "choosePlan": "選擇 {{plan}}",
+    "switchedToast": "已切換至 {{plan}} 方案",
+    "plans": {
+      "free": {
+        "name": "Free",
+        "features": [
+          "每月最多 10 筆撤回申請",
+          "電子郵件通知"
+        ]
+      },
+      "starter": {
+        "name": "Starter",
+        "features": [
+          "無限撤回申請",
+          "自訂表單欄位",
+          "電子郵件通知"
+        ]
+      },
+      "pro": {
+        "name": "Pro",
+        "features": [
+          "包含 Starter 的所有功能",
+          "優先支援",
+          "自動退款"
+        ]
+      }
+    },
+    "switchError": "無法變更你的方案"
+  }
+}

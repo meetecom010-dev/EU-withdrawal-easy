@@ -1,0 +1,1250 @@
+{
+  "common": {
+    "add": "Ekle",
+    "backToHome": "Ana sayfaya dön",
+    "cancel": "İptal",
+    "delete": "Sil",
+    "discard": "Vazgeç",
+    "done": "Bitti",
+    "dayCount_one": "{{count}} gün",
+    "dayCount_other": "{{count}} gün",
+    "emptyValue": "—",
+    "noMatches": "\"{{query}}\" için sonuç yok.",
+    "preview": "Önizle",
+    "remove": "Kaldır",
+    "save": "Kaydet",
+    "verified": "Doğrulandı"
+  },
+  "nav": {
+    "home": "Ana sayfa",
+    "withdrawalRequests": "Talepler",
+    "formSetup": "Ayarlar",
+    "emailTemplates": "Bildirimler",
+    "pricing": "Fiyatlandırma"
+  },
+  "errors": {
+    "generic": "Bir sorun oluştu. Tekrar deneyin.",
+    "requestFailed": "Bir sorun oluştu (hata {{status}}). Tekrar deneyin.",
+    "methodNotAllowed": "Bu işlem desteklenmiyor.",
+    "unknownAction": "Bu işlem desteklenmiyor.",
+    "noValidFields": "Güncellenecek bir şey yok.",
+    "emailServiceUnavailable": "E-posta hizmetine bağlanılamadı. Birkaç dakika sonra tekrar deneyin.",
+    "emailServiceNotConfigured": "E-posta gönderimi henüz ayarlanmadı. Yardım için destek ekibiyle iletişime geçin.",
+    "requestNotFound": "Bu cayma talebi mevcut değil veya silinmiş.",
+    "requestDecided": "Bu talep zaten onaylandı veya reddedildi. Bu nedenle sipariş işlemleri artık kullanılamaz.",
+    "unknownDecision": "Bu talebi onaylamayı veya reddetmeyi seçin.",
+    "invalidStatus": "Bu talep için geçerli bir durum seçin.",
+    "noteRequired": "Bir not girin.",
+    "orderNotFound": "Bu sipariş Shopify'da bulunamadı.",
+    "invalidEmail": "Geçerli bir e-posta adresi girin.",
+    "featureRequestIncomplete": "Talebinizi göndermeden önce tüm alanları doldurun.",
+    "senderCodeRequired": "E-postanıza gelen doğrulama kodunu girin.",
+    "senderNotFound": "Bu gönderici e-postası bulunamadı. Yeni bir kod almak için kaldırıp tekrar ekleyin.",
+    "senderNotStarted": "Önce gönderici e-postanızı doğrulayın.",
+    "senderIdMissing": "Bu gönderici e-postası kaydedilemedi. Tekrar deneyin.",
+    "domainInvalid": "magazaniz.com gibi geçerli bir alan adı girin.",
+    "domainFreeProvider": "Gmail ve Yahoo gibi ücretsiz e-posta sağlayıcılarının kimliği doğrulanamaz. Bunun yerine mağazanızın alan adını kullanın."
+  },
+  "auth": {
+    "login": {
+      "heading": "Giriş yap",
+      "shopLabel": "Mağaza alan adı",
+      "shopDetails": "example.myshopify.com",
+      "submit": "Giriş yap",
+      "missingShop": "Giriş yapmak için mağaza alan adınızı girin.",
+      "invalidShop": "example.myshopify.com gibi geçerli bir mağaza alan adı girin."
+    }
+  },
+  "status": {
+    "pending": "Beklemede",
+    "approved": "Onaylandı",
+    "rejected": "Reddedildi"
+  },
+  "sourceInline": {
+    "order_status": "sipariş durumu sayfası",
+    "standalone_page": "mağaza sayfanız"
+  },
+  "placements": {
+    "orderStatus": {
+      "label": "Sipariş durumu sayfası",
+      "details": "Cayma formunu, müşterilerin ödemeden sonra gördüğü sipariş durumu sayfasında gösterin."
+    },
+    "storefront": {
+      "label": "Mağaza sayfası",
+      "details": "Müşterilerin sipariş durumu sayfası dışında da bulabilmesi için cayma formunu temanızdaki ayrı bir sayfada gösterin."
+    }
+  },
+  "orderStatus": {
+    "financial": {
+      "PENDING": "Ödeme bekleniyor",
+      "AUTHORIZED": "Yetkilendirildi",
+      "PARTIALLY_PAID": "Kısmen ödendi",
+      "PAID": "Ödendi",
+      "PARTIALLY_REFUNDED": "Kısmen para iadesi yapıldı",
+      "REFUNDED": "Para iadesi yapıldı",
+      "VOIDED": "Geçersiz kılındı",
+      "EXPIRED": "Süresi doldu"
+    },
+    "fulfillment": {
+      "UNFULFILLED": "Karşılanmadı",
+      "PENDING_FULFILLMENT": "Karşılama bekleniyor",
+      "OPEN": "Açık",
+      "IN_PROGRESS": "Devam ediyor",
+      "ON_HOLD": "Beklemeye alındı",
+      "PARTIALLY_FULFILLED": "Kısmen karşılandı",
+      "FULFILLED": "Karşılandı",
+      "RESTOCKED": "Stoğa geri eklendi",
+      "SCHEDULED": "Planlandı"
+    },
+    "return": {
+      "REQUESTED": "Talep edildi",
+      "OPEN": "Açık",
+      "CLOSED": "Kapandı",
+      "DECLINED": "Reddedildi",
+      "CANCELED": "İptal edildi"
+    }
+  },
+  "stats": {
+    "heading": "Genel bakış",
+    "description": "Cayma taleplerinizin özeti",
+    "viewRequests": "Talepleri görüntüle",
+    "total": "Toplam talep",
+    "today": "Bugün gönderilen",
+    "pending": "Beklemede",
+    "closed": "Kapatıldı",
+    "requestCount_one": "{{count}} talep",
+    "requestCount_other": "{{count}} talep"
+  },
+  "home": {
+    "pageTitle": "Ana sayfa",
+    "loadError": "Kontrol paneliniz yüklenemedi",
+    "saveErrorHeading": "Değişikliğiniz kaydedilemedi",
+    "saveErrorAction": "Tekrar deneyin veya değişikliği Ayarlar'da yapın.",
+    "setupBanner": {
+      "heading_one": "{{count}} kurulum adımı kaldı",
+      "heading_other": "{{count}} kurulum adımı kaldı",
+      "body": "Cayma formunuzu hazırlamak için şu adımları tamamlayın: {{steps}}."
+    },
+    "setupGuide": {
+      "heading": "Kurulum rehberi",
+      "description": "Cayma formunuzu mağazanızda yayına almak için bu rehberi kullanın.",
+      "progress": "{{total}} görevden {{completed}} tanesi tamamlandı",
+      "dismiss": "Kurulum rehberini kapat",
+      "collapse": "Kurulum rehberini daralt",
+      "expand": "Kurulum rehberini genişlet",
+      "showStep": "{{step}} ayrıntılarını göster",
+      "hideStep": "{{step}} ayrıntılarını gizle",
+      "steps": {
+        "form": {
+          "label": "Cayma formunuzu etkinleştirin",
+          "description": "Formu etkinleştirin ve müşterilerin formu nerede göreceğini seçin. Alanlar, nedenler ve metinler varsayılan olarak doldurulmuştur. Bunları istediğiniz zaman Ayarlar'dan değiştirebilirsiniz.",
+          "checkbox": "Cayma formunu etkinleştir",
+          "cta": "Ayarlar'a git",
+          "placementHeading": "Müşterilerin formu nerede göreceğini seçin",
+          "placementDescription": "En az bir yer seçin. Müşterilerin formu görebilmesi için her yere ait uygulama bloğunun eklenmesi gerekir."
+        },
+        "blocks": {
+          "label": "Uygulama bloklarını mağazanıza ekleyin",
+          "description": "Önceki adımda seçtiğiniz her yer için bir uygulama bloğu ekleyin.",
+          "locked": "Formun nerede görüneceğini seçmek için {{step}}. adımı tamamlayın. Ardından uygulama bloklarını buradan ekleyebilirsiniz.",
+          "surfaces": {
+            "orderStatus": "Sipariş durumu sayfası",
+            "theme": "Mağaza sayfası"
+          },
+          "live": {
+            "orderStatus": "Uygulama bloğu sipariş durumu sayfanızda yayında.",
+            "theme": "Uygulama bloğu mağaza sayfanızda yayında."
+          }
+        }
+      }
+    },
+    "help": {
+      "heading": "Yardım ve kaynaklar",
+      "support": {
+        "title": "E-posta desteği",
+        "description": "Sorunuz mu var? Destek ekibimiz yardımcı olabilir.",
+        "link": "Destek ekibiyle iletişime geç"
+      },
+      "faqs": {
+        "title": "SSS",
+        "description": "Uygulamanın kurulumu ve kullanımıyla ilgili sık sorulan soruların yanıtlarını bulun.",
+        "link": "SSS'yi görüntüle"
+      },
+      "featureRequest": {
+        "title": "Özellik talepleri",
+        "description": "Uygulama için bir fikriniz mi var? Görmek istediklerinizi bize anlatın.",
+        "link": "Özellik talep et"
+      }
+    }
+  },
+  "blockSetup": {
+    "autoUpdate": "Bu mesaj, uygulama bloğunu kaydettikten birkaç saniye sonra kendiliğinden kaybolur.",
+    "addAppBlock": "Uygulama bloğu ekle",
+    "orderStatus": {
+      "heading": "Uygulama bloğunu sipariş durumu sayfanıza ekleyin",
+      "body": "Uygulama bloğunu ekleyene kadar müşteriler cayma formunu sipariş durumu sayfasında göremez. Eklemek için:",
+      "steps": {
+        "open": "Aşağıdan <strong>Uygulama bloğu ekle</strong>'yi seçin. Sipariş durumu sayfası ödeme düzenleyicisinde açılır.",
+        "add": "Kenar çubuğunda <strong>Uygulama bloğu ekle</strong>'yi seçin.",
+        "choose": "<strong>Cayma formu</strong>'nu seçin.",
+        "save": "<strong>Kaydet</strong>'i seçin."
+      }
+    },
+    "storefront": {
+      "heading": "Uygulama bloğunu bir mağaza sayfasına ekleyin",
+      "body": "Bir sayfa şablonu seçin, ardından Uygulama bloğu ekle'yi seçin. Tema düzenleyicisi, cayma formu bir bölüm olarak eklenmiş şekilde açılır.",
+      "templateLabel": "Sayfa şablonu",
+      "templates": {
+        "page": "Varsayılan sayfa",
+        "index": "Ana sayfa",
+        "product": "Ürün sayfaları",
+        "collection": "Koleksiyon sayfaları",
+        "cart": "Sepet sayfası"
+      },
+      "steps": {
+        "open": "Tema düzenleyicisini bölüm eklenmiş şekilde açmak için <strong>Uygulama bloğu ekle</strong>'yi seçin.",
+        "move": "Bölümü sayfada istediğiniz yere sürükleyin.",
+        "save": "<strong>Kaydet</strong>'i seçin."
+      }
+    }
+  },
+  "onboarding": {
+    "pageTitle": "Başlayın",
+    "heading": "Mağazanızı AB cayma taleplerine hazırlayın",
+    "intro_one": "AB'deki müşterilerinize bir satın alımdan cayma için yasalara uygun bir yol sunmak üzere bu {{count}} adımı tamamlayın.",
+    "intro_other": "AB'deki müşterilerinize bir satın alımdan cayma için yasalara uygun bir yol sunmak üzere bu {{count}} adımı tamamlayın.",
+    "stepBadge": "Adım {{current}}/{{total}}",
+    "completedToast": "Kurulum tamamlandı",
+    "steps": {
+      "welcome": {
+        "title": "Hoş geldiniz",
+        "description": "Uygulama ne yapar?"
+      },
+      "form": {
+        "title": "Cayma formu",
+        "description": "Formunuzu etkinleştirin"
+      }
+    },
+    "actions": {
+      "getStarted": "Başlayın",
+      "continue": "Devam",
+      "finish": "Kurulumu bitir",
+      "skip": "Kurulumu atla",
+      "back": "Geri"
+    },
+    "help": {
+      "heading": "Yardıma mı ihtiyacınız var?",
+      "body": "Sorunuz mu var? <supportLink>Destek ekibiyle iletişime geçin</supportLink>."
+    },
+    "welcome": {
+      "heading": "{{appName}} uygulamasına hoş geldiniz",
+      "setupTime": "Yaklaşık 1 dakika sürer",
+      "law": "19 Haziran 2026'dan itibaren AB'deki müşterilere satış yapan mağazalar, her sipariş için 2 adımlı bir cayma yolu sunmak zorundadır (AB Direktifi 2023/2673, Madde 11a). Yalnızca bir iade politikası yeterli değildir.",
+      "app": "{{appName}}, sipariş durumu sayfanıza, online mağazanızdaki bir sayfaya veya her ikisine bir cayma düğmesi ekler. 2 adımlı onayı yönetir ve zorunlu onay e-postasını gönderir. Tüm talepleri tek bir yerden yönetebilirsiniz.",
+      "imageAlt": "Bir siparişten cayan müşteri",
+      "requirementsHeading": "Yasanın gerektirdikleri",
+      "requirements": {
+        "button": "Müşterilerin kolayca bulabileceği, açıkça etiketlenmiş bir cayma düğmesi",
+        "twoStep": "2 adımlı bir süreç: müşteriler caymalarını gönderir ve ardından onaylar",
+        "email": "Müşterilerin saklayabileceği otomatik bir onay e-postası"
+      },
+      "penaltyHeading": "Uymazsanız ne olur?",
+      "penalty": "Cayma düğmesi yoksa veya çalışmıyorsa yasa, {{days}} günlük cayma süresini uzatır. Bu durumda müşterilerin etkilenen her siparişten caymak için 12 ay {{days}} günü olur."
+    },
+    "form": {
+      "heading": "Cayma formunuzu etkinleştirin",
+      "body": "Müşteriler, AB mevzuatının gerektirdiği şekilde caymalarını gönderir ve ardından ayrı bir adımda onaylar. Form varsayılan yasal metinlerle birlikte gelir. Müşterilerin teslimattan itibaren caymak için {{days}} süresi vardır.",
+      "switch": "Cayma formunu etkinleştir",
+      "later": "Bunların tümünü daha sonra Ayarlar'dan değiştirebilirsiniz.",
+      "loadError": "Form ayarlarınız yüklenemedi. Kurulumu şimdi bitirebilir ve formu daha sonra Ayarlar'dan etkinleştirebilirsiniz.",
+      "saveError": "Form seçimleriniz kaydedilemedi. Tekrar deneyin veya kurulumu bunlar olmadan bitirip daha sonra Ayarlar'dan belirleyin.",
+      "finishWithoutSaving": "Kaydetmeden bitir",
+      "placementError": "En az bir yer seçin veya formu devre dışı bırakın."
+    },
+    "finishError": "Kurulum bitirilemedi. Tekrar deneyin."
+  },
+  "formSetup": {
+    "pageTitle": "Ayarlar",
+    "loadError": "Ayarlar yüklenemedi",
+    "saveError": "Ayarlar kaydedilemedi",
+    "savedToast": "Ayarlar kaydedildi",
+    "enable": {
+      "heading": "Cayma formu",
+      "description": "Müşterilerin cayma talebi gönderip gönderemeyeceğini ve formu nerede göreceklerini seçin.",
+      "checkbox": "Cayma formunu etkinleştir",
+      "details": "Bu seçenek kapalıyken müşteriler hiçbir yerden cayma talebi gönderemez.",
+      "orderStatus": "Sipariş durumu sayfasında göster",
+      "storefront": "Bir mağaza sayfasında göster"
+    },
+    "countries": {
+      "heading": "Uygun ülkeler",
+      "description": "Müşteriler cayma formunu yalnızca siparişleri bu ülkelerden birine gönderiliyorsa görür.",
+      "all": "Tüm {{count}} AB ülkesi (önerilir)",
+      "allDetails": "Cayma hakkı tüm AB'de geçerlidir.",
+      "specific": "Belirli ülkeler",
+      "specificDetails": "Aşağıdan ülkeleri seçin. Bunu istediğiniz zaman değiştirebilirsiniz.",
+      "pickerLabel": "Ülkeler",
+      "pickerPlaceholder": "Ülke ara"
+    },
+    "content": {
+      "heading": "Form içeriği",
+      "tabs": {
+        "step1": "1. Ayrıntılar",
+        "confirm": "2. Onay",
+        "done": "3. Bitti"
+      },
+      "language": "Dil",
+      "languageDetails": "Form içeriğini o dilde düzenlemek için bir dil seçin. Her dil ayrı olarak kaydedilir.",
+      "beforeDelivery": {
+        "heading": "Teslimattan önce",
+        "description": "Sipariş teslim edilene kadar, yoldayken de dahil olmak üzere formun ilk ekranında ve Ayrıntılar adımında gösterilir."
+      },
+      "afterDelivery": {
+        "heading": "Teslimattan sonra",
+        "description": "Shopify siparişi teslim edildi olarak işaretlediğinde bunun yerine gösterilir."
+      },
+      "title": "Başlık",
+      "description": "Açıklama",
+      "itemHeading": "Ürün seçimi başlığı",
+      "customerDetails": {
+        "heading": "Müşteri bilgileri",
+        "description": "Siparişten doldurulur. Müşteriler bu alanları düzenleyemez.",
+        "locked": "Kilitli",
+        "fullName": "Ad soyad",
+        "email": "E-posta",
+        "orderNumber": "Sipariş numarası"
+      },
+      "reason": {
+        "heading": "Cayma nedeni",
+        "checkbox": "Neden sor",
+        "details": "Müşterilerin hiçbir zaman neden belirtmesi gerekmez. AB mevzuatı bu alanın isteğe bağlı olmasını gerektirir.",
+        "label": "Neden alanı etiketi",
+        "optionsHeading": "Neden seçenekleri",
+        "optionsHelp": "Müşteriler bu listeden seçim yapar. Seçenekleri mağazanıza uyacak şekilde ekleyin, kaldırın veya yeniden yazın. Sona her zaman metin kutulu bir \"Diğer\" seçeneği eklenir.",
+        "removeOption": "{{option}} seçeneğini kaldır",
+        "addLabel": "Neden ekle",
+        "addPlaceholder": "Örneğin, Yanlışlıkla sipariş verdim",
+        "translatedHelp": "Her seçeneği çevirin. Seçenek eklemek veya kaldırmak için İngilizceye geçin.",
+        "translatedEmpty": "Önce İngilizce neden seçenekleri ekleyin."
+      },
+      "continueButton": "Devam düğmesi etiketi",
+      "confirm": {
+        "heading": "Onay başlığı",
+        "messageBefore": "Teslimattan önceki mesaj",
+        "messageAfter": "Teslimattan sonraki mesaj",
+        "declaration": "Beyan",
+        "button": "Onayla düğmesi etiketi"
+      },
+      "done": {
+        "titleBefore": "Teslimattan önceki başlık",
+        "messageBefore": "Teslimattan önceki mesaj",
+        "titleAfter": "Teslimattan sonraki başlık",
+        "messageAfter": "Teslimattan sonraki mesaj"
+      }
+    },
+    "automation": {
+      "heading": "Otomasyon",
+      "description": "Bir müşteri cayma talebi gönderdiğinde uygulamanın ne yapacağını seçin.",
+      "beforeShip": {
+        "heading": "Sipariş gönderilmeden önce",
+        "description": "Herhangi bir ürün gönderilmeden önce gelen talepler için geçerlidir.",
+        "hold": "İnceleme için karşılamayı beklet",
+        "holdDetails": "Talebi onaylayana veya reddedene kadar karşılamayı duraklatın. Karar verdiğinizde bekletme kaldırılır.",
+        "tagDetails": "Personelinizin sipariş listesinde bulabilmesi için gönderilmeden önce talep alan siparişleri etiketleyin."
+      },
+      "fallback": {
+        "label": "Siparişe ne olacak?",
+        "hold": "Talebi onaylayana veya reddedene kadar beklemede tut",
+        "cancelNow": "Siparişin tamamını iptal et ve hemen para iadesi yap",
+        "releaseN": "Belirli sayıda gün sonra bekletmeyi kaldır",
+        "cancelN": "Belirli sayıda gün sonra siparişin tamamını iptal et ve para iadesi yap",
+        "cancelWarning": "Bu işlem, müşteri yalnızca bazı ürünlerden caymış olsa bile siparişin tamamını iptal eder ve para iadesi yapar. Shopify müşteriye iptalle ilgili bir e-posta gönderir.",
+        "days": "Gün sayısı"
+      },
+      "afterDelivery": {
+        "heading": "Sipariş gönderildikten sonra",
+        "description": "En az bir ürün gönderildikten sonra gelen talepler için, ürün henüz teslim edilmemiş olsa bile geçerlidir. Her talep yine de Talepler sayfasında görünür.",
+        "createReturn": "İade oluştur",
+        "createReturnDetails": "Talep edilen ve gönderilmiş ürünler için Shopify'da bir iade oluşturun.",
+        "tagDetails": "Gönderildikten sonra talep alan siparişleri etiketleyin."
+      },
+      "tag": {
+        "checkbox": "Siparişi etiketle",
+        "label": "Sipariş etiketleri",
+        "placeholder": "Etiket ekle"
+      }
+    },
+    "deadline": {
+      "heading": "Cayma süresi",
+      "description": "Cayma süresi, sipariş verildiğinde değil, sipariş teslim edildiğinde başlar. AB mevzuatı en az {{days}} gerektirir.",
+      "days": "Teslimattan sonra cayma için gün sayısı",
+      "daysDetails": "Siparişleri teslim edildikten sonra müşterilerin caymak için ne kadar süresi olduğu.",
+      "transit": "Tahmini taşıma süresi (gün)",
+      "transitDetails": "Kargo firması teslimat tarihi veya tahmini paylaşmadığında kullanılır. Uygulama bu günleri gönderim tarihine ekler."
+    },
+    "validation": {
+      "countryMode": "Hangi ülkelerin uygun olduğunu seçin.",
+      "euCountries": "En az bir ülke seçin.",
+      "title": "Bir başlık girin.",
+      "description": "Bir açıklama girin.",
+      "itemHeading": "Ürün listesi için bir başlık girin.",
+      "continueButton": "Devam düğmesi için bir etiket girin.",
+      "heading": "Bir başlık girin.",
+      "confirmMessage": "Bir onay mesajı girin.",
+      "declaration": "Müşterilerin kabul etmesi gereken beyanı girin.",
+      "confirmButton": "Onayla düğmesi için bir etiket girin.",
+      "message": "Bir mesaj girin.",
+      "reasonLabel": "Neden alanı için bir etiket girin.",
+      "reasonOptions": "En az bir neden ekleyin.",
+      "reasonOptionTranslation": "Bu neden için bir çeviri girin.",
+      "fallback": "Siparişe ne olacağını seçin.",
+      "daysRange": "{{min}} ile {{max}} arasında bir gün sayısı girin.",
+      "tags": "En az bir etiket ekleyin veya etiketlemeyi kapatın.",
+      "afterDeliveryAction": "Sipariş gönderildikten sonra ne olacağını seçin."
+    },
+    "preview": {
+      "heading": "Canlı önizleme",
+      "compliantBadge": "2 adıma uygun",
+      "surfaceLabel": "Önizleme",
+      "surfaces": {
+        "orderStatus": "Sipariş durumu sayfası",
+        "theme": "Mağaza sayfası"
+      },
+      "stageLabel": "Teslimat durumu",
+      "stages": {
+        "beforeDelivery": "Henüz teslim edilmedi",
+        "delivered": "Teslim edildi"
+      },
+      "banner": {
+        "orderStatus": "Müşteriler sipariş durumu sayfasında bunu görür. Denemek için düğmeleri seçin veya belirli bir adıma gitmek için Form içeriği'ndeki sekmeleri kullanın.",
+        "theme": "Müşteriler mağaza sayfanızda bunu görür. Mağaza ziyaretçileri giriş yapmadığı için \"Siparişinizi bulun\" adımıyla başlar."
+      },
+      "restart": "Önizlemeyi yeniden başlat",
+      "position": {
+        "entry": "Giriş kartı",
+        "lookup": "Siparişinizi bulun",
+        "step": "Adım {{current}}/{{total}}"
+      },
+      "storefront": {
+        "start": "Cayma talebi başlat",
+        "findOrderHeading": "Siparişinizi bulun",
+        "findOrderBody": "Cayma talebinizi başlatmak için sipariş bilgilerinizi girin.",
+        "fullName": "Ad soyad",
+        "email": "E-posta",
+        "orderNumber": "Sipariş numarası",
+        "continue": "Devam",
+        "steps": {
+          "step1": "Ayrıntılar",
+          "confirm": "Onay",
+          "done": "Bitti"
+        },
+        "stepOf": "Adım {{current}}/{{total}}",
+        "stepProgress": "Adım {{current}}/{{total}}: {{label}}",
+        "reasonPlaceholder": "Bir neden seçin (isteğe bağlı)",
+        "otherReason": "Diğer",
+        "yourReason": "Nedeniniz",
+        "yourReasonPlaceholder": "Nedeninizi bize anlatın",
+        "selectItem": "Devam etmek için en az bir ürün seçin.",
+        "itemsToWithdraw": "Cayılacak ürünler ({{count}})",
+        "selectedTotal": "Seçilen ürünlerin toplamı",
+        "previous": "Önceki",
+        "submittedOn": "Gönderilme tarihi: {{date}}"
+      }
+    }
+  },
+  "requests": {
+    "pageTitle": "Talepler",
+    "searchLabel": "Cayma taleplerinde ara",
+    "searchPlaceholder": "Sipariş numarası, müşteri adı veya e-postaya göre ara",
+    "export": "Dışa aktar",
+    "exportSelected": "Seçilenleri dışa aktar",
+    "tabs": {
+      "all": "Tümü",
+      "withCount": "{{label}} ({{count}})"
+    },
+    "empty": {
+      "imageAlt": "",
+      "heading": "Henüz cayma talebi yok",
+      "body": "Müşterilerinizden gelen cayma talepleri burada görünür.",
+      "filteredHeading": "Cayma talebi bulunamadı",
+      "filteredBody": "Arama terimini veya filtreyi değiştirmeyi deneyin."
+    },
+    "table": {
+      "selectAll": "Tüm cayma taleplerini seç",
+      "selectRow": "{{order}} siparişini seç",
+      "selectedCount": "{{count}} seçildi",
+      "order": "Sipariş",
+      "customer": "Müşteri",
+      "items": "Ürünler",
+      "value": "Tutar",
+      "status": "Durum",
+      "submitted": "Gönderildi",
+      "actions": "İşlemler",
+      "itemCount_one": "{{count}} ürün",
+      "itemCount_other": "{{count}} ürün",
+      "viewRow": "{{order}} siparişine ait talebi görüntüle",
+      "deleteRow": "{{order}} siparişine ait talebi sil"
+    },
+    "delete": {
+      "heading_one": "Cayma talebi silinsin mi?",
+      "heading_other": "{{count}} cayma talebi silinsin mi?",
+      "body_one": "Bu cayma talebi kalıcı olarak silinecek. Bu işlem geri alınamaz.",
+      "body_other": "Bu {{count}} cayma talebi kalıcı olarak silinecek. Bu işlem geri alınamaz.",
+      "confirm_one": "Talebi sil",
+      "confirm_other": "Talepleri sil",
+      "toast_one": "Cayma talebi silindi",
+      "toast_other": "{{count}} cayma talebi silindi"
+    },
+    "csv": {
+      "filename": "cayma-talepleri-{{date}}.csv",
+      "order": "Sipariş",
+      "customerName": "Müşteri adı",
+      "customerEmail": "Müşteri e-postası",
+      "country": "Ülke",
+      "items": "Ürünler",
+      "value": "Tutar",
+      "reason": "Neden",
+      "status": "Durum",
+      "submitted": "Gönderildi",
+      "decided": "Karar verildi"
+    }
+  },
+  "requestDetail": {
+    "pageTitle": "Cayma talebi",
+    "backLink": "Talepler",
+    "submittedLine": "{{date}} tarihinde {{source}} üzerinden gönderildi",
+    "previous": "Önceki talep",
+    "next": "Sonraki talep",
+    "badges": {
+      "canceled": "İptal edildi",
+      "onHold": "Beklemede",
+      "return": "İade: {{status}}"
+    },
+    "actions": {
+      "refund": "Para iadesi yap",
+      "more": "Diğer işlemler",
+      "cancelOrder": "Siparişi iptal et",
+      "placeHold": "Karşılamayı beklet",
+      "releaseHold": "Karşılama bekletmesini kaldır",
+      "createReturn": "İade oluştur",
+      "processReturn": "İşle ve para iadesi yap",
+      "viewOrder": "Siparişi görüntüle"
+    },
+    "banners": {
+      "orderUnavailableHeading": "Sipariş ayrıntıları kullanılamıyor",
+      "orderUnavailableBody": "{{error}} Sipariş ayrıntıları yüklenene kadar sipariş işlemlerini kullanamazsınız.",
+      "actionFailedHeading": "Bu işlem tamamlanamadı",
+      "actionFailedAction": "Ayrıntılar için aşağıdaki Etkinlik bölümüne bakın.",
+      "canceled": "Bu sipariş iptal edildi. Sipariş işlemleri artık kullanılamaz."
+    },
+    "deadline": {
+      "heading": "Para iadesi son tarihi",
+      "pendingLabel": "Karar verip para iadesi yapmak için kalan süre",
+      "decidedLabel": "Karar",
+      "badges": {
+        "overdue": "Süresi geçti",
+        "actionNeeded": "İşlem gerekli",
+        "onTime": "Zamanında"
+      },
+      "daysLeft_one": "{{count}} gün kaldı",
+      "daysLeft_other": "{{count}} gün kaldı",
+      "daysOverdue_one": "{{count}} gün gecikti",
+      "daysOverdue_other": "{{count}} gün gecikti",
+      "daysEarly_one": "Son tarihten {{count}} gün önce",
+      "daysEarly_other": "Son tarihten {{count}} gün önce",
+      "daysLate_one": "Son tarihten {{count}} gün sonra",
+      "daysLate_other": "Son tarihten {{count}} gün sonra",
+      "pending": "Talebin gönderildiği andan itibaren karar verip para iadesi yapmak için {{days}} süreniz var. Son tarih {{date}}.",
+      "pendingOverdue": "Son tarih {{date}} tarihinde geçti. Müşteriye en kısa sürede para iadesi yapın.",
+      "decidedOnTime": "{{windowDays}} günlük para iadesi süresi içinde karar verildi. Son tarih {{date}} idi.",
+      "decidedLate": "{{date}} para iadesi son tarihinden sonra karar verildi."
+    },
+    "items": {
+      "heading": "Cayılan ürünler",
+      "reject": "Reddet",
+      "approve": "Onayla",
+      "total": "Cayılan toplam",
+      "sku": "SKU: {{sku}}",
+      "quantity": "Adet: {{count}}",
+      "shipping": {
+        "notShipped": "Henüz gönderilmedi",
+        "partlyShipped": "Kısmen gönderildi",
+        "shipped": "Gönderildi"
+      },
+      "partiallyShippedBanner": "Bu siparişin bir kısmı gönderildi. Henüz gönderilmemiş ürünler hâlâ bekletilebilir, gönderilmiş ürünler için ise iade gerekir."
+    },
+    "return": {
+      "heading": "İade",
+      "status": "Durum",
+      "created": "Oluşturuldu",
+      "body": "Cayılan ürünler için Shopify'da bir iade oluşturuldu.",
+      "openBody": "Ürünler geri geldiğinde İşle ve para iadesi yap'ı seçin. Bu işlem, iade edilen ürünler için müşteriye para iadesi yapar ve iadeyi kapatır.",
+      "alreadyRefundedBody": "Bu iadedeki ürünlerin parası zaten iade edildi. Ürünler geri geldiğinde iadeyi Shopify'da kapatın."
+    },
+    "processReturnModal": {
+      "heading": "İadeyi işle ve para iadesi yap",
+      "calculating": "Para iadesi tutarı hesaplanıyor…",
+      "nothingToProcess": "Bu iadede işlenecek bir şey kalmadı. İade Shopify'da zaten işlenmiş veya kapatılmış olabilir.",
+      "nothingToRefund": "Bu iadedeki ürünlerin parası zaten iade edildiğinden iade edilecek bir şey kalmadı.",
+      "unsupportedPayment": "Bu siparişin ödemesi uygulamadan iade edilemez. İadeyi işleyin ve parayı Shopify'dan iade edin.",
+      "itemsHeading": "{{name}} iadesindeki ürünler",
+      "subtotal": "Ürün ara toplamı",
+      "shippingLine": "Orijinal kargo",
+      "total": "Toplam para iadesi",
+      "body": "Bu işlem, iade edilen ürünleri işlendi olarak işaretler, parayı orijinal ödeme yöntemine iade eder ve iadeyi kapatır. Shopify müşteriye para iadesi makbuzunu e-postayla gönderir. Bu işlem geri alınamaz.",
+      "confirmAmount": "{{amount}} iade et",
+      "confirm": "İşle ve para iadesi yap"
+    },
+    "payment": {
+      "heading": "Ödeme",
+      "status": "Ödeme durumu",
+      "subtotal": "Cayma ara toplamı",
+      "shipping": "Sipariş kargosu",
+      "total": "Sipariş toplamı",
+      "refunded": "İade edildi",
+      "unavailable": "Ödeme ayrıntıları şu anda kullanılamıyor."
+    },
+    "activity": {
+      "heading": "Etkinlik",
+      "noteLabel": "Not ekle",
+      "notePlaceholder": "Not ekle…",
+      "post": "Paylaş",
+      "noteHelp": "Notları yalnızca siz ve personeliniz görebilir. Müşteriler notları asla görmez.",
+      "submitted": "Cayma talebi {{source}} üzerinden gönderildi",
+      "decided": {
+        "approved": "Talep onaylandı",
+        "rejected": "Talep reddedildi"
+      },
+      "note": "Not: {{body}}",
+      "entry": "{{label}}: {{message}}",
+      "actions": {
+        "resolve_branch": "Otomasyon başlatıldı",
+        "run_automation": "Otomasyon",
+        "automation_completed": "Otomasyon tamamlandı",
+        "hold_fulfillment": "Karşılama bekletmesi",
+        "schedule_fallback": "Planlanmış takip işlemi",
+        "release_hold": "Karşılama bekletmesi kaldırıldı",
+        "cancel_order_immediate": "Sipariş iptal edildi ve para iadesi yapıldı",
+        "cancel_order_scheduled": "Sipariş iptal edildi ve para iadesi yapıldı",
+        "cancel_order_manual": "Sipariş iptal edildi ve para iadesi yapıldı",
+        "cancel_order": "Sipariş iptal edildi ve para iadesi yapıldı",
+        "refund": "Para iadesi",
+        "tag_before_ship": "Sipariş etiketlendi",
+        "tag_after_delivery": "Sipariş etiketlendi",
+        "order_tag_add": "Sipariş etiketleri eklendi",
+        "order_tag_remove": "Sipariş etiketleri kaldırıldı",
+        "create_return": "İade",
+        "refresh_return": "İade durumu yenilendi",
+        "process_return": "İşle ve para iadesi yap",
+        "fetch_shop_contact": "Mağaza iletişim bilgileri",
+        "customer_email": "Müşteri onay e-postası",
+        "merchant_email": "Yeni talep bildirimi",
+        "notify_customer": "Karar e-postası",
+        "notify_merchant": "Size bildirim gönderildi"
+      },
+      "messages": {
+        "noTags": "Ayarlanmış etiket yok",
+        "tagged": "Sipariş {{tags}} ile etiketlendi",
+        "noHoldableOrders": "Bu siparişte şu anda bekletilebilecek bir şey yok",
+        "held": "Ürünler gönderilmemeleri için bekletildi",
+        "holdOff": "İnceleme için karşılamayı bekletme kapalı",
+        "tagBeforeShipOff": "Gönderimden önce etiketleme kapalı",
+        "tagAfterDeliveryOff": "Gönderimden sonra etiketleme kapalı",
+        "fallbackHold": "Talebi onaylayana veya reddedene kadar sipariş beklemede kalır",
+        "fallbackInvalidDays": "Takip işlemi planlanamadı. Gün sayısı geçerli değil.",
+        "scheduledRelease": "Bekletmenin kaldırılması {{date}} tarihine planlandı",
+        "scheduledCancel": "İptal ve para iadesi {{date}} tarihine planlandı",
+        "canceled": "Sipariş iptal edildi ve para iadesi yapıldı",
+        "returnCreated": "Shopify'da iade oluşturuldu",
+        "returnNoMatch": "Talep edilen ürünlerin hiçbiri iade edilemez",
+        "notifiedByEmail": "Uygulamada ve e-postayla bildirildi",
+        "notifiedEmailFailed": "Uygulamada bildirildi. Bildirim e-postası başarısız oldu: {{error}}",
+        "notifiedInAppOnly": "Uygulamada bildirildi. Bildirim e-postası gönderilmedi.",
+        "emailSent": "Gönderildi",
+        "emailFailed": "Başarısız: {{error}}",
+        "emailNotSent": "Alıcı olmadığı veya e-posta ayarlanmadığı için gönderilmedi",
+        "orderNotFound": "Bu sipariş Shopify'da bulunamadı",
+        "alreadyCanceled": "Sipariş zaten iptal edilmişti",
+        "branchBeforeShip": "Sipariş henüz gönderilmediği için gönderim öncesi adımlar çalıştırıldı",
+        "branchAfterDelivery": "Sipariş gönderildiği için gönderim sonrası adımlar çalıştırıldı",
+        "branchPartiallyShipped": "Sipariş kısmen gönderildiği için gönderilmiş ve gönderilmemiş ürünlere yönelik adımlar çalıştırıldı",
+        "noUnshippedItemsRequested": "Talep edilen ürünlerin hiçbiri gönderilmeyi beklemediğinden hiçbir şey bekletilmedi",
+        "fallbackCancelPartiallyShipped": "Sipariş kısmen gönderildiği için tamamı iptal edilemez. Talep edilen ürünler, talebi onaylayana veya reddedene kadar beklemede kalır.",
+        "returnNothingShipped": "Talep edilen ürünlerin hiçbiri gönderilmediği için iadeye gerek kalmadı",
+        "runCompleted": "Otomasyon tamamlandı",
+        "runFailed": "Bir veya daha fazla otomasyon adımı başarısız oldu",
+        "runSkipped": "Otomasyon atlandı",
+        "scheduledSkippedApproved": "Talep zaten onaylandığı için planlanan işlem çalıştırılmadı",
+        "scheduledSkippedRejected": "Talep zaten reddedildiği için planlanan işlem çalıştırılmadı",
+        "noHoldsPlaced": "Bu talep için bekletme uygulanmadı",
+        "holdsAlreadyReleased": "Bekletmeler zaten kaldırılmıştı",
+        "holdReleased": "Sipariş yeniden karşılanabilir",
+        "holdExists": "Bu talep için zaten bir bekletme var",
+        "decisionSkipped": "Personel müşteriye e-posta göndermemeyi seçti",
+        "decisionSent": "Müşteriye karar hakkında e-posta gönderildi",
+        "decisionFailed": "Karar e-postası başarısız oldu: {{error}}",
+        "decisionNotConfigured": "E-posta ayarlanmadığı için karar e-postası gönderilmedi",
+        "refunded": "{{amount}} iade edildi",
+        "noReturn": "Bu talep için iade yok",
+        "returnStatus": "İade durumu: {{status}}",
+        "returnProcessed": "İade işlendi ve {{amount}} iade edildi",
+        "returnNothingToProcess": "Bu iadede işlenecek bir şey kalmadı",
+        "returnNothingToRefund": "Bu iadedeki ürünlerin parası zaten iade edildi",
+        "returnPaymentUnsupported": "Bu ödeme uygulamadan iade edilemez. İadeyi Shopify'da işleyin.",
+        "refundNothingRefundable": "Talep edilen ürünlerin hiçbiri için para iadesi yapılamaz. Parası zaten iade edilmiş olabilir.",
+        "refundNoSuggestion": "Shopify bu ürünler için para iadesi hesaplayamadı. Parayı Shopify'dan iade edin.",
+        "refundCoveredByReturn": "Cayılan ürünlerin tümü açık iadede. Parasını iade etmek için iadedeki İşle ve para iadesi yap seçeneğini kullanın.",
+        "tagsRemoved": "Kaldırılan sipariş etiketleri: {{tags}}",
+        "tagsAdded": "Eklenen sipariş etiketleri: {{tags}}"
+      }
+    },
+    "order": {
+      "heading": "Sipariş",
+      "order": "Sipariş",
+      "placed": "Verildi",
+      "payment": "Ödeme",
+      "fulfillment": "Karşılama"
+    },
+    "customer": {
+      "heading": "Müşteri",
+      "avatarFallback": "Müşteri",
+      "contactHeading": "İletişim bilgileri",
+      "email": "E-posta",
+      "language": "Dil",
+      "shippingHeading": "Gönderim adresi"
+    },
+    "automation": {
+      "heading": "Otomasyon",
+      "stage": "Aşama",
+      "stages": {
+        "before_ship": "Gönderimden önce",
+        "partially_shipped": "Kısmen gönderildi",
+        "after_delivery": "Gönderimden sonra"
+      },
+      "hold": "Karşılama bekletmesi",
+      "holdStates": {
+        "onHold": "Beklemede",
+        "released": "Kaldırıldı",
+        "none": "Yok"
+      },
+      "canceled": "İptal edildi",
+      "return": "İade"
+    },
+    "emails": {
+      "heading": "E-posta geçmişi",
+      "customerConfirmation": "Müşteri cayma onayı",
+      "merchantNotification": "Yeni talep bildirimi",
+      "decision": "Karar e-postası",
+      "statuses": {
+        "sent": "Gönderildi",
+        "failed": "Başarısız",
+        "notSent": "Gönderilmedi"
+      }
+    },
+    "tags": {
+      "heading": "Sipariş etiketleri",
+      "label": "Sipariş etiketi ekle",
+      "placeholder": "Etiket ekle",
+      "remove": "{{tag}} etiketini kaldır",
+      "savedToast": "Sipariş etiketleri kaydedildi"
+    },
+    "reason": {
+      "heading": "Cayma nedeni",
+      "quoted": "\"{{reason}}\"",
+      "none": "Neden belirtilmedi"
+    },
+    "decidedToast": {
+      "approved": "Cayma talebi onaylandı",
+      "rejected": "Cayma talebi reddedildi"
+    },
+    "cancelModal": {
+      "heading": "Sipariş iptal edilsin mi?",
+      "body": "Bu işlem, müşterinin caymadığı ürünler dahil siparişin tamamını Shopify'da iptal eder. Siparişin parası orijinal ödeme yöntemine iade edilir, ürünler stoğa geri eklenir ve Shopify müşteriye e-posta gönderir. Bu işlem geri alınamaz.",
+      "keep": "Siparişi koru",
+      "confirm": "Siparişi iptal et ve para iadesi yap"
+    },
+    "createReturnModal": {
+      "heading": "Cayılan ürünler için iade oluştur",
+      "itemsHeading": "İade edilecek ürünler",
+      "subtotal": "Ürün ara toplamı",
+      "checking": "Hangi ürünlerin iade edilebileceği kontrol ediliyor…",
+      "nothingToReturn": "Cayılan ürünlerin hiçbiri henüz gönderilmediğinden iade edilecek bir şey yok. Gönderilmemeleri için bekletin veya siparişten kaldırmak için para iadesi yapın.",
+      "notShipped_one": "Henüz gönderilmediği için cayılan {{count}} ürün dahil edilmedi.",
+      "notShipped_other": "Henüz gönderilmedikleri için cayılan {{count}} ürün dahil edilmedi.",
+      "notReturnable_one": "Zaten iade edildiği için cayılan {{count}} ürün dahil edilmedi.",
+      "notReturnable_other": "Zaten iade edildikleri için cayılan {{count}} ürün dahil edilmedi.",
+      "body": "Bu işlem, yukarıdaki ürünler için Shopify'da bir iade oluşturur. Müşteriye para iadesi yapmaz. Ürünler geri geldiğinde iadede İşle ve para iadesi yap'ı seçin.",
+      "cancel": "İptal",
+      "confirm": "İade oluştur"
+    },
+    "decisionModal": {
+      "headingApprove": "Cayma talebi onaylansın mı?",
+      "headingReject": "Cayma talebi reddedilsin mi?",
+      "approveAndSend": "Onayla ve e-posta gönder",
+      "rejectAndSend": "Reddet ve e-posta gönder",
+      "approve": "Onayla",
+      "reject": "Reddet",
+      "loadingLabel": "E-posta önizlemesi yükleniyor",
+      "loading": "Müşteri e-postası hazırlanıyor…",
+      "sendEmail": "Müşteriye e-posta gönder",
+      "language": "Bu e-posta müşterinin dili olan {{language}} dilindedir. Değişiklikleriniz yalnızca bu e-posta için geçerlidir.",
+      "subject": "Konu",
+      "body": "E-posta gövdesi",
+      "editHtml": "HTML'yi düzenle",
+      "htmlLabel": "E-posta HTML'si",
+      "previewTitle": "E-posta önizlemesi",
+      "templateUnchanged": "Değişiklikleriniz yalnızca bu e-posta için geçerlidir. Kayıtlı şablonunuz değişmez.",
+      "noEmail": "Müşteriye e-posta gönderilmez. Gerekirse müşteriyle ayrıca iletişime geçebilirsiniz.",
+      "holdReleased": "Bu işlem, siparişin yeniden karşılanabilmesi için bu siparişteki karşılama bekletmesini de kaldırır."
+    },
+    "refundModal": {
+      "heading": "Cayılan ürünler için para iadesi yap",
+      "calculatingLabel": "Para iadesi hesaplanıyor",
+      "calculating": "Para iadesi tutarı hesaplanıyor…",
+      "nothingToRefund": "Bu siparişte iade edilecek bir şey yok. Cayılan ürünlerin parası zaten iade edilmiş veya sipariş iptal edilmiş olabilir.",
+      "itemsHeading": "Parası iade edilecek ürünler",
+      "subtotal": "Ürün ara toplamı",
+      "shippingLine": "Orijinal kargo",
+      "amount": "Para iadesi tutarı",
+      "total": "Toplam para iadesi",
+      "body": "Cayılan ürünlerin parası orijinal ödeme yöntemine iade edilir ve mümkün olduğunda ürünler stoğa geri eklenir. Shopify müşteriye para iadesi makbuzunu e-postayla gönderir.",
+      "includesShipping": "Müşteri siparişin tamamından caydığı için orijinal kargo ücreti dahil edildi.",
+      "unshippedItems": "Henüz gönderilmemiş ürünler siparişten kaldırılır, bu nedenle gönderilmez.",
+      "inReturn_one": "{{name}} iadesinde olduğu için cayılan {{count}} ürün dahil edilmedi. Parasını iadedeki İşle ve para iadesi yap seçeneğiyle iade edin.",
+      "inReturn_other": "{{name}} iadesinde oldukları için cayılan {{count}} ürün dahil edilmedi. Parasını iadedeki İşle ve para iadesi yap seçeneğiyle iade edin.",
+      "allInReturn": "Cayılan ürünlerin tümü {{name}} iadesinde. Parasını iadedeki İşle ve para iadesi yap seçeneğiyle iade edin. Bu işlem iadeyi de kapatır.",
+      "irreversible": "Bu işlem geri alınamaz.",
+      "confirmAmount": "{{amount}} iade et",
+      "confirm": "Para iadesi yap"
+    },
+    "shopifyNotes": {
+      "holdAutomatic": "{{order}} siparişine ait cayma talebi personel incelemesini bekliyor",
+      "holdManual": "{{order}} siparişine ait cayma talebi personel tarafından bekletildi",
+      "canceled": "Müşteri satın alımdan caydığı için {{appName}} tarafından iptal edildi (talep {{id}}).",
+      "refunded": "Müşteri satın alımdan caydığı için {{appName}} tarafından para iadesi yapıldı (talep {{id}}).",
+      "returnReason": "Cayma talebi: {{reason}}",
+      "returnReasonNone": "Cayma talebi (neden belirtilmedi)"
+    }
+  },
+  "emailTemplates": {
+    "pageTitle": "Bildirimler",
+    "loadError": "Bildirimler yüklenemedi",
+    "saveError": "Bildirimler kaydedilemedi",
+    "savedToast": "Bildirimler kaydedildi",
+    "resetToast": "{{name}} varsayılana sıfırlandı",
+    "sender": {
+      "heading": "Gönderici",
+      "description": "Bu ayarlar, uygulamanın mağazanız için gönderdiği her e-posta için geçerlidir. Kendi doğrulanmış adresinizden gönderin ve müşteri yanıtlarının nereye gideceğini seçin.",
+      "emailLabel": "Gönderici e-postası",
+      "emailPlaceholder": "notifications@withdrawaleasy.com",
+      "detailsVerified": "E-postalar bu adresten gönderilir.",
+      "detailsPending": "Doğrulamak için bu adrese gönderdiğimiz kodu girin.",
+      "detailsDefault": "Bu alanı boş bırakırsanız e-postalar {{email}} adresinden gönderilir.",
+      "detailsDefaultFallback": "Bu alanı boş bırakırsanız e-postalar uygulamanın varsayılan adresinden gönderilir.",
+      "freeProviderWarning": "Gmail ve Yahoo gibi ücretsiz e-posta sağlayıcılarının kimliği doğrulanamaz. Müşteriler bu adresten gelen e-postalarda \"via brevosend.com\" ifadesini görür. Daha profesyonel bir görünüm için mağazanızın alan adındaki bir adresi kullanın.",
+      "codeLabel": "Doğrulama kodu",
+      "codeDetails": "Size gönderdiğimiz e-postadaki 6 haneli kodu girin.",
+      "verifyCode": "Kodu doğrula",
+      "checkStatus": "Doğrulama durumunu kontrol et",
+      "verifyEmail": "E-postayı doğrula",
+      "codeSent": "{{email}} adresine bir doğrulama kodu gönderdik.",
+      "notVerifiedYet": "Bu e-posta henüz doğrulanmadı. Gelen kutunuzda kodu bulun ve tekrar deneyin.",
+      "replyToLabel": "Yanıt e-postası",
+      "replyToPlaceholder": "destek@magazaniz.com",
+      "replyToDetails": "Müşteri yanıtları varsayılan olarak mağaza e-postanıza gider. Yanıtları başka bir yere göndermek için farklı bir adres girin."
+    },
+    "domain": {
+      "heading": "Alan adı kimlik doğrulaması",
+      "description": "Müşterilerin e-postalarınızda \"via brevosend.com\" ifadesini görmemesi için alan adınızın kimliğini doğrulayın. Bu isteğe bağlıdır ancak mağazanızın alan adından gönderim yapıyorsanız önerilir.",
+      "label": "Alan adı",
+      "placeholder": "magazaniz.com",
+      "details": "myshopify.com alan adınızı değil, e-posta gönderdiğiniz alan adını girin.",
+      "freeProviderWarning": "Gmail ve Yahoo gibi ücretsiz e-posta sağlayıcılarının kimliği doğrulanamaz. Bunun yerine mağazanızın alan adını girin.",
+      "columns": {
+        "record": "Kayıt",
+        "type": "Tür",
+        "host": "Ana bilgisayar",
+        "value": "Değer"
+      },
+      "records": {
+        "brevo_code": "Alan adı sahipliği",
+        "dkim_record": "DKIM",
+        "dkim1Record": "DKIM 1",
+        "dkim2Record": "DKIM 2",
+        "dmarc_record": "DMARC"
+      },
+      "copyHost": "Ana bilgisayarı kopyala",
+      "copyValue": "Değeri kopyala",
+      "verifyRecords": "DNS kayıtlarını doğrula",
+      "authenticate": "Alan adının kimliğini doğrula",
+      "pendingInfo": "Bu kayıtları alan adı sağlayıcınıza ekleyin, ardından DNS kayıtlarını doğrula'yı seçin.",
+      "notVerifiedYet": "Alan adınız henüz doğrulanmadı. DNS değişikliklerinin güncellenmesi biraz zaman alabilir, bu yüzden daha sonra tekrar deneyin."
+    },
+    "notification": {
+      "heading": "E-posta şablonu",
+      "emailLabel": "E-posta",
+      "language": "Dil",
+      "languageDetails": "Bu e-postayı o dilde düzenlemek için bir dil seçin. Her dil ayrı olarak kaydedilir. Müşteriler e-postaları kendi dillerinde alır.",
+      "send": "Bu e-postayı gönder",
+      "requiredDetails": "AB mevzuatı bu e-postayı zorunlu kılar, bu nedenle kapatılamaz.",
+      "merchantDetails": "Bu e-postayı almayı durdurmak için kapatın.",
+      "decisionDetails": "Bu e-postayı varsayılan olarak göndermeyi durdurmak için kapatın. Tek bir talebi onaylarken veya reddederken yine de göndermeyi seçebilirsiniz.",
+      "subject": "Konu",
+      "reset": "Varsayılana sıfırla",
+      "customized": "Özelleştirildi"
+    },
+    "templates": {
+      "customerConfirmation": {
+        "name": "Müşteri cayma onayı",
+        "description": "Müşterilere cayma talebi gönderdikleri anda gönderilir."
+      },
+      "merchantNotification": {
+        "name": "Yeni talep bildirimi",
+        "description": "Bir müşteri yeni bir cayma talebi gönderdiğinde mağazanızın iletişim e-postasına gönderilir. Müşteriye e-posta göndermek için yanıtlayın."
+      },
+      "withdrawalApproved": {
+        "name": "Cayma onaylandı",
+        "description": "Müşterilerin cayma talebini onayladığınızda müşterilere gönderilir. Gönderilmeden önce inceleyip düzenleyebilirsiniz."
+      },
+      "withdrawalRejected": {
+        "name": "Cayma reddedildi",
+        "description": "Müşterilerin cayma talebini reddettiğinizde müşterilere gönderilir. Gönderilmeden önce inceleyip düzenleyebilirsiniz."
+      }
+    },
+    "merchantDefaults": {
+      "subject": "Yeni cayma talebi — sipariş {{order}}",
+      "heading": "Yeni cayma talebi",
+      "intro": "Bir müşteri cayma talebi gönderdi. İncelemeniz için gereken her şey burada.",
+      "rows": {
+        "name": "Ad",
+        "email": "E-posta",
+        "date": "Tarih",
+        "orderNumber": "Sipariş numarası",
+        "reference": "Referans numarası",
+        "reason": "Neden"
+      },
+      "button": "Talebi görüntüle",
+      "itemsHeading": "Talep edilen ürünler",
+      "footnote": "Onaylamak veya reddetmek için talebi yönetici panelinizde açın. Para iadesi son tarihi orada otomatik olarak takip edilir."
+    },
+    "body": {
+      "heading": "E-posta gövdesi",
+      "editCode": "Kodu düzenle",
+      "htmlLabel": "E-posta HTML gövdesi",
+      "previewHeading": "E-posta önizlemesi"
+    },
+    "variables": {
+      "heading": "Değişkenler",
+      "help": "İmlecinizin bulunduğu yere eklemek için bir değişken seçin.",
+      "insert": "{{label}} ekle: {{description}}",
+      "groups": {
+        "customer": "Müşteri",
+        "order": "Sipariş",
+        "withdrawal": "Cayma",
+        "request": "Talep",
+        "shop": "Mağaza"
+      },
+      "tokens": {
+        "customer": {
+          "first_name": {
+            "label": "Ad",
+            "description": "Müşterinin adı"
+          },
+          "last_name": {
+            "label": "Soyadı",
+            "description": "Müşterinin soyadı"
+          },
+          "email": {
+            "label": "E-posta",
+            "description": "Müşterinin e-posta adresi"
+          }
+        },
+        "order": {
+          "name": {
+            "label": "Sipariş numarası",
+            "description": "Sipariş numarası, örneğin #2138"
+          },
+          "id": {
+            "label": "Sipariş kimliği",
+            "description": "Siparişin dahili kimliği"
+          }
+        },
+        "withdrawal": {
+          "request_id": {
+            "label": "Referans numarası",
+            "description": "Cayma talebinin referans numarası"
+          },
+          "submitted_at": {
+            "label": "Gönderim tarihi",
+            "description": "Talebin gönderildiği tarih ve saat"
+          },
+          "reason": {
+            "label": "Neden",
+            "description": "Varsa müşterinin belirttiği neden"
+          },
+          "selected_products": {
+            "label": "Seçilen ürünler (metin)",
+            "description": "Talep edilen ürünlerin virgülle ayrılmış listesi"
+          }
+        },
+        "request": {
+          "status": {
+            "label": "Durum",
+            "description": "Talebin mevcut durumu"
+          },
+          "url": {
+            "label": "Talep bağlantısı",
+            "description": "Uygulamadaki talebin bağlantısı"
+          }
+        },
+        "shop": {
+          "name": {
+            "label": "Mağaza adı",
+            "description": "Mağazanızın adı"
+          },
+          "email": {
+            "label": "Mağaza e-postası",
+            "description": "Mağazanızın iletişim e-posta adresi"
+          }
+        }
+      }
+    },
+    "validation": {
+      "email": "Geçerli bir e-posta adresi girin.",
+      "subjectRequired": "Bir konu girin.",
+      "subjectTooLong": "Konu en fazla {{max}} karakter olmalıdır.",
+      "bodyRequired": "Bir e-posta gövdesi girin."
+    }
+  },
+  "sample": {
+    "customerName": "Ayşe Yılmaz",
+    "items": {
+      "lamp": {
+        "title": "Fjord Masa Lambası",
+        "variant": "Meşe / Büyük"
+      },
+      "candleHolder": {
+        "title": "Tind Şamdan",
+        "variant": "Pirinç"
+      }
+    },
+    "reason": "Fikrimi değiştirdim"
+  },
+  "faqs": {
+    "pageTitle": "SSS",
+    "searchLabel": "SSS'de ara",
+    "searchPlaceholder": "\"para iadesi\" veya \"son tarih\" gibi soruları arayın",
+    "noResults": "\"{{query}}\" ile eşleşen soru yok",
+    "noResultsHelp": "Farklı bir kelime deneyin veya aşağıdan destek ekibiyle iletişime geçin.",
+    "showAnswer": "Yanıtı göster: {{question}}",
+    "hideAnswer": "Yanıtı gizle: {{question}}",
+    "groups": {
+      "gettingStarted": "Başlarken",
+      "deadline": "Cayma süresi",
+      "requests": "Talepleri yönetme",
+      "emailsLanguages": "E-postalar ve diller"
+    },
+    "actions": {
+      "goToSettings": "Ayarlar'a git",
+      "goToRequests": "Talepler'e git",
+      "goToNotifications": "Bildirimler'e git"
+    },
+    "stillStuck": {
+      "heading": "Hâlâ sorunuz mu var?",
+      "body": "Destek ekibimiz her e-postayı okur ve yanıtlar.",
+      "link": "Destek ekibiyle iletişime geç"
+    },
+    "items": {
+      "what-it-does": {
+        "question": "Uygulama ne yapar?",
+        "paragraphs": [
+          "AB mevzuatının gerektirdiği şekilde, AB'deki müşterilerinize bir satın alımdan caymaları için açık bir yol sunar. Ayrıca tüm talepleri yönetebileceğiniz tek bir yer sağlar.",
+          "Müşteriler formu siparişlerinden açar, caymak istedikleri ürünleri seçer ve onaylar. Her talep daha sonra ürünler, neden ve para iadesi son tarihinizle birlikte Talepler sayfasında görünür. Uygulama zorunlu e-postaları sizin yerinize gönderir."
+        ]
+      },
+      "where-form-appears": {
+        "question": "Müşteriler cayma formunu nerede bulur?",
+        "paragraphs": [
+          "Formu 2 yerde gösterebilirsiniz. Birini veya ikisini birden kullanın:"
+        ],
+        "bullets": [
+          "Sipariş durumu sayfası: Müşterilerin ödemeden sonra ve sipariş onayı e-postasındaki bağlantıyı açtıklarında gördüğü sayfa.",
+          "Mağaza sayfası: Daha sonra geri gelen müşteriler için online mağazanızdaki bir sayfa. Müşteriler siparişlerini sipariş numarası ve e-posta adresiyle bulur."
+        ],
+        "closing": "Her yeri Ayarlar'dan etkinleştirin, ardından ilgili uygulama bloğunu bir kez ekleyin. Ana sayfadaki kurulum rehberi hangi blokların eklendiğini gösterir."
+      },
+      "form-not-showing": {
+        "question": "Müşteri cayma formunu neden göremiyor?",
+        "paragraphs": [
+          "En yaygın olanından başlayarak şunları kontrol edin:"
+        ],
+        "bullets": [
+          "Form kapalı veya müşterinin kullandığı yer Ayarlar'da etkinleştirilmemiş.",
+          "Uygulama bloğu o sayfaya henüz eklenmemiş.",
+          "Sipariş uygun ülkelerinizden birine gönderilmiyor.",
+          "Siparişin cayma süresi sona ermiş.",
+          "Sipariş iptal edilmiş veya zaten bekleyen bir talebi var. Her siparişin aynı anda yalnızca 1 bekleyen talebi olabilir."
+        ]
+      },
+      "deadline": {
+        "question": "Cayma süresi ne zaman başlar ve biter?",
+        "paragraphs": [
+          "AB mevzuatına göre süre, müşteri sipariş verdiğinde değil, ürünleri teslim aldığında başlar. Müşteriler ürünler gelmeden önce de istedikleri zaman cayabilir."
+        ],
+        "bullets": [
+          "Henüz gönderilmedi: Süre başlamadığı için müşteriler her zaman cayabilir.",
+          "Teslim edildi: Süre, kargo firmasının bildirdiği teslimat tarihinde başlar ve {{withdrawalDays}} sürer. Gün sayısını Ayarlar'dan değiştirebilirsiniz.",
+          "Gönderildi ancak teslimat tarihi yok: Uygulama kargo firmasının tahmini teslimat tarihini kullanır. Tahmin yoksa gönderim tarihine tahmini taşıma sürenizi ekler."
+        ]
+      },
+      "transit-days": {
+        "question": "Tahmini taşıma süresi ne için kullanılır?",
+        "paragraphs": [
+          "Birçok kargo firması Shopify'a teslimat tarihi göndermez. Bu tarih olmadan uygulama cayma süresinin ne zaman başladığını bilemez, bu nedenle tahmini taşıma sürenizi gönderim tarihine ekler.",
+          "Bunu, paketlerinizin ulaşması için gereken yaklaşık süreye ayarlayın. Şu anda {{transitDays}}. Emin değilseniz daha uzun bir süre seçin. Çok kısa bir süre, müşterinin cayma süresini erken sona erdirebilir."
+        ]
+      },
+      "split-shipments": {
+        "question": "Sipariş 1'den fazla pakette gönderilirse ne olur?",
+        "paragraphs": [
+          "Cayma süresi son paket ulaştığında başlar. Müşteri caydığı için uygulamanın beklettiği ürünler gönderilmeyeceği için hesaba katılmaz.",
+          "Siparişin yalnızca bir kısmı gönderilmişken müşteri cayarsa uygulama her kısmı ayrı ayrı ele alır:"
+        ],
+        "bullets": [
+          "Gönderilmemiş ürünler: Uygulama bunları gönderilmemeleri için bekletebilir.",
+          "Gönderilmiş ürünler: Uygulama bunlar için bir iade oluşturabilir."
+        ],
+        "closing": "Uygulama, kısmen gönderilmiş bir siparişi asla iptal etmez. Çünkü bu, müşterinin elindeki ürünleri de iptal eder."
+      },
+      "after-submit": {
+        "question": "Müşteri bir talep gönderdikten sonra ne olur?",
+        "paragraphs": [
+          "Şunlar bu sırayla gerçekleşir:"
+        ],
+        "bullets": [
+          "Talep, Talepler sayfasında Beklemede olarak görünür.",
+          "Müşteri bir onay e-postası alır. Bu e-posta, cayma kanıtı olduğu için her zaman gönderilir.",
+          "Yeni talep bildirimi açıksa size de bir e-posta gelir.",
+          "Otomasyon ayarlarınız çalışır. Örneğin uygulama karşılamayı bekletebilir veya siparişi etiketleyebilir."
+        ]
+      },
+      "automation": {
+        "question": "Otomasyon ayarları ne yapar?",
+        "paragraphs": [
+          "Bir talep geldiğinde çalışırlar. Uygulamanın yapabilecekleri, siparişin gönderilip gönderilmediğine bağlıdır:"
+        ],
+        "bullets": [
+          "Sipariş gönderilmeden önce: Siz talebi incelerken hiçbir şeyin gönderilmemesi için karşılamayı bekletin. Uygulamanın siparişin tamamını hemen iptal edip para iadesi yapmasını da sağlayabilirsiniz.",
+          "Sipariş gönderildikten sonra: Gönderilmiş ürünler için Shopify'da bir iade oluşturun.",
+          "Kısmen gönderildi: İkisi de geçerlidir. Uygulama yalnızca talep edilen ve gönderilmemiş ürünleri bekletir, gönderilmiş olanlar için iade oluşturur."
+        ],
+        "closing": "Her durumda uygulama siparişi etiketleyebilir de. Otomasyon hiçbir zaman bir talebi onaylamaz veya reddetmez. Kararı her zaman siz verirsiniz."
+      },
+      "partial-withdrawal": {
+        "question": "Müşteri yalnızca bazı ürünlerden cayabilir mi?",
+        "paragraphs": [
+          "Evet. Müşteriler hangi ürünlerden cayacaklarını seçer. Talep, para iadesi ve varsa iade yalnızca bu ürünleri kapsar. Orijinal kargo ücreti yalnızca müşteri siparişin tamamından caydığında iade edilir.",
+          "Her siparişin aynı anda 1 bekleyen talebi olabilir. Siz talebi onayladıktan veya reddettikten sonra müşteri diğer ürünler için yeni bir talep gönderebilir."
+        ]
+      },
+      "reason": {
+        "question": "Müşterilerin neden belirtmesi gerekir mi?",
+        "paragraphs": [
+          "Hayır. AB mevzuatına göre müşterilerin caymak için bir nedene ihtiyacı yoktur, bu nedenle neden alanı her zaman isteğe bağlıdır. Ayarlar'da hangi nedenlerin sunulacağını seçebilir veya neden sormayı bırakabilirsiniz."
+        ]
+      },
+      "refund": {
+        "question": "Bir cayma için nasıl para iadesi yaparım?",
+        "paragraphs": [
+          "Talebi Talepler sayfasından açın. Para iadesinin nasıl yapılacağı ürünlerin nerede olduğuna bağlıdır:"
+        ],
+        "bullets": [
+          "İadede olmayan ürünler: Para iadesi yap'ı seçin. Henüz gönderilmemiş ürünler siparişten kaldırılır, bu nedenle gönderilmez.",
+          "İadedeki ürünler: Ürünler geri geldiğinde iadede İşle ve para iadesi yap'ı seçin. Bu işlem müşteriye para iadesi yapar ve iadeyi kapatır.",
+          "Henüz hiçbir şey gönderilmedi: Diğer işlemler menüsünden siparişin tamamını iptal edip para iadesi de yapabilirsiniz."
+        ],
+        "closing": "AB mevzuatı, para iadesi için size caymadan itibaren {{refundDays}} süre tanır. Talep sayfası ne kadar süre kaldığını gösterir. Talebi onaylamadan önce para iadesi yapın."
+      },
+      "returns": {
+        "question": "İadeler nasıl çalışır?",
+        "paragraphs": [
+          "İade, müşterinin hangi ürünleri geri gönderdiğini Shopify'a bildirir. Uygulama bir talep geldiğinde iade oluşturabilir veya talep sayfasında İade oluştur'u seçebilirsiniz.",
+          "İade yalnızca gönderilmiş ürünleri içerir. İade oluşturmak müşteriye para iadesi yapmaz. Ürünler geri geldiğinde iadede İşle ve para iadesi yap'ı seçin."
+        ]
+      },
+      "decision-lock": {
+        "question": "Bir talebi onayladıktan veya reddettikten sonra sipariş işlemleri neden kapanıyor?",
+        "paragraphs": [
+          "Onaylamak veya reddetmek talebi sonlandırır. Bundan sonra para iadeleri, bekletmeler, iadeler ve iptaller kapatılır, böylece sipariş yanlışlıkla değiştirilemez. Bu yüzden onaylamadan önce para iadesi yapmalısınız.",
+          "Karar vermek, uygulamanın uyguladığı tüm karşılama bekletmelerini de kaldırır. Kaldırma başarısız olursa Karşılama bekletmesini kaldır'ı yine de seçebilirsiniz."
+        ]
+      },
+      "emails": {
+        "question": "Uygulama hangi e-postaları gönderir ve bunları düzenleyebilir miyim?",
+        "paragraphs": [
+          "Uygulama {{emailCount}} e-posta gönderir. Tümünü Bildirimler sayfasında düzenleyebilirsiniz:"
+        ],
+        "bullets": [
+          "Müşteri cayma onayı: Müşteri bir talep gönderdiğinde gönderilir. Her zaman açıktır.",
+          "Yeni talep bildirimi: Mağazanızın iletişim e-postasına gönderilir. Kapatabilirsiniz.",
+          "Cayma onaylandı: Bir talebi onayladığınızda müşteriye gönderilir. Önce inceleyebilir veya kapatabilirsiniz.",
+          "Cayma reddedildi: Bir talebi reddettiğinizde müşteriye gönderilir. Önce inceleyebilir veya kapatabilirsiniz."
+        ],
+        "closing": "Her e-postanın konusunu ve gövdesini her dilde düzenleyebilir, sipariş numarası veya müşteri adı gibi değişkenler ekleyebilirsiniz. Önizleme siz yazdıkça güncellenir."
+      },
+      "countries-languages": {
+        "question": "Uygulama hangi ülkeleri ve dilleri destekliyor?",
+        "paragraphs": [
+          "Tüm AB ülkeleri varsayılan olarak uygundur. Yalnızca bazılarına satış yapıyorsanız Ayarlar'da Belirli ülkeler'i seçin.",
+          "Form {{languageCount}} dilde sunulur: {{languages}}. Müşteriler formu kendi dillerinde görür.",
+          "Temel dil İngilizcedir. Çevrilmiş bir alanı boş bırakırsanız müşteriler bunun yerine İngilizce metni görür."
+        ]
+      }
+    }
+  },
+  "featureRequest": {
+    "pageTitle": "Özellik talep et",
+    "intro": "Uygulamada görmek istediklerinizi bize anlatın. Her talebi okuyoruz.",
+    "sentHeading": "Özellik talebi gönderildi",
+    "sentBody": "Fikrinizi ekibimizle paylaştığınız için teşekkürler.",
+    "firstName": "Ad",
+    "lastName": "Soyadı",
+    "email": "E-posta",
+    "request": "Hangi özelliği istersiniz?",
+    "requestPlaceholder": "Özelliği ve mağazanıza nasıl yardımcı olacağını açıklayın",
+    "submit": "Talebi gönder"
+  },
+  "pricing": {
+    "pageTitle": "Fiyatlandırma",
+    "pricePerMonth": "Aylık {{price}}",
+    "currentPlan": "Mevcut plan",
+    "choosePlan": "{{plan}} planını seç",
+    "switchedToast": "{{plan}} planına geçildi",
+    "plans": {
+      "free": {
+        "name": "Free",
+        "features": [
+          "Ayda en fazla 10 cayma talebi",
+          "E-posta bildirimleri"
+        ]
+      },
+      "starter": {
+        "name": "Starter",
+        "features": [
+          "Sınırsız cayma talebi",
+          "Özel form alanları",
+          "E-posta bildirimleri"
+        ]
+      },
+      "pro": {
+        "name": "Pro",
+        "features": [
+          "Starter'daki her şey",
+          "Öncelikli destek",
+          "Otomatik para iadeleri"
+        ]
+      }
+    },
+    "switchError": "Planınız değiştirilemedi"
+  }
+}

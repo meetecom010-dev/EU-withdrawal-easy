@@ -1,0 +1,1266 @@
+{
+  "common": {
+    "add": "Adicionar",
+    "backToHome": "Voltar ao início",
+    "cancel": "Cancelar",
+    "delete": "Eliminar",
+    "discard": "Descartar",
+    "done": "Concluído",
+    "dayCount_one": "{{count}} dia",
+    "dayCount_other": "{{count}} dias",
+    "dayCount_many": "{{count}} dias",
+    "emptyValue": "—",
+    "noMatches": "Sem resultados para \"{{query}}\".",
+    "preview": "Pré-visualizar",
+    "remove": "Remover",
+    "save": "Guardar",
+    "verified": "Verificado"
+  },
+  "nav": {
+    "home": "Início",
+    "withdrawalRequests": "Pedidos",
+    "formSetup": "Definições",
+    "emailTemplates": "Notificações",
+    "pricing": "Preços"
+  },
+  "errors": {
+    "generic": "Ocorreu um erro. Tente novamente.",
+    "requestFailed": "Ocorreu um erro (erro {{status}}). Tente novamente.",
+    "methodNotAllowed": "Esta ação não é suportada.",
+    "unknownAction": "Esta ação não é suportada.",
+    "noValidFields": "Não há nada para atualizar.",
+    "emailServiceUnavailable": "Não foi possível ligar ao serviço de e-mail. Tente novamente dentro de alguns minutos.",
+    "emailServiceNotConfigured": "O envio de e-mails ainda não está configurado. Contacte o suporte.",
+    "requestNotFound": "Este pedido de livre resolução não existe ou foi eliminado.",
+    "requestDecided": "Este pedido já foi aprovado ou rejeitado, pelo que as ações da encomenda já não estão disponíveis.",
+    "unknownDecision": "Escolha se pretende aprovar ou rejeitar este pedido.",
+    "invalidStatus": "Escolha um estado válido para este pedido.",
+    "noteRequired": "Introduza uma nota.",
+    "orderNotFound": "Não foi possível encontrar esta encomenda na Shopify.",
+    "invalidEmail": "Introduza um endereço de e-mail válido.",
+    "featureRequestIncomplete": "Preencha todos os campos antes de enviar a sua sugestão.",
+    "senderCodeRequired": "Introduza o código de verificação que recebeu por e-mail.",
+    "senderNotFound": "Não foi possível encontrar este e-mail de remetente. Remova-o e adicione-o novamente para receber um novo código.",
+    "senderNotStarted": "Verifique primeiro o seu e-mail de remetente.",
+    "senderIdMissing": "Não foi possível registar este e-mail de remetente. Tente novamente.",
+    "domainInvalid": "Introduza um domínio válido, como asualoja.com.",
+    "domainFreeProvider": "Os fornecedores de e-mail gratuitos, como o Gmail e o Yahoo, não podem ser autenticados. Utilize antes o domínio da sua loja."
+  },
+  "auth": {
+    "login": {
+      "heading": "Iniciar sessão",
+      "shopLabel": "Domínio da loja",
+      "shopDetails": "example.myshopify.com",
+      "submit": "Iniciar sessão",
+      "missingShop": "Introduza o domínio da sua loja para iniciar sessão.",
+      "invalidShop": "Introduza um domínio de loja válido, como example.myshopify.com."
+    }
+  },
+  "status": {
+    "pending": "Pendente",
+    "approved": "Aprovado",
+    "rejected": "Rejeitado"
+  },
+  "sourceInline": {
+    "order_status": "a página de estado da encomenda",
+    "standalone_page": "a página da sua loja"
+  },
+  "placements": {
+    "orderStatus": {
+      "label": "Página de estado da encomenda",
+      "details": "Mostre o formulário de livre resolução na página de estado da encomenda que os clientes veem após o checkout."
+    },
+    "storefront": {
+      "label": "Página da loja",
+      "details": "Mostre o formulário de livre resolução numa página própria do seu tema, para que os clientes o encontrem fora da página de estado da encomenda."
+    }
+  },
+  "orderStatus": {
+    "financial": {
+      "PENDING": "Pagamento pendente",
+      "AUTHORIZED": "Autorizado",
+      "PARTIALLY_PAID": "Parcialmente pago",
+      "PAID": "Pago",
+      "PARTIALLY_REFUNDED": "Parcialmente reembolsado",
+      "REFUNDED": "Reembolsado",
+      "VOIDED": "Anulado",
+      "EXPIRED": "Expirado"
+    },
+    "fulfillment": {
+      "UNFULFILLED": "Não processada",
+      "PENDING_FULFILLMENT": "Processamento pendente",
+      "OPEN": "Aberta",
+      "IN_PROGRESS": "Em curso",
+      "ON_HOLD": "Em espera",
+      "PARTIALLY_FULFILLED": "Parcialmente processada",
+      "FULFILLED": "Processada",
+      "RESTOCKED": "Reposta em stock",
+      "SCHEDULED": "Agendada"
+    },
+    "return": {
+      "REQUESTED": "Solicitada",
+      "OPEN": "Aberta",
+      "CLOSED": "Fechada",
+      "DECLINED": "Recusada",
+      "CANCELED": "Cancelada"
+    }
+  },
+  "stats": {
+    "heading": "Visão geral",
+    "description": "Um resumo dos seus pedidos de livre resolução",
+    "viewRequests": "Ver pedidos",
+    "total": "Total de pedidos",
+    "today": "Enviados hoje",
+    "pending": "Pendentes",
+    "closed": "Encerrados",
+    "requestCount_one": "{{count}} pedido",
+    "requestCount_other": "{{count}} pedidos",
+    "requestCount_many": "{{count}} pedidos"
+  },
+  "home": {
+    "pageTitle": "Início",
+    "loadError": "Não foi possível carregar o seu painel",
+    "saveErrorHeading": "Não foi possível guardar a sua alteração",
+    "saveErrorAction": "Tente novamente ou faça a alteração nas Definições.",
+    "setupBanner": {
+      "heading_one": "Falta {{count}} passo de configuração",
+      "heading_other": "Faltam {{count}} passos de configuração",
+      "heading_many": "Faltam {{count}} passos de configuração",
+      "body": "Conclua estes passos para preparar o seu formulário de livre resolução: {{steps}}."
+    },
+    "setupGuide": {
+      "heading": "Guia de configuração",
+      "description": "Utilize este guia para publicar o formulário de livre resolução na sua loja.",
+      "progress": "{{completed}} de {{total}} tarefas concluídas",
+      "dismiss": "Ignorar o guia de configuração",
+      "collapse": "Fechar o guia de configuração",
+      "expand": "Expandir o guia de configuração",
+      "showStep": "Mostrar detalhes de {{step}}",
+      "hideStep": "Ocultar detalhes de {{step}}",
+      "steps": {
+        "form": {
+          "label": "Ativar o formulário de livre resolução",
+          "description": "Ative o formulário e escolha onde os clientes o veem. Os campos, os motivos e os textos já têm um texto predefinido. Pode alterá-los a qualquer momento nas Definições.",
+          "checkbox": "Ativar o formulário de livre resolução",
+          "cta": "Ir para as Definições",
+          "placementHeading": "Escolha onde os clientes veem o formulário",
+          "placementDescription": "Selecione pelo menos um local. Cada local precisa do respetivo bloco de aplicação para que os clientes vejam o formulário."
+        },
+        "blocks": {
+          "label": "Adicionar os blocos de aplicação à sua loja",
+          "description": "Adicione um bloco de aplicação para cada local escolhido no passo anterior.",
+          "locked": "Conclua o passo {{step}} para escolher onde o formulário aparece. Depois, pode adicionar aqui os blocos de aplicação.",
+          "surfaces": {
+            "orderStatus": "Página de estado da encomenda",
+            "theme": "Página da loja"
+          },
+          "live": {
+            "orderStatus": "O bloco de aplicação está ativo na página de estado da encomenda.",
+            "theme": "O bloco de aplicação está ativo na página da sua loja."
+          }
+        }
+      }
+    },
+    "help": {
+      "heading": "Ajuda e recursos",
+      "support": {
+        "title": "Suporte por e-mail",
+        "description": "Tem alguma questão? A nossa equipa de suporte pode ajudar.",
+        "link": "Contactar o suporte"
+      },
+      "faqs": {
+        "title": "Perguntas frequentes",
+        "description": "Encontre respostas a questões comuns sobre a configuração e a utilização da aplicação.",
+        "link": "Ver perguntas frequentes"
+      },
+      "featureRequest": {
+        "title": "Sugestões de funcionalidades",
+        "description": "Tem uma ideia para a aplicação? Diga-nos o que gostaria de ver.",
+        "link": "Sugerir uma funcionalidade"
+      }
+    }
+  },
+  "blockSetup": {
+    "autoUpdate": "Esta mensagem desaparece automaticamente alguns segundos depois de guardar o bloco de aplicação.",
+    "addAppBlock": "Adicionar bloco de aplicação",
+    "orderStatus": {
+      "heading": "Adicionar o bloco de aplicação à página de estado da encomenda",
+      "body": "Os clientes só veem o formulário de livre resolução na página de estado da encomenda depois de adicionar o bloco de aplicação. Para o adicionar:",
+      "steps": {
+        "open": "Selecione <strong>Adicionar bloco de aplicação</strong> abaixo. A página de estado da encomenda abre no editor do checkout.",
+        "add": "Na barra lateral, selecione <strong>Adicionar bloco de aplicação</strong>.",
+        "choose": "Selecione <strong>Formulário de livre resolução</strong>.",
+        "save": "Selecione <strong>Guardar</strong>."
+      }
+    },
+    "storefront": {
+      "heading": "Adicionar o bloco de aplicação a uma página da loja",
+      "body": "Escolha um modelo de página e, em seguida, selecione Adicionar bloco de aplicação. O editor de temas abre com o formulário de livre resolução já adicionado como secção.",
+      "templateLabel": "Modelo de página",
+      "templates": {
+        "page": "Página predefinida",
+        "index": "Página inicial",
+        "product": "Páginas de produto",
+        "collection": "Páginas de coleção",
+        "cart": "Página do carrinho"
+      },
+      "steps": {
+        "open": "Selecione <strong>Adicionar bloco de aplicação</strong> para abrir o editor de temas com a secção adicionada.",
+        "move": "Arraste a secção para o local pretendido na página.",
+        "save": "Selecione <strong>Guardar</strong>."
+      }
+    }
+  },
+  "onboarding": {
+    "pageTitle": "Começar",
+    "heading": "Prepare a sua loja para a livre resolução na UE",
+    "intro_one": "Conclua este {{count}} passo para oferecer aos seus clientes da UE uma forma conforme de exercer o direito de livre resolução.",
+    "intro_other": "Conclua estes {{count}} passos para oferecer aos seus clientes da UE uma forma conforme de exercer o direito de livre resolução.",
+    "intro_many": "Conclua estes {{count}} passos para oferecer aos seus clientes da UE uma forma conforme de exercer o direito de livre resolução.",
+    "stepBadge": "Passo {{current}} de {{total}}",
+    "completedToast": "Configuração concluída",
+    "steps": {
+      "welcome": {
+        "title": "Boas-vindas",
+        "description": "O que a aplicação faz"
+      },
+      "form": {
+        "title": "Formulário de livre resolução",
+        "description": "Ativar o formulário"
+      }
+    },
+    "actions": {
+      "getStarted": "Começar",
+      "continue": "Continuar",
+      "finish": "Concluir configuração",
+      "skip": "Ignorar configuração",
+      "back": "Voltar"
+    },
+    "help": {
+      "heading": "Precisa de ajuda?",
+      "body": "Tem alguma questão? <supportLink>Contacte o suporte</supportLink>."
+    },
+    "welcome": {
+      "heading": "Bem-vindo(a) ao {{appName}}",
+      "setupTime": "Demora cerca de 1 minuto",
+      "law": "Desde 19 de junho de 2026, as lojas que vendem a clientes da UE têm de disponibilizar uma forma de exercer a livre resolução de cada encomenda em 2 passos (Diretiva UE 2023/2673, artigo 11.º-A). Uma política de devoluções, por si só, não é suficiente.",
+      "app": "O {{appName}} adiciona um botão de livre resolução à página de estado da encomenda, a uma página da sua loja online ou a ambas. Trata da confirmação em 2 passos e envia o e-mail de confirmação obrigatório. Pode gerir todos os pedidos num único local.",
+      "imageAlt": "Um cliente a exercer a livre resolução de uma encomenda",
+      "requirementsHeading": "O que a lei exige",
+      "requirements": {
+        "button": "Um botão de livre resolução claramente identificado que os clientes encontrem facilmente",
+        "twoStep": "Um processo em 2 passos: os clientes enviam a livre resolução e depois confirmam-na",
+        "email": "Um e-mail de confirmação automático que os clientes possam guardar"
+      },
+      "penaltyHeading": "O que acontece se não cumprir",
+      "penalty": "Se o botão de livre resolução não existir ou não funcionar, a lei prolonga o prazo de livre resolução de {{days}} dias. Os clientes passam a ter 12 meses e {{days}} dias para exercer a livre resolução de cada encomenda afetada."
+    },
+    "form": {
+      "heading": "Ativar o formulário de livre resolução",
+      "body": "Os clientes enviam a livre resolução e depois confirmam-na num passo separado, como exige a legislação da UE. O formulário inclui um texto jurídico predefinido. Os clientes têm {{days}} para exercer a livre resolução, a contar da entrega.",
+      "switch": "Ativar o formulário de livre resolução",
+      "later": "Pode alterar tudo isto mais tarde nas Definições.",
+      "loadError": "Não foi possível carregar as definições do formulário. Pode concluir a configuração agora e ativar o formulário mais tarde nas Definições.",
+      "saveError": "Não foi possível guardar as opções do formulário. Tente novamente ou conclua a configuração sem elas e defina-as mais tarde nas Definições.",
+      "finishWithoutSaving": "Concluir sem guardar",
+      "placementError": "Selecione pelo menos um local ou desative o formulário."
+    },
+    "finishError": "Não foi possível concluir a configuração. Tente novamente."
+  },
+  "formSetup": {
+    "pageTitle": "Definições",
+    "loadError": "Não foi possível carregar as definições",
+    "saveError": "Não foi possível guardar as definições",
+    "savedToast": "Definições guardadas",
+    "enable": {
+      "heading": "Formulário de livre resolução",
+      "description": "Escolha se os clientes podem enviar pedidos de livre resolução e onde veem o formulário.",
+      "checkbox": "Ativar o formulário de livre resolução",
+      "details": "Quando esta opção está desativada, os clientes não podem enviar pedidos de livre resolução em nenhum local.",
+      "orderStatus": "Mostrar na página de estado da encomenda",
+      "storefront": "Mostrar numa página da loja"
+    },
+    "countries": {
+      "heading": "Países elegíveis",
+      "description": "Os clientes só veem o formulário de livre resolução se a encomenda for enviada para um destes países.",
+      "all": "Todos os {{count}} países da UE (recomendado)",
+      "allDetails": "O direito de livre resolução aplica-se em toda a UE.",
+      "specific": "Países específicos",
+      "specificDetails": "Escolha os países abaixo. Pode alterar isto a qualquer momento.",
+      "pickerLabel": "Países",
+      "pickerPlaceholder": "Pesquisar países"
+    },
+    "content": {
+      "heading": "Conteúdo do formulário",
+      "tabs": {
+        "step1": "1. Detalhes",
+        "confirm": "2. Confirmar",
+        "done": "3. Concluído"
+      },
+      "language": "Idioma",
+      "languageDetails": "Escolha um idioma para editar o conteúdo do formulário nesse idioma. Cada idioma é guardado separadamente.",
+      "beforeDelivery": {
+        "heading": "Antes da entrega",
+        "description": "Apresentado no primeiro ecrã do formulário e no passo Detalhes até a encomenda ser entregue, incluindo enquanto está em trânsito."
+      },
+      "afterDelivery": {
+        "heading": "Após a entrega",
+        "description": "Apresentado em alternativa quando a Shopify marca a encomenda como entregue."
+      },
+      "title": "Título",
+      "description": "Descrição",
+      "itemHeading": "Título da seleção de artigos",
+      "customerDetails": {
+        "heading": "Dados do cliente",
+        "description": "Preenchidos a partir da encomenda. Os clientes não podem editar estes campos.",
+        "locked": "Bloqueado",
+        "fullName": "Nome completo",
+        "email": "E-mail",
+        "orderNumber": "Número da encomenda"
+      },
+      "reason": {
+        "heading": "Motivo da livre resolução",
+        "checkbox": "Pedir um motivo",
+        "details": "Os clientes nunca têm de indicar um motivo. A legislação da UE exige que este campo seja opcional.",
+        "label": "Etiqueta do campo de motivo",
+        "optionsHeading": "Opções de motivo",
+        "optionsHelp": "Os clientes escolhem a partir desta lista. Adicione, remova ou reformule as opções de acordo com a sua loja. É sempre adicionada no fim uma opção \"Outro\" com uma caixa de texto.",
+        "removeOption": "Remover {{option}}",
+        "addLabel": "Adicionar um motivo",
+        "addPlaceholder": "Por exemplo, Encomendado por engano",
+        "translatedHelp": "Traduza cada opção. Para adicionar ou remover opções, mude para inglês.",
+        "translatedEmpty": "Adicione primeiro as opções de motivo em inglês."
+      },
+      "continueButton": "Etiqueta do botão Continuar",
+      "confirm": {
+        "heading": "Título da confirmação",
+        "messageBefore": "Mensagem antes da entrega",
+        "messageAfter": "Mensagem após a entrega",
+        "declaration": "Declaração",
+        "button": "Etiqueta do botão Confirmar"
+      },
+      "done": {
+        "titleBefore": "Título antes da entrega",
+        "messageBefore": "Mensagem antes da entrega",
+        "titleAfter": "Título após a entrega",
+        "messageAfter": "Mensagem após a entrega"
+      }
+    },
+    "automation": {
+      "heading": "Automatização",
+      "description": "Escolha o que a aplicação faz quando um cliente envia um pedido de livre resolução.",
+      "beforeShip": {
+        "heading": "Antes do envio da encomenda",
+        "description": "Aplica-se quando um pedido chega antes do envio de qualquer artigo.",
+        "hold": "Suspender o processamento para análise",
+        "holdDetails": "Pause o processamento até aprovar ou rejeitar o pedido. A suspensão é levantada quando decidir.",
+        "tagDetails": "Adicione etiquetas às encomendas que recebem um pedido antes do envio, para que a sua equipa as encontre na lista de encomendas."
+      },
+      "fallback": {
+        "label": "O que acontece à encomenda",
+        "hold": "Mantê-la suspensa até aprovar ou rejeitar o pedido",
+        "cancelNow": "Cancelar toda a encomenda e reembolsá-la imediatamente",
+        "releaseN": "Levantar a suspensão após um número definido de dias",
+        "cancelN": "Cancelar toda a encomenda e reembolsá-la após um número definido de dias",
+        "cancelWarning": "Esta ação cancela e reembolsa toda a encomenda, mesmo que o cliente só tenha exercido a livre resolução de alguns artigos. A Shopify envia um e-mail ao cliente sobre o cancelamento.",
+        "days": "Número de dias"
+      },
+      "afterDelivery": {
+        "heading": "Após o envio da encomenda",
+        "description": "Aplica-se quando um pedido chega depois do envio de pelo menos um artigo, mesmo que ainda não tenha sido entregue. Todos os pedidos continuam a aparecer na página Pedidos.",
+        "createReturn": "Criar uma devolução",
+        "createReturnDetails": "Crie uma devolução na Shopify para os artigos pedidos que já foram enviados.",
+        "tagDetails": "Adicione etiquetas às encomendas que recebem um pedido após o envio."
+      },
+      "tag": {
+        "checkbox": "Adicionar etiqueta à encomenda",
+        "label": "Etiquetas da encomenda",
+        "placeholder": "Adicionar uma etiqueta"
+      }
+    },
+    "deadline": {
+      "heading": "Prazo de livre resolução",
+      "description": "O prazo de livre resolução começa quando a encomenda é entregue, não quando é efetuada. A legislação da UE exige pelo menos {{days}}.",
+      "days": "Dias para exercer a livre resolução após a entrega",
+      "daysDetails": "Quanto tempo os clientes têm para exercer a livre resolução após a entrega da encomenda.",
+      "transit": "Tempo de trânsito estimado (dias)",
+      "transitDetails": "Utilizado quando a transportadora não partilha uma data de entrega nem uma estimativa. A aplicação soma estes dias à data de envio."
+    },
+    "validation": {
+      "countryMode": "Escolha os países elegíveis.",
+      "euCountries": "Selecione pelo menos um país.",
+      "title": "Introduza um título.",
+      "description": "Introduza uma descrição.",
+      "itemHeading": "Introduza um título para a lista de artigos.",
+      "continueButton": "Introduza uma etiqueta para o botão Continuar.",
+      "heading": "Introduza um título.",
+      "confirmMessage": "Introduza uma mensagem de confirmação.",
+      "declaration": "Introduza a declaração que os clientes têm de aceitar.",
+      "confirmButton": "Introduza uma etiqueta para o botão Confirmar.",
+      "message": "Introduza uma mensagem.",
+      "reasonLabel": "Introduza uma etiqueta para o campo de motivo.",
+      "reasonOptions": "Adicione pelo menos um motivo.",
+      "reasonOptionTranslation": "Introduza uma tradução para este motivo.",
+      "fallback": "Escolha o que acontece à encomenda.",
+      "daysRange": "Introduza um número de dias entre {{min}} e {{max}}.",
+      "tags": "Adicione pelo menos uma etiqueta ou desative a adição de etiquetas.",
+      "afterDeliveryAction": "Escolha o que acontece após o envio da encomenda."
+    },
+    "preview": {
+      "heading": "Pré-visualização em direto",
+      "compliantBadge": "Conforme em 2 passos",
+      "surfaceLabel": "Pré-visualização",
+      "surfaces": {
+        "orderStatus": "Página de estado da encomenda",
+        "theme": "Página da loja"
+      },
+      "stageLabel": "Estado da entrega",
+      "stages": {
+        "beforeDelivery": "Ainda não entregue",
+        "delivered": "Entregue"
+      },
+      "banner": {
+        "orderStatus": "É isto que os clientes veem na página de estado da encomenda. Selecione os botões para experimentar ou utilize os separadores em Conteúdo do formulário para ir para um passo específico.",
+        "theme": "É isto que os clientes veem na página da sua loja. Começa com o passo \"Encontrar a sua encomenda\", porque os visitantes da loja não têm sessão iniciada."
+      },
+      "restart": "Reiniciar pré-visualização",
+      "position": {
+        "entry": "Cartão inicial",
+        "lookup": "Encontrar a sua encomenda",
+        "step": "Passo {{current}} de {{total}}"
+      },
+      "storefront": {
+        "start": "Iniciar pedido de livre resolução",
+        "findOrderHeading": "Encontrar a sua encomenda",
+        "findOrderBody": "Introduza os dados da sua encomenda para iniciar o pedido de livre resolução.",
+        "fullName": "Nome completo",
+        "email": "E-mail",
+        "orderNumber": "Número da encomenda",
+        "continue": "Continuar",
+        "steps": {
+          "step1": "Detalhes",
+          "confirm": "Confirmar",
+          "done": "Concluído"
+        },
+        "stepOf": "Passo {{current}} de {{total}}",
+        "stepProgress": "Passo {{current}} de {{total}}: {{label}}",
+        "reasonPlaceholder": "Selecione um motivo (opcional)",
+        "otherReason": "Outro",
+        "yourReason": "O seu motivo",
+        "yourReasonPlaceholder": "Indique-nos o seu motivo",
+        "selectItem": "Selecione pelo menos um artigo para continuar.",
+        "itemsToWithdraw": "Artigos da livre resolução ({{count}})",
+        "selectedTotal": "Total dos artigos selecionados",
+        "previous": "Anterior",
+        "submittedOn": "Enviado a {{date}}"
+      }
+    }
+  },
+  "requests": {
+    "pageTitle": "Pedidos",
+    "searchLabel": "Pesquisar pedidos de livre resolução",
+    "searchPlaceholder": "Pesquisar por número da encomenda, nome do cliente ou e-mail",
+    "export": "Exportar",
+    "exportSelected": "Exportar selecionados",
+    "tabs": {
+      "all": "Todos",
+      "withCount": "{{label}} ({{count}})"
+    },
+    "empty": {
+      "imageAlt": "",
+      "heading": "Ainda não há pedidos de livre resolução",
+      "body": "Os pedidos de livre resolução dos seus clientes aparecerão aqui.",
+      "filteredHeading": "Não foram encontrados pedidos de livre resolução",
+      "filteredBody": "Experimente alterar o termo de pesquisa ou o filtro."
+    },
+    "table": {
+      "selectAll": "Selecionar todos os pedidos de livre resolução",
+      "selectRow": "Selecionar a encomenda {{order}}",
+      "selectedCount": "{{count}} selecionados",
+      "order": "Encomenda",
+      "customer": "Cliente",
+      "items": "Artigos",
+      "value": "Valor",
+      "status": "Estado",
+      "submitted": "Enviado",
+      "actions": "Ações",
+      "itemCount_one": "{{count}} artigo",
+      "itemCount_other": "{{count}} artigos",
+      "itemCount_many": "{{count}} artigos",
+      "viewRow": "Ver o pedido da encomenda {{order}}",
+      "deleteRow": "Eliminar o pedido da encomenda {{order}}"
+    },
+    "delete": {
+      "heading_one": "Eliminar o pedido de livre resolução?",
+      "heading_other": "Eliminar {{count}} pedidos de livre resolução?",
+      "heading_many": "Eliminar {{count}} pedidos de livre resolução?",
+      "body_one": "Este pedido de livre resolução será eliminado permanentemente. Esta ação não pode ser anulada.",
+      "body_other": "Estes {{count}} pedidos de livre resolução serão eliminados permanentemente. Esta ação não pode ser anulada.",
+      "body_many": "Estes {{count}} pedidos de livre resolução serão eliminados permanentemente. Esta ação não pode ser anulada.",
+      "confirm_one": "Eliminar pedido",
+      "confirm_other": "Eliminar pedidos",
+      "confirm_many": "Eliminar pedidos",
+      "toast_one": "Pedido de livre resolução eliminado",
+      "toast_other": "{{count}} pedidos de livre resolução eliminados",
+      "toast_many": "{{count}} pedidos de livre resolução eliminados"
+    },
+    "csv": {
+      "filename": "pedidos-de-livre-resolucao-{{date}}.csv",
+      "order": "Encomenda",
+      "customerName": "Nome do cliente",
+      "customerEmail": "E-mail do cliente",
+      "country": "País",
+      "items": "Artigos",
+      "value": "Valor",
+      "reason": "Motivo",
+      "status": "Estado",
+      "submitted": "Enviado",
+      "decided": "Decidido"
+    }
+  },
+  "requestDetail": {
+    "pageTitle": "Pedido de livre resolução",
+    "backLink": "Pedidos",
+    "submittedLine": "Enviado a {{date}} a partir de {{source}}",
+    "previous": "Pedido anterior",
+    "next": "Pedido seguinte",
+    "badges": {
+      "canceled": "Cancelada",
+      "onHold": "Em espera",
+      "return": "Devolução: {{status}}"
+    },
+    "actions": {
+      "refund": "Reembolsar",
+      "more": "Mais ações",
+      "cancelOrder": "Cancelar encomenda",
+      "placeHold": "Suspender processamento",
+      "releaseHold": "Levantar suspensão do processamento",
+      "createReturn": "Criar devolução",
+      "processReturn": "Processar e reembolsar",
+      "viewOrder": "Ver encomenda"
+    },
+    "banners": {
+      "orderUnavailableHeading": "Detalhes da encomenda indisponíveis",
+      "orderUnavailableBody": "{{error}} Não pode utilizar as ações da encomenda até os detalhes da encomenda serem carregados.",
+      "actionFailedHeading": "Não foi possível concluir esta ação",
+      "actionFailedAction": "Consulte a Atividade abaixo para ver os detalhes.",
+      "canceled": "Esta encomenda foi cancelada. As ações da encomenda já não estão disponíveis."
+    },
+    "deadline": {
+      "heading": "Prazo de reembolso",
+      "pendingLabel": "Tempo restante para decidir e reembolsar",
+      "decidedLabel": "Decisão",
+      "badges": {
+        "overdue": "Em atraso",
+        "actionNeeded": "Ação necessária",
+        "onTime": "Dentro do prazo"
+      },
+      "daysLeft_one": "Falta {{count}} dia",
+      "daysLeft_other": "Faltam {{count}} dias",
+      "daysLeft_many": "Faltam {{count}} dias",
+      "daysOverdue_one": "{{count}} dia de atraso",
+      "daysOverdue_other": "{{count}} dias de atraso",
+      "daysOverdue_many": "{{count}} dias de atraso",
+      "daysEarly_one": "{{count}} dia antes do prazo",
+      "daysEarly_other": "{{count}} dias antes do prazo",
+      "daysEarly_many": "{{count}} dias antes do prazo",
+      "daysLate_one": "{{count}} dia depois do prazo",
+      "daysLate_other": "{{count}} dias depois do prazo",
+      "daysLate_many": "{{count}} dias depois do prazo",
+      "pending": "Tem {{days}} a contar do envio do pedido para decidir e reembolsar. O prazo termina a {{date}}.",
+      "pendingOverdue": "O prazo terminou a {{date}}. Reembolse o cliente o mais rapidamente possível.",
+      "decidedOnTime": "Decidido dentro do prazo de reembolso de {{windowDays}} dias. O prazo terminava a {{date}}.",
+      "decidedLate": "Decidido depois do prazo de reembolso de {{date}}."
+    },
+    "items": {
+      "heading": "Artigos da livre resolução",
+      "reject": "Rejeitar",
+      "approve": "Aprovar",
+      "total": "Total da livre resolução",
+      "sku": "SKU: {{sku}}",
+      "quantity": "Quantidade: {{count}}",
+      "shipping": {
+        "notShipped": "Ainda não enviado",
+        "partlyShipped": "Parcialmente enviado",
+        "shipped": "Enviado"
+      },
+      "partiallyShippedBanner": "Parte desta encomenda já foi enviada. Os artigos ainda não enviados podem continuar a ser suspensos, e os artigos enviados precisam de uma devolução."
+    },
+    "return": {
+      "heading": "Devolução",
+      "status": "Estado",
+      "created": "Criada",
+      "body": "Foi criada uma devolução na Shopify para os artigos da livre resolução.",
+      "openBody": "Quando os artigos forem devolvidos, selecione Processar e reembolsar. Assim, o cliente é reembolsado pelos artigos devolvidos e a devolução é fechada.",
+      "alreadyRefundedBody": "Os artigos desta devolução já foram reembolsados. Feche a devolução na Shopify quando forem devolvidos."
+    },
+    "processReturnModal": {
+      "heading": "Processar a devolução e reembolsar",
+      "calculating": "A calcular o valor do reembolso…",
+      "nothingToProcess": "Não há mais nada para processar nesta devolução. Pode já ter sido processada ou fechada na Shopify.",
+      "nothingToRefund": "Os artigos desta devolução já foram reembolsados, pelo que não há mais nada para reembolsar.",
+      "unsupportedPayment": "O pagamento desta encomenda não pode ser reembolsado a partir da aplicação. Processe a devolução e reembolse-a antes na Shopify.",
+      "itemsHeading": "Artigos da devolução {{name}}",
+      "subtotal": "Subtotal dos artigos",
+      "shippingLine": "Envio original",
+      "total": "Reembolso total",
+      "body": "Esta ação marca os artigos devolvidos como processados, reembolsa-os no método de pagamento original e fecha a devolução. A Shopify envia ao cliente um recibo de reembolso por e-mail. Esta ação não pode ser anulada.",
+      "confirmAmount": "Reembolsar {{amount}}",
+      "confirm": "Processar e reembolsar"
+    },
+    "payment": {
+      "heading": "Pagamento",
+      "status": "Estado do pagamento",
+      "subtotal": "Subtotal da livre resolução",
+      "shipping": "Envio da encomenda",
+      "total": "Total da encomenda",
+      "refunded": "Reembolsado",
+      "unavailable": "Os detalhes do pagamento não estão disponíveis de momento."
+    },
+    "activity": {
+      "heading": "Atividade",
+      "noteLabel": "Adicionar uma nota",
+      "notePlaceholder": "Adicionar uma nota…",
+      "post": "Publicar",
+      "noteHelp": "Só o utilizador e a sua equipa podem ver as notas. Os clientes nunca as veem.",
+      "submitted": "Pedido de livre resolução enviado a partir de {{source}}",
+      "decided": {
+        "approved": "Pedido aprovado",
+        "rejected": "Pedido rejeitado"
+      },
+      "note": "Nota: {{body}}",
+      "entry": "{{label}}: {{message}}",
+      "actions": {
+        "resolve_branch": "Automatização iniciada",
+        "run_automation": "Automatização",
+        "automation_completed": "Automatização concluída",
+        "hold_fulfillment": "Suspensão do processamento",
+        "schedule_fallback": "Ação posterior agendada",
+        "release_hold": "Suspensão do processamento levantada",
+        "cancel_order_immediate": "Encomenda cancelada e reembolsada",
+        "cancel_order_scheduled": "Encomenda cancelada e reembolsada",
+        "cancel_order_manual": "Encomenda cancelada e reembolsada",
+        "cancel_order": "Encomenda cancelada e reembolsada",
+        "refund": "Reembolso",
+        "tag_before_ship": "Etiqueta adicionada à encomenda",
+        "tag_after_delivery": "Etiqueta adicionada à encomenda",
+        "order_tag_add": "Etiquetas da encomenda adicionadas",
+        "order_tag_remove": "Etiquetas da encomenda removidas",
+        "create_return": "Devolução",
+        "refresh_return": "Estado da devolução atualizado",
+        "process_return": "Processar e reembolsar",
+        "fetch_shop_contact": "Dados de contacto da loja",
+        "customer_email": "E-mail de confirmação ao cliente",
+        "merchant_email": "Notificação de novo pedido",
+        "notify_customer": "E-mail de decisão",
+        "notify_merchant": "Foi notificado"
+      },
+      "messages": {
+        "noTags": "Não há etiquetas configuradas",
+        "tagged": "Etiqueta {{tags}} adicionada à encomenda",
+        "noHoldableOrders": "De momento, nada nesta encomenda pode ser suspenso",
+        "held": "Artigos suspensos para não serem enviados",
+        "holdOff": "A suspensão do processamento para análise está desativada",
+        "tagBeforeShipOff": "A adição de etiquetas antes do envio está desativada",
+        "tagAfterDeliveryOff": "A adição de etiquetas após o envio está desativada",
+        "fallbackHold": "A encomenda permanece suspensa até aprovar ou rejeitar o pedido",
+        "fallbackInvalidDays": "Não foi possível agendar a ação posterior. O número de dias não é válido.",
+        "scheduledRelease": "Levantamento da suspensão agendado para {{date}}",
+        "scheduledCancel": "Cancelamento e reembolso agendados para {{date}}",
+        "canceled": "Encomenda cancelada e reembolsada",
+        "returnCreated": "Devolução criada na Shopify",
+        "returnNoMatch": "Nenhum dos artigos pedidos pode ser devolvido",
+        "notifiedByEmail": "Notificado na aplicação e por e-mail",
+        "notifiedEmailFailed": "Notificado na aplicação. O e-mail de notificação falhou: {{error}}",
+        "notifiedInAppOnly": "Notificado na aplicação. O e-mail de notificação não foi enviado.",
+        "emailSent": "Enviado",
+        "emailFailed": "Falhou: {{error}}",
+        "emailNotSent": "Não enviado porque não há destinatário ou o e-mail não está configurado",
+        "orderNotFound": "Não foi possível encontrar esta encomenda na Shopify",
+        "alreadyCanceled": "A encomenda já estava cancelada",
+        "branchBeforeShip": "A encomenda ainda não foi enviada, pelo que foram executados os passos anteriores ao envio",
+        "branchAfterDelivery": "A encomenda foi enviada, pelo que foram executados os passos posteriores ao envio",
+        "branchPartiallyShipped": "A encomenda foi parcialmente enviada, pelo que foram executados os passos para artigos enviados e não enviados",
+        "noUnshippedItemsRequested": "Nenhum dos artigos pedidos está a aguardar envio, pelo que nada foi suspenso",
+        "fallbackCancelPartiallyShipped": "A encomenda foi parcialmente enviada, pelo que não pode ser cancelada na totalidade. Os artigos pedidos permanecem suspensos até aprovar ou rejeitar o pedido.",
+        "returnNothingShipped": "Nenhum dos artigos pedidos foi enviado, pelo que não foi necessária uma devolução",
+        "runCompleted": "Automatização concluída",
+        "runFailed": "Um ou mais passos da automatização falharam",
+        "runSkipped": "Automatização ignorada",
+        "scheduledSkippedApproved": "O pedido já estava aprovado, pelo que a ação agendada não foi executada",
+        "scheduledSkippedRejected": "O pedido já estava rejeitado, pelo que a ação agendada não foi executada",
+        "noHoldsPlaced": "Não foram aplicadas suspensões a este pedido",
+        "holdsAlreadyReleased": "As suspensões já tinham sido levantadas",
+        "holdReleased": "A encomenda pode voltar a ser processada",
+        "holdExists": "Já existe uma suspensão para este pedido",
+        "decisionSkipped": "A equipa optou por não enviar um e-mail ao cliente",
+        "decisionSent": "E-mail enviado ao cliente sobre a decisão",
+        "decisionFailed": "O e-mail de decisão falhou: {{error}}",
+        "decisionNotConfigured": "O e-mail de decisão não foi enviado porque o e-mail não está configurado",
+        "refunded": "{{amount}} reembolsado",
+        "noReturn": "Não existe nenhuma devolução para este pedido",
+        "returnStatus": "Estado da devolução: {{status}}",
+        "returnProcessed": "Devolução processada e {{amount}} reembolsado",
+        "returnNothingToProcess": "Não há mais nada para processar nesta devolução",
+        "returnNothingToRefund": "Os artigos desta devolução já foram reembolsados",
+        "returnPaymentUnsupported": "Este pagamento não pode ser reembolsado a partir da aplicação. Processe a devolução na Shopify.",
+        "refundNothingRefundable": "Nenhum dos artigos pedidos pode ser reembolsado. Podem já ter sido reembolsados.",
+        "refundNoSuggestion": "A Shopify não conseguiu calcular um reembolso para estes artigos. Reembolse-os antes na Shopify.",
+        "refundCoveredByReturn": "Todos os artigos da livre resolução estão na devolução aberta. Utilize Processar e reembolsar na devolução para os reembolsar.",
+        "tagsRemoved": "Etiquetas da encomenda removidas: {{tags}}",
+        "tagsAdded": "Etiquetas da encomenda adicionadas: {{tags}}"
+      }
+    },
+    "order": {
+      "heading": "Encomenda",
+      "order": "Encomenda",
+      "placed": "Efetuada",
+      "payment": "Pagamento",
+      "fulfillment": "Processamento"
+    },
+    "customer": {
+      "heading": "Cliente",
+      "avatarFallback": "Cliente",
+      "contactHeading": "Informações de contacto",
+      "email": "E-mail",
+      "language": "Idioma",
+      "shippingHeading": "Morada de envio"
+    },
+    "automation": {
+      "heading": "Automatização",
+      "stage": "Fase",
+      "stages": {
+        "before_ship": "Antes do envio",
+        "partially_shipped": "Parcialmente enviada",
+        "after_delivery": "Após o envio"
+      },
+      "hold": "Suspensão do processamento",
+      "holdStates": {
+        "onHold": "Em espera",
+        "released": "Levantada",
+        "none": "Nenhuma"
+      },
+      "canceled": "Cancelada",
+      "return": "Devolução"
+    },
+    "emails": {
+      "heading": "Histórico de e-mails",
+      "customerConfirmation": "Confirmação de livre resolução ao cliente",
+      "merchantNotification": "Notificação de novo pedido",
+      "decision": "E-mail de decisão",
+      "statuses": {
+        "sent": "Enviado",
+        "failed": "Falhou",
+        "notSent": "Não enviado"
+      }
+    },
+    "tags": {
+      "heading": "Etiquetas da encomenda",
+      "label": "Adicionar etiqueta à encomenda",
+      "placeholder": "Adicionar uma etiqueta",
+      "remove": "Remover a etiqueta {{tag}}",
+      "savedToast": "Etiquetas da encomenda guardadas"
+    },
+    "reason": {
+      "heading": "Motivo da livre resolução",
+      "quoted": "\"{{reason}}\"",
+      "none": "Nenhum motivo indicado"
+    },
+    "decidedToast": {
+      "approved": "Pedido de livre resolução aprovado",
+      "rejected": "Pedido de livre resolução rejeitado"
+    },
+    "cancelModal": {
+      "heading": "Cancelar a encomenda?",
+      "body": "Esta ação cancela toda a encomenda na Shopify, incluindo os artigos dos quais o cliente não exerceu a livre resolução. A encomenda é reembolsada no método de pagamento original e reposta em stock, e a Shopify envia um e-mail ao cliente. Esta ação não pode ser anulada.",
+      "keep": "Manter encomenda",
+      "confirm": "Cancelar e reembolsar encomenda"
+    },
+    "createReturnModal": {
+      "heading": "Criar devolução dos artigos da livre resolução",
+      "itemsHeading": "Artigos a devolver",
+      "subtotal": "Subtotal dos artigos",
+      "checking": "A verificar que artigos podem ser devolvidos…",
+      "nothingToReturn": "Nenhum dos artigos da livre resolução foi enviado ainda, pelo que não há nada para devolver. Suspenda-os para não serem enviados ou reembolse-os para os remover da encomenda.",
+      "notShipped_one": "{{count}} artigo da livre resolução não está incluído porque ainda não foi enviado.",
+      "notShipped_other": "{{count}} artigos da livre resolução não estão incluídos porque ainda não foram enviados.",
+      "notShipped_many": "{{count}} artigos da livre resolução não estão incluídos porque ainda não foram enviados.",
+      "notReturnable_one": "{{count}} artigo da livre resolução não está incluído porque já foi devolvido.",
+      "notReturnable_other": "{{count}} artigos da livre resolução não estão incluídos porque já foram devolvidos.",
+      "notReturnable_many": "{{count}} artigos da livre resolução não estão incluídos porque já foram devolvidos.",
+      "body": "Esta ação cria uma devolução na Shopify para os artigos acima. Não reembolsa o cliente. Quando os artigos forem devolvidos, selecione Processar e reembolsar na devolução.",
+      "cancel": "Cancelar",
+      "confirm": "Criar devolução"
+    },
+    "decisionModal": {
+      "headingApprove": "Aprovar o pedido de livre resolução?",
+      "headingReject": "Rejeitar o pedido de livre resolução?",
+      "approveAndSend": "Aprovar e enviar e-mail",
+      "rejectAndSend": "Rejeitar e enviar e-mail",
+      "approve": "Aprovar",
+      "reject": "Rejeitar",
+      "loadingLabel": "A carregar a pré-visualização do e-mail",
+      "loading": "A preparar o e-mail para o cliente…",
+      "sendEmail": "Enviar e-mail ao cliente",
+      "language": "Este e-mail está em {{language}}, o idioma do cliente. As suas alterações aplicam-se apenas a este e-mail.",
+      "subject": "Assunto",
+      "body": "Corpo do e-mail",
+      "editHtml": "Editar HTML",
+      "htmlLabel": "HTML do e-mail",
+      "previewTitle": "Pré-visualização do e-mail",
+      "templateUnchanged": "As suas alterações aplicam-se apenas a este e-mail. O modelo guardado não será alterado.",
+      "noEmail": "O cliente não receberá um e-mail. Pode contactá-lo separadamente, se necessário.",
+      "holdReleased": "Esta ação também levanta a suspensão do processamento desta encomenda, para que possa voltar a ser processada."
+    },
+    "refundModal": {
+      "heading": "Reembolsar os artigos da livre resolução",
+      "calculatingLabel": "A calcular o reembolso",
+      "calculating": "A calcular o valor do reembolso…",
+      "nothingToRefund": "Não há nada para reembolsar nesta encomenda. Os artigos da livre resolução podem já ter sido reembolsados ou a encomenda pode ter sido cancelada.",
+      "itemsHeading": "Artigos a reembolsar",
+      "subtotal": "Subtotal dos artigos",
+      "shippingLine": "Envio original",
+      "amount": "Valor do reembolso",
+      "total": "Reembolso total",
+      "body": "Os artigos da livre resolução são reembolsados no método de pagamento original e repostos em stock sempre que possível. A Shopify envia ao cliente um recibo de reembolso por e-mail.",
+      "includesShipping": "O cliente exerceu a livre resolução de toda a encomenda, pelo que o custo de envio original está incluído.",
+      "unshippedItems": "Os artigos ainda não enviados são removidos da encomenda, pelo que não serão enviados.",
+      "inReturn_one": "{{count}} artigo da livre resolução não está incluído porque está na devolução {{name}}. Reembolse-o com Processar e reembolsar na devolução.",
+      "inReturn_other": "{{count}} artigos da livre resolução não estão incluídos porque estão na devolução {{name}}. Reembolse-os com Processar e reembolsar na devolução.",
+      "inReturn_many": "{{count}} artigos da livre resolução não estão incluídos porque estão na devolução {{name}}. Reembolse-os com Processar e reembolsar na devolução.",
+      "allInReturn": "Todos os artigos da livre resolução estão na devolução {{name}}. Reembolse-os com Processar e reembolsar na devolução, o que também a fecha.",
+      "irreversible": "Esta ação não pode ser anulada.",
+      "confirmAmount": "Reembolsar {{amount}}",
+      "confirm": "Reembolsar"
+    },
+    "shopifyNotes": {
+      "holdAutomatic": "O pedido de livre resolução da encomenda {{order}} aguarda análise da equipa",
+      "holdManual": "O pedido de livre resolução da encomenda {{order}} foi suspenso pela equipa",
+      "canceled": "Cancelada pelo {{appName}} porque o cliente exerceu a livre resolução da compra (pedido {{id}}).",
+      "refunded": "Reembolsada pelo {{appName}} porque o cliente exerceu a livre resolução da compra (pedido {{id}}).",
+      "returnReason": "Pedido de livre resolução: {{reason}}",
+      "returnReasonNone": "Pedido de livre resolução (nenhum motivo indicado)"
+    }
+  },
+  "emailTemplates": {
+    "pageTitle": "Notificações",
+    "loadError": "Não foi possível carregar as notificações",
+    "saveError": "Não foi possível guardar as notificações",
+    "savedToast": "Notificações guardadas",
+    "resetToast": "{{name}} reposto para a predefinição",
+    "sender": {
+      "heading": "Remetente",
+      "description": "Estas definições aplicam-se a todos os e-mails que a aplicação envia pela sua loja. Envie a partir do seu próprio endereço verificado e escolha para onde vão as respostas dos clientes.",
+      "emailLabel": "E-mail do remetente",
+      "emailPlaceholder": "notifications@withdrawaleasy.com",
+      "detailsVerified": "Os e-mails são enviados a partir deste endereço.",
+      "detailsPending": "Introduza o código que enviámos para este endereço para o verificar.",
+      "detailsDefault": "Se deixar este campo em branco, os e-mails são enviados a partir de {{email}}.",
+      "detailsDefaultFallback": "Se deixar este campo em branco, os e-mails são enviados a partir do endereço predefinido da aplicação.",
+      "freeProviderWarning": "Os fornecedores de e-mail gratuitos, como o Gmail e o Yahoo, não podem ser autenticados. Os clientes verão \"via brevosend.com\" nos e-mails deste endereço. Para uma imagem mais profissional, utilize um endereço no domínio da sua loja.",
+      "codeLabel": "Código de verificação",
+      "codeDetails": "Introduza o código de 6 dígitos do e-mail que lhe enviámos.",
+      "verifyCode": "Verificar código",
+      "checkStatus": "Verificar o estado da verificação",
+      "verifyEmail": "Verificar e-mail",
+      "codeSent": "Enviámos um código de verificação para {{email}}.",
+      "notVerifiedYet": "Este e-mail ainda não está verificado. Procure o código na sua caixa de entrada e tente novamente.",
+      "replyToLabel": "E-mail de resposta",
+      "replyToPlaceholder": "suporte@asualoja.com",
+      "replyToDetails": "Por predefinição, as respostas dos clientes vão para o e-mail da sua loja. Para as receber noutro local, introduza um endereço diferente."
+    },
+    "domain": {
+      "heading": "Autenticação do domínio",
+      "description": "Autentique o seu domínio para que os clientes não vejam \"via brevosend.com\" nos seus e-mails. É opcional, mas recomendamos se enviar a partir do domínio da sua loja.",
+      "label": "Domínio",
+      "placeholder": "asualoja.com",
+      "details": "Introduza o domínio a partir do qual envia e-mails, não o seu domínio myshopify.com.",
+      "freeProviderWarning": "Os fornecedores de e-mail gratuitos, como o Gmail e o Yahoo, não podem ser autenticados. Introduza antes o domínio da sua loja.",
+      "columns": {
+        "record": "Registo",
+        "type": "Tipo",
+        "host": "Anfitrião",
+        "value": "Valor"
+      },
+      "records": {
+        "brevo_code": "Propriedade do domínio",
+        "dkim_record": "DKIM",
+        "dkim1Record": "DKIM 1",
+        "dkim2Record": "DKIM 2",
+        "dmarc_record": "DMARC"
+      },
+      "copyHost": "Copiar anfitrião",
+      "copyValue": "Copiar valor",
+      "verifyRecords": "Verificar registos DNS",
+      "authenticate": "Autenticar domínio",
+      "pendingInfo": "Adicione estes registos no seu fornecedor de domínio e, em seguida, selecione Verificar registos DNS.",
+      "notVerifiedYet": "O seu domínio ainda não está verificado. As alterações de DNS podem demorar algum tempo a atualizar, pelo que deve tentar novamente mais tarde."
+    },
+    "notification": {
+      "heading": "Modelo de e-mail",
+      "emailLabel": "E-mail",
+      "language": "Idioma",
+      "languageDetails": "Escolha um idioma para editar este e-mail nesse idioma. Cada idioma é guardado separadamente. Os clientes recebem os e-mails no próprio idioma.",
+      "send": "Enviar este e-mail",
+      "requiredDetails": "A legislação da UE exige este e-mail, pelo que não pode ser desativado.",
+      "merchantDetails": "Desative para deixar de receber este e-mail.",
+      "decisionDetails": "Desative para deixar de enviar este e-mail por predefinição. Pode continuar a optar por enviá-lo ao aprovar ou rejeitar um pedido específico.",
+      "subject": "Assunto",
+      "reset": "Repor predefinição",
+      "customized": "Personalizado"
+    },
+    "templates": {
+      "customerConfirmation": {
+        "name": "Confirmação de livre resolução ao cliente",
+        "description": "Enviado aos clientes assim que enviam um pedido de livre resolução."
+      },
+      "merchantNotification": {
+        "name": "Notificação de novo pedido",
+        "description": "Enviado para o e-mail de contacto da sua loja quando um cliente envia um novo pedido de livre resolução. Responda para enviar um e-mail ao cliente."
+      },
+      "withdrawalApproved": {
+        "name": "Livre resolução aprovada",
+        "description": "Enviado aos clientes quando aprova o pedido de livre resolução. Pode revê-lo e editá-lo antes do envio."
+      },
+      "withdrawalRejected": {
+        "name": "Livre resolução rejeitada",
+        "description": "Enviado aos clientes quando rejeita o pedido de livre resolução. Pode revê-lo e editá-lo antes do envio."
+      }
+    },
+    "merchantDefaults": {
+      "subject": "Novo pedido de livre resolução — encomenda {{order}}",
+      "heading": "Novo pedido de livre resolução",
+      "intro": "Um cliente enviou um pedido de livre resolução. Aqui está tudo o que precisa para o analisar.",
+      "rows": {
+        "name": "Nome",
+        "email": "E-mail",
+        "date": "Data",
+        "orderNumber": "Número da encomenda",
+        "reference": "Número de referência",
+        "reason": "Motivo"
+      },
+      "button": "Ver pedido",
+      "itemsHeading": "Artigos pedidos",
+      "footnote": "Abra o pedido no seu painel de administração para o aprovar ou rejeitar. O prazo de reembolso é acompanhado automaticamente aí."
+    },
+    "body": {
+      "heading": "Corpo do e-mail",
+      "editCode": "Editar código",
+      "htmlLabel": "Corpo HTML do e-mail",
+      "previewHeading": "Pré-visualização do e-mail"
+    },
+    "variables": {
+      "heading": "Variáveis",
+      "help": "Selecione uma variável para a inserir na posição do cursor.",
+      "insert": "Inserir {{label}}: {{description}}",
+      "groups": {
+        "customer": "Cliente",
+        "order": "Encomenda",
+        "withdrawal": "Livre resolução",
+        "request": "Pedido",
+        "shop": "Loja"
+      },
+      "tokens": {
+        "customer": {
+          "first_name": {
+            "label": "Nome próprio",
+            "description": "O nome próprio do cliente"
+          },
+          "last_name": {
+            "label": "Apelido",
+            "description": "O apelido do cliente"
+          },
+          "email": {
+            "label": "E-mail",
+            "description": "O endereço de e-mail do cliente"
+          }
+        },
+        "order": {
+          "name": {
+            "label": "Número da encomenda",
+            "description": "O número da encomenda, como #2138"
+          },
+          "id": {
+            "label": "ID da encomenda",
+            "description": "O ID interno da encomenda"
+          }
+        },
+        "withdrawal": {
+          "request_id": {
+            "label": "Número de referência",
+            "description": "O número de referência do pedido de livre resolução"
+          },
+          "submitted_at": {
+            "label": "Data de envio",
+            "description": "A data e a hora de envio do pedido"
+          },
+          "reason": {
+            "label": "Motivo",
+            "description": "O motivo indicado pelo cliente, se existir"
+          },
+          "selected_products": {
+            "label": "Produtos selecionados (texto)",
+            "description": "Os artigos pedidos numa lista separada por vírgulas"
+          }
+        },
+        "request": {
+          "status": {
+            "label": "Estado",
+            "description": "O estado atual do pedido"
+          },
+          "url": {
+            "label": "Ligação do pedido",
+            "description": "Uma ligação para o pedido na aplicação"
+          }
+        },
+        "shop": {
+          "name": {
+            "label": "Nome da loja",
+            "description": "O nome da sua loja"
+          },
+          "email": {
+            "label": "E-mail da loja",
+            "description": "O endereço de e-mail de contacto da sua loja"
+          }
+        }
+      }
+    },
+    "validation": {
+      "email": "Introduza um endereço de e-mail válido.",
+      "subjectRequired": "Introduza um assunto.",
+      "subjectTooLong": "O assunto não pode ter mais de {{max}} carateres.",
+      "bodyRequired": "Introduza o corpo do e-mail."
+    }
+  },
+  "sample": {
+    "customerName": "Maria Silva",
+    "items": {
+      "lamp": {
+        "title": "Candeeiro de mesa Fjord",
+        "variant": "Carvalho / Grande"
+      },
+      "candleHolder": {
+        "title": "Castiçal Tind",
+        "variant": "Latão"
+      }
+    },
+    "reason": "Mudei de ideias"
+  },
+  "faqs": {
+    "pageTitle": "Perguntas frequentes",
+    "searchLabel": "Pesquisar nas perguntas frequentes",
+    "searchPlaceholder": "Pesquise perguntas, como \"reembolso\" ou \"prazo\"",
+    "noResults": "Nenhuma pergunta corresponde a \"{{query}}\"",
+    "noResultsHelp": "Experimente outra palavra ou contacte o suporte abaixo.",
+    "showAnswer": "Mostrar resposta: {{question}}",
+    "hideAnswer": "Ocultar resposta: {{question}}",
+    "groups": {
+      "gettingStarted": "Primeiros passos",
+      "deadline": "Prazo de livre resolução",
+      "requests": "Gestão de pedidos",
+      "emailsLanguages": "E-mails e idiomas"
+    },
+    "actions": {
+      "goToSettings": "Ir para as Definições",
+      "goToRequests": "Ir para os Pedidos",
+      "goToNotifications": "Ir para as Notificações"
+    },
+    "stillStuck": {
+      "heading": "Ainda tem questões?",
+      "body": "A nossa equipa de suporte lê e responde a todos os e-mails.",
+      "link": "Contactar o suporte"
+    },
+    "items": {
+      "what-it-does": {
+        "question": "O que faz a aplicação?",
+        "paragraphs": [
+          "Dá aos seus clientes da UE uma forma clara de exercer a livre resolução de uma compra, como exige a legislação da UE. Também lhe dá um único local para gerir todos os pedidos.",
+          "Os clientes abrem o formulário a partir da encomenda, escolhem os artigos dos quais pretendem exercer a livre resolução e confirmam. Cada pedido aparece depois na página Pedidos com os artigos, o motivo e o seu prazo de reembolso. A aplicação envia os e-mails obrigatórios por si."
+        ]
+      },
+      "where-form-appears": {
+        "question": "Onde encontram os clientes o formulário de livre resolução?",
+        "paragraphs": [
+          "Pode mostrar o formulário em 2 locais. Utilize um ou ambos:"
+        ],
+        "bullets": [
+          "Página de estado da encomenda: a página que os clientes veem após o checkout e quando abrem a ligação no e-mail de confirmação da encomenda.",
+          "Página da loja: uma página da sua loja online para os clientes que regressam mais tarde. Encontram a encomenda com o número da encomenda e o e-mail."
+        ],
+        "closing": "Ative cada local nas Definições e, depois, adicione uma vez o respetivo bloco de aplicação. O guia de configuração no Início mostra que blocos foram adicionados."
+      },
+      "form-not-showing": {
+        "question": "Porque é que um cliente não vê o formulário de livre resolução?",
+        "paragraphs": [
+          "Verifique estes pontos, começando pelo mais comum:"
+        ],
+        "bullets": [
+          "O formulário está desativado ou o local que o cliente está a utilizar não está ativado nas Definições.",
+          "O bloco de aplicação ainda não foi adicionado a essa página.",
+          "A encomenda não é enviada para um dos seus países elegíveis.",
+          "O prazo de livre resolução da encomenda terminou.",
+          "A encomenda foi cancelada ou já tem um pedido pendente. Cada encomenda só pode ter 1 pedido pendente de cada vez."
+        ]
+      },
+      "deadline": {
+        "question": "Quando começa e termina o prazo de livre resolução?",
+        "paragraphs": [
+          "Nos termos da legislação da UE, o prazo começa quando o cliente recebe os artigos, não quando faz a encomenda. Os clientes também podem exercer a livre resolução a qualquer momento antes de os artigos chegarem."
+        ],
+        "bullets": [
+          "Ainda não enviada: o prazo ainda não começou, pelo que os clientes podem sempre exercer a livre resolução.",
+          "Entregue: o prazo começa na data de entrega indicada pela transportadora e dura {{withdrawalDays}}. Pode alterar o número de dias nas Definições.",
+          "Enviada, mas sem data de entrega: a aplicação utiliza a data de entrega estimada pela transportadora. Se não existir, utiliza a data de envio mais o seu tempo de trânsito estimado."
+        ]
+      },
+      "transit-days": {
+        "question": "Para que serve o tempo de trânsito estimado?",
+        "paragraphs": [
+          "Muitas transportadoras não enviam uma data de entrega à Shopify. Sem ela, a aplicação não consegue saber quando começa o prazo de livre resolução, pelo que soma o seu tempo de trânsito estimado à data de envio.",
+          "Defina-o com o tempo aproximado que as suas encomendas demoram a chegar. Neste momento, é de {{transitDays}}. Se não tiver a certeza, escolha um tempo mais longo. Um tempo demasiado curto pode terminar antecipadamente o prazo de livre resolução de um cliente."
+        ]
+      },
+      "split-shipments": {
+        "question": "E se uma encomenda for enviada em mais de 1 volume?",
+        "paragraphs": [
+          "O prazo de livre resolução começa quando chega o último volume. Os artigos que a aplicação suspende porque o cliente exerceu a livre resolução não contam, uma vez que não serão enviados.",
+          "Se um cliente exercer a livre resolução quando só parte da encomenda foi enviada, a aplicação trata cada parte separadamente:"
+        ],
+        "bullets": [
+          "Artigos não enviados: a aplicação pode suspendê-los para não serem enviados.",
+          "Artigos enviados: a aplicação pode criar uma devolução para eles."
+        ],
+        "closing": "A aplicação nunca cancela uma encomenda parcialmente enviada, porque isso cancelaria também artigos que o cliente já recebeu."
+      },
+      "after-submit": {
+        "question": "O que acontece depois de um cliente enviar um pedido?",
+        "paragraphs": [
+          "Acontece o seguinte, por esta ordem:"
+        ],
+        "bullets": [
+          "O pedido aparece na página Pedidos como Pendente.",
+          "O cliente recebe um e-mail de confirmação. É sempre enviado, porque é o comprovativo da livre resolução.",
+          "Também recebe um e-mail, se a notificação de novo pedido estiver ativada.",
+          "As suas definições de automatização são executadas. Por exemplo, a aplicação pode suspender o processamento ou adicionar uma etiqueta à encomenda."
+        ]
+      },
+      "automation": {
+        "question": "O que fazem as definições de automatização?",
+        "paragraphs": [
+          "São executadas quando chega um pedido. O que a aplicação pode fazer depende de a encomenda já ter sido enviada:"
+        ],
+        "bullets": [
+          "Antes do envio: suspender o processamento para que nada seja enviado enquanto analisa o pedido. Também pode fazer com que a aplicação cancele e reembolse imediatamente toda a encomenda.",
+          "Após o envio: criar uma devolução na Shopify para os artigos enviados.",
+          "Parcialmente enviada: aplicam-se ambas. A aplicação suspende apenas os artigos pedidos que não foram enviados e cria uma devolução para os que já foram."
+        ],
+        "closing": "Em todos os casos, a aplicação também pode adicionar uma etiqueta à encomenda. A automatização nunca aprova nem rejeita um pedido. A decisão é sempre sua."
+      },
+      "partial-withdrawal": {
+        "question": "Um cliente pode exercer a livre resolução apenas de alguns artigos?",
+        "paragraphs": [
+          "Sim. Os clientes escolhem os artigos dos quais exercem a livre resolução. O pedido, o reembolso e qualquer devolução incluem apenas esses artigos. O custo de envio original só é reembolsado quando o cliente exerce a livre resolução de toda a encomenda.",
+          "Cada encomenda pode ter 1 pedido pendente de cada vez. Depois de o aprovar ou rejeitar, o cliente pode enviar um novo pedido para outros artigos."
+        ]
+      },
+      "reason": {
+        "question": "Os clientes têm de indicar um motivo?",
+        "paragraphs": [
+          "Não. Nos termos da legislação da UE, os clientes não precisam de indicar um motivo para exercer a livre resolução, pelo que o campo de motivo é sempre opcional. Nas Definições, pode escolher que motivos oferecer ou deixar de pedir um motivo."
+        ]
+      },
+      "refund": {
+        "question": "Como reembolso uma livre resolução?",
+        "paragraphs": [
+          "Abra o pedido a partir da página Pedidos. A forma de reembolsar depende de onde estão os artigos:"
+        ],
+        "bullets": [
+          "Artigos que não estão numa devolução: selecione Reembolsar. Os artigos ainda não enviados são removidos da encomenda, pelo que não serão enviados.",
+          "Artigos numa devolução: quando forem devolvidos, selecione Processar e reembolsar na devolução. Assim, o cliente é reembolsado e a devolução é fechada.",
+          "Ainda nada foi enviado: também pode cancelar e reembolsar toda a encomenda em Mais ações."
+        ],
+        "closing": "A legislação da UE dá-lhe {{refundDays}} a contar da livre resolução para reembolsar. A página do pedido mostra quanto tempo falta. Reembolse antes de aprovar o pedido."
+      },
+      "returns": {
+        "question": "Como funcionam as devoluções?",
+        "paragraphs": [
+          "Uma devolução indica à Shopify que artigos o cliente está a devolver. A aplicação pode criar uma quando chega um pedido, ou pode selecionar Criar devolução na página do pedido.",
+          "Uma devolução inclui apenas os artigos que foram enviados. Criá-la não reembolsa o cliente. Quando os artigos forem devolvidos, selecione Processar e reembolsar na devolução."
+        ]
+      },
+      "decision-lock": {
+        "question": "Porque é que as ações da encomenda ficam desativadas depois de aprovar ou rejeitar um pedido?",
+        "paragraphs": [
+          "Aprovar ou rejeitar conclui o pedido. Depois disso, os reembolsos, as suspensões, as devoluções e os cancelamentos ficam desativados, para que a encomenda não seja alterada por engano. É por isso que deve reembolsar antes de aprovar.",
+          "A decisão também levanta qualquer suspensão do processamento aplicada pela aplicação. Se o levantamento falhar, pode continuar a selecionar Levantar suspensão do processamento."
+        ]
+      },
+      "emails": {
+        "question": "Que e-mails envia a aplicação e posso editá-los?",
+        "paragraphs": [
+          "A aplicação envia {{emailCount}} e-mails. Pode editá-los todos na página Notificações:"
+        ],
+        "bullets": [
+          "Confirmação de livre resolução ao cliente: enviado quando um cliente envia um pedido. Está sempre ativado.",
+          "Notificação de novo pedido: enviado para o e-mail de contacto da sua loja. Pode desativá-lo.",
+          "Livre resolução aprovada: enviado ao cliente quando aprova um pedido. Pode revê-lo antes ou desativá-lo.",
+          "Livre resolução rejeitada: enviado ao cliente quando rejeita um pedido. Pode revê-lo antes ou desativá-lo."
+        ],
+        "closing": "Pode editar o assunto e o corpo de cada e-mail em todos os idiomas e adicionar variáveis como o número da encomenda ou o nome do cliente. A pré-visualização é atualizada enquanto escreve."
+      },
+      "countries-languages": {
+        "question": "Que países e idiomas são suportados pela aplicação?",
+        "paragraphs": [
+          "Todos os países da UE são elegíveis por predefinição. Se só vender para alguns deles, selecione Países específicos nas Definições.",
+          "O formulário está disponível em {{languageCount}} idiomas: {{languages}}. Os clientes veem-no no próprio idioma.",
+          "O inglês é o idioma base. Se deixar um campo traduzido em branco, os clientes veem o texto em inglês em alternativa."
+        ]
+      }
+    }
+  },
+  "featureRequest": {
+    "pageTitle": "Sugerir uma funcionalidade",
+    "intro": "Diga-nos o que gostaria de ver na aplicação. Lemos todas as sugestões.",
+    "sentHeading": "Sugestão de funcionalidade enviada",
+    "sentBody": "Obrigado por partilhar a sua ideia com a nossa equipa.",
+    "firstName": "Nome próprio",
+    "lastName": "Apelido",
+    "email": "E-mail",
+    "request": "Que funcionalidade gostaria de ter?",
+    "requestPlaceholder": "Descreva a funcionalidade e como ajudaria a sua loja",
+    "submit": "Enviar sugestão"
+  },
+  "pricing": {
+    "pageTitle": "Preços",
+    "pricePerMonth": "{{price}} por mês",
+    "currentPlan": "Plano atual",
+    "choosePlan": "Escolher {{plan}}",
+    "switchedToast": "Mudou para o plano {{plan}}",
+    "plans": {
+      "free": {
+        "name": "Free",
+        "features": [
+          "Até 10 pedidos de livre resolução por mês",
+          "Notificações por e-mail"
+        ]
+      },
+      "starter": {
+        "name": "Starter",
+        "features": [
+          "Pedidos de livre resolução ilimitados",
+          "Campos de formulário personalizados",
+          "Notificações por e-mail"
+        ]
+      },
+      "pro": {
+        "name": "Pro",
+        "features": [
+          "Tudo o que o Starter inclui",
+          "Suporte prioritário",
+          "Reembolsos automáticos"
+        ]
+      }
+    },
+    "switchError": "Não foi possível alterar o seu plano"
+  }
+}

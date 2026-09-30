@@ -1,0 +1,1234 @@
+{
+  "common": {
+    "add": "添加",
+    "backToHome": "返回主页",
+    "cancel": "取消",
+    "delete": "删除",
+    "discard": "放弃",
+    "done": "完成",
+    "dayCount_other": "{{count}} 天",
+    "emptyValue": "—",
+    "noMatches": "没有与“{{query}}”匹配的结果。",
+    "preview": "预览",
+    "remove": "移除",
+    "save": "保存",
+    "verified": "已验证"
+  },
+  "nav": {
+    "home": "主页",
+    "withdrawalRequests": "申请",
+    "formSetup": "设置",
+    "emailTemplates": "通知",
+    "pricing": "定价"
+  },
+  "errors": {
+    "generic": "出现问题。请重试。",
+    "requestFailed": "出现问题（错误 {{status}}）。请重试。",
+    "methodNotAllowed": "不支持此操作。",
+    "unknownAction": "不支持此操作。",
+    "noValidFields": "没有需要更新的内容。",
+    "emailServiceUnavailable": "无法连接到邮件服务。请几分钟后重试。",
+    "emailServiceNotConfigured": "尚未设置邮件发送。请联系支持团队获取帮助。",
+    "requestNotFound": "此撤回申请不存在或已被删除。",
+    "requestDecided": "此申请已被批准或拒绝，因此订单操作不再可用。",
+    "unknownDecision": "请选择批准还是拒绝此申请。",
+    "invalidStatus": "请为此申请选择有效的状态。",
+    "noteRequired": "请输入备注。",
+    "orderNotFound": "在 Shopify 中找不到此订单。",
+    "invalidEmail": "请输入有效的邮箱地址。",
+    "featureRequestIncomplete": "发送申请前请填写所有字段。",
+    "senderCodeRequired": "请输入邮件中的验证码。",
+    "senderNotFound": "找不到此发件人邮箱。请将其移除后重新添加，以获取新的验证码。",
+    "senderNotStarted": "请先验证发件人邮箱。",
+    "senderIdMissing": "无法注册此发件人邮箱。请重试。",
+    "domainInvalid": "请输入有效的域名，例如 yourstore.com。",
+    "domainFreeProvider": "Gmail 和 Yahoo 等免费邮箱服务无法验证。请改用您商店的域名。"
+  },
+  "auth": {
+    "login": {
+      "heading": "登录",
+      "shopLabel": "商店域名",
+      "shopDetails": "example.myshopify.com",
+      "submit": "登录",
+      "missingShop": "请输入您的商店域名以登录。",
+      "invalidShop": "请输入有效的商店域名，例如 example.myshopify.com。"
+    }
+  },
+  "status": {
+    "pending": "待处理",
+    "approved": "已批准",
+    "rejected": "已拒绝"
+  },
+  "sourceInline": {
+    "order_status": "订单状态页面",
+    "standalone_page": "您的商店页面"
+  },
+  "placements": {
+    "orderStatus": {
+      "label": "订单状态页面",
+      "details": "在客户结账后看到的订单状态页面上显示撤回表单。"
+    },
+    "storefront": {
+      "label": "商店页面",
+      "details": "在主题中的独立页面上显示撤回表单，方便客户在订单状态页面之外找到它。"
+    }
+  },
+  "orderStatus": {
+    "financial": {
+      "PENDING": "付款待处理",
+      "AUTHORIZED": "已授权",
+      "PARTIALLY_PAID": "部分付款",
+      "PAID": "已付款",
+      "PARTIALLY_REFUNDED": "部分退款",
+      "REFUNDED": "已退款",
+      "VOIDED": "已作废",
+      "EXPIRED": "已过期"
+    },
+    "fulfillment": {
+      "UNFULFILLED": "未发货",
+      "PENDING_FULFILLMENT": "待发货",
+      "OPEN": "未完成",
+      "IN_PROGRESS": "处理中",
+      "ON_HOLD": "已暂缓",
+      "PARTIALLY_FULFILLED": "部分发货",
+      "FULFILLED": "已发货",
+      "RESTOCKED": "已补货",
+      "SCHEDULED": "已计划"
+    },
+    "return": {
+      "REQUESTED": "已申请",
+      "OPEN": "未完成",
+      "CLOSED": "已关闭",
+      "DECLINED": "已拒绝",
+      "CANCELED": "已取消"
+    }
+  },
+  "stats": {
+    "heading": "概览",
+    "description": "您的撤回申请概况",
+    "viewRequests": "查看申请",
+    "total": "申请总数",
+    "today": "今日提交",
+    "pending": "待处理",
+    "closed": "已结束",
+    "requestCount_other": "{{count}} 个申请"
+  },
+  "home": {
+    "pageTitle": "主页",
+    "loadError": "无法加载您的控制面板",
+    "saveErrorHeading": "无法保存您的更改",
+    "saveErrorAction": "请重试，或在“设置”中进行更改。",
+    "setupBanner": {
+      "heading_other": "还剩 {{count}} 个设置步骤",
+      "body": "完成以下步骤，准备好您的撤回表单：{{steps}}。"
+    },
+    "setupGuide": {
+      "heading": "设置指南",
+      "description": "按照本指南在您的商店中上线撤回表单。",
+      "progress": "已完成 {{completed}}/{{total}} 项任务",
+      "dismiss": "关闭设置指南",
+      "collapse": "收起设置指南",
+      "expand": "展开设置指南",
+      "showStep": "显示“{{step}}”的详细信息",
+      "hideStep": "隐藏“{{step}}”的详细信息",
+      "steps": {
+        "form": {
+          "label": "启用撤回表单",
+          "description": "启用表单并选择客户在哪里看到它。字段、原因和文字已预设默认内容。您可以随时在“设置”中更改。",
+          "checkbox": "启用撤回表单",
+          "cta": "前往“设置”",
+          "placementHeading": "选择客户在哪里看到表单",
+          "placementDescription": "至少选择一个位置。每个位置都需要添加对应的应用块，客户才能看到表单。"
+        },
+        "blocks": {
+          "label": "将应用块添加到您的商店",
+          "description": "为您在上一步中选择的每个位置添加一个应用块。",
+          "locked": "完成第 {{step}} 步以选择表单的显示位置，然后即可在此处添加应用块。",
+          "surfaces": {
+            "orderStatus": "订单状态页面",
+            "theme": "商店页面"
+          },
+          "live": {
+            "orderStatus": "应用块已在您的订单状态页面上线。",
+            "theme": "应用块已在您的商店页面上线。"
+          }
+        }
+      }
+    },
+    "help": {
+      "heading": "帮助和资源",
+      "support": {
+        "title": "邮件支持",
+        "description": "有疑问？我们的支持团队可以提供帮助。",
+        "link": "联系支持团队"
+      },
+      "faqs": {
+        "title": "常见问题",
+        "description": "查看有关设置和使用本应用的常见问题解答。",
+        "link": "查看常见问题"
+      },
+      "featureRequest": {
+        "title": "功能建议",
+        "description": "对应用有什么想法？告诉我们您希望看到什么功能。",
+        "link": "提交功能建议"
+      }
+    }
+  },
+  "blockSetup": {
+    "autoUpdate": "保存应用块几秒钟后，此消息会自动消失。",
+    "addAppBlock": "添加应用块",
+    "orderStatus": {
+      "heading": "将应用块添加到订单状态页面",
+      "body": "添加应用块之前，客户无法在订单状态页面上看到撤回表单。添加方法：",
+      "steps": {
+        "open": "选择下方的<strong>添加应用块</strong>。订单状态页面将在结账编辑器中打开。",
+        "add": "在侧边栏中选择<strong>添加应用块</strong>。",
+        "choose": "选择<strong>撤回表单</strong>。",
+        "save": "选择<strong>保存</strong>。"
+      }
+    },
+    "storefront": {
+      "heading": "将应用块添加到商店页面",
+      "body": "选择一个页面模板，然后选择“添加应用块”。主题编辑器将打开，撤回表单已作为分区添加。",
+      "templateLabel": "页面模板",
+      "templates": {
+        "page": "默认页面",
+        "index": "主页",
+        "product": "产品页面",
+        "collection": "产品系列页面",
+        "cart": "购物车页面"
+      },
+      "steps": {
+        "open": "选择<strong>添加应用块</strong>，打开已添加该分区的主题编辑器。",
+        "move": "将分区拖动到页面上的所需位置。",
+        "save": "选择<strong>保存</strong>。"
+      }
+    }
+  },
+  "onboarding": {
+    "pageTitle": "开始使用",
+    "heading": "让您的商店做好应对欧盟撤回的准备",
+    "intro_other": "完成以下 {{count}} 个步骤，为欧盟客户提供合规的购买撤回方式。",
+    "stepBadge": "第 {{current}} 步，共 {{total}} 步",
+    "completedToast": "设置已完成",
+    "steps": {
+      "welcome": {
+        "title": "欢迎",
+        "description": "应用的功能"
+      },
+      "form": {
+        "title": "撤回表单",
+        "description": "启用您的表单"
+      }
+    },
+    "actions": {
+      "getStarted": "开始使用",
+      "continue": "继续",
+      "finish": "完成设置",
+      "skip": "跳过设置",
+      "back": "返回"
+    },
+    "help": {
+      "heading": "需要帮助？",
+      "body": "有疑问？<supportLink>联系支持团队</supportLink>。"
+    },
+    "welcome": {
+      "heading": "欢迎使用 {{appName}}",
+      "setupTime": "大约需要 1 分钟",
+      "law": "自 2026 年 6 月 19 日起，向欧盟客户销售商品的商店必须为每个订单提供两步撤回方式（欧盟指令 2023/2673 第 11a 条）。仅有退货政策是不够的。",
+      "app": "{{appName}} 会在您的订单状态页面、在线商店的某个页面或两者上添加撤回按钮。它会处理两步确认流程并发送必需的确认邮件。您可以在一个地方管理所有申请。",
+      "imageAlt": "客户正在撤回订单",
+      "requirementsHeading": "法律要求",
+      "requirements": {
+        "button": "清晰标注、便于客户找到的撤回按钮",
+        "twoStep": "两步流程：客户先提交撤回，然后进行确认",
+        "email": "客户可以保存的自动确认邮件"
+      },
+      "penaltyHeading": "不合规的后果",
+      "penalty": "如果缺少撤回按钮或按钮无法使用，法律将延长 {{days}} 天的撤回期。届时客户将有 12 个月零 {{days}} 天的时间撤回每个受影响的订单。"
+    },
+    "form": {
+      "heading": "启用撤回表单",
+      "body": "根据欧盟法律要求，客户先提交撤回，然后在单独的步骤中进行确认。表单包含默认法律文本。客户可在收货后 {{days}}内撤回。",
+      "switch": "启用撤回表单",
+      "later": "您可以稍后在“设置”中更改所有内容。",
+      "loadError": "无法加载表单设置。您可以现在完成设置，稍后在“设置”中启用表单。",
+      "saveError": "无法保存您的表单选择。请重试，或跳过这些选择完成设置，稍后在“设置”中进行设置。",
+      "finishWithoutSaving": "不保存并完成",
+      "placementError": "请至少选择一个位置，或关闭表单。"
+    },
+    "finishError": "无法完成设置。请重试。"
+  },
+  "formSetup": {
+    "pageTitle": "设置",
+    "loadError": "无法加载设置",
+    "saveError": "无法保存设置",
+    "savedToast": "设置已保存",
+    "enable": {
+      "heading": "撤回表单",
+      "description": "选择客户是否可以提交撤回申请，以及他们在哪里看到表单。",
+      "checkbox": "启用撤回表单",
+      "details": "关闭后，客户将无法在任何地方提交撤回申请。",
+      "orderStatus": "在订单状态页面上显示",
+      "storefront": "在商店页面上显示"
+    },
+    "countries": {
+      "heading": "适用国家/地区",
+      "description": "只有当订单配送到以下国家/地区之一时，客户才会看到撤回表单。",
+      "all": "全部 {{count}} 个欧盟国家/地区（推荐）",
+      "allDetails": "撤回权适用于整个欧盟。",
+      "specific": "特定国家/地区",
+      "specificDetails": "请在下方选择国家/地区。您可以随时更改。",
+      "pickerLabel": "国家/地区",
+      "pickerPlaceholder": "搜索国家/地区"
+    },
+    "content": {
+      "heading": "表单内容",
+      "tabs": {
+        "step1": "1. 详细信息",
+        "confirm": "2. 确认",
+        "done": "3. 完成"
+      },
+      "language": "语言",
+      "languageDetails": "选择一种语言以编辑该语言的表单内容。每种语言分别保存。",
+      "beforeDelivery": {
+        "heading": "送达前",
+        "description": "在订单送达前（包括运输途中），显示在表单的第一个页面和“详细信息”步骤中。"
+      },
+      "afterDelivery": {
+        "heading": "送达后",
+        "description": "Shopify 将订单标记为已送达后，改为显示此内容。"
+      },
+      "title": "标题",
+      "description": "描述",
+      "itemHeading": "商品选择标题",
+      "customerDetails": {
+        "heading": "客户信息",
+        "description": "根据订单自动填写。客户无法编辑这些字段。",
+        "locked": "已锁定",
+        "fullName": "全名",
+        "email": "邮箱",
+        "orderNumber": "订单号"
+      },
+      "reason": {
+        "heading": "撤回原因",
+        "checkbox": "询问原因",
+        "details": "客户无需提供原因。欧盟法律要求此字段为选填。",
+        "label": "原因字段标签",
+        "optionsHeading": "原因选项",
+        "optionsHelp": "客户从此列表中选择。您可以根据商店情况添加、移除或改写选项。末尾始终会添加一个带文本框的“其他”选项。",
+        "removeOption": "移除“{{option}}”",
+        "addLabel": "添加原因",
+        "addPlaceholder": "例如：误下单",
+        "translatedHelp": "请翻译每个选项。如需添加或移除选项，请切换到英语。",
+        "translatedEmpty": "请先添加英语原因选项。"
+      },
+      "continueButton": "“继续”按钮标签",
+      "confirm": {
+        "heading": "确认标题",
+        "messageBefore": "送达前消息",
+        "messageAfter": "送达后消息",
+        "declaration": "声明",
+        "button": "“确认”按钮标签"
+      },
+      "done": {
+        "titleBefore": "送达前标题",
+        "messageBefore": "送达前消息",
+        "titleAfter": "送达后标题",
+        "messageAfter": "送达后消息"
+      }
+    },
+    "automation": {
+      "heading": "自动化",
+      "description": "选择客户提交撤回申请时应用执行的操作。",
+      "beforeShip": {
+        "heading": "订单发货前",
+        "description": "适用于在任何商品发货前收到的申请。",
+        "hold": "暂缓发货以便审核",
+        "holdDetails": "在您批准或拒绝申请之前暂停发货。您做出决定后，暂缓将被解除。",
+        "tagDetails": "为发货前收到申请的订单添加标签，方便员工在订单列表中找到它们。"
+      },
+      "fallback": {
+        "label": "订单如何处理",
+        "hold": "保持暂缓，直到您批准或拒绝申请",
+        "cancelNow": "立即取消整个订单并退款",
+        "releaseN": "在设定的天数后解除暂缓",
+        "cancelN": "在设定的天数后取消整个订单并退款",
+        "cancelWarning": "即使客户只撤回了部分商品，此操作也会取消整个订单并退款。Shopify 会向客户发送取消通知邮件。",
+        "days": "天数"
+      },
+      "afterDelivery": {
+        "heading": "订单发货后",
+        "description": "适用于至少一件商品已发货后收到的申请，即使商品尚未送达。所有申请仍会显示在“申请”页面上。",
+        "createReturn": "创建退货",
+        "createReturnDetails": "在 Shopify 中为已发货的申请商品创建退货。",
+        "tagDetails": "为发货后收到申请的订单添加标签。"
+      },
+      "tag": {
+        "checkbox": "为订单添加标签",
+        "label": "订单标签",
+        "placeholder": "添加标签"
+      }
+    },
+    "deadline": {
+      "heading": "撤回期限",
+      "description": "撤回期从订单送达时开始，而不是从下单时开始。欧盟法律要求至少 {{days}}。",
+      "days": "送达后的撤回天数",
+      "daysDetails": "订单送达后客户可以撤回的时间。",
+      "transit": "预计运输时间（天）",
+      "transitDetails": "当承运商未提供送达日期或预估日期时使用。应用会将这些天数加到发货日期上。"
+    },
+    "validation": {
+      "countryMode": "请选择适用的国家/地区。",
+      "euCountries": "请至少选择一个国家/地区。",
+      "title": "请输入标题。",
+      "description": "请输入描述。",
+      "itemHeading": "请输入商品列表的标题。",
+      "continueButton": "请输入“继续”按钮的标签。",
+      "heading": "请输入标题。",
+      "confirmMessage": "请输入确认消息。",
+      "declaration": "请输入客户必须接受的声明。",
+      "confirmButton": "请输入“确认”按钮的标签。",
+      "message": "请输入消息。",
+      "reasonLabel": "请输入原因字段的标签。",
+      "reasonOptions": "请至少添加一个原因。",
+      "reasonOptionTranslation": "请输入此原因的翻译。",
+      "fallback": "请选择订单如何处理。",
+      "daysRange": "请输入 {{min}} 到 {{max}} 之间的天数。",
+      "tags": "请至少添加一个标签，或关闭添加标签功能。",
+      "afterDeliveryAction": "请选择订单发货后如何处理。"
+    },
+    "preview": {
+      "heading": "实时预览",
+      "compliantBadge": "符合两步要求",
+      "surfaceLabel": "预览",
+      "surfaces": {
+        "orderStatus": "订单状态页面",
+        "theme": "商店页面"
+      },
+      "stageLabel": "送达状态",
+      "stages": {
+        "beforeDelivery": "尚未送达",
+        "delivered": "已送达"
+      },
+      "banner": {
+        "orderStatus": "这是客户在订单状态页面上看到的内容。选择按钮进行试用，或使用“表单内容”中的标签页跳转到特定步骤。",
+        "theme": "这是客户在您的商店页面上看到的内容。由于商店访客未登录，表单会从“查找您的订单”步骤开始。"
+      },
+      "restart": "重新开始预览",
+      "position": {
+        "entry": "入口卡片",
+        "lookup": "查找您的订单",
+        "step": "第 {{current}} 步，共 {{total}} 步"
+      },
+      "storefront": {
+        "start": "开始撤回申请",
+        "findOrderHeading": "查找您的订单",
+        "findOrderBody": "输入您的订单信息以开始撤回申请。",
+        "fullName": "全名",
+        "email": "邮箱",
+        "orderNumber": "订单号",
+        "continue": "继续",
+        "steps": {
+          "step1": "详细信息",
+          "confirm": "确认",
+          "done": "完成"
+        },
+        "stepOf": "第 {{current}} 步，共 {{total}} 步",
+        "stepProgress": "第 {{current}} 步，共 {{total}} 步：{{label}}",
+        "reasonPlaceholder": "选择原因（选填）",
+        "otherReason": "其他",
+        "yourReason": "您的原因",
+        "yourReasonPlaceholder": "请告诉我们您的原因",
+        "selectItem": "请至少选择一件商品以继续。",
+        "itemsToWithdraw": "要撤回的商品（{{count}}）",
+        "selectedTotal": "所选商品合计",
+        "previous": "上一步",
+        "submittedOn": "提交于 {{date}}"
+      }
+    }
+  },
+  "requests": {
+    "pageTitle": "申请",
+    "searchLabel": "搜索撤回申请",
+    "searchPlaceholder": "按订单号、客户姓名或邮箱搜索",
+    "export": "导出",
+    "exportSelected": "导出所选",
+    "tabs": {
+      "all": "全部",
+      "withCount": "{{label}}（{{count}}）"
+    },
+    "empty": {
+      "imageAlt": "",
+      "heading": "暂无撤回申请",
+      "body": "客户的撤回申请将显示在这里。",
+      "filteredHeading": "未找到撤回申请",
+      "filteredBody": "请尝试更改搜索词或筛选条件。"
+    },
+    "table": {
+      "selectAll": "选择所有撤回申请",
+      "selectRow": "选择订单 {{order}}",
+      "selectedCount": "已选择 {{count}} 个",
+      "order": "订单",
+      "customer": "客户",
+      "items": "商品",
+      "value": "金额",
+      "status": "状态",
+      "submitted": "提交时间",
+      "actions": "操作",
+      "itemCount_other": "{{count}} 件商品",
+      "viewRow": "查看订单 {{order}} 的申请",
+      "deleteRow": "删除订单 {{order}} 的申请"
+    },
+    "delete": {
+      "heading_other": "要删除 {{count}} 个撤回申请吗？",
+      "body_other": "这 {{count}} 个撤回申请将被永久删除。此操作无法撤消。",
+      "confirm_other": "删除",
+      "toast_other": "已删除 {{count}} 个撤回申请"
+    },
+    "csv": {
+      "filename": "withdrawal-requests-{{date}}.csv",
+      "order": "订单",
+      "customerName": "客户姓名",
+      "customerEmail": "客户邮箱",
+      "country": "国家/地区",
+      "items": "商品",
+      "value": "金额",
+      "reason": "原因",
+      "status": "状态",
+      "submitted": "提交时间",
+      "decided": "处理时间"
+    }
+  },
+  "requestDetail": {
+    "pageTitle": "撤回申请",
+    "backLink": "申请",
+    "submittedLine": "于 {{date}} 通过{{source}}提交",
+    "previous": "上一个申请",
+    "next": "下一个申请",
+    "badges": {
+      "canceled": "已取消",
+      "onHold": "已暂缓",
+      "return": "退货：{{status}}"
+    },
+    "actions": {
+      "refund": "退款",
+      "more": "更多操作",
+      "cancelOrder": "取消订单",
+      "placeHold": "暂缓发货",
+      "releaseHold": "解除发货暂缓",
+      "createReturn": "创建退货",
+      "processReturn": "处理并退款",
+      "viewOrder": "查看订单"
+    },
+    "banners": {
+      "orderUnavailableHeading": "订单详细信息不可用",
+      "orderUnavailableBody": "{{error}} 订单详细信息加载完成前，无法使用订单操作。",
+      "actionFailedHeading": "无法完成此操作",
+      "actionFailedAction": "请查看下方的“活动”了解详情。",
+      "canceled": "此订单已取消。订单操作不再可用。"
+    },
+    "deadline": {
+      "heading": "退款期限",
+      "pendingLabel": "剩余决定和退款时间",
+      "decidedLabel": "决定",
+      "badges": {
+        "overdue": "已逾期",
+        "actionNeeded": "需要处理",
+        "onTime": "按时"
+      },
+      "daysLeft_other": "剩余 {{count}} 天",
+      "daysOverdue_other": "已逾期 {{count}} 天",
+      "daysEarly_other": "截止日期前 {{count}} 天",
+      "daysLate_other": "截止日期后 {{count}} 天",
+      "pending": "从申请提交之日起，您有 {{days}}的时间做出决定并退款。截止日期为 {{date}}。",
+      "pendingOverdue": "截止日期已于 {{date}} 过去。请尽快为客户退款。",
+      "decidedOnTime": "已在 {{windowDays}} 天的退款期内做出决定。截止日期为 {{date}}。",
+      "decidedLate": "在退款截止日期 {{date}} 之后做出决定。"
+    },
+    "items": {
+      "heading": "撤回的商品",
+      "reject": "拒绝",
+      "approve": "批准",
+      "total": "撤回合计",
+      "sku": "SKU：{{sku}}",
+      "quantity": "数量：{{count}}",
+      "shipping": {
+        "notShipped": "尚未发货",
+        "partlyShipped": "部分发货",
+        "shipped": "已发货"
+      },
+      "partiallyShippedBanner": "此订单的部分商品已发货。尚未发货的商品仍可暂缓，已发货的商品需要退货。"
+    },
+    "return": {
+      "heading": "退货",
+      "status": "状态",
+      "created": "创建时间",
+      "body": "已在 Shopify 中为撤回的商品创建退货。",
+      "openBody": "商品寄回后，请选择“处理并退款”。这会为退回的商品向客户退款并关闭退货。",
+      "alreadyRefundedBody": "此退货中的商品已退款。商品寄回后，请在 Shopify 中关闭退货。"
+    },
+    "processReturnModal": {
+      "heading": "处理退货并退款",
+      "calculating": "正在计算退款金额…",
+      "nothingToProcess": "此退货已没有需要处理的内容。它可能已在 Shopify 中处理或关闭。",
+      "nothingToRefund": "此退货中的商品已退款，因此没有可退款的内容。",
+      "unsupportedPayment": "此订单的付款无法通过应用退款。请改为在 Shopify 中处理退货并退款。",
+      "itemsHeading": "退货 {{name}} 中的商品",
+      "subtotal": "商品小计",
+      "shippingLine": "原运费",
+      "total": "退款总额",
+      "body": "此操作会将退回的商品标记为已处理，退款至原付款方式并关闭退货。Shopify 会通过邮件向客户发送退款收据。此操作无法撤消。",
+      "confirmAmount": "退款 {{amount}}",
+      "confirm": "处理并退款"
+    },
+    "payment": {
+      "heading": "付款",
+      "status": "付款状态",
+      "subtotal": "撤回小计",
+      "shipping": "订单运费",
+      "total": "订单总额",
+      "refunded": "已退款",
+      "unavailable": "付款详细信息暂时不可用。"
+    },
+    "activity": {
+      "heading": "活动",
+      "noteLabel": "添加备注",
+      "notePlaceholder": "添加备注…",
+      "post": "发布",
+      "noteHelp": "只有您和员工可以看到备注。客户永远看不到备注。",
+      "submitted": "撤回申请通过{{source}}提交",
+      "decided": {
+        "approved": "申请已批准",
+        "rejected": "申请已拒绝"
+      },
+      "note": "备注：{{body}}",
+      "entry": "{{label}}：{{message}}",
+      "actions": {
+        "resolve_branch": "自动化已开始",
+        "run_automation": "自动化",
+        "automation_completed": "自动化已完成",
+        "hold_fulfillment": "发货暂缓",
+        "schedule_fallback": "计划的后续操作",
+        "release_hold": "已解除发货暂缓",
+        "cancel_order_immediate": "订单已取消并退款",
+        "cancel_order_scheduled": "订单已取消并退款",
+        "cancel_order_manual": "订单已取消并退款",
+        "cancel_order": "订单已取消并退款",
+        "refund": "退款",
+        "tag_before_ship": "已为订单添加标签",
+        "tag_after_delivery": "已为订单添加标签",
+        "order_tag_add": "已添加订单标签",
+        "order_tag_remove": "已移除订单标签",
+        "create_return": "退货",
+        "refresh_return": "已刷新退货状态",
+        "process_return": "处理并退款",
+        "fetch_shop_contact": "商店联系信息",
+        "customer_email": "客户确认邮件",
+        "merchant_email": "新申请通知",
+        "notify_customer": "决定通知邮件",
+        "notify_merchant": "您已收到通知"
+      },
+      "messages": {
+        "noTags": "未设置任何标签",
+        "tagged": "已为订单添加标签 {{tags}}",
+        "noHoldableOrders": "此订单目前没有可暂缓的内容",
+        "held": "已暂缓商品，使其不会发货",
+        "holdOff": "“暂缓发货以便审核”已关闭",
+        "tagBeforeShipOff": "发货前添加标签已关闭",
+        "tagAfterDeliveryOff": "发货后添加标签已关闭",
+        "fallbackHold": "在您批准或拒绝申请之前，订单将保持暂缓",
+        "fallbackInvalidDays": "无法计划后续操作。天数无效。",
+        "scheduledRelease": "已计划于 {{date}} 解除暂缓",
+        "scheduledCancel": "已计划于 {{date}} 取消并退款",
+        "canceled": "订单已取消并退款",
+        "returnCreated": "已在 Shopify 中创建退货",
+        "returnNoMatch": "申请的商品均无法退货",
+        "notifiedByEmail": "已通过应用和邮件通知",
+        "notifiedEmailFailed": "已在应用中通知。通知邮件发送失败：{{error}}",
+        "notifiedInAppOnly": "已在应用中通知。未发送通知邮件。",
+        "emailSent": "已发送",
+        "emailFailed": "失败：{{error}}",
+        "emailNotSent": "由于没有收件人或未设置邮件，因此未发送",
+        "orderNotFound": "在 Shopify 中找不到此订单",
+        "alreadyCanceled": "订单已被取消",
+        "branchBeforeShip": "订单尚未发货，因此执行了发货前步骤",
+        "branchAfterDelivery": "订单已发货，因此执行了发货后步骤",
+        "branchPartiallyShipped": "订单已部分发货，因此针对已发货和未发货商品分别执行了相应步骤",
+        "noUnshippedItemsRequested": "申请的商品中没有等待发货的商品，因此未暂缓任何内容",
+        "fallbackCancelPartiallyShipped": "订单已部分发货，因此无法整体取消。在您批准或拒绝申请之前，申请的商品将保持暂缓。",
+        "returnNothingShipped": "申请的商品均未发货，因此无需退货",
+        "runCompleted": "自动化已完成",
+        "runFailed": "一个或多个自动化步骤失败",
+        "runSkipped": "已跳过自动化",
+        "scheduledSkippedApproved": "申请已被批准，因此未执行计划的操作",
+        "scheduledSkippedRejected": "申请已被拒绝，因此未执行计划的操作",
+        "noHoldsPlaced": "此申请未设置任何暂缓",
+        "holdsAlreadyReleased": "暂缓已被解除",
+        "holdReleased": "订单可以重新发货",
+        "holdExists": "此申请已存在暂缓",
+        "decisionSkipped": "员工选择不向客户发送邮件",
+        "decisionSent": "已向客户发送决定通知邮件",
+        "decisionFailed": "决定通知邮件发送失败：{{error}}",
+        "decisionNotConfigured": "由于未设置邮件，因此未发送决定通知邮件",
+        "refunded": "已退款 {{amount}}",
+        "noReturn": "此申请没有退货",
+        "returnStatus": "退货状态：{{status}}",
+        "returnProcessed": "退货已处理，已退款 {{amount}}",
+        "returnNothingToProcess": "此退货已没有需要处理的内容",
+        "returnNothingToRefund": "此退货中的商品已退款",
+        "returnPaymentUnsupported": "此付款无法通过应用退款。请在 Shopify 中处理退货。",
+        "refundNothingRefundable": "申请的商品均无法退款。它们可能已经退款。",
+        "refundNoSuggestion": "Shopify 无法计算这些商品的退款。请改为在 Shopify 中退款。",
+        "refundCoveredByReturn": "所有撤回的商品都在未完成的退货中。请在退货中使用“处理并退款”进行退款。",
+        "tagsRemoved": "已移除订单标签：{{tags}}",
+        "tagsAdded": "已添加订单标签：{{tags}}"
+      }
+    },
+    "order": {
+      "heading": "订单",
+      "order": "订单",
+      "placed": "下单时间",
+      "payment": "付款",
+      "fulfillment": "发货"
+    },
+    "customer": {
+      "heading": "客户",
+      "avatarFallback": "客户",
+      "contactHeading": "联系信息",
+      "email": "邮箱",
+      "language": "语言",
+      "shippingHeading": "收货地址"
+    },
+    "automation": {
+      "heading": "自动化",
+      "stage": "阶段",
+      "stages": {
+        "before_ship": "发货前",
+        "partially_shipped": "部分发货",
+        "after_delivery": "发货后"
+      },
+      "hold": "发货暂缓",
+      "holdStates": {
+        "onHold": "已暂缓",
+        "released": "已解除",
+        "none": "无"
+      },
+      "canceled": "已取消",
+      "return": "退货"
+    },
+    "emails": {
+      "heading": "邮件记录",
+      "customerConfirmation": "客户撤回确认",
+      "merchantNotification": "新申请通知",
+      "decision": "决定通知邮件",
+      "statuses": {
+        "sent": "已发送",
+        "failed": "失败",
+        "notSent": "未发送"
+      }
+    },
+    "tags": {
+      "heading": "订单标签",
+      "label": "添加订单标签",
+      "placeholder": "添加标签",
+      "remove": "移除标签 {{tag}}",
+      "savedToast": "订单标签已保存"
+    },
+    "reason": {
+      "heading": "撤回原因",
+      "quoted": "“{{reason}}”",
+      "none": "未提供原因"
+    },
+    "decidedToast": {
+      "approved": "撤回申请已批准",
+      "rejected": "撤回申请已拒绝"
+    },
+    "cancelModal": {
+      "heading": "要取消订单吗？",
+      "body": "此操作会在 Shopify 中取消整个订单，包括客户未撤回的商品。订单将退款至原付款方式并补货，Shopify 会向客户发送邮件。此操作无法撤消。",
+      "keep": "保留订单",
+      "confirm": "取消订单并退款"
+    },
+    "createReturnModal": {
+      "heading": "为撤回的商品创建退货",
+      "itemsHeading": "要退货的商品",
+      "subtotal": "商品小计",
+      "checking": "正在检查可退货的商品…",
+      "nothingToReturn": "撤回的商品均尚未发货，因此没有可退货的商品。请暂缓这些商品以免发货，或为其退款以从订单中移除。",
+      "notShipped_other": "有 {{count}} 件撤回的商品尚未发货，因此未包含在内。",
+      "notReturnable_other": "有 {{count}} 件撤回的商品已退货，因此未包含在内。",
+      "body": "此操作会在 Shopify 中为上述商品创建退货，但不会向客户退款。商品寄回后，请在退货中选择“处理并退款”。",
+      "cancel": "取消",
+      "confirm": "创建退货"
+    },
+    "decisionModal": {
+      "headingApprove": "要批准撤回申请吗？",
+      "headingReject": "要拒绝撤回申请吗？",
+      "approveAndSend": "批准并发送邮件",
+      "rejectAndSend": "拒绝并发送邮件",
+      "approve": "批准",
+      "reject": "拒绝",
+      "loadingLabel": "正在加载邮件预览",
+      "loading": "正在准备客户邮件…",
+      "sendEmail": "向客户发送邮件",
+      "language": "此邮件使用客户的语言（{{language}}）。您的更改仅适用于此邮件。",
+      "subject": "主题",
+      "body": "邮件正文",
+      "editHtml": "编辑 HTML",
+      "htmlLabel": "邮件 HTML",
+      "previewTitle": "邮件预览",
+      "templateUnchanged": "您的更改仅适用于此邮件。已保存的模板不会改变。",
+      "noEmail": "客户不会收到邮件。如有需要，您可以单独联系客户。",
+      "holdReleased": "此操作还会解除此订单的发货暂缓，使订单可以重新发货。"
+    },
+    "refundModal": {
+      "heading": "为撤回的商品退款",
+      "calculatingLabel": "正在计算退款",
+      "calculating": "正在计算退款金额…",
+      "nothingToRefund": "此订单没有可退款的内容。撤回的商品可能已经退款，或者订单可能已被取消。",
+      "itemsHeading": "要退款的商品",
+      "subtotal": "商品小计",
+      "shippingLine": "原运费",
+      "amount": "退款金额",
+      "total": "退款总额",
+      "body": "撤回的商品将退款至原付款方式，并在可能的情况下补货。Shopify 会通过邮件向客户发送退款收据。",
+      "includesShipping": "客户撤回了整个订单，因此包含原运费。",
+      "unshippedItems": "尚未发货的商品将从订单中移除，因此不会发货。",
+      "inReturn_other": "有 {{count}} 件撤回的商品在退货 {{name}} 中，因此未包含在内。请在退货中使用“处理并退款”为其退款。",
+      "allInReturn": "所有撤回的商品都在退货 {{name}} 中。请在退货中使用“处理并退款”为其退款，这也会关闭该退货。",
+      "irreversible": "此操作无法撤消。",
+      "confirmAmount": "退款 {{amount}}",
+      "confirm": "退款"
+    },
+    "shopifyNotes": {
+      "holdAutomatic": "订单 {{order}} 的撤回申请正在等待员工审核",
+      "holdManual": "订单 {{order}} 的撤回申请已被员工暂缓",
+      "canceled": "由于客户撤回了购买，{{appName}} 已取消订单（申请 {{id}}）。",
+      "refunded": "由于客户撤回了购买，{{appName}} 已退款（申请 {{id}}）。",
+      "returnReason": "撤回申请：{{reason}}",
+      "returnReasonNone": "撤回申请（未提供原因）"
+    }
+  },
+  "emailTemplates": {
+    "pageTitle": "通知",
+    "loadError": "无法加载通知",
+    "saveError": "无法保存通知",
+    "savedToast": "通知已保存",
+    "resetToast": "{{name}}已重置为默认设置",
+    "sender": {
+      "heading": "发件人",
+      "description": "这些设置适用于应用为您的商店发送的所有邮件。使用您自己已验证的地址发送，并选择客户回复的接收地址。",
+      "emailLabel": "发件人邮箱",
+      "emailPlaceholder": "notifications@withdrawaleasy.com",
+      "detailsVerified": "邮件将从此地址发送。",
+      "detailsPending": "输入我们发送到此地址的验证码以完成验证。",
+      "detailsDefault": "如果留空，邮件将从 {{email}} 发送。",
+      "detailsDefaultFallback": "如果留空，邮件将从应用的默认地址发送。",
+      "freeProviderWarning": "Gmail 和 Yahoo 等免费邮箱服务无法验证。客户会在此地址发出的邮件中看到“via brevosend.com”。为了更专业，请使用您商店域名下的地址。",
+      "codeLabel": "验证码",
+      "codeDetails": "请输入我们发送给您的邮件中的 6 位数验证码。",
+      "verifyCode": "验证验证码",
+      "checkStatus": "检查验证状态",
+      "verifyEmail": "验证邮箱",
+      "codeSent": "我们已向 {{email}} 发送验证码。",
+      "notVerifiedYet": "此邮箱尚未验证。请在收件箱中查找验证码，然后重试。",
+      "replyToLabel": "回复邮箱",
+      "replyToPlaceholder": "support@yourstore.com",
+      "replyToDetails": "默认情况下，客户回复会发送到您商店的邮箱。如需发送到其他地址，请输入不同的地址。"
+    },
+    "domain": {
+      "heading": "域名验证",
+      "description": "验证您的域名，这样客户就不会在您的邮件中看到“via brevosend.com”。此步骤为选填，但如果您使用商店域名发送邮件，我们建议进行验证。",
+      "label": "域名",
+      "placeholder": "yourstore.com",
+      "details": "请输入您用于发送邮件的域名，而不是 myshopify.com 域名。",
+      "freeProviderWarning": "Gmail 和 Yahoo 等免费邮箱服务无法验证。请改为输入您商店的域名。",
+      "columns": {
+        "record": "记录",
+        "type": "类型",
+        "host": "主机",
+        "value": "值"
+      },
+      "records": {
+        "brevo_code": "域名所有权",
+        "dkim_record": "DKIM",
+        "dkim1Record": "DKIM 1",
+        "dkim2Record": "DKIM 2",
+        "dmarc_record": "DMARC"
+      },
+      "copyHost": "复制主机",
+      "copyValue": "复制值",
+      "verifyRecords": "验证 DNS 记录",
+      "authenticate": "验证域名",
+      "pendingInfo": "请在域名服务商处添加这些记录，然后选择“验证 DNS 记录”。",
+      "notVerifiedYet": "您的域名尚未验证。DNS 更改可能需要一段时间才能生效，请稍后重试。"
+    },
+    "notification": {
+      "heading": "邮件模板",
+      "emailLabel": "邮件",
+      "language": "语言",
+      "languageDetails": "选择一种语言以编辑该语言的邮件。每种语言分别保存。客户会收到其自己语言的邮件。",
+      "send": "发送此邮件",
+      "requiredDetails": "欧盟法律要求发送此邮件，因此无法关闭。",
+      "merchantDetails": "关闭后将不再收到此邮件。",
+      "decisionDetails": "关闭后默认将不再发送此邮件。在批准或拒绝单个申请时，您仍可选择发送。",
+      "subject": "主题",
+      "reset": "重置为默认设置",
+      "customized": "已自定义"
+    },
+    "templates": {
+      "customerConfirmation": {
+        "name": "客户撤回确认",
+        "description": "客户提交撤回申请后立即发送给客户。"
+      },
+      "merchantNotification": {
+        "name": "新申请通知",
+        "description": "客户提交新的撤回申请时发送到您商店的联系邮箱。回复此邮件即可给客户发邮件。"
+      },
+      "withdrawalApproved": {
+        "name": "撤回已批准",
+        "description": "您批准客户的撤回申请时发送给客户。您可以在发送前审核和编辑。"
+      },
+      "withdrawalRejected": {
+        "name": "撤回已拒绝",
+        "description": "您拒绝客户的撤回申请时发送给客户。您可以在发送前审核和编辑。"
+      }
+    },
+    "merchantDefaults": {
+      "subject": "新撤回申请 — 订单 {{order}}",
+      "heading": "新撤回申请",
+      "intro": "一位客户提交了撤回申请。以下是审核所需的全部信息。",
+      "rows": {
+        "name": "姓名",
+        "email": "邮箱",
+        "date": "日期",
+        "orderNumber": "订单号",
+        "reference": "参考编号",
+        "reason": "原因"
+      },
+      "button": "查看申请",
+      "itemsHeading": "申请的商品",
+      "footnote": "在后台打开该申请以批准或拒绝。退款期限会在后台自动跟踪。"
+    },
+    "body": {
+      "heading": "邮件正文",
+      "editCode": "编辑代码",
+      "htmlLabel": "邮件 HTML 正文",
+      "previewHeading": "邮件预览"
+    },
+    "variables": {
+      "heading": "变量",
+      "help": "选择一个变量，将其插入到光标位置。",
+      "insert": "插入{{label}}：{{description}}",
+      "groups": {
+        "customer": "客户",
+        "order": "订单",
+        "withdrawal": "撤回",
+        "request": "申请",
+        "shop": "商店"
+      },
+      "tokens": {
+        "customer": {
+          "first_name": {
+            "label": "名字",
+            "description": "客户的名字"
+          },
+          "last_name": {
+            "label": "姓氏",
+            "description": "客户的姓氏"
+          },
+          "email": {
+            "label": "邮箱",
+            "description": "客户的邮箱地址"
+          }
+        },
+        "order": {
+          "name": {
+            "label": "订单号",
+            "description": "订单号，例如 #2138"
+          },
+          "id": {
+            "label": "订单 ID",
+            "description": "订单的内部 ID"
+          }
+        },
+        "withdrawal": {
+          "request_id": {
+            "label": "参考编号",
+            "description": "撤回申请的参考编号"
+          },
+          "submitted_at": {
+            "label": "提交日期",
+            "description": "申请提交的日期和时间"
+          },
+          "reason": {
+            "label": "原因",
+            "description": "客户提供的原因（如有）"
+          },
+          "selected_products": {
+            "label": "所选产品（文本）",
+            "description": "以逗号分隔的申请商品列表"
+          }
+        },
+        "request": {
+          "status": {
+            "label": "状态",
+            "description": "申请的当前状态"
+          },
+          "url": {
+            "label": "申请链接",
+            "description": "指向应用中该申请的链接"
+          }
+        },
+        "shop": {
+          "name": {
+            "label": "商店名称",
+            "description": "您的商店名称"
+          },
+          "email": {
+            "label": "商店邮箱",
+            "description": "您商店的联系邮箱地址"
+          }
+        }
+      }
+    },
+    "validation": {
+      "email": "请输入有效的邮箱地址。",
+      "subjectRequired": "请输入主题。",
+      "subjectTooLong": "主题不能超过 {{max}} 个字符。",
+      "bodyRequired": "请输入邮件正文。"
+    }
+  },
+  "sample": {
+    "customerName": "王小雨",
+    "items": {
+      "lamp": {
+        "title": "Fjord 台灯",
+        "variant": "橡木 / 大号"
+      },
+      "candleHolder": {
+        "title": "Tind 烛台",
+        "variant": "黄铜"
+      }
+    },
+    "reason": "改变主意了"
+  },
+  "faqs": {
+    "pageTitle": "常见问题",
+    "searchLabel": "搜索常见问题",
+    "searchPlaceholder": "搜索问题，例如“退款”或“期限”",
+    "noResults": "没有与“{{query}}”匹配的问题",
+    "noResultsHelp": "请尝试其他关键词，或通过下方联系支持团队。",
+    "showAnswer": "显示答案：{{question}}",
+    "hideAnswer": "隐藏答案：{{question}}",
+    "groups": {
+      "gettingStarted": "入门",
+      "deadline": "撤回期限",
+      "requests": "处理申请",
+      "emailsLanguages": "邮件和语言"
+    },
+    "actions": {
+      "goToSettings": "前往“设置”",
+      "goToRequests": "前往“申请”",
+      "goToNotifications": "前往“通知”"
+    },
+    "stillStuck": {
+      "heading": "还有其他问题？",
+      "body": "我们的支持团队会阅读并回复每一封邮件。",
+      "link": "联系支持团队"
+    },
+    "items": {
+      "what-it-does": {
+        "question": "这个应用有什么用？",
+        "paragraphs": [
+          "它按照欧盟法律要求，为您的欧盟客户提供清晰的购买撤回方式，同时让您在一个地方管理所有申请。",
+          "客户从订单中打开表单，选择要撤回的商品并确认。随后，每个申请都会显示在“申请”页面上，包括商品、原因和您的退款期限。应用会替您发送必需的邮件。"
+        ]
+      },
+      "where-form-appears": {
+        "question": "客户在哪里可以找到撤回表单？",
+        "paragraphs": [
+          "您可以在 2 个位置显示表单。可以使用其中一个或同时使用两个："
+        ],
+        "bullets": [
+          "订单状态页面：客户结账后以及打开订单确认邮件中的链接时看到的页面。",
+          "商店页面：您在线商店中的一个页面，供之后再回来的客户使用。客户通过订单号和邮箱查找订单。"
+        ],
+        "closing": "在“设置”中启用每个位置，然后为其添加一次应用块。“主页”上的设置指南会显示已添加的应用块。"
+      },
+      "form-not-showing": {
+        "question": "为什么客户看不到撤回表单？",
+        "paragraphs": [
+          "请从最常见的原因开始检查以下各项："
+        ],
+        "bullets": [
+          "表单已关闭，或客户使用的位置未在“设置”中启用。",
+          "尚未在该页面上添加应用块。",
+          "订单未配送到您的适用国家/地区之一。",
+          "订单的撤回期已结束。",
+          "订单已取消，或已有待处理的申请。每个订单同一时间只能有 1 个待处理的申请。"
+        ]
+      },
+      "deadline": {
+        "question": "撤回期何时开始、何时结束？",
+        "paragraphs": [
+          "根据欧盟法律，撤回期从客户收到商品时开始，而不是从下单时开始。客户也可以在商品送达前随时撤回。"
+        ],
+        "bullets": [
+          "尚未发货：撤回期尚未开始，因此客户随时可以撤回。",
+          "已送达：撤回期从承运商提供的送达日期开始，持续 {{withdrawalDays}}。您可以在“设置”中更改天数。",
+          "已发货但没有送达日期：应用会使用承运商的预计送达日期。如果没有预计日期，则使用发货日期加上您的预计运输时间。"
+        ]
+      },
+      "transit-days": {
+        "question": "预计运输时间有什么用？",
+        "paragraphs": [
+          "许多承运商不会向 Shopify 发送送达日期。没有送达日期，应用就无法判断撤回期何时开始，因此会将您的预计运输时间加到发货日期上。",
+          "请将其设置为包裹送达大约需要的时间。目前为 {{transitDays}}。如果不确定，请选择较长的时间。时间过短可能会导致客户的撤回期提前结束。"
+        ]
+      },
+      "split-shipments": {
+        "question": "如果订单分多个包裹发货怎么办？",
+        "paragraphs": [
+          "撤回期从最后一个包裹送达时开始。因客户撤回而被应用暂缓的商品不会发货，因此不计算在内。",
+          "如果客户在订单仅部分发货时撤回，应用会分别处理每个部分："
+        ],
+        "bullets": [
+          "未发货的商品：应用可以暂缓这些商品，使其不会发货。",
+          "已发货的商品：应用可以为其创建退货。"
+        ],
+        "closing": "应用绝不会取消部分发货的订单，因为这样也会取消客户已经收到的商品。"
+      },
+      "after-submit": {
+        "question": "客户提交申请后会发生什么？",
+        "paragraphs": [
+          "会按以下顺序进行："
+        ],
+        "bullets": [
+          "申请以“待处理”状态显示在“申请”页面上。",
+          "客户会收到确认邮件。此邮件始终会发送，因为它是客户撤回的凭证。",
+          "如果已开启新申请通知，您也会收到邮件。",
+          "您的自动化设置开始运行。例如，应用可以暂缓发货或为订单添加标签。"
+        ]
+      },
+      "automation": {
+        "question": "自动化设置有什么作用？",
+        "paragraphs": [
+          "这些设置会在收到申请时运行。应用可以执行的操作取决于订单是否已发货："
+        ],
+        "bullets": [
+          "订单发货前：暂缓发货，在您审核申请期间不会发出任何商品。您也可以让应用立即取消整个订单并退款。",
+          "订单发货后：在 Shopify 中为已发货的商品创建退货。",
+          "部分发货：两者均适用。应用只会暂缓申请中尚未发货的商品，并为已发货的商品创建退货。"
+        ],
+        "closing": "在上述每种情况下，应用都可以为订单添加标签。自动化永远不会批准或拒绝申请，始终由您做出决定。"
+      },
+      "partial-withdrawal": {
+        "question": "客户可以只撤回部分商品吗？",
+        "paragraphs": [
+          "可以。客户可以选择要撤回的商品。申请、退款和退货只包含这些商品。只有当客户撤回整个订单时，才会退还原运费。",
+          "每个订单同一时间可以有 1 个待处理的申请。您批准或拒绝后，客户可以为其他商品发送新的申请。"
+        ]
+      },
+      "reason": {
+        "question": "客户必须提供原因吗？",
+        "paragraphs": [
+          "不必。根据欧盟法律，客户撤回无需提供原因，因此原因字段始终为选填。在“设置”中，您可以选择提供哪些原因，或者不再询问原因。"
+        ]
+      },
+      "refund": {
+        "question": "如何为撤回退款？",
+        "paragraphs": [
+          "从“申请”页面打开该申请。退款方式取决于商品所处的位置："
+        ],
+        "bullets": [
+          "不在退货中的商品：选择“退款”。尚未发货的商品会从订单中移除，因此不会发货。",
+          "退货中的商品：商品寄回后，在退货中选择“处理并退款”。这会为客户退款并关闭退货。",
+          "尚未发出任何商品：您也可以通过“更多操作”取消整个订单并退款。"
+        ],
+        "closing": "欧盟法律规定，您需要在撤回后 {{refundDays}}内完成退款。申请页面会显示剩余时间。请在批准申请之前退款。"
+      },
+      "returns": {
+        "question": "退货是如何运作的？",
+        "paragraphs": [
+          "退货用于告知 Shopify 客户要寄回哪些商品。应用可以在收到申请时创建退货，您也可以在申请页面上选择“创建退货”。",
+          "退货只包含已发货的商品。创建退货不会向客户退款。商品寄回后，请在退货中选择“处理并退款”。"
+        ]
+      },
+      "decision-lock": {
+        "question": "为什么批准或拒绝申请后，订单操作会被关闭？",
+        "paragraphs": [
+          "批准或拒绝即表示申请已结束。此后，退款、暂缓、退货和取消都会被关闭，以免订单被误改。因此，您应该在批准前完成退款。",
+          "做出决定也会解除应用设置的所有发货暂缓。如果解除失败，您仍然可以选择“解除发货暂缓”。"
+        ]
+      },
+      "emails": {
+        "question": "应用会发送哪些邮件？我可以编辑吗？",
+        "paragraphs": [
+          "应用会发送 {{emailCount}} 种邮件。您可以在“通知”页面编辑所有邮件："
+        ],
+        "bullets": [
+          "客户撤回确认：客户提交申请时发送。此邮件始终开启。",
+          "新申请通知：发送到您商店的联系邮箱。您可以关闭此邮件。",
+          "撤回已批准：您批准申请时发送给客户。您可以先审核，也可以关闭此邮件。",
+          "撤回已拒绝：您拒绝申请时发送给客户。您可以先审核，也可以关闭此邮件。"
+        ],
+        "closing": "您可以用每种语言编辑每封邮件的主题和正文，并添加订单号或客户姓名等变量。预览会随您的输入实时更新。"
+      },
+      "countries-languages": {
+        "question": "应用支持哪些国家/地区和语言？",
+        "paragraphs": [
+          "默认情况下，所有欧盟国家/地区均适用。如果您只向其中部分国家/地区销售，请在“设置”中选择“特定国家/地区”。",
+          "表单提供 {{languageCount}} 种语言：{{languages}}。客户会看到其自己语言的表单。",
+          "英语是基础语言。如果您将某个翻译字段留空，客户将看到对应的英语文本。"
+        ]
+      }
+    }
+  },
+  "featureRequest": {
+    "pageTitle": "提交功能建议",
+    "intro": "告诉我们您希望应用增加哪些功能。我们会阅读每一条建议。",
+    "sentHeading": "功能建议已发送",
+    "sentBody": "感谢您与我们的团队分享想法。",
+    "firstName": "名字",
+    "lastName": "姓氏",
+    "email": "邮箱",
+    "request": "您希望增加什么功能？",
+    "requestPlaceholder": "请描述该功能以及它将如何帮助您的商店",
+    "submit": "发送建议"
+  },
+  "pricing": {
+    "pageTitle": "定价",
+    "pricePerMonth": "每月 {{price}}",
+    "currentPlan": "当前套餐",
+    "choosePlan": "选择 {{plan}}",
+    "switchedToast": "已切换到 {{plan}} 套餐",
+    "plans": {
+      "free": {
+        "name": "Free",
+        "features": [
+          "每月最多 10 个撤回申请",
+          "邮件通知"
+        ]
+      },
+      "starter": {
+        "name": "Starter",
+        "features": [
+          "无限撤回申请",
+          "自定义表单字段",
+          "邮件通知"
+        ]
+      },
+      "pro": {
+        "name": "Pro",
+        "features": [
+          "包含 Starter 的所有功能",
+          "优先支持",
+          "自动退款"
+        ]
+      }
+    },
+    "switchError": "无法更改您的套餐"
+  }
+}

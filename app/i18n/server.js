@@ -1,4 +1,4 @@
-import { DEFAULT_LOCALE, SUPPORTED_LOCALES, getFixedT, resolveLocale } from "./config";
+import { DEFAULT_LOCALE, getFixedT, matchLocale, resolveLocale } from "./config";
 
 // Shopify appends `locale` (the merchant's admin language) to the embedded
 // app URL on every document load. Later data requests don't carry it, so the
@@ -12,18 +12,12 @@ export function getLocaleFromRequest(request) {
 
   const header = request.headers.get("accept-language");
   if (header) {
-    const candidates = header
-      .split(",")
-      .map((part) => part.split(";")[0].trim())
-      .filter(Boolean);
     // First language the browser prefers that we actually support.
-    const match = candidates.find((candidate) => {
-      const base = candidate.toLowerCase().split(/[-_]/)[0];
-      return SUPPORTED_LOCALES.some(
-        (locale) => locale.toLowerCase() === candidate.toLowerCase() || locale === base,
-      );
-    });
-    if (match) return resolveLocale(match);
+    const match = header
+      .split(",")
+      .map((part) => matchLocale(part.split(";")[0].trim()))
+      .find(Boolean);
+    if (match) return match;
   }
 
   return DEFAULT_LOCALE;

@@ -1,0 +1,1250 @@
+{
+  "common": {
+    "add": "Tilføj",
+    "backToHome": "Tilbage til Start",
+    "cancel": "Annuller",
+    "delete": "Slet",
+    "discard": "Kassér",
+    "done": "Færdig",
+    "dayCount_one": "{{count}} dag",
+    "dayCount_other": "{{count}} dage",
+    "emptyValue": "—",
+    "noMatches": "Ingen resultater for \"{{query}}\".",
+    "preview": "Forhåndsvis",
+    "remove": "Fjern",
+    "save": "Gem",
+    "verified": "Bekræftet"
+  },
+  "nav": {
+    "home": "Start",
+    "withdrawalRequests": "Anmodninger",
+    "formSetup": "Indstillinger",
+    "emailTemplates": "Notifikationer",
+    "pricing": "Priser"
+  },
+  "errors": {
+    "generic": "Noget gik galt. Prøv igen.",
+    "requestFailed": "Noget gik galt (fejl {{status}}). Prøv igen.",
+    "methodNotAllowed": "Denne handling understøttes ikke.",
+    "unknownAction": "Denne handling understøttes ikke.",
+    "noValidFields": "Der er intet at opdatere.",
+    "emailServiceUnavailable": "Vi kunne ikke oprette forbindelse til e-mailtjenesten. Prøv igen om et par minutter.",
+    "emailServiceNotConfigured": "Afsendelse af e-mails er ikke konfigureret endnu. Kontakt support for at få hjælp.",
+    "requestNotFound": "Denne fortrydelsesanmodning findes ikke eller er blevet slettet.",
+    "requestDecided": "Denne anmodning er allerede godkendt eller afvist, så ordrehandlinger er ikke længere tilgængelige.",
+    "unknownDecision": "Vælg, om du vil godkende eller afvise denne anmodning.",
+    "invalidStatus": "Vælg en gyldig status for denne anmodning.",
+    "noteRequired": "Angiv en note.",
+    "orderNotFound": "Denne ordre kan ikke findes i Shopify.",
+    "invalidEmail": "Angiv en gyldig e-mailadresse.",
+    "featureRequestIncomplete": "Udfyld alle felter, før du sender din anmodning.",
+    "senderCodeRequired": "Angiv bekræftelseskoden fra din e-mail.",
+    "senderNotFound": "Vi kunne ikke finde denne afsenderadresse. Fjern den, og tilføj den igen for at få en ny kode.",
+    "senderNotStarted": "Bekræft din afsenderadresse først.",
+    "senderIdMissing": "Vi kunne ikke registrere denne afsenderadresse. Prøv igen.",
+    "domainInvalid": "Angiv et gyldigt domæne, f.eks. dinbutik.dk.",
+    "domainFreeProvider": "Gratis e-mailudbydere som Gmail og Yahoo kan ikke godkendes. Brug din butiks domæne i stedet."
+  },
+  "auth": {
+    "login": {
+      "heading": "Log ind",
+      "shopLabel": "Butiksdomæne",
+      "shopDetails": "example.myshopify.com",
+      "submit": "Log ind",
+      "missingShop": "Angiv dit butiksdomæne for at logge ind.",
+      "invalidShop": "Angiv et gyldigt butiksdomæne, f.eks. example.myshopify.com."
+    }
+  },
+  "status": {
+    "pending": "Afventer",
+    "approved": "Godkendt",
+    "rejected": "Afvist"
+  },
+  "sourceInline": {
+    "order_status": "ordrestatussiden",
+    "standalone_page": "din butiksside"
+  },
+  "placements": {
+    "orderStatus": {
+      "label": "Ordrestatusside",
+      "details": "Vis fortrydelsesformularen på ordrestatussiden, som kunderne ser efter betalingen."
+    },
+    "storefront": {
+      "label": "Butiksside",
+      "details": "Vis fortrydelsesformularen på en separat side i dit tema, så kunderne kan finde den uden for ordrestatussiden."
+    }
+  },
+  "orderStatus": {
+    "financial": {
+      "PENDING": "Betaling afventer",
+      "AUTHORIZED": "Godkendt",
+      "PARTIALLY_PAID": "Delvist betalt",
+      "PAID": "Betalt",
+      "PARTIALLY_REFUNDED": "Delvist refunderet",
+      "REFUNDED": "Refunderet",
+      "VOIDED": "Annulleret",
+      "EXPIRED": "Udløbet"
+    },
+    "fulfillment": {
+      "UNFULFILLED": "Ikke udført",
+      "PENDING_FULFILLMENT": "Udførelse afventer",
+      "OPEN": "Åben",
+      "IN_PROGRESS": "I gang",
+      "ON_HOLD": "Tilbageholdt",
+      "PARTIALLY_FULFILLED": "Delvist udført",
+      "FULFILLED": "Udført",
+      "RESTOCKED": "Lagt på lager igen",
+      "SCHEDULED": "Planlagt"
+    },
+    "return": {
+      "REQUESTED": "Anmodet",
+      "OPEN": "Åben",
+      "CLOSED": "Lukket",
+      "DECLINED": "Afvist",
+      "CANCELED": "Annulleret"
+    }
+  },
+  "stats": {
+    "heading": "Oversigt",
+    "description": "Et øjebliksbillede af dine fortrydelsesanmodninger",
+    "viewRequests": "Se anmodninger",
+    "total": "Anmodninger i alt",
+    "today": "Indsendt i dag",
+    "pending": "Afventer",
+    "closed": "Afsluttet",
+    "requestCount_one": "{{count}} anmodning",
+    "requestCount_other": "{{count}} anmodninger"
+  },
+  "home": {
+    "pageTitle": "Start",
+    "loadError": "Dit dashboard kunne ikke indlæses",
+    "saveErrorHeading": "Din ændring kunne ikke gemmes",
+    "saveErrorAction": "Prøv igen, eller foretag ændringen i Indstillinger.",
+    "setupBanner": {
+      "heading_one": "{{count}} opsætningstrin tilbage",
+      "heading_other": "{{count}} opsætningstrin tilbage",
+      "body": "Fuldfør disse trin for at gøre din fortrydelsesformular klar: {{steps}}."
+    },
+    "setupGuide": {
+      "heading": "Opsætningsguide",
+      "description": "Brug denne guide til at få din fortrydelsesformular live i din butik.",
+      "progress": "{{completed}} af {{total}} opgaver fuldført",
+      "dismiss": "Luk opsætningsguiden",
+      "collapse": "Skjul opsætningsguiden",
+      "expand": "Udvid opsætningsguiden",
+      "showStep": "Vis detaljer for {{step}}",
+      "hideStep": "Skjul detaljer for {{step}}",
+      "steps": {
+        "form": {
+          "label": "Aktivér din fortrydelsesformular",
+          "description": "Aktivér formularen, og vælg, hvor kunderne ser den. Felterne, årsagerne og teksterne har allerede standardtekst. Du kan til enhver tid ændre dem i Indstillinger.",
+          "checkbox": "Aktivér fortrydelsesformular",
+          "cta": "Gå til Indstillinger",
+          "placementHeading": "Vælg, hvor kunderne ser formularen",
+          "placementDescription": "Vælg mindst ét sted. Hvert sted skal have sin appblok, før kunderne kan se formularen."
+        },
+        "blocks": {
+          "label": "Tilføj appblokkene til din butik",
+          "description": "Tilføj en appblok for hvert sted, du valgte i det forrige trin.",
+          "locked": "Fuldfør trin {{step}} for at vælge, hvor formularen vises. Derefter kan du tilføje appblokkene her.",
+          "surfaces": {
+            "orderStatus": "Ordrestatusside",
+            "theme": "Butiksside"
+          },
+          "live": {
+            "orderStatus": "Appblokken er live på din ordrestatusside.",
+            "theme": "Appblokken er live på din butiksside."
+          }
+        }
+      }
+    },
+    "help": {
+      "heading": "Hjælp og ressourcer",
+      "support": {
+        "title": "Support via e-mail",
+        "description": "Har du et spørgsmål? Vores supportteam kan hjælpe.",
+        "link": "Kontakt support"
+      },
+      "faqs": {
+        "title": "Ofte stillede spørgsmål",
+        "description": "Find svar på almindelige spørgsmål om opsætning og brug af appen.",
+        "link": "Se ofte stillede spørgsmål"
+      },
+      "featureRequest": {
+        "title": "Ønsker til funktioner",
+        "description": "Har du en idé til appen? Fortæl os, hvad du gerne vil se.",
+        "link": "Foreslå en funktion"
+      }
+    }
+  },
+  "blockSetup": {
+    "autoUpdate": "Denne meddelelse forsvinder af sig selv et par sekunder efter, at du har gemt appblokken.",
+    "addAppBlock": "Tilføj appblok",
+    "orderStatus": {
+      "heading": "Tilføj appblokken til din ordrestatusside",
+      "body": "Kunderne kan ikke se fortrydelsesformularen på ordrestatussiden, før du tilføjer appblokken. Sådan tilføjer du den:",
+      "steps": {
+        "open": "Vælg <strong>Tilføj appblok</strong> nedenfor. Ordrestatussiden åbnes i betalingseditoren.",
+        "add": "Vælg <strong>Tilføj appblok</strong> i sidepanelet.",
+        "choose": "Vælg <strong>Fortrydelsesformular</strong>.",
+        "save": "Vælg <strong>Gem</strong>."
+      }
+    },
+    "storefront": {
+      "heading": "Tilføj appblokken til en butiksside",
+      "body": "Vælg en sideskabelon, og vælg derefter Tilføj appblok. Temaeditoren åbnes med fortrydelsesformularen allerede tilføjet som en sektion.",
+      "templateLabel": "Sideskabelon",
+      "templates": {
+        "page": "Standardside",
+        "index": "Forside",
+        "product": "Produktsider",
+        "collection": "Kollektionssider",
+        "cart": "Kurvside"
+      },
+      "steps": {
+        "open": "Vælg <strong>Tilføj appblok</strong> for at åbne temaeditoren med sektionen tilføjet.",
+        "move": "Træk sektionen derhen, hvor du vil have den på siden.",
+        "save": "Vælg <strong>Gem</strong>."
+      }
+    }
+  },
+  "onboarding": {
+    "pageTitle": "Kom i gang",
+    "heading": "Gør din butik klar til fortrydelser i EU",
+    "intro_one": "Fuldfør dette {{count}} trin for at give dine EU-kunder en lovlig måde at fortryde et køb på.",
+    "intro_other": "Fuldfør disse {{count}} trin for at give dine EU-kunder en lovlig måde at fortryde et køb på.",
+    "stepBadge": "Trin {{current}} af {{total}}",
+    "completedToast": "Opsætningen er fuldført",
+    "steps": {
+      "welcome": {
+        "title": "Velkommen",
+        "description": "Hvad appen gør"
+      },
+      "form": {
+        "title": "Fortrydelsesformular",
+        "description": "Aktivér din formular"
+      }
+    },
+    "actions": {
+      "getStarted": "Kom i gang",
+      "continue": "Fortsæt",
+      "finish": "Afslut opsætning",
+      "skip": "Spring opsætning over",
+      "back": "Tilbage"
+    },
+    "help": {
+      "heading": "Brug for hjælp?",
+      "body": "Har du et spørgsmål? <supportLink>Kontakt support</supportLink>."
+    },
+    "welcome": {
+      "heading": "Velkommen til {{appName}}",
+      "setupTime": "Tager cirka 1 minut",
+      "law": "Siden 19. juni 2026 skal butikker, der sælger til kunder i EU, tilbyde en måde at fortryde hver ordre på i 2 trin (EU-direktiv 2023/2673, artikel 11a). En returpolitik alene er ikke nok.",
+      "app": "{{appName}} tilføjer en fortrydelsesknap til din ordrestatusside, en side i din webshop eller begge dele. Appen håndterer bekræftelsen i 2 trin og sender den påkrævede bekræftelsesmail. Du kan administrere alle anmodninger ét sted.",
+      "imageAlt": "En kunde fortryder en ordre",
+      "requirementsHeading": "Hvad loven kræver",
+      "requirements": {
+        "button": "En tydeligt mærket fortrydelsesknap, som kunderne nemt kan finde",
+        "twoStep": "En proces i 2 trin: kunderne indsender deres fortrydelse og bekræfter den derefter",
+        "email": "En automatisk bekræftelsesmail, som kunderne kan gemme"
+      },
+      "penaltyHeading": "Hvad der sker, hvis du ikke overholder reglerne",
+      "penalty": "Hvis fortrydelsesknappen mangler eller ikke virker, forlænger loven fortrydelsesfristen på {{days}} dage. Kunderne får så 12 måneder og {{days}} dage til at fortryde hver berørt ordre."
+    },
+    "form": {
+      "heading": "Aktivér din fortrydelsesformular",
+      "body": "Kunderne indsender deres fortrydelse og bekræfter den derefter i et separat trin, som EU-lovgivningen kræver. Formularen indeholder juridisk standardtekst. Kunderne har {{days}} til at fortryde, regnet fra levering.",
+      "switch": "Aktivér fortrydelsesformular",
+      "later": "Du kan ændre alt dette senere i Indstillinger.",
+      "loadError": "Dine formularindstillinger kunne ikke indlæses. Du kan afslutte opsætningen nu og aktivere formularen senere i Indstillinger.",
+      "saveError": "Dine formularvalg kunne ikke gemmes. Prøv igen, eller afslut opsætningen uden dem, og angiv dem senere i Indstillinger.",
+      "finishWithoutSaving": "Afslut uden at gemme",
+      "placementError": "Vælg mindst ét sted, eller deaktiver formularen."
+    },
+    "finishError": "Opsætningen kunne ikke afsluttes. Prøv igen."
+  },
+  "formSetup": {
+    "pageTitle": "Indstillinger",
+    "loadError": "Indstillingerne kunne ikke indlæses",
+    "saveError": "Indstillingerne kunne ikke gemmes",
+    "savedToast": "Indstillingerne er gemt",
+    "enable": {
+      "heading": "Fortrydelsesformular",
+      "description": "Vælg, om kunderne kan indsende fortrydelsesanmodninger, og hvor de ser formularen.",
+      "checkbox": "Aktivér fortrydelsesformular",
+      "details": "Når dette er deaktiveret, kan kunderne ikke indsende fortrydelsesanmodninger nogen steder.",
+      "orderStatus": "Vis på ordrestatussiden",
+      "storefront": "Vis på en butiksside"
+    },
+    "countries": {
+      "heading": "Berettigede lande",
+      "description": "Kunderne ser kun fortrydelsesformularen, hvis deres ordre sendes til et af disse lande.",
+      "all": "Alle {{count}} EU-lande (anbefales)",
+      "allDetails": "Fortrydelsesretten gælder i hele EU.",
+      "specific": "Bestemte lande",
+      "specificDetails": "Vælg lande nedenfor. Du kan til enhver tid ændre dette.",
+      "pickerLabel": "Lande",
+      "pickerPlaceholder": "Søg efter lande"
+    },
+    "content": {
+      "heading": "Formularens indhold",
+      "tabs": {
+        "step1": "1. Oplysninger",
+        "confirm": "2. Bekræft",
+        "done": "3. Færdig"
+      },
+      "language": "Sprog",
+      "languageDetails": "Vælg et sprog for at redigere formularens indhold på det sprog. Hvert sprog gemmes separat.",
+      "beforeDelivery": {
+        "heading": "Før levering",
+        "description": "Vises på formularens første skærm og i trinnet Oplysninger, indtil ordren er leveret, også mens den er undervejs."
+      },
+      "afterDelivery": {
+        "heading": "Efter levering",
+        "description": "Vises i stedet, når Shopify markerer ordren som leveret."
+      },
+      "title": "Titel",
+      "description": "Beskrivelse",
+      "itemHeading": "Overskrift for varevalg",
+      "customerDetails": {
+        "heading": "Kundeoplysninger",
+        "description": "Udfyldes fra ordren. Kunderne kan ikke redigere disse felter.",
+        "locked": "Låst",
+        "fullName": "Fulde navn",
+        "email": "E-mail",
+        "orderNumber": "Ordrenummer"
+      },
+      "reason": {
+        "heading": "Årsag til fortrydelse",
+        "checkbox": "Spørg om en årsag",
+        "details": "Kunderne skal aldrig angive en årsag. Ifølge EU-lovgivningen skal dette felt være valgfrit.",
+        "label": "Etiket for årsagsfeltet",
+        "optionsHeading": "Årsagsmuligheder",
+        "optionsHelp": "Kunderne vælger fra denne liste. Tilføj, fjern eller omformuler mulighederne, så de passer til din butik. En mulighed \"Andet\" med et tekstfelt tilføjes altid til sidst.",
+        "removeOption": "Fjern {{option}}",
+        "addLabel": "Tilføj en årsag",
+        "addPlaceholder": "F.eks. Bestilt ved en fejl",
+        "translatedHelp": "Oversæt hver mulighed. Skift til engelsk for at tilføje eller fjerne muligheder.",
+        "translatedEmpty": "Tilføj først årsagsmuligheder på engelsk."
+      },
+      "continueButton": "Etiket for Fortsæt-knappen",
+      "confirm": {
+        "heading": "Overskrift for bekræftelse",
+        "messageBefore": "Besked før levering",
+        "messageAfter": "Besked efter levering",
+        "declaration": "Erklæring",
+        "button": "Etiket for Bekræft-knappen"
+      },
+      "done": {
+        "titleBefore": "Titel før levering",
+        "messageBefore": "Besked før levering",
+        "titleAfter": "Titel efter levering",
+        "messageAfter": "Besked efter levering"
+      }
+    },
+    "automation": {
+      "heading": "Automatisering",
+      "description": "Vælg, hvad appen gør, når en kunde indsender en fortrydelsesanmodning.",
+      "beforeShip": {
+        "heading": "Før ordren afsendes",
+        "description": "Gælder, når en anmodning modtages, før nogen varer er afsendt.",
+        "hold": "Tilbagehold udførelse til gennemgang",
+        "holdDetails": "Sæt udførelsen på pause, indtil du godkender eller afviser anmodningen. Tilbageholdelsen ophæves, når du træffer din beslutning.",
+        "tagDetails": "Tag ordrer, der modtager en anmodning, før de afsendes, så dit personale kan finde dem på ordrelisten."
+      },
+      "fallback": {
+        "label": "Hvad der sker med ordren",
+        "hold": "Behold den tilbageholdt, indtil du godkender eller afviser anmodningen",
+        "cancelNow": "Annuller hele ordren, og refunder den med det samme",
+        "releaseN": "Ophæv tilbageholdelsen efter et bestemt antal dage",
+        "cancelN": "Annuller hele ordren, og refunder den efter et bestemt antal dage",
+        "cancelWarning": "Dette annullerer og refunderer hele ordren, også selvom kunden kun har fortrudt nogle af varerne. Shopify sender kunden en e-mail om annulleringen.",
+        "days": "Antal dage"
+      },
+      "afterDelivery": {
+        "heading": "Efter ordren er afsendt",
+        "description": "Gælder, når en anmodning modtages, efter at mindst én vare er afsendt, også selvom den ikke er leveret endnu. Alle anmodninger vises stadig på siden Anmodninger.",
+        "createReturn": "Opret en returnering",
+        "createReturnDetails": "Opret en returnering i Shopify for de anmodede varer, der er afsendt.",
+        "tagDetails": "Tag ordrer, der modtager en anmodning, efter de er afsendt."
+      },
+      "tag": {
+        "checkbox": "Tag ordren",
+        "label": "Ordretags",
+        "placeholder": "Tilføj et tag"
+      }
+    },
+    "deadline": {
+      "heading": "Fortrydelsesfrist",
+      "description": "Fortrydelsesfristen starter, når ordren leveres, ikke når den afgives. EU-lovgivningen kræver mindst {{days}}.",
+      "days": "Dage til at fortryde efter levering",
+      "daysDetails": "Hvor lang tid kunderne har til at fortryde, efter deres ordre er leveret.",
+      "transit": "Anslået transporttid (dage)",
+      "transitDetails": "Bruges, når fragtfirmaet ikke deler en leveringsdato eller et skøn. Appen lægger disse dage til afsendelsesdatoen."
+    },
+    "validation": {
+      "countryMode": "Vælg, hvilke lande der er berettigede.",
+      "euCountries": "Vælg mindst ét land.",
+      "title": "Angiv en titel.",
+      "description": "Angiv en beskrivelse.",
+      "itemHeading": "Angiv en overskrift for varelisten.",
+      "continueButton": "Angiv en etiket for Fortsæt-knappen.",
+      "heading": "Angiv en overskrift.",
+      "confirmMessage": "Angiv en bekræftelsesbesked.",
+      "declaration": "Angiv den erklæring, kunderne skal acceptere.",
+      "confirmButton": "Angiv en etiket for Bekræft-knappen.",
+      "message": "Angiv en besked.",
+      "reasonLabel": "Angiv en etiket for årsagsfeltet.",
+      "reasonOptions": "Tilføj mindst én årsag.",
+      "reasonOptionTranslation": "Angiv en oversættelse af denne årsag.",
+      "fallback": "Vælg, hvad der sker med ordren.",
+      "daysRange": "Angiv et antal dage fra {{min}} til {{max}}.",
+      "tags": "Tilføj mindst ét tag, eller deaktiver tagging.",
+      "afterDeliveryAction": "Vælg, hvad der sker, efter ordren er afsendt."
+    },
+    "preview": {
+      "heading": "Live-forhåndsvisning",
+      "compliantBadge": "Overholder 2-trinskravet",
+      "surfaceLabel": "Forhåndsvisning",
+      "surfaces": {
+        "orderStatus": "Ordrestatusside",
+        "theme": "Butiksside"
+      },
+      "stageLabel": "Leveringsstatus",
+      "stages": {
+        "beforeDelivery": "Ikke leveret endnu",
+        "delivered": "Leveret"
+      },
+      "banner": {
+        "orderStatus": "Sådan ser kunderne det på ordrestatussiden. Vælg knapperne for at prøve det, eller brug fanerne i Formularens indhold til at gå til et bestemt trin.",
+        "theme": "Sådan ser kunderne det på din butiksside. Det starter med trinnet \"Find din ordre\", fordi besøgende i butikken ikke er logget ind."
+      },
+      "restart": "Genstart forhåndsvisning",
+      "position": {
+        "entry": "Startkort",
+        "lookup": "Find din ordre",
+        "step": "Trin {{current}} af {{total}}"
+      },
+      "storefront": {
+        "start": "Start fortrydelsesanmodning",
+        "findOrderHeading": "Find din ordre",
+        "findOrderBody": "Angiv dine ordreoplysninger for at starte din fortrydelsesanmodning.",
+        "fullName": "Fulde navn",
+        "email": "E-mail",
+        "orderNumber": "Ordrenummer",
+        "continue": "Fortsæt",
+        "steps": {
+          "step1": "Oplysninger",
+          "confirm": "Bekræft",
+          "done": "Færdig"
+        },
+        "stepOf": "Trin {{current}} af {{total}}",
+        "stepProgress": "Trin {{current}} af {{total}}: {{label}}",
+        "reasonPlaceholder": "Vælg en årsag (valgfrit)",
+        "otherReason": "Andet",
+        "yourReason": "Din årsag",
+        "yourReasonPlaceholder": "Fortæl os din årsag",
+        "selectItem": "Vælg mindst én vare for at fortsætte.",
+        "itemsToWithdraw": "Varer, der fortrydes ({{count}})",
+        "selectedTotal": "Valgte varer i alt",
+        "previous": "Forrige",
+        "submittedOn": "Indsendt {{date}}"
+      }
+    }
+  },
+  "requests": {
+    "pageTitle": "Anmodninger",
+    "searchLabel": "Søg i fortrydelsesanmodninger",
+    "searchPlaceholder": "Søg efter ordrenummer, kundenavn eller e-mail",
+    "export": "Eksportér",
+    "exportSelected": "Eksportér valgte",
+    "tabs": {
+      "all": "Alle",
+      "withCount": "{{label}} ({{count}})"
+    },
+    "empty": {
+      "imageAlt": "",
+      "heading": "Ingen fortrydelsesanmodninger endnu",
+      "body": "Fortrydelsesanmodninger fra dine kunder vises her.",
+      "filteredHeading": "Ingen fortrydelsesanmodninger fundet",
+      "filteredBody": "Prøv at ændre søgeordet eller filteret."
+    },
+    "table": {
+      "selectAll": "Vælg alle fortrydelsesanmodninger",
+      "selectRow": "Vælg ordre {{order}}",
+      "selectedCount": "{{count}} valgt",
+      "order": "Ordre",
+      "customer": "Kunde",
+      "items": "Varer",
+      "value": "Værdi",
+      "status": "Status",
+      "submitted": "Indsendt",
+      "actions": "Handlinger",
+      "itemCount_one": "{{count}} vare",
+      "itemCount_other": "{{count}} varer",
+      "viewRow": "Se anmodning for ordre {{order}}",
+      "deleteRow": "Slet anmodning for ordre {{order}}"
+    },
+    "delete": {
+      "heading_one": "Vil du slette fortrydelsesanmodningen?",
+      "heading_other": "Vil du slette {{count}} fortrydelsesanmodninger?",
+      "body_one": "Denne fortrydelsesanmodning slettes permanent. Handlingen kan ikke fortrydes.",
+      "body_other": "Disse {{count}} fortrydelsesanmodninger slettes permanent. Handlingen kan ikke fortrydes.",
+      "confirm_one": "Slet anmodning",
+      "confirm_other": "Slet anmodninger",
+      "toast_one": "Fortrydelsesanmodningen er slettet",
+      "toast_other": "{{count}} fortrydelsesanmodninger er slettet"
+    },
+    "csv": {
+      "filename": "fortrydelsesanmodninger-{{date}}.csv",
+      "order": "Ordre",
+      "customerName": "Kundenavn",
+      "customerEmail": "Kundens e-mail",
+      "country": "Land",
+      "items": "Varer",
+      "value": "Værdi",
+      "reason": "Årsag",
+      "status": "Status",
+      "submitted": "Indsendt",
+      "decided": "Besluttet"
+    }
+  },
+  "requestDetail": {
+    "pageTitle": "Fortrydelsesanmodning",
+    "backLink": "Anmodninger",
+    "submittedLine": "Indsendt {{date}} fra {{source}}",
+    "previous": "Forrige anmodning",
+    "next": "Næste anmodning",
+    "badges": {
+      "canceled": "Annulleret",
+      "onHold": "Tilbageholdt",
+      "return": "Returnering: {{status}}"
+    },
+    "actions": {
+      "refund": "Refunder",
+      "more": "Flere handlinger",
+      "cancelOrder": "Annuller ordre",
+      "placeHold": "Tilbagehold udførelse",
+      "releaseHold": "Ophæv tilbageholdelse af udførelse",
+      "createReturn": "Opret returnering",
+      "processReturn": "Behandl og refunder",
+      "viewOrder": "Se ordre"
+    },
+    "banners": {
+      "orderUnavailableHeading": "Ordreoplysningerne er ikke tilgængelige",
+      "orderUnavailableBody": "{{error}} Du kan ikke bruge ordrehandlinger, før ordreoplysningerne er indlæst.",
+      "actionFailedHeading": "Handlingen kunne ikke fuldføres",
+      "actionFailedAction": "Se Aktivitet nedenfor for at få flere oplysninger.",
+      "canceled": "Denne ordre er annulleret. Ordrehandlinger er ikke længere tilgængelige."
+    },
+    "deadline": {
+      "heading": "Frist for refundering",
+      "pendingLabel": "Resterende tid til at beslutte og refundere",
+      "decidedLabel": "Beslutning",
+      "badges": {
+        "overdue": "Overskredet",
+        "actionNeeded": "Handling påkrævet",
+        "onTime": "Til tiden"
+      },
+      "daysLeft_one": "{{count}} dag tilbage",
+      "daysLeft_other": "{{count}} dage tilbage",
+      "daysOverdue_one": "{{count}} dag over fristen",
+      "daysOverdue_other": "{{count}} dage over fristen",
+      "daysEarly_one": "{{count}} dag før fristen",
+      "daysEarly_other": "{{count}} dage før fristen",
+      "daysLate_one": "{{count}} dag efter fristen",
+      "daysLate_other": "{{count}} dage efter fristen",
+      "pending": "Du har {{days}}, fra anmodningen blev indsendt, til at beslutte og refundere. Fristen er {{date}}.",
+      "pendingOverdue": "Fristen udløb {{date}}. Refunder kunden så hurtigt som muligt.",
+      "decidedOnTime": "Besluttet inden for refunderingsfristen på {{windowDays}} dage. Fristen var {{date}}.",
+      "decidedLate": "Besluttet efter refunderingsfristen {{date}}."
+    },
+    "items": {
+      "heading": "Fortrudte varer",
+      "reject": "Afvis",
+      "approve": "Godkend",
+      "total": "Fortrudt i alt",
+      "sku": "Varenummer: {{sku}}",
+      "quantity": "Antal: {{count}}",
+      "shipping": {
+        "notShipped": "Ikke afsendt endnu",
+        "partlyShipped": "Delvist afsendt",
+        "shipped": "Afsendt"
+      },
+      "partiallyShippedBanner": "En del af denne ordre er afsendt. Varer, der ikke er afsendt endnu, kan stadig tilbageholdes, og afsendte varer skal returneres."
+    },
+    "return": {
+      "heading": "Returnering",
+      "status": "Status",
+      "created": "Oprettet",
+      "body": "Der er oprettet en returnering i Shopify for de fortrudte varer.",
+      "openBody": "Når varerne er kommet tilbage, skal du vælge Behandl og refunder. Så refunderes kunden for de returnerede varer, og returneringen lukkes.",
+      "alreadyRefundedBody": "Varerne i denne returnering er allerede refunderet. Luk returneringen i Shopify, når de er kommet tilbage."
+    },
+    "processReturnModal": {
+      "heading": "Behandl returnering og refunder",
+      "calculating": "Beregner refunderingsbeløbet …",
+      "nothingToProcess": "Der er ikke mere at behandle på denne returnering. Den er muligvis allerede behandlet eller lukket i Shopify.",
+      "nothingToRefund": "Varerne i denne returnering er allerede refunderet, så der er ikke mere at refundere.",
+      "unsupportedPayment": "Betalingen for denne ordre kan ikke refunderes fra appen. Behandl returneringen, og refunder den i Shopify i stedet.",
+      "itemsHeading": "Varer i returnering {{name}}",
+      "subtotal": "Subtotal for varer",
+      "shippingLine": "Oprindelig fragt",
+      "total": "Samlet refundering",
+      "body": "Dette markerer de returnerede varer som behandlet, refunderer dem til den oprindelige betalingsmetode og lukker returneringen. Shopify sender kunden en refunderingskvittering via e-mail. Handlingen kan ikke fortrydes.",
+      "confirmAmount": "Refunder {{amount}}",
+      "confirm": "Behandl og refunder"
+    },
+    "payment": {
+      "heading": "Betaling",
+      "status": "Betalingsstatus",
+      "subtotal": "Subtotal for fortrydelse",
+      "shipping": "Fragt for ordren",
+      "total": "Ordretotal",
+      "refunded": "Refunderet",
+      "unavailable": "Betalingsoplysningerne er ikke tilgængelige lige nu."
+    },
+    "activity": {
+      "heading": "Aktivitet",
+      "noteLabel": "Tilføj en note",
+      "notePlaceholder": "Tilføj en note …",
+      "post": "Slå op",
+      "noteHelp": "Kun du og dit personale kan se noter. Kunderne ser dem aldrig.",
+      "submitted": "Fortrydelsesanmodning indsendt fra {{source}}",
+      "decided": {
+        "approved": "Anmodningen er godkendt",
+        "rejected": "Anmodningen er afvist"
+      },
+      "note": "Note: {{body}}",
+      "entry": "{{label}}: {{message}}",
+      "actions": {
+        "resolve_branch": "Automatiseringen er startet",
+        "run_automation": "Automatisering",
+        "automation_completed": "Automatiseringen er færdig",
+        "hold_fulfillment": "Tilbageholdelse af udførelse",
+        "schedule_fallback": "Planlagt opfølgning",
+        "release_hold": "Tilbageholdelse af udførelse ophævet",
+        "cancel_order_immediate": "Ordren er annulleret og refunderet",
+        "cancel_order_scheduled": "Ordren er annulleret og refunderet",
+        "cancel_order_manual": "Ordren er annulleret og refunderet",
+        "cancel_order": "Ordren er annulleret og refunderet",
+        "refund": "Refundering",
+        "tag_before_ship": "Ordren er tagget",
+        "tag_after_delivery": "Ordren er tagget",
+        "order_tag_add": "Ordretags tilføjet",
+        "order_tag_remove": "Ordretags fjernet",
+        "create_return": "Returnering",
+        "refresh_return": "Returneringsstatus opdateret",
+        "process_return": "Behandl og refunder",
+        "fetch_shop_contact": "Butikkens kontaktoplysninger",
+        "customer_email": "Bekræftelsesmail til kunden",
+        "merchant_email": "Notifikation om ny anmodning",
+        "notify_customer": "E-mail om beslutning",
+        "notify_merchant": "Du fik besked"
+      },
+      "messages": {
+        "noTags": "Der er ikke konfigureret nogen tags",
+        "tagged": "Ordren er tagget med {{tags}}",
+        "noHoldableOrders": "Intet i denne ordre kan tilbageholdes lige nu",
+        "held": "Varerne er tilbageholdt, så de ikke bliver afsendt",
+        "holdOff": "Tilbageholdelse af udførelse til gennemgang er deaktiveret",
+        "tagBeforeShipOff": "Tagging før afsendelse er deaktiveret",
+        "tagAfterDeliveryOff": "Tagging efter afsendelse er deaktiveret",
+        "fallbackHold": "Ordren forbliver tilbageholdt, indtil du godkender eller afviser anmodningen",
+        "fallbackInvalidDays": "Opfølgningen kunne ikke planlægges. Antallet af dage er ugyldigt.",
+        "scheduledRelease": "Ophævelse af tilbageholdelse planlagt til {{date}}",
+        "scheduledCancel": "Annullering og refundering planlagt til {{date}}",
+        "canceled": "Ordren er annulleret og refunderet",
+        "returnCreated": "Returnering oprettet i Shopify",
+        "returnNoMatch": "Ingen af de anmodede varer kan returneres",
+        "notifiedByEmail": "Underrettet i appen og via e-mail",
+        "notifiedEmailFailed": "Underrettet i appen. Notifikationsmailen mislykkedes: {{error}}",
+        "notifiedInAppOnly": "Underrettet i appen. Notifikationsmailen blev ikke sendt.",
+        "emailSent": "Sendt",
+        "emailFailed": "Mislykkedes: {{error}}",
+        "emailNotSent": "Ikke sendt, fordi der ikke er nogen modtager, eller fordi e-mail ikke er konfigureret",
+        "orderNotFound": "Denne ordre kan ikke findes i Shopify",
+        "alreadyCanceled": "Ordren var allerede annulleret",
+        "branchBeforeShip": "Ordren er ikke afsendt endnu, så trinnene før afsendelse blev kørt",
+        "branchAfterDelivery": "Ordren er afsendt, så trinnene efter afsendelse blev kørt",
+        "branchPartiallyShipped": "Ordren er delvist afsendt, så trinnene for afsendte og ikke-afsendte varer blev kørt",
+        "noUnshippedItemsRequested": "Ingen af de anmodede varer venter på afsendelse, så intet blev tilbageholdt",
+        "fallbackCancelPartiallyShipped": "Ordren er delvist afsendt, så den kan ikke annulleres som helhed. De anmodede varer forbliver tilbageholdt, indtil du godkender eller afviser anmodningen.",
+        "returnNothingShipped": "Ingen af de anmodede varer er afsendt, så der var ikke brug for en returnering",
+        "runCompleted": "Automatiseringen er fuldført",
+        "runFailed": "Et eller flere automatiseringstrin mislykkedes",
+        "runSkipped": "Automatiseringen blev sprunget over",
+        "scheduledSkippedApproved": "Anmodningen var allerede godkendt, så den planlagte handling blev ikke kørt",
+        "scheduledSkippedRejected": "Anmodningen var allerede afvist, så den planlagte handling blev ikke kørt",
+        "noHoldsPlaced": "Der blev ikke tilbageholdt noget for denne anmodning",
+        "holdsAlreadyReleased": "Tilbageholdelserne var allerede ophævet",
+        "holdReleased": "Ordren kan udføres igen",
+        "holdExists": "Der er allerede en tilbageholdelse for denne anmodning",
+        "decisionSkipped": "Personalet valgte ikke at sende en e-mail til kunden",
+        "decisionSent": "Kunden fik en e-mail om beslutningen",
+        "decisionFailed": "E-mailen om beslutningen mislykkedes: {{error}}",
+        "decisionNotConfigured": "E-mailen om beslutningen blev ikke sendt, fordi e-mail ikke er konfigureret",
+        "refunded": "{{amount}} refunderet",
+        "noReturn": "Der er ingen returnering for denne anmodning",
+        "returnStatus": "Returneringsstatus: {{status}}",
+        "returnProcessed": "Returneringen er behandlet, og {{amount}} er refunderet",
+        "returnNothingToProcess": "Der er ikke mere at behandle på denne returnering",
+        "returnNothingToRefund": "Varerne i denne returnering er allerede refunderet",
+        "returnPaymentUnsupported": "Denne betaling kan ikke refunderes fra appen. Behandl returneringen i Shopify.",
+        "refundNothingRefundable": "Ingen af de anmodede varer kan refunderes. De er muligvis allerede refunderet.",
+        "refundNoSuggestion": "Shopify kunne ikke beregne en refundering for disse varer. Refunder dem i Shopify i stedet.",
+        "refundCoveredByReturn": "Alle fortrudte varer er i den åbne returnering. Brug Behandl og refunder på returneringen for at refundere dem.",
+        "tagsRemoved": "Ordretags fjernet: {{tags}}",
+        "tagsAdded": "Ordretags tilføjet: {{tags}}"
+      }
+    },
+    "order": {
+      "heading": "Ordre",
+      "order": "Ordre",
+      "placed": "Afgivet",
+      "payment": "Betaling",
+      "fulfillment": "Udførelse"
+    },
+    "customer": {
+      "heading": "Kunde",
+      "avatarFallback": "Kunde",
+      "contactHeading": "Kontaktoplysninger",
+      "email": "E-mail",
+      "language": "Sprog",
+      "shippingHeading": "Leveringsadresse"
+    },
+    "automation": {
+      "heading": "Automatisering",
+      "stage": "Fase",
+      "stages": {
+        "before_ship": "Før afsendelse",
+        "partially_shipped": "Delvist afsendt",
+        "after_delivery": "Efter afsendelse"
+      },
+      "hold": "Tilbageholdelse af udførelse",
+      "holdStates": {
+        "onHold": "Tilbageholdt",
+        "released": "Ophævet",
+        "none": "Ingen"
+      },
+      "canceled": "Annulleret",
+      "return": "Returnering"
+    },
+    "emails": {
+      "heading": "E-mailhistorik",
+      "customerConfirmation": "Fortrydelsesbekræftelse til kunden",
+      "merchantNotification": "Notifikation om ny anmodning",
+      "decision": "E-mail om beslutning",
+      "statuses": {
+        "sent": "Sendt",
+        "failed": "Mislykkedes",
+        "notSent": "Ikke sendt"
+      }
+    },
+    "tags": {
+      "heading": "Ordretags",
+      "label": "Tilføj ordretag",
+      "placeholder": "Tilføj et tag",
+      "remove": "Fjern tagget {{tag}}",
+      "savedToast": "Ordretags er gemt"
+    },
+    "reason": {
+      "heading": "Årsag til fortrydelse",
+      "quoted": "\"{{reason}}\"",
+      "none": "Ingen årsag angivet"
+    },
+    "decidedToast": {
+      "approved": "Fortrydelsesanmodningen er godkendt",
+      "rejected": "Fortrydelsesanmodningen er afvist"
+    },
+    "cancelModal": {
+      "heading": "Vil du annullere ordren?",
+      "body": "Dette annullerer hele ordren i Shopify, herunder varer, som kunden ikke har fortrudt. Ordren refunderes til den oprindelige betalingsmetode, varerne lægges på lager igen, og Shopify sender kunden en e-mail. Handlingen kan ikke fortrydes.",
+      "keep": "Behold ordren",
+      "confirm": "Annuller og refunder ordren"
+    },
+    "createReturnModal": {
+      "heading": "Opret returnering for fortrudte varer",
+      "itemsHeading": "Varer, der skal returneres",
+      "subtotal": "Subtotal for varer",
+      "checking": "Kontrollerer, hvilke varer der kan returneres …",
+      "nothingToReturn": "Ingen af de fortrudte varer er afsendt endnu, så der er intet at returnere. Tilbagehold dem, så de ikke bliver afsendt, eller refunder dem for at fjerne dem fra ordren.",
+      "notShipped_one": "{{count}} fortrudt vare er ikke medtaget, fordi den ikke er afsendt endnu.",
+      "notShipped_other": "{{count}} fortrudte varer er ikke medtaget, fordi de ikke er afsendt endnu.",
+      "notReturnable_one": "{{count}} fortrudt vare er ikke medtaget, fordi den allerede er returneret.",
+      "notReturnable_other": "{{count}} fortrudte varer er ikke medtaget, fordi de allerede er returneret.",
+      "body": "Dette opretter en returnering i Shopify for varerne ovenfor. Kunden refunderes ikke. Når varerne er kommet tilbage, skal du vælge Behandl og refunder på returneringen.",
+      "cancel": "Annuller",
+      "confirm": "Opret returnering"
+    },
+    "decisionModal": {
+      "headingApprove": "Vil du godkende fortrydelsesanmodningen?",
+      "headingReject": "Vil du afvise fortrydelsesanmodningen?",
+      "approveAndSend": "Godkend og send e-mail",
+      "rejectAndSend": "Afvis og send e-mail",
+      "approve": "Godkend",
+      "reject": "Afvis",
+      "loadingLabel": "Indlæser forhåndsvisning af e-mail",
+      "loading": "Forbereder e-mailen til kunden …",
+      "sendEmail": "Send e-mail til kunden",
+      "language": "Denne e-mail er på {{language}}, som er kundens sprog. Dine ændringer gælder kun for denne e-mail.",
+      "subject": "Emne",
+      "body": "E-mailens brødtekst",
+      "editHtml": "Rediger HTML",
+      "htmlLabel": "E-mailens HTML",
+      "previewTitle": "Forhåndsvisning af e-mail",
+      "templateUnchanged": "Dine ændringer gælder kun for denne e-mail. Din gemte skabelon ændres ikke.",
+      "noEmail": "Kunden får ikke en e-mail. Du kan kontakte kunden separat, hvis det er nødvendigt.",
+      "holdReleased": "Dette ophæver også tilbageholdelsen af udførelsen for denne ordre, så den kan udføres igen."
+    },
+    "refundModal": {
+      "heading": "Refunder fortrudte varer",
+      "calculatingLabel": "Beregner refundering",
+      "calculating": "Beregner refunderingsbeløbet …",
+      "nothingToRefund": "Der er intet at refundere på denne ordre. De fortrudte varer er muligvis allerede refunderet, eller ordren er muligvis annulleret.",
+      "itemsHeading": "Varer, der skal refunderes",
+      "subtotal": "Subtotal for varer",
+      "shippingLine": "Oprindelig fragt",
+      "amount": "Refunderingsbeløb",
+      "total": "Samlet refundering",
+      "body": "De fortrudte varer refunderes til den oprindelige betalingsmetode og lægges på lager igen, hvor det er muligt. Shopify sender kunden en refunderingskvittering via e-mail.",
+      "includesShipping": "Kunden har fortrudt hele ordren, så den oprindelige fragtomkostning er medtaget.",
+      "unshippedItems": "Varer, der ikke er afsendt endnu, fjernes fra ordren, så de ikke bliver sendt.",
+      "inReturn_one": "{{count}} fortrudt vare er ikke medtaget, fordi den er i returnering {{name}}. Refunder den med Behandl og refunder på returneringen.",
+      "inReturn_other": "{{count}} fortrudte varer er ikke medtaget, fordi de er i returnering {{name}}. Refunder dem med Behandl og refunder på returneringen.",
+      "allInReturn": "Alle de fortrudte varer er i returnering {{name}}. Refunder dem med Behandl og refunder på returneringen, som også lukker den.",
+      "irreversible": "Handlingen kan ikke fortrydes.",
+      "confirmAmount": "Refunder {{amount}}",
+      "confirm": "Refunder"
+    },
+    "shopifyNotes": {
+      "holdAutomatic": "Fortrydelsesanmodning for ordre {{order}} venter på gennemgang af personalet",
+      "holdManual": "Fortrydelsesanmodning for ordre {{order}} blev tilbageholdt af personalet",
+      "canceled": "Annulleret af {{appName}}, fordi kunden fortrød købet (anmodning {{id}}).",
+      "refunded": "Refunderet af {{appName}}, fordi kunden fortrød købet (anmodning {{id}}).",
+      "returnReason": "Fortrydelsesanmodning: {{reason}}",
+      "returnReasonNone": "Fortrydelsesanmodning (ingen årsag angivet)"
+    }
+  },
+  "emailTemplates": {
+    "pageTitle": "Notifikationer",
+    "loadError": "Notifikationerne kunne ikke indlæses",
+    "saveError": "Notifikationerne kunne ikke gemmes",
+    "savedToast": "Notifikationerne er gemt",
+    "resetToast": "{{name}} er nulstillet til standard",
+    "sender": {
+      "heading": "Afsender",
+      "description": "Disse indstillinger gælder for alle e-mails, som appen sender for din butik. Send fra din egen bekræftede adresse, og vælg, hvor svar fra kunder skal hen.",
+      "emailLabel": "Afsenderadresse",
+      "emailPlaceholder": "notifications@withdrawaleasy.com",
+      "detailsVerified": "E-mails sendes fra denne adresse.",
+      "detailsPending": "Angiv den kode, vi sendte til denne adresse, for at bekræfte den.",
+      "detailsDefault": "Hvis du lader feltet være tomt, sendes e-mails fra {{email}}.",
+      "detailsDefaultFallback": "Hvis du lader feltet være tomt, sendes e-mails fra appens standardadresse.",
+      "freeProviderWarning": "Gratis e-mailudbydere som Gmail og Yahoo kan ikke godkendes. Kunderne vil se \"via brevosend.com\" i e-mails fra denne adresse. Brug en adresse på din butiks domæne for et mere professionelt udtryk.",
+      "codeLabel": "Bekræftelseskode",
+      "codeDetails": "Angiv den 6-cifrede kode fra den e-mail, vi sendte dig.",
+      "verifyCode": "Bekræft kode",
+      "checkStatus": "Tjek bekræftelsesstatus",
+      "verifyEmail": "Bekræft e-mail",
+      "codeSent": "Vi har sendt en bekræftelseskode til {{email}}.",
+      "notVerifiedYet": "Denne e-mail er ikke bekræftet endnu. Find koden i din indbakke, og prøv igen.",
+      "replyToLabel": "Svaradresse",
+      "replyToPlaceholder": "support@dinbutik.dk",
+      "replyToDetails": "Svar fra kunder går som standard til din butiks e-mail. Angiv en anden adresse, hvis svarene skal sendes et andet sted hen."
+    },
+    "domain": {
+      "heading": "Domænegodkendelse",
+      "description": "Godkend dit domæne, så kunderne ikke ser \"via brevosend.com\" i dine e-mails. Det er valgfrit, men vi anbefaler det, hvis du sender fra din butiks domæne.",
+      "label": "Domæne",
+      "placeholder": "dinbutik.dk",
+      "details": "Angiv det domæne, du sender e-mails fra, ikke dit myshopify.com-domæne.",
+      "freeProviderWarning": "Gratis e-mailudbydere som Gmail og Yahoo kan ikke godkendes. Angiv din butiks domæne i stedet.",
+      "columns": {
+        "record": "Post",
+        "type": "Type",
+        "host": "Vært",
+        "value": "Værdi"
+      },
+      "records": {
+        "brevo_code": "Ejerskab af domæne",
+        "dkim_record": "DKIM",
+        "dkim1Record": "DKIM 1",
+        "dkim2Record": "DKIM 2",
+        "dmarc_record": "DMARC"
+      },
+      "copyHost": "Kopiér vært",
+      "copyValue": "Kopiér værdi",
+      "verifyRecords": "Bekræft DNS-poster",
+      "authenticate": "Godkend domæne",
+      "pendingInfo": "Tilføj disse poster hos din domæneudbyder, og vælg derefter Bekræft DNS-poster.",
+      "notVerifiedYet": "Dit domæne er ikke bekræftet endnu. DNS-ændringer kan tage noget tid at blive opdateret, så prøv igen senere."
+    },
+    "notification": {
+      "heading": "E-mailskabelon",
+      "emailLabel": "E-mail",
+      "language": "Sprog",
+      "languageDetails": "Vælg et sprog for at redigere denne e-mail på det sprog. Hvert sprog gemmes separat. Kunderne får e-mails på deres eget sprog.",
+      "send": "Send denne e-mail",
+      "requiredDetails": "EU-lovgivningen kræver denne e-mail, så den kan ikke deaktiveres.",
+      "merchantDetails": "Deaktiver for at stoppe med at modtage denne e-mail.",
+      "decisionDetails": "Deaktiver for at stoppe med at sende denne e-mail som standard. Du kan stadig vælge at sende den, når du godkender eller afviser en enkelt anmodning.",
+      "subject": "Emne",
+      "reset": "Nulstil til standard",
+      "customized": "Tilpasset"
+    },
+    "templates": {
+      "customerConfirmation": {
+        "name": "Fortrydelsesbekræftelse til kunden",
+        "description": "Sendes til kunderne, så snart de indsender en fortrydelsesanmodning."
+      },
+      "merchantNotification": {
+        "name": "Notifikation om ny anmodning",
+        "description": "Sendes til din butiks kontaktmail, når en kunde indsender en ny fortrydelsesanmodning. Svar på den for at sende en e-mail til kunden."
+      },
+      "withdrawalApproved": {
+        "name": "Fortrydelse godkendt",
+        "description": "Sendes til kunderne, når du godkender deres fortrydelsesanmodning. Du kan gennemgå og redigere den, før den sendes."
+      },
+      "withdrawalRejected": {
+        "name": "Fortrydelse afvist",
+        "description": "Sendes til kunderne, når du afviser deres fortrydelsesanmodning. Du kan gennemgå og redigere den, før den sendes."
+      }
+    },
+    "merchantDefaults": {
+      "subject": "Ny fortrydelsesanmodning – ordre {{order}}",
+      "heading": "Ny fortrydelsesanmodning",
+      "intro": "En kunde har indsendt en fortrydelsesanmodning. Her er alt, hvad du skal bruge for at gennemgå den.",
+      "rows": {
+        "name": "Navn",
+        "email": "E-mail",
+        "date": "Dato",
+        "orderNumber": "Ordrenummer",
+        "reference": "Referencenummer",
+        "reason": "Årsag"
+      },
+      "button": "Se anmodning",
+      "itemsHeading": "Anmodede varer",
+      "footnote": "Åbn anmodningen i din admin for at godkende eller afvise den. Refunderingsfristen spores automatisk der."
+    },
+    "body": {
+      "heading": "E-mailens brødtekst",
+      "editCode": "Rediger kode",
+      "htmlLabel": "E-mailens HTML-brødtekst",
+      "previewHeading": "Forhåndsvisning af e-mail"
+    },
+    "variables": {
+      "heading": "Variabler",
+      "help": "Vælg en variabel for at indsætte den ved markøren.",
+      "insert": "Indsæt {{label}}: {{description}}",
+      "groups": {
+        "customer": "Kunde",
+        "order": "Ordre",
+        "withdrawal": "Fortrydelse",
+        "request": "Anmodning",
+        "shop": "Butik"
+      },
+      "tokens": {
+        "customer": {
+          "first_name": {
+            "label": "Fornavn",
+            "description": "Kundens fornavn"
+          },
+          "last_name": {
+            "label": "Efternavn",
+            "description": "Kundens efternavn"
+          },
+          "email": {
+            "label": "E-mail",
+            "description": "Kundens e-mailadresse"
+          }
+        },
+        "order": {
+          "name": {
+            "label": "Ordrenummer",
+            "description": "Ordrenummeret, f.eks. #2138"
+          },
+          "id": {
+            "label": "Ordre-id",
+            "description": "Ordrens interne id"
+          }
+        },
+        "withdrawal": {
+          "request_id": {
+            "label": "Referencenummer",
+            "description": "Fortrydelsesanmodningens referencenummer"
+          },
+          "submitted_at": {
+            "label": "Indsendelsesdato",
+            "description": "Dato og klokkeslæt for indsendelse af anmodningen"
+          },
+          "reason": {
+            "label": "Årsag",
+            "description": "Den årsag, kunden har angivet, hvis nogen"
+          },
+          "selected_products": {
+            "label": "Valgte produkter (tekst)",
+            "description": "De anmodede varer som en kommasepareret liste"
+          }
+        },
+        "request": {
+          "status": {
+            "label": "Status",
+            "description": "Anmodningens aktuelle status"
+          },
+          "url": {
+            "label": "Link til anmodning",
+            "description": "Et link til anmodningen i appen"
+          }
+        },
+        "shop": {
+          "name": {
+            "label": "Butikkens navn",
+            "description": "Din butiks navn"
+          },
+          "email": {
+            "label": "Butikkens e-mail",
+            "description": "Din butiks kontaktadresse"
+          }
+        }
+      }
+    },
+    "validation": {
+      "email": "Angiv en gyldig e-mailadresse.",
+      "subjectRequired": "Angiv et emne.",
+      "subjectTooLong": "Emnet må højst være på {{max}} tegn.",
+      "bodyRequired": "Angiv en brødtekst til e-mailen."
+    }
+  },
+  "sample": {
+    "customerName": "Mette Hansen",
+    "items": {
+      "lamp": {
+        "title": "Fjord bordlampe",
+        "variant": "Eg / Stor"
+      },
+      "candleHolder": {
+        "title": "Tind lysestage",
+        "variant": "Messing"
+      }
+    },
+    "reason": "Jeg har fortrudt"
+  },
+  "faqs": {
+    "pageTitle": "Ofte stillede spørgsmål",
+    "searchLabel": "Søg i ofte stillede spørgsmål",
+    "searchPlaceholder": "Søg efter spørgsmål, f.eks. \"refundering\" eller \"frist\"",
+    "noResults": "Ingen spørgsmål matcher \"{{query}}\"",
+    "noResultsHelp": "Prøv et andet ord, eller kontakt support nedenfor.",
+    "showAnswer": "Vis svar: {{question}}",
+    "hideAnswer": "Skjul svar: {{question}}",
+    "groups": {
+      "gettingStarted": "Kom i gang",
+      "deadline": "Fortrydelsesfrist",
+      "requests": "Håndtering af anmodninger",
+      "emailsLanguages": "E-mails og sprog"
+    },
+    "actions": {
+      "goToSettings": "Gå til Indstillinger",
+      "goToRequests": "Gå til Anmodninger",
+      "goToNotifications": "Gå til Notifikationer"
+    },
+    "stillStuck": {
+      "heading": "Har du stadig spørgsmål?",
+      "body": "Vores supportteam læser og besvarer hver e-mail.",
+      "link": "Kontakt support"
+    },
+    "items": {
+      "what-it-does": {
+        "question": "Hvad gør appen?",
+        "paragraphs": [
+          "Den giver dine EU-kunder en tydelig måde at fortryde et køb på, som EU-lovgivningen kræver. Den giver dig også ét sted, hvor du kan administrere alle anmodninger.",
+          "Kunderne åbner formularen fra deres ordre, vælger de varer, de vil fortryde, og bekræfter. Hver anmodning vises derefter på siden Anmodninger med varerne, årsagen og din refunderingsfrist. Appen sender de påkrævede e-mails for dig."
+        ]
+      },
+      "where-form-appears": {
+        "question": "Hvor finder kunderne fortrydelsesformularen?",
+        "paragraphs": [
+          "Du kan vise formularen 2 steder. Brug det ene eller begge:"
+        ],
+        "bullets": [
+          "Ordrestatusside: den side, kunderne ser efter betalingen, og når de åbner linket i deres ordrebekræftelse.",
+          "Butiksside: en side i din webshop til kunder, der vender tilbage senere. De finder deres ordre med ordrenummer og e-mail."
+        ],
+        "closing": "Aktivér hvert sted i Indstillinger, og tilføj derefter stedets appblok én gang. Opsætningsguiden på Start viser, hvilke blokke der er tilføjet."
+      },
+      "form-not-showing": {
+        "question": "Hvorfor kan en kunde ikke se fortrydelsesformularen?",
+        "paragraphs": [
+          "Tjek disse punkter, startende med det mest almindelige:"
+        ],
+        "bullets": [
+          "Formularen er deaktiveret, eller det sted, kunden bruger, er ikke aktiveret i Indstillinger.",
+          "Appblokken er ikke tilføjet til den side endnu.",
+          "Ordren sendes ikke til et af dine berettigede lande.",
+          "Fortrydelsesfristen for ordren er udløbet.",
+          "Ordren er annulleret eller har allerede en afventende anmodning. Hver ordre kan kun have 1 afventende anmodning ad gangen."
+        ]
+      },
+      "deadline": {
+        "question": "Hvornår starter og slutter fortrydelsesfristen?",
+        "paragraphs": [
+          "Ifølge EU-lovgivningen starter fristen, når kunden modtager varerne, ikke når kunden bestiller. Kunderne kan også fortryde når som helst, før varerne ankommer."
+        ],
+        "bullets": [
+          "Ikke afsendt endnu: fristen er ikke startet, så kunderne kan altid fortryde.",
+          "Leveret: fristen starter på fragtfirmaets leveringsdato og varer {{withdrawalDays}}. Du kan ændre antallet af dage i Indstillinger.",
+          "Afsendt, men uden leveringsdato: appen bruger fragtfirmaets forventede leveringsdato. Hvis der ikke er nogen, bruger den afsendelsesdatoen plus din anslåede transporttid."
+        ]
+      },
+      "transit-days": {
+        "question": "Hvad bruges den anslåede transporttid til?",
+        "paragraphs": [
+          "Mange fragtfirmaer sender ikke en leveringsdato til Shopify. Uden den kan appen ikke vide, hvornår fortrydelsesfristen starter, så den lægger din anslåede transporttid til afsendelsesdatoen.",
+          "Indstil den til omtrent den tid, dine pakker er om at nå frem. Lige nu er den {{transitDays}}. Vælg en længere tid, hvis du er i tvivl. En for kort tid kan få en kundes fortrydelsesfrist til at slutte for tidligt."
+        ]
+      },
+      "split-shipments": {
+        "question": "Hvad sker der, hvis en ordre sendes i mere end 1 pakke?",
+        "paragraphs": [
+          "Fortrydelsesfristen starter, når den sidste pakke ankommer. Varer, som appen tilbageholder, fordi kunden har fortrudt dem, tæller ikke med, da de ikke bliver afsendt.",
+          "Hvis en kunde fortryder, mens kun en del af ordren er afsendt, håndterer appen hver del separat:"
+        ],
+        "bullets": [
+          "Varer, der ikke er afsendt: appen kan tilbageholde dem, så de ikke bliver afsendt.",
+          "Varer, der er afsendt: appen kan oprette en returnering for dem."
+        ],
+        "closing": "Appen annullerer aldrig en delvist afsendt ordre, fordi det også ville annullere varer, som kunden allerede har."
+      },
+      "after-submit": {
+        "question": "Hvad sker der, når en kunde har indsendt en anmodning?",
+        "paragraphs": [
+          "Følgende sker i denne rækkefølge:"
+        ],
+        "bullets": [
+          "Anmodningen vises på siden Anmodninger som Afventer.",
+          "Kunden får en bekræftelsesmail. Den sendes altid, fordi den er kundens bevis på fortrydelsen.",
+          "Du får også en e-mail, hvis notifikationen om nye anmodninger er aktiveret.",
+          "Dine automatiseringsindstillinger køres. Appen kan f.eks. tilbageholde udførelsen eller tagge ordren."
+        ]
+      },
+      "automation": {
+        "question": "Hvad gør automatiseringsindstillingerne?",
+        "paragraphs": [
+          "De køres, når en anmodning modtages. Hvad appen kan gøre, afhænger af, om ordren er afsendt:"
+        ],
+        "bullets": [
+          "Før ordren afsendes: tilbagehold udførelsen, så intet bliver afsendt, mens du gennemgår anmodningen. Du kan også lade appen annullere og refundere hele ordren med det samme.",
+          "Efter ordren er afsendt: opret en returnering i Shopify for de afsendte varer.",
+          "Delvist afsendt: begge dele gælder. Appen tilbageholder kun de anmodede varer, der ikke er afsendt, og opretter en returnering for dem, der er."
+        ],
+        "closing": "I alle tilfælde kan appen også tagge ordren. Automatiseringen godkender eller afviser aldrig en anmodning. Det er altid dig, der beslutter."
+      },
+      "partial-withdrawal": {
+        "question": "Kan en kunde fortryde kun nogle af varerne?",
+        "paragraphs": [
+          "Ja. Kunderne vælger, hvilke varer de fortryder. Anmodningen, refunderingen og en eventuel returnering omfatter kun disse varer. Den oprindelige fragtomkostning refunderes kun, når kunden fortryder hele ordren.",
+          "Hver ordre kan have 1 afventende anmodning ad gangen. Når du har godkendt eller afvist den, kan kunden sende en ny anmodning for andre varer."
+        ]
+      },
+      "reason": {
+        "question": "Skal kunderne angive en årsag?",
+        "paragraphs": [
+          "Nej. Ifølge EU-lovgivningen behøver kunderne ikke en årsag for at fortryde, så årsagsfeltet er altid valgfrit. I Indstillinger kan du vælge, hvilke årsager der skal tilbydes, eller holde op med at spørge."
+        ]
+      },
+      "refund": {
+        "question": "Hvordan refunderer jeg en fortrydelse?",
+        "paragraphs": [
+          "Åbn anmodningen fra siden Anmodninger. Hvordan du refunderer, afhænger af, hvor varerne er:"
+        ],
+        "bullets": [
+          "Varer, der ikke er i en returnering: vælg Refunder. Varer, der ikke er afsendt endnu, fjernes fra ordren, så de ikke bliver sendt.",
+          "Varer i en returnering: når de er kommet tilbage, skal du vælge Behandl og refunder på returneringen. Så refunderes kunden, og returneringen lukkes.",
+          "Intet er afsendt endnu: du kan også annullere og refundere hele ordren fra Flere handlinger."
+        ],
+        "closing": "EU-lovgivningen giver dig {{refundDays}} fra fortrydelsen til at refundere. Anmodningssiden viser, hvor meget tid der er tilbage. Refunder, før du godkender anmodningen."
+      },
+      "returns": {
+        "question": "Hvordan fungerer returneringer?",
+        "paragraphs": [
+          "En returnering fortæller Shopify, hvilke varer kunden sender tilbage. Appen kan oprette en, når en anmodning modtages, eller du kan vælge Opret returnering på anmodningssiden.",
+          "En returnering omfatter kun varer, der er afsendt. Kunden refunderes ikke, når returneringen oprettes. Når varerne er kommet tilbage, skal du vælge Behandl og refunder på returneringen."
+        ]
+      },
+      "decision-lock": {
+        "question": "Hvorfor deaktiveres ordrehandlinger, når jeg har godkendt eller afvist en anmodning?",
+        "paragraphs": [
+          "Når du godkender eller afviser, afsluttes anmodningen. Derefter deaktiveres refunderinger, tilbageholdelser, returneringer og annulleringer, så ordren ikke ændres ved en fejl. Derfor bør du refundere, før du godkender.",
+          "Beslutningen ophæver også enhver tilbageholdelse af udførelsen, som appen har foretaget. Hvis ophævelsen mislykkes, kan du stadig vælge Ophæv tilbageholdelse af udførelse."
+        ]
+      },
+      "emails": {
+        "question": "Hvilke e-mails sender appen, og kan jeg redigere dem?",
+        "paragraphs": [
+          "Appen sender {{emailCount}} e-mails. Du kan redigere dem alle på siden Notifikationer:"
+        ],
+        "bullets": [
+          "Fortrydelsesbekræftelse til kunden: sendes, når en kunde indsender en anmodning. Den er altid aktiveret.",
+          "Notifikation om ny anmodning: sendes til din butiks kontaktmail. Du kan deaktivere den.",
+          "Fortrydelse godkendt: sendes til kunden, når du godkender en anmodning. Du kan gennemgå den først eller deaktivere den.",
+          "Fortrydelse afvist: sendes til kunden, når du afviser en anmodning. Du kan gennemgå den først eller deaktivere den."
+        ],
+        "closing": "Du kan redigere emne og brødtekst i hver e-mail på alle sprog og tilføje variabler som ordrenummeret eller kundens navn. Forhåndsvisningen opdateres, mens du skriver."
+      },
+      "countries-languages": {
+        "question": "Hvilke lande og sprog understøtter appen?",
+        "paragraphs": [
+          "Alle EU-lande er som standard berettigede. Hvis du kun sælger til nogle af dem, skal du vælge Bestemte lande i Indstillinger.",
+          "Formularen findes på {{languageCount}} sprog: {{languages}}. Kunderne ser den på deres eget sprog.",
+          "Engelsk er grundsproget. Hvis du lader et oversat felt være tomt, ser kunderne den engelske tekst i stedet."
+        ]
+      }
+    }
+  },
+  "featureRequest": {
+    "pageTitle": "Foreslå en funktion",
+    "intro": "Fortæl os, hvad du gerne vil se i appen. Vi læser alle forslag.",
+    "sentHeading": "Funktionsforslaget er sendt",
+    "sentBody": "Tak, fordi du delte din idé med vores team.",
+    "firstName": "Fornavn",
+    "lastName": "Efternavn",
+    "email": "E-mail",
+    "request": "Hvilken funktion ønsker du?",
+    "requestPlaceholder": "Beskriv funktionen, og hvordan den ville hjælpe din butik",
+    "submit": "Send forslag"
+  },
+  "pricing": {
+    "pageTitle": "Priser",
+    "pricePerMonth": "{{price}} pr. måned",
+    "currentPlan": "Nuværende abonnement",
+    "choosePlan": "Vælg {{plan}}",
+    "switchedToast": "Skiftet til abonnementet {{plan}}",
+    "plans": {
+      "free": {
+        "name": "Free",
+        "features": [
+          "Op til 10 fortrydelsesanmodninger om måneden",
+          "E-mailnotifikationer"
+        ]
+      },
+      "starter": {
+        "name": "Starter",
+        "features": [
+          "Ubegrænsede fortrydelsesanmodninger",
+          "Tilpassede formularfelter",
+          "E-mailnotifikationer"
+        ]
+      },
+      "pro": {
+        "name": "Pro",
+        "features": [
+          "Alt i Starter",
+          "Prioriteret support",
+          "Automatiske refunderinger"
+        ]
+      }
+    },
+    "switchError": "Dit abonnement kunne ikke ændres"
+  }
+}

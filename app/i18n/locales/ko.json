@@ -1,0 +1,1234 @@
+{
+  "common": {
+    "add": "추가",
+    "backToHome": "홈으로 돌아가기",
+    "cancel": "취소",
+    "delete": "삭제",
+    "discard": "취소",
+    "done": "완료",
+    "dayCount_other": "{{count}}일",
+    "emptyValue": "—",
+    "noMatches": "'{{query}}'에 대한 결과가 없습니다.",
+    "preview": "미리 보기",
+    "remove": "제거",
+    "save": "저장",
+    "verified": "인증됨"
+  },
+  "nav": {
+    "home": "홈",
+    "withdrawalRequests": "요청",
+    "formSetup": "설정",
+    "emailTemplates": "알림",
+    "pricing": "요금제"
+  },
+  "errors": {
+    "generic": "문제가 발생했습니다. 다시 시도하세요.",
+    "requestFailed": "문제가 발생했습니다(오류 {{status}}). 다시 시도하세요.",
+    "methodNotAllowed": "이 작업은 지원되지 않습니다.",
+    "unknownAction": "이 작업은 지원되지 않습니다.",
+    "noValidFields": "업데이트할 내용이 없습니다.",
+    "emailServiceUnavailable": "이메일 서비스에 연결할 수 없습니다. 몇 분 후에 다시 시도하세요.",
+    "emailServiceNotConfigured": "이메일 발송이 아직 설정되지 않았습니다. 지원팀에 문의하세요.",
+    "requestNotFound": "이 철회 요청이 없거나 삭제되었습니다.",
+    "requestDecided": "이 요청은 이미 승인 또는 거부되어 주문 작업을 더 이상 사용할 수 없습니다.",
+    "unknownDecision": "이 요청을 승인할지 거부할지 선택하세요.",
+    "invalidStatus": "이 요청의 유효한 상태를 선택하세요.",
+    "noteRequired": "메모를 입력하세요.",
+    "orderNotFound": "Shopify에서 이 주문을 찾을 수 없습니다.",
+    "invalidEmail": "유효한 이메일 주소를 입력하세요.",
+    "featureRequestIncomplete": "요청을 보내기 전에 모든 필드를 입력하세요.",
+    "senderCodeRequired": "이메일로 받은 인증 코드를 입력하세요.",
+    "senderNotFound": "이 발신자 이메일을 찾을 수 없습니다. 제거한 후 다시 추가하면 새 코드를 받을 수 있습니다.",
+    "senderNotStarted": "먼저 발신자 이메일을 인증하세요.",
+    "senderIdMissing": "이 발신자 이메일을 등록할 수 없습니다. 다시 시도하세요.",
+    "domainInvalid": "yourstore.com과 같은 유효한 도메인을 입력하세요.",
+    "domainFreeProvider": "Gmail, Yahoo 같은 무료 이메일 서비스는 인증할 수 없습니다. 대신 스토어 도메인을 사용하세요."
+  },
+  "auth": {
+    "login": {
+      "heading": "로그인",
+      "shopLabel": "스토어 도메인",
+      "shopDetails": "example.myshopify.com",
+      "submit": "로그인",
+      "missingShop": "로그인하려면 스토어 도메인을 입력하세요.",
+      "invalidShop": "example.myshopify.com과 같은 유효한 스토어 도메인을 입력하세요."
+    }
+  },
+  "status": {
+    "pending": "대기 중",
+    "approved": "승인됨",
+    "rejected": "거부됨"
+  },
+  "sourceInline": {
+    "order_status": "주문 상태 페이지",
+    "standalone_page": "스토어 페이지"
+  },
+  "placements": {
+    "orderStatus": {
+      "label": "주문 상태 페이지",
+      "details": "고객이 결제 후에 보는 주문 상태 페이지에 철회 양식을 표시합니다."
+    },
+    "storefront": {
+      "label": "스토어 페이지",
+      "details": "테마의 별도 페이지에 철회 양식을 표시해 고객이 주문 상태 페이지 밖에서도 찾을 수 있도록 합니다."
+    }
+  },
+  "orderStatus": {
+    "financial": {
+      "PENDING": "결제 대기 중",
+      "AUTHORIZED": "승인됨",
+      "PARTIALLY_PAID": "부분 결제됨",
+      "PAID": "결제됨",
+      "PARTIALLY_REFUNDED": "부분 환불됨",
+      "REFUNDED": "환불됨",
+      "VOIDED": "무효화됨",
+      "EXPIRED": "만료됨"
+    },
+    "fulfillment": {
+      "UNFULFILLED": "처리되지 않음",
+      "PENDING_FULFILLMENT": "처리 대기 중",
+      "OPEN": "열림",
+      "IN_PROGRESS": "진행 중",
+      "ON_HOLD": "보류됨",
+      "PARTIALLY_FULFILLED": "부분 처리됨",
+      "FULFILLED": "처리됨",
+      "RESTOCKED": "재입고됨",
+      "SCHEDULED": "예약됨"
+    },
+    "return": {
+      "REQUESTED": "요청됨",
+      "OPEN": "열림",
+      "CLOSED": "닫힘",
+      "DECLINED": "거절됨",
+      "CANCELED": "취소됨"
+    }
+  },
+  "stats": {
+    "heading": "개요",
+    "description": "철회 요청 현황",
+    "viewRequests": "요청 보기",
+    "total": "전체 요청",
+    "today": "오늘 제출됨",
+    "pending": "대기 중",
+    "closed": "종료됨",
+    "requestCount_other": "요청 {{count}}건"
+  },
+  "home": {
+    "pageTitle": "홈",
+    "loadError": "대시보드를 불러올 수 없습니다",
+    "saveErrorHeading": "변경 사항을 저장할 수 없습니다",
+    "saveErrorAction": "다시 시도하거나 설정에서 변경하세요.",
+    "setupBanner": {
+      "heading_other": "설정 단계 {{count}}개 남음",
+      "body": "철회 양식을 준비하려면 다음 단계를 완료하세요: {{steps}}."
+    },
+    "setupGuide": {
+      "heading": "설정 가이드",
+      "description": "이 가이드를 따라 스토어에 철회 양식을 게시하세요.",
+      "progress": "작업 {{total}}개 중 {{completed}}개 완료",
+      "dismiss": "설정 가이드 닫기",
+      "collapse": "설정 가이드 접기",
+      "expand": "설정 가이드 펼치기",
+      "showStep": "{{step}} 세부 정보 표시",
+      "hideStep": "{{step}} 세부 정보 숨기기",
+      "steps": {
+        "form": {
+          "label": "철회 양식 사용 설정",
+          "description": "양식을 사용 설정하고 고객에게 표시할 위치를 선택하세요. 필드, 사유, 문구에는 이미 기본 텍스트가 있습니다. 설정에서 언제든지 변경할 수 있습니다.",
+          "checkbox": "철회 양식 사용",
+          "cta": "설정으로 이동",
+          "placementHeading": "고객에게 양식을 표시할 위치 선택",
+          "placementDescription": "위치를 하나 이상 선택하세요. 고객에게 양식이 표시되려면 각 위치에 앱 블록이 있어야 합니다."
+        },
+        "blocks": {
+          "label": "스토어에 앱 블록 추가",
+          "description": "이전 단계에서 선택한 위치마다 앱 블록을 추가하세요.",
+          "locked": "{{step}}단계를 완료하여 양식을 표시할 위치를 선택하세요. 그런 다음 여기에서 앱 블록을 추가할 수 있습니다.",
+          "surfaces": {
+            "orderStatus": "주문 상태 페이지",
+            "theme": "스토어 페이지"
+          },
+          "live": {
+            "orderStatus": "주문 상태 페이지에 앱 블록이 게시되었습니다.",
+            "theme": "스토어 페이지에 앱 블록이 게시되었습니다."
+          }
+        }
+      }
+    },
+    "help": {
+      "heading": "도움말 및 리소스",
+      "support": {
+        "title": "이메일 지원",
+        "description": "궁금한 점이 있으신가요? 지원팀이 도와드립니다.",
+        "link": "지원팀에 문의"
+      },
+      "faqs": {
+        "title": "자주 묻는 질문",
+        "description": "앱 설정 및 사용에 관한 자주 묻는 질문의 답변을 확인하세요.",
+        "link": "자주 묻는 질문 보기"
+      },
+      "featureRequest": {
+        "title": "기능 요청",
+        "description": "앱에 대한 아이디어가 있으신가요? 원하는 기능을 알려 주세요.",
+        "link": "기능 요청하기"
+      }
+    }
+  },
+  "blockSetup": {
+    "autoUpdate": "이 메시지는 앱 블록을 저장하고 몇 초 후에 자동으로 사라집니다.",
+    "addAppBlock": "앱 블록 추가",
+    "orderStatus": {
+      "heading": "주문 상태 페이지에 앱 블록 추가",
+      "body": "앱 블록을 추가해야 고객이 주문 상태 페이지에서 철회 양식을 볼 수 있습니다. 추가 방법:",
+      "steps": {
+        "open": "아래에서 <strong>앱 블록 추가</strong>를 선택합니다. 결제 편집기에서 주문 상태 페이지가 열립니다.",
+        "add": "사이드바에서 <strong>앱 블록 추가</strong>를 선택합니다.",
+        "choose": "<strong>철회 양식</strong>을 선택합니다.",
+        "save": "<strong>저장</strong>을 선택합니다."
+      }
+    },
+    "storefront": {
+      "heading": "스토어 페이지에 앱 블록 추가",
+      "body": "페이지 템플릿을 선택한 다음 앱 블록 추가를 선택하세요. 철회 양식이 섹션으로 추가된 상태로 테마 편집기가 열립니다.",
+      "templateLabel": "페이지 템플릿",
+      "templates": {
+        "page": "기본 페이지",
+        "index": "홈페이지",
+        "product": "제품 페이지",
+        "collection": "컬렉션 페이지",
+        "cart": "장바구니 페이지"
+      },
+      "steps": {
+        "open": "<strong>앱 블록 추가</strong>를 선택하면 섹션이 추가된 상태로 테마 편집기가 열립니다.",
+        "move": "섹션을 페이지의 원하는 위치로 드래그합니다.",
+        "save": "<strong>저장</strong>을 선택합니다."
+      }
+    }
+  },
+  "onboarding": {
+    "pageTitle": "시작하기",
+    "heading": "EU 철회에 대비해 스토어 준비하기",
+    "intro_other": "다음 {{count}}단계를 완료하면 EU 고객에게 구매를 철회할 수 있는 법적 요건을 갖춘 방법을 제공할 수 있습니다.",
+    "stepBadge": "{{total}}단계 중 {{current}}단계",
+    "completedToast": "설정 완료",
+    "steps": {
+      "welcome": {
+        "title": "환영합니다",
+        "description": "앱의 기능"
+      },
+      "form": {
+        "title": "철회 양식",
+        "description": "양식 사용 설정"
+      }
+    },
+    "actions": {
+      "getStarted": "시작하기",
+      "continue": "계속",
+      "finish": "설정 완료",
+      "skip": "설정 건너뛰기",
+      "back": "뒤로"
+    },
+    "help": {
+      "heading": "도움이 필요하신가요?",
+      "body": "궁금한 점이 있으신가요? <supportLink>지원팀에 문의하세요</supportLink>."
+    },
+    "welcome": {
+      "heading": "{{appName}}에 오신 것을 환영합니다",
+      "setupTime": "약 1분 소요",
+      "law": "2026년 6월 19일부터 EU 고객에게 판매하는 스토어는 모든 주문에 대해 2단계 철회 방법을 제공해야 합니다(EU 지침 2023/2673, 제11a조). 반품 정책만으로는 충분하지 않습니다.",
+      "app": "{{appName}}은(는) 주문 상태 페이지, 온라인 스토어의 페이지 또는 둘 다에 철회 버튼을 추가합니다. 2단계 확인을 처리하고 필수 확인 이메일을 발송합니다. 모든 요청을 한곳에서 관리할 수 있습니다.",
+      "imageAlt": "주문을 철회하는 고객",
+      "requirementsHeading": "법적 요구 사항",
+      "requirements": {
+        "button": "고객이 쉽게 찾을 수 있는 명확한 라벨의 철회 버튼",
+        "twoStep": "2단계 절차: 고객이 철회를 제출한 후 확인",
+        "email": "고객이 보관할 수 있는 자동 확인 이메일"
+      },
+      "penaltyHeading": "요건을 준수하지 않으면",
+      "penalty": "철회 버튼이 없거나 작동하지 않으면 법에 따라 {{days}}일의 철회 기간이 연장됩니다. 이 경우 고객은 해당 주문마다 12개월 {{days}}일 동안 철회할 수 있습니다."
+    },
+    "form": {
+      "heading": "철회 양식 사용 설정",
+      "body": "EU 법률에 따라 고객은 철회를 제출한 후 별도의 단계에서 확인합니다. 양식에는 기본 법률 문구가 포함되어 있습니다. 고객은 배송일로부터 {{days}} 이내에 철회할 수 있습니다.",
+      "switch": "철회 양식 사용",
+      "later": "이 모든 설정은 나중에 설정에서 변경할 수 있습니다.",
+      "loadError": "양식 설정을 불러올 수 없습니다. 지금 설정을 완료하고 나중에 설정에서 양식을 사용 설정할 수 있습니다.",
+      "saveError": "양식 선택 사항을 저장할 수 없습니다. 다시 시도하거나, 저장하지 않고 설정을 완료한 후 나중에 설정에서 지정하세요.",
+      "finishWithoutSaving": "저장하지 않고 완료",
+      "placementError": "위치를 하나 이상 선택하거나 양식을 사용 중지하세요."
+    },
+    "finishError": "설정을 완료할 수 없습니다. 다시 시도하세요."
+  },
+  "formSetup": {
+    "pageTitle": "설정",
+    "loadError": "설정을 불러올 수 없습니다",
+    "saveError": "설정을 저장할 수 없습니다",
+    "savedToast": "설정이 저장되었습니다",
+    "enable": {
+      "heading": "철회 양식",
+      "description": "고객이 철회 요청을 제출할 수 있는지와 양식이 표시되는 위치를 선택하세요.",
+      "checkbox": "철회 양식 사용",
+      "details": "이 설정을 끄면 고객은 어디에서도 철회 요청을 제출할 수 없습니다.",
+      "orderStatus": "주문 상태 페이지에 표시",
+      "storefront": "스토어 페이지에 표시"
+    },
+    "countries": {
+      "heading": "대상 국가",
+      "description": "주문이 이 국가 중 하나로 배송되는 경우에만 고객에게 철회 양식이 표시됩니다.",
+      "all": "EU 국가 전체 {{count}}개국(권장)",
+      "allDetails": "철회권은 EU 전역에 적용됩니다.",
+      "specific": "특정 국가",
+      "specificDetails": "아래에서 국가를 선택하세요. 언제든지 변경할 수 있습니다.",
+      "pickerLabel": "국가",
+      "pickerPlaceholder": "국가 검색"
+    },
+    "content": {
+      "heading": "양식 내용",
+      "tabs": {
+        "step1": "1. 세부 정보",
+        "confirm": "2. 확인",
+        "done": "3. 완료"
+      },
+      "language": "언어",
+      "languageDetails": "언어를 선택하면 해당 언어로 양식 내용을 편집할 수 있습니다. 언어별로 따로 저장됩니다.",
+      "beforeDelivery": {
+        "heading": "배송 전",
+        "description": "주문이 배송될 때까지(배송 중 포함) 양식의 첫 화면과 세부 정보 단계에 표시됩니다."
+      },
+      "afterDelivery": {
+        "heading": "배송 후",
+        "description": "Shopify에서 주문이 배송 완료로 표시되면 대신 표시됩니다."
+      },
+      "title": "제목",
+      "description": "설명",
+      "itemHeading": "품목 선택 제목",
+      "customerDetails": {
+        "heading": "고객 정보",
+        "description": "주문에서 자동으로 입력됩니다. 고객은 이 필드를 편집할 수 없습니다.",
+        "locked": "잠김",
+        "fullName": "이름",
+        "email": "이메일",
+        "orderNumber": "주문 번호"
+      },
+      "reason": {
+        "heading": "철회 사유",
+        "checkbox": "사유 묻기",
+        "details": "고객은 사유를 밝힐 필요가 없습니다. EU 법률에 따라 이 필드는 선택 사항이어야 합니다.",
+        "label": "사유 필드 라벨",
+        "optionsHeading": "사유 옵션",
+        "optionsHelp": "고객은 이 목록에서 선택합니다. 스토어에 맞게 옵션을 추가, 제거하거나 문구를 수정하세요. 텍스트 상자가 있는 '기타' 옵션은 항상 마지막에 추가됩니다.",
+        "removeOption": "{{option}} 제거",
+        "addLabel": "사유 추가",
+        "addPlaceholder": "예: 실수로 주문함",
+        "translatedHelp": "각 옵션을 번역하세요. 옵션을 추가하거나 제거하려면 영어로 전환하세요.",
+        "translatedEmpty": "먼저 영어로 사유 옵션을 추가하세요."
+      },
+      "continueButton": "계속 버튼 라벨",
+      "confirm": {
+        "heading": "확인 제목",
+        "messageBefore": "배송 전 메시지",
+        "messageAfter": "배송 후 메시지",
+        "declaration": "동의 문구",
+        "button": "확인 버튼 라벨"
+      },
+      "done": {
+        "titleBefore": "배송 전 제목",
+        "messageBefore": "배송 전 메시지",
+        "titleAfter": "배송 후 제목",
+        "messageAfter": "배송 후 메시지"
+      }
+    },
+    "automation": {
+      "heading": "자동화",
+      "description": "고객이 철회 요청을 제출하면 앱이 수행할 작업을 선택하세요.",
+      "beforeShip": {
+        "heading": "주문 발송 전",
+        "description": "품목이 하나도 발송되기 전에 요청이 들어온 경우에 적용됩니다.",
+        "hold": "검토를 위해 주문 처리 보류",
+        "holdDetails": "요청을 승인하거나 거부할 때까지 주문 처리를 일시 중지합니다. 결정하면 보류가 해제됩니다.",
+        "tagDetails": "발송 전에 요청이 들어온 주문에 태그를 추가해 직원이 주문 목록에서 찾을 수 있게 합니다."
+      },
+      "fallback": {
+        "label": "주문 처리 방식",
+        "hold": "요청을 승인하거나 거부할 때까지 보류 유지",
+        "cancelNow": "전체 주문을 취소하고 즉시 환불",
+        "releaseN": "지정한 일수가 지나면 보류 해제",
+        "cancelN": "지정한 일수가 지나면 전체 주문을 취소하고 환불",
+        "cancelWarning": "고객이 일부 품목만 철회했더라도 전체 주문이 취소되고 환불됩니다. Shopify에서 고객에게 취소 이메일을 보냅니다.",
+        "days": "일수"
+      },
+      "afterDelivery": {
+        "heading": "주문 발송 후",
+        "description": "품목이 하나 이상 발송된 후에 요청이 들어온 경우에 적용되며, 아직 배송되지 않은 경우도 포함됩니다. 모든 요청은 여전히 요청 페이지에 표시됩니다.",
+        "createReturn": "반품 생성",
+        "createReturnDetails": "요청된 품목 중 발송된 품목에 대해 Shopify에서 반품을 생성합니다.",
+        "tagDetails": "발송 후에 요청이 들어온 주문에 태그를 추가합니다."
+      },
+      "tag": {
+        "checkbox": "주문에 태그 추가",
+        "label": "주문 태그",
+        "placeholder": "태그 추가"
+      }
+    },
+    "deadline": {
+      "heading": "철회 기한",
+      "description": "철회 기간은 주문일이 아니라 배송일부터 시작됩니다. EU 법률에 따라 최소 {{days}}이 필요합니다.",
+      "days": "배송 후 철회 가능 일수",
+      "daysDetails": "주문이 배송된 후 고객이 철회할 수 있는 기간입니다.",
+      "transit": "예상 배송 소요 기간(일)",
+      "transitDetails": "배송업체가 배송일이나 예상일을 제공하지 않을 때 사용됩니다. 앱이 발송일에 이 일수를 더합니다."
+    },
+    "validation": {
+      "countryMode": "대상 국가를 선택하세요.",
+      "euCountries": "국가를 하나 이상 선택하세요.",
+      "title": "제목을 입력하세요.",
+      "description": "설명을 입력하세요.",
+      "itemHeading": "품목 목록의 제목을 입력하세요.",
+      "continueButton": "계속 버튼의 라벨을 입력하세요.",
+      "heading": "제목을 입력하세요.",
+      "confirmMessage": "확인 메시지를 입력하세요.",
+      "declaration": "고객이 동의해야 하는 문구를 입력하세요.",
+      "confirmButton": "확인 버튼의 라벨을 입력하세요.",
+      "message": "메시지를 입력하세요.",
+      "reasonLabel": "사유 필드의 라벨을 입력하세요.",
+      "reasonOptions": "사유를 하나 이상 추가하세요.",
+      "reasonOptionTranslation": "이 사유의 번역을 입력하세요.",
+      "fallback": "주문 처리 방식을 선택하세요.",
+      "daysRange": "{{min}}~{{max}} 사이의 일수를 입력하세요.",
+      "tags": "태그를 하나 이상 추가하거나 태그 추가를 끄세요.",
+      "afterDeliveryAction": "주문 발송 후 수행할 작업을 선택하세요."
+    },
+    "preview": {
+      "heading": "실시간 미리 보기",
+      "compliantBadge": "2단계 요건 충족",
+      "surfaceLabel": "미리 보기",
+      "surfaces": {
+        "orderStatus": "주문 상태 페이지",
+        "theme": "스토어 페이지"
+      },
+      "stageLabel": "배송 상태",
+      "stages": {
+        "beforeDelivery": "아직 배송되지 않음",
+        "delivered": "배송됨"
+      },
+      "banner": {
+        "orderStatus": "주문 상태 페이지에서 고객에게 표시되는 화면입니다. 버튼을 선택해 사용해 보거나 양식 내용의 탭을 사용해 특정 단계로 이동하세요.",
+        "theme": "스토어 페이지에서 고객에게 표시되는 화면입니다. 스토어 방문자는 로그인하지 않은 상태이므로 '주문 찾기' 단계부터 시작합니다."
+      },
+      "restart": "미리 보기 다시 시작",
+      "position": {
+        "entry": "시작 카드",
+        "lookup": "주문 찾기",
+        "step": "{{total}}단계 중 {{current}}단계"
+      },
+      "storefront": {
+        "start": "철회 요청 시작",
+        "findOrderHeading": "주문 찾기",
+        "findOrderBody": "철회 요청을 시작하려면 주문 정보를 입력하세요.",
+        "fullName": "이름",
+        "email": "이메일",
+        "orderNumber": "주문 번호",
+        "continue": "계속",
+        "steps": {
+          "step1": "세부 정보",
+          "confirm": "확인",
+          "done": "완료"
+        },
+        "stepOf": "{{total}}단계 중 {{current}}단계",
+        "stepProgress": "{{total}}단계 중 {{current}}단계: {{label}}",
+        "reasonPlaceholder": "사유 선택(선택 사항)",
+        "otherReason": "기타",
+        "yourReason": "사유",
+        "yourReasonPlaceholder": "사유를 알려 주세요",
+        "selectItem": "계속하려면 품목을 하나 이상 선택하세요.",
+        "itemsToWithdraw": "철회할 품목({{count}})",
+        "selectedTotal": "선택한 품목 합계",
+        "previous": "이전",
+        "submittedOn": "{{date}}에 제출됨"
+      }
+    }
+  },
+  "requests": {
+    "pageTitle": "요청",
+    "searchLabel": "철회 요청 검색",
+    "searchPlaceholder": "주문 번호, 고객 이름 또는 이메일로 검색",
+    "export": "내보내기",
+    "exportSelected": "선택 항목 내보내기",
+    "tabs": {
+      "all": "전체",
+      "withCount": "{{label}}({{count}})"
+    },
+    "empty": {
+      "imageAlt": "",
+      "heading": "아직 철회 요청이 없습니다",
+      "body": "고객의 철회 요청이 여기에 표시됩니다.",
+      "filteredHeading": "철회 요청을 찾을 수 없습니다",
+      "filteredBody": "검색어나 필터를 변경해 보세요."
+    },
+    "table": {
+      "selectAll": "모든 철회 요청 선택",
+      "selectRow": "주문 {{order}} 선택",
+      "selectedCount": "{{count}}개 선택됨",
+      "order": "주문",
+      "customer": "고객",
+      "items": "품목",
+      "value": "금액",
+      "status": "상태",
+      "submitted": "제출일",
+      "actions": "작업",
+      "itemCount_other": "품목 {{count}}개",
+      "viewRow": "주문 {{order}}의 요청 보기",
+      "deleteRow": "주문 {{order}}의 요청 삭제"
+    },
+    "delete": {
+      "heading_other": "철회 요청 {{count}}건을 삭제하시겠습니까?",
+      "body_other": "철회 요청 {{count}}건이 영구적으로 삭제됩니다. 이 작업은 취소할 수 없습니다.",
+      "confirm_other": "삭제",
+      "toast_other": "철회 요청 {{count}}건이 삭제되었습니다"
+    },
+    "csv": {
+      "filename": "withdrawal-requests-{{date}}.csv",
+      "order": "주문",
+      "customerName": "고객 이름",
+      "customerEmail": "고객 이메일",
+      "country": "국가",
+      "items": "품목",
+      "value": "금액",
+      "reason": "사유",
+      "status": "상태",
+      "submitted": "제출일",
+      "decided": "결정일"
+    }
+  },
+  "requestDetail": {
+    "pageTitle": "철회 요청",
+    "backLink": "요청",
+    "submittedLine": "{{date}}에 {{source}}에서 제출됨",
+    "previous": "이전 요청",
+    "next": "다음 요청",
+    "badges": {
+      "canceled": "취소됨",
+      "onHold": "보류됨",
+      "return": "반품: {{status}}"
+    },
+    "actions": {
+      "refund": "환불",
+      "more": "추가 작업",
+      "cancelOrder": "주문 취소",
+      "placeHold": "주문 처리 보류",
+      "releaseHold": "주문 처리 보류 해제",
+      "createReturn": "반품 생성",
+      "processReturn": "처리 및 환불",
+      "viewOrder": "주문 보기"
+    },
+    "banners": {
+      "orderUnavailableHeading": "주문 세부 정보를 사용할 수 없음",
+      "orderUnavailableBody": "{{error}} 주문 세부 정보가 로드될 때까지 주문 작업을 사용할 수 없습니다.",
+      "actionFailedHeading": "이 작업을 완료할 수 없습니다",
+      "actionFailedAction": "자세한 내용은 아래 활동을 확인하세요.",
+      "canceled": "이 주문은 취소되었습니다. 주문 작업을 더 이상 사용할 수 없습니다."
+    },
+    "deadline": {
+      "heading": "환불 기한",
+      "pendingLabel": "결정 및 환불까지 남은 기간",
+      "decidedLabel": "결정",
+      "badges": {
+        "overdue": "기한 초과",
+        "actionNeeded": "조치 필요",
+        "onTime": "기한 내"
+      },
+      "daysLeft_other": "{{count}}일 남음",
+      "daysOverdue_other": "{{count}}일 초과",
+      "daysEarly_other": "기한 {{count}}일 전",
+      "daysLate_other": "기한 {{count}}일 후",
+      "pending": "요청이 제출된 시점부터 {{days}} 이내에 결정하고 환불해야 합니다. 기한은 {{date}}입니다.",
+      "pendingOverdue": "기한이 {{date}}에 지났습니다. 최대한 빨리 고객에게 환불하세요.",
+      "decidedOnTime": "{{windowDays}}일의 환불 기간 내에 결정되었습니다. 기한은 {{date}}였습니다.",
+      "decidedLate": "환불 기한({{date}})이 지난 후 결정되었습니다."
+    },
+    "items": {
+      "heading": "철회된 품목",
+      "reject": "거부",
+      "approve": "승인",
+      "total": "철회 합계",
+      "sku": "SKU: {{sku}}",
+      "quantity": "수량: {{count}}",
+      "shipping": {
+        "notShipped": "아직 발송되지 않음",
+        "partlyShipped": "부분 발송됨",
+        "shipped": "발송됨"
+      },
+      "partiallyShippedBanner": "이 주문의 일부가 발송되었습니다. 아직 발송되지 않은 품목은 계속 보류할 수 있으며, 발송된 품목은 반품이 필요합니다."
+    },
+    "return": {
+      "heading": "반품",
+      "status": "상태",
+      "created": "생성일",
+      "body": "철회된 품목에 대해 Shopify에서 반품이 생성되었습니다.",
+      "openBody": "품목이 반송되면 처리 및 환불을 선택하세요. 반품된 품목에 대해 고객에게 환불되고 반품이 종료됩니다.",
+      "alreadyRefundedBody": "이 반품의 품목은 이미 환불되었습니다. 품목이 반송되면 Shopify에서 반품을 종료하세요."
+    },
+    "processReturnModal": {
+      "heading": "반품 처리 및 환불",
+      "calculating": "환불 금액을 계산하는 중…",
+      "nothingToProcess": "이 반품에서 처리할 항목이 없습니다. Shopify에서 이미 처리되었거나 종료되었을 수 있습니다.",
+      "nothingToRefund": "이 반품의 품목은 이미 환불되어 더 이상 환불할 금액이 없습니다.",
+      "unsupportedPayment": "이 주문의 결제는 앱에서 환불할 수 없습니다. Shopify에서 반품을 처리하고 환불하세요.",
+      "itemsHeading": "반품 {{name}}의 품목",
+      "subtotal": "품목 소계",
+      "shippingLine": "원래 배송비",
+      "total": "총 환불액",
+      "body": "반품된 품목을 처리됨으로 표시하고, 원래 결제 수단으로 환불한 다음, 반품을 종료합니다. Shopify에서 고객에게 환불 영수증을 이메일로 보냅니다. 이 작업은 취소할 수 없습니다.",
+      "confirmAmount": "{{amount}} 환불",
+      "confirm": "처리 및 환불"
+    },
+    "payment": {
+      "heading": "결제",
+      "status": "결제 상태",
+      "subtotal": "철회 소계",
+      "shipping": "주문 배송비",
+      "total": "주문 합계",
+      "refunded": "환불됨",
+      "unavailable": "지금은 결제 세부 정보를 사용할 수 없습니다."
+    },
+    "activity": {
+      "heading": "활동",
+      "noteLabel": "메모 추가",
+      "notePlaceholder": "메모 추가…",
+      "post": "게시",
+      "noteHelp": "메모는 본인과 직원만 볼 수 있습니다. 고객에게는 표시되지 않습니다.",
+      "submitted": "{{source}}에서 철회 요청이 제출됨",
+      "decided": {
+        "approved": "요청이 승인됨",
+        "rejected": "요청이 거부됨"
+      },
+      "note": "메모: {{body}}",
+      "entry": "{{label}}: {{message}}",
+      "actions": {
+        "resolve_branch": "자동화 시작됨",
+        "run_automation": "자동화",
+        "automation_completed": "자동화 완료됨",
+        "hold_fulfillment": "주문 처리 보류",
+        "schedule_fallback": "예약된 후속 작업",
+        "release_hold": "주문 처리 보류 해제됨",
+        "cancel_order_immediate": "주문이 취소 및 환불됨",
+        "cancel_order_scheduled": "주문이 취소 및 환불됨",
+        "cancel_order_manual": "주문이 취소 및 환불됨",
+        "cancel_order": "주문이 취소 및 환불됨",
+        "refund": "환불",
+        "tag_before_ship": "주문에 태그가 추가됨",
+        "tag_after_delivery": "주문에 태그가 추가됨",
+        "order_tag_add": "주문 태그 추가됨",
+        "order_tag_remove": "주문 태그 제거됨",
+        "create_return": "반품",
+        "refresh_return": "반품 상태 새로 고침됨",
+        "process_return": "처리 및 환불",
+        "fetch_shop_contact": "스토어 연락처 정보",
+        "customer_email": "고객 확인 이메일",
+        "merchant_email": "새 요청 알림",
+        "notify_customer": "결정 이메일",
+        "notify_merchant": "알림을 받음"
+      },
+      "messages": {
+        "noTags": "설정된 태그가 없습니다",
+        "tagged": "주문에 {{tags}} 태그를 추가함",
+        "noHoldableOrders": "지금은 이 주문에서 보류할 수 있는 항목이 없습니다",
+        "held": "품목이 발송되지 않도록 보류함",
+        "holdOff": "검토를 위한 주문 처리 보류가 꺼져 있습니다",
+        "tagBeforeShipOff": "발송 전 태그 추가가 꺼져 있습니다",
+        "tagAfterDeliveryOff": "발송 후 태그 추가가 꺼져 있습니다",
+        "fallbackHold": "요청을 승인하거나 거부할 때까지 주문이 보류 상태로 유지됩니다",
+        "fallbackInvalidDays": "후속 작업을 예약할 수 없습니다. 일수가 유효하지 않습니다.",
+        "scheduledRelease": "{{date}}에 보류 해제 예약됨",
+        "scheduledCancel": "{{date}}에 취소 및 환불 예약됨",
+        "canceled": "주문이 취소 및 환불됨",
+        "returnCreated": "Shopify에서 반품이 생성됨",
+        "returnNoMatch": "요청된 품목 중 반품할 수 있는 품목이 없습니다",
+        "notifiedByEmail": "앱과 이메일로 알림",
+        "notifiedEmailFailed": "앱에서 알림을 보냈습니다. 알림 이메일 발송 실패: {{error}}",
+        "notifiedInAppOnly": "앱에서 알림을 보냈습니다. 알림 이메일은 발송되지 않았습니다.",
+        "emailSent": "발송됨",
+        "emailFailed": "실패: {{error}}",
+        "emailNotSent": "수신자가 없거나 이메일이 설정되지 않아 발송되지 않음",
+        "orderNotFound": "Shopify에서 이 주문을 찾을 수 없습니다",
+        "alreadyCanceled": "주문이 이미 취소되었습니다",
+        "branchBeforeShip": "주문이 아직 발송되지 않아 발송 전 단계가 실행됨",
+        "branchAfterDelivery": "주문이 발송되어 발송 후 단계가 실행됨",
+        "branchPartiallyShipped": "주문이 부분 발송되어 발송된 품목과 발송되지 않은 품목에 대한 단계가 실행됨",
+        "noUnshippedItemsRequested": "요청된 품목 중 발송 대기 중인 품목이 없어 보류한 항목이 없습니다",
+        "fallbackCancelPartiallyShipped": "주문이 부분 발송되어 전체를 취소할 수 없습니다. 요청을 승인하거나 거부할 때까지 요청된 품목은 보류 상태로 유지됩니다.",
+        "returnNothingShipped": "요청된 품목 중 발송된 품목이 없어 반품이 필요하지 않았습니다",
+        "runCompleted": "자동화 완료됨",
+        "runFailed": "하나 이상의 자동화 단계가 실패했습니다",
+        "runSkipped": "자동화를 건너뜀",
+        "scheduledSkippedApproved": "요청이 이미 승인되어 예약된 작업이 실행되지 않았습니다",
+        "scheduledSkippedRejected": "요청이 이미 거부되어 예약된 작업이 실행되지 않았습니다",
+        "noHoldsPlaced": "이 요청에 대해 보류된 항목이 없습니다",
+        "holdsAlreadyReleased": "보류가 이미 해제되었습니다",
+        "holdReleased": "주문을 다시 처리할 수 있습니다",
+        "holdExists": "이 요청에 대한 보류가 이미 있습니다",
+        "decisionSkipped": "직원이 고객에게 이메일을 보내지 않기로 선택함",
+        "decisionSent": "결정 내용을 고객에게 이메일로 보냄",
+        "decisionFailed": "결정 이메일 발송 실패: {{error}}",
+        "decisionNotConfigured": "이메일이 설정되지 않아 결정 이메일이 발송되지 않음",
+        "refunded": "{{amount}} 환불됨",
+        "noReturn": "이 요청에 대한 반품이 없습니다",
+        "returnStatus": "반품 상태: {{status}}",
+        "returnProcessed": "반품이 처리되고 {{amount}} 환불됨",
+        "returnNothingToProcess": "이 반품에서 처리할 항목이 없습니다",
+        "returnNothingToRefund": "이 반품의 품목은 이미 환불되었습니다",
+        "returnPaymentUnsupported": "이 결제는 앱에서 환불할 수 없습니다. Shopify에서 반품을 처리하세요.",
+        "refundNothingRefundable": "요청된 품목 중 환불할 수 있는 품목이 없습니다. 이미 환불되었을 수 있습니다.",
+        "refundNoSuggestion": "Shopify에서 이 품목의 환불 금액을 계산할 수 없습니다. Shopify에서 환불하세요.",
+        "refundCoveredByReturn": "철회된 품목이 모두 진행 중인 반품에 포함되어 있습니다. 반품에서 처리 및 환불을 사용해 환불하세요.",
+        "tagsRemoved": "주문 태그 제거됨: {{tags}}",
+        "tagsAdded": "주문 태그 추가됨: {{tags}}"
+      }
+    },
+    "order": {
+      "heading": "주문",
+      "order": "주문",
+      "placed": "주문일",
+      "payment": "결제",
+      "fulfillment": "주문 처리"
+    },
+    "customer": {
+      "heading": "고객",
+      "avatarFallback": "고객",
+      "contactHeading": "연락처 정보",
+      "email": "이메일",
+      "language": "언어",
+      "shippingHeading": "배송 주소"
+    },
+    "automation": {
+      "heading": "자동화",
+      "stage": "단계",
+      "stages": {
+        "before_ship": "발송 전",
+        "partially_shipped": "부분 발송됨",
+        "after_delivery": "발송 후"
+      },
+      "hold": "주문 처리 보류",
+      "holdStates": {
+        "onHold": "보류됨",
+        "released": "해제됨",
+        "none": "없음"
+      },
+      "canceled": "취소됨",
+      "return": "반품"
+    },
+    "emails": {
+      "heading": "이메일 기록",
+      "customerConfirmation": "고객 철회 확인",
+      "merchantNotification": "새 요청 알림",
+      "decision": "결정 이메일",
+      "statuses": {
+        "sent": "발송됨",
+        "failed": "실패",
+        "notSent": "발송되지 않음"
+      }
+    },
+    "tags": {
+      "heading": "주문 태그",
+      "label": "주문 태그 추가",
+      "placeholder": "태그 추가",
+      "remove": "{{tag}} 태그 제거",
+      "savedToast": "주문 태그가 저장되었습니다"
+    },
+    "reason": {
+      "heading": "철회 사유",
+      "quoted": "\"{{reason}}\"",
+      "none": "사유가 제공되지 않음"
+    },
+    "decidedToast": {
+      "approved": "철회 요청이 승인되었습니다",
+      "rejected": "철회 요청이 거부되었습니다"
+    },
+    "cancelModal": {
+      "heading": "주문을 취소하시겠습니까?",
+      "body": "고객이 철회하지 않은 품목을 포함해 Shopify에서 전체 주문이 취소됩니다. 주문 금액은 원래 결제 수단으로 환불되고 품목은 재입고되며, Shopify에서 고객에게 이메일을 보냅니다. 이 작업은 취소할 수 없습니다.",
+      "keep": "주문 유지",
+      "confirm": "주문 취소 및 환불"
+    },
+    "createReturnModal": {
+      "heading": "철회된 품목의 반품 생성",
+      "itemsHeading": "반품할 품목",
+      "subtotal": "품목 소계",
+      "checking": "반품할 수 있는 품목을 확인하는 중…",
+      "nothingToReturn": "철회된 품목 중 아직 발송된 품목이 없어 반품할 항목이 없습니다. 발송되지 않도록 보류하거나, 환불하여 주문에서 제거하세요.",
+      "notShipped_other": "철회된 품목 {{count}}개는 아직 발송되지 않아 포함되지 않았습니다.",
+      "notReturnable_other": "철회된 품목 {{count}}개는 이미 반품되어 포함되지 않았습니다.",
+      "body": "위 품목에 대해 Shopify에서 반품을 생성합니다. 고객에게 환불되지는 않습니다. 품목이 반송되면 반품에서 처리 및 환불을 선택하세요.",
+      "cancel": "취소",
+      "confirm": "반품 생성"
+    },
+    "decisionModal": {
+      "headingApprove": "철회 요청을 승인하시겠습니까?",
+      "headingReject": "철회 요청을 거부하시겠습니까?",
+      "approveAndSend": "승인 및 이메일 발송",
+      "rejectAndSend": "거부 및 이메일 발송",
+      "approve": "승인",
+      "reject": "거부",
+      "loadingLabel": "이메일 미리 보기 로드 중",
+      "loading": "고객 이메일을 준비하는 중…",
+      "sendEmail": "고객에게 이메일 발송",
+      "language": "이 이메일은 고객의 언어인 {{language}}로 작성되었습니다. 변경 사항은 이 이메일에만 적용됩니다.",
+      "subject": "제목",
+      "body": "이메일 본문",
+      "editHtml": "HTML 편집",
+      "htmlLabel": "이메일 HTML",
+      "previewTitle": "이메일 미리 보기",
+      "templateUnchanged": "변경 사항은 이 이메일에만 적용됩니다. 저장된 템플릿은 변경되지 않습니다.",
+      "noEmail": "고객에게 이메일이 발송되지 않습니다. 필요하면 별도로 연락할 수 있습니다.",
+      "holdReleased": "이 주문의 주문 처리 보류도 해제되어 주문을 다시 처리할 수 있게 됩니다."
+    },
+    "refundModal": {
+      "heading": "철회된 품목 환불",
+      "calculatingLabel": "환불 금액 계산 중",
+      "calculating": "환불 금액을 계산하는 중…",
+      "nothingToRefund": "이 주문에서 환불할 항목이 없습니다. 철회된 품목이 이미 환불되었거나 주문이 취소되었을 수 있습니다.",
+      "itemsHeading": "환불할 품목",
+      "subtotal": "품목 소계",
+      "shippingLine": "원래 배송비",
+      "amount": "환불 금액",
+      "total": "총 환불액",
+      "body": "철회된 품목은 원래 결제 수단으로 환불되며 가능한 경우 재입고됩니다. Shopify에서 고객에게 환불 영수증을 이메일로 보냅니다.",
+      "includesShipping": "고객이 전체 주문을 철회했으므로 원래 배송비가 포함됩니다.",
+      "unshippedItems": "아직 발송되지 않은 품목은 주문에서 제거되므로 발송되지 않습니다.",
+      "inReturn_other": "철회된 품목 {{count}}개는 반품 {{name}}에 포함되어 있어 제외되었습니다. 반품에서 처리 및 환불을 사용해 환불하세요.",
+      "allInReturn": "철회된 품목이 모두 반품 {{name}}에 포함되어 있습니다. 반품에서 처리 및 환불을 사용해 환불하면 반품도 종료됩니다.",
+      "irreversible": "이 작업은 취소할 수 없습니다.",
+      "confirmAmount": "{{amount}} 환불",
+      "confirm": "환불"
+    },
+    "shopifyNotes": {
+      "holdAutomatic": "주문 {{order}}의 철회 요청이 직원 검토를 기다리고 있습니다",
+      "holdManual": "주문 {{order}}의 철회 요청이 직원에 의해 보류되었습니다",
+      "canceled": "고객이 구매를 철회하여 {{appName}}에서 취소함(요청 {{id}}).",
+      "refunded": "고객이 구매를 철회하여 {{appName}}에서 환불함(요청 {{id}}).",
+      "returnReason": "철회 요청: {{reason}}",
+      "returnReasonNone": "철회 요청(사유 없음)"
+    }
+  },
+  "emailTemplates": {
+    "pageTitle": "알림",
+    "loadError": "알림을 불러올 수 없습니다",
+    "saveError": "알림을 저장할 수 없습니다",
+    "savedToast": "알림이 저장되었습니다",
+    "resetToast": "{{name}}이(가) 기본값으로 재설정되었습니다",
+    "sender": {
+      "heading": "발신자",
+      "description": "이 설정은 앱이 스토어를 대신해 보내는 모든 이메일에 적용됩니다. 인증된 본인 주소에서 발송하고 고객 회신을 받을 주소를 선택하세요.",
+      "emailLabel": "발신자 이메일",
+      "emailPlaceholder": "notifications@withdrawaleasy.com",
+      "detailsVerified": "이 주소에서 이메일이 발송됩니다.",
+      "detailsPending": "이 주소로 보낸 코드를 입력하여 인증하세요.",
+      "detailsDefault": "비워 두면 {{email}}에서 이메일이 발송됩니다.",
+      "detailsDefaultFallback": "비워 두면 앱의 기본 주소에서 이메일이 발송됩니다.",
+      "freeProviderWarning": "Gmail, Yahoo 같은 무료 이메일 서비스는 인증할 수 없습니다. 이 주소에서 보낸 이메일에는 고객에게 'via brevosend.com'이 표시됩니다. 더 전문적으로 보이려면 스토어 도메인의 주소를 사용하세요.",
+      "codeLabel": "인증 코드",
+      "codeDetails": "보내 드린 이메일에 있는 6자리 코드를 입력하세요.",
+      "verifyCode": "코드 인증",
+      "checkStatus": "인증 상태 확인",
+      "verifyEmail": "이메일 인증",
+      "codeSent": "{{email}}(으)로 인증 코드를 보냈습니다.",
+      "notVerifiedYet": "이 이메일은 아직 인증되지 않았습니다. 받은편지함에서 코드를 확인한 후 다시 시도하세요.",
+      "replyToLabel": "회신 이메일",
+      "replyToPlaceholder": "support@yourstore.com",
+      "replyToDetails": "기본적으로 고객 회신은 스토어 이메일로 전송됩니다. 다른 곳에서 받으려면 다른 주소를 입력하세요."
+    },
+    "domain": {
+      "heading": "도메인 인증",
+      "description": "도메인을 인증하면 고객이 이메일에서 'via brevosend.com'을 보지 않게 됩니다. 선택 사항이지만 스토어 도메인에서 발송하는 경우 권장합니다.",
+      "label": "도메인",
+      "placeholder": "yourstore.com",
+      "details": "myshopify.com 도메인이 아닌, 이메일을 발송하는 도메인을 입력하세요.",
+      "freeProviderWarning": "Gmail, Yahoo 같은 무료 이메일 서비스는 인증할 수 없습니다. 대신 스토어 도메인을 입력하세요.",
+      "columns": {
+        "record": "레코드",
+        "type": "유형",
+        "host": "호스트",
+        "value": "값"
+      },
+      "records": {
+        "brevo_code": "도메인 소유권",
+        "dkim_record": "DKIM",
+        "dkim1Record": "DKIM 1",
+        "dkim2Record": "DKIM 2",
+        "dmarc_record": "DMARC"
+      },
+      "copyHost": "호스트 복사",
+      "copyValue": "값 복사",
+      "verifyRecords": "DNS 레코드 확인",
+      "authenticate": "도메인 인증",
+      "pendingInfo": "도메인 제공업체에서 이 레코드를 추가한 다음 DNS 레코드 확인을 선택하세요.",
+      "notVerifiedYet": "도메인이 아직 인증되지 않았습니다. DNS 변경 사항이 반영되려면 시간이 걸릴 수 있으니 나중에 다시 시도하세요."
+    },
+    "notification": {
+      "heading": "이메일 템플릿",
+      "emailLabel": "이메일",
+      "language": "언어",
+      "languageDetails": "언어를 선택하면 해당 언어로 이 이메일을 편집할 수 있습니다. 언어별로 따로 저장됩니다. 고객은 자신의 언어로 이메일을 받습니다.",
+      "send": "이 이메일 발송",
+      "requiredDetails": "EU 법률에서 요구하는 이메일이므로 끌 수 없습니다.",
+      "merchantDetails": "이 이메일을 더 이상 받지 않으려면 끄세요.",
+      "decisionDetails": "끄면 이 이메일이 기본적으로 발송되지 않습니다. 개별 요청을 승인하거나 거부할 때 발송하도록 선택할 수 있습니다.",
+      "subject": "제목",
+      "reset": "기본값으로 재설정",
+      "customized": "사용자 지정됨"
+    },
+    "templates": {
+      "customerConfirmation": {
+        "name": "고객 철회 확인",
+        "description": "고객이 철회 요청을 제출하는 즉시 고객에게 발송됩니다."
+      },
+      "merchantNotification": {
+        "name": "새 요청 알림",
+        "description": "고객이 새 철회 요청을 제출하면 스토어의 연락처 이메일로 발송됩니다. 회신하면 고객에게 이메일을 보낼 수 있습니다."
+      },
+      "withdrawalApproved": {
+        "name": "철회 승인",
+        "description": "고객의 철회 요청을 승인하면 고객에게 발송됩니다. 발송 전에 검토하고 편집할 수 있습니다."
+      },
+      "withdrawalRejected": {
+        "name": "철회 거부",
+        "description": "고객의 철회 요청을 거부하면 고객에게 발송됩니다. 발송 전에 검토하고 편집할 수 있습니다."
+      }
+    },
+    "merchantDefaults": {
+      "subject": "새 철회 요청 — 주문 {{order}}",
+      "heading": "새 철회 요청",
+      "intro": "고객이 철회 요청을 제출했습니다. 검토에 필요한 모든 정보는 다음과 같습니다.",
+      "rows": {
+        "name": "이름",
+        "email": "이메일",
+        "date": "날짜",
+        "orderNumber": "주문 번호",
+        "reference": "참조 번호",
+        "reason": "사유"
+      },
+      "button": "요청 보기",
+      "itemsHeading": "요청된 품목",
+      "footnote": "관리자에서 요청을 열어 승인하거나 거부하세요. 환불 기한은 관리자에서 자동으로 추적됩니다."
+    },
+    "body": {
+      "heading": "이메일 본문",
+      "editCode": "코드 편집",
+      "htmlLabel": "이메일 HTML 본문",
+      "previewHeading": "이메일 미리 보기"
+    },
+    "variables": {
+      "heading": "변수",
+      "help": "변수를 선택하면 커서 위치에 삽입됩니다.",
+      "insert": "{{label}} 삽입: {{description}}",
+      "groups": {
+        "customer": "고객",
+        "order": "주문",
+        "withdrawal": "철회",
+        "request": "요청",
+        "shop": "스토어"
+      },
+      "tokens": {
+        "customer": {
+          "first_name": {
+            "label": "이름",
+            "description": "고객의 이름"
+          },
+          "last_name": {
+            "label": "성",
+            "description": "고객의 성"
+          },
+          "email": {
+            "label": "이메일",
+            "description": "고객의 이메일 주소"
+          }
+        },
+        "order": {
+          "name": {
+            "label": "주문 번호",
+            "description": "주문 번호(예: #2138)"
+          },
+          "id": {
+            "label": "주문 ID",
+            "description": "주문의 내부 ID"
+          }
+        },
+        "withdrawal": {
+          "request_id": {
+            "label": "참조 번호",
+            "description": "철회 요청의 참조 번호"
+          },
+          "submitted_at": {
+            "label": "제출일",
+            "description": "요청이 제출된 날짜 및 시간"
+          },
+          "reason": {
+            "label": "사유",
+            "description": "고객이 제공한 사유(있는 경우)"
+          },
+          "selected_products": {
+            "label": "선택한 제품(텍스트)",
+            "description": "쉼표로 구분된 요청 품목 목록"
+          }
+        },
+        "request": {
+          "status": {
+            "label": "상태",
+            "description": "요청의 현재 상태"
+          },
+          "url": {
+            "label": "요청 링크",
+            "description": "앱의 요청 링크"
+          }
+        },
+        "shop": {
+          "name": {
+            "label": "스토어 이름",
+            "description": "스토어의 이름"
+          },
+          "email": {
+            "label": "스토어 이메일",
+            "description": "스토어의 연락처 이메일 주소"
+          }
+        }
+      }
+    },
+    "validation": {
+      "email": "유효한 이메일 주소를 입력하세요.",
+      "subjectRequired": "제목을 입력하세요.",
+      "subjectTooLong": "제목은 {{max}}자 이하여야 합니다.",
+      "bodyRequired": "이메일 본문을 입력하세요."
+    }
+  },
+  "sample": {
+    "customerName": "김지은",
+    "items": {
+      "lamp": {
+        "title": "Fjord 테이블 램프",
+        "variant": "오크 / 대형"
+      },
+      "candleHolder": {
+        "title": "Tind 캔들 홀더",
+        "variant": "황동"
+      }
+    },
+    "reason": "마음이 바뀌었어요"
+  },
+  "faqs": {
+    "pageTitle": "자주 묻는 질문",
+    "searchLabel": "자주 묻는 질문 검색",
+    "searchPlaceholder": "'환불', '기한' 등으로 질문 검색",
+    "noResults": "'{{query}}'와(과) 일치하는 질문이 없습니다",
+    "noResultsHelp": "다른 단어로 검색하거나 아래에서 지원팀에 문의하세요.",
+    "showAnswer": "답변 표시: {{question}}",
+    "hideAnswer": "답변 숨기기: {{question}}",
+    "groups": {
+      "gettingStarted": "시작하기",
+      "deadline": "철회 기한",
+      "requests": "요청 처리",
+      "emailsLanguages": "이메일 및 언어"
+    },
+    "actions": {
+      "goToSettings": "설정으로 이동",
+      "goToRequests": "요청으로 이동",
+      "goToNotifications": "알림으로 이동"
+    },
+    "stillStuck": {
+      "heading": "더 궁금한 점이 있으신가요?",
+      "body": "지원팀이 모든 이메일을 읽고 답변해 드립니다.",
+      "link": "지원팀에 문의"
+    },
+    "items": {
+      "what-it-does": {
+        "question": "앱은 어떤 기능을 하나요?",
+        "paragraphs": [
+          "EU 법률에 따라 EU 고객이 구매를 철회할 수 있는 명확한 방법을 제공합니다. 또한 모든 요청을 한곳에서 관리할 수 있습니다.",
+          "고객은 주문에서 양식을 열고 철회할 품목을 선택한 후 확인합니다. 각 요청은 품목, 사유, 환불 기한과 함께 요청 페이지에 표시됩니다. 필수 이메일은 앱이 대신 발송합니다."
+        ]
+      },
+      "where-form-appears": {
+        "question": "고객은 철회 양식을 어디에서 찾나요?",
+        "paragraphs": [
+          "양식은 2곳에 표시할 수 있습니다. 한 곳 또는 두 곳 모두 사용하세요:"
+        ],
+        "bullets": [
+          "주문 상태 페이지: 고객이 결제 후, 그리고 주문 확인 이메일의 링크를 열었을 때 보는 페이지입니다.",
+          "스토어 페이지: 나중에 다시 방문하는 고객을 위한 온라인 스토어의 페이지입니다. 고객은 주문 번호와 이메일로 주문을 찾습니다."
+        ],
+        "closing": "설정에서 각 위치를 사용 설정한 다음 해당 앱 블록을 한 번 추가하세요. 홈의 설정 가이드에서 추가된 블록을 확인할 수 있습니다."
+      },
+      "form-not-showing": {
+        "question": "고객에게 철회 양식이 표시되지 않는 이유는 무엇인가요?",
+        "paragraphs": [
+          "가장 흔한 원인부터 다음을 확인하세요:"
+        ],
+        "bullets": [
+          "양식이 꺼져 있거나 고객이 사용하는 위치가 설정에서 사용 설정되지 않았습니다.",
+          "해당 페이지에 앱 블록이 아직 추가되지 않았습니다.",
+          "주문이 대상 국가로 배송되지 않습니다.",
+          "주문의 철회 기간이 종료되었습니다.",
+          "주문이 취소되었거나 이미 대기 중인 요청이 있습니다. 각 주문에는 한 번에 1건의 대기 중인 요청만 있을 수 있습니다."
+        ]
+      },
+      "deadline": {
+        "question": "철회 기간은 언제 시작되고 끝나나요?",
+        "paragraphs": [
+          "EU 법률에 따라 기간은 주문일이 아니라 고객이 품목을 받은 날부터 시작됩니다. 고객은 품목이 도착하기 전에도 언제든지 철회할 수 있습니다."
+        ],
+        "bullets": [
+          "아직 발송되지 않음: 기간이 시작되지 않았으므로 고객은 언제든지 철회할 수 있습니다.",
+          "배송됨: 기간은 배송업체의 배송일부터 시작되며 {{withdrawalDays}} 동안 지속됩니다. 일수는 설정에서 변경할 수 있습니다.",
+          "발송되었지만 배송일 없음: 앱은 배송업체의 예상 배송일을 사용합니다. 예상 배송일이 없으면 발송일에 예상 배송 소요 기간을 더한 날짜를 사용합니다."
+        ]
+      },
+      "transit-days": {
+        "question": "예상 배송 소요 기간은 어디에 사용되나요?",
+        "paragraphs": [
+          "많은 배송업체가 Shopify에 배송일을 보내지 않습니다. 배송일이 없으면 앱이 철회 기간의 시작일을 알 수 없으므로 발송일에 예상 배송 소요 기간을 더합니다.",
+          "패키지가 도착하기까지 걸리는 대략적인 기간으로 설정하세요. 현재는 {{transitDays}}입니다. 확실하지 않다면 더 긴 기간을 선택하세요. 기간이 너무 짧으면 고객의 철회 기간이 일찍 끝날 수 있습니다."
+        ]
+      },
+      "split-shipments": {
+        "question": "주문이 여러 패키지로 발송되면 어떻게 되나요?",
+        "paragraphs": [
+          "철회 기간은 마지막 패키지가 도착한 때부터 시작됩니다. 고객이 철회하여 앱이 보류 중인 품목은 발송되지 않으므로 포함되지 않습니다.",
+          "주문의 일부만 발송된 상태에서 고객이 철회하면 앱은 각 부분을 따로 처리합니다:"
+        ],
+        "bullets": [
+          "발송되지 않은 품목: 앱이 발송되지 않도록 보류할 수 있습니다.",
+          "발송된 품목: 앱이 반품을 생성할 수 있습니다."
+        ],
+        "closing": "고객이 이미 받은 품목까지 취소되므로 앱은 부분 발송된 주문을 취소하지 않습니다."
+      },
+      "after-submit": {
+        "question": "고객이 요청을 제출하면 어떻게 되나요?",
+        "paragraphs": [
+          "다음 순서로 진행됩니다:"
+        ],
+        "bullets": [
+          "요청이 요청 페이지에 대기 중으로 표시됩니다.",
+          "고객이 확인 이메일을 받습니다. 철회를 증명하는 자료이므로 항상 발송됩니다.",
+          "새 요청 알림이 켜져 있으면 판매자도 이메일을 받습니다.",
+          "자동화 설정이 실행됩니다. 예를 들어 앱이 주문 처리를 보류하거나 주문에 태그를 추가할 수 있습니다."
+        ]
+      },
+      "automation": {
+        "question": "자동화 설정은 어떤 역할을 하나요?",
+        "paragraphs": [
+          "요청이 들어오면 실행됩니다. 앱이 할 수 있는 작업은 주문의 발송 여부에 따라 다릅니다:"
+        ],
+        "bullets": [
+          "주문 발송 전: 요청을 검토하는 동안 아무것도 발송되지 않도록 주문 처리를 보류합니다. 앱이 전체 주문을 즉시 취소하고 환불하도록 설정할 수도 있습니다.",
+          "주문 발송 후: 발송된 품목에 대해 Shopify에서 반품을 생성합니다.",
+          "부분 발송됨: 두 가지 모두 적용됩니다. 앱은 요청된 품목 중 발송되지 않은 품목만 보류하고 발송된 품목에 대해서는 반품을 생성합니다."
+        ],
+        "closing": "모든 경우에 앱은 주문에 태그를 추가할 수도 있습니다. 자동화는 요청을 승인하거나 거부하지 않습니다. 결정은 항상 판매자가 합니다."
+      },
+      "partial-withdrawal": {
+        "question": "고객이 일부 품목만 철회할 수 있나요?",
+        "paragraphs": [
+          "네. 고객은 철회할 품목을 선택합니다. 요청, 환불, 반품에는 해당 품목만 포함됩니다. 원래 배송비는 고객이 전체 주문을 철회한 경우에만 환불됩니다.",
+          "각 주문에는 한 번에 1건의 대기 중인 요청이 있을 수 있습니다. 요청을 승인하거나 거부하면 고객은 다른 품목에 대해 새 요청을 보낼 수 있습니다."
+        ]
+      },
+      "reason": {
+        "question": "고객이 사유를 밝혀야 하나요?",
+        "paragraphs": [
+          "아니요. EU 법률에 따라 고객은 사유 없이 철회할 수 있으므로 사유 필드는 항상 선택 사항입니다. 설정에서 제공할 사유를 선택하거나 사유를 묻지 않도록 할 수 있습니다."
+        ]
+      },
+      "refund": {
+        "question": "철회에 대한 환불은 어떻게 하나요?",
+        "paragraphs": [
+          "요청 페이지에서 요청을 여세요. 환불 방법은 품목의 위치에 따라 다릅니다:"
+        ],
+        "bullets": [
+          "반품에 포함되지 않은 품목: 환불을 선택하세요. 아직 발송되지 않은 품목은 주문에서 제거되므로 발송되지 않습니다.",
+          "반품에 포함된 품목: 품목이 반송되면 반품에서 처리 및 환불을 선택하세요. 고객에게 환불되고 반품이 종료됩니다.",
+          "아직 발송된 것이 없음: 추가 작업에서 전체 주문을 취소하고 환불할 수도 있습니다."
+        ],
+        "closing": "EU 법률에 따라 철회일로부터 {{refundDays}} 이내에 환불해야 합니다. 남은 기간은 요청 페이지에 표시됩니다. 요청을 승인하기 전에 환불하세요."
+      },
+      "returns": {
+        "question": "반품은 어떻게 처리되나요?",
+        "paragraphs": [
+          "반품은 고객이 돌려보내는 품목을 Shopify에 알려 줍니다. 요청이 들어오면 앱이 반품을 생성하거나, 요청 페이지에서 반품 생성을 선택할 수 있습니다.",
+          "반품에는 발송된 품목만 포함됩니다. 반품을 생성해도 고객에게 환불되지 않습니다. 품목이 반송되면 반품에서 처리 및 환불을 선택하세요."
+        ]
+      },
+      "decision-lock": {
+        "question": "요청을 승인하거나 거부한 후 주문 작업이 꺼지는 이유는 무엇인가요?",
+        "paragraphs": [
+          "승인하거나 거부하면 요청이 종료됩니다. 그 이후에는 주문이 실수로 변경되지 않도록 환불, 보류, 반품, 취소가 꺼집니다. 따라서 승인하기 전에 환불해야 합니다.",
+          "결정하면 앱이 설정한 주문 처리 보류도 해제됩니다. 해제에 실패해도 주문 처리 보류 해제를 선택할 수 있습니다."
+        ]
+      },
+      "emails": {
+        "question": "앱은 어떤 이메일을 보내며, 편집할 수 있나요?",
+        "paragraphs": [
+          "앱은 이메일 {{emailCount}}개를 보냅니다. 알림 페이지에서 모두 편집할 수 있습니다:"
+        ],
+        "bullets": [
+          "고객 철회 확인: 고객이 요청을 제출하면 발송됩니다. 항상 켜져 있습니다.",
+          "새 요청 알림: 스토어의 연락처 이메일로 발송됩니다. 끌 수 있습니다.",
+          "철회 승인: 요청을 승인하면 고객에게 발송됩니다. 먼저 검토하거나 끌 수 있습니다.",
+          "철회 거부: 요청을 거부하면 고객에게 발송됩니다. 먼저 검토하거나 끌 수 있습니다."
+        ],
+        "closing": "모든 언어로 각 이메일의 제목과 본문을 편집하고 주문 번호나 고객 이름 같은 변수를 추가할 수 있습니다. 입력하는 동안 미리 보기가 업데이트됩니다."
+      },
+      "countries-languages": {
+        "question": "앱은 어떤 국가와 언어를 지원하나요?",
+        "paragraphs": [
+          "기본적으로 모든 EU 국가가 대상입니다. 일부 국가에만 판매하는 경우 설정에서 특정 국가를 선택하세요.",
+          "양식은 {{languageCount}}개 언어로 제공됩니다: {{languages}}. 고객은 자신의 언어로 양식을 봅니다.",
+          "기본 언어는 영어입니다. 번역 필드를 비워 두면 고객에게 영어 텍스트가 대신 표시됩니다."
+        ]
+      }
+    }
+  },
+  "featureRequest": {
+    "pageTitle": "기능 요청하기",
+    "intro": "앱에 추가되었으면 하는 기능을 알려 주세요. 모든 요청을 읽어 봅니다.",
+    "sentHeading": "기능 요청이 전송되었습니다",
+    "sentBody": "아이디어를 공유해 주셔서 감사합니다.",
+    "firstName": "이름",
+    "lastName": "성",
+    "email": "이메일",
+    "request": "어떤 기능을 원하시나요?",
+    "requestPlaceholder": "기능과 그것이 스토어에 어떻게 도움이 될지 설명해 주세요",
+    "submit": "요청 보내기"
+  },
+  "pricing": {
+    "pageTitle": "요금제",
+    "pricePerMonth": "월 {{price}}",
+    "currentPlan": "현재 요금제",
+    "choosePlan": "{{plan}} 선택",
+    "switchedToast": "{{plan}} 요금제로 변경되었습니다",
+    "plans": {
+      "free": {
+        "name": "Free",
+        "features": [
+          "월 최대 10건의 철회 요청",
+          "이메일 알림"
+        ]
+      },
+      "starter": {
+        "name": "Starter",
+        "features": [
+          "무제한 철회 요청",
+          "사용자 지정 양식 필드",
+          "이메일 알림"
+        ]
+      },
+      "pro": {
+        "name": "Pro",
+        "features": [
+          "Starter의 모든 기능",
+          "우선 지원",
+          "자동 환불"
+        ]
+      }
+    },
+    "switchError": "요금제를 변경할 수 없습니다"
+  }
+}

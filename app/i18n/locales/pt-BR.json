@@ -1,0 +1,1266 @@
+{
+  "common": {
+    "add": "Adicionar",
+    "backToHome": "Voltar para a página inicial",
+    "cancel": "Cancelar",
+    "delete": "Excluir",
+    "discard": "Descartar",
+    "done": "Concluído",
+    "dayCount_one": "{{count}} dia",
+    "dayCount_other": "{{count}} dias",
+    "dayCount_many": "{{count}} dias",
+    "emptyValue": "—",
+    "noMatches": "Nenhum resultado para \"{{query}}\".",
+    "preview": "Pré-visualizar",
+    "remove": "Remover",
+    "save": "Salvar",
+    "verified": "Verificado"
+  },
+  "nav": {
+    "home": "Início",
+    "withdrawalRequests": "Solicitações",
+    "formSetup": "Configurações",
+    "emailTemplates": "Notificações",
+    "pricing": "Preços"
+  },
+  "errors": {
+    "generic": "Algo deu errado. Tente novamente.",
+    "requestFailed": "Algo deu errado (erro {{status}}). Tente novamente.",
+    "methodNotAllowed": "Essa ação não é compatível.",
+    "unknownAction": "Essa ação não é compatível.",
+    "noValidFields": "Não há nada para atualizar.",
+    "emailServiceUnavailable": "Não foi possível conectar ao serviço de e-mail. Tente novamente em alguns minutos.",
+    "emailServiceNotConfigured": "O envio de e-mails ainda não está configurado. Entre em contato com o suporte.",
+    "requestNotFound": "Esta solicitação de desistência não existe ou foi excluída.",
+    "requestDecided": "Esta solicitação já foi aprovada ou rejeitada, então as ações do pedido não estão mais disponíveis.",
+    "unknownDecision": "Escolha se deseja aprovar ou rejeitar esta solicitação.",
+    "invalidStatus": "Escolha um status válido para esta solicitação.",
+    "noteRequired": "Insira uma observação.",
+    "orderNotFound": "Não foi possível encontrar este pedido na Shopify.",
+    "invalidEmail": "Insira um endereço de e-mail válido.",
+    "featureRequestIncomplete": "Preencha todos os campos antes de enviar sua solicitação.",
+    "senderCodeRequired": "Insira o código de verificação do seu e-mail.",
+    "senderNotFound": "Não foi possível encontrar este e-mail de remetente. Remova-o e adicione-o novamente para receber um novo código.",
+    "senderNotStarted": "Verifique seu e-mail de remetente primeiro.",
+    "senderIdMissing": "Não foi possível registrar este e-mail de remetente. Tente novamente.",
+    "domainInvalid": "Insira um domínio válido, como sualoja.com.",
+    "domainFreeProvider": "Provedores de e-mail gratuitos como Gmail e Yahoo não podem ser autenticados. Use o domínio da sua loja."
+  },
+  "auth": {
+    "login": {
+      "heading": "Fazer login",
+      "shopLabel": "Domínio da loja",
+      "shopDetails": "example.myshopify.com",
+      "submit": "Fazer login",
+      "missingShop": "Insira o domínio da sua loja para fazer login.",
+      "invalidShop": "Insira um domínio de loja válido, como example.myshopify.com."
+    }
+  },
+  "status": {
+    "pending": "Pendente",
+    "approved": "Aprovada",
+    "rejected": "Rejeitada"
+  },
+  "sourceInline": {
+    "order_status": "a página de status do pedido",
+    "standalone_page": "a página da sua loja"
+  },
+  "placements": {
+    "orderStatus": {
+      "label": "Página de status do pedido",
+      "details": "Mostre o formulário de desistência na página de status do pedido que os clientes veem após o checkout."
+    },
+    "storefront": {
+      "label": "Página da loja",
+      "details": "Mostre o formulário de desistência em uma página própria no seu tema, para que os clientes possam encontrá-lo fora da página de status do pedido."
+    }
+  },
+  "orderStatus": {
+    "financial": {
+      "PENDING": "Pagamento pendente",
+      "AUTHORIZED": "Autorizado",
+      "PARTIALLY_PAID": "Parcialmente pago",
+      "PAID": "Pago",
+      "PARTIALLY_REFUNDED": "Parcialmente reembolsado",
+      "REFUNDED": "Reembolsado",
+      "VOIDED": "Anulado",
+      "EXPIRED": "Expirado"
+    },
+    "fulfillment": {
+      "UNFULFILLED": "Não processado",
+      "PENDING_FULFILLMENT": "Processamento pendente",
+      "OPEN": "Aberto",
+      "IN_PROGRESS": "Em andamento",
+      "ON_HOLD": "Em espera",
+      "PARTIALLY_FULFILLED": "Parcialmente processado",
+      "FULFILLED": "Processado",
+      "RESTOCKED": "Reabastecido",
+      "SCHEDULED": "Agendado"
+    },
+    "return": {
+      "REQUESTED": "Solicitada",
+      "OPEN": "Aberta",
+      "CLOSED": "Fechada",
+      "DECLINED": "Recusada",
+      "CANCELED": "Cancelada"
+    }
+  },
+  "stats": {
+    "heading": "Visão geral",
+    "description": "Um resumo das suas solicitações de desistência",
+    "viewRequests": "Ver solicitações",
+    "total": "Total de solicitações",
+    "today": "Enviadas hoje",
+    "pending": "Pendentes",
+    "closed": "Encerradas",
+    "requestCount_one": "{{count}} solicitação",
+    "requestCount_other": "{{count}} solicitações",
+    "requestCount_many": "{{count}} solicitações"
+  },
+  "home": {
+    "pageTitle": "Início",
+    "loadError": "Não foi possível carregar seu painel",
+    "saveErrorHeading": "Não foi possível salvar sua alteração",
+    "saveErrorAction": "Tente novamente ou faça a alteração em Configurações.",
+    "setupBanner": {
+      "heading_one": "Falta {{count}} etapa de configuração",
+      "heading_other": "Faltam {{count}} etapas de configuração",
+      "heading_many": "Faltam {{count}} etapas de configuração",
+      "body": "Conclua estas etapas para deixar seu formulário de desistência pronto: {{steps}}."
+    },
+    "setupGuide": {
+      "heading": "Guia de configuração",
+      "description": "Use este guia para publicar seu formulário de desistência na sua loja.",
+      "progress": "{{completed}} de {{total}} tarefas concluídas",
+      "dismiss": "Dispensar guia de configuração",
+      "collapse": "Recolher guia de configuração",
+      "expand": "Expandir guia de configuração",
+      "showStep": "Mostrar detalhes de {{step}}",
+      "hideStep": "Ocultar detalhes de {{step}}",
+      "steps": {
+        "form": {
+          "label": "Ative seu formulário de desistência",
+          "description": "Ative o formulário e escolha onde os clientes o veem. Os campos, motivos e textos já vêm com um texto padrão. Você pode alterá-los quando quiser em Configurações.",
+          "checkbox": "Ativar formulário de desistência",
+          "cta": "Ir para Configurações",
+          "placementHeading": "Escolha onde os clientes veem o formulário",
+          "placementDescription": "Selecione pelo menos um local. Cada local precisa do bloco de app para que os clientes vejam o formulário."
+        },
+        "blocks": {
+          "label": "Adicione os blocos de app à sua loja",
+          "description": "Adicione um bloco de app para cada local escolhido na etapa anterior.",
+          "locked": "Conclua a etapa {{step}} para escolher onde o formulário aparece. Depois, você poderá adicionar os blocos de app aqui.",
+          "surfaces": {
+            "orderStatus": "Página de status do pedido",
+            "theme": "Página da loja"
+          },
+          "live": {
+            "orderStatus": "O bloco de app está ativo na página de status do pedido.",
+            "theme": "O bloco de app está ativo na página da sua loja."
+          }
+        }
+      }
+    },
+    "help": {
+      "heading": "Ajuda e recursos",
+      "support": {
+        "title": "Suporte por e-mail",
+        "description": "Tem alguma dúvida? Nossa equipe de suporte pode ajudar.",
+        "link": "Falar com o suporte"
+      },
+      "faqs": {
+        "title": "Perguntas frequentes",
+        "description": "Encontre respostas para dúvidas comuns sobre como configurar e usar o app.",
+        "link": "Ver perguntas frequentes"
+      },
+      "featureRequest": {
+        "title": "Sugestões de recursos",
+        "description": "Tem uma ideia para o app? Conte o que você gostaria de ver.",
+        "link": "Sugerir um recurso"
+      }
+    }
+  },
+  "blockSetup": {
+    "autoUpdate": "Esta mensagem desaparece sozinha alguns segundos depois que você salva o bloco de app.",
+    "addAppBlock": "Adicionar bloco de app",
+    "orderStatus": {
+      "heading": "Adicione o bloco de app à página de status do pedido",
+      "body": "Os clientes só veem o formulário de desistência na página de status do pedido depois que você adiciona o bloco de app. Para adicioná-lo:",
+      "steps": {
+        "open": "Selecione <strong>Adicionar bloco de app</strong> abaixo. A página de status do pedido abre no editor de checkout.",
+        "add": "Na barra lateral, selecione <strong>Adicionar bloco de app</strong>.",
+        "choose": "Selecione <strong>Formulário de desistência</strong>.",
+        "save": "Selecione <strong>Salvar</strong>."
+      }
+    },
+    "storefront": {
+      "heading": "Adicione o bloco de app a uma página da loja",
+      "body": "Escolha um modelo de página e selecione Adicionar bloco de app. O editor de temas abre com o formulário de desistência já adicionado como seção.",
+      "templateLabel": "Modelo de página",
+      "templates": {
+        "page": "Página padrão",
+        "index": "Página inicial",
+        "product": "Páginas de produto",
+        "collection": "Páginas de coleção",
+        "cart": "Página do carrinho"
+      },
+      "steps": {
+        "open": "Selecione <strong>Adicionar bloco de app</strong> para abrir o editor de temas com a seção adicionada.",
+        "move": "Arraste a seção para onde quiser na página.",
+        "save": "Selecione <strong>Salvar</strong>."
+      }
+    }
+  },
+  "onboarding": {
+    "pageTitle": "Primeiros passos",
+    "heading": "Prepare sua loja para desistências na UE",
+    "intro_one": "Conclua esta {{count}} etapa para oferecer aos seus clientes da UE uma forma adequada à lei de desistir de uma compra.",
+    "intro_other": "Conclua estas {{count}} etapas para oferecer aos seus clientes da UE uma forma adequada à lei de desistir de uma compra.",
+    "intro_many": "Conclua estas {{count}} etapas para oferecer aos seus clientes da UE uma forma adequada à lei de desistir de uma compra.",
+    "stepBadge": "Etapa {{current}} de {{total}}",
+    "completedToast": "Configuração concluída",
+    "steps": {
+      "welcome": {
+        "title": "Boas-vindas",
+        "description": "O que o app faz"
+      },
+      "form": {
+        "title": "Formulário de desistência",
+        "description": "Ative seu formulário"
+      }
+    },
+    "actions": {
+      "getStarted": "Começar",
+      "continue": "Continuar",
+      "finish": "Concluir configuração",
+      "skip": "Pular configuração",
+      "back": "Voltar"
+    },
+    "help": {
+      "heading": "Precisa de ajuda?",
+      "body": "Tem alguma dúvida? <supportLink>Fale com o suporte</supportLink>."
+    },
+    "welcome": {
+      "heading": "Boas-vindas ao {{appName}}",
+      "setupTime": "Leva cerca de 1 minuto",
+      "law": "Desde 19 de junho de 2026, lojas que vendem para clientes da UE devem oferecer uma forma de desistir de cada pedido em 2 etapas (Diretiva UE 2023/2673, artigo 11.º-A). Apenas uma política de devolução não é suficiente.",
+      "app": "O {{appName}} adiciona um botão de desistência à página de status do pedido, a uma página da sua loja virtual ou a ambas. Ele cuida da confirmação em 2 etapas e envia o e-mail de confirmação obrigatório. Você gerencia todas as solicitações em um só lugar.",
+      "imageAlt": "Um cliente desistindo de um pedido",
+      "requirementsHeading": "O que a lei exige",
+      "requirements": {
+        "button": "Um botão de desistência bem identificado que os clientes encontrem com facilidade",
+        "twoStep": "Um processo em 2 etapas: os clientes enviam a desistência e depois a confirmam",
+        "email": "Um e-mail de confirmação automático que os clientes possam guardar"
+      },
+      "penaltyHeading": "O que acontece se você não cumprir a lei",
+      "penalty": "Se o botão de desistência não existir ou não funcionar, a lei prorroga o prazo de desistência de {{days}} dias. Os clientes passam a ter 12 meses e {{days}} dias para desistir de cada pedido afetado."
+    },
+    "form": {
+      "heading": "Ative seu formulário de desistência",
+      "body": "Os clientes enviam a desistência e depois a confirmam em uma etapa separada, como exige a legislação da UE. O formulário vem com um texto jurídico padrão. Os clientes têm {{days}} para desistir, contados a partir da entrega.",
+      "switch": "Ativar formulário de desistência",
+      "later": "Você pode alterar tudo isso depois em Configurações.",
+      "loadError": "Não foi possível carregar as configurações do formulário. Você pode concluir a configuração agora e ativar o formulário depois em Configurações.",
+      "saveError": "Não foi possível salvar suas escolhas do formulário. Tente novamente ou conclua a configuração sem elas e defina-as depois em Configurações.",
+      "finishWithoutSaving": "Concluir sem salvar",
+      "placementError": "Selecione pelo menos um local ou desative o formulário."
+    },
+    "finishError": "Não foi possível concluir a configuração. Tente novamente."
+  },
+  "formSetup": {
+    "pageTitle": "Configurações",
+    "loadError": "Não foi possível carregar as configurações",
+    "saveError": "Não foi possível salvar as configurações",
+    "savedToast": "Configurações salvas",
+    "enable": {
+      "heading": "Formulário de desistência",
+      "description": "Escolha se os clientes podem enviar solicitações de desistência e onde eles veem o formulário.",
+      "checkbox": "Ativar formulário de desistência",
+      "details": "Quando desativado, os clientes não podem enviar solicitações de desistência em nenhum lugar.",
+      "orderStatus": "Mostrar na página de status do pedido",
+      "storefront": "Mostrar em uma página da loja"
+    },
+    "countries": {
+      "heading": "Países qualificados",
+      "description": "Os clientes só veem o formulário de desistência se o pedido for enviado para um destes países.",
+      "all": "Todos os {{count}} países da UE (recomendado)",
+      "allDetails": "O direito de desistência se aplica em toda a UE.",
+      "specific": "Países específicos",
+      "specificDetails": "Escolha os países abaixo. Você pode alterar isso quando quiser.",
+      "pickerLabel": "Países",
+      "pickerPlaceholder": "Pesquisar países"
+    },
+    "content": {
+      "heading": "Conteúdo do formulário",
+      "tabs": {
+        "step1": "1. Detalhes",
+        "confirm": "2. Confirmar",
+        "done": "3. Concluído"
+      },
+      "language": "Idioma",
+      "languageDetails": "Escolha um idioma para editar o conteúdo do formulário nesse idioma. Cada idioma é salvo separadamente.",
+      "beforeDelivery": {
+        "heading": "Antes da entrega",
+        "description": "Mostrado na primeira tela do formulário e na etapa Detalhes até o pedido ser entregue, inclusive enquanto está a caminho."
+      },
+      "afterDelivery": {
+        "heading": "Após a entrega",
+        "description": "Mostrado no lugar quando a Shopify marca o pedido como entregue."
+      },
+      "title": "Título",
+      "description": "Descrição",
+      "itemHeading": "Título da seleção de itens",
+      "customerDetails": {
+        "heading": "Dados do cliente",
+        "description": "Preenchidos a partir do pedido. Os clientes não podem editar estes campos.",
+        "locked": "Bloqueado",
+        "fullName": "Nome completo",
+        "email": "E-mail",
+        "orderNumber": "Número do pedido"
+      },
+      "reason": {
+        "heading": "Motivo da desistência",
+        "checkbox": "Perguntar o motivo",
+        "details": "Os clientes nunca precisam informar um motivo. A legislação da UE exige que este campo seja opcional.",
+        "label": "Rótulo do campo de motivo",
+        "optionsHeading": "Opções de motivo",
+        "optionsHelp": "Os clientes escolhem desta lista. Adicione, remova ou reescreva as opções para combinar com sua loja. Uma opção \"Outro\" com uma caixa de texto é sempre adicionada no final.",
+        "removeOption": "Remover {{option}}",
+        "addLabel": "Adicionar um motivo",
+        "addPlaceholder": "Por exemplo, Comprei por engano",
+        "translatedHelp": "Traduza cada opção. Para adicionar ou remover opções, mude para inglês.",
+        "translatedEmpty": "Adicione primeiro as opções de motivo em inglês."
+      },
+      "continueButton": "Rótulo do botão Continuar",
+      "confirm": {
+        "heading": "Título da confirmação",
+        "messageBefore": "Mensagem antes da entrega",
+        "messageAfter": "Mensagem após a entrega",
+        "declaration": "Declaração",
+        "button": "Rótulo do botão Confirmar"
+      },
+      "done": {
+        "titleBefore": "Título antes da entrega",
+        "messageBefore": "Mensagem antes da entrega",
+        "titleAfter": "Título após a entrega",
+        "messageAfter": "Mensagem após a entrega"
+      }
+    },
+    "automation": {
+      "heading": "Automação",
+      "description": "Escolha o que o app faz quando um cliente envia uma solicitação de desistência.",
+      "beforeShip": {
+        "heading": "Antes do envio do pedido",
+        "description": "Aplica-se quando uma solicitação chega antes do envio de qualquer item.",
+        "hold": "Suspender o processamento para análise",
+        "holdDetails": "Pause o processamento até você aprovar ou rejeitar a solicitação. A suspensão é liberada quando você decide.",
+        "tagDetails": "Adicione tags aos pedidos que recebem uma solicitação antes do envio, para que sua equipe os encontre na lista de pedidos."
+      },
+      "fallback": {
+        "label": "O que acontece com o pedido",
+        "hold": "Mantê-lo suspenso até você aprovar ou rejeitar a solicitação",
+        "cancelNow": "Cancelar o pedido inteiro e reembolsá-lo imediatamente",
+        "releaseN": "Liberar a suspensão após um número definido de dias",
+        "cancelN": "Cancelar o pedido inteiro e reembolsá-lo após um número definido de dias",
+        "cancelWarning": "Isso cancela e reembolsa o pedido inteiro, mesmo que o cliente tenha desistido apenas de alguns itens. A Shopify envia um e-mail ao cliente sobre o cancelamento.",
+        "days": "Número de dias"
+      },
+      "afterDelivery": {
+        "heading": "Após o envio do pedido",
+        "description": "Aplica-se quando uma solicitação chega após o envio de pelo menos um item, mesmo que ele ainda não tenha sido entregue. Todas as solicitações continuam aparecendo na página Solicitações.",
+        "createReturn": "Criar uma devolução",
+        "createReturnDetails": "Crie uma devolução na Shopify para os itens solicitados que já foram enviados.",
+        "tagDetails": "Adicione tags aos pedidos que recebem uma solicitação após o envio."
+      },
+      "tag": {
+        "checkbox": "Adicionar tag ao pedido",
+        "label": "Tags do pedido",
+        "placeholder": "Adicionar uma tag"
+      }
+    },
+    "deadline": {
+      "heading": "Prazo de desistência",
+      "description": "O prazo de desistência começa quando o pedido é entregue, não quando é feito. A legislação da UE exige pelo menos {{days}}.",
+      "days": "Dias para desistir após a entrega",
+      "daysDetails": "Quanto tempo os clientes têm para desistir após a entrega do pedido.",
+      "transit": "Tempo de trânsito estimado (dias)",
+      "transitDetails": "Usado quando a transportadora não informa uma data de entrega nem uma estimativa. O app soma esses dias à data de envio."
+    },
+    "validation": {
+      "countryMode": "Escolha quais países são qualificados.",
+      "euCountries": "Selecione pelo menos um país.",
+      "title": "Insira um título.",
+      "description": "Insira uma descrição.",
+      "itemHeading": "Insira um título para a lista de itens.",
+      "continueButton": "Insira um rótulo para o botão Continuar.",
+      "heading": "Insira um título.",
+      "confirmMessage": "Insira uma mensagem de confirmação.",
+      "declaration": "Insira a declaração que os clientes devem aceitar.",
+      "confirmButton": "Insira um rótulo para o botão Confirmar.",
+      "message": "Insira uma mensagem.",
+      "reasonLabel": "Insira um rótulo para o campo de motivo.",
+      "reasonOptions": "Adicione pelo menos um motivo.",
+      "reasonOptionTranslation": "Insira uma tradução para este motivo.",
+      "fallback": "Escolha o que acontece com o pedido.",
+      "daysRange": "Insira um número de dias entre {{min}} e {{max}}.",
+      "tags": "Adicione pelo menos uma tag ou desative a adição de tags.",
+      "afterDeliveryAction": "Escolha o que acontece após o envio do pedido."
+    },
+    "preview": {
+      "heading": "Pré-visualização ao vivo",
+      "compliantBadge": "Conforme em 2 etapas",
+      "surfaceLabel": "Pré-visualização",
+      "surfaces": {
+        "orderStatus": "Página de status do pedido",
+        "theme": "Página da loja"
+      },
+      "stageLabel": "Status da entrega",
+      "stages": {
+        "beforeDelivery": "Ainda não entregue",
+        "delivered": "Entregue"
+      },
+      "banner": {
+        "orderStatus": "Isto é o que os clientes veem na página de status do pedido. Selecione os botões para testar ou use as guias em Conteúdo do formulário para ir a uma etapa específica.",
+        "theme": "Isto é o que os clientes veem na página da sua loja. Ela começa com a etapa \"Encontre seu pedido\", porque os visitantes da loja não estão logados."
+      },
+      "restart": "Reiniciar pré-visualização",
+      "position": {
+        "entry": "Cartão inicial",
+        "lookup": "Encontre seu pedido",
+        "step": "Etapa {{current}} de {{total}}"
+      },
+      "storefront": {
+        "start": "Iniciar solicitação de desistência",
+        "findOrderHeading": "Encontre seu pedido",
+        "findOrderBody": "Insira os dados do seu pedido para iniciar sua solicitação de desistência.",
+        "fullName": "Nome completo",
+        "email": "E-mail",
+        "orderNumber": "Número do pedido",
+        "continue": "Continuar",
+        "steps": {
+          "step1": "Detalhes",
+          "confirm": "Confirmar",
+          "done": "Concluído"
+        },
+        "stepOf": "Etapa {{current}} de {{total}}",
+        "stepProgress": "Etapa {{current}} de {{total}}: {{label}}",
+        "reasonPlaceholder": "Selecione um motivo (opcional)",
+        "otherReason": "Outro",
+        "yourReason": "Seu motivo",
+        "yourReasonPlaceholder": "Conte o seu motivo",
+        "selectItem": "Selecione pelo menos um item para continuar.",
+        "itemsToWithdraw": "Itens da desistência ({{count}})",
+        "selectedTotal": "Total dos itens selecionados",
+        "previous": "Anterior",
+        "submittedOn": "Enviada em {{date}}"
+      }
+    }
+  },
+  "requests": {
+    "pageTitle": "Solicitações",
+    "searchLabel": "Pesquisar solicitações de desistência",
+    "searchPlaceholder": "Pesquisar por número do pedido, nome do cliente ou e-mail",
+    "export": "Exportar",
+    "exportSelected": "Exportar selecionadas",
+    "tabs": {
+      "all": "Todas",
+      "withCount": "{{label}} ({{count}})"
+    },
+    "empty": {
+      "imageAlt": "",
+      "heading": "Nenhuma solicitação de desistência ainda",
+      "body": "As solicitações de desistência dos seus clientes aparecerão aqui.",
+      "filteredHeading": "Nenhuma solicitação de desistência encontrada",
+      "filteredBody": "Tente alterar o termo de pesquisa ou o filtro."
+    },
+    "table": {
+      "selectAll": "Selecionar todas as solicitações de desistência",
+      "selectRow": "Selecionar pedido {{order}}",
+      "selectedCount": "{{count}} selecionadas",
+      "order": "Pedido",
+      "customer": "Cliente",
+      "items": "Itens",
+      "value": "Valor",
+      "status": "Status",
+      "submitted": "Enviada",
+      "actions": "Ações",
+      "itemCount_one": "{{count}} item",
+      "itemCount_other": "{{count}} itens",
+      "itemCount_many": "{{count}} itens",
+      "viewRow": "Ver solicitação do pedido {{order}}",
+      "deleteRow": "Excluir solicitação do pedido {{order}}"
+    },
+    "delete": {
+      "heading_one": "Excluir solicitação de desistência?",
+      "heading_other": "Excluir {{count}} solicitações de desistência?",
+      "heading_many": "Excluir {{count}} solicitações de desistência?",
+      "body_one": "Esta solicitação de desistência será excluída permanentemente. Essa ação não pode ser desfeita.",
+      "body_other": "Estas {{count}} solicitações de desistência serão excluídas permanentemente. Essa ação não pode ser desfeita.",
+      "body_many": "Estas {{count}} solicitações de desistência serão excluídas permanentemente. Essa ação não pode ser desfeita.",
+      "confirm_one": "Excluir solicitação",
+      "confirm_other": "Excluir solicitações",
+      "confirm_many": "Excluir solicitações",
+      "toast_one": "Solicitação de desistência excluída",
+      "toast_other": "{{count}} solicitações de desistência excluídas",
+      "toast_many": "{{count}} solicitações de desistência excluídas"
+    },
+    "csv": {
+      "filename": "solicitacoes-de-desistencia-{{date}}.csv",
+      "order": "Pedido",
+      "customerName": "Nome do cliente",
+      "customerEmail": "E-mail do cliente",
+      "country": "País",
+      "items": "Itens",
+      "value": "Valor",
+      "reason": "Motivo",
+      "status": "Status",
+      "submitted": "Enviada",
+      "decided": "Decidida"
+    }
+  },
+  "requestDetail": {
+    "pageTitle": "Solicitação de desistência",
+    "backLink": "Solicitações",
+    "submittedLine": "Enviada em {{date}} a partir de {{source}}",
+    "previous": "Solicitação anterior",
+    "next": "Próxima solicitação",
+    "badges": {
+      "canceled": "Cancelado",
+      "onHold": "Em espera",
+      "return": "Devolução: {{status}}"
+    },
+    "actions": {
+      "refund": "Reembolsar",
+      "more": "Mais ações",
+      "cancelOrder": "Cancelar pedido",
+      "placeHold": "Suspender processamento",
+      "releaseHold": "Liberar suspensão do processamento",
+      "createReturn": "Criar devolução",
+      "processReturn": "Processar e reembolsar",
+      "viewOrder": "Ver pedido"
+    },
+    "banners": {
+      "orderUnavailableHeading": "Detalhes do pedido indisponíveis",
+      "orderUnavailableBody": "{{error}} Não é possível usar as ações do pedido até que os detalhes do pedido sejam carregados.",
+      "actionFailedHeading": "Não foi possível concluir esta ação",
+      "actionFailedAction": "Confira Atividade abaixo para ver os detalhes.",
+      "canceled": "Este pedido foi cancelado. As ações do pedido não estão mais disponíveis."
+    },
+    "deadline": {
+      "heading": "Prazo de reembolso",
+      "pendingLabel": "Tempo restante para decidir e reembolsar",
+      "decidedLabel": "Decisão",
+      "badges": {
+        "overdue": "Atrasado",
+        "actionNeeded": "Ação necessária",
+        "onTime": "No prazo"
+      },
+      "daysLeft_one": "{{count}} dia restante",
+      "daysLeft_other": "{{count}} dias restantes",
+      "daysLeft_many": "{{count}} dias restantes",
+      "daysOverdue_one": "{{count}} dia de atraso",
+      "daysOverdue_other": "{{count}} dias de atraso",
+      "daysOverdue_many": "{{count}} dias de atraso",
+      "daysEarly_one": "{{count}} dia antes do prazo",
+      "daysEarly_other": "{{count}} dias antes do prazo",
+      "daysEarly_many": "{{count}} dias antes do prazo",
+      "daysLate_one": "{{count}} dia após o prazo",
+      "daysLate_other": "{{count}} dias após o prazo",
+      "daysLate_many": "{{count}} dias após o prazo",
+      "pending": "Você tem {{days}} a partir do envio da solicitação para decidir e reembolsar. O prazo termina em {{date}}.",
+      "pendingOverdue": "O prazo terminou em {{date}}. Reembolse o cliente o quanto antes.",
+      "decidedOnTime": "Decidida dentro do prazo de reembolso de {{windowDays}} dias. O prazo era {{date}}.",
+      "decidedLate": "Decidida após o prazo de reembolso de {{date}}."
+    },
+    "items": {
+      "heading": "Itens da desistência",
+      "reject": "Rejeitar",
+      "approve": "Aprovar",
+      "total": "Total da desistência",
+      "sku": "SKU: {{sku}}",
+      "quantity": "Quantidade: {{count}}",
+      "shipping": {
+        "notShipped": "Ainda não enviado",
+        "partlyShipped": "Parcialmente enviado",
+        "shipped": "Enviado"
+      },
+      "partiallyShippedBanner": "Parte deste pedido já foi enviada. Os itens que ainda não foram enviados podem ser suspensos, e os itens enviados precisam de uma devolução."
+    },
+    "return": {
+      "heading": "Devolução",
+      "status": "Status",
+      "created": "Criada",
+      "body": "Uma devolução foi criada na Shopify para os itens da desistência.",
+      "openBody": "Quando os itens voltarem, selecione Processar e reembolsar. Isso reembolsa o cliente pelos itens devolvidos e fecha a devolução.",
+      "alreadyRefundedBody": "Os itens desta devolução já foram reembolsados. Feche a devolução na Shopify quando eles voltarem."
+    },
+    "processReturnModal": {
+      "heading": "Processar devolução e reembolsar",
+      "calculating": "Calculando o valor do reembolso…",
+      "nothingToProcess": "Não há mais nada para processar nesta devolução. Ela pode já ter sido processada ou fechada na Shopify.",
+      "nothingToRefund": "Os itens desta devolução já foram reembolsados, então não há mais nada para reembolsar.",
+      "unsupportedPayment": "O pagamento deste pedido não pode ser reembolsado pelo app. Processe a devolução e faça o reembolso na Shopify.",
+      "itemsHeading": "Itens da devolução {{name}}",
+      "subtotal": "Subtotal dos itens",
+      "shippingLine": "Frete original",
+      "total": "Reembolso total",
+      "body": "Isso marca os itens devolvidos como processados, reembolsa-os na forma de pagamento original e fecha a devolução. A Shopify envia ao cliente um recibo de reembolso por e-mail. Essa ação não pode ser desfeita.",
+      "confirmAmount": "Reembolsar {{amount}}",
+      "confirm": "Processar e reembolsar"
+    },
+    "payment": {
+      "heading": "Pagamento",
+      "status": "Status do pagamento",
+      "subtotal": "Subtotal da desistência",
+      "shipping": "Frete do pedido",
+      "total": "Total do pedido",
+      "refunded": "Reembolsado",
+      "unavailable": "Os detalhes do pagamento não estão disponíveis no momento."
+    },
+    "activity": {
+      "heading": "Atividade",
+      "noteLabel": "Adicionar uma observação",
+      "notePlaceholder": "Adicionar uma observação…",
+      "post": "Publicar",
+      "noteHelp": "Somente você e sua equipe podem ver as observações. Os clientes nunca as veem.",
+      "submitted": "Solicitação de desistência enviada a partir de {{source}}",
+      "decided": {
+        "approved": "Solicitação aprovada",
+        "rejected": "Solicitação rejeitada"
+      },
+      "note": "Observação: {{body}}",
+      "entry": "{{label}}: {{message}}",
+      "actions": {
+        "resolve_branch": "Automação iniciada",
+        "run_automation": "Automação",
+        "automation_completed": "Automação concluída",
+        "hold_fulfillment": "Suspensão do processamento",
+        "schedule_fallback": "Ação posterior agendada",
+        "release_hold": "Suspensão do processamento liberada",
+        "cancel_order_immediate": "Pedido cancelado e reembolsado",
+        "cancel_order_scheduled": "Pedido cancelado e reembolsado",
+        "cancel_order_manual": "Pedido cancelado e reembolsado",
+        "cancel_order": "Pedido cancelado e reembolsado",
+        "refund": "Reembolso",
+        "tag_before_ship": "Tag adicionada ao pedido",
+        "tag_after_delivery": "Tag adicionada ao pedido",
+        "order_tag_add": "Tags do pedido adicionadas",
+        "order_tag_remove": "Tags do pedido removidas",
+        "create_return": "Devolução",
+        "refresh_return": "Status da devolução atualizado",
+        "process_return": "Processar e reembolsar",
+        "fetch_shop_contact": "Dados de contato da loja",
+        "customer_email": "E-mail de confirmação ao cliente",
+        "merchant_email": "Notificação de nova solicitação",
+        "notify_customer": "E-mail de decisão",
+        "notify_merchant": "Você foi notificado"
+      },
+      "messages": {
+        "noTags": "Nenhuma tag configurada",
+        "tagged": "Tag {{tags}} adicionada ao pedido",
+        "noHoldableOrders": "Nada neste pedido pode ser suspenso no momento",
+        "held": "Itens suspensos para não serem enviados",
+        "holdOff": "A suspensão do processamento para análise está desativada",
+        "tagBeforeShipOff": "A adição de tags antes do envio está desativada",
+        "tagAfterDeliveryOff": "A adição de tags após o envio está desativada",
+        "fallbackHold": "O pedido continua suspenso até você aprovar ou rejeitar a solicitação",
+        "fallbackInvalidDays": "Não foi possível agendar a ação posterior. O número de dias não é válido.",
+        "scheduledRelease": "Liberação da suspensão agendada para {{date}}",
+        "scheduledCancel": "Cancelamento e reembolso agendados para {{date}}",
+        "canceled": "Pedido cancelado e reembolsado",
+        "returnCreated": "Devolução criada na Shopify",
+        "returnNoMatch": "Nenhum dos itens solicitados pode ser devolvido",
+        "notifiedByEmail": "Notificado no app e por e-mail",
+        "notifiedEmailFailed": "Notificado no app. O e-mail de notificação falhou: {{error}}",
+        "notifiedInAppOnly": "Notificado no app. O e-mail de notificação não foi enviado.",
+        "emailSent": "Enviado",
+        "emailFailed": "Falhou: {{error}}",
+        "emailNotSent": "Não enviado porque não há destinatário ou o e-mail não está configurado",
+        "orderNotFound": "Não foi possível encontrar este pedido na Shopify",
+        "alreadyCanceled": "O pedido já estava cancelado",
+        "branchBeforeShip": "O pedido ainda não foi enviado, então as etapas anteriores ao envio foram executadas",
+        "branchAfterDelivery": "O pedido foi enviado, então as etapas posteriores ao envio foram executadas",
+        "branchPartiallyShipped": "O pedido foi parcialmente enviado, então as etapas para itens enviados e não enviados foram executadas",
+        "noUnshippedItemsRequested": "Nenhum dos itens solicitados está aguardando envio, então nada foi suspenso",
+        "fallbackCancelPartiallyShipped": "O pedido foi parcialmente enviado, então não pode ser cancelado por inteiro. Os itens solicitados continuam suspensos até você aprovar ou rejeitar a solicitação.",
+        "returnNothingShipped": "Nenhum dos itens solicitados foi enviado, então não foi necessária uma devolução",
+        "runCompleted": "Automação concluída",
+        "runFailed": "Uma ou mais etapas da automação falharam",
+        "runSkipped": "Automação ignorada",
+        "scheduledSkippedApproved": "A solicitação já estava aprovada, então a ação agendada não foi executada",
+        "scheduledSkippedRejected": "A solicitação já estava rejeitada, então a ação agendada não foi executada",
+        "noHoldsPlaced": "Nenhuma suspensão foi aplicada para esta solicitação",
+        "holdsAlreadyReleased": "As suspensões já tinham sido liberadas",
+        "holdReleased": "O pedido pode ser processado novamente",
+        "holdExists": "Já existe uma suspensão para esta solicitação",
+        "decisionSkipped": "A equipe optou por não enviar e-mail ao cliente",
+        "decisionSent": "E-mail enviado ao cliente sobre a decisão",
+        "decisionFailed": "O e-mail de decisão falhou: {{error}}",
+        "decisionNotConfigured": "O e-mail de decisão não foi enviado porque o e-mail não está configurado",
+        "refunded": "{{amount}} reembolsado",
+        "noReturn": "Não há devolução para esta solicitação",
+        "returnStatus": "Status da devolução: {{status}}",
+        "returnProcessed": "Devolução processada e {{amount}} reembolsado",
+        "returnNothingToProcess": "Não há mais nada para processar nesta devolução",
+        "returnNothingToRefund": "Os itens desta devolução já foram reembolsados",
+        "returnPaymentUnsupported": "Este pagamento não pode ser reembolsado pelo app. Processe a devolução na Shopify.",
+        "refundNothingRefundable": "Nenhum dos itens solicitados pode ser reembolsado. Eles podem já ter sido reembolsados.",
+        "refundNoSuggestion": "A Shopify não conseguiu calcular um reembolso para estes itens. Faça o reembolso na Shopify.",
+        "refundCoveredByReturn": "Todos os itens da desistência estão na devolução aberta. Use Processar e reembolsar na devolução para reembolsá-los.",
+        "tagsRemoved": "Tags do pedido removidas: {{tags}}",
+        "tagsAdded": "Tags do pedido adicionadas: {{tags}}"
+      }
+    },
+    "order": {
+      "heading": "Pedido",
+      "order": "Pedido",
+      "placed": "Realizado em",
+      "payment": "Pagamento",
+      "fulfillment": "Processamento"
+    },
+    "customer": {
+      "heading": "Cliente",
+      "avatarFallback": "Cliente",
+      "contactHeading": "Informações de contato",
+      "email": "E-mail",
+      "language": "Idioma",
+      "shippingHeading": "Endereço de entrega"
+    },
+    "automation": {
+      "heading": "Automação",
+      "stage": "Etapa",
+      "stages": {
+        "before_ship": "Antes do envio",
+        "partially_shipped": "Parcialmente enviado",
+        "after_delivery": "Após o envio"
+      },
+      "hold": "Suspensão do processamento",
+      "holdStates": {
+        "onHold": "Em espera",
+        "released": "Liberada",
+        "none": "Nenhuma"
+      },
+      "canceled": "Cancelado",
+      "return": "Devolução"
+    },
+    "emails": {
+      "heading": "Histórico de e-mails",
+      "customerConfirmation": "Confirmação de desistência ao cliente",
+      "merchantNotification": "Notificação de nova solicitação",
+      "decision": "E-mail de decisão",
+      "statuses": {
+        "sent": "Enviado",
+        "failed": "Falhou",
+        "notSent": "Não enviado"
+      }
+    },
+    "tags": {
+      "heading": "Tags do pedido",
+      "label": "Adicionar tag ao pedido",
+      "placeholder": "Adicionar uma tag",
+      "remove": "Remover tag {{tag}}",
+      "savedToast": "Tags do pedido salvas"
+    },
+    "reason": {
+      "heading": "Motivo da desistência",
+      "quoted": "\"{{reason}}\"",
+      "none": "Nenhum motivo informado"
+    },
+    "decidedToast": {
+      "approved": "Solicitação de desistência aprovada",
+      "rejected": "Solicitação de desistência rejeitada"
+    },
+    "cancelModal": {
+      "heading": "Cancelar pedido?",
+      "body": "Isso cancela o pedido inteiro na Shopify, incluindo os itens dos quais o cliente não desistiu. O pedido é reembolsado na forma de pagamento original e reabastecido, e a Shopify envia um e-mail ao cliente. Essa ação não pode ser desfeita.",
+      "keep": "Manter pedido",
+      "confirm": "Cancelar e reembolsar pedido"
+    },
+    "createReturnModal": {
+      "heading": "Criar devolução dos itens da desistência",
+      "itemsHeading": "Itens a devolver",
+      "subtotal": "Subtotal dos itens",
+      "checking": "Verificando quais itens podem ser devolvidos…",
+      "nothingToReturn": "Nenhum dos itens da desistência foi enviado ainda, então não há nada para devolver. Suspenda-os para que não sejam enviados ou reembolse-os para removê-los do pedido.",
+      "notShipped_one": "{{count}} item da desistência não foi incluído porque ainda não foi enviado.",
+      "notShipped_other": "{{count}} itens da desistência não foram incluídos porque ainda não foram enviados.",
+      "notShipped_many": "{{count}} itens da desistência não foram incluídos porque ainda não foram enviados.",
+      "notReturnable_one": "{{count}} item da desistência não foi incluído porque já foi devolvido.",
+      "notReturnable_other": "{{count}} itens da desistência não foram incluídos porque já foram devolvidos.",
+      "notReturnable_many": "{{count}} itens da desistência não foram incluídos porque já foram devolvidos.",
+      "body": "Isso cria uma devolução na Shopify para os itens acima. Isso não reembolsa o cliente. Quando os itens voltarem, selecione Processar e reembolsar na devolução.",
+      "cancel": "Cancelar",
+      "confirm": "Criar devolução"
+    },
+    "decisionModal": {
+      "headingApprove": "Aprovar solicitação de desistência?",
+      "headingReject": "Rejeitar solicitação de desistência?",
+      "approveAndSend": "Aprovar e enviar e-mail",
+      "rejectAndSend": "Rejeitar e enviar e-mail",
+      "approve": "Aprovar",
+      "reject": "Rejeitar",
+      "loadingLabel": "Carregando pré-visualização do e-mail",
+      "loading": "Preparando o e-mail ao cliente…",
+      "sendEmail": "Enviar e-mail ao cliente",
+      "language": "Este e-mail está em {{language}}, o idioma do cliente. Suas alterações se aplicam somente a este e-mail.",
+      "subject": "Assunto",
+      "body": "Corpo do e-mail",
+      "editHtml": "Editar HTML",
+      "htmlLabel": "HTML do e-mail",
+      "previewTitle": "Pré-visualização do e-mail",
+      "templateUnchanged": "Suas alterações se aplicam somente a este e-mail. Seu modelo salvo não será alterado.",
+      "noEmail": "O cliente não receberá um e-mail. Você pode entrar em contato separadamente, se necessário.",
+      "holdReleased": "Isso também libera a suspensão do processamento deste pedido, para que ele possa ser processado novamente."
+    },
+    "refundModal": {
+      "heading": "Reembolsar itens da desistência",
+      "calculatingLabel": "Calculando reembolso",
+      "calculating": "Calculando o valor do reembolso…",
+      "nothingToRefund": "Não há nada para reembolsar neste pedido. Os itens da desistência podem já ter sido reembolsados ou o pedido pode ter sido cancelado.",
+      "itemsHeading": "Itens a reembolsar",
+      "subtotal": "Subtotal dos itens",
+      "shippingLine": "Frete original",
+      "amount": "Valor do reembolso",
+      "total": "Reembolso total",
+      "body": "Os itens da desistência são reembolsados na forma de pagamento original e reabastecidos quando possível. A Shopify envia ao cliente um recibo de reembolso por e-mail.",
+      "includesShipping": "O cliente desistiu do pedido inteiro, então o valor do frete original está incluído.",
+      "unshippedItems": "Os itens que ainda não foram enviados são removidos do pedido e, portanto, não serão enviados.",
+      "inReturn_one": "{{count}} item da desistência não foi incluído porque está na devolução {{name}}. Reembolse-o com Processar e reembolsar na devolução.",
+      "inReturn_other": "{{count}} itens da desistência não foram incluídos porque estão na devolução {{name}}. Reembolse-os com Processar e reembolsar na devolução.",
+      "inReturn_many": "{{count}} itens da desistência não foram incluídos porque estão na devolução {{name}}. Reembolse-os com Processar e reembolsar na devolução.",
+      "allInReturn": "Todos os itens da desistência estão na devolução {{name}}. Reembolse-os com Processar e reembolsar na devolução, o que também a fecha.",
+      "irreversible": "Essa ação não pode ser desfeita.",
+      "confirmAmount": "Reembolsar {{amount}}",
+      "confirm": "Reembolsar"
+    },
+    "shopifyNotes": {
+      "holdAutomatic": "A solicitação de desistência do pedido {{order}} está aguardando análise da equipe",
+      "holdManual": "A solicitação de desistência do pedido {{order}} foi suspensa pela equipe",
+      "canceled": "Cancelado pelo {{appName}} porque o cliente desistiu da compra (solicitação {{id}}).",
+      "refunded": "Reembolsado pelo {{appName}} porque o cliente desistiu da compra (solicitação {{id}}).",
+      "returnReason": "Solicitação de desistência: {{reason}}",
+      "returnReasonNone": "Solicitação de desistência (nenhum motivo informado)"
+    }
+  },
+  "emailTemplates": {
+    "pageTitle": "Notificações",
+    "loadError": "Não foi possível carregar as notificações",
+    "saveError": "Não foi possível salvar as notificações",
+    "savedToast": "Notificações salvas",
+    "resetToast": "{{name}} redefinido para o padrão",
+    "sender": {
+      "heading": "Remetente",
+      "description": "Estas configurações se aplicam a todos os e-mails que o app envia para sua loja. Envie a partir do seu próprio endereço verificado e escolha para onde vão as respostas dos clientes.",
+      "emailLabel": "E-mail do remetente",
+      "emailPlaceholder": "notifications@withdrawaleasy.com",
+      "detailsVerified": "Os e-mails são enviados a partir deste endereço.",
+      "detailsPending": "Insira o código que enviamos para este endereço para verificá-lo.",
+      "detailsDefault": "Se você deixar este campo em branco, os e-mails serão enviados a partir de {{email}}.",
+      "detailsDefaultFallback": "Se você deixar este campo em branco, os e-mails serão enviados a partir do endereço padrão do app.",
+      "freeProviderWarning": "Provedores de e-mail gratuitos como Gmail e Yahoo não podem ser autenticados. Os clientes verão \"via brevosend.com\" nos e-mails deste endereço. Para uma aparência mais profissional, use um endereço no domínio da sua loja.",
+      "codeLabel": "Código de verificação",
+      "codeDetails": "Insira o código de 6 dígitos do e-mail que enviamos para você.",
+      "verifyCode": "Verificar código",
+      "checkStatus": "Verificar status da verificação",
+      "verifyEmail": "Verificar e-mail",
+      "codeSent": "Enviamos um código de verificação para {{email}}.",
+      "notVerifiedYet": "Este e-mail ainda não foi verificado. Procure o código na sua caixa de entrada e tente novamente.",
+      "replyToLabel": "E-mail de resposta",
+      "replyToPlaceholder": "suporte@sualoja.com",
+      "replyToDetails": "Por padrão, as respostas dos clientes vão para o e-mail da sua loja. Para receber as respostas em outro lugar, insira um endereço diferente."
+    },
+    "domain": {
+      "heading": "Autenticação do domínio",
+      "description": "Autentique seu domínio para que os clientes não vejam \"via brevosend.com\" nos seus e-mails. É opcional, mas recomendamos se você envia a partir do domínio da sua loja.",
+      "label": "Domínio",
+      "placeholder": "sualoja.com",
+      "details": "Insira o domínio a partir do qual você envia e-mails, não o seu domínio myshopify.com.",
+      "freeProviderWarning": "Provedores de e-mail gratuitos como Gmail e Yahoo não podem ser autenticados. Insira o domínio da sua loja.",
+      "columns": {
+        "record": "Registro",
+        "type": "Tipo",
+        "host": "Host",
+        "value": "Valor"
+      },
+      "records": {
+        "brevo_code": "Propriedade do domínio",
+        "dkim_record": "DKIM",
+        "dkim1Record": "DKIM 1",
+        "dkim2Record": "DKIM 2",
+        "dmarc_record": "DMARC"
+      },
+      "copyHost": "Copiar host",
+      "copyValue": "Copiar valor",
+      "verifyRecords": "Verificar registros DNS",
+      "authenticate": "Autenticar domínio",
+      "pendingInfo": "Adicione estes registros no seu provedor de domínio e selecione Verificar registros DNS.",
+      "notVerifiedYet": "Seu domínio ainda não foi verificado. As alterações de DNS podem levar algum tempo para atualizar, então tente novamente mais tarde."
+    },
+    "notification": {
+      "heading": "Modelo de e-mail",
+      "emailLabel": "E-mail",
+      "language": "Idioma",
+      "languageDetails": "Escolha um idioma para editar este e-mail nesse idioma. Cada idioma é salvo separadamente. Os clientes recebem os e-mails no próprio idioma.",
+      "send": "Enviar este e-mail",
+      "requiredDetails": "A legislação da UE exige este e-mail, então ele não pode ser desativado.",
+      "merchantDetails": "Desative para deixar de receber este e-mail.",
+      "decisionDetails": "Desative para deixar de enviar este e-mail por padrão. Você ainda pode escolher enviá-lo ao aprovar ou rejeitar uma solicitação específica.",
+      "subject": "Assunto",
+      "reset": "Redefinir para o padrão",
+      "customized": "Personalizado"
+    },
+    "templates": {
+      "customerConfirmation": {
+        "name": "Confirmação de desistência ao cliente",
+        "description": "Enviado aos clientes assim que eles enviam uma solicitação de desistência."
+      },
+      "merchantNotification": {
+        "name": "Notificação de nova solicitação",
+        "description": "Enviado ao e-mail de contato da sua loja quando um cliente envia uma nova solicitação de desistência. Responda a ele para enviar um e-mail ao cliente."
+      },
+      "withdrawalApproved": {
+        "name": "Desistência aprovada",
+        "description": "Enviado aos clientes quando você aprova a solicitação de desistência. Você pode revisá-lo e editá-lo antes do envio."
+      },
+      "withdrawalRejected": {
+        "name": "Desistência rejeitada",
+        "description": "Enviado aos clientes quando você rejeita a solicitação de desistência. Você pode revisá-lo e editá-lo antes do envio."
+      }
+    },
+    "merchantDefaults": {
+      "subject": "Nova solicitação de desistência — pedido {{order}}",
+      "heading": "Nova solicitação de desistência",
+      "intro": "Um cliente enviou uma solicitação de desistência. Aqui está tudo o que você precisa para analisá-la.",
+      "rows": {
+        "name": "Nome",
+        "email": "E-mail",
+        "date": "Data",
+        "orderNumber": "Número do pedido",
+        "reference": "Número de referência",
+        "reason": "Motivo"
+      },
+      "button": "Ver solicitação",
+      "itemsHeading": "Itens solicitados",
+      "footnote": "Abra a solicitação no seu admin para aprová-la ou rejeitá-la. O prazo de reembolso é acompanhado automaticamente lá."
+    },
+    "body": {
+      "heading": "Corpo do e-mail",
+      "editCode": "Editar código",
+      "htmlLabel": "Corpo HTML do e-mail",
+      "previewHeading": "Pré-visualização do e-mail"
+    },
+    "variables": {
+      "heading": "Variáveis",
+      "help": "Selecione uma variável para inseri-la na posição do cursor.",
+      "insert": "Inserir {{label}}: {{description}}",
+      "groups": {
+        "customer": "Cliente",
+        "order": "Pedido",
+        "withdrawal": "Desistência",
+        "request": "Solicitação",
+        "shop": "Loja"
+      },
+      "tokens": {
+        "customer": {
+          "first_name": {
+            "label": "Nome",
+            "description": "O nome do cliente"
+          },
+          "last_name": {
+            "label": "Sobrenome",
+            "description": "O sobrenome do cliente"
+          },
+          "email": {
+            "label": "E-mail",
+            "description": "O endereço de e-mail do cliente"
+          }
+        },
+        "order": {
+          "name": {
+            "label": "Número do pedido",
+            "description": "O número do pedido, como #2138"
+          },
+          "id": {
+            "label": "ID do pedido",
+            "description": "O ID interno do pedido"
+          }
+        },
+        "withdrawal": {
+          "request_id": {
+            "label": "Número de referência",
+            "description": "O número de referência da solicitação de desistência"
+          },
+          "submitted_at": {
+            "label": "Data de envio",
+            "description": "A data e a hora em que a solicitação foi enviada"
+          },
+          "reason": {
+            "label": "Motivo",
+            "description": "O motivo informado pelo cliente, se houver"
+          },
+          "selected_products": {
+            "label": "Produtos selecionados (texto)",
+            "description": "Os itens solicitados como uma lista separada por vírgulas"
+          }
+        },
+        "request": {
+          "status": {
+            "label": "Status",
+            "description": "O status atual da solicitação"
+          },
+          "url": {
+            "label": "Link da solicitação",
+            "description": "Um link para a solicitação no app"
+          }
+        },
+        "shop": {
+          "name": {
+            "label": "Nome da loja",
+            "description": "O nome da sua loja"
+          },
+          "email": {
+            "label": "E-mail da loja",
+            "description": "O endereço de e-mail de contato da sua loja"
+          }
+        }
+      }
+    },
+    "validation": {
+      "email": "Insira um endereço de e-mail válido.",
+      "subjectRequired": "Insira um assunto.",
+      "subjectTooLong": "O assunto deve ter no máximo {{max}} caracteres.",
+      "bodyRequired": "Insira o corpo do e-mail."
+    }
+  },
+  "sample": {
+    "customerName": "Ana Souza",
+    "items": {
+      "lamp": {
+        "title": "Luminária de mesa Fjord",
+        "variant": "Carvalho / Grande"
+      },
+      "candleHolder": {
+        "title": "Castiçal Tind",
+        "variant": "Latão"
+      }
+    },
+    "reason": "Mudei de ideia"
+  },
+  "faqs": {
+    "pageTitle": "Perguntas frequentes",
+    "searchLabel": "Pesquisar perguntas frequentes",
+    "searchPlaceholder": "Pesquise perguntas, como \"reembolso\" ou \"prazo\"",
+    "noResults": "Nenhuma pergunta corresponde a \"{{query}}\"",
+    "noResultsHelp": "Tente outra palavra ou fale com o suporte abaixo.",
+    "showAnswer": "Mostrar resposta: {{question}}",
+    "hideAnswer": "Ocultar resposta: {{question}}",
+    "groups": {
+      "gettingStarted": "Primeiros passos",
+      "deadline": "Prazo de desistência",
+      "requests": "Gestão de solicitações",
+      "emailsLanguages": "E-mails e idiomas"
+    },
+    "actions": {
+      "goToSettings": "Ir para Configurações",
+      "goToRequests": "Ir para Solicitações",
+      "goToNotifications": "Ir para Notificações"
+    },
+    "stillStuck": {
+      "heading": "Ainda tem dúvidas?",
+      "body": "Nossa equipe de suporte lê e responde todos os e-mails.",
+      "link": "Falar com o suporte"
+    },
+    "items": {
+      "what-it-does": {
+        "question": "O que o app faz?",
+        "paragraphs": [
+          "Ele oferece aos seus clientes da UE uma forma clara de desistir de uma compra, como exige a legislação da UE. Também reúne todas as solicitações em um só lugar para você gerenciar.",
+          "Os clientes abrem o formulário a partir do pedido, escolhem os itens dos quais querem desistir e confirmam. Cada solicitação aparece na página Solicitações com os itens, o motivo e o seu prazo de reembolso. O app envia os e-mails obrigatórios por você."
+        ]
+      },
+      "where-form-appears": {
+        "question": "Onde os clientes encontram o formulário de desistência?",
+        "paragraphs": [
+          "Você pode mostrar o formulário em 2 lugares. Use um ou os dois:"
+        ],
+        "bullets": [
+          "Página de status do pedido: a página que os clientes veem após o checkout e quando abrem o link no e-mail de confirmação do pedido.",
+          "Página da loja: uma página na sua loja virtual para os clientes que voltam depois. Eles encontram o pedido com o número do pedido e o e-mail."
+        ],
+        "closing": "Ative cada local em Configurações e adicione o bloco de app correspondente uma vez. O guia de configuração em Início mostra quais blocos foram adicionados."
+      },
+      "form-not-showing": {
+        "question": "Por que um cliente não vê o formulário de desistência?",
+        "paragraphs": [
+          "Verifique estes pontos, começando pelo mais comum:"
+        ],
+        "bullets": [
+          "O formulário está desativado ou o local que o cliente está usando não está ativado em Configurações.",
+          "O bloco de app ainda não foi adicionado a essa página.",
+          "O pedido não é enviado para um dos seus países qualificados.",
+          "O prazo de desistência do pedido terminou.",
+          "O pedido foi cancelado ou já tem uma solicitação pendente. Cada pedido pode ter apenas 1 solicitação pendente por vez."
+        ]
+      },
+      "deadline": {
+        "question": "Quando o prazo de desistência começa e termina?",
+        "paragraphs": [
+          "Pela legislação da UE, o prazo começa quando o cliente recebe os itens, não quando faz o pedido. Os clientes também podem desistir a qualquer momento antes de os itens chegarem."
+        ],
+        "bullets": [
+          "Ainda não enviado: o prazo não começou, então os clientes sempre podem desistir.",
+          "Entregue: o prazo começa na data de entrega informada pela transportadora e dura {{withdrawalDays}}. Você pode alterar o número de dias em Configurações.",
+          "Enviado, mas sem data de entrega: o app usa a data de entrega estimada da transportadora. Se não houver, usa a data de envio mais o seu tempo de trânsito estimado."
+        ]
+      },
+      "transit-days": {
+        "question": "Para que serve o tempo de trânsito estimado?",
+        "paragraphs": [
+          "Muitas transportadoras não enviam uma data de entrega para a Shopify. Sem ela, o app não consegue saber quando o prazo de desistência começa, então soma o seu tempo de trânsito estimado à data de envio.",
+          "Defina-o como o tempo aproximado que seus pacotes levam para chegar. No momento, ele é de {{transitDays}}. Se não tiver certeza, escolha um tempo maior. Um tempo muito curto pode encerrar antes da hora o prazo de desistência de um cliente."
+        ]
+      },
+      "split-shipments": {
+        "question": "E se um pedido for enviado em mais de 1 pacote?",
+        "paragraphs": [
+          "O prazo de desistência começa quando o último pacote chega. Os itens que o app suspende porque o cliente desistiu deles não contam, já que não serão enviados.",
+          "Se um cliente desistir quando apenas parte do pedido foi enviada, o app trata cada parte separadamente:"
+        ],
+        "bullets": [
+          "Itens não enviados: o app pode suspendê-los para que não sejam enviados.",
+          "Itens enviados: o app pode criar uma devolução para eles."
+        ],
+        "closing": "O app nunca cancela um pedido parcialmente enviado, porque isso também cancelaria itens que o cliente já recebeu."
+      },
+      "after-submit": {
+        "question": "O que acontece depois que um cliente envia uma solicitação?",
+        "paragraphs": [
+          "Acontece o seguinte, nesta ordem:"
+        ],
+        "bullets": [
+          "A solicitação aparece na página Solicitações como Pendente.",
+          "O cliente recebe um e-mail de confirmação. Ele é sempre enviado, porque é o comprovante da desistência.",
+          "Você também recebe um e-mail, se a notificação de nova solicitação estiver ativada.",
+          "Suas configurações de automação são executadas. Por exemplo, o app pode suspender o processamento ou adicionar uma tag ao pedido."
+        ]
+      },
+      "automation": {
+        "question": "O que as configurações de automação fazem?",
+        "paragraphs": [
+          "Elas são executadas quando chega uma solicitação. O que o app pode fazer depende de o pedido já ter sido enviado ou não:"
+        ],
+        "bullets": [
+          "Antes do envio: suspender o processamento para que nada seja enviado enquanto você analisa a solicitação. Você também pode fazer o app cancelar e reembolsar o pedido inteiro imediatamente.",
+          "Após o envio: criar uma devolução na Shopify para os itens enviados.",
+          "Parcialmente enviado: as duas se aplicam. O app suspende apenas os itens solicitados que não foram enviados e cria uma devolução para os que foram."
+        ],
+        "closing": "Em todos os casos, o app também pode adicionar uma tag ao pedido. A automação nunca aprova nem rejeita uma solicitação. Quem decide é sempre você."
+      },
+      "partial-withdrawal": {
+        "question": "Um cliente pode desistir de apenas alguns itens?",
+        "paragraphs": [
+          "Sim. Os clientes escolhem de quais itens desistem. A solicitação, o reembolso e qualquer devolução incluem apenas esses itens. O frete original só é reembolsado quando o cliente desiste do pedido inteiro.",
+          "Cada pedido pode ter 1 solicitação pendente por vez. Depois que você a aprovar ou rejeitar, o cliente pode enviar uma nova solicitação para outros itens."
+        ]
+      },
+      "reason": {
+        "question": "Os clientes precisam informar um motivo?",
+        "paragraphs": [
+          "Não. Pela legislação da UE, os clientes não precisam de motivo para desistir, então o campo de motivo é sempre opcional. Em Configurações, você pode escolher quais motivos oferecer ou deixar de perguntar."
+        ]
+      },
+      "refund": {
+        "question": "Como reembolso uma desistência?",
+        "paragraphs": [
+          "Abra a solicitação na página Solicitações. A forma de reembolsar depende de onde os itens estão:"
+        ],
+        "bullets": [
+          "Itens que não estão em uma devolução: selecione Reembolsar. Os itens que ainda não foram enviados são removidos do pedido e não serão enviados.",
+          "Itens em uma devolução: quando voltarem, selecione Processar e reembolsar na devolução. Isso reembolsa o cliente e fecha a devolução.",
+          "Nada foi enviado ainda: você também pode cancelar e reembolsar o pedido inteiro em Mais ações."
+        ],
+        "closing": "A legislação da UE dá a você {{refundDays}} a partir da desistência para reembolsar. A página da solicitação mostra quanto tempo resta. Reembolse antes de aprovar a solicitação."
+      },
+      "returns": {
+        "question": "Como funcionam as devoluções?",
+        "paragraphs": [
+          "Uma devolução informa à Shopify quais itens o cliente está enviando de volta. O app pode criar uma quando chega uma solicitação, ou você pode selecionar Criar devolução na página da solicitação.",
+          "Uma devolução inclui apenas itens que foram enviados. Criá-la não reembolsa o cliente. Quando os itens voltarem, selecione Processar e reembolsar na devolução."
+        ]
+      },
+      "decision-lock": {
+        "question": "Por que as ações do pedido são desativadas depois que aprovo ou rejeito uma solicitação?",
+        "paragraphs": [
+          "Aprovar ou rejeitar encerra a solicitação. Depois disso, reembolsos, suspensões, devoluções e cancelamentos são desativados para que o pedido não seja alterado por engano. Por isso, você deve reembolsar antes de aprovar.",
+          "A decisão também libera qualquer suspensão de processamento aplicada pelo app. Se a liberação falhar, você ainda pode selecionar Liberar suspensão do processamento."
+        ]
+      },
+      "emails": {
+        "question": "Quais e-mails o app envia e posso editá-los?",
+        "paragraphs": [
+          "O app envia {{emailCount}} e-mails. Você pode editar todos na página Notificações:"
+        ],
+        "bullets": [
+          "Confirmação de desistência ao cliente: enviado quando um cliente envia uma solicitação. Está sempre ativado.",
+          "Notificação de nova solicitação: enviado ao e-mail de contato da sua loja. Você pode desativá-lo.",
+          "Desistência aprovada: enviado ao cliente quando você aprova uma solicitação. Você pode revisá-lo antes ou desativá-lo.",
+          "Desistência rejeitada: enviado ao cliente quando você rejeita uma solicitação. Você pode revisá-lo antes ou desativá-lo."
+        ],
+        "closing": "Você pode editar o assunto e o corpo de cada e-mail em todos os idiomas e adicionar variáveis como o número do pedido ou o nome do cliente. A pré-visualização é atualizada enquanto você digita."
+      },
+      "countries-languages": {
+        "question": "Quais países e idiomas o app oferece?",
+        "paragraphs": [
+          "Todos os países da UE são qualificados por padrão. Se você vende apenas para alguns deles, selecione Países específicos em Configurações.",
+          "O formulário está disponível em {{languageCount}} idiomas: {{languages}}. Os clientes o veem no próprio idioma.",
+          "O inglês é o idioma base. Se você deixar um campo traduzido em branco, os clientes verão o texto em inglês no lugar."
+        ]
+      }
+    }
+  },
+  "featureRequest": {
+    "pageTitle": "Sugerir um recurso",
+    "intro": "Conte o que você gostaria de ver no app. Lemos todas as sugestões.",
+    "sentHeading": "Sugestão de recurso enviada",
+    "sentBody": "Obrigado por compartilhar sua ideia com nossa equipe.",
+    "firstName": "Nome",
+    "lastName": "Sobrenome",
+    "email": "E-mail",
+    "request": "Qual recurso você gostaria de ter?",
+    "requestPlaceholder": "Descreva o recurso e como ele ajudaria sua loja",
+    "submit": "Enviar sugestão"
+  },
+  "pricing": {
+    "pageTitle": "Preços",
+    "pricePerMonth": "{{price}} por mês",
+    "currentPlan": "Plano atual",
+    "choosePlan": "Escolher {{plan}}",
+    "switchedToast": "Você mudou para o plano {{plan}}",
+    "plans": {
+      "free": {
+        "name": "Free",
+        "features": [
+          "Até 10 solicitações de desistência por mês",
+          "Notificações por e-mail"
+        ]
+      },
+      "starter": {
+        "name": "Starter",
+        "features": [
+          "Solicitações de desistência ilimitadas",
+          "Campos de formulário personalizados",
+          "Notificações por e-mail"
+        ]
+      },
+      "pro": {
+        "name": "Pro",
+        "features": [
+          "Tudo do plano Starter",
+          "Suporte prioritário",
+          "Reembolsos automáticos"
+        ]
+      }
+    },
+    "switchError": "Não foi possível alterar seu plano"
+  }
+}

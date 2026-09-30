@@ -1,0 +1,1250 @@
+{
+  "common": {
+    "add": "Toevoegen",
+    "backToHome": "Terug naar Start",
+    "cancel": "Annuleren",
+    "delete": "Verwijderen",
+    "discard": "Negeren",
+    "done": "Klaar",
+    "dayCount_one": "{{count}} dag",
+    "dayCount_other": "{{count}} dagen",
+    "emptyValue": "—",
+    "noMatches": "Geen resultaten voor '{{query}}'.",
+    "preview": "Voorbeeld",
+    "remove": "Verwijderen",
+    "save": "Opslaan",
+    "verified": "Geverifieerd"
+  },
+  "nav": {
+    "home": "Start",
+    "withdrawalRequests": "Verzoeken",
+    "formSetup": "Instellingen",
+    "emailTemplates": "Meldingen",
+    "pricing": "Prijzen"
+  },
+  "errors": {
+    "generic": "Er is iets misgegaan. Probeer het opnieuw.",
+    "requestFailed": "Er is iets misgegaan (fout {{status}}). Probeer het opnieuw.",
+    "methodNotAllowed": "Deze actie wordt niet ondersteund.",
+    "unknownAction": "Deze actie wordt niet ondersteund.",
+    "noValidFields": "Er is niets om bij te werken.",
+    "emailServiceUnavailable": "We konden geen verbinding maken met de e-mailservice. Probeer het over een paar minuten opnieuw.",
+    "emailServiceNotConfigured": "Het verzenden van e-mails is nog niet ingesteld. Neem contact op met support.",
+    "requestNotFound": "Dit herroepingsverzoek bestaat niet of is verwijderd.",
+    "requestDecided": "Dit verzoek is al goedgekeurd of afgewezen, dus bestellingsacties zijn niet meer beschikbaar.",
+    "unknownDecision": "Kies of je dit verzoek wilt goedkeuren of afwijzen.",
+    "invalidStatus": "Kies een geldige status voor dit verzoek.",
+    "noteRequired": "Voer een notitie in.",
+    "orderNotFound": "Deze bestelling is niet gevonden in Shopify.",
+    "invalidEmail": "Voer een geldig e-mailadres in.",
+    "featureRequestIncomplete": "Vul alle velden in voordat je je verzoek verstuurt.",
+    "senderCodeRequired": "Voer de verificatiecode uit je e-mail in.",
+    "senderNotFound": "We konden dit afzenderadres niet vinden. Verwijder het en voeg het opnieuw toe om een nieuwe code te ontvangen.",
+    "senderNotStarted": "Verifieer eerst je afzenderadres.",
+    "senderIdMissing": "We konden dit afzenderadres niet registreren. Probeer het opnieuw.",
+    "domainInvalid": "Voer een geldig domein in, zoals jouwwinkel.com.",
+    "domainFreeProvider": "Gratis e-mailproviders zoals Gmail en Yahoo kunnen niet worden geverifieerd. Gebruik in plaats daarvan het domein van je winkel."
+  },
+  "auth": {
+    "login": {
+      "heading": "Inloggen",
+      "shopLabel": "Winkeldomein",
+      "shopDetails": "example.myshopify.com",
+      "submit": "Inloggen",
+      "missingShop": "Voer je winkeldomein in om in te loggen.",
+      "invalidShop": "Voer een geldig winkeldomein in, zoals example.myshopify.com."
+    }
+  },
+  "status": {
+    "pending": "In behandeling",
+    "approved": "Goedgekeurd",
+    "rejected": "Afgewezen"
+  },
+  "sourceInline": {
+    "order_status": "de bestelstatuspagina",
+    "standalone_page": "je winkelpagina"
+  },
+  "placements": {
+    "orderStatus": {
+      "label": "Bestelstatuspagina",
+      "details": "Toon het herroepingsformulier op de bestelstatuspagina die klanten na het afrekenen zien."
+    },
+    "storefront": {
+      "label": "Winkelpagina",
+      "details": "Toon het herroepingsformulier op een eigen pagina in je thema, zodat klanten het ook buiten de bestelstatuspagina kunnen vinden."
+    }
+  },
+  "orderStatus": {
+    "financial": {
+      "PENDING": "Betaling in behandeling",
+      "AUTHORIZED": "Geautoriseerd",
+      "PARTIALLY_PAID": "Gedeeltelijk betaald",
+      "PAID": "Betaald",
+      "PARTIALLY_REFUNDED": "Gedeeltelijk terugbetaald",
+      "REFUNDED": "Terugbetaald",
+      "VOIDED": "Geannuleerd",
+      "EXPIRED": "Verlopen"
+    },
+    "fulfillment": {
+      "UNFULFILLED": "Niet uitgevoerd",
+      "PENDING_FULFILLMENT": "Uitvoering in behandeling",
+      "OPEN": "Open",
+      "IN_PROGRESS": "Bezig",
+      "ON_HOLD": "In de wacht",
+      "PARTIALLY_FULFILLED": "Gedeeltelijk uitgevoerd",
+      "FULFILLED": "Uitgevoerd",
+      "RESTOCKED": "Weer op voorraad",
+      "SCHEDULED": "Gepland"
+    },
+    "return": {
+      "REQUESTED": "Aangevraagd",
+      "OPEN": "Open",
+      "CLOSED": "Gesloten",
+      "DECLINED": "Afgewezen",
+      "CANCELED": "Geannuleerd"
+    }
+  },
+  "stats": {
+    "heading": "Overzicht",
+    "description": "Een momentopname van je herroepingsverzoeken",
+    "viewRequests": "Verzoeken bekijken",
+    "total": "Totaal aantal verzoeken",
+    "today": "Vandaag ingediend",
+    "pending": "In behandeling",
+    "closed": "Afgesloten",
+    "requestCount_one": "{{count}} verzoek",
+    "requestCount_other": "{{count}} verzoeken"
+  },
+  "home": {
+    "pageTitle": "Start",
+    "loadError": "Je dashboard kan niet worden geladen",
+    "saveErrorHeading": "Je wijziging kan niet worden opgeslagen",
+    "saveErrorAction": "Probeer het opnieuw of breng de wijziging aan in Instellingen.",
+    "setupBanner": {
+      "heading_one": "Nog {{count}} configuratiestap",
+      "heading_other": "Nog {{count}} configuratiestappen",
+      "body": "Voltooi deze stappen om je herroepingsformulier klaar te maken: {{steps}}."
+    },
+    "setupGuide": {
+      "heading": "Configuratiegids",
+      "description": "Gebruik deze gids om je herroepingsformulier live te zetten in je winkel.",
+      "progress": "{{completed}} van {{total}} taken voltooid",
+      "dismiss": "Configuratiegids sluiten",
+      "collapse": "Configuratiegids samenvouwen",
+      "expand": "Configuratiegids uitvouwen",
+      "showStep": "Details voor {{step}} tonen",
+      "hideStep": "Details voor {{step}} verbergen",
+      "steps": {
+        "form": {
+          "label": "Je herroepingsformulier inschakelen",
+          "description": "Schakel het formulier in en kies waar klanten het zien. De velden, redenen en teksten zijn al standaard ingevuld. Je kunt ze altijd wijzigen in Instellingen.",
+          "checkbox": "Herroepingsformulier inschakelen",
+          "cta": "Naar Instellingen",
+          "placementHeading": "Kies waar klanten het formulier zien",
+          "placementDescription": "Selecteer minstens één plek. Voor elke plek moet het app-blok worden toegevoegd voordat klanten het formulier zien."
+        },
+        "blocks": {
+          "label": "De app-blokken aan je winkel toevoegen",
+          "description": "Voeg een app-blok toe voor elke plek die je in de vorige stap hebt gekozen.",
+          "locked": "Voltooi stap {{step}} om te kiezen waar het formulier verschijnt. Daarna kun je hier de app-blokken toevoegen.",
+          "surfaces": {
+            "orderStatus": "Bestelstatuspagina",
+            "theme": "Winkelpagina"
+          },
+          "live": {
+            "orderStatus": "Het app-blok is live op je bestelstatuspagina.",
+            "theme": "Het app-blok is live op je winkelpagina."
+          }
+        }
+      }
+    },
+    "help": {
+      "heading": "Hulp en informatie",
+      "support": {
+        "title": "Support per e-mail",
+        "description": "Heb je een vraag? Ons supportteam helpt je graag.",
+        "link": "Contact opnemen met support"
+      },
+      "faqs": {
+        "title": "Veelgestelde vragen",
+        "description": "Vind antwoorden op veelgestelde vragen over het instellen en gebruiken van de app.",
+        "link": "Veelgestelde vragen bekijken"
+      },
+      "featureRequest": {
+        "title": "Functieverzoeken",
+        "description": "Heb je een idee voor de app? Laat ons weten wat je graag zou zien.",
+        "link": "Functie aanvragen"
+      }
+    }
+  },
+  "blockSetup": {
+    "autoUpdate": "Dit bericht verdwijnt vanzelf een paar seconden nadat je het app-blok hebt opgeslagen.",
+    "addAppBlock": "App-blok toevoegen",
+    "orderStatus": {
+      "heading": "Het app-blok aan je bestelstatuspagina toevoegen",
+      "body": "Klanten zien het herroepingsformulier pas op de bestelstatuspagina als je het app-blok hebt toegevoegd. Zo voeg je het toe:",
+      "steps": {
+        "open": "Selecteer hieronder <strong>App-blok toevoegen</strong>. De bestelstatuspagina wordt geopend in de checkout-editor.",
+        "add": "Selecteer in de zijbalk <strong>App-blok toevoegen</strong>.",
+        "choose": "Selecteer <strong>Herroepingsformulier</strong>.",
+        "save": "Selecteer <strong>Opslaan</strong>."
+      }
+    },
+    "storefront": {
+      "heading": "Het app-blok aan een winkelpagina toevoegen",
+      "body": "Kies een paginasjabloon en selecteer dan App-blok toevoegen. De thema-editor wordt geopend met het herroepingsformulier al als sectie toegevoegd.",
+      "templateLabel": "Paginasjabloon",
+      "templates": {
+        "page": "Standaardpagina",
+        "index": "Startpagina",
+        "product": "Productpagina's",
+        "collection": "Collectiepagina's",
+        "cart": "Winkelwagenpagina"
+      },
+      "steps": {
+        "open": "Selecteer <strong>App-blok toevoegen</strong> om de thema-editor te openen met de sectie toegevoegd.",
+        "move": "Sleep de sectie naar de gewenste plek op de pagina.",
+        "save": "Selecteer <strong>Opslaan</strong>."
+      }
+    }
+  },
+  "onboarding": {
+    "pageTitle": "Aan de slag",
+    "heading": "Maak je winkel klaar voor EU-herroepingen",
+    "intro_one": "Voltooi deze {{count}} stap om je EU-klanten een conforme manier te bieden om een aankoop te herroepen.",
+    "intro_other": "Voltooi deze {{count}} stappen om je EU-klanten een conforme manier te bieden om een aankoop te herroepen.",
+    "stepBadge": "Stap {{current}} van {{total}}",
+    "completedToast": "Configuratie voltooid",
+    "steps": {
+      "welcome": {
+        "title": "Welkom",
+        "description": "Wat de app doet"
+      },
+      "form": {
+        "title": "Herroepingsformulier",
+        "description": "Je formulier inschakelen"
+      }
+    },
+    "actions": {
+      "getStarted": "Aan de slag",
+      "continue": "Doorgaan",
+      "finish": "Configuratie voltooien",
+      "skip": "Configuratie overslaan",
+      "back": "Terug"
+    },
+    "help": {
+      "heading": "Hulp nodig?",
+      "body": "Heb je een vraag? <supportLink>Neem contact op met support</supportLink>."
+    },
+    "welcome": {
+      "heading": "Welkom bij {{appName}}",
+      "setupTime": "Duurt ongeveer 1 minuut",
+      "law": "Sinds 19 juni 2026 moeten winkels die aan EU-klanten verkopen voor elke bestelling een herroepingsmogelijkheid in 2 stappen aanbieden (EU-richtlijn 2023/2673, artikel 11 bis). Alleen een retourbeleid is niet genoeg.",
+      "app": "{{appName}} voegt een herroepingsknop toe aan je bestelstatuspagina, een pagina in je webwinkel of beide. De app regelt de bevestiging in 2 stappen en verstuurt de verplichte bevestigingsmail. Je beheert alle verzoeken op één plek.",
+      "imageAlt": "Een klant herroept een bestelling",
+      "requirementsHeading": "Wat de wet vereist",
+      "requirements": {
+        "button": "Een duidelijk gelabelde herroepingsknop die klanten makkelijk kunnen vinden",
+        "twoStep": "Een proces in 2 stappen: klanten dienen hun herroeping in en bevestigen die daarna",
+        "email": "Een automatische bevestigingsmail die klanten kunnen bewaren"
+      },
+      "penaltyHeading": "Wat er gebeurt als je je niet aan de regels houdt",
+      "penalty": "Als de herroepingsknop ontbreekt of niet werkt, verlengt de wet de herroepingstermijn van {{days}} dagen. Klanten hebben dan 12 maanden en {{days}} dagen om elke betrokken bestelling te herroepen."
+    },
+    "form": {
+      "heading": "Je herroepingsformulier inschakelen",
+      "body": "Klanten dienen hun herroeping in en bevestigen die in een aparte stap, zoals de EU-wetgeving vereist. Het formulier bevat standaard juridische teksten. Klanten hebben vanaf de levering {{days}} om te herroepen.",
+      "switch": "Herroepingsformulier inschakelen",
+      "later": "Je kunt dit allemaal later wijzigen in Instellingen.",
+      "loadError": "Je formulierinstellingen kunnen niet worden geladen. Je kunt de configuratie nu voltooien en het formulier later inschakelen in Instellingen.",
+      "saveError": "Je formulierkeuzes kunnen niet worden opgeslagen. Probeer het opnieuw, of voltooi de configuratie zonder deze keuzes en stel ze later in via Instellingen.",
+      "finishWithoutSaving": "Voltooien zonder opslaan",
+      "placementError": "Selecteer minstens één plek of schakel het formulier uit."
+    },
+    "finishError": "De configuratie kan niet worden voltooid. Probeer het opnieuw."
+  },
+  "formSetup": {
+    "pageTitle": "Instellingen",
+    "loadError": "Instellingen kunnen niet worden geladen",
+    "saveError": "Instellingen kunnen niet worden opgeslagen",
+    "savedToast": "Instellingen opgeslagen",
+    "enable": {
+      "heading": "Herroepingsformulier",
+      "description": "Kies of klanten herroepingsverzoeken kunnen indienen en waar ze het formulier zien.",
+      "checkbox": "Herroepingsformulier inschakelen",
+      "details": "Als dit is uitgeschakeld, kunnen klanten nergens herroepingsverzoeken indienen.",
+      "orderStatus": "Tonen op de bestelstatuspagina",
+      "storefront": "Tonen op een winkelpagina"
+    },
+    "countries": {
+      "heading": "Geschikte landen",
+      "description": "Klanten zien het herroepingsformulier alleen als hun bestelling naar een van deze landen wordt verzonden.",
+      "all": "Alle {{count}} EU-landen (aanbevolen)",
+      "allDetails": "Het herroepingsrecht geldt in de hele EU.",
+      "specific": "Specifieke landen",
+      "specificDetails": "Kies hieronder de landen. Je kunt dit altijd wijzigen.",
+      "pickerLabel": "Landen",
+      "pickerPlaceholder": "Landen zoeken"
+    },
+    "content": {
+      "heading": "Formulierinhoud",
+      "tabs": {
+        "step1": "1. Gegevens",
+        "confirm": "2. Bevestigen",
+        "done": "3. Klaar"
+      },
+      "language": "Taal",
+      "languageDetails": "Kies een taal om de formulierinhoud in die taal te bewerken. Elke taal wordt apart opgeslagen.",
+      "beforeDelivery": {
+        "heading": "Vóór levering",
+        "description": "Wordt getoond op het eerste scherm van het formulier en in de stap Gegevens totdat de bestelling is geleverd, ook terwijl die onderweg is."
+      },
+      "afterDelivery": {
+        "heading": "Na levering",
+        "description": "Wordt in plaats daarvan getoond zodra Shopify de bestelling als geleverd markeert."
+      },
+      "title": "Titel",
+      "description": "Beschrijving",
+      "itemHeading": "Kop van de artikelselectie",
+      "customerDetails": {
+        "heading": "Klantgegevens",
+        "description": "Ingevuld vanuit de bestelling. Klanten kunnen deze velden niet bewerken.",
+        "locked": "Vergrendeld",
+        "fullName": "Volledige naam",
+        "email": "E-mail",
+        "orderNumber": "Bestelnummer"
+      },
+      "reason": {
+        "heading": "Reden voor herroeping",
+        "checkbox": "Om een reden vragen",
+        "details": "Klanten hoeven nooit een reden op te geven. Volgens de EU-wetgeving moet dit veld optioneel zijn.",
+        "label": "Label van het redenveld",
+        "optionsHeading": "Redenopties",
+        "optionsHelp": "Klanten kiezen uit deze lijst. Voeg opties toe, verwijder ze of formuleer ze anders zodat ze bij je winkel passen. Aan het einde wordt altijd een optie 'Anders' met een tekstvak toegevoegd.",
+        "removeOption": "{{option}} verwijderen",
+        "addLabel": "Reden toevoegen",
+        "addPlaceholder": "Bijvoorbeeld: Per ongeluk besteld",
+        "translatedHelp": "Vertaal elke optie. Schakel over naar Engels om opties toe te voegen of te verwijderen.",
+        "translatedEmpty": "Voeg eerst redenopties toe in het Engels."
+      },
+      "continueButton": "Label van de knop Doorgaan",
+      "confirm": {
+        "heading": "Kop van de bevestiging",
+        "messageBefore": "Bericht vóór levering",
+        "messageAfter": "Bericht na levering",
+        "declaration": "Verklaring",
+        "button": "Label van de knop Bevestigen"
+      },
+      "done": {
+        "titleBefore": "Titel vóór levering",
+        "messageBefore": "Bericht vóór levering",
+        "titleAfter": "Titel na levering",
+        "messageAfter": "Bericht na levering"
+      }
+    },
+    "automation": {
+      "heading": "Automatisering",
+      "description": "Kies wat de app doet wanneer een klant een herroepingsverzoek indient.",
+      "beforeShip": {
+        "heading": "Voordat de bestelling wordt verzonden",
+        "description": "Geldt wanneer een verzoek binnenkomt voordat er artikelen zijn verzonden.",
+        "hold": "Uitvoering in de wacht zetten voor beoordeling",
+        "holdDetails": "Pauzeer de uitvoering totdat je het verzoek goedkeurt of afwijst. De wachtstatus wordt opgeheven zodra je beslist.",
+        "tagDetails": "Tag bestellingen die vóór verzending een verzoek krijgen, zodat je medewerkers ze in je bestellingenlijst kunnen vinden."
+      },
+      "fallback": {
+        "label": "Wat er met de bestelling gebeurt",
+        "hold": "In de wacht houden totdat je het verzoek goedkeurt of afwijst",
+        "cancelNow": "De hele bestelling direct annuleren en terugbetalen",
+        "releaseN": "De wachtstatus na een ingesteld aantal dagen opheffen",
+        "cancelN": "De hele bestelling na een ingesteld aantal dagen annuleren en terugbetalen",
+        "cancelWarning": "Hiermee wordt de hele bestelling geannuleerd en terugbetaald, ook als de klant maar een deel van de artikelen heeft herroepen. Shopify stuurt de klant een e-mail over de annulering.",
+        "days": "Aantal dagen"
+      },
+      "afterDelivery": {
+        "heading": "Nadat de bestelling is verzonden",
+        "description": "Geldt wanneer een verzoek binnenkomt nadat er minstens één artikel is verzonden, ook als het nog niet is geleverd. Elk verzoek verschijnt nog steeds op de pagina Verzoeken.",
+        "createReturn": "Retour aanmaken",
+        "createReturnDetails": "Maak in Shopify een retour aan voor de aangevraagde artikelen die zijn verzonden.",
+        "tagDetails": "Tag bestellingen die na verzending een verzoek krijgen."
+      },
+      "tag": {
+        "checkbox": "Bestelling taggen",
+        "label": "Bestellingstags",
+        "placeholder": "Tag toevoegen"
+      }
+    },
+    "deadline": {
+      "heading": "Herroepingstermijn",
+      "description": "De herroepingstermijn begint wanneer de bestelling is geleverd, niet wanneer die is geplaatst. De EU-wetgeving vereist minstens {{days}}.",
+      "days": "Dagen om te herroepen na levering",
+      "daysDetails": "Hoelang klanten na levering van hun bestelling de tijd hebben om te herroepen.",
+      "transit": "Geschatte transittijd (dagen)",
+      "transitDetails": "Wordt gebruikt als de vervoerder geen leverdatum of schatting doorgeeft. De app telt deze dagen op bij de verzenddatum."
+    },
+    "validation": {
+      "countryMode": "Kies welke landen geschikt zijn.",
+      "euCountries": "Selecteer minstens één land.",
+      "title": "Voer een titel in.",
+      "description": "Voer een beschrijving in.",
+      "itemHeading": "Voer een kop in voor de artikellijst.",
+      "continueButton": "Voer een label in voor de knop Doorgaan.",
+      "heading": "Voer een kop in.",
+      "confirmMessage": "Voer een bevestigingsbericht in.",
+      "declaration": "Voer de verklaring in die klanten moeten accepteren.",
+      "confirmButton": "Voer een label in voor de knop Bevestigen.",
+      "message": "Voer een bericht in.",
+      "reasonLabel": "Voer een label in voor het redenveld.",
+      "reasonOptions": "Voeg minstens één reden toe.",
+      "reasonOptionTranslation": "Voer een vertaling in voor deze reden.",
+      "fallback": "Kies wat er met de bestelling gebeurt.",
+      "daysRange": "Voer een aantal dagen in van {{min}} tot {{max}}.",
+      "tags": "Voeg minstens één tag toe of schakel taggen uit.",
+      "afterDeliveryAction": "Kies wat er gebeurt nadat de bestelling is verzonden."
+    },
+    "preview": {
+      "heading": "Live voorbeeld",
+      "compliantBadge": "Conform in 2 stappen",
+      "surfaceLabel": "Voorbeeld",
+      "surfaces": {
+        "orderStatus": "Bestelstatuspagina",
+        "theme": "Winkelpagina"
+      },
+      "stageLabel": "Leveringsstatus",
+      "stages": {
+        "beforeDelivery": "Nog niet geleverd",
+        "delivered": "Geleverd"
+      },
+      "banner": {
+        "orderStatus": "Dit is wat klanten zien op de bestelstatuspagina. Selecteer de knoppen om het uit te proberen, of gebruik de tabbladen in Formulierinhoud om naar een specifieke stap te gaan.",
+        "theme": "Dit is wat klanten zien op je winkelpagina. Het begint met de stap 'Je bestelling zoeken', omdat winkelbezoekers niet zijn ingelogd."
+      },
+      "restart": "Voorbeeld opnieuw starten",
+      "position": {
+        "entry": "Startkaart",
+        "lookup": "Je bestelling zoeken",
+        "step": "Stap {{current}} van {{total}}"
+      },
+      "storefront": {
+        "start": "Herroepingsverzoek starten",
+        "findOrderHeading": "Je bestelling zoeken",
+        "findOrderBody": "Voer je bestelgegevens in om je herroepingsverzoek te starten.",
+        "fullName": "Volledige naam",
+        "email": "E-mail",
+        "orderNumber": "Bestelnummer",
+        "continue": "Doorgaan",
+        "steps": {
+          "step1": "Gegevens",
+          "confirm": "Bevestigen",
+          "done": "Klaar"
+        },
+        "stepOf": "Stap {{current}} van {{total}}",
+        "stepProgress": "Stap {{current}} van {{total}}: {{label}}",
+        "reasonPlaceholder": "Selecteer een reden (optioneel)",
+        "otherReason": "Anders",
+        "yourReason": "Je reden",
+        "yourReasonPlaceholder": "Vertel ons je reden",
+        "selectItem": "Selecteer minstens één artikel om door te gaan.",
+        "itemsToWithdraw": "Te herroepen artikelen ({{count}})",
+        "selectedTotal": "Totaal geselecteerde artikelen",
+        "previous": "Vorige",
+        "submittedOn": "Ingediend op {{date}}"
+      }
+    }
+  },
+  "requests": {
+    "pageTitle": "Verzoeken",
+    "searchLabel": "Herroepingsverzoeken zoeken",
+    "searchPlaceholder": "Zoeken op bestelnummer, klantnaam of e-mail",
+    "export": "Exporteren",
+    "exportSelected": "Selectie exporteren",
+    "tabs": {
+      "all": "Alle",
+      "withCount": "{{label}} ({{count}})"
+    },
+    "empty": {
+      "imageAlt": "",
+      "heading": "Nog geen herroepingsverzoeken",
+      "body": "Herroepingsverzoeken van je klanten verschijnen hier.",
+      "filteredHeading": "Geen herroepingsverzoeken gevonden",
+      "filteredBody": "Probeer een andere zoekterm of een ander filter."
+    },
+    "table": {
+      "selectAll": "Alle herroepingsverzoeken selecteren",
+      "selectRow": "Bestelling {{order}} selecteren",
+      "selectedCount": "{{count}} geselecteerd",
+      "order": "Bestelling",
+      "customer": "Klant",
+      "items": "Artikelen",
+      "value": "Waarde",
+      "status": "Status",
+      "submitted": "Ingediend",
+      "actions": "Acties",
+      "itemCount_one": "{{count}} artikel",
+      "itemCount_other": "{{count}} artikelen",
+      "viewRow": "Verzoek voor bestelling {{order}} bekijken",
+      "deleteRow": "Verzoek voor bestelling {{order}} verwijderen"
+    },
+    "delete": {
+      "heading_one": "Herroepingsverzoek verwijderen?",
+      "heading_other": "{{count}} herroepingsverzoeken verwijderen?",
+      "body_one": "Dit herroepingsverzoek wordt definitief verwijderd. Dit kan niet ongedaan worden gemaakt.",
+      "body_other": "Deze {{count}} herroepingsverzoeken worden definitief verwijderd. Dit kan niet ongedaan worden gemaakt.",
+      "confirm_one": "Verzoek verwijderen",
+      "confirm_other": "Verzoeken verwijderen",
+      "toast_one": "Herroepingsverzoek verwijderd",
+      "toast_other": "{{count}} herroepingsverzoeken verwijderd"
+    },
+    "csv": {
+      "filename": "herroepingsverzoeken-{{date}}.csv",
+      "order": "Bestelling",
+      "customerName": "Naam klant",
+      "customerEmail": "E-mail klant",
+      "country": "Land",
+      "items": "Artikelen",
+      "value": "Waarde",
+      "reason": "Reden",
+      "status": "Status",
+      "submitted": "Ingediend",
+      "decided": "Besloten"
+    }
+  },
+  "requestDetail": {
+    "pageTitle": "Herroepingsverzoek",
+    "backLink": "Verzoeken",
+    "submittedLine": "Ingediend op {{date}} via {{source}}",
+    "previous": "Vorig verzoek",
+    "next": "Volgend verzoek",
+    "badges": {
+      "canceled": "Geannuleerd",
+      "onHold": "In de wacht",
+      "return": "Retour: {{status}}"
+    },
+    "actions": {
+      "refund": "Terugbetalen",
+      "more": "Meer acties",
+      "cancelOrder": "Bestelling annuleren",
+      "placeHold": "Uitvoering in de wacht zetten",
+      "releaseHold": "Wachtstatus van uitvoering opheffen",
+      "createReturn": "Retour aanmaken",
+      "processReturn": "Verwerken en terugbetalen",
+      "viewOrder": "Bestelling bekijken"
+    },
+    "banners": {
+      "orderUnavailableHeading": "Bestelgegevens niet beschikbaar",
+      "orderUnavailableBody": "{{error}} Je kunt geen bestellingsacties gebruiken totdat de bestelgegevens zijn geladen.",
+      "actionFailedHeading": "Deze actie kan niet worden voltooid",
+      "actionFailedAction": "Bekijk Activiteit hieronder voor details.",
+      "canceled": "Deze bestelling is geannuleerd. Bestellingsacties zijn niet meer beschikbaar."
+    },
+    "deadline": {
+      "heading": "Terugbetalingstermijn",
+      "pendingLabel": "Resterende tijd om te beslissen en terug te betalen",
+      "decidedLabel": "Beslissing",
+      "badges": {
+        "overdue": "Te laat",
+        "actionNeeded": "Actie vereist",
+        "onTime": "Op tijd"
+      },
+      "daysLeft_one": "Nog {{count}} dag",
+      "daysLeft_other": "Nog {{count}} dagen",
+      "daysOverdue_one": "{{count}} dag te laat",
+      "daysOverdue_other": "{{count}} dagen te laat",
+      "daysEarly_one": "{{count}} dag vóór de termijn",
+      "daysEarly_other": "{{count}} dagen vóór de termijn",
+      "daysLate_one": "{{count}} dag na de termijn",
+      "daysLate_other": "{{count}} dagen na de termijn",
+      "pending": "Je hebt vanaf het indienen van het verzoek {{days}} om te beslissen en terug te betalen. De termijn verloopt op {{date}}.",
+      "pendingOverdue": "De termijn is verlopen op {{date}}. Betaal de klant zo snel mogelijk terug.",
+      "decidedOnTime": "Besloten binnen de terugbetalingstermijn van {{windowDays}} dagen. De termijn verliep op {{date}}.",
+      "decidedLate": "Besloten na de terugbetalingstermijn van {{date}}."
+    },
+    "items": {
+      "heading": "Herroepen artikelen",
+      "reject": "Afwijzen",
+      "approve": "Goedkeuren",
+      "total": "Totaal herroepen",
+      "sku": "SKU: {{sku}}",
+      "quantity": "Aantal: {{count}}",
+      "shipping": {
+        "notShipped": "Nog niet verzonden",
+        "partlyShipped": "Gedeeltelijk verzonden",
+        "shipped": "Verzonden"
+      },
+      "partiallyShippedBanner": "Een deel van deze bestelling is verzonden. Artikelen die nog niet zijn verzonden kunnen nog in de wacht worden gezet, en voor verzonden artikelen is een retour nodig."
+    },
+    "return": {
+      "heading": "Retour",
+      "status": "Status",
+      "created": "Aangemaakt",
+      "body": "Er is in Shopify een retour aangemaakt voor de herroepen artikelen.",
+      "openBody": "Selecteer Verwerken en terugbetalen zodra de artikelen terug zijn. Daarmee krijgt de klant het bedrag voor de geretourneerde artikelen terug en wordt de retour gesloten.",
+      "alreadyRefundedBody": "De artikelen in deze retour zijn al terugbetaald. Sluit de retour in Shopify zodra ze terug zijn."
+    },
+    "processReturnModal": {
+      "heading": "Retour verwerken en terugbetalen",
+      "calculating": "Terugbetalingsbedrag berekenen…",
+      "nothingToProcess": "Er valt niets meer te verwerken voor deze retour. Mogelijk is die al verwerkt of gesloten in Shopify.",
+      "nothingToRefund": "De artikelen in deze retour zijn al terugbetaald, dus er valt niets meer terug te betalen.",
+      "unsupportedPayment": "De betaling van deze bestelling kan niet vanuit de app worden terugbetaald. Verwerk de retour en betaal terug in Shopify.",
+      "itemsHeading": "Artikelen in retour {{name}}",
+      "subtotal": "Subtotaal artikelen",
+      "shippingLine": "Oorspronkelijke verzending",
+      "total": "Totale terugbetaling",
+      "body": "Hiermee worden de geretourneerde artikelen als verwerkt gemarkeerd, terugbetaald via de oorspronkelijke betaalmethode en wordt de retour gesloten. Shopify stuurt de klant een terugbetalingsbewijs per e-mail. Dit kan niet ongedaan worden gemaakt.",
+      "confirmAmount": "{{amount}} terugbetalen",
+      "confirm": "Verwerken en terugbetalen"
+    },
+    "payment": {
+      "heading": "Betaling",
+      "status": "Betalingsstatus",
+      "subtotal": "Subtotaal herroeping",
+      "shipping": "Verzending bestelling",
+      "total": "Totaal bestelling",
+      "refunded": "Terugbetaald",
+      "unavailable": "Betalingsgegevens zijn op dit moment niet beschikbaar."
+    },
+    "activity": {
+      "heading": "Activiteit",
+      "noteLabel": "Notitie toevoegen",
+      "notePlaceholder": "Notitie toevoegen…",
+      "post": "Plaatsen",
+      "noteHelp": "Alleen jij en je medewerkers kunnen notities zien. Klanten zien ze nooit.",
+      "submitted": "Herroepingsverzoek ingediend via {{source}}",
+      "decided": {
+        "approved": "Verzoek goedgekeurd",
+        "rejected": "Verzoek afgewezen"
+      },
+      "note": "Notitie: {{body}}",
+      "entry": "{{label}}: {{message}}",
+      "actions": {
+        "resolve_branch": "Automatisering gestart",
+        "run_automation": "Automatisering",
+        "automation_completed": "Automatisering voltooid",
+        "hold_fulfillment": "Uitvoering in de wacht",
+        "schedule_fallback": "Geplande vervolgactie",
+        "release_hold": "Wachtstatus van uitvoering opgeheven",
+        "cancel_order_immediate": "Bestelling geannuleerd en terugbetaald",
+        "cancel_order_scheduled": "Bestelling geannuleerd en terugbetaald",
+        "cancel_order_manual": "Bestelling geannuleerd en terugbetaald",
+        "cancel_order": "Bestelling geannuleerd en terugbetaald",
+        "refund": "Terugbetaling",
+        "tag_before_ship": "Bestelling getagd",
+        "tag_after_delivery": "Bestelling getagd",
+        "order_tag_add": "Bestellingstags toegevoegd",
+        "order_tag_remove": "Bestellingstags verwijderd",
+        "create_return": "Retour",
+        "refresh_return": "Retourstatus vernieuwd",
+        "process_return": "Verwerken en terugbetalen",
+        "fetch_shop_contact": "Contactgegevens van de winkel",
+        "customer_email": "Bevestigingsmail aan klant",
+        "merchant_email": "Melding van nieuw verzoek",
+        "notify_customer": "E-mail over beslissing",
+        "notify_merchant": "Je hebt een melding ontvangen"
+      },
+      "messages": {
+        "noTags": "Er zijn geen tags ingesteld",
+        "tagged": "Bestelling getagd met {{tags}}",
+        "noHoldableOrders": "Niets in deze bestelling kan op dit moment in de wacht worden gezet",
+        "held": "Artikelen in de wacht gezet zodat ze niet worden verzonden",
+        "holdOff": "Uitvoering in de wacht zetten voor beoordeling is uitgeschakeld",
+        "tagBeforeShipOff": "Taggen vóór verzending is uitgeschakeld",
+        "tagAfterDeliveryOff": "Taggen na verzending is uitgeschakeld",
+        "fallbackHold": "De bestelling blijft in de wacht totdat je het verzoek goedkeurt of afwijst",
+        "fallbackInvalidDays": "De vervolgactie kan niet worden gepland. Het aantal dagen is ongeldig.",
+        "scheduledRelease": "Opheffen van wachtstatus gepland op {{date}}",
+        "scheduledCancel": "Annulering en terugbetaling gepland op {{date}}",
+        "canceled": "Bestelling geannuleerd en terugbetaald",
+        "returnCreated": "Retour aangemaakt in Shopify",
+        "returnNoMatch": "Geen van de aangevraagde artikelen kan worden geretourneerd",
+        "notifiedByEmail": "Gemeld in de app en per e-mail",
+        "notifiedEmailFailed": "Gemeld in de app. De meldingsmail is mislukt: {{error}}",
+        "notifiedInAppOnly": "Gemeld in de app. De meldingsmail is niet verzonden.",
+        "emailSent": "Verzonden",
+        "emailFailed": "Mislukt: {{error}}",
+        "emailNotSent": "Niet verzonden omdat er geen ontvanger is of e-mail niet is ingesteld",
+        "orderNotFound": "Deze bestelling is niet gevonden in Shopify",
+        "alreadyCanceled": "De bestelling was al geannuleerd",
+        "branchBeforeShip": "De bestelling is nog niet verzonden, dus de stappen vóór verzending zijn uitgevoerd",
+        "branchAfterDelivery": "De bestelling is verzonden, dus de stappen na verzending zijn uitgevoerd",
+        "branchPartiallyShipped": "De bestelling is gedeeltelijk verzonden, dus de stappen voor verzonden en niet-verzonden artikelen zijn uitgevoerd",
+        "noUnshippedItemsRequested": "Geen van de aangevraagde artikelen wacht op verzending, dus er is niets in de wacht gezet",
+        "fallbackCancelPartiallyShipped": "De bestelling is gedeeltelijk verzonden en kan dus niet in zijn geheel worden geannuleerd. De aangevraagde artikelen blijven in de wacht totdat je het verzoek goedkeurt of afwijst.",
+        "returnNothingShipped": "Geen van de aangevraagde artikelen is verzonden, dus er was geen retour nodig",
+        "runCompleted": "Automatisering voltooid",
+        "runFailed": "Een of meer automatiseringsstappen zijn mislukt",
+        "runSkipped": "Automatisering overgeslagen",
+        "scheduledSkippedApproved": "Het verzoek was al goedgekeurd, dus de geplande actie is niet uitgevoerd",
+        "scheduledSkippedRejected": "Het verzoek was al afgewezen, dus de geplande actie is niet uitgevoerd",
+        "noHoldsPlaced": "Er zijn voor dit verzoek geen wachtstatussen ingesteld",
+        "holdsAlreadyReleased": "De wachtstatussen waren al opgeheven",
+        "holdReleased": "De bestelling kan weer worden uitgevoerd",
+        "holdExists": "Er is al een wachtstatus voor dit verzoek",
+        "decisionSkipped": "Een medewerker heeft ervoor gekozen de klant geen e-mail te sturen",
+        "decisionSent": "Klant per e-mail geïnformeerd over de beslissing",
+        "decisionFailed": "E-mail over beslissing mislukt: {{error}}",
+        "decisionNotConfigured": "E-mail over beslissing niet verzonden omdat e-mail niet is ingesteld",
+        "refunded": "{{amount}} terugbetaald",
+        "noReturn": "Er is geen retour voor dit verzoek",
+        "returnStatus": "Retourstatus: {{status}}",
+        "returnProcessed": "Retour verwerkt en {{amount}} terugbetaald",
+        "returnNothingToProcess": "Er valt niets meer te verwerken voor deze retour",
+        "returnNothingToRefund": "De artikelen in deze retour zijn al terugbetaald",
+        "returnPaymentUnsupported": "Deze betaling kan niet vanuit de app worden terugbetaald. Verwerk de retour in Shopify.",
+        "refundNothingRefundable": "Geen van de aangevraagde artikelen kan worden terugbetaald. Mogelijk zijn ze al terugbetaald.",
+        "refundNoSuggestion": "Shopify kon geen terugbetaling voor deze artikelen berekenen. Betaal ze terug in Shopify.",
+        "refundCoveredByReturn": "Alle herroepen artikelen zitten in de open retour. Gebruik Verwerken en terugbetalen bij de retour om ze terug te betalen.",
+        "tagsRemoved": "Bestellingstags verwijderd: {{tags}}",
+        "tagsAdded": "Bestellingstags toegevoegd: {{tags}}"
+      }
+    },
+    "order": {
+      "heading": "Bestelling",
+      "order": "Bestelling",
+      "placed": "Geplaatst",
+      "payment": "Betaling",
+      "fulfillment": "Uitvoering"
+    },
+    "customer": {
+      "heading": "Klant",
+      "avatarFallback": "Klant",
+      "contactHeading": "Contactgegevens",
+      "email": "E-mail",
+      "language": "Taal",
+      "shippingHeading": "Verzendadres"
+    },
+    "automation": {
+      "heading": "Automatisering",
+      "stage": "Fase",
+      "stages": {
+        "before_ship": "Vóór verzending",
+        "partially_shipped": "Gedeeltelijk verzonden",
+        "after_delivery": "Na verzending"
+      },
+      "hold": "Uitvoering in de wacht",
+      "holdStates": {
+        "onHold": "In de wacht",
+        "released": "Opgeheven",
+        "none": "Geen"
+      },
+      "canceled": "Geannuleerd",
+      "return": "Retour"
+    },
+    "emails": {
+      "heading": "E-mailgeschiedenis",
+      "customerConfirmation": "Herroepingsbevestiging aan klant",
+      "merchantNotification": "Melding van nieuw verzoek",
+      "decision": "E-mail over beslissing",
+      "statuses": {
+        "sent": "Verzonden",
+        "failed": "Mislukt",
+        "notSent": "Niet verzonden"
+      }
+    },
+    "tags": {
+      "heading": "Bestellingstags",
+      "label": "Bestellingstag toevoegen",
+      "placeholder": "Tag toevoegen",
+      "remove": "Tag {{tag}} verwijderen",
+      "savedToast": "Bestellingstags opgeslagen"
+    },
+    "reason": {
+      "heading": "Reden voor herroeping",
+      "quoted": "'{{reason}}'",
+      "none": "Geen reden opgegeven"
+    },
+    "decidedToast": {
+      "approved": "Herroepingsverzoek goedgekeurd",
+      "rejected": "Herroepingsverzoek afgewezen"
+    },
+    "cancelModal": {
+      "heading": "Bestelling annuleren?",
+      "body": "Hiermee wordt de hele bestelling in Shopify geannuleerd, inclusief artikelen die de klant niet heeft herroepen. De bestelling wordt terugbetaald via de oorspronkelijke betaalmethode en weer op voorraad gezet, en Shopify stuurt de klant een e-mail. Dit kan niet ongedaan worden gemaakt.",
+      "keep": "Bestelling behouden",
+      "confirm": "Bestelling annuleren en terugbetalen"
+    },
+    "createReturnModal": {
+      "heading": "Retour aanmaken voor herroepen artikelen",
+      "itemsHeading": "Te retourneren artikelen",
+      "subtotal": "Subtotaal artikelen",
+      "checking": "Controleren welke artikelen kunnen worden geretourneerd…",
+      "nothingToReturn": "Geen van de herroepen artikelen is al verzonden, dus er valt niets te retourneren. Zet ze in de wacht zodat ze niet worden verzonden, of betaal ze terug om ze uit de bestelling te verwijderen.",
+      "notShipped_one": "{{count}} herroepen artikel is niet inbegrepen omdat het nog niet is verzonden.",
+      "notShipped_other": "{{count}} herroepen artikelen zijn niet inbegrepen omdat ze nog niet zijn verzonden.",
+      "notReturnable_one": "{{count}} herroepen artikel is niet inbegrepen omdat het al is geretourneerd.",
+      "notReturnable_other": "{{count}} herroepen artikelen zijn niet inbegrepen omdat ze al zijn geretourneerd.",
+      "body": "Hiermee wordt in Shopify een retour aangemaakt voor de bovenstaande artikelen. De klant krijgt hiermee nog niets terugbetaald. Selecteer Verwerken en terugbetalen bij de retour zodra de artikelen terug zijn.",
+      "cancel": "Annuleren",
+      "confirm": "Retour aanmaken"
+    },
+    "decisionModal": {
+      "headingApprove": "Herroepingsverzoek goedkeuren?",
+      "headingReject": "Herroepingsverzoek afwijzen?",
+      "approveAndSend": "Goedkeuren en e-mail verzenden",
+      "rejectAndSend": "Afwijzen en e-mail verzenden",
+      "approve": "Goedkeuren",
+      "reject": "Afwijzen",
+      "loadingLabel": "E-mailvoorbeeld laden",
+      "loading": "E-mail aan klant voorbereiden…",
+      "sendEmail": "E-mail naar klant verzenden",
+      "language": "Deze e-mail is in het {{language}}, de taal van de klant. Je wijzigingen gelden alleen voor deze e-mail.",
+      "subject": "Onderwerp",
+      "body": "Tekst van e-mail",
+      "editHtml": "HTML bewerken",
+      "htmlLabel": "HTML van e-mail",
+      "previewTitle": "E-mailvoorbeeld",
+      "templateUnchanged": "Je wijzigingen gelden alleen voor deze e-mail. Je opgeslagen sjabloon verandert niet.",
+      "noEmail": "De klant ontvangt geen e-mail. Je kunt indien nodig apart contact met de klant opnemen.",
+      "holdReleased": "Hiermee wordt ook de wachtstatus van de uitvoering voor deze bestelling opgeheven, zodat de bestelling weer kan worden uitgevoerd."
+    },
+    "refundModal": {
+      "heading": "Herroepen artikelen terugbetalen",
+      "calculatingLabel": "Terugbetaling berekenen",
+      "calculating": "Terugbetalingsbedrag berekenen…",
+      "nothingToRefund": "Er valt niets terug te betalen voor deze bestelling. Mogelijk zijn de herroepen artikelen al terugbetaald of is de bestelling geannuleerd.",
+      "itemsHeading": "Terug te betalen artikelen",
+      "subtotal": "Subtotaal artikelen",
+      "shippingLine": "Oorspronkelijke verzending",
+      "amount": "Terugbetalingsbedrag",
+      "total": "Totale terugbetaling",
+      "body": "De herroepen artikelen worden terugbetaald via de oorspronkelijke betaalmethode en waar mogelijk weer op voorraad gezet. Shopify stuurt de klant een terugbetalingsbewijs per e-mail.",
+      "includesShipping": "De klant heeft de hele bestelling herroepen, dus de oorspronkelijke verzendkosten zijn inbegrepen.",
+      "unshippedItems": "Artikelen die nog niet zijn verzonden worden uit de bestelling verwijderd en dus niet verzonden.",
+      "inReturn_one": "{{count}} herroepen artikel is niet inbegrepen omdat het in retour {{name}} zit. Betaal het terug met Verwerken en terugbetalen bij de retour.",
+      "inReturn_other": "{{count}} herroepen artikelen zijn niet inbegrepen omdat ze in retour {{name}} zitten. Betaal ze terug met Verwerken en terugbetalen bij de retour.",
+      "allInReturn": "Alle herroepen artikelen zitten in retour {{name}}. Betaal ze terug met Verwerken en terugbetalen bij de retour, waarmee die ook wordt gesloten.",
+      "irreversible": "Dit kan niet ongedaan worden gemaakt.",
+      "confirmAmount": "{{amount}} terugbetalen",
+      "confirm": "Terugbetalen"
+    },
+    "shopifyNotes": {
+      "holdAutomatic": "Herroepingsverzoek voor bestelling {{order}} wacht op beoordeling door medewerkers",
+      "holdManual": "Herroepingsverzoek voor bestelling {{order}} is door medewerkers in de wacht gezet",
+      "canceled": "Geannuleerd door {{appName}} omdat de klant de aankoop heeft herroepen (verzoek {{id}}).",
+      "refunded": "Terugbetaald door {{appName}} omdat de klant de aankoop heeft herroepen (verzoek {{id}}).",
+      "returnReason": "Herroepingsverzoek: {{reason}}",
+      "returnReasonNone": "Herroepingsverzoek (geen reden opgegeven)"
+    }
+  },
+  "emailTemplates": {
+    "pageTitle": "Meldingen",
+    "loadError": "Meldingen kunnen niet worden geladen",
+    "saveError": "Meldingen kunnen niet worden opgeslagen",
+    "savedToast": "Meldingen opgeslagen",
+    "resetToast": "{{name}} teruggezet naar standaard",
+    "sender": {
+      "heading": "Afzender",
+      "description": "Deze instellingen gelden voor elke e-mail die de app voor je winkel verstuurt. Verstuur vanaf je eigen geverifieerde adres en kies waar antwoorden van klanten naartoe gaan.",
+      "emailLabel": "Afzenderadres",
+      "emailPlaceholder": "notifications@withdrawaleasy.com",
+      "detailsVerified": "E-mails worden vanaf dit adres verzonden.",
+      "detailsPending": "Voer de code in die we naar dit adres hebben gestuurd om het te verifiëren.",
+      "detailsDefault": "Als je dit leeg laat, worden e-mails verzonden vanaf {{email}}.",
+      "detailsDefaultFallback": "Als je dit leeg laat, worden e-mails verzonden vanaf het standaardadres van de app.",
+      "freeProviderWarning": "Gratis e-mailproviders zoals Gmail en Yahoo kunnen niet worden geverifieerd. Klanten zien 'via brevosend.com' bij e-mails van dit adres. Gebruik voor een professionelere uitstraling een adres op het domein van je winkel.",
+      "codeLabel": "Verificatiecode",
+      "codeDetails": "Voer de 6-cijferige code in uit de e-mail die we je hebben gestuurd.",
+      "verifyCode": "Code verifiëren",
+      "checkStatus": "Verificatiestatus controleren",
+      "verifyEmail": "E-mail verifiëren",
+      "codeSent": "We hebben een verificatiecode gestuurd naar {{email}}.",
+      "notVerifiedYet": "Deze e-mail is nog niet geverifieerd. Zoek de code in je inbox en probeer het opnieuw.",
+      "replyToLabel": "Antwoordadres",
+      "replyToPlaceholder": "support@jouwwinkel.com",
+      "replyToDetails": "Antwoorden van klanten gaan standaard naar het e-mailadres van je winkel. Voer een ander adres in om antwoorden ergens anders te ontvangen."
+    },
+    "domain": {
+      "heading": "Domeinverificatie",
+      "description": "Verifieer je domein zodat klanten geen 'via brevosend.com' zien bij je e-mails. Dit is optioneel, maar we raden het aan als je vanaf het domein van je winkel verstuurt.",
+      "label": "Domein",
+      "placeholder": "jouwwinkel.com",
+      "details": "Voer het domein in waarvandaan je e-mails verstuurt, niet je myshopify.com-domein.",
+      "freeProviderWarning": "Gratis e-mailproviders zoals Gmail en Yahoo kunnen niet worden geverifieerd. Voer in plaats daarvan het domein van je winkel in.",
+      "columns": {
+        "record": "Record",
+        "type": "Type",
+        "host": "Host",
+        "value": "Waarde"
+      },
+      "records": {
+        "brevo_code": "Domeineigendom",
+        "dkim_record": "DKIM",
+        "dkim1Record": "DKIM 1",
+        "dkim2Record": "DKIM 2",
+        "dmarc_record": "DMARC"
+      },
+      "copyHost": "Host kopiëren",
+      "copyValue": "Waarde kopiëren",
+      "verifyRecords": "DNS-records verifiëren",
+      "authenticate": "Domein verifiëren",
+      "pendingInfo": "Voeg deze records toe bij je domeinprovider en selecteer daarna DNS-records verifiëren.",
+      "notVerifiedYet": "Je domein is nog niet geverifieerd. DNS-wijzigingen kunnen enige tijd nodig hebben, dus probeer het later opnieuw."
+    },
+    "notification": {
+      "heading": "E-mailsjabloon",
+      "emailLabel": "E-mail",
+      "language": "Taal",
+      "languageDetails": "Kies een taal om deze e-mail in die taal te bewerken. Elke taal wordt apart opgeslagen. Klanten ontvangen e-mails in hun eigen taal.",
+      "send": "Deze e-mail verzenden",
+      "requiredDetails": "Deze e-mail is verplicht volgens de EU-wetgeving en kan dus niet worden uitgeschakeld.",
+      "merchantDetails": "Schakel uit om deze e-mail niet meer te ontvangen.",
+      "decisionDetails": "Schakel uit om deze e-mail standaard niet meer te verzenden. Je kunt er nog steeds voor kiezen om hem te verzenden wanneer je een afzonderlijk verzoek goedkeurt of afwijst.",
+      "subject": "Onderwerp",
+      "reset": "Terugzetten naar standaard",
+      "customized": "Aangepast"
+    },
+    "templates": {
+      "customerConfirmation": {
+        "name": "Herroepingsbevestiging aan klant",
+        "description": "Wordt naar klanten verzonden zodra ze een herroepingsverzoek indienen."
+      },
+      "merchantNotification": {
+        "name": "Melding van nieuw verzoek",
+        "description": "Wordt naar het contactadres van je winkel verzonden wanneer een klant een nieuw herroepingsverzoek indient. Beantwoord de e-mail om de klant te mailen."
+      },
+      "withdrawalApproved": {
+        "name": "Herroeping goedgekeurd",
+        "description": "Wordt naar klanten verzonden wanneer je hun herroepingsverzoek goedkeurt. Je kunt de e-mail vóór verzending controleren en bewerken."
+      },
+      "withdrawalRejected": {
+        "name": "Herroeping afgewezen",
+        "description": "Wordt naar klanten verzonden wanneer je hun herroepingsverzoek afwijst. Je kunt de e-mail vóór verzending controleren en bewerken."
+      }
+    },
+    "merchantDefaults": {
+      "subject": "Nieuw herroepingsverzoek — bestelling {{order}}",
+      "heading": "Nieuw herroepingsverzoek",
+      "intro": "Een klant heeft een herroepingsverzoek ingediend. Hier vind je alles wat je nodig hebt om het te beoordelen.",
+      "rows": {
+        "name": "Naam",
+        "email": "E-mail",
+        "date": "Datum",
+        "orderNumber": "Bestelnummer",
+        "reference": "Referentienummer",
+        "reason": "Reden"
+      },
+      "button": "Verzoek bekijken",
+      "itemsHeading": "Aangevraagde artikelen",
+      "footnote": "Open het verzoek in je beheeromgeving om het goed te keuren of af te wijzen. De terugbetalingstermijn wordt daar automatisch bijgehouden."
+    },
+    "body": {
+      "heading": "Tekst van e-mail",
+      "editCode": "Code bewerken",
+      "htmlLabel": "HTML-tekst van e-mail",
+      "previewHeading": "E-mailvoorbeeld"
+    },
+    "variables": {
+      "heading": "Variabelen",
+      "help": "Selecteer een variabele om die op de cursorpositie in te voegen.",
+      "insert": "{{label}} invoegen: {{description}}",
+      "groups": {
+        "customer": "Klant",
+        "order": "Bestelling",
+        "withdrawal": "Herroeping",
+        "request": "Verzoek",
+        "shop": "Winkel"
+      },
+      "tokens": {
+        "customer": {
+          "first_name": {
+            "label": "Voornaam",
+            "description": "De voornaam van de klant"
+          },
+          "last_name": {
+            "label": "Achternaam",
+            "description": "De achternaam van de klant"
+          },
+          "email": {
+            "label": "E-mail",
+            "description": "Het e-mailadres van de klant"
+          }
+        },
+        "order": {
+          "name": {
+            "label": "Bestelnummer",
+            "description": "Het bestelnummer, zoals #2138"
+          },
+          "id": {
+            "label": "Bestellings-ID",
+            "description": "De interne ID van de bestelling"
+          }
+        },
+        "withdrawal": {
+          "request_id": {
+            "label": "Referentienummer",
+            "description": "Het referentienummer van het herroepingsverzoek"
+          },
+          "submitted_at": {
+            "label": "Indieningsdatum",
+            "description": "De datum en tijd waarop het verzoek is ingediend"
+          },
+          "reason": {
+            "label": "Reden",
+            "description": "De reden die de klant heeft opgegeven, indien van toepassing"
+          },
+          "selected_products": {
+            "label": "Geselecteerde producten (tekst)",
+            "description": "De aangevraagde artikelen als lijst gescheiden door komma's"
+          }
+        },
+        "request": {
+          "status": {
+            "label": "Status",
+            "description": "De huidige status van het verzoek"
+          },
+          "url": {
+            "label": "Link naar verzoek",
+            "description": "Een link naar het verzoek in de app"
+          }
+        },
+        "shop": {
+          "name": {
+            "label": "Winkelnaam",
+            "description": "De naam van je winkel"
+          },
+          "email": {
+            "label": "E-mail van winkel",
+            "description": "Het contactadres van je winkel"
+          }
+        }
+      }
+    },
+    "validation": {
+      "email": "Voer een geldig e-mailadres in.",
+      "subjectRequired": "Voer een onderwerp in.",
+      "subjectTooLong": "Het onderwerp mag maximaal {{max}} tekens bevatten.",
+      "bodyRequired": "Voer de tekst van de e-mail in."
+    }
+  },
+  "sample": {
+    "customerName": "Sanne de Vries",
+    "items": {
+      "lamp": {
+        "title": "Fjord tafellamp",
+        "variant": "Eiken / Groot"
+      },
+      "candleHolder": {
+        "title": "Tind kandelaar",
+        "variant": "Messing"
+      }
+    },
+    "reason": "Ik ben van gedachten veranderd"
+  },
+  "faqs": {
+    "pageTitle": "Veelgestelde vragen",
+    "searchLabel": "Veelgestelde vragen doorzoeken",
+    "searchPlaceholder": "Zoek vragen, zoals 'terugbetaling' of 'termijn'",
+    "noResults": "Geen vragen gevonden voor '{{query}}'",
+    "noResultsHelp": "Probeer een ander woord of neem hieronder contact op met support.",
+    "showAnswer": "Antwoord tonen: {{question}}",
+    "hideAnswer": "Antwoord verbergen: {{question}}",
+    "groups": {
+      "gettingStarted": "Aan de slag",
+      "deadline": "Herroepingstermijn",
+      "requests": "Verzoeken afhandelen",
+      "emailsLanguages": "E-mails en talen"
+    },
+    "actions": {
+      "goToSettings": "Naar Instellingen",
+      "goToRequests": "Naar Verzoeken",
+      "goToNotifications": "Naar Meldingen"
+    },
+    "stillStuck": {
+      "heading": "Nog vragen?",
+      "body": "Ons supportteam leest en beantwoordt elke e-mail.",
+      "link": "Contact opnemen met support"
+    },
+    "items": {
+      "what-it-does": {
+        "question": "Wat doet de app?",
+        "paragraphs": [
+          "De app geeft je EU-klanten een duidelijke manier om een aankoop te herroepen, zoals de EU-wetgeving vereist. Ook beheer je alle verzoeken op één plek.",
+          "Klanten openen het formulier vanuit hun bestelling, kiezen de artikelen die ze willen herroepen en bevestigen. Elk verzoek verschijnt daarna op de pagina Verzoeken met de artikelen, de reden en je terugbetalingstermijn. De app verstuurt de verplichte e-mails voor je."
+        ]
+      },
+      "where-form-appears": {
+        "question": "Waar vinden klanten het herroepingsformulier?",
+        "paragraphs": [
+          "Je kunt het formulier op 2 plekken tonen. Gebruik er een of beide:"
+        ],
+        "bullets": [
+          "Bestelstatuspagina: de pagina die klanten na het afrekenen zien en wanneer ze de link in hun orderbevestiging openen.",
+          "Winkelpagina: een pagina in je webwinkel voor klanten die later terugkomen. Ze vinden hun bestelling met hun bestelnummer en e-mailadres."
+        ],
+        "closing": "Schakel elke plek in via Instellingen en voeg daarna eenmalig het bijbehorende app-blok toe. De configuratiegids op Start laat zien welke blokken zijn toegevoegd."
+      },
+      "form-not-showing": {
+        "question": "Waarom ziet een klant het herroepingsformulier niet?",
+        "paragraphs": [
+          "Controleer deze punten, te beginnen met de meest voorkomende:"
+        ],
+        "bullets": [
+          "Het formulier is uitgeschakeld, of de plek die de klant gebruikt is niet ingeschakeld in Instellingen.",
+          "Het app-blok is nog niet aan die pagina toegevoegd.",
+          "De bestelling wordt niet naar een van je geschikte landen verzonden.",
+          "De herroepingstermijn voor de bestelling is verlopen.",
+          "De bestelling is geannuleerd of heeft al een verzoek in behandeling. Elke bestelling kan maar 1 verzoek tegelijk in behandeling hebben."
+        ]
+      },
+      "deadline": {
+        "question": "Wanneer begint en eindigt de herroepingstermijn?",
+        "paragraphs": [
+          "Volgens de EU-wetgeving begint de termijn wanneer de klant de artikelen ontvangt, niet wanneer die bestelt. Klanten kunnen ook op elk moment herroepen voordat de artikelen aankomen."
+        ],
+        "bullets": [
+          "Nog niet verzonden: de termijn is nog niet begonnen, dus klanten kunnen altijd herroepen.",
+          "Geleverd: de termijn begint op de leverdatum van de vervoerder en duurt {{withdrawalDays}}. Je kunt het aantal dagen wijzigen in Instellingen.",
+          "Verzonden, maar zonder leverdatum: de app gebruikt de geschatte leverdatum van de vervoerder. Als die er niet is, gebruikt de app de verzenddatum plus je geschatte transittijd."
+        ]
+      },
+      "transit-days": {
+        "question": "Waarvoor wordt de geschatte transittijd gebruikt?",
+        "paragraphs": [
+          "Veel vervoerders sturen geen leverdatum naar Shopify. Zonder die datum weet de app niet wanneer de herroepingstermijn begint, dus telt de app je geschatte transittijd op bij de verzenddatum.",
+          "Stel deze in op ongeveer de tijd die je pakketten nodig hebben om aan te komen. Op dit moment is dat {{transitDays}}. Kies bij twijfel een langere tijd. Een te korte tijd kan de herroepingstermijn van een klant te vroeg laten eindigen."
+        ]
+      },
+      "split-shipments": {
+        "question": "Wat als een bestelling in meer dan 1 pakket wordt verzonden?",
+        "paragraphs": [
+          "De herroepingstermijn begint wanneer het laatste pakket aankomt. Artikelen die de app in de wacht houdt omdat de klant ze heeft herroepen, tellen niet mee, omdat ze niet worden verzonden.",
+          "Als een klant herroept terwijl pas een deel van de bestelling is verzonden, behandelt de app elk deel apart:"
+        ],
+        "bullets": [
+          "Artikelen die niet zijn verzonden: de app kan ze in de wacht zetten zodat ze niet worden verzonden.",
+          "Artikelen die zijn verzonden: de app kan er een retour voor aanmaken."
+        ],
+        "closing": "De app annuleert nooit een gedeeltelijk verzonden bestelling, omdat daarmee ook artikelen worden geannuleerd die de klant al heeft."
+      },
+      "after-submit": {
+        "question": "Wat gebeurt er nadat een klant een verzoek heeft ingediend?",
+        "paragraphs": [
+          "Het volgende gebeurt, in deze volgorde:"
+        ],
+        "bullets": [
+          "Het verzoek verschijnt op de pagina Verzoeken als In behandeling.",
+          "De klant ontvangt een bevestigingsmail. Die wordt altijd verzonden, omdat het het bewijs van herroeping is.",
+          "Jij ontvangt ook een e-mail, als de melding van nieuwe verzoeken is ingeschakeld.",
+          "Je automatiseringsinstellingen worden uitgevoerd. De app kan bijvoorbeeld de uitvoering in de wacht zetten of de bestelling taggen."
+        ]
+      },
+      "automation": {
+        "question": "Wat doen de automatiseringsinstellingen?",
+        "paragraphs": [
+          "Ze worden uitgevoerd wanneer een verzoek binnenkomt. Wat de app kan doen, hangt af van of de bestelling is verzonden:"
+        ],
+        "bullets": [
+          "Vóór verzending: de uitvoering in de wacht zetten zodat er niets wordt verzonden terwijl je het verzoek beoordeelt. Je kunt de app ook de hele bestelling direct laten annuleren en terugbetalen.",
+          "Na verzending: in Shopify een retour aanmaken voor de verzonden artikelen.",
+          "Gedeeltelijk verzonden: beide gelden. De app zet alleen de aangevraagde artikelen die nog niet zijn verzonden in de wacht en maakt een retour aan voor de artikelen die wel zijn verzonden."
+        ],
+        "closing": "In elk geval kan de app de bestelling ook taggen. De automatisering keurt nooit een verzoek goed of af. Jij beslist altijd."
+      },
+      "partial-withdrawal": {
+        "question": "Kan een klant maar een deel van de artikelen herroepen?",
+        "paragraphs": [
+          "Ja. Klanten kiezen welke artikelen ze herroepen. Het verzoek, de terugbetaling en een eventuele retour bevatten alleen die artikelen. De oorspronkelijke verzendkosten worden alleen terugbetaald als de klant de hele bestelling herroept.",
+          "Elke bestelling kan 1 verzoek tegelijk in behandeling hebben. Nadat je het hebt goedgekeurd of afgewezen, kan de klant een nieuw verzoek voor andere artikelen indienen."
+        ]
+      },
+      "reason": {
+        "question": "Moeten klanten een reden opgeven?",
+        "paragraphs": [
+          "Nee. Volgens de EU-wetgeving hoeven klanten geen reden te geven om te herroepen, dus het redenveld is altijd optioneel. In Instellingen kun je kiezen welke redenen je aanbiedt, of helemaal stoppen met vragen."
+        ]
+      },
+      "refund": {
+        "question": "Hoe betaal ik een herroeping terug?",
+        "paragraphs": [
+          "Open het verzoek via de pagina Verzoeken. Hoe je terugbetaalt, hangt af van waar de artikelen zijn:"
+        ],
+        "bullets": [
+          "Artikelen die niet in een retour zitten: selecteer Terugbetalen. Artikelen die nog niet zijn verzonden, worden uit de bestelling verwijderd en dus niet verzonden.",
+          "Artikelen in een retour: selecteer Verwerken en terugbetalen bij de retour zodra ze terug zijn. Daarmee krijgt de klant het geld terug en wordt de retour gesloten.",
+          "Er is nog niets verzonden: je kunt de hele bestelling ook annuleren en terugbetalen via Meer acties."
+        ],
+        "closing": "Volgens de EU-wetgeving heb je vanaf de herroeping {{refundDays}} om terug te betalen. De verzoekpagina laat zien hoeveel tijd er nog over is. Betaal terug voordat je het verzoek goedkeurt."
+      },
+      "returns": {
+        "question": "Hoe werken retouren?",
+        "paragraphs": [
+          "Een retour laat Shopify weten welke artikelen de klant terugstuurt. De app kan er een aanmaken wanneer een verzoek binnenkomt, of je selecteert Retour aanmaken op de verzoekpagina.",
+          "Een retour bevat alleen artikelen die zijn verzonden. Door de retour aan te maken wordt de klant nog niet terugbetaald. Selecteer Verwerken en terugbetalen bij de retour zodra de artikelen terug zijn."
+        ]
+      },
+      "decision-lock": {
+        "question": "Waarom zijn bestellingsacties uitgeschakeld nadat ik een verzoek heb goedgekeurd of afgewezen?",
+        "paragraphs": [
+          "Met goedkeuren of afwijzen wordt het verzoek afgerond. Daarna zijn terugbetalingen, wachtstatussen, retouren en annuleringen uitgeschakeld, zodat de bestelling niet per ongeluk wordt gewijzigd. Daarom moet je terugbetalen voordat je goedkeurt.",
+          "Een beslissing heft ook elke wachtstatus op die de app voor de uitvoering heeft ingesteld. Als dat mislukt, kun je nog steeds Wachtstatus van uitvoering opheffen selecteren."
+        ]
+      },
+      "emails": {
+        "question": "Welke e-mails verstuurt de app, en kan ik ze bewerken?",
+        "paragraphs": [
+          "De app verstuurt {{emailCount}} e-mails. Je kunt ze allemaal bewerken op de pagina Meldingen:"
+        ],
+        "bullets": [
+          "Herroepingsbevestiging aan klant: wordt verzonden wanneer een klant een verzoek indient. Deze is altijd ingeschakeld.",
+          "Melding van nieuw verzoek: wordt verzonden naar het contactadres van je winkel. Je kunt deze uitschakelen.",
+          "Herroeping goedgekeurd: wordt naar de klant verzonden wanneer je een verzoek goedkeurt. Je kunt deze eerst controleren of uitschakelen.",
+          "Herroeping afgewezen: wordt naar de klant verzonden wanneer je een verzoek afwijst. Je kunt deze eerst controleren of uitschakelen."
+        ],
+        "closing": "Je kunt het onderwerp en de tekst van elke e-mail in elke taal bewerken en variabelen toevoegen, zoals het bestelnummer of de naam van de klant. Het voorbeeld wordt bijgewerkt terwijl je typt."
+      },
+      "countries-languages": {
+        "question": "Welke landen en talen ondersteunt de app?",
+        "paragraphs": [
+          "Alle EU-landen zijn standaard geschikt. Als je maar aan een deel ervan verkoopt, selecteer je Specifieke landen in Instellingen.",
+          "Het formulier is beschikbaar in {{languageCount}} talen: {{languages}}. Klanten zien het in hun eigen taal.",
+          "Engels is de basistaal. Als je een vertaald veld leeg laat, zien klanten in plaats daarvan de Engelse tekst."
+        ]
+      }
+    }
+  },
+  "featureRequest": {
+    "pageTitle": "Functie aanvragen",
+    "intro": "Laat ons weten wat je graag in de app zou zien. We lezen elk verzoek.",
+    "sentHeading": "Functieverzoek verzonden",
+    "sentBody": "Bedankt dat je je idee met ons team hebt gedeeld.",
+    "firstName": "Voornaam",
+    "lastName": "Achternaam",
+    "email": "E-mail",
+    "request": "Welke functie zou je graag zien?",
+    "requestPlaceholder": "Beschrijf de functie en hoe die je winkel zou helpen",
+    "submit": "Verzoek verzenden"
+  },
+  "pricing": {
+    "pageTitle": "Prijzen",
+    "pricePerMonth": "{{price}} per maand",
+    "currentPlan": "Huidig abonnement",
+    "choosePlan": "{{plan}} kiezen",
+    "switchedToast": "Overgestapt naar het abonnement {{plan}}",
+    "plans": {
+      "free": {
+        "name": "Free",
+        "features": [
+          "Tot 10 herroepingsverzoeken per maand",
+          "E-mailmeldingen"
+        ]
+      },
+      "starter": {
+        "name": "Starter",
+        "features": [
+          "Onbeperkt herroepingsverzoeken",
+          "Aangepaste formuliervelden",
+          "E-mailmeldingen"
+        ]
+      },
+      "pro": {
+        "name": "Pro",
+        "features": [
+          "Alles uit Starter",
+          "Support met voorrang",
+          "Geautomatiseerde terugbetalingen"
+        ]
+      }
+    },
+    "switchError": "Je abonnement kan niet worden gewijzigd"
+  }
+}

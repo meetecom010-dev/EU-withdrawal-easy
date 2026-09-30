@@ -1,0 +1,1266 @@
+{
+  "common": {
+    "add": "Aggiungi",
+    "backToHome": "Torna alla home",
+    "cancel": "Annulla",
+    "delete": "Elimina",
+    "discard": "Scarta",
+    "done": "Fatto",
+    "dayCount_one": "{{count}} giorno",
+    "dayCount_other": "{{count}} giorni",
+    "dayCount_many": "{{count}} giorni",
+    "emptyValue": "—",
+    "noMatches": "Nessun risultato per \"{{query}}\".",
+    "preview": "Anteprima",
+    "remove": "Rimuovi",
+    "save": "Salva",
+    "verified": "Verificato"
+  },
+  "nav": {
+    "home": "Home",
+    "withdrawalRequests": "Richieste",
+    "formSetup": "Impostazioni",
+    "emailTemplates": "Notifiche",
+    "pricing": "Prezzi"
+  },
+  "errors": {
+    "generic": "Si è verificato un errore. Riprova.",
+    "requestFailed": "Si è verificato un errore (errore {{status}}). Riprova.",
+    "methodNotAllowed": "Questa azione non è supportata.",
+    "unknownAction": "Questa azione non è supportata.",
+    "noValidFields": "Non c'è nulla da aggiornare.",
+    "emailServiceUnavailable": "Impossibile connettersi al servizio email. Riprova tra qualche minuto.",
+    "emailServiceNotConfigured": "L'invio delle email non è ancora configurato. Contatta l'assistenza.",
+    "requestNotFound": "Questa richiesta di recesso non esiste o è stata eliminata.",
+    "requestDecided": "Questa richiesta è già stata approvata o rifiutata, quindi le azioni sull'ordine non sono più disponibili.",
+    "unknownDecision": "Scegli se approvare o rifiutare questa richiesta.",
+    "invalidStatus": "Scegli uno stato valido per questa richiesta.",
+    "noteRequired": "Inserisci una nota.",
+    "orderNotFound": "Impossibile trovare questo ordine su Shopify.",
+    "invalidEmail": "Inserisci un indirizzo email valido.",
+    "featureRequestIncomplete": "Compila tutti i campi prima di inviare la richiesta.",
+    "senderCodeRequired": "Inserisci il codice di verifica ricevuto via email.",
+    "senderNotFound": "Impossibile trovare questa email del mittente. Rimuovila e aggiungila di nuovo per ricevere un nuovo codice.",
+    "senderNotStarted": "Verifica prima la tua email del mittente.",
+    "senderIdMissing": "Impossibile registrare questa email del mittente. Riprova.",
+    "domainInvalid": "Inserisci un dominio valido, ad esempio iltuonegozio.com.",
+    "domainFreeProvider": "I provider email gratuiti come Gmail e Yahoo non possono essere autenticati. Usa invece il dominio del tuo negozio."
+  },
+  "auth": {
+    "login": {
+      "heading": "Accedi",
+      "shopLabel": "Dominio del negozio",
+      "shopDetails": "example.myshopify.com",
+      "submit": "Accedi",
+      "missingShop": "Inserisci il dominio del tuo negozio per accedere.",
+      "invalidShop": "Inserisci un dominio del negozio valido, ad esempio example.myshopify.com."
+    }
+  },
+  "status": {
+    "pending": "In attesa",
+    "approved": "Approvata",
+    "rejected": "Rifiutata"
+  },
+  "sourceInline": {
+    "order_status": "la pagina di stato dell'ordine",
+    "standalone_page": "la pagina del tuo negozio"
+  },
+  "placements": {
+    "orderStatus": {
+      "label": "Pagina di stato dell'ordine",
+      "details": "Mostra il modulo di recesso nella pagina di stato dell'ordine che i clienti vedono dopo il checkout."
+    },
+    "storefront": {
+      "label": "Pagina del negozio",
+      "details": "Mostra il modulo di recesso in una pagina dedicata del tuo tema, così i clienti possono trovarlo anche al di fuori della pagina di stato dell'ordine."
+    }
+  },
+  "orderStatus": {
+    "financial": {
+      "PENDING": "Pagamento in sospeso",
+      "AUTHORIZED": "Autorizzato",
+      "PARTIALLY_PAID": "Parzialmente pagato",
+      "PAID": "Pagato",
+      "PARTIALLY_REFUNDED": "Parzialmente rimborsato",
+      "REFUNDED": "Rimborsato",
+      "VOIDED": "Annullato",
+      "EXPIRED": "Scaduto"
+    },
+    "fulfillment": {
+      "UNFULFILLED": "Non evaso",
+      "PENDING_FULFILLMENT": "Evasione in sospeso",
+      "OPEN": "Aperto",
+      "IN_PROGRESS": "In corso",
+      "ON_HOLD": "In sospeso",
+      "PARTIALLY_FULFILLED": "Parzialmente evaso",
+      "FULFILLED": "Evaso",
+      "RESTOCKED": "Riassortito",
+      "SCHEDULED": "Programmato"
+    },
+    "return": {
+      "REQUESTED": "Richiesto",
+      "OPEN": "Aperto",
+      "CLOSED": "Chiuso",
+      "DECLINED": "Rifiutato",
+      "CANCELED": "Annullato"
+    }
+  },
+  "stats": {
+    "heading": "Panoramica",
+    "description": "Un riepilogo delle tue richieste di recesso",
+    "viewRequests": "Visualizza richieste",
+    "total": "Richieste totali",
+    "today": "Inviate oggi",
+    "pending": "In attesa",
+    "closed": "Chiuse",
+    "requestCount_one": "{{count}} richiesta",
+    "requestCount_other": "{{count}} richieste",
+    "requestCount_many": "{{count}} richieste"
+  },
+  "home": {
+    "pageTitle": "Home",
+    "loadError": "Impossibile caricare la dashboard",
+    "saveErrorHeading": "Impossibile salvare la modifica",
+    "saveErrorAction": "Riprova oppure apporta la modifica nelle Impostazioni.",
+    "setupBanner": {
+      "heading_one": "Manca {{count}} passaggio di configurazione",
+      "heading_other": "Mancano {{count}} passaggi di configurazione",
+      "heading_many": "Mancano {{count}} passaggi di configurazione",
+      "body": "Completa questi passaggi per preparare il tuo modulo di recesso: {{steps}}."
+    },
+    "setupGuide": {
+      "heading": "Guida alla configurazione",
+      "description": "Usa questa guida per pubblicare il modulo di recesso nel tuo negozio.",
+      "progress": "{{completed}} di {{total}} attività completate",
+      "dismiss": "Chiudi la guida alla configurazione",
+      "collapse": "Comprimi la guida alla configurazione",
+      "expand": "Espandi la guida alla configurazione",
+      "showStep": "Mostra i dettagli di {{step}}",
+      "hideStep": "Nascondi i dettagli di {{step}}",
+      "steps": {
+        "form": {
+          "label": "Attiva il modulo di recesso",
+          "description": "Attiva il modulo e scegli dove lo vedono i clienti. Campi, motivi e testi hanno già un testo predefinito. Puoi modificarli in qualsiasi momento nelle Impostazioni.",
+          "checkbox": "Attiva il modulo di recesso",
+          "cta": "Vai alle Impostazioni",
+          "placementHeading": "Scegli dove i clienti vedono il modulo",
+          "placementDescription": "Seleziona almeno una posizione. Ogni posizione richiede il relativo blocco app prima che i clienti possano vedere il modulo."
+        },
+        "blocks": {
+          "label": "Aggiungi i blocchi app al tuo negozio",
+          "description": "Aggiungi un blocco app per ogni posizione scelta nel passaggio precedente.",
+          "locked": "Completa il passaggio {{step}} per scegliere dove appare il modulo. Poi potrai aggiungere qui i blocchi app.",
+          "surfaces": {
+            "orderStatus": "Pagina di stato dell'ordine",
+            "theme": "Pagina del negozio"
+          },
+          "live": {
+            "orderStatus": "Il blocco app è attivo nella pagina di stato dell'ordine.",
+            "theme": "Il blocco app è attivo nella pagina del tuo negozio."
+          }
+        }
+      }
+    },
+    "help": {
+      "heading": "Assistenza e risorse",
+      "support": {
+        "title": "Assistenza via email",
+        "description": "Hai una domanda? Il nostro team di assistenza può aiutarti.",
+        "link": "Contatta l'assistenza"
+      },
+      "faqs": {
+        "title": "Domande frequenti",
+        "description": "Trova le risposte alle domande più comuni sulla configurazione e sull'uso dell'app.",
+        "link": "Visualizza le domande frequenti"
+      },
+      "featureRequest": {
+        "title": "Richieste di funzionalità",
+        "description": "Hai un'idea per l'app? Dicci cosa ti piacerebbe vedere.",
+        "link": "Richiedi una funzionalità"
+      }
+    }
+  },
+  "blockSetup": {
+    "autoUpdate": "Questo messaggio scompare da solo qualche secondo dopo il salvataggio del blocco app.",
+    "addAppBlock": "Aggiungi blocco app",
+    "orderStatus": {
+      "heading": "Aggiungi il blocco app alla pagina di stato dell'ordine",
+      "body": "I clienti non possono vedere il modulo di recesso nella pagina di stato dell'ordine finché non aggiungi il blocco app. Per aggiungerlo:",
+      "steps": {
+        "open": "Seleziona <strong>Aggiungi blocco app</strong> qui sotto. La pagina di stato dell'ordine si apre nell'editor del checkout.",
+        "add": "Nella barra laterale, seleziona <strong>Aggiungi blocco app</strong>.",
+        "choose": "Seleziona <strong>Modulo di recesso</strong>.",
+        "save": "Seleziona <strong>Salva</strong>."
+      }
+    },
+    "storefront": {
+      "heading": "Aggiungi il blocco app a una pagina del negozio",
+      "body": "Scegli un modello di pagina, poi seleziona Aggiungi blocco app. L'editor del tema si apre con il modulo di recesso già aggiunto come sezione.",
+      "templateLabel": "Modello di pagina",
+      "templates": {
+        "page": "Pagina predefinita",
+        "index": "Home page",
+        "product": "Pagine prodotto",
+        "collection": "Pagine collezione",
+        "cart": "Pagina del carrello"
+      },
+      "steps": {
+        "open": "Seleziona <strong>Aggiungi blocco app</strong> per aprire l'editor del tema con la sezione aggiunta.",
+        "move": "Trascina la sezione nel punto desiderato della pagina.",
+        "save": "Seleziona <strong>Salva</strong>."
+      }
+    }
+  },
+  "onboarding": {
+    "pageTitle": "Inizia",
+    "heading": "Prepara il tuo negozio ai recessi nell'UE",
+    "intro_one": "Completa questo {{count}} passaggio per offrire ai tuoi clienti UE un modo conforme per recedere da un acquisto.",
+    "intro_other": "Completa questi {{count}} passaggi per offrire ai tuoi clienti UE un modo conforme per recedere da un acquisto.",
+    "intro_many": "Completa questi {{count}} passaggi per offrire ai tuoi clienti UE un modo conforme per recedere da un acquisto.",
+    "stepBadge": "Passaggio {{current}} di {{total}}",
+    "completedToast": "Configurazione completata",
+    "steps": {
+      "welcome": {
+        "title": "Benvenuto",
+        "description": "Cosa fa l'app"
+      },
+      "form": {
+        "title": "Modulo di recesso",
+        "description": "Attiva il modulo"
+      }
+    },
+    "actions": {
+      "getStarted": "Inizia",
+      "continue": "Continua",
+      "finish": "Completa la configurazione",
+      "skip": "Salta la configurazione",
+      "back": "Indietro"
+    },
+    "help": {
+      "heading": "Hai bisogno di aiuto?",
+      "body": "Hai una domanda? <supportLink>Contatta l'assistenza</supportLink>."
+    },
+    "welcome": {
+      "heading": "Ti diamo il benvenuto in {{appName}}",
+      "setupTime": "Richiede circa 1 minuto",
+      "law": "Dal 19 giugno 2026, i negozi che vendono a clienti dell'UE devono offrire un modo per recedere da ogni ordine in 2 passaggi (Direttiva UE 2023/2673, articolo 11 bis). Una politica di reso da sola non è sufficiente.",
+      "app": "{{appName}} aggiunge un pulsante di recesso alla pagina di stato dell'ordine, a una pagina del tuo negozio online o a entrambe. Gestisce la conferma in 2 passaggi e invia l'email di conferma obbligatoria. Puoi gestire tutte le richieste in un unico posto.",
+      "imageAlt": "Un cliente che recede da un ordine",
+      "requirementsHeading": "Cosa richiede la legge",
+      "requirements": {
+        "button": "Un pulsante di recesso chiaramente etichettato che i clienti possano trovare facilmente",
+        "twoStep": "Un processo in 2 passaggi: i clienti inviano il recesso e poi lo confermano",
+        "email": "Un'email di conferma automatica che i clienti possano conservare"
+      },
+      "penaltyHeading": "Cosa succede se non rispetti la normativa",
+      "penalty": "Se il pulsante di recesso manca o non funziona, la legge estende il periodo di recesso di {{days}} giorni. I clienti hanno quindi 12 mesi e {{days}} giorni per recedere da ogni ordine interessato."
+    },
+    "form": {
+      "heading": "Attiva il modulo di recesso",
+      "body": "I clienti inviano il recesso e poi lo confermano in un passaggio separato, come richiesto dalla normativa UE. Il modulo include un testo legale predefinito. I clienti hanno {{days}} per recedere, a partire dalla consegna.",
+      "switch": "Attiva il modulo di recesso",
+      "later": "Puoi modificare tutto questo in seguito nelle Impostazioni.",
+      "loadError": "Impossibile caricare le impostazioni del modulo. Puoi completare la configurazione ora e attivare il modulo in seguito nelle Impostazioni.",
+      "saveError": "Impossibile salvare le scelte del modulo. Riprova, oppure completa la configurazione senza salvarle e impostale in seguito nelle Impostazioni.",
+      "finishWithoutSaving": "Completa senza salvare",
+      "placementError": "Seleziona almeno una posizione oppure disattiva il modulo."
+    },
+    "finishError": "Impossibile completare la configurazione. Riprova."
+  },
+  "formSetup": {
+    "pageTitle": "Impostazioni",
+    "loadError": "Impossibile caricare le impostazioni",
+    "saveError": "Impossibile salvare le impostazioni",
+    "savedToast": "Impostazioni salvate",
+    "enable": {
+      "heading": "Modulo di recesso",
+      "description": "Scegli se i clienti possono inviare richieste di recesso e dove vedono il modulo.",
+      "checkbox": "Attiva il modulo di recesso",
+      "details": "Quando è disattivato, i clienti non possono inviare richieste di recesso da nessuna parte.",
+      "orderStatus": "Mostra nella pagina di stato dell'ordine",
+      "storefront": "Mostra in una pagina del negozio"
+    },
+    "countries": {
+      "heading": "Paesi idonei",
+      "description": "I clienti vedono il modulo di recesso solo se il loro ordine viene spedito in uno di questi paesi.",
+      "all": "Tutti i {{count}} paesi UE (consigliato)",
+      "allDetails": "Il diritto di recesso si applica in tutta l'UE.",
+      "specific": "Paesi specifici",
+      "specificDetails": "Scegli i paesi qui sotto. Puoi modificarli in qualsiasi momento.",
+      "pickerLabel": "Paesi",
+      "pickerPlaceholder": "Cerca paesi"
+    },
+    "content": {
+      "heading": "Contenuto del modulo",
+      "tabs": {
+        "step1": "1. Dettagli",
+        "confirm": "2. Conferma",
+        "done": "3. Fatto"
+      },
+      "language": "Lingua",
+      "languageDetails": "Scegli una lingua per modificare il contenuto del modulo in quella lingua. Ogni lingua viene salvata separatamente.",
+      "beforeDelivery": {
+        "heading": "Prima della consegna",
+        "description": "Mostrato nella prima schermata del modulo e nel passaggio Dettagli finché l'ordine non viene consegnato, anche durante il trasporto."
+      },
+      "afterDelivery": {
+        "heading": "Dopo la consegna",
+        "description": "Mostrato al suo posto quando Shopify contrassegna l'ordine come consegnato."
+      },
+      "title": "Titolo",
+      "description": "Descrizione",
+      "itemHeading": "Intestazione della selezione articoli",
+      "customerDetails": {
+        "heading": "Dati del cliente",
+        "description": "Compilati a partire dall'ordine. I clienti non possono modificare questi campi.",
+        "locked": "Bloccato",
+        "fullName": "Nome completo",
+        "email": "Email",
+        "orderNumber": "Numero d'ordine"
+      },
+      "reason": {
+        "heading": "Motivo del recesso",
+        "checkbox": "Chiedi un motivo",
+        "details": "I clienti non devono mai indicare un motivo. La normativa UE richiede che questo campo sia facoltativo.",
+        "label": "Etichetta del campo motivo",
+        "optionsHeading": "Opzioni per il motivo",
+        "optionsHelp": "I clienti scelgono da questo elenco. Aggiungi, rimuovi o riformula le opzioni per adattarle al tuo negozio. Alla fine viene sempre aggiunta un'opzione \"Altro\" con una casella di testo.",
+        "removeOption": "Rimuovi {{option}}",
+        "addLabel": "Aggiungi un motivo",
+        "addPlaceholder": "Ad esempio, Ordinato per errore",
+        "translatedHelp": "Traduci ogni opzione. Per aggiungere o rimuovere opzioni, passa all'inglese.",
+        "translatedEmpty": "Aggiungi prima le opzioni per il motivo in inglese."
+      },
+      "continueButton": "Etichetta del pulsante Continua",
+      "confirm": {
+        "heading": "Intestazione della conferma",
+        "messageBefore": "Messaggio prima della consegna",
+        "messageAfter": "Messaggio dopo la consegna",
+        "declaration": "Dichiarazione",
+        "button": "Etichetta del pulsante Conferma"
+      },
+      "done": {
+        "titleBefore": "Titolo prima della consegna",
+        "messageBefore": "Messaggio prima della consegna",
+        "titleAfter": "Titolo dopo la consegna",
+        "messageAfter": "Messaggio dopo la consegna"
+      }
+    },
+    "automation": {
+      "heading": "Automazione",
+      "description": "Scegli cosa fa l'app quando un cliente invia una richiesta di recesso.",
+      "beforeShip": {
+        "heading": "Prima della spedizione dell'ordine",
+        "description": "Si applica quando una richiesta arriva prima che siano stati spediti articoli.",
+        "hold": "Sospendi l'evasione per la revisione",
+        "holdDetails": "Sospendi l'evasione finché non approvi o rifiuti la richiesta. La sospensione viene rimossa quando decidi.",
+        "tagDetails": "Aggiungi un tag agli ordini che ricevono una richiesta prima della spedizione, così il tuo staff può trovarli nell'elenco degli ordini."
+      },
+      "fallback": {
+        "label": "Cosa succede all'ordine",
+        "hold": "Mantienilo in sospeso finché non approvi o rifiuti la richiesta",
+        "cancelNow": "Annulla l'intero ordine e rimborsalo subito",
+        "releaseN": "Rimuovi la sospensione dopo un numero di giorni stabilito",
+        "cancelN": "Annulla l'intero ordine e rimborsalo dopo un numero di giorni stabilito",
+        "cancelWarning": "Questa operazione annulla e rimborsa l'intero ordine, anche se il cliente ha receduto solo da alcuni articoli. Shopify invia un'email al cliente sull'annullamento.",
+        "days": "Numero di giorni"
+      },
+      "afterDelivery": {
+        "heading": "Dopo la spedizione dell'ordine",
+        "description": "Si applica quando una richiesta arriva dopo la spedizione di almeno un articolo, anche se non è ancora stato consegnato. Ogni richiesta viene comunque mostrata nella pagina Richieste.",
+        "createReturn": "Crea un reso",
+        "createReturnDetails": "Crea un reso su Shopify per gli articoli richiesti già spediti.",
+        "tagDetails": "Aggiungi un tag agli ordini che ricevono una richiesta dopo la spedizione."
+      },
+      "tag": {
+        "checkbox": "Aggiungi un tag all'ordine",
+        "label": "Tag dell'ordine",
+        "placeholder": "Aggiungi un tag"
+      }
+    },
+    "deadline": {
+      "heading": "Termine di recesso",
+      "description": "Il periodo di recesso inizia alla consegna dell'ordine, non al momento dell'acquisto. La normativa UE richiede almeno {{days}}.",
+      "days": "Giorni per il recesso dopo la consegna",
+      "daysDetails": "Quanto tempo hanno i clienti per recedere dopo la consegna dell'ordine.",
+      "transit": "Tempo di transito stimato (giorni)",
+      "transitDetails": "Usato quando il corriere non fornisce una data di consegna o una stima. L'app aggiunge questi giorni alla data di spedizione."
+    },
+    "validation": {
+      "countryMode": "Scegli quali paesi sono idonei.",
+      "euCountries": "Seleziona almeno un paese.",
+      "title": "Inserisci un titolo.",
+      "description": "Inserisci una descrizione.",
+      "itemHeading": "Inserisci un'intestazione per l'elenco degli articoli.",
+      "continueButton": "Inserisci un'etichetta per il pulsante Continua.",
+      "heading": "Inserisci un'intestazione.",
+      "confirmMessage": "Inserisci un messaggio di conferma.",
+      "declaration": "Inserisci la dichiarazione che i clienti devono accettare.",
+      "confirmButton": "Inserisci un'etichetta per il pulsante Conferma.",
+      "message": "Inserisci un messaggio.",
+      "reasonLabel": "Inserisci un'etichetta per il campo motivo.",
+      "reasonOptions": "Aggiungi almeno un motivo.",
+      "reasonOptionTranslation": "Inserisci una traduzione per questo motivo.",
+      "fallback": "Scegli cosa succede all'ordine.",
+      "daysRange": "Inserisci un numero di giorni compreso tra {{min}} e {{max}}.",
+      "tags": "Aggiungi almeno un tag oppure disattiva l'aggiunta di tag.",
+      "afterDeliveryAction": "Scegli cosa succede dopo la spedizione dell'ordine."
+    },
+    "preview": {
+      "heading": "Anteprima dal vivo",
+      "compliantBadge": "Conforme in 2 passaggi",
+      "surfaceLabel": "Anteprima",
+      "surfaces": {
+        "orderStatus": "Pagina di stato dell'ordine",
+        "theme": "Pagina del negozio"
+      },
+      "stageLabel": "Stato della consegna",
+      "stages": {
+        "beforeDelivery": "Non ancora consegnato",
+        "delivered": "Consegnato"
+      },
+      "banner": {
+        "orderStatus": "Ecco cosa vedono i clienti nella pagina di stato dell'ordine. Seleziona i pulsanti per provarlo oppure usa le schede in Contenuto del modulo per andare a un passaggio specifico.",
+        "theme": "Ecco cosa vedono i clienti nella pagina del tuo negozio. Inizia con un passaggio \"Trova il tuo ordine\", perché i visitatori del negozio non hanno effettuato l'accesso."
+      },
+      "restart": "Riavvia l'anteprima",
+      "position": {
+        "entry": "Scheda iniziale",
+        "lookup": "Trova il tuo ordine",
+        "step": "Passaggio {{current}} di {{total}}"
+      },
+      "storefront": {
+        "start": "Avvia la richiesta di recesso",
+        "findOrderHeading": "Trova il tuo ordine",
+        "findOrderBody": "Inserisci i dati del tuo ordine per avviare la richiesta di recesso.",
+        "fullName": "Nome completo",
+        "email": "Email",
+        "orderNumber": "Numero d'ordine",
+        "continue": "Continua",
+        "steps": {
+          "step1": "Dettagli",
+          "confirm": "Conferma",
+          "done": "Fatto"
+        },
+        "stepOf": "Passaggio {{current}} di {{total}}",
+        "stepProgress": "Passaggio {{current}} di {{total}}: {{label}}",
+        "reasonPlaceholder": "Seleziona un motivo (facoltativo)",
+        "otherReason": "Altro",
+        "yourReason": "Il tuo motivo",
+        "yourReasonPlaceholder": "Indicaci il tuo motivo",
+        "selectItem": "Seleziona almeno un articolo per continuare.",
+        "itemsToWithdraw": "Articoli oggetto del recesso ({{count}})",
+        "selectedTotal": "Totale articoli selezionati",
+        "previous": "Indietro",
+        "submittedOn": "Inviata il {{date}}"
+      }
+    }
+  },
+  "requests": {
+    "pageTitle": "Richieste",
+    "searchLabel": "Cerca richieste di recesso",
+    "searchPlaceholder": "Cerca per numero d'ordine, nome del cliente o email",
+    "export": "Esporta",
+    "exportSelected": "Esporta selezionate",
+    "tabs": {
+      "all": "Tutte",
+      "withCount": "{{label}} ({{count}})"
+    },
+    "empty": {
+      "imageAlt": "",
+      "heading": "Ancora nessuna richiesta di recesso",
+      "body": "Le richieste di recesso dei tuoi clienti verranno visualizzate qui.",
+      "filteredHeading": "Nessuna richiesta di recesso trovata",
+      "filteredBody": "Prova a modificare il termine di ricerca o il filtro."
+    },
+    "table": {
+      "selectAll": "Seleziona tutte le richieste di recesso",
+      "selectRow": "Seleziona l'ordine {{order}}",
+      "selectedCount": "{{count}} selezionate",
+      "order": "Ordine",
+      "customer": "Cliente",
+      "items": "Articoli",
+      "value": "Valore",
+      "status": "Stato",
+      "submitted": "Inviata",
+      "actions": "Azioni",
+      "itemCount_one": "{{count}} articolo",
+      "itemCount_other": "{{count}} articoli",
+      "itemCount_many": "{{count}} articoli",
+      "viewRow": "Visualizza la richiesta per l'ordine {{order}}",
+      "deleteRow": "Elimina la richiesta per l'ordine {{order}}"
+    },
+    "delete": {
+      "heading_one": "Eliminare la richiesta di recesso?",
+      "heading_other": "Eliminare {{count}} richieste di recesso?",
+      "heading_many": "Eliminare {{count}} richieste di recesso?",
+      "body_one": "Questa richiesta di recesso verrà eliminata definitivamente. L'operazione non può essere annullata.",
+      "body_other": "Queste {{count}} richieste di recesso verranno eliminate definitivamente. L'operazione non può essere annullata.",
+      "body_many": "Queste {{count}} richieste di recesso verranno eliminate definitivamente. L'operazione non può essere annullata.",
+      "confirm_one": "Elimina richiesta",
+      "confirm_other": "Elimina richieste",
+      "confirm_many": "Elimina richieste",
+      "toast_one": "Richiesta di recesso eliminata",
+      "toast_other": "{{count}} richieste di recesso eliminate",
+      "toast_many": "{{count}} richieste di recesso eliminate"
+    },
+    "csv": {
+      "filename": "richieste-di-recesso-{{date}}.csv",
+      "order": "Ordine",
+      "customerName": "Nome del cliente",
+      "customerEmail": "Email del cliente",
+      "country": "Paese",
+      "items": "Articoli",
+      "value": "Valore",
+      "reason": "Motivo",
+      "status": "Stato",
+      "submitted": "Inviata",
+      "decided": "Decisa"
+    }
+  },
+  "requestDetail": {
+    "pageTitle": "Richiesta di recesso",
+    "backLink": "Richieste",
+    "submittedLine": "Inviata il {{date}} da {{source}}",
+    "previous": "Richiesta precedente",
+    "next": "Richiesta successiva",
+    "badges": {
+      "canceled": "Annullato",
+      "onHold": "In sospeso",
+      "return": "Reso: {{status}}"
+    },
+    "actions": {
+      "refund": "Rimborsa",
+      "more": "Altre azioni",
+      "cancelOrder": "Annulla ordine",
+      "placeHold": "Sospendi evasione",
+      "releaseHold": "Rimuovi sospensione dell'evasione",
+      "createReturn": "Crea reso",
+      "processReturn": "Elabora e rimborsa",
+      "viewOrder": "Visualizza ordine"
+    },
+    "banners": {
+      "orderUnavailableHeading": "Dettagli dell'ordine non disponibili",
+      "orderUnavailableBody": "{{error}} Non puoi usare le azioni sull'ordine finché i dettagli dell'ordine non vengono caricati.",
+      "actionFailedHeading": "Impossibile completare questa azione",
+      "actionFailedAction": "Consulta Attività qui sotto per i dettagli.",
+      "canceled": "Questo ordine è stato annullato. Le azioni sull'ordine non sono più disponibili."
+    },
+    "deadline": {
+      "heading": "Termine di rimborso",
+      "pendingLabel": "Tempo rimanente per decidere e rimborsare",
+      "decidedLabel": "Decisione",
+      "badges": {
+        "overdue": "Scaduto",
+        "actionNeeded": "Azione necessaria",
+        "onTime": "Nei tempi"
+      },
+      "daysLeft_one": "{{count}} giorno rimanente",
+      "daysLeft_other": "{{count}} giorni rimanenti",
+      "daysLeft_many": "{{count}} giorni rimanenti",
+      "daysOverdue_one": "{{count}} giorno di ritardo",
+      "daysOverdue_other": "{{count}} giorni di ritardo",
+      "daysOverdue_many": "{{count}} giorni di ritardo",
+      "daysEarly_one": "{{count}} giorno prima della scadenza",
+      "daysEarly_other": "{{count}} giorni prima della scadenza",
+      "daysEarly_many": "{{count}} giorni prima della scadenza",
+      "daysLate_one": "{{count}} giorno dopo la scadenza",
+      "daysLate_other": "{{count}} giorni dopo la scadenza",
+      "daysLate_many": "{{count}} giorni dopo la scadenza",
+      "pending": "Hai {{days}} dall'invio della richiesta per decidere e rimborsare. La scadenza è il {{date}}.",
+      "pendingOverdue": "La scadenza è passata il {{date}}. Rimborsa il cliente il prima possibile.",
+      "decidedOnTime": "Decisa entro il periodo di rimborso di {{windowDays}} giorni. La scadenza era il {{date}}.",
+      "decidedLate": "Decisa dopo la scadenza del rimborso del {{date}}."
+    },
+    "items": {
+      "heading": "Articoli oggetto del recesso",
+      "reject": "Rifiuta",
+      "approve": "Approva",
+      "total": "Totale oggetto del recesso",
+      "sku": "SKU: {{sku}}",
+      "quantity": "Quantità: {{count}}",
+      "shipping": {
+        "notShipped": "Non ancora spedito",
+        "partlyShipped": "Parzialmente spedito",
+        "shipped": "Spedito"
+      },
+      "partiallyShippedBanner": "Parte di questo ordine è stata spedita. Gli articoli non ancora spediti possono ancora essere sospesi, mentre per gli articoli spediti è necessario un reso."
+    },
+    "return": {
+      "heading": "Reso",
+      "status": "Stato",
+      "created": "Creato",
+      "body": "È stato creato un reso su Shopify per gli articoli oggetto del recesso.",
+      "openBody": "Quando gli articoli tornano, seleziona Elabora e rimborsa. In questo modo il cliente viene rimborsato per gli articoli resi e il reso viene chiuso.",
+      "alreadyRefundedBody": "Gli articoli di questo reso sono già stati rimborsati. Chiudi il reso su Shopify quando tornano."
+    },
+    "processReturnModal": {
+      "heading": "Elabora il reso e rimborsa",
+      "calculating": "Calcolo dell'importo del rimborso…",
+      "nothingToProcess": "Non c'è più nulla da elaborare in questo reso. Potrebbe essere già stato elaborato o chiuso su Shopify.",
+      "nothingToRefund": "Gli articoli di questo reso sono già stati rimborsati, quindi non c'è più nulla da rimborsare.",
+      "unsupportedPayment": "Il pagamento di questo ordine non può essere rimborsato dall'app. Elabora il reso e rimborsalo invece su Shopify.",
+      "itemsHeading": "Articoli nel reso {{name}}",
+      "subtotal": "Subtotale articoli",
+      "shippingLine": "Spedizione originale",
+      "total": "Rimborso totale",
+      "body": "Questa operazione contrassegna gli articoli resi come elaborati, li rimborsa sul metodo di pagamento originale e chiude il reso. Shopify invia al cliente una ricevuta di rimborso via email. L'operazione non può essere annullata.",
+      "confirmAmount": "Rimborsa {{amount}}",
+      "confirm": "Elabora e rimborsa"
+    },
+    "payment": {
+      "heading": "Pagamento",
+      "status": "Stato del pagamento",
+      "subtotal": "Subtotale del recesso",
+      "shipping": "Spedizione dell'ordine",
+      "total": "Totale dell'ordine",
+      "refunded": "Rimborsato",
+      "unavailable": "I dettagli del pagamento non sono disponibili al momento."
+    },
+    "activity": {
+      "heading": "Attività",
+      "noteLabel": "Aggiungi una nota",
+      "notePlaceholder": "Aggiungi una nota…",
+      "post": "Pubblica",
+      "noteHelp": "Solo tu e il tuo staff potete vedere le note. I clienti non le vedono mai.",
+      "submitted": "Richiesta di recesso inviata da {{source}}",
+      "decided": {
+        "approved": "Richiesta approvata",
+        "rejected": "Richiesta rifiutata"
+      },
+      "note": "Nota: {{body}}",
+      "entry": "{{label}}: {{message}}",
+      "actions": {
+        "resolve_branch": "Automazione avviata",
+        "run_automation": "Automazione",
+        "automation_completed": "Automazione terminata",
+        "hold_fulfillment": "Sospensione dell'evasione",
+        "schedule_fallback": "Azione successiva programmata",
+        "release_hold": "Sospensione dell'evasione rimossa",
+        "cancel_order_immediate": "Ordine annullato e rimborsato",
+        "cancel_order_scheduled": "Ordine annullato e rimborsato",
+        "cancel_order_manual": "Ordine annullato e rimborsato",
+        "cancel_order": "Ordine annullato e rimborsato",
+        "refund": "Rimborso",
+        "tag_before_ship": "Tag aggiunto all'ordine",
+        "tag_after_delivery": "Tag aggiunto all'ordine",
+        "order_tag_add": "Tag dell'ordine aggiunti",
+        "order_tag_remove": "Tag dell'ordine rimossi",
+        "create_return": "Reso",
+        "refresh_return": "Stato del reso aggiornato",
+        "process_return": "Elabora e rimborsa",
+        "fetch_shop_contact": "Dati di contatto del negozio",
+        "customer_email": "Email di conferma al cliente",
+        "merchant_email": "Notifica di nuova richiesta",
+        "notify_customer": "Email sulla decisione",
+        "notify_merchant": "Hai ricevuto una notifica"
+      },
+      "messages": {
+        "noTags": "Nessun tag configurato",
+        "tagged": "Tag {{tags}} aggiunto all'ordine",
+        "noHoldableOrders": "Al momento nulla di questo ordine può essere sospeso",
+        "held": "Articoli sospesi in modo che non vengano spediti",
+        "holdOff": "La sospensione dell'evasione per la revisione è disattivata",
+        "tagBeforeShipOff": "L'aggiunta di tag prima della spedizione è disattivata",
+        "tagAfterDeliveryOff": "L'aggiunta di tag dopo la spedizione è disattivata",
+        "fallbackHold": "L'ordine resta in sospeso finché non approvi o rifiuti la richiesta",
+        "fallbackInvalidDays": "Impossibile programmare l'azione successiva. Il numero di giorni non è valido.",
+        "scheduledRelease": "Rimozione della sospensione programmata per il {{date}}",
+        "scheduledCancel": "Annullamento e rimborso programmati per il {{date}}",
+        "canceled": "Ordine annullato e rimborsato",
+        "returnCreated": "Reso creato su Shopify",
+        "returnNoMatch": "Nessuno degli articoli richiesti può essere reso",
+        "notifiedByEmail": "Notifica inviata nell'app e via email",
+        "notifiedEmailFailed": "Notifica inviata nell'app. L'email di notifica non è stata inviata: {{error}}",
+        "notifiedInAppOnly": "Notifica inviata nell'app. L'email di notifica non è stata inviata.",
+        "emailSent": "Inviata",
+        "emailFailed": "Non riuscita: {{error}}",
+        "emailNotSent": "Non inviata perché non c'è un destinatario o l'email non è configurata",
+        "orderNotFound": "Impossibile trovare questo ordine su Shopify",
+        "alreadyCanceled": "L'ordine era già stato annullato",
+        "branchBeforeShip": "L'ordine non è ancora stato spedito, quindi sono stati eseguiti i passaggi prima della spedizione",
+        "branchAfterDelivery": "L'ordine è stato spedito, quindi sono stati eseguiti i passaggi dopo la spedizione",
+        "branchPartiallyShipped": "L'ordine è stato spedito parzialmente, quindi sono stati eseguiti i passaggi per gli articoli spediti e non spediti",
+        "noUnshippedItemsRequested": "Nessuno degli articoli richiesti è in attesa di spedizione, quindi non è stato sospeso nulla",
+        "fallbackCancelPartiallyShipped": "L'ordine è stato spedito parzialmente, quindi non può essere annullato per intero. Gli articoli richiesti restano in sospeso finché non approvi o rifiuti la richiesta.",
+        "returnNothingShipped": "Nessuno degli articoli richiesti è stato spedito, quindi non era necessario un reso",
+        "runCompleted": "Automazione completata",
+        "runFailed": "Uno o più passaggi dell'automazione non sono riusciti",
+        "runSkipped": "Automazione saltata",
+        "scheduledSkippedApproved": "La richiesta era già stata approvata, quindi l'azione programmata non è stata eseguita",
+        "scheduledSkippedRejected": "La richiesta era già stata rifiutata, quindi l'azione programmata non è stata eseguita",
+        "noHoldsPlaced": "Non sono state applicate sospensioni per questa richiesta",
+        "holdsAlreadyReleased": "Le sospensioni erano già state rimosse",
+        "holdReleased": "L'ordine può essere di nuovo evaso",
+        "holdExists": "Esiste già una sospensione per questa richiesta",
+        "decisionSkipped": "Lo staff ha scelto di non inviare un'email al cliente",
+        "decisionSent": "Email inviata al cliente sulla decisione",
+        "decisionFailed": "Email sulla decisione non riuscita: {{error}}",
+        "decisionNotConfigured": "L'email sulla decisione non è stata inviata perché l'email non è configurata",
+        "refunded": "Rimborsati {{amount}}",
+        "noReturn": "Non c'è alcun reso per questa richiesta",
+        "returnStatus": "Stato del reso: {{status}}",
+        "returnProcessed": "Reso elaborato e {{amount}} rimborsati",
+        "returnNothingToProcess": "Non c'è più nulla da elaborare in questo reso",
+        "returnNothingToRefund": "Gli articoli di questo reso sono già stati rimborsati",
+        "returnPaymentUnsupported": "Questo pagamento non può essere rimborsato dall'app. Elabora il reso su Shopify.",
+        "refundNothingRefundable": "Nessuno degli articoli richiesti può essere rimborsato. Potrebbero essere già stati rimborsati.",
+        "refundNoSuggestion": "Shopify non è riuscito a calcolare un rimborso per questi articoli. Rimborsali invece su Shopify.",
+        "refundCoveredByReturn": "Tutti gli articoli oggetto del recesso sono nel reso aperto. Usa Elabora e rimborsa sul reso per rimborsarli.",
+        "tagsRemoved": "Tag dell'ordine rimossi: {{tags}}",
+        "tagsAdded": "Tag dell'ordine aggiunti: {{tags}}"
+      }
+    },
+    "order": {
+      "heading": "Ordine",
+      "order": "Ordine",
+      "placed": "Effettuato",
+      "payment": "Pagamento",
+      "fulfillment": "Evasione"
+    },
+    "customer": {
+      "heading": "Cliente",
+      "avatarFallback": "Cliente",
+      "contactHeading": "Informazioni di contatto",
+      "email": "Email",
+      "language": "Lingua",
+      "shippingHeading": "Indirizzo di spedizione"
+    },
+    "automation": {
+      "heading": "Automazione",
+      "stage": "Fase",
+      "stages": {
+        "before_ship": "Prima della spedizione",
+        "partially_shipped": "Parzialmente spedito",
+        "after_delivery": "Dopo la spedizione"
+      },
+      "hold": "Sospensione dell'evasione",
+      "holdStates": {
+        "onHold": "In sospeso",
+        "released": "Rimossa",
+        "none": "Nessuna"
+      },
+      "canceled": "Annullato",
+      "return": "Reso"
+    },
+    "emails": {
+      "heading": "Cronologia email",
+      "customerConfirmation": "Conferma di recesso al cliente",
+      "merchantNotification": "Notifica di nuova richiesta",
+      "decision": "Email sulla decisione",
+      "statuses": {
+        "sent": "Inviata",
+        "failed": "Non riuscita",
+        "notSent": "Non inviata"
+      }
+    },
+    "tags": {
+      "heading": "Tag dell'ordine",
+      "label": "Aggiungi tag dell'ordine",
+      "placeholder": "Aggiungi un tag",
+      "remove": "Rimuovi il tag {{tag}}",
+      "savedToast": "Tag dell'ordine salvati"
+    },
+    "reason": {
+      "heading": "Motivo del recesso",
+      "quoted": "\"{{reason}}\"",
+      "none": "Nessun motivo indicato"
+    },
+    "decidedToast": {
+      "approved": "Richiesta di recesso approvata",
+      "rejected": "Richiesta di recesso rifiutata"
+    },
+    "cancelModal": {
+      "heading": "Annullare l'ordine?",
+      "body": "Questa operazione annulla l'intero ordine su Shopify, inclusi gli articoli da cui il cliente non ha receduto. L'ordine viene rimborsato sul metodo di pagamento originale e riassortito, e Shopify invia un'email al cliente. L'operazione non può essere annullata.",
+      "keep": "Mantieni ordine",
+      "confirm": "Annulla e rimborsa ordine"
+    },
+    "createReturnModal": {
+      "heading": "Crea un reso per gli articoli oggetto del recesso",
+      "itemsHeading": "Articoli da rendere",
+      "subtotal": "Subtotale articoli",
+      "checking": "Verifica degli articoli che possono essere resi…",
+      "nothingToReturn": "Nessuno degli articoli oggetto del recesso è ancora stato spedito, quindi non c'è nulla da rendere. Sospendili in modo che non vengano spediti, oppure rimborsali per rimuoverli dall'ordine.",
+      "notShipped_one": "{{count}} articolo oggetto del recesso non è incluso perché non è ancora stato spedito.",
+      "notShipped_other": "{{count}} articoli oggetto del recesso non sono inclusi perché non sono ancora stati spediti.",
+      "notShipped_many": "{{count}} articoli oggetto del recesso non sono inclusi perché non sono ancora stati spediti.",
+      "notReturnable_one": "{{count}} articolo oggetto del recesso non è incluso perché è già stato reso.",
+      "notReturnable_other": "{{count}} articoli oggetto del recesso non sono inclusi perché sono già stati resi.",
+      "notReturnable_many": "{{count}} articoli oggetto del recesso non sono inclusi perché sono già stati resi.",
+      "body": "Questa operazione crea un reso su Shopify per gli articoli indicati sopra. Non rimborsa il cliente. Quando gli articoli tornano, seleziona Elabora e rimborsa sul reso.",
+      "cancel": "Annulla",
+      "confirm": "Crea reso"
+    },
+    "decisionModal": {
+      "headingApprove": "Approvare la richiesta di recesso?",
+      "headingReject": "Rifiutare la richiesta di recesso?",
+      "approveAndSend": "Approva e invia email",
+      "rejectAndSend": "Rifiuta e invia email",
+      "approve": "Approva",
+      "reject": "Rifiuta",
+      "loadingLabel": "Caricamento dell'anteprima email",
+      "loading": "Preparazione dell'email al cliente…",
+      "sendEmail": "Invia email al cliente",
+      "language": "Questa email è in {{language}}, la lingua del cliente. Le modifiche si applicano solo a questa email.",
+      "subject": "Oggetto",
+      "body": "Corpo dell'email",
+      "editHtml": "Modifica HTML",
+      "htmlLabel": "HTML dell'email",
+      "previewTitle": "Anteprima email",
+      "templateUnchanged": "Le modifiche si applicano solo a questa email. Il modello salvato non cambierà.",
+      "noEmail": "Il cliente non riceverà un'email. Se necessario, puoi contattarlo separatamente.",
+      "holdReleased": "Questa operazione rimuove anche la sospensione dell'evasione su questo ordine, così l'ordine può essere di nuovo evaso."
+    },
+    "refundModal": {
+      "heading": "Rimborsa gli articoli oggetto del recesso",
+      "calculatingLabel": "Calcolo del rimborso",
+      "calculating": "Calcolo dell'importo del rimborso…",
+      "nothingToRefund": "Non c'è nulla da rimborsare su questo ordine. Gli articoli oggetto del recesso potrebbero essere già stati rimborsati, oppure l'ordine potrebbe essere stato annullato.",
+      "itemsHeading": "Articoli da rimborsare",
+      "subtotal": "Subtotale articoli",
+      "shippingLine": "Spedizione originale",
+      "amount": "Importo del rimborso",
+      "total": "Rimborso totale",
+      "body": "Gli articoli oggetto del recesso vengono rimborsati sul metodo di pagamento originale e riassortiti, se possibile. Shopify invia al cliente una ricevuta di rimborso via email.",
+      "includesShipping": "Il cliente ha receduto dall'intero ordine, quindi è incluso il costo di spedizione originale.",
+      "unshippedItems": "Gli articoli non ancora spediti vengono rimossi dall'ordine, quindi non verranno inviati.",
+      "inReturn_one": "{{count}} articolo oggetto del recesso non è incluso perché si trova nel reso {{name}}. Rimborsalo con Elabora e rimborsa sul reso.",
+      "inReturn_other": "{{count}} articoli oggetto del recesso non sono inclusi perché si trovano nel reso {{name}}. Rimborsali con Elabora e rimborsa sul reso.",
+      "inReturn_many": "{{count}} articoli oggetto del recesso non sono inclusi perché si trovano nel reso {{name}}. Rimborsali con Elabora e rimborsa sul reso.",
+      "allInReturn": "Tutti gli articoli oggetto del recesso si trovano nel reso {{name}}. Rimborsali con Elabora e rimborsa sul reso, che viene anche chiuso.",
+      "irreversible": "L'operazione non può essere annullata.",
+      "confirmAmount": "Rimborsa {{amount}}",
+      "confirm": "Rimborsa"
+    },
+    "shopifyNotes": {
+      "holdAutomatic": "La richiesta di recesso per l'ordine {{order}} è in attesa di revisione da parte dello staff",
+      "holdManual": "La richiesta di recesso per l'ordine {{order}} è stata sospesa dallo staff",
+      "canceled": "Annullato da {{appName}} perché il cliente ha receduto dall'acquisto (richiesta {{id}}).",
+      "refunded": "Rimborsato da {{appName}} perché il cliente ha receduto dall'acquisto (richiesta {{id}}).",
+      "returnReason": "Richiesta di recesso: {{reason}}",
+      "returnReasonNone": "Richiesta di recesso (nessun motivo indicato)"
+    }
+  },
+  "emailTemplates": {
+    "pageTitle": "Notifiche",
+    "loadError": "Impossibile caricare le notifiche",
+    "saveError": "Impossibile salvare le notifiche",
+    "savedToast": "Notifiche salvate",
+    "resetToast": "{{name}} ripristinato alle impostazioni predefinite",
+    "sender": {
+      "heading": "Mittente",
+      "description": "Queste impostazioni si applicano a ogni email che l'app invia per il tuo negozio. Invia dal tuo indirizzo verificato e scegli dove arrivano le risposte dei clienti.",
+      "emailLabel": "Email del mittente",
+      "emailPlaceholder": "notifications@withdrawaleasy.com",
+      "detailsVerified": "Le email vengono inviate da questo indirizzo.",
+      "detailsPending": "Inserisci il codice che abbiamo inviato a questo indirizzo per verificarlo.",
+      "detailsDefault": "Se lasci vuoto questo campo, le email vengono inviate da {{email}}.",
+      "detailsDefaultFallback": "Se lasci vuoto questo campo, le email vengono inviate dall'indirizzo predefinito dell'app.",
+      "freeProviderWarning": "I provider email gratuiti come Gmail e Yahoo non possono essere autenticati. I clienti vedranno \"via brevosend.com\" nelle email inviate da questo indirizzo. Per un aspetto più professionale, usa un indirizzo sul dominio del tuo negozio.",
+      "codeLabel": "Codice di verifica",
+      "codeDetails": "Inserisci il codice a 6 cifre dell'email che ti abbiamo inviato.",
+      "verifyCode": "Verifica codice",
+      "checkStatus": "Controlla lo stato della verifica",
+      "verifyEmail": "Verifica email",
+      "codeSent": "Abbiamo inviato un codice di verifica a {{email}}.",
+      "notVerifiedYet": "Questa email non è ancora verificata. Cerca il codice nella tua casella di posta, poi riprova.",
+      "replyToLabel": "Email per le risposte",
+      "replyToPlaceholder": "assistenza@iltuonegozio.com",
+      "replyToDetails": "Per impostazione predefinita, le risposte dei clienti arrivano all'email del tuo negozio. Per riceverle altrove, inserisci un indirizzo diverso."
+    },
+    "domain": {
+      "heading": "Autenticazione del dominio",
+      "description": "Autentica il tuo dominio in modo che i clienti non vedano \"via brevosend.com\" nelle tue email. È facoltativo, ma lo consigliamo se invii dal dominio del tuo negozio.",
+      "label": "Dominio",
+      "placeholder": "iltuonegozio.com",
+      "details": "Inserisci il dominio da cui invii le email, non il tuo dominio myshopify.com.",
+      "freeProviderWarning": "I provider email gratuiti come Gmail e Yahoo non possono essere autenticati. Inserisci invece il dominio del tuo negozio.",
+      "columns": {
+        "record": "Record",
+        "type": "Tipo",
+        "host": "Host",
+        "value": "Valore"
+      },
+      "records": {
+        "brevo_code": "Proprietà del dominio",
+        "dkim_record": "DKIM",
+        "dkim1Record": "DKIM 1",
+        "dkim2Record": "DKIM 2",
+        "dmarc_record": "DMARC"
+      },
+      "copyHost": "Copia host",
+      "copyValue": "Copia valore",
+      "verifyRecords": "Verifica record DNS",
+      "authenticate": "Autentica dominio",
+      "pendingInfo": "Aggiungi questi record presso il tuo provider di dominio, poi seleziona Verifica record DNS.",
+      "notVerifiedYet": "Il tuo dominio non è ancora verificato. L'aggiornamento delle modifiche DNS può richiedere del tempo, quindi riprova più tardi."
+    },
+    "notification": {
+      "heading": "Modello email",
+      "emailLabel": "Email",
+      "language": "Lingua",
+      "languageDetails": "Scegli una lingua per modificare questa email in quella lingua. Ogni lingua viene salvata separatamente. I clienti ricevono le email nella propria lingua.",
+      "send": "Invia questa email",
+      "requiredDetails": "La normativa UE richiede questa email, quindi non può essere disattivata.",
+      "merchantDetails": "Disattiva per non ricevere più questa email.",
+      "decisionDetails": "Disattiva per non inviare più questa email per impostazione predefinita. Puoi comunque scegliere di inviarla quando approvi o rifiuti una singola richiesta.",
+      "subject": "Oggetto",
+      "reset": "Ripristina impostazioni predefinite",
+      "customized": "Personalizzata"
+    },
+    "templates": {
+      "customerConfirmation": {
+        "name": "Conferma di recesso al cliente",
+        "description": "Inviata ai clienti non appena inviano una richiesta di recesso."
+      },
+      "merchantNotification": {
+        "name": "Notifica di nuova richiesta",
+        "description": "Inviata all'email di contatto del tuo negozio quando un cliente invia una nuova richiesta di recesso. Rispondi per scrivere al cliente."
+      },
+      "withdrawalApproved": {
+        "name": "Recesso approvato",
+        "description": "Inviata ai clienti quando approvi la loro richiesta di recesso. Puoi rivederla e modificarla prima dell'invio."
+      },
+      "withdrawalRejected": {
+        "name": "Recesso rifiutato",
+        "description": "Inviata ai clienti quando rifiuti la loro richiesta di recesso. Puoi rivederla e modificarla prima dell'invio."
+      }
+    },
+    "merchantDefaults": {
+      "subject": "Nuova richiesta di recesso — ordine {{order}}",
+      "heading": "Nuova richiesta di recesso",
+      "intro": "Un cliente ha inviato una richiesta di recesso. Ecco tutto ciò che ti serve per esaminarla.",
+      "rows": {
+        "name": "Nome",
+        "email": "Email",
+        "date": "Data",
+        "orderNumber": "Numero d'ordine",
+        "reference": "Numero di riferimento",
+        "reason": "Motivo"
+      },
+      "button": "Visualizza richiesta",
+      "itemsHeading": "Articoli richiesti",
+      "footnote": "Apri la richiesta nel pannello di amministrazione per approvarla o rifiutarla. Lì il termine di rimborso viene monitorato automaticamente."
+    },
+    "body": {
+      "heading": "Corpo dell'email",
+      "editCode": "Modifica codice",
+      "htmlLabel": "Corpo HTML dell'email",
+      "previewHeading": "Anteprima email"
+    },
+    "variables": {
+      "heading": "Variabili",
+      "help": "Seleziona una variabile per inserirla nella posizione del cursore.",
+      "insert": "Inserisci {{label}}: {{description}}",
+      "groups": {
+        "customer": "Cliente",
+        "order": "Ordine",
+        "withdrawal": "Recesso",
+        "request": "Richiesta",
+        "shop": "Negozio"
+      },
+      "tokens": {
+        "customer": {
+          "first_name": {
+            "label": "Nome",
+            "description": "Il nome del cliente"
+          },
+          "last_name": {
+            "label": "Cognome",
+            "description": "Il cognome del cliente"
+          },
+          "email": {
+            "label": "Email",
+            "description": "L'indirizzo email del cliente"
+          }
+        },
+        "order": {
+          "name": {
+            "label": "Numero d'ordine",
+            "description": "Il numero d'ordine, ad esempio #2138"
+          },
+          "id": {
+            "label": "ID ordine",
+            "description": "L'ID interno dell'ordine"
+          }
+        },
+        "withdrawal": {
+          "request_id": {
+            "label": "Numero di riferimento",
+            "description": "Il numero di riferimento della richiesta di recesso"
+          },
+          "submitted_at": {
+            "label": "Data di invio",
+            "description": "La data e l'ora di invio della richiesta"
+          },
+          "reason": {
+            "label": "Motivo",
+            "description": "Il motivo indicato dal cliente, se presente"
+          },
+          "selected_products": {
+            "label": "Prodotti selezionati (testo)",
+            "description": "Gli articoli richiesti come elenco separato da virgole"
+          }
+        },
+        "request": {
+          "status": {
+            "label": "Stato",
+            "description": "Lo stato attuale della richiesta"
+          },
+          "url": {
+            "label": "Link alla richiesta",
+            "description": "Un link alla richiesta nell'app"
+          }
+        },
+        "shop": {
+          "name": {
+            "label": "Nome del negozio",
+            "description": "Il nome del tuo negozio"
+          },
+          "email": {
+            "label": "Email del negozio",
+            "description": "L'indirizzo email di contatto del tuo negozio"
+          }
+        }
+      }
+    },
+    "validation": {
+      "email": "Inserisci un indirizzo email valido.",
+      "subjectRequired": "Inserisci un oggetto.",
+      "subjectTooLong": "L'oggetto deve contenere al massimo {{max}} caratteri.",
+      "bodyRequired": "Inserisci il corpo dell'email."
+    }
+  },
+  "sample": {
+    "customerName": "Giulia Rossi",
+    "items": {
+      "lamp": {
+        "title": "Lampada da tavolo Fjord",
+        "variant": "Rovere / Grande"
+      },
+      "candleHolder": {
+        "title": "Portacandele Tind",
+        "variant": "Ottone"
+      }
+    },
+    "reason": "Ho cambiato idea"
+  },
+  "faqs": {
+    "pageTitle": "Domande frequenti",
+    "searchLabel": "Cerca nelle domande frequenti",
+    "searchPlaceholder": "Cerca domande, ad esempio \"rimborso\" o \"scadenza\"",
+    "noResults": "Nessuna domanda corrisponde a \"{{query}}\"",
+    "noResultsHelp": "Prova con un'altra parola oppure contatta l'assistenza qui sotto.",
+    "showAnswer": "Mostra risposta: {{question}}",
+    "hideAnswer": "Nascondi risposta: {{question}}",
+    "groups": {
+      "gettingStarted": "Primi passi",
+      "deadline": "Termine di recesso",
+      "requests": "Gestione delle richieste",
+      "emailsLanguages": "Email e lingue"
+    },
+    "actions": {
+      "goToSettings": "Vai alle Impostazioni",
+      "goToRequests": "Vai alle Richieste",
+      "goToNotifications": "Vai alle Notifiche"
+    },
+    "stillStuck": {
+      "heading": "Hai ancora domande?",
+      "body": "Il nostro team di assistenza legge e risponde a ogni email.",
+      "link": "Contatta l'assistenza"
+    },
+    "items": {
+      "what-it-does": {
+        "question": "Cosa fa l'app?",
+        "paragraphs": [
+          "Offre ai tuoi clienti UE un modo chiaro per recedere da un acquisto, come richiesto dalla normativa UE. Ti offre anche un unico posto per gestire tutte le richieste.",
+          "I clienti aprono il modulo dal loro ordine, scelgono gli articoli da cui vogliono recedere e confermano. Ogni richiesta viene poi mostrata nella pagina Richieste con gli articoli, il motivo e il tuo termine di rimborso. L'app invia per te le email obbligatorie."
+        ]
+      },
+      "where-form-appears": {
+        "question": "Dove trovano i clienti il modulo di recesso?",
+        "paragraphs": [
+          "Puoi mostrare il modulo in 2 posizioni. Usane una o entrambe:"
+        ],
+        "bullets": [
+          "Pagina di stato dell'ordine: la pagina che i clienti vedono dopo il checkout e quando aprono il link nell'email di conferma dell'ordine.",
+          "Pagina del negozio: una pagina del tuo negozio online, per i clienti che tornano in seguito. Trovano il loro ordine con il numero d'ordine e l'email."
+        ],
+        "closing": "Attiva ogni posizione nelle Impostazioni, poi aggiungi una volta il relativo blocco app. La guida alla configurazione nella Home mostra quali blocchi sono stati aggiunti."
+      },
+      "form-not-showing": {
+        "question": "Perché un cliente non vede il modulo di recesso?",
+        "paragraphs": [
+          "Controlla questi punti, a partire dal più comune:"
+        ],
+        "bullets": [
+          "Il modulo è disattivato oppure la posizione usata dal cliente non è attivata nelle Impostazioni.",
+          "Il blocco app non è ancora stato aggiunto a quella pagina.",
+          "L'ordine non viene spedito in uno dei tuoi paesi idonei.",
+          "Il periodo di recesso per l'ordine è terminato.",
+          "L'ordine è stato annullato oppure ha già una richiesta in attesa. Ogni ordine può avere solo 1 richiesta in attesa alla volta."
+        ]
+      },
+      "deadline": {
+        "question": "Quando inizia e finisce il periodo di recesso?",
+        "paragraphs": [
+          "In base alla normativa UE, il periodo inizia quando il cliente riceve gli articoli, non quando effettua l'ordine. I clienti possono anche recedere in qualsiasi momento prima dell'arrivo degli articoli."
+        ],
+        "bullets": [
+          "Non ancora spedito: il periodo non è ancora iniziato, quindi i clienti possono sempre recedere.",
+          "Consegnato: il periodo inizia dalla data di consegna fornita dal corriere e dura {{withdrawalDays}}. Puoi modificare il numero di giorni nelle Impostazioni.",
+          "Spedito, ma senza data di consegna: l'app usa la data di consegna stimata dal corriere. Se non è disponibile, usa la data di spedizione più il tempo di transito stimato."
+        ]
+      },
+      "transit-days": {
+        "question": "A cosa serve il tempo di transito stimato?",
+        "paragraphs": [
+          "Molti corrieri non inviano una data di consegna a Shopify. Senza questa data, l'app non sa quando inizia il periodo di recesso, quindi aggiunge il tempo di transito stimato alla data di spedizione.",
+          "Impostalo sul tempo che i tuoi pacchi impiegano all'incirca ad arrivare. Al momento è di {{transitDays}}. Se non sei sicuro, scegli un tempo più lungo. Un tempo troppo breve può far terminare in anticipo il periodo di recesso di un cliente."
+        ]
+      },
+      "split-shipments": {
+        "question": "Cosa succede se un ordine viene spedito in più di 1 pacco?",
+        "paragraphs": [
+          "Il periodo di recesso inizia quando arriva l'ultimo pacco. Gli articoli che l'app sospende perché il cliente ha receduto non contano, dato che non verranno spediti.",
+          "Se un cliente recede quando solo una parte dell'ordine è stata spedita, l'app gestisce ciascuna parte separatamente:"
+        ],
+        "bullets": [
+          "Articoli non spediti: l'app può sospenderli in modo che non vengano spediti.",
+          "Articoli spediti: l'app può creare un reso per questi articoli."
+        ],
+        "closing": "L'app non annulla mai un ordine spedito parzialmente, perché annullerebbe anche articoli che il cliente ha già ricevuto."
+      },
+      "after-submit": {
+        "question": "Cosa succede dopo che un cliente invia una richiesta?",
+        "paragraphs": [
+          "Succede quanto segue, in questo ordine:"
+        ],
+        "bullets": [
+          "La richiesta viene mostrata nella pagina Richieste come In attesa.",
+          "Il cliente riceve un'email di conferma. Viene sempre inviata, perché è la sua prova di recesso.",
+          "Ricevi un'email anche tu, se la notifica di nuova richiesta è attiva.",
+          "Vengono eseguite le impostazioni di automazione. Ad esempio, l'app può sospendere l'evasione o aggiungere un tag all'ordine."
+        ]
+      },
+      "automation": {
+        "question": "Cosa fanno le impostazioni di automazione?",
+        "paragraphs": [
+          "Vengono eseguite quando arriva una richiesta. Cosa può fare l'app dipende dal fatto che l'ordine sia stato spedito o meno:"
+        ],
+        "bullets": [
+          "Prima della spedizione: sospendere l'evasione in modo che nulla venga spedito mentre esamini la richiesta. Puoi anche far annullare e rimborsare subito l'intero ordine dall'app.",
+          "Dopo la spedizione: creare un reso su Shopify per gli articoli spediti.",
+          "Spedito parzialmente: si applicano entrambe. L'app sospende solo gli articoli richiesti non ancora spediti e crea un reso per quelli già spediti."
+        ],
+        "closing": "In ogni caso, l'app può anche aggiungere un tag all'ordine. L'automazione non approva né rifiuta mai una richiesta. Decidi sempre tu."
+      },
+      "partial-withdrawal": {
+        "question": "Un cliente può recedere solo da alcuni articoli?",
+        "paragraphs": [
+          "Sì. I clienti scelgono da quali articoli recedere. La richiesta, il rimborso e l'eventuale reso includono solo quegli articoli. Il costo di spedizione originale viene rimborsato solo quando il cliente recede dall'intero ordine.",
+          "Ogni ordine può avere 1 richiesta in attesa alla volta. Dopo che l'hai approvata o rifiutata, il cliente può inviare una nuova richiesta per altri articoli."
+        ]
+      },
+      "reason": {
+        "question": "I clienti devono indicare un motivo?",
+        "paragraphs": [
+          "No. In base alla normativa UE, i clienti non devono indicare un motivo per recedere, quindi il campo motivo è sempre facoltativo. Nelle Impostazioni puoi scegliere quali motivi offrire oppure smettere di chiederlo."
+        ]
+      },
+      "refund": {
+        "question": "Come rimborso un recesso?",
+        "paragraphs": [
+          "Apri la richiesta dalla pagina Richieste. Il modo in cui rimborsi dipende da dove si trovano gli articoli:"
+        ],
+        "bullets": [
+          "Articoli non inclusi in un reso: seleziona Rimborsa. Gli articoli non ancora spediti vengono rimossi dall'ordine, quindi non verranno inviati.",
+          "Articoli in un reso: quando tornano, seleziona Elabora e rimborsa sul reso. In questo modo il cliente viene rimborsato e il reso viene chiuso.",
+          "Nulla è stato ancora spedito: puoi anche annullare e rimborsare l'intero ordine da Altre azioni."
+        ],
+        "closing": "La normativa UE ti concede {{refundDays}} dal recesso per effettuare il rimborso. La pagina della richiesta mostra quanto tempo rimane. Rimborsa prima di approvare la richiesta."
+      },
+      "returns": {
+        "question": "Come funzionano i resi?",
+        "paragraphs": [
+          "Un reso indica a Shopify quali articoli il cliente sta rispedendo. L'app può crearne uno quando arriva una richiesta, oppure puoi selezionare Crea reso nella pagina della richiesta.",
+          "Un reso include solo gli articoli già spediti. Crearlo non rimborsa il cliente. Quando gli articoli tornano, seleziona Elabora e rimborsa sul reso."
+        ]
+      },
+      "decision-lock": {
+        "question": "Perché le azioni sull'ordine vengono disattivate dopo che approvo o rifiuto una richiesta?",
+        "paragraphs": [
+          "Approvare o rifiutare conclude la richiesta. Dopo, rimborsi, sospensioni, resi e annullamenti vengono disattivati, così l'ordine non può essere modificato per errore. Per questo dovresti rimborsare prima di approvare.",
+          "La decisione rimuove anche qualsiasi sospensione dell'evasione applicata dall'app. Se la rimozione non riesce, puoi comunque selezionare Rimuovi sospensione dell'evasione."
+        ]
+      },
+      "emails": {
+        "question": "Quali email invia l'app e posso modificarle?",
+        "paragraphs": [
+          "L'app invia {{emailCount}} email. Puoi modificarle tutte nella pagina Notifiche:"
+        ],
+        "bullets": [
+          "Conferma di recesso al cliente: inviata quando un cliente invia una richiesta. È sempre attiva.",
+          "Notifica di nuova richiesta: inviata all'email di contatto del tuo negozio. Puoi disattivarla.",
+          "Recesso approvato: inviata al cliente quando approvi una richiesta. Puoi rivederla prima o disattivarla.",
+          "Recesso rifiutato: inviata al cliente quando rifiuti una richiesta. Puoi rivederla prima o disattivarla."
+        ],
+        "closing": "Puoi modificare l'oggetto e il corpo di ogni email in ogni lingua e aggiungere variabili come il numero d'ordine o il nome del cliente. L'anteprima si aggiorna mentre scrivi."
+      },
+      "countries-languages": {
+        "question": "Quali paesi e lingue supporta l'app?",
+        "paragraphs": [
+          "Tutti i paesi UE sono idonei per impostazione predefinita. Se vendi solo in alcuni di essi, seleziona Paesi specifici nelle Impostazioni.",
+          "Il modulo è disponibile in {{languageCount}} lingue: {{languages}}. I clienti lo vedono nella propria lingua.",
+          "L'inglese è la lingua di base. Se lasci vuoto un campo tradotto, i clienti vedono al suo posto il testo in inglese."
+        ]
+      }
+    }
+  },
+  "featureRequest": {
+    "pageTitle": "Richiedi una funzionalità",
+    "intro": "Dicci cosa ti piacerebbe vedere nell'app. Leggiamo ogni richiesta.",
+    "sentHeading": "Richiesta di funzionalità inviata",
+    "sentBody": "Grazie per aver condiviso la tua idea con il nostro team.",
+    "firstName": "Nome",
+    "lastName": "Cognome",
+    "email": "Email",
+    "request": "Quale funzionalità ti piacerebbe?",
+    "requestPlaceholder": "Descrivi la funzionalità e come aiuterebbe il tuo negozio",
+    "submit": "Invia richiesta"
+  },
+  "pricing": {
+    "pageTitle": "Prezzi",
+    "pricePerMonth": "{{price}} al mese",
+    "currentPlan": "Piano attuale",
+    "choosePlan": "Scegli {{plan}}",
+    "switchedToast": "Passaggio al piano {{plan}} effettuato",
+    "plans": {
+      "free": {
+        "name": "Free",
+        "features": [
+          "Fino a 10 richieste di recesso al mese",
+          "Notifiche via email"
+        ]
+      },
+      "starter": {
+        "name": "Starter",
+        "features": [
+          "Richieste di recesso illimitate",
+          "Campi del modulo personalizzati",
+          "Notifiche via email"
+        ]
+      },
+      "pro": {
+        "name": "Pro",
+        "features": [
+          "Tutto ciò che include Starter",
+          "Assistenza prioritaria",
+          "Rimborsi automatici"
+        ]
+      }
+    },
+    "switchError": "Impossibile cambiare il piano"
+  }
+}

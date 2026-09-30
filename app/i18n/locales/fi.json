@@ -1,0 +1,1250 @@
+{
+  "common": {
+    "add": "Lisää",
+    "backToHome": "Takaisin etusivulle",
+    "cancel": "Peruuta",
+    "delete": "Poista",
+    "discard": "Hylkää",
+    "done": "Valmis",
+    "dayCount_one": "{{count}} päivä",
+    "dayCount_other": "{{count}} päivää",
+    "emptyValue": "—",
+    "noMatches": "Ei tuloksia haulla ”{{query}}”.",
+    "preview": "Esikatsele",
+    "remove": "Poista",
+    "save": "Tallenna",
+    "verified": "Vahvistettu"
+  },
+  "nav": {
+    "home": "Etusivu",
+    "withdrawalRequests": "Pyynnöt",
+    "formSetup": "Asetukset",
+    "emailTemplates": "Ilmoitukset",
+    "pricing": "Hinnoittelu"
+  },
+  "errors": {
+    "generic": "Jokin meni vikaan. Yritä uudelleen.",
+    "requestFailed": "Jokin meni vikaan (virhe {{status}}). Yritä uudelleen.",
+    "methodNotAllowed": "Tätä toimintoa ei tueta.",
+    "unknownAction": "Tätä toimintoa ei tueta.",
+    "noValidFields": "Päivitettävää ei ole.",
+    "emailServiceUnavailable": "Sähköpostipalveluun ei saatu yhteyttä. Yritä uudelleen muutaman minuutin kuluttua.",
+    "emailServiceNotConfigured": "Sähköpostien lähetystä ei ole vielä määritetty. Ota yhteyttä tukeen.",
+    "requestNotFound": "Tätä peruutuspyyntöä ei ole olemassa tai se on poistettu.",
+    "requestDecided": "Tämä pyyntö on jo hyväksytty tai hylätty, joten tilaustoiminnot eivät ole enää käytettävissä.",
+    "unknownDecision": "Valitse, hyväksytkö vai hylkäätkö tämän pyynnön.",
+    "invalidStatus": "Valitse tälle pyynnölle kelvollinen tila.",
+    "noteRequired": "Kirjoita muistiinpano.",
+    "orderNotFound": "Tätä tilausta ei löydy Shopifysta.",
+    "invalidEmail": "Anna kelvollinen sähköpostiosoite.",
+    "featureRequestIncomplete": "Täytä kaikki kentät ennen kuin lähetät pyynnön.",
+    "senderCodeRequired": "Anna sähköpostiisi lähetetty vahvistuskoodi.",
+    "senderNotFound": "Tätä lähettäjän sähköpostiosoitetta ei löytynyt. Poista se ja lisää se uudelleen, niin saat uuden koodin.",
+    "senderNotStarted": "Vahvista ensin lähettäjän sähköpostiosoite.",
+    "senderIdMissing": "Lähettäjän sähköpostiosoitetta ei voitu rekisteröidä. Yritä uudelleen.",
+    "domainInvalid": "Anna kelvollinen verkkotunnus, esimerkiksi kauppasi.fi.",
+    "domainFreeProvider": "Ilmaisia sähköpostipalveluja, kuten Gmailia ja Yahoota, ei voi todentaa. Käytä sen sijaan kauppasi verkkotunnusta."
+  },
+  "auth": {
+    "login": {
+      "heading": "Kirjaudu sisään",
+      "shopLabel": "Kaupan verkkotunnus",
+      "shopDetails": "example.myshopify.com",
+      "submit": "Kirjaudu sisään",
+      "missingShop": "Kirjaudu sisään antamalla kauppasi verkkotunnus.",
+      "invalidShop": "Anna kelvollinen kaupan verkkotunnus, esimerkiksi example.myshopify.com."
+    }
+  },
+  "status": {
+    "pending": "Odottaa",
+    "approved": "Hyväksytty",
+    "rejected": "Hylätty"
+  },
+  "sourceInline": {
+    "order_status": "tilauksen tilasivulta",
+    "standalone_page": "kauppasi sivulta"
+  },
+  "placements": {
+    "orderStatus": {
+      "label": "Tilauksen tilasivu",
+      "details": "Näytä peruutuslomake tilauksen tilasivulla, jonka asiakkaat näkevät kassan jälkeen."
+    },
+    "storefront": {
+      "label": "Kaupan sivu",
+      "details": "Näytä peruutuslomake teeman omalla sivulla, jotta asiakkaat löytävät sen myös tilauksen tilasivun ulkopuolelta."
+    }
+  },
+  "orderStatus": {
+    "financial": {
+      "PENDING": "Maksu odottaa",
+      "AUTHORIZED": "Valtuutettu",
+      "PARTIALLY_PAID": "Osittain maksettu",
+      "PAID": "Maksettu",
+      "PARTIALLY_REFUNDED": "Osittain hyvitetty",
+      "REFUNDED": "Hyvitetty",
+      "VOIDED": "Mitätöity",
+      "EXPIRED": "Vanhentunut"
+    },
+    "fulfillment": {
+      "UNFULFILLED": "Toimittamaton",
+      "PENDING_FULFILLMENT": "Toimitus odottaa",
+      "OPEN": "Avoin",
+      "IN_PROGRESS": "Käynnissä",
+      "ON_HOLD": "Pidossa",
+      "PARTIALLY_FULFILLED": "Osittain toimitettu",
+      "FULFILLED": "Toimitettu",
+      "RESTOCKED": "Palautettu varastoon",
+      "SCHEDULED": "Ajoitettu"
+    },
+    "return": {
+      "REQUESTED": "Pyydetty",
+      "OPEN": "Avoin",
+      "CLOSED": "Suljettu",
+      "DECLINED": "Hylätty",
+      "CANCELED": "Peruttu"
+    }
+  },
+  "stats": {
+    "heading": "Yleiskatsaus",
+    "description": "Tilannekuva peruutuspyynnöistäsi",
+    "viewRequests": "Näytä pyynnöt",
+    "total": "Pyyntöjä yhteensä",
+    "today": "Lähetetty tänään",
+    "pending": "Odottaa",
+    "closed": "Suljettu",
+    "requestCount_one": "{{count}} pyyntö",
+    "requestCount_other": "{{count}} pyyntöä"
+  },
+  "home": {
+    "pageTitle": "Etusivu",
+    "loadError": "Hallintapaneelia ei voitu ladata",
+    "saveErrorHeading": "Muutosta ei voitu tallentaa",
+    "saveErrorAction": "Yritä uudelleen tai tee muutos Asetuksissa.",
+    "setupBanner": {
+      "heading_one": "{{count}} määritysvaihe jäljellä",
+      "heading_other": "{{count}} määritysvaihetta jäljellä",
+      "body": "Viimeistele nämä vaiheet, jotta peruutuslomake on valmis: {{steps}}."
+    },
+    "setupGuide": {
+      "heading": "Määritysopas",
+      "description": "Tämän oppaan avulla saat peruutuslomakkeen käyttöön kaupassasi.",
+      "progress": "{{completed}}/{{total}} tehtävää valmiina",
+      "dismiss": "Sulje määritysopas",
+      "collapse": "Pienennä määritysopas",
+      "expand": "Laajenna määritysopas",
+      "showStep": "Näytä vaiheen {{step}} tiedot",
+      "hideStep": "Piilota vaiheen {{step}} tiedot",
+      "steps": {
+        "form": {
+          "label": "Ota peruutuslomake käyttöön",
+          "description": "Ota lomake käyttöön ja valitse, missä asiakkaat näkevät sen. Kentissä, syissä ja teksteissä on jo oletustekstit. Voit muuttaa niitä milloin tahansa Asetuksissa.",
+          "checkbox": "Ota peruutuslomake käyttöön",
+          "cta": "Siirry Asetuksiin",
+          "placementHeading": "Valitse, missä asiakkaat näkevät lomakkeen",
+          "placementDescription": "Valitse vähintään yksi paikka. Jokainen paikka tarvitsee oman sovelluslohkonsa, ennen kuin asiakkaat näkevät lomakkeen."
+        },
+        "blocks": {
+          "label": "Lisää sovelluslohkot kauppaasi",
+          "description": "Lisää sovelluslohko jokaiseen edellisessä vaiheessa valitsemaasi paikkaan.",
+          "locked": "Valitse lomakkeen sijainti viimeistelemällä vaihe {{step}}. Sen jälkeen voit lisätä sovelluslohkot tässä.",
+          "surfaces": {
+            "orderStatus": "Tilauksen tilasivu",
+            "theme": "Kaupan sivu"
+          },
+          "live": {
+            "orderStatus": "Sovelluslohko on julkaistu tilauksen tilasivulla.",
+            "theme": "Sovelluslohko on julkaistu kauppasi sivulla."
+          }
+        }
+      }
+    },
+    "help": {
+      "heading": "Ohjeet ja resurssit",
+      "support": {
+        "title": "Sähköpostituki",
+        "description": "Onko sinulla kysyttävää? Tukitiimimme auttaa.",
+        "link": "Ota yhteyttä tukeen"
+      },
+      "faqs": {
+        "title": "Usein kysytyt kysymykset",
+        "description": "Löydä vastauksia yleisiin kysymyksiin sovelluksen määrittämisestä ja käytöstä.",
+        "link": "Näytä usein kysytyt kysymykset"
+      },
+      "featureRequest": {
+        "title": "Ominaisuustoiveet",
+        "description": "Onko sinulla idea sovellukseen? Kerro, mitä haluaisit nähdä.",
+        "link": "Ehdota ominaisuutta"
+      }
+    }
+  },
+  "blockSetup": {
+    "autoUpdate": "Tämä viesti katoaa itsestään muutaman sekunnin kuluttua sovelluslohkon tallentamisesta.",
+    "addAppBlock": "Lisää sovelluslohko",
+    "orderStatus": {
+      "heading": "Lisää sovelluslohko tilauksen tilasivulle",
+      "body": "Asiakkaat eivät näe peruutuslomaketta tilauksen tilasivulla, ennen kuin lisäät sovelluslohkon. Näin lisäät sen:",
+      "steps": {
+        "open": "Valitse alta <strong>Lisää sovelluslohko</strong>. Tilauksen tilasivu avautuu kassaeditorissa.",
+        "add": "Valitse sivupalkista <strong>Lisää sovelluslohko</strong>.",
+        "choose": "Valitse <strong>Peruutuslomake</strong>.",
+        "save": "Valitse <strong>Tallenna</strong>."
+      }
+    },
+    "storefront": {
+      "heading": "Lisää sovelluslohko kaupan sivulle",
+      "body": "Valitse sivupohja ja sitten Lisää sovelluslohko. Teemaeditori avautuu, ja peruutuslomake on jo lisätty osioksi.",
+      "templateLabel": "Sivupohja",
+      "templates": {
+        "page": "Oletussivu",
+        "index": "Etusivu",
+        "product": "Tuotesivut",
+        "collection": "Kokoelmasivut",
+        "cart": "Ostoskorisivu"
+      },
+      "steps": {
+        "open": "Valitse <strong>Lisää sovelluslohko</strong>, niin teemaeditori avautuu osio lisättynä.",
+        "move": "Vedä osio haluamaasi kohtaan sivulla.",
+        "save": "Valitse <strong>Tallenna</strong>."
+      }
+    }
+  },
+  "onboarding": {
+    "pageTitle": "Aloita",
+    "heading": "Valmistele kauppasi EU:n peruutuksia varten",
+    "intro_one": "Viimeistele tämä {{count}} vaihe, jotta EU-asiakkaasi voivat peruuttaa oston lainmukaisesti.",
+    "intro_other": "Viimeistele nämä {{count}} vaihetta, jotta EU-asiakkaasi voivat peruuttaa oston lainmukaisesti.",
+    "stepBadge": "Vaihe {{current}}/{{total}}",
+    "completedToast": "Määritys valmis",
+    "steps": {
+      "welcome": {
+        "title": "Tervetuloa",
+        "description": "Mitä sovellus tekee"
+      },
+      "form": {
+        "title": "Peruutuslomake",
+        "description": "Ota lomake käyttöön"
+      }
+    },
+    "actions": {
+      "getStarted": "Aloita",
+      "continue": "Jatka",
+      "finish": "Viimeistele määritys",
+      "skip": "Ohita määritys",
+      "back": "Takaisin"
+    },
+    "help": {
+      "heading": "Tarvitsetko apua?",
+      "body": "Onko sinulla kysyttävää? <supportLink>Ota yhteyttä tukeen</supportLink>."
+    },
+    "welcome": {
+      "heading": "Tervetuloa käyttämään sovellusta {{appName}}",
+      "setupTime": "Vie noin 1 minuutin",
+      "law": "19.6.2026 alkaen EU:n asiakkaille myyvien kauppojen on tarjottava jokaiselle tilaukselle 2-vaiheinen tapa peruuttaa ostos (EU-direktiivi 2023/2673, 11 a artikla). Pelkkä palautuskäytäntö ei riitä.",
+      "app": "{{appName}} lisää peruutuspainikkeen tilauksen tilasivulle, verkkokauppasi sivulle tai molempiin. Se hoitaa 2-vaiheisen vahvistuksen ja lähettää vaaditun vahvistussähköpostin. Voit hallita kaikkia pyyntöjä yhdessä paikassa.",
+      "imageAlt": "Asiakas peruuttaa tilauksen",
+      "requirementsHeading": "Mitä laki vaatii",
+      "requirements": {
+        "button": "Selkeästi merkitty peruutuspainike, jonka asiakkaat löytävät helposti",
+        "twoStep": "2-vaiheinen prosessi: asiakas lähettää peruutuksen ja vahvistaa sen sitten",
+        "email": "Automaattinen vahvistussähköposti, jonka asiakas voi säilyttää"
+      },
+      "penaltyHeading": "Mitä tapahtuu, jos et noudata vaatimuksia",
+      "penalty": "Jos peruutuspainike puuttuu tai ei toimi, laki pidentää {{days}} päivän peruutusaikaa. Asiakkailla on silloin 12 kuukautta ja {{days}} päivää aikaa peruuttaa jokainen asianomainen tilaus."
+    },
+    "form": {
+      "heading": "Ota peruutuslomake käyttöön",
+      "body": "Asiakkaat lähettävät peruutuksen ja vahvistavat sen erillisessä vaiheessa, kuten EU-lainsäädäntö edellyttää. Lomakkeessa on oletusarvoinen lakiteksti. Asiakkailla on toimituksesta alkaen {{days}} aikaa peruuttaa.",
+      "switch": "Ota peruutuslomake käyttöön",
+      "later": "Voit muuttaa näitä myöhemmin Asetuksissa.",
+      "loadError": "Lomakkeen asetuksia ei voitu ladata. Voit viimeistellä määrityksen nyt ja ottaa lomakkeen käyttöön myöhemmin Asetuksissa.",
+      "saveError": "Lomakkeen valintoja ei voitu tallentaa. Yritä uudelleen tai viimeistele määritys ilman niitä ja tee valinnat myöhemmin Asetuksissa.",
+      "finishWithoutSaving": "Viimeistele tallentamatta",
+      "placementError": "Valitse vähintään yksi paikka tai poista lomake käytöstä."
+    },
+    "finishError": "Määritystä ei voitu viimeistellä. Yritä uudelleen."
+  },
+  "formSetup": {
+    "pageTitle": "Asetukset",
+    "loadError": "Asetuksia ei voitu ladata",
+    "saveError": "Asetuksia ei voitu tallentaa",
+    "savedToast": "Asetukset tallennettu",
+    "enable": {
+      "heading": "Peruutuslomake",
+      "description": "Valitse, voivatko asiakkaat lähettää peruutuspyyntöjä ja missä he näkevät lomakkeen.",
+      "checkbox": "Ota peruutuslomake käyttöön",
+      "details": "Kun tämä on pois käytöstä, asiakkaat eivät voi lähettää peruutuspyyntöjä mistään.",
+      "orderStatus": "Näytä tilauksen tilasivulla",
+      "storefront": "Näytä kaupan sivulla"
+    },
+    "countries": {
+      "heading": "Kelpoiset maat",
+      "description": "Asiakkaat näkevät peruutuslomakkeen vain, jos tilaus toimitetaan johonkin näistä maista.",
+      "all": "Kaikki {{count}} EU-maata (suositus)",
+      "allDetails": "Peruutusoikeus on voimassa koko EU:ssa.",
+      "specific": "Tietyt maat",
+      "specificDetails": "Valitse maat alta. Voit muuttaa valintaa milloin tahansa.",
+      "pickerLabel": "Maat",
+      "pickerPlaceholder": "Hae maita"
+    },
+    "content": {
+      "heading": "Lomakkeen sisältö",
+      "tabs": {
+        "step1": "1. Tiedot",
+        "confirm": "2. Vahvista",
+        "done": "3. Valmis"
+      },
+      "language": "Kieli",
+      "languageDetails": "Valitse kieli, jolla haluat muokata lomakkeen sisältöä. Jokainen kieli tallennetaan erikseen.",
+      "beforeDelivery": {
+        "heading": "Ennen toimitusta",
+        "description": "Näytetään lomakkeen ensimmäisellä näytöllä ja Tiedot-vaiheessa, kunnes tilaus on toimitettu, myös kuljetuksen aikana."
+      },
+      "afterDelivery": {
+        "heading": "Toimituksen jälkeen",
+        "description": "Näytetään sen sijaan, kun Shopify merkitsee tilauksen toimitetuksi."
+      },
+      "title": "Otsikko",
+      "description": "Kuvaus",
+      "itemHeading": "Tuotevalinnan otsikko",
+      "customerDetails": {
+        "heading": "Asiakkaan tiedot",
+        "description": "Täytetään tilauksen tiedoista. Asiakkaat eivät voi muokata näitä kenttiä.",
+        "locked": "Lukittu",
+        "fullName": "Koko nimi",
+        "email": "Sähköposti",
+        "orderNumber": "Tilausnumero"
+      },
+      "reason": {
+        "heading": "Peruutuksen syy",
+        "checkbox": "Kysy syytä",
+        "details": "Asiakkaiden ei koskaan tarvitse kertoa syytä. EU-lainsäädännön mukaan tämän kentän on oltava valinnainen.",
+        "label": "Syykentän nimi",
+        "optionsHeading": "Syyvaihtoehdot",
+        "optionsHelp": "Asiakkaat valitsevat tästä luettelosta. Lisää, poista tai muotoile vaihtoehtoja kauppaasi sopiviksi. Loppuun lisätään aina Muu-vaihtoehto, jossa on tekstikenttä.",
+        "removeOption": "Poista {{option}}",
+        "addLabel": "Lisää syy",
+        "addPlaceholder": "Esimerkiksi: Tilattu vahingossa",
+        "translatedHelp": "Käännä jokainen vaihtoehto. Jos haluat lisätä tai poistaa vaihtoehtoja, vaihda englantiin.",
+        "translatedEmpty": "Lisää ensin syyvaihtoehdot englanniksi."
+      },
+      "continueButton": "Jatka-painikkeen teksti",
+      "confirm": {
+        "heading": "Vahvistuksen otsikko",
+        "messageBefore": "Viesti ennen toimitusta",
+        "messageAfter": "Viesti toimituksen jälkeen",
+        "declaration": "Ilmoitus",
+        "button": "Vahvista-painikkeen teksti"
+      },
+      "done": {
+        "titleBefore": "Otsikko ennen toimitusta",
+        "messageBefore": "Viesti ennen toimitusta",
+        "titleAfter": "Otsikko toimituksen jälkeen",
+        "messageAfter": "Viesti toimituksen jälkeen"
+      }
+    },
+    "automation": {
+      "heading": "Automaatio",
+      "description": "Valitse, mitä sovellus tekee, kun asiakas lähettää peruutuspyynnön.",
+      "beforeShip": {
+        "heading": "Ennen tilauksen lähettämistä",
+        "description": "Koskee pyyntöjä, jotka saapuvat ennen kuin yhtään tuotetta on lähetetty.",
+        "hold": "Pidätä toimitus tarkistusta varten",
+        "holdDetails": "Keskeytä toimitus, kunnes hyväksyt tai hylkäät pyynnön. Pidätys vapautetaan, kun teet päätöksen.",
+        "tagDetails": "Lisää tunniste tilauksiin, joista saapuu pyyntö ennen lähettämistä, jotta henkilökunta löytää ne tilausluettelosta."
+      },
+      "fallback": {
+        "label": "Mitä tilaukselle tapahtuu",
+        "hold": "Pidä se pidätettynä, kunnes hyväksyt tai hylkäät pyynnön",
+        "cancelNow": "Peruuta koko tilaus ja hyvitä se heti",
+        "releaseN": "Vapauta pidätys, kun tietty määrä päiviä on kulunut",
+        "cancelN": "Peruuta koko tilaus ja hyvitä se, kun tietty määrä päiviä on kulunut",
+        "cancelWarning": "Tämä peruuttaa ja hyvittää koko tilauksen, vaikka asiakas olisi peruuttanut vain osan tuotteista. Shopify lähettää asiakkaalle sähköpostin peruutuksesta.",
+        "days": "Päivien määrä"
+      },
+      "afterDelivery": {
+        "heading": "Tilauksen lähettämisen jälkeen",
+        "description": "Koskee pyyntöjä, jotka saapuvat sen jälkeen, kun vähintään yksi tuote on lähetetty, vaikka sitä ei olisi vielä toimitettu. Kaikki pyynnöt näkyvät silti Pyynnöt-sivulla.",
+        "createReturn": "Luo palautus",
+        "createReturnDetails": "Luo Shopifyssa palautus pyydetyille tuotteille, jotka on lähetetty.",
+        "tagDetails": "Lisää tunniste tilauksiin, joista saapuu pyyntö lähettämisen jälkeen."
+      },
+      "tag": {
+        "checkbox": "Lisää tilaukseen tunniste",
+        "label": "Tilauksen tunnisteet",
+        "placeholder": "Lisää tunniste"
+      }
+    },
+    "deadline": {
+      "heading": "Peruutusaika",
+      "description": "Peruutusaika alkaa, kun tilaus toimitetaan, ei silloin kun se tehdään. EU-lainsäädäntö edellyttää vähintään {{days}}.",
+      "days": "Peruutusaika toimituksen jälkeen (päivää)",
+      "daysDetails": "Kuinka kauan asiakkailla on aikaa peruuttaa tilauksen toimituksen jälkeen.",
+      "transit": "Arvioitu kuljetusaika (päivää)",
+      "transitDetails": "Käytetään, kun kuljetusyhtiö ei ilmoita toimituspäivää tai arviota. Sovellus lisää nämä päivät lähetyspäivään."
+    },
+    "validation": {
+      "countryMode": "Valitse, mitkä maat ovat kelpoisia.",
+      "euCountries": "Valitse vähintään yksi maa.",
+      "title": "Anna otsikko.",
+      "description": "Anna kuvaus.",
+      "itemHeading": "Anna tuoteluettelolle otsikko.",
+      "continueButton": "Anna Jatka-painikkeelle teksti.",
+      "heading": "Anna otsikko.",
+      "confirmMessage": "Anna vahvistusviesti.",
+      "declaration": "Anna ilmoitus, joka asiakkaiden on hyväksyttävä.",
+      "confirmButton": "Anna Vahvista-painikkeelle teksti.",
+      "message": "Anna viesti.",
+      "reasonLabel": "Anna syykentälle nimi.",
+      "reasonOptions": "Lisää vähintään yksi syy.",
+      "reasonOptionTranslation": "Anna tälle syylle käännös.",
+      "fallback": "Valitse, mitä tilaukselle tapahtuu.",
+      "daysRange": "Anna päivien määrä väliltä {{min}}–{{max}}.",
+      "tags": "Lisää vähintään yksi tunniste tai poista tunnisteiden lisääminen käytöstä.",
+      "afterDeliveryAction": "Valitse, mitä tapahtuu tilauksen lähettämisen jälkeen."
+    },
+    "preview": {
+      "heading": "Reaaliaikainen esikatselu",
+      "compliantBadge": "2-vaiheinen, vaatimusten mukainen",
+      "surfaceLabel": "Esikatselu",
+      "surfaces": {
+        "orderStatus": "Tilauksen tilasivu",
+        "theme": "Kaupan sivu"
+      },
+      "stageLabel": "Toimituksen tila",
+      "stages": {
+        "beforeDelivery": "Ei vielä toimitettu",
+        "delivered": "Toimitettu"
+      },
+      "banner": {
+        "orderStatus": "Asiakkaat näkevät tämän tilauksen tilasivulla. Kokeile valitsemalla painikkeita tai siirry tiettyyn vaiheeseen Lomakkeen sisältö -osion välilehdillä.",
+        "theme": "Asiakkaat näkevät tämän kauppasi sivulla. Se alkaa vaiheella ”Etsi tilauksesi”, koska kaupan vierailijat eivät ole kirjautuneet sisään."
+      },
+      "restart": "Aloita esikatselu alusta",
+      "position": {
+        "entry": "Aloituskortti",
+        "lookup": "Etsi tilauksesi",
+        "step": "Vaihe {{current}}/{{total}}"
+      },
+      "storefront": {
+        "start": "Aloita peruutuspyyntö",
+        "findOrderHeading": "Etsi tilauksesi",
+        "findOrderBody": "Aloita peruutuspyyntö antamalla tilauksesi tiedot.",
+        "fullName": "Koko nimi",
+        "email": "Sähköposti",
+        "orderNumber": "Tilausnumero",
+        "continue": "Jatka",
+        "steps": {
+          "step1": "Tiedot",
+          "confirm": "Vahvista",
+          "done": "Valmis"
+        },
+        "stepOf": "Vaihe {{current}}/{{total}}",
+        "stepProgress": "Vaihe {{current}}/{{total}}: {{label}}",
+        "reasonPlaceholder": "Valitse syy (valinnainen)",
+        "otherReason": "Muu",
+        "yourReason": "Syysi",
+        "yourReasonPlaceholder": "Kerro syysi",
+        "selectItem": "Jatka valitsemalla vähintään yksi tuote.",
+        "itemsToWithdraw": "Peruutettavat tuotteet ({{count}})",
+        "selectedTotal": "Valitut tuotteet yhteensä",
+        "previous": "Edellinen",
+        "submittedOn": "Lähetetty {{date}}"
+      }
+    }
+  },
+  "requests": {
+    "pageTitle": "Pyynnöt",
+    "searchLabel": "Hae peruutuspyyntöjä",
+    "searchPlaceholder": "Hae tilausnumerolla, asiakkaan nimellä tai sähköpostilla",
+    "export": "Vie",
+    "exportSelected": "Vie valitut",
+    "tabs": {
+      "all": "Kaikki",
+      "withCount": "{{label}} ({{count}})"
+    },
+    "empty": {
+      "imageAlt": "",
+      "heading": "Ei vielä peruutuspyyntöjä",
+      "body": "Asiakkaidesi peruutuspyynnöt näkyvät tässä.",
+      "filteredHeading": "Peruutuspyyntöjä ei löytynyt",
+      "filteredBody": "Kokeile muuttaa hakusanaa tai suodatinta."
+    },
+    "table": {
+      "selectAll": "Valitse kaikki peruutuspyynnöt",
+      "selectRow": "Valitse tilaus {{order}}",
+      "selectedCount": "{{count}} valittu",
+      "order": "Tilaus",
+      "customer": "Asiakas",
+      "items": "Tuotteet",
+      "value": "Arvo",
+      "status": "Tila",
+      "submitted": "Lähetetty",
+      "actions": "Toiminnot",
+      "itemCount_one": "{{count}} tuote",
+      "itemCount_other": "{{count}} tuotetta",
+      "viewRow": "Näytä tilauksen {{order}} pyyntö",
+      "deleteRow": "Poista tilauksen {{order}} pyyntö"
+    },
+    "delete": {
+      "heading_one": "Poistetaanko peruutuspyyntö?",
+      "heading_other": "Poistetaanko {{count}} peruutuspyyntöä?",
+      "body_one": "Tämä peruutuspyyntö poistetaan pysyvästi. Toimintoa ei voi kumota.",
+      "body_other": "Nämä {{count}} peruutuspyyntöä poistetaan pysyvästi. Toimintoa ei voi kumota.",
+      "confirm_one": "Poista pyyntö",
+      "confirm_other": "Poista pyynnöt",
+      "toast_one": "Peruutuspyyntö poistettu",
+      "toast_other": "{{count}} peruutuspyyntöä poistettu"
+    },
+    "csv": {
+      "filename": "peruutuspyynnot-{{date}}.csv",
+      "order": "Tilaus",
+      "customerName": "Asiakkaan nimi",
+      "customerEmail": "Asiakkaan sähköposti",
+      "country": "Maa",
+      "items": "Tuotteet",
+      "value": "Arvo",
+      "reason": "Syy",
+      "status": "Tila",
+      "submitted": "Lähetetty",
+      "decided": "Päätetty"
+    }
+  },
+  "requestDetail": {
+    "pageTitle": "Peruutuspyyntö",
+    "backLink": "Pyynnöt",
+    "submittedLine": "Lähetetty {{date}}, lähde: {{source}}",
+    "previous": "Edellinen pyyntö",
+    "next": "Seuraava pyyntö",
+    "badges": {
+      "canceled": "Peruutettu",
+      "onHold": "Pidossa",
+      "return": "Palautus: {{status}}"
+    },
+    "actions": {
+      "refund": "Hyvitä",
+      "more": "Lisää toimintoja",
+      "cancelOrder": "Peruuta tilaus",
+      "placeHold": "Pidätä toimitus",
+      "releaseHold": "Vapauta toimituksen pidätys",
+      "createReturn": "Luo palautus",
+      "processReturn": "Käsittele ja hyvitä",
+      "viewOrder": "Näytä tilaus"
+    },
+    "banners": {
+      "orderUnavailableHeading": "Tilauksen tiedot eivät ole saatavilla",
+      "orderUnavailableBody": "{{error}} Et voi käyttää tilaustoimintoja, ennen kuin tilauksen tiedot on ladattu.",
+      "actionFailedHeading": "Toimintoa ei voitu suorittaa",
+      "actionFailedAction": "Katso lisätiedot alta kohdasta Toiminta.",
+      "canceled": "Tämä tilaus on peruutettu. Tilaustoiminnot eivät ole enää käytettävissä."
+    },
+    "deadline": {
+      "heading": "Hyvityksen määräaika",
+      "pendingLabel": "Aikaa jäljellä päätökseen ja hyvitykseen",
+      "decidedLabel": "Päätös",
+      "badges": {
+        "overdue": "Myöhässä",
+        "actionNeeded": "Toimia tarvitaan",
+        "onTime": "Ajallaan"
+      },
+      "daysLeft_one": "{{count}} päivä jäljellä",
+      "daysLeft_other": "{{count}} päivää jäljellä",
+      "daysOverdue_one": "{{count}} päivä myöhässä",
+      "daysOverdue_other": "{{count}} päivää myöhässä",
+      "daysEarly_one": "{{count}} päivä ennen määräaikaa",
+      "daysEarly_other": "{{count}} päivää ennen määräaikaa",
+      "daysLate_one": "{{count}} päivä määräajan jälkeen",
+      "daysLate_other": "{{count}} päivää määräajan jälkeen",
+      "pending": "Sinulla on pyynnön lähettämisestä alkaen {{days}} aikaa tehdä päätös ja hyvittää. Määräaika on {{date}}.",
+      "pendingOverdue": "Määräaika umpeutui {{date}}. Hyvitä asiakasta mahdollisimman pian.",
+      "decidedOnTime": "Päätetty {{windowDays}} päivän hyvitysajan kuluessa. Määräaika oli {{date}}.",
+      "decidedLate": "Päätetty hyvityksen määräajan {{date}} jälkeen."
+    },
+    "items": {
+      "heading": "Peruutetut tuotteet",
+      "reject": "Hylkää",
+      "approve": "Hyväksy",
+      "total": "Peruutettu yhteensä",
+      "sku": "SKU: {{sku}}",
+      "quantity": "Määrä: {{count}}",
+      "shipping": {
+        "notShipped": "Ei vielä lähetetty",
+        "partlyShipped": "Osittain lähetetty",
+        "shipped": "Lähetetty"
+      },
+      "partiallyShippedBanner": "Osa tästä tilauksesta on lähetetty. Lähettämättömät tuotteet voidaan vielä pidättää, ja lähetetyille tuotteille tarvitaan palautus."
+    },
+    "return": {
+      "heading": "Palautus",
+      "status": "Tila",
+      "created": "Luotu",
+      "body": "Peruutetuille tuotteille on luotu palautus Shopifyssa.",
+      "openBody": "Kun tuotteet ovat palanneet, valitse Käsittele ja hyvitä. Tämä hyvittää asiakkaalle palautetut tuotteet ja sulkee palautuksen.",
+      "alreadyRefundedBody": "Tämän palautuksen tuotteet on jo hyvitetty. Sulje palautus Shopifyssa, kun tuotteet ovat palanneet."
+    },
+    "processReturnModal": {
+      "heading": "Käsittele palautus ja hyvitä",
+      "calculating": "Lasketaan hyvityksen summaa…",
+      "nothingToProcess": "Tässä palautuksessa ei ole enää käsiteltävää. Se on ehkä jo käsitelty tai suljettu Shopifyssa.",
+      "nothingToRefund": "Tämän palautuksen tuotteet on jo hyvitetty, joten hyvitettävää ei ole enää.",
+      "unsupportedPayment": "Tämän tilauksen maksua ei voi hyvittää sovelluksesta. Käsittele palautus ja hyvitä se sen sijaan Shopifyssa.",
+      "itemsHeading": "Palautuksen {{name}} tuotteet",
+      "subtotal": "Tuotteiden välisumma",
+      "shippingLine": "Alkuperäinen toimitus",
+      "total": "Hyvitys yhteensä",
+      "body": "Tämä merkitsee palautetut tuotteet käsitellyiksi, hyvittää ne alkuperäiselle maksutavalle ja sulkee palautuksen. Shopify lähettää asiakkaalle hyvityskuitin sähköpostitse. Toimintoa ei voi kumota.",
+      "confirmAmount": "Hyvitä {{amount}}",
+      "confirm": "Käsittele ja hyvitä"
+    },
+    "payment": {
+      "heading": "Maksu",
+      "status": "Maksun tila",
+      "subtotal": "Peruutuksen välisumma",
+      "shipping": "Tilauksen toimitus",
+      "total": "Tilauksen kokonaissumma",
+      "refunded": "Hyvitetty",
+      "unavailable": "Maksun tiedot eivät ole juuri nyt saatavilla."
+    },
+    "activity": {
+      "heading": "Toiminta",
+      "noteLabel": "Lisää muistiinpano",
+      "notePlaceholder": "Lisää muistiinpano…",
+      "post": "Julkaise",
+      "noteHelp": "Vain sinä ja henkilökuntasi näette muistiinpanot. Asiakkaat eivät koskaan näe niitä.",
+      "submitted": "Peruutuspyyntö lähetetty, lähde: {{source}}",
+      "decided": {
+        "approved": "Pyyntö hyväksytty",
+        "rejected": "Pyyntö hylätty"
+      },
+      "note": "Muistiinpano: {{body}}",
+      "entry": "{{label}}: {{message}}",
+      "actions": {
+        "resolve_branch": "Automaatio käynnistetty",
+        "run_automation": "Automaatio",
+        "automation_completed": "Automaatio valmis",
+        "hold_fulfillment": "Toimituksen pidätys",
+        "schedule_fallback": "Ajoitettu jatkotoimi",
+        "release_hold": "Toimituksen pidätys vapautettu",
+        "cancel_order_immediate": "Tilaus peruutettu ja hyvitetty",
+        "cancel_order_scheduled": "Tilaus peruutettu ja hyvitetty",
+        "cancel_order_manual": "Tilaus peruutettu ja hyvitetty",
+        "cancel_order": "Tilaus peruutettu ja hyvitetty",
+        "refund": "Hyvitys",
+        "tag_before_ship": "Tilaukseen lisätty tunniste",
+        "tag_after_delivery": "Tilaukseen lisätty tunniste",
+        "order_tag_add": "Tilauksen tunnisteita lisätty",
+        "order_tag_remove": "Tilauksen tunnisteita poistettu",
+        "create_return": "Palautus",
+        "refresh_return": "Palautuksen tila päivitetty",
+        "process_return": "Käsittele ja hyvitä",
+        "fetch_shop_contact": "Kaupan yhteystiedot",
+        "customer_email": "Vahvistussähköposti asiakkaalle",
+        "merchant_email": "Ilmoitus uudesta pyynnöstä",
+        "notify_customer": "Päätössähköposti",
+        "notify_merchant": "Sinulle ilmoitettiin"
+      },
+      "messages": {
+        "noTags": "Tunnisteita ei ole määritetty",
+        "tagged": "Tilaukseen lisätty tunnisteet {{tags}}",
+        "noHoldableOrders": "Tästä tilauksesta ei voi juuri nyt pidättää mitään",
+        "held": "Tuotteet pidätetty, jotta niitä ei lähetetä",
+        "holdOff": "Toimituksen pidätys tarkistusta varten on pois käytöstä",
+        "tagBeforeShipOff": "Tunnisteiden lisääminen ennen lähettämistä on pois käytöstä",
+        "tagAfterDeliveryOff": "Tunnisteiden lisääminen lähettämisen jälkeen on pois käytöstä",
+        "fallbackHold": "Tilaus pysyy pidätettynä, kunnes hyväksyt tai hylkäät pyynnön",
+        "fallbackInvalidDays": "Jatkotoimea ei voitu ajoittaa. Päivien määrä ei kelpaa.",
+        "scheduledRelease": "Pidätyksen vapautus ajoitettu päivälle {{date}}",
+        "scheduledCancel": "Peruutus ja hyvitys ajoitettu päivälle {{date}}",
+        "canceled": "Tilaus peruutettu ja hyvitetty",
+        "returnCreated": "Palautus luotu Shopifyssa",
+        "returnNoMatch": "Mitään pyydetyistä tuotteista ei voi palauttaa",
+        "notifiedByEmail": "Ilmoitettu sovelluksessa ja sähköpostitse",
+        "notifiedEmailFailed": "Ilmoitettu sovelluksessa. Ilmoitussähköpostin lähetys epäonnistui: {{error}}",
+        "notifiedInAppOnly": "Ilmoitettu sovelluksessa. Ilmoitussähköpostia ei lähetetty.",
+        "emailSent": "Lähetetty",
+        "emailFailed": "Epäonnistui: {{error}}",
+        "emailNotSent": "Ei lähetetty, koska vastaanottajaa ei ole tai sähköpostia ei ole määritetty",
+        "orderNotFound": "Tätä tilausta ei löydy Shopifysta",
+        "alreadyCanceled": "Tilaus oli jo peruutettu",
+        "branchBeforeShip": "Tilausta ei ole vielä lähetetty, joten ennen lähettämistä tehtävät vaiheet suoritettiin",
+        "branchAfterDelivery": "Tilaus on lähetetty, joten lähettämisen jälkeen tehtävät vaiheet suoritettiin",
+        "branchPartiallyShipped": "Tilaus on osittain lähetetty, joten lähetettyjen ja lähettämättömien tuotteiden vaiheet suoritettiin",
+        "noUnshippedItemsRequested": "Mikään pyydetyistä tuotteista ei odota lähetystä, joten mitään ei pidätetty",
+        "fallbackCancelPartiallyShipped": "Tilaus on osittain lähetetty, joten sitä ei voi peruuttaa kokonaan. Pyydetyt tuotteet pysyvät pidätettyinä, kunnes hyväksyt tai hylkäät pyynnön.",
+        "returnNothingShipped": "Mitään pyydetyistä tuotteista ei ole lähetetty, joten palautusta ei tarvittu",
+        "runCompleted": "Automaatio suoritettu",
+        "runFailed": "Vähintään yksi automaation vaihe epäonnistui",
+        "runSkipped": "Automaatio ohitettu",
+        "scheduledSkippedApproved": "Pyyntö oli jo hyväksytty, joten ajoitettua toimintoa ei suoritettu",
+        "scheduledSkippedRejected": "Pyyntö oli jo hylätty, joten ajoitettua toimintoa ei suoritettu",
+        "noHoldsPlaced": "Tälle pyynnölle ei tehty pidätyksiä",
+        "holdsAlreadyReleased": "Pidätykset oli jo vapautettu",
+        "holdReleased": "Tilaus voidaan taas toimittaa",
+        "holdExists": "Tällä pyynnöllä on jo pidätys",
+        "decisionSkipped": "Henkilökunta päätti olla lähettämättä sähköpostia asiakkaalle",
+        "decisionSent": "Asiakkaalle lähetettiin sähköposti päätöksestä",
+        "decisionFailed": "Päätössähköpostin lähetys epäonnistui: {{error}}",
+        "decisionNotConfigured": "Päätössähköpostia ei lähetetty, koska sähköpostia ei ole määritetty",
+        "refunded": "Hyvitetty {{amount}}",
+        "noReturn": "Tälle pyynnölle ei ole palautusta",
+        "returnStatus": "Palautuksen tila: {{status}}",
+        "returnProcessed": "Palautus käsitelty ja {{amount}} hyvitetty",
+        "returnNothingToProcess": "Tässä palautuksessa ei ole enää käsiteltävää",
+        "returnNothingToRefund": "Tämän palautuksen tuotteet on jo hyvitetty",
+        "returnPaymentUnsupported": "Tätä maksua ei voi hyvittää sovelluksesta. Käsittele palautus Shopifyssa.",
+        "refundNothingRefundable": "Mitään pyydetyistä tuotteista ei voi hyvittää. Ne on ehkä jo hyvitetty.",
+        "refundNoSuggestion": "Shopify ei pystynyt laskemaan hyvitystä näille tuotteille. Hyvitä ne sen sijaan Shopifyssa.",
+        "refundCoveredByReturn": "Kaikki peruutetut tuotteet ovat avoimessa palautuksessa. Hyvitä ne palautuksen Käsittele ja hyvitä -toiminnolla.",
+        "tagsRemoved": "Tilauksen tunnisteita poistettu: {{tags}}",
+        "tagsAdded": "Tilauksen tunnisteita lisätty: {{tags}}"
+      }
+    },
+    "order": {
+      "heading": "Tilaus",
+      "order": "Tilaus",
+      "placed": "Tehty",
+      "payment": "Maksu",
+      "fulfillment": "Toimitus"
+    },
+    "customer": {
+      "heading": "Asiakas",
+      "avatarFallback": "Asiakas",
+      "contactHeading": "Yhteystiedot",
+      "email": "Sähköposti",
+      "language": "Kieli",
+      "shippingHeading": "Toimitusosoite"
+    },
+    "automation": {
+      "heading": "Automaatio",
+      "stage": "Vaihe",
+      "stages": {
+        "before_ship": "Ennen lähettämistä",
+        "partially_shipped": "Osittain lähetetty",
+        "after_delivery": "Lähettämisen jälkeen"
+      },
+      "hold": "Toimituksen pidätys",
+      "holdStates": {
+        "onHold": "Pidossa",
+        "released": "Vapautettu",
+        "none": "Ei mitään"
+      },
+      "canceled": "Peruutettu",
+      "return": "Palautus"
+    },
+    "emails": {
+      "heading": "Sähköpostihistoria",
+      "customerConfirmation": "Peruutusvahvistus asiakkaalle",
+      "merchantNotification": "Ilmoitus uudesta pyynnöstä",
+      "decision": "Päätössähköposti",
+      "statuses": {
+        "sent": "Lähetetty",
+        "failed": "Epäonnistui",
+        "notSent": "Ei lähetetty"
+      }
+    },
+    "tags": {
+      "heading": "Tilauksen tunnisteet",
+      "label": "Lisää tilauksen tunniste",
+      "placeholder": "Lisää tunniste",
+      "remove": "Poista tunniste {{tag}}",
+      "savedToast": "Tilauksen tunnisteet tallennettu"
+    },
+    "reason": {
+      "heading": "Peruutuksen syy",
+      "quoted": "”{{reason}}”",
+      "none": "Syytä ei annettu"
+    },
+    "decidedToast": {
+      "approved": "Peruutuspyyntö hyväksytty",
+      "rejected": "Peruutuspyyntö hylätty"
+    },
+    "cancelModal": {
+      "heading": "Peruutetaanko tilaus?",
+      "body": "Tämä peruuttaa koko tilauksen Shopifyssa, myös tuotteet, joita asiakas ei peruuttanut. Tilaus hyvitetään alkuperäiselle maksutavalle, tuotteet palautetaan varastoon ja Shopify lähettää asiakkaalle sähköpostin. Toimintoa ei voi kumota.",
+      "keep": "Säilytä tilaus",
+      "confirm": "Peruuta ja hyvitä tilaus"
+    },
+    "createReturnModal": {
+      "heading": "Luo palautus peruutetuille tuotteille",
+      "itemsHeading": "Palautettavat tuotteet",
+      "subtotal": "Tuotteiden välisumma",
+      "checking": "Tarkistetaan, mitkä tuotteet voidaan palauttaa…",
+      "nothingToReturn": "Mitään peruutetuista tuotteista ei ole vielä lähetetty, joten palautettavaa ei ole. Pidätä ne, jotta niitä ei lähetetä, tai hyvitä ne, jotta ne poistetaan tilauksesta.",
+      "notShipped_one": "{{count}} peruutettu tuote puuttuu, koska sitä ei ole vielä lähetetty.",
+      "notShipped_other": "{{count}} peruutettua tuotetta puuttuu, koska niitä ei ole vielä lähetetty.",
+      "notReturnable_one": "{{count}} peruutettu tuote puuttuu, koska se on jo palautettu.",
+      "notReturnable_other": "{{count}} peruutettua tuotetta puuttuu, koska ne on jo palautettu.",
+      "body": "Tämä luo Shopifyssa palautuksen yllä oleville tuotteille. Asiakasta ei hyvitetä. Kun tuotteet ovat palanneet, valitse palautuksessa Käsittele ja hyvitä.",
+      "cancel": "Peruuta",
+      "confirm": "Luo palautus"
+    },
+    "decisionModal": {
+      "headingApprove": "Hyväksytäänkö peruutuspyyntö?",
+      "headingReject": "Hylätäänkö peruutuspyyntö?",
+      "approveAndSend": "Hyväksy ja lähetä sähköposti",
+      "rejectAndSend": "Hylkää ja lähetä sähköposti",
+      "approve": "Hyväksy",
+      "reject": "Hylkää",
+      "loadingLabel": "Ladataan sähköpostin esikatselua",
+      "loading": "Valmistellaan asiakkaan sähköpostia…",
+      "sendEmail": "Lähetä sähköposti asiakkaalle",
+      "language": "Tämän sähköpostin kieli on {{language}}, joka on asiakkaan kieli. Muutoksesi koskevat vain tätä sähköpostia.",
+      "subject": "Aihe",
+      "body": "Sähköpostin sisältö",
+      "editHtml": "Muokkaa HTML:ää",
+      "htmlLabel": "Sähköpostin HTML",
+      "previewTitle": "Sähköpostin esikatselu",
+      "templateUnchanged": "Muutoksesi koskevat vain tätä sähköpostia. Tallennettu mallisi ei muutu.",
+      "noEmail": "Asiakas ei saa sähköpostia. Voit tarvittaessa ottaa yhteyttä asiakkaaseen erikseen.",
+      "holdReleased": "Tämä vapauttaa myös tämän tilauksen toimituksen pidätyksen, jotta tilaus voidaan taas toimittaa."
+    },
+    "refundModal": {
+      "heading": "Hyvitä peruutetut tuotteet",
+      "calculatingLabel": "Lasketaan hyvitystä",
+      "calculating": "Lasketaan hyvityksen summaa…",
+      "nothingToRefund": "Tässä tilauksessa ei ole hyvitettävää. Peruutetut tuotteet on ehkä jo hyvitetty tai tilaus on ehkä peruutettu.",
+      "itemsHeading": "Hyvitettävät tuotteet",
+      "subtotal": "Tuotteiden välisumma",
+      "shippingLine": "Alkuperäinen toimitus",
+      "amount": "Hyvityksen summa",
+      "total": "Hyvitys yhteensä",
+      "body": "Peruutetut tuotteet hyvitetään alkuperäiselle maksutavalle ja palautetaan varastoon, jos mahdollista. Shopify lähettää asiakkaalle hyvityskuitin sähköpostitse.",
+      "includesShipping": "Asiakas peruutti koko tilauksen, joten alkuperäiset toimituskulut sisältyvät hyvitykseen.",
+      "unshippedItems": "Tuotteet, joita ei ole vielä lähetetty, poistetaan tilauksesta, joten niitä ei lähetetä.",
+      "inReturn_one": "{{count}} peruutettu tuote puuttuu, koska se on palautuksessa {{name}}. Hyvitä se palautuksen Käsittele ja hyvitä -toiminnolla.",
+      "inReturn_other": "{{count}} peruutettua tuotetta puuttuu, koska ne ovat palautuksessa {{name}}. Hyvitä ne palautuksen Käsittele ja hyvitä -toiminnolla.",
+      "allInReturn": "Kaikki peruutetut tuotteet ovat palautuksessa {{name}}. Hyvitä ne palautuksen Käsittele ja hyvitä -toiminnolla, joka myös sulkee palautuksen.",
+      "irreversible": "Toimintoa ei voi kumota.",
+      "confirmAmount": "Hyvitä {{amount}}",
+      "confirm": "Hyvitä"
+    },
+    "shopifyNotes": {
+      "holdAutomatic": "Tilauksen {{order}} peruutuspyyntö odottaa henkilökunnan tarkistusta",
+      "holdManual": "Henkilökunta pidätti tilauksen {{order}} peruutuspyynnön",
+      "canceled": "Peruutettu sovelluksessa {{appName}}, koska asiakas peruutti oston (pyyntö {{id}}).",
+      "refunded": "Hyvitetty sovelluksessa {{appName}}, koska asiakas peruutti oston (pyyntö {{id}}).",
+      "returnReason": "Peruutuspyyntö: {{reason}}",
+      "returnReasonNone": "Peruutuspyyntö (syytä ei annettu)"
+    }
+  },
+  "emailTemplates": {
+    "pageTitle": "Ilmoitukset",
+    "loadError": "Ilmoituksia ei voitu ladata",
+    "saveError": "Ilmoituksia ei voitu tallentaa",
+    "savedToast": "Ilmoitukset tallennettu",
+    "resetToast": "{{name}} palautettu oletukseksi",
+    "sender": {
+      "heading": "Lähettäjä",
+      "description": "Nämä asetukset koskevat kaikkia sähköposteja, joita sovellus lähettää kauppasi puolesta. Lähetä omasta vahvistetusta osoitteestasi ja valitse, minne asiakkaiden vastaukset menevät.",
+      "emailLabel": "Lähettäjän sähköposti",
+      "emailPlaceholder": "notifications@withdrawaleasy.com",
+      "detailsVerified": "Sähköpostit lähetetään tästä osoitteesta.",
+      "detailsPending": "Vahvista osoite antamalla koodi, jonka lähetimme siihen.",
+      "detailsDefault": "Jos jätät tämän tyhjäksi, sähköpostit lähetetään osoitteesta {{email}}.",
+      "detailsDefaultFallback": "Jos jätät tämän tyhjäksi, sähköpostit lähetetään sovelluksen oletusosoitteesta.",
+      "freeProviderWarning": "Ilmaisia sähköpostipalveluja, kuten Gmailia ja Yahoota, ei voi todentaa. Asiakkaat näkevät tästä osoitteesta lähetetyissä sähköposteissa merkinnän ”via brevosend.com”. Ammattimaisempaa vaikutelmaa varten käytä kauppasi verkkotunnuksen osoitetta.",
+      "codeLabel": "Vahvistuskoodi",
+      "codeDetails": "Anna 6-numeroinen koodi, jonka lähetimme sinulle sähköpostitse.",
+      "verifyCode": "Vahvista koodi",
+      "checkStatus": "Tarkista vahvistuksen tila",
+      "verifyEmail": "Vahvista sähköposti",
+      "codeSent": "Lähetimme vahvistuskoodin osoitteeseen {{email}}.",
+      "notVerifiedYet": "Tätä sähköpostiosoitetta ei ole vielä vahvistettu. Etsi koodi saapuneista viesteistä ja yritä uudelleen.",
+      "replyToLabel": "Vastausosoite",
+      "replyToPlaceholder": "tuki@kauppasi.fi",
+      "replyToDetails": "Asiakkaiden vastaukset menevät oletuksena kauppasi sähköpostiin. Jos haluat vastausten menevän muualle, anna toinen osoite."
+    },
+    "domain": {
+      "heading": "Verkkotunnuksen todennus",
+      "description": "Todenna verkkotunnuksesi, jotta asiakkaat eivät näe sähköposteissasi merkintää ”via brevosend.com”. Tämä on valinnaista, mutta suosittelemme sitä, jos lähetät kauppasi verkkotunnuksesta.",
+      "label": "Verkkotunnus",
+      "placeholder": "kauppasi.fi",
+      "details": "Anna verkkotunnus, josta lähetät sähköpostit, äläkä myshopify.com-verkkotunnustasi.",
+      "freeProviderWarning": "Ilmaisia sähköpostipalveluja, kuten Gmailia ja Yahoota, ei voi todentaa. Anna sen sijaan kauppasi verkkotunnus.",
+      "columns": {
+        "record": "Tietue",
+        "type": "Tyyppi",
+        "host": "Isäntä",
+        "value": "Arvo"
+      },
+      "records": {
+        "brevo_code": "Verkkotunnuksen omistajuus",
+        "dkim_record": "DKIM",
+        "dkim1Record": "DKIM 1",
+        "dkim2Record": "DKIM 2",
+        "dmarc_record": "DMARC"
+      },
+      "copyHost": "Kopioi isäntä",
+      "copyValue": "Kopioi arvo",
+      "verifyRecords": "Vahvista DNS-tietueet",
+      "authenticate": "Todenna verkkotunnus",
+      "pendingInfo": "Lisää nämä tietueet verkkotunnuspalveluusi ja valitse sitten Vahvista DNS-tietueet.",
+      "notVerifiedYet": "Verkkotunnustasi ei ole vielä vahvistettu. DNS-muutosten päivittyminen voi kestää jonkin aikaa, joten yritä myöhemmin uudelleen."
+    },
+    "notification": {
+      "heading": "Sähköpostimalli",
+      "emailLabel": "Sähköposti",
+      "language": "Kieli",
+      "languageDetails": "Valitse kieli, jolla haluat muokata tätä sähköpostia. Jokainen kieli tallennetaan erikseen. Asiakkaat saavat sähköpostit omalla kielellään.",
+      "send": "Lähetä tämä sähköposti",
+      "requiredDetails": "EU-lainsäädäntö edellyttää tätä sähköpostia, joten sitä ei voi poistaa käytöstä.",
+      "merchantDetails": "Poista käytöstä, jos et halua enää saada tätä sähköpostia.",
+      "decisionDetails": "Poista käytöstä, jos et halua enää lähettää tätä sähköpostia oletuksena. Voit silti lähettää sen, kun hyväksyt tai hylkäät yksittäisen pyynnön.",
+      "subject": "Aihe",
+      "reset": "Palauta oletus",
+      "customized": "Mukautettu"
+    },
+    "templates": {
+      "customerConfirmation": {
+        "name": "Peruutusvahvistus asiakkaalle",
+        "description": "Lähetetään asiakkaille heti, kun he lähettävät peruutuspyynnön."
+      },
+      "merchantNotification": {
+        "name": "Ilmoitus uudesta pyynnöstä",
+        "description": "Lähetetään kauppasi yhteyssähköpostiin, kun asiakas lähettää uuden peruutuspyynnön. Vastaa siihen, niin voit lähettää asiakkaalle sähköpostia."
+      },
+      "withdrawalApproved": {
+        "name": "Peruutus hyväksytty",
+        "description": "Lähetetään asiakkaille, kun hyväksyt heidän peruutuspyyntönsä. Voit tarkistaa ja muokata sitä ennen lähettämistä."
+      },
+      "withdrawalRejected": {
+        "name": "Peruutus hylätty",
+        "description": "Lähetetään asiakkaille, kun hylkäät heidän peruutuspyyntönsä. Voit tarkistaa ja muokata sitä ennen lähettämistä."
+      }
+    },
+    "merchantDefaults": {
+      "subject": "Uusi peruutuspyyntö – tilaus {{order}}",
+      "heading": "Uusi peruutuspyyntö",
+      "intro": "Asiakas on lähettänyt peruutuspyynnön. Tässä on kaikki, mitä tarvitset sen tarkistamiseen.",
+      "rows": {
+        "name": "Nimi",
+        "email": "Sähköposti",
+        "date": "Päivämäärä",
+        "orderNumber": "Tilausnumero",
+        "reference": "Viitenumero",
+        "reason": "Syy"
+      },
+      "button": "Näytä pyyntö",
+      "itemsHeading": "Pyydetyt tuotteet",
+      "footnote": "Avaa pyyntö hallintapaneelissa hyväksyäksesi tai hylätäksesi sen. Hyvityksen määräaikaa seurataan siellä automaattisesti."
+    },
+    "body": {
+      "heading": "Sähköpostin sisältö",
+      "editCode": "Muokkaa koodia",
+      "htmlLabel": "Sähköpostin HTML-sisältö",
+      "previewHeading": "Sähköpostin esikatselu"
+    },
+    "variables": {
+      "heading": "Muuttujat",
+      "help": "Valitse muuttuja lisätäksesi sen kohdistimen kohtaan.",
+      "insert": "Lisää {{label}}: {{description}}",
+      "groups": {
+        "customer": "Asiakas",
+        "order": "Tilaus",
+        "withdrawal": "Peruutus",
+        "request": "Pyyntö",
+        "shop": "Kauppa"
+      },
+      "tokens": {
+        "customer": {
+          "first_name": {
+            "label": "Etunimi",
+            "description": "Asiakkaan etunimi"
+          },
+          "last_name": {
+            "label": "Sukunimi",
+            "description": "Asiakkaan sukunimi"
+          },
+          "email": {
+            "label": "Sähköposti",
+            "description": "Asiakkaan sähköpostiosoite"
+          }
+        },
+        "order": {
+          "name": {
+            "label": "Tilausnumero",
+            "description": "Tilausnumero, esimerkiksi #2138"
+          },
+          "id": {
+            "label": "Tilauksen tunnus",
+            "description": "Tilauksen sisäinen tunnus"
+          }
+        },
+        "withdrawal": {
+          "request_id": {
+            "label": "Viitenumero",
+            "description": "Peruutuspyynnön viitenumero"
+          },
+          "submitted_at": {
+            "label": "Lähetyspäivä",
+            "description": "Pyynnön lähetyspäivä ja -aika"
+          },
+          "reason": {
+            "label": "Syy",
+            "description": "Asiakkaan antama syy, jos sellainen on"
+          },
+          "selected_products": {
+            "label": "Valitut tuotteet (teksti)",
+            "description": "Pyydetyt tuotteet pilkuilla erotettuna luettelona"
+          }
+        },
+        "request": {
+          "status": {
+            "label": "Tila",
+            "description": "Pyynnön nykyinen tila"
+          },
+          "url": {
+            "label": "Pyynnön linkki",
+            "description": "Linkki pyyntöön sovelluksessa"
+          }
+        },
+        "shop": {
+          "name": {
+            "label": "Kaupan nimi",
+            "description": "Kauppasi nimi"
+          },
+          "email": {
+            "label": "Kaupan sähköposti",
+            "description": "Kauppasi yhteyssähköpostiosoite"
+          }
+        }
+      }
+    },
+    "validation": {
+      "email": "Anna kelvollinen sähköpostiosoite.",
+      "subjectRequired": "Anna aihe.",
+      "subjectTooLong": "Aiheessa saa olla enintään {{max}} merkkiä.",
+      "bodyRequired": "Anna sähköpostin sisältö."
+    }
+  },
+  "sample": {
+    "customerName": "Maija Virtanen",
+    "items": {
+      "lamp": {
+        "title": "Fjord-pöytävalaisin",
+        "variant": "Tammi / Suuri"
+      },
+      "candleHolder": {
+        "title": "Tind-kynttilänjalka",
+        "variant": "Messinki"
+      }
+    },
+    "reason": "Muutin mieleni"
+  },
+  "faqs": {
+    "pageTitle": "Usein kysytyt kysymykset",
+    "searchLabel": "Hae usein kysytyistä kysymyksistä",
+    "searchPlaceholder": "Hae kysymyksiä, esimerkiksi ”hyvitys” tai ”määräaika”",
+    "noResults": "Mikään kysymys ei vastaa hakua ”{{query}}”",
+    "noResultsHelp": "Kokeile toista sanaa tai ota yhteyttä tukeen alla.",
+    "showAnswer": "Näytä vastaus: {{question}}",
+    "hideAnswer": "Piilota vastaus: {{question}}",
+    "groups": {
+      "gettingStarted": "Aloittaminen",
+      "deadline": "Peruutusaika",
+      "requests": "Pyyntöjen käsittely",
+      "emailsLanguages": "Sähköpostit ja kielet"
+    },
+    "actions": {
+      "goToSettings": "Siirry Asetuksiin",
+      "goToRequests": "Siirry Pyyntöihin",
+      "goToNotifications": "Siirry Ilmoituksiin"
+    },
+    "stillStuck": {
+      "heading": "Onko sinulla vielä kysyttävää?",
+      "body": "Tukitiimimme lukee jokaisen sähköpostin ja vastaa siihen.",
+      "link": "Ota yhteyttä tukeen"
+    },
+    "items": {
+      "what-it-does": {
+        "question": "Mitä sovellus tekee?",
+        "paragraphs": [
+          "Se antaa EU-asiakkaillesi selkeän tavan peruuttaa ostos, kuten EU-lainsäädäntö edellyttää. Se antaa sinulle myös yhden paikan, jossa hallita kaikkia pyyntöjä.",
+          "Asiakkaat avaavat lomakkeen tilauksestaan, valitsevat peruutettavat tuotteet ja vahvistavat. Jokainen pyyntö näkyy sen jälkeen Pyynnöt-sivulla tuotteineen, syineen ja hyvityksen määräaikoineen. Sovellus lähettää vaaditut sähköpostit puolestasi."
+        ]
+      },
+      "where-form-appears": {
+        "question": "Mistä asiakkaat löytävät peruutuslomakkeen?",
+        "paragraphs": [
+          "Voit näyttää lomakkeen 2 paikassa. Käytä toista tai molempia:"
+        ],
+        "bullets": [
+          "Tilauksen tilasivu: sivu, jonka asiakkaat näkevät kassan jälkeen ja kun he avaavat tilausvahvistuksen linkin.",
+          "Kaupan sivu: verkkokauppasi sivu asiakkaille, jotka palaavat myöhemmin. He löytävät tilauksensa tilausnumerolla ja sähköpostiosoitteella."
+        ],
+        "closing": "Ota jokainen paikka käyttöön Asetuksissa ja lisää sen sovelluslohko kerran. Etusivun määritysopas näyttää, mitkä lohkot on lisätty."
+      },
+      "form-not-showing": {
+        "question": "Miksi asiakas ei näe peruutuslomaketta?",
+        "paragraphs": [
+          "Tarkista nämä asiat yleisimmästä alkaen:"
+        ],
+        "bullets": [
+          "Lomake on pois käytöstä, tai asiakkaan käyttämää paikkaa ei ole otettu käyttöön Asetuksissa.",
+          "Sovelluslohkoa ei ole vielä lisätty kyseiselle sivulle.",
+          "Tilausta ei toimiteta mihinkään kelpoisista maistasi.",
+          "Tilauksen peruutusaika on päättynyt.",
+          "Tilaus on peruutettu, tai sillä on jo odottava pyyntö. Jokaisella tilauksella voi olla kerrallaan vain 1 odottava pyyntö."
+        ]
+      },
+      "deadline": {
+        "question": "Milloin peruutusaika alkaa ja päättyy?",
+        "paragraphs": [
+          "EU-lainsäädännön mukaan aika alkaa, kun asiakas vastaanottaa tuotteet, ei silloin kun hän tilaa. Asiakkaat voivat myös peruuttaa milloin tahansa ennen tuotteiden saapumista."
+        ],
+        "bullets": [
+          "Ei vielä lähetetty: aika ei ole alkanut, joten asiakkaat voivat aina peruuttaa.",
+          "Toimitettu: aika alkaa kuljetusyhtiön ilmoittamasta toimituspäivästä ja kestää {{withdrawalDays}}. Voit muuttaa päivien määrää Asetuksissa.",
+          "Lähetetty mutta ei toimituspäivää: sovellus käyttää kuljetusyhtiön arvioimaa toimituspäivää. Jos sitä ei ole, se käyttää lähetyspäivää lisättynä arvioidulla kuljetusajallasi."
+        ]
+      },
+      "transit-days": {
+        "question": "Mihin arvioitua kuljetusaikaa käytetään?",
+        "paragraphs": [
+          "Monet kuljetusyhtiöt eivät lähetä toimituspäivää Shopifyhin. Ilman sitä sovellus ei tiedä, milloin peruutusaika alkaa, joten se lisää arvioidun kuljetusaikasi lähetyspäivään.",
+          "Aseta se suunnilleen siihen aikaan, jonka pakettisi tarvitsevat perille pääsyyn. Tällä hetkellä se on {{transitDays}}. Jos et ole varma, valitse pidempi aika. Liian lyhyt aika voi päättää asiakkaan peruutusajan liian aikaisin."
+        ]
+      },
+      "split-shipments": {
+        "question": "Entä jos tilaus lähetetään useammassa kuin 1 paketissa?",
+        "paragraphs": [
+          "Peruutusaika alkaa, kun viimeinen paketti saapuu. Tuotteita, joita sovellus pidättää, koska asiakas peruutti ne, ei lasketa, koska niitä ei lähetetä.",
+          "Jos asiakas peruuttaa, kun vain osa tilauksesta on lähetetty, sovellus käsittelee kunkin osan erikseen:"
+        ],
+        "bullets": [
+          "Lähettämättömät tuotteet: sovellus voi pidättää ne, jotta niitä ei lähetetä.",
+          "Lähetetyt tuotteet: sovellus voi luoda niille palautuksen."
+        ],
+        "closing": "Sovellus ei koskaan peruuta osittain lähetettyä tilausta, koska se peruuttaisi myös tuotteet, jotka asiakkaalla jo on."
+      },
+      "after-submit": {
+        "question": "Mitä tapahtuu, kun asiakas on lähettänyt pyynnön?",
+        "paragraphs": [
+          "Seuraavat asiat tapahtuvat tässä järjestyksessä:"
+        ],
+        "bullets": [
+          "Pyyntö näkyy Pyynnöt-sivulla tilassa Odottaa.",
+          "Asiakas saa vahvistussähköpostin. Se lähetetään aina, koska se on asiakkaan todiste peruutuksesta.",
+          "Myös sinä saat sähköpostin, jos ilmoitus uudesta pyynnöstä on käytössä.",
+          "Automaatioasetuksesi suoritetaan. Sovellus voi esimerkiksi pidättää toimituksen tai lisätä tilaukseen tunnisteen."
+        ]
+      },
+      "automation": {
+        "question": "Mitä automaatioasetukset tekevät?",
+        "paragraphs": [
+          "Ne suoritetaan, kun pyyntö saapuu. Se, mitä sovellus voi tehdä, riippuu siitä, onko tilaus lähetetty:"
+        ],
+        "bullets": [
+          "Ennen tilauksen lähettämistä: pidätä toimitus, jotta mitään ei lähetetä sillä aikaa, kun tarkistat pyynnön. Voit myös antaa sovelluksen peruuttaa ja hyvittää koko tilauksen heti.",
+          "Tilauksen lähettämisen jälkeen: luo Shopifyssa palautus lähetetyille tuotteille.",
+          "Osittain lähetetty: molemmat pätevät. Sovellus pidättää vain pyydetyt tuotteet, joita ei ole lähetetty, ja luo palautuksen lähetetyille."
+        ],
+        "closing": "Kaikissa tapauksissa sovellus voi myös lisätä tilaukseen tunnisteen. Automaatio ei koskaan hyväksy tai hylkää pyyntöä. Sinä päätät aina."
+      },
+      "partial-withdrawal": {
+        "question": "Voiko asiakas peruuttaa vain osan tuotteista?",
+        "paragraphs": [
+          "Kyllä. Asiakkaat valitsevat, mitkä tuotteet he peruuttavat. Pyyntö, hyvitys ja mahdollinen palautus sisältävät vain nämä tuotteet. Alkuperäiset toimituskulut hyvitetään vain, jos asiakas peruuttaa koko tilauksen.",
+          "Jokaisella tilauksella voi olla kerrallaan 1 odottava pyyntö. Kun olet hyväksynyt tai hylännyt sen, asiakas voi lähettää uuden pyynnön muista tuotteista."
+        ]
+      },
+      "reason": {
+        "question": "Täytyykö asiakkaiden kertoa syy?",
+        "paragraphs": [
+          "Ei. EU-lainsäädännön mukaan asiakkaat eivät tarvitse syytä peruuttaakseen, joten syykenttä on aina valinnainen. Asetuksissa voit valita, mitä syitä tarjotaan, tai lopettaa syyn kysymisen."
+        ]
+      },
+      "refund": {
+        "question": "Miten hyvitän peruutuksen?",
+        "paragraphs": [
+          "Avaa pyyntö Pyynnöt-sivulta. Hyvitystapa riippuu siitä, missä tuotteet ovat:"
+        ],
+        "bullets": [
+          "Tuotteet, jotka eivät ole palautuksessa: valitse Hyvitä. Tuotteet, joita ei ole vielä lähetetty, poistetaan tilauksesta, joten niitä ei lähetetä.",
+          "Palautuksessa olevat tuotteet: kun ne ovat palanneet, valitse palautuksessa Käsittele ja hyvitä. Tämä hyvittää asiakasta ja sulkee palautuksen.",
+          "Mitään ei ole vielä lähetetty: voit myös peruuttaa ja hyvittää koko tilauksen kohdasta Lisää toimintoja."
+        ],
+        "closing": "EU-lainsäädäntö antaa sinulle peruutuksesta alkaen {{refundDays}} aikaa hyvittää. Pyynnön sivulla näkyy, paljonko aikaa on jäljellä. Hyvitä ennen kuin hyväksyt pyynnön."
+      },
+      "returns": {
+        "question": "Miten palautukset toimivat?",
+        "paragraphs": [
+          "Palautus kertoo Shopifylle, mitkä tuotteet asiakas lähettää takaisin. Sovellus voi luoda palautuksen, kun pyyntö saapuu, tai voit valita pyynnön sivulla Luo palautus.",
+          "Palautus sisältää vain lähetetyt tuotteet. Palautuksen luominen ei hyvitä asiakasta. Kun tuotteet ovat palanneet, valitse palautuksessa Käsittele ja hyvitä."
+        ]
+      },
+      "decision-lock": {
+        "question": "Miksi tilaustoiminnot poistetaan käytöstä, kun hyväksyn tai hylkään pyynnön?",
+        "paragraphs": [
+          "Hyväksyminen tai hylkääminen päättää pyynnön. Sen jälkeen hyvitykset, pidätykset, palautukset ja peruutukset poistetaan käytöstä, jotta tilausta ei muuteta vahingossa. Siksi sinun kannattaa hyvittää ennen hyväksymistä.",
+          "Päätös vapauttaa myös kaikki sovelluksen tekemät toimituksen pidätykset. Jos vapautus epäonnistuu, voit silti valita Vapauta toimituksen pidätys."
+        ]
+      },
+      "emails": {
+        "question": "Mitä sähköposteja sovellus lähettää, ja voinko muokata niitä?",
+        "paragraphs": [
+          "Sovellus lähettää {{emailCount}} sähköpostia. Voit muokata niitä kaikkia Ilmoitukset-sivulla:"
+        ],
+        "bullets": [
+          "Peruutusvahvistus asiakkaalle: lähetetään, kun asiakas lähettää pyynnön. Se on aina käytössä.",
+          "Ilmoitus uudesta pyynnöstä: lähetetään kauppasi yhteyssähköpostiin. Voit poistaa sen käytöstä.",
+          "Peruutus hyväksytty: lähetetään asiakkaalle, kun hyväksyt pyynnön. Voit tarkistaa sen ensin tai poistaa sen käytöstä.",
+          "Peruutus hylätty: lähetetään asiakkaalle, kun hylkäät pyynnön. Voit tarkistaa sen ensin tai poistaa sen käytöstä."
+        ],
+        "closing": "Voit muokata jokaisen sähköpostin aihetta ja sisältöä kaikilla kielillä ja lisätä muuttujia, kuten tilausnumeron tai asiakkaan nimen. Esikatselu päivittyy kirjoittaessasi."
+      },
+      "countries-languages": {
+        "question": "Mitä maita ja kieliä sovellus tukee?",
+        "paragraphs": [
+          "Kaikki EU-maat ovat oletuksena kelpoisia. Jos myyt vain osaan niistä, valitse Asetuksissa Tietyt maat.",
+          "Lomake on saatavilla {{languageCount}} kielellä: {{languages}}. Asiakkaat näkevät sen omalla kielellään.",
+          "Englanti on peruskieli. Jos jätät käännetyn kentän tyhjäksi, asiakkaat näkevät sen sijaan englanninkielisen tekstin."
+        ]
+      }
+    }
+  },
+  "featureRequest": {
+    "pageTitle": "Ehdota ominaisuutta",
+    "intro": "Kerro, mitä haluaisit nähdä sovelluksessa. Luemme jokaisen ehdotuksen.",
+    "sentHeading": "Ominaisuusehdotus lähetetty",
+    "sentBody": "Kiitos, että jaoit ideasi tiimimme kanssa.",
+    "firstName": "Etunimi",
+    "lastName": "Sukunimi",
+    "email": "Sähköposti",
+    "request": "Minkä ominaisuuden haluaisit?",
+    "requestPlaceholder": "Kuvaile ominaisuutta ja sitä, miten se auttaisi kauppaasi",
+    "submit": "Lähetä ehdotus"
+  },
+  "pricing": {
+    "pageTitle": "Hinnoittelu",
+    "pricePerMonth": "{{price}} kuukaudessa",
+    "currentPlan": "Nykyinen tilaus",
+    "choosePlan": "Valitse {{plan}}",
+    "switchedToast": "Vaihdettu {{plan}}-tilaukseen",
+    "plans": {
+      "free": {
+        "name": "Free",
+        "features": [
+          "Enintään 10 peruutuspyyntöä kuukaudessa",
+          "Sähköposti-ilmoitukset"
+        ]
+      },
+      "starter": {
+        "name": "Starter",
+        "features": [
+          "Rajattomasti peruutuspyyntöjä",
+          "Mukautetut lomakekentät",
+          "Sähköposti-ilmoitukset"
+        ]
+      },
+      "pro": {
+        "name": "Pro",
+        "features": [
+          "Kaikki Starter-tilauksen ominaisuudet",
+          "Ensisijainen tuki",
+          "Automaattiset hyvitykset"
+        ]
+      }
+    },
+    "switchError": "Tilaustasi ei voitu vaihtaa"
+  }
+}

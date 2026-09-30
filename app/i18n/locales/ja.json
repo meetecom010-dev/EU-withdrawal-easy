@@ -1,0 +1,1234 @@
+{
+  "common": {
+    "add": "追加",
+    "backToHome": "ホームに戻る",
+    "cancel": "キャンセル",
+    "delete": "削除",
+    "discard": "破棄",
+    "done": "完了",
+    "dayCount_other": "{{count}}日",
+    "emptyValue": "—",
+    "noMatches": "「{{query}}」に一致する結果はありません。",
+    "preview": "プレビュー",
+    "remove": "削除",
+    "save": "保存",
+    "verified": "認証済み"
+  },
+  "nav": {
+    "home": "ホーム",
+    "withdrawalRequests": "リクエスト",
+    "formSetup": "設定",
+    "emailTemplates": "通知",
+    "pricing": "料金プラン"
+  },
+  "errors": {
+    "generic": "問題が発生しました。もう一度お試しください。",
+    "requestFailed": "問題が発生しました (エラー {{status}})。もう一度お試しください。",
+    "methodNotAllowed": "この操作はサポートされていません。",
+    "unknownAction": "この操作はサポートされていません。",
+    "noValidFields": "更新する内容はありません。",
+    "emailServiceUnavailable": "メールサービスに接続できませんでした。数分後にもう一度お試しください。",
+    "emailServiceNotConfigured": "メール送信はまだ設定されていません。サポートにお問い合わせください。",
+    "requestNotFound": "この撤回リクエストは存在しないか、削除されました。",
+    "requestDecided": "このリクエストはすでに承認または却下されているため、注文に対する操作は利用できません。",
+    "unknownDecision": "このリクエストを承認するか却下するかを選択してください。",
+    "invalidStatus": "このリクエストの有効なステータスを選択してください。",
+    "noteRequired": "メモを入力してください。",
+    "orderNotFound": "この注文はShopifyで見つかりません。",
+    "invalidEmail": "有効なメールアドレスを入力してください。",
+    "featureRequestIncomplete": "リクエストを送信する前に、すべての項目を入力してください。",
+    "senderCodeRequired": "メールに記載された認証コードを入力してください。",
+    "senderNotFound": "この送信元メールアドレスが見つかりませんでした。削除してから再度追加すると、新しいコードが届きます。",
+    "senderNotStarted": "先に送信元メールアドレスを認証してください。",
+    "senderIdMissing": "この送信元メールアドレスを登録できませんでした。もう一度お試しください。",
+    "domainInvalid": "yourstore.com のような有効なドメインを入力してください。",
+    "domainFreeProvider": "GmailやYahooなどの無料メールサービスは認証できません。代わりにストアのドメインを使用してください。"
+  },
+  "auth": {
+    "login": {
+      "heading": "ログイン",
+      "shopLabel": "ストアのドメイン",
+      "shopDetails": "example.myshopify.com",
+      "submit": "ログイン",
+      "missingShop": "ログインするには、ストアのドメインを入力してください。",
+      "invalidShop": "example.myshopify.com のような有効なストアのドメインを入力してください。"
+    }
+  },
+  "status": {
+    "pending": "保留中",
+    "approved": "承認済み",
+    "rejected": "却下済み"
+  },
+  "sourceInline": {
+    "order_status": "注文状況ページ",
+    "standalone_page": "ストアのページ"
+  },
+  "placements": {
+    "orderStatus": {
+      "label": "注文状況ページ",
+      "details": "お客様がチェックアウト後に表示する注文状況ページに撤回フォームを表示します。"
+    },
+    "storefront": {
+      "label": "ストアのページ",
+      "details": "テーマ内の専用ページに撤回フォームを表示し、お客様が注文状況ページ以外からもフォームを見つけられるようにします。"
+    }
+  },
+  "orderStatus": {
+    "financial": {
+      "PENDING": "支払い待ち",
+      "AUTHORIZED": "オーソリ済み",
+      "PARTIALLY_PAID": "一部支払い済み",
+      "PAID": "支払い済み",
+      "PARTIALLY_REFUNDED": "一部返金済み",
+      "REFUNDED": "返金済み",
+      "VOIDED": "無効",
+      "EXPIRED": "期限切れ"
+    },
+    "fulfillment": {
+      "UNFULFILLED": "未発送",
+      "PENDING_FULFILLMENT": "発送待ち",
+      "OPEN": "未処理",
+      "IN_PROGRESS": "処理中",
+      "ON_HOLD": "保留中",
+      "PARTIALLY_FULFILLED": "一部発送済み",
+      "FULFILLED": "発送済み",
+      "RESTOCKED": "在庫に戻し済み",
+      "SCHEDULED": "予定済み"
+    },
+    "return": {
+      "REQUESTED": "リクエスト済み",
+      "OPEN": "未処理",
+      "CLOSED": "クローズ",
+      "DECLINED": "拒否",
+      "CANCELED": "キャンセル済み"
+    }
+  },
+  "stats": {
+    "heading": "概要",
+    "description": "撤回リクエストの概要",
+    "viewRequests": "リクエストを表示",
+    "total": "リクエスト合計",
+    "today": "本日の送信",
+    "pending": "保留中",
+    "closed": "完了",
+    "requestCount_other": "{{count}}件のリクエスト"
+  },
+  "home": {
+    "pageTitle": "ホーム",
+    "loadError": "ダッシュボードを読み込めませんでした",
+    "saveErrorHeading": "変更を保存できませんでした",
+    "saveErrorAction": "もう一度お試しいただくか、設定から変更してください。",
+    "setupBanner": {
+      "heading_other": "残りの設定ステップ: {{count}}件",
+      "body": "撤回フォームの準備を完了するには、次のステップを完了してください: {{steps}}。"
+    },
+    "setupGuide": {
+      "heading": "設定ガイド",
+      "description": "このガイドに沿って、撤回フォームをストアで公開しましょう。",
+      "progress": "{{total}}件中{{completed}}件のタスクが完了",
+      "dismiss": "設定ガイドを閉じる",
+      "collapse": "設定ガイドを折りたたむ",
+      "expand": "設定ガイドを展開する",
+      "showStep": "{{step}}の詳細を表示",
+      "hideStep": "{{step}}の詳細を非表示",
+      "steps": {
+        "form": {
+          "label": "撤回フォームを有効にする",
+          "description": "フォームを有効にし、お客様に表示する場所を選択します。項目、理由、文言にはすでにデフォルトのテキストが設定されています。設定からいつでも変更できます。",
+          "checkbox": "撤回フォームを有効にする",
+          "cta": "設定に移動",
+          "placementHeading": "フォームを表示する場所を選択",
+          "placementDescription": "少なくとも1つの場所を選択してください。お客様にフォームを表示するには、各場所にアプリブロックを追加する必要があります。"
+        },
+        "blocks": {
+          "label": "アプリブロックをストアに追加する",
+          "description": "前のステップで選択した各場所にアプリブロックを追加します。",
+          "locked": "ステップ{{step}}を完了して、フォームを表示する場所を選択してください。その後、ここでアプリブロックを追加できます。",
+          "surfaces": {
+            "orderStatus": "注文状況ページ",
+            "theme": "ストアのページ"
+          },
+          "live": {
+            "orderStatus": "注文状況ページでアプリブロックが公開されています。",
+            "theme": "ストアのページでアプリブロックが公開されています。"
+          }
+        }
+      }
+    },
+    "help": {
+      "heading": "ヘルプとリソース",
+      "support": {
+        "title": "メールサポート",
+        "description": "ご不明な点がありましたら、サポートチームがお手伝いします。",
+        "link": "サポートに問い合わせる"
+      },
+      "faqs": {
+        "title": "よくある質問",
+        "description": "アプリの設定や使い方に関するよくある質問への回答をご覧ください。",
+        "link": "よくある質問を見る"
+      },
+      "featureRequest": {
+        "title": "機能リクエスト",
+        "description": "アプリについてのアイデアはありますか？ご希望の機能をお聞かせください。",
+        "link": "機能をリクエストする"
+      }
+    }
+  },
+  "blockSetup": {
+    "autoUpdate": "このメッセージは、アプリブロックを保存してから数秒後に自動的に消えます。",
+    "addAppBlock": "アプリブロックを追加",
+    "orderStatus": {
+      "heading": "注文状況ページにアプリブロックを追加する",
+      "body": "アプリブロックを追加するまで、お客様は注文状況ページで撤回フォームを表示できません。追加する手順:",
+      "steps": {
+        "open": "下の<strong>アプリブロックを追加</strong>を選択します。チェックアウトエディターで注文状況ページが開きます。",
+        "add": "サイドバーで<strong>アプリブロックを追加</strong>を選択します。",
+        "choose": "<strong>撤回フォーム</strong>を選択します。",
+        "save": "<strong>保存</strong>を選択します。"
+      }
+    },
+    "storefront": {
+      "heading": "ストアのページにアプリブロックを追加する",
+      "body": "ページテンプレートを選択し、「アプリブロックを追加」を選択します。撤回フォームがセクションとして追加された状態でテーマエディターが開きます。",
+      "templateLabel": "ページテンプレート",
+      "templates": {
+        "page": "デフォルトページ",
+        "index": "ホームページ",
+        "product": "商品ページ",
+        "collection": "コレクションページ",
+        "cart": "カートページ"
+      },
+      "steps": {
+        "open": "<strong>アプリブロックを追加</strong>を選択すると、セクションが追加された状態でテーマエディターが開きます。",
+        "move": "セクションをページ内の表示したい位置までドラッグします。",
+        "save": "<strong>保存</strong>を選択します。"
+      }
+    }
+  },
+  "onboarding": {
+    "pageTitle": "はじめに",
+    "heading": "EUの撤回に対応できるようストアを準備しましょう",
+    "intro_other": "次の{{count}}つのステップを完了すると、EUのお客様が法令に準拠した方法で購入を撤回できるようになります。",
+    "stepBadge": "ステップ{{current}}/{{total}}",
+    "completedToast": "設定が完了しました",
+    "steps": {
+      "welcome": {
+        "title": "ようこそ",
+        "description": "アプリでできること"
+      },
+      "form": {
+        "title": "撤回フォーム",
+        "description": "フォームを有効にする"
+      }
+    },
+    "actions": {
+      "getStarted": "始める",
+      "continue": "続ける",
+      "finish": "設定を完了",
+      "skip": "設定をスキップ",
+      "back": "戻る"
+    },
+    "help": {
+      "heading": "サポートが必要ですか？",
+      "body": "ご不明な点はありますか？<supportLink>サポートに問い合わせる</supportLink>。"
+    },
+    "welcome": {
+      "heading": "{{appName}}へようこそ",
+      "setupTime": "所要時間は約1分です",
+      "law": "2026年6月19日以降、EUのお客様に販売するストアは、すべての注文について2ステップで撤回できる方法を提供する必要があります (EU指令2023/2673、第11a条)。返品ポリシーだけでは不十分です。",
+      "app": "{{appName}}は、注文状況ページ、オンラインストアのページ、またはその両方に撤回ボタンを追加します。2ステップの確認を処理し、必要な確認メールを送信します。すべてのリクエストを1か所で管理できます。",
+      "imageAlt": "注文を撤回するお客様",
+      "requirementsHeading": "法律で求められること",
+      "requirements": {
+        "button": "お客様が簡単に見つけられる、明確なラベルの撤回ボタン",
+        "twoStep": "2ステップの手続き: お客様が撤回を送信し、その後に確認する",
+        "email": "お客様が保存できる自動確認メール"
+      },
+      "penaltyHeading": "対応しなかった場合",
+      "penalty": "撤回ボタンがない、または機能しない場合、法律により{{days}}日間の撤回期間が延長されます。お客様は該当する各注文を12か月と{{days}}日間撤回できるようになります。"
+    },
+    "form": {
+      "heading": "撤回フォームを有効にする",
+      "body": "EU法の定めに従い、お客様は撤回を送信した後、別のステップで確認します。フォームにはデフォルトの法的文言が含まれています。お客様は配達日から{{days}}以内に撤回できます。",
+      "switch": "撤回フォームを有効にする",
+      "later": "これらはすべて後から設定で変更できます。",
+      "loadError": "フォームの設定を読み込めませんでした。今すぐ設定を完了し、後で設定からフォームを有効にすることができます。",
+      "saveError": "フォームの選択内容を保存できませんでした。もう一度お試しいただくか、保存せずに設定を完了し、後で設定から変更してください。",
+      "finishWithoutSaving": "保存せずに完了",
+      "placementError": "少なくとも1つの場所を選択するか、フォームを無効にしてください。"
+    },
+    "finishError": "設定を完了できませんでした。もう一度お試しください。"
+  },
+  "formSetup": {
+    "pageTitle": "設定",
+    "loadError": "設定を読み込めませんでした",
+    "saveError": "設定を保存できませんでした",
+    "savedToast": "設定を保存しました",
+    "enable": {
+      "heading": "撤回フォーム",
+      "description": "お客様が撤回リクエストを送信できるかどうかと、フォームを表示する場所を選択します。",
+      "checkbox": "撤回フォームを有効にする",
+      "details": "無効にすると、お客様はどこからも撤回リクエストを送信できません。",
+      "orderStatus": "注文状況ページに表示",
+      "storefront": "ストアのページに表示"
+    },
+    "countries": {
+      "heading": "対象国",
+      "description": "注文の配送先がこれらの国のいずれかの場合にのみ、お客様に撤回フォームが表示されます。",
+      "all": "EU加盟国すべて ({{count}}か国) (推奨)",
+      "allDetails": "撤回権はEU全域で適用されます。",
+      "specific": "特定の国",
+      "specificDetails": "下から国を選択してください。いつでも変更できます。",
+      "pickerLabel": "国",
+      "pickerPlaceholder": "国を検索"
+    },
+    "content": {
+      "heading": "フォームの内容",
+      "tabs": {
+        "step1": "1. 詳細",
+        "confirm": "2. 確認",
+        "done": "3. 完了"
+      },
+      "language": "言語",
+      "languageDetails": "言語を選択すると、その言語でフォームの内容を編集できます。言語ごとに個別に保存されます。",
+      "beforeDelivery": {
+        "heading": "配達前",
+        "description": "注文が配達されるまで (配送中を含む)、フォームの最初の画面と「詳細」ステップに表示されます。"
+      },
+      "afterDelivery": {
+        "heading": "配達後",
+        "description": "Shopifyで注文が配達済みになると、代わりにこちらが表示されます。"
+      },
+      "title": "タイトル",
+      "description": "説明",
+      "itemHeading": "商品選択の見出し",
+      "customerDetails": {
+        "heading": "お客様情報",
+        "description": "注文から自動入力されます。お客様はこれらの項目を編集できません。",
+        "locked": "ロック済み",
+        "fullName": "氏名",
+        "email": "メールアドレス",
+        "orderNumber": "注文番号"
+      },
+      "reason": {
+        "heading": "撤回の理由",
+        "checkbox": "理由を尋ねる",
+        "details": "お客様が理由を伝える必要はありません。EU法では、この項目を任意にすることが求められています。",
+        "label": "理由欄のラベル",
+        "optionsHeading": "理由の選択肢",
+        "optionsHelp": "お客様はこのリストから選択します。ストアに合わせて選択肢を追加、削除、または書き換えてください。テキスト入力欄付きの「その他」は常に最後に追加されます。",
+        "removeOption": "{{option}}を削除",
+        "addLabel": "理由を追加",
+        "addPlaceholder": "例: 誤って注文した",
+        "translatedHelp": "各選択肢を翻訳してください。選択肢を追加または削除するには、英語に切り替えてください。",
+        "translatedEmpty": "先に英語で理由の選択肢を追加してください。"
+      },
+      "continueButton": "「続ける」ボタンのラベル",
+      "confirm": {
+        "heading": "確認の見出し",
+        "messageBefore": "配達前のメッセージ",
+        "messageAfter": "配達後のメッセージ",
+        "declaration": "同意文",
+        "button": "「確認」ボタンのラベル"
+      },
+      "done": {
+        "titleBefore": "配達前のタイトル",
+        "messageBefore": "配達前のメッセージ",
+        "titleAfter": "配達後のタイトル",
+        "messageAfter": "配達後のメッセージ"
+      }
+    },
+    "automation": {
+      "heading": "自動化",
+      "description": "お客様が撤回リクエストを送信したときにアプリが行う処理を選択します。",
+      "beforeShip": {
+        "heading": "注文の発送前",
+        "description": "商品が1つも発送されていない段階でリクエストが届いた場合に適用されます。",
+        "hold": "確認のために発送を保留する",
+        "holdDetails": "リクエストを承認または却下するまで発送を一時停止します。判断すると保留は解除されます。",
+        "tagDetails": "発送前にリクエストが届いた注文にタグを付け、スタッフが注文一覧で見つけられるようにします。"
+      },
+      "fallback": {
+        "label": "注文の扱い",
+        "hold": "リクエストを承認または却下するまで保留する",
+        "cancelNow": "注文全体をキャンセルしてすぐに返金する",
+        "releaseN": "指定した日数が経過したら保留を解除する",
+        "cancelN": "指定した日数が経過したら注文全体をキャンセルして返金する",
+        "cancelWarning": "お客様が一部の商品のみを撤回した場合でも、注文全体がキャンセル・返金されます。Shopifyからお客様にキャンセルのメールが送信されます。",
+        "days": "日数"
+      },
+      "afterDelivery": {
+        "heading": "注文の発送後",
+        "description": "少なくとも1つの商品が発送された後にリクエストが届いた場合に適用されます (未配達の場合も含む)。すべてのリクエストは引き続きリクエストページに表示されます。",
+        "createReturn": "返品を作成する",
+        "createReturnDetails": "リクエストされた商品のうち発送済みのものについて、Shopifyで返品を作成します。",
+        "tagDetails": "発送後にリクエストが届いた注文にタグを付けます。"
+      },
+      "tag": {
+        "checkbox": "注文にタグを付ける",
+        "label": "注文タグ",
+        "placeholder": "タグを追加"
+      }
+    },
+    "deadline": {
+      "heading": "撤回期限",
+      "description": "撤回期間は注文日ではなく配達日から始まります。EU法では少なくとも{{days}}が必要です。",
+      "days": "配達後の撤回可能日数",
+      "daysDetails": "注文の配達後、お客様が撤回できる期間です。",
+      "transit": "推定配送日数 (日)",
+      "transitDetails": "配送業者が配達日や予定日を提供しない場合に使用されます。アプリは発送日にこの日数を加算します。"
+    },
+    "validation": {
+      "countryMode": "対象国を選択してください。",
+      "euCountries": "少なくとも1つの国を選択してください。",
+      "title": "タイトルを入力してください。",
+      "description": "説明を入力してください。",
+      "itemHeading": "商品リストの見出しを入力してください。",
+      "continueButton": "「続ける」ボタンのラベルを入力してください。",
+      "heading": "見出しを入力してください。",
+      "confirmMessage": "確認メッセージを入力してください。",
+      "declaration": "お客様が同意する必要のある同意文を入力してください。",
+      "confirmButton": "「確認」ボタンのラベルを入力してください。",
+      "message": "メッセージを入力してください。",
+      "reasonLabel": "理由欄のラベルを入力してください。",
+      "reasonOptions": "少なくとも1つの理由を追加してください。",
+      "reasonOptionTranslation": "この理由の翻訳を入力してください。",
+      "fallback": "注文の扱いを選択してください。",
+      "daysRange": "{{min}}～{{max}}の日数を入力してください。",
+      "tags": "少なくとも1つのタグを追加するか、タグ付けを無効にしてください。",
+      "afterDeliveryAction": "注文の発送後の処理を選択してください。"
+    },
+    "preview": {
+      "heading": "ライブプレビュー",
+      "compliantBadge": "2ステップ準拠",
+      "surfaceLabel": "プレビュー",
+      "surfaces": {
+        "orderStatus": "注文状況ページ",
+        "theme": "ストアのページ"
+      },
+      "stageLabel": "配達状況",
+      "stages": {
+        "beforeDelivery": "未配達",
+        "delivered": "配達済み"
+      },
+      "banner": {
+        "orderStatus": "注文状況ページでお客様に表示される内容です。ボタンを選択して試すか、「フォームの内容」のタブを使って特定のステップに移動できます。",
+        "theme": "ストアのページでお客様に表示される内容です。ストアの訪問者はログインしていないため、「注文を検索」ステップから始まります。"
+      },
+      "restart": "プレビューをやり直す",
+      "position": {
+        "entry": "開始カード",
+        "lookup": "注文を検索",
+        "step": "ステップ{{current}}/{{total}}"
+      },
+      "storefront": {
+        "start": "撤回リクエストを開始",
+        "findOrderHeading": "注文を検索",
+        "findOrderBody": "撤回リクエストを開始するには、注文情報を入力してください。",
+        "fullName": "氏名",
+        "email": "メールアドレス",
+        "orderNumber": "注文番号",
+        "continue": "続ける",
+        "steps": {
+          "step1": "詳細",
+          "confirm": "確認",
+          "done": "完了"
+        },
+        "stepOf": "ステップ{{current}}/{{total}}",
+        "stepProgress": "ステップ{{current}}/{{total}}: {{label}}",
+        "reasonPlaceholder": "理由を選択 (任意)",
+        "otherReason": "その他",
+        "yourReason": "理由",
+        "yourReasonPlaceholder": "理由をお聞かせください",
+        "selectItem": "続けるには、少なくとも1つの商品を選択してください。",
+        "itemsToWithdraw": "撤回する商品 ({{count}})",
+        "selectedTotal": "選択した商品の合計",
+        "previous": "前へ",
+        "submittedOn": "送信日: {{date}}"
+      }
+    }
+  },
+  "requests": {
+    "pageTitle": "リクエスト",
+    "searchLabel": "撤回リクエストを検索",
+    "searchPlaceholder": "注文番号、お客様の名前、メールアドレスで検索",
+    "export": "エクスポート",
+    "exportSelected": "選択項目をエクスポート",
+    "tabs": {
+      "all": "すべて",
+      "withCount": "{{label}} ({{count}})"
+    },
+    "empty": {
+      "imageAlt": "",
+      "heading": "撤回リクエストはまだありません",
+      "body": "お客様からの撤回リクエストがここに表示されます。",
+      "filteredHeading": "撤回リクエストが見つかりません",
+      "filteredBody": "検索キーワードやフィルターを変更してみてください。"
+    },
+    "table": {
+      "selectAll": "すべての撤回リクエストを選択",
+      "selectRow": "注文{{order}}を選択",
+      "selectedCount": "{{count}}件を選択中",
+      "order": "注文",
+      "customer": "お客様",
+      "items": "商品",
+      "value": "金額",
+      "status": "ステータス",
+      "submitted": "送信日",
+      "actions": "操作",
+      "itemCount_other": "{{count}}点",
+      "viewRow": "注文{{order}}のリクエストを表示",
+      "deleteRow": "注文{{order}}のリクエストを削除"
+    },
+    "delete": {
+      "heading_other": "{{count}}件の撤回リクエストを削除しますか？",
+      "body_other": "{{count}}件の撤回リクエストが完全に削除されます。この操作は元に戻せません。",
+      "confirm_other": "削除",
+      "toast_other": "{{count}}件の撤回リクエストを削除しました"
+    },
+    "csv": {
+      "filename": "withdrawal-requests-{{date}}.csv",
+      "order": "注文",
+      "customerName": "お客様の名前",
+      "customerEmail": "お客様のメールアドレス",
+      "country": "国",
+      "items": "商品",
+      "value": "金額",
+      "reason": "理由",
+      "status": "ステータス",
+      "submitted": "送信日",
+      "decided": "判断日"
+    }
+  },
+  "requestDetail": {
+    "pageTitle": "撤回リクエスト",
+    "backLink": "リクエスト",
+    "submittedLine": "{{date}}に{{source}}から送信",
+    "previous": "前のリクエスト",
+    "next": "次のリクエスト",
+    "badges": {
+      "canceled": "キャンセル済み",
+      "onHold": "保留中",
+      "return": "返品: {{status}}"
+    },
+    "actions": {
+      "refund": "返金",
+      "more": "その他の操作",
+      "cancelOrder": "注文をキャンセル",
+      "placeHold": "発送を保留",
+      "releaseHold": "発送の保留を解除",
+      "createReturn": "返品を作成",
+      "processReturn": "処理して返金",
+      "viewOrder": "注文を表示"
+    },
+    "banners": {
+      "orderUnavailableHeading": "注文の詳細を利用できません",
+      "orderUnavailableBody": "{{error}} 注文の詳細が読み込まれるまで、注文に対する操作は使用できません。",
+      "actionFailedHeading": "この操作を完了できませんでした",
+      "actionFailedAction": "詳しくは下の「アクティビティ」をご確認ください。",
+      "canceled": "この注文はキャンセルされました。注文に対する操作は利用できません。"
+    },
+    "deadline": {
+      "heading": "返金期限",
+      "pendingLabel": "判断と返金までの残り時間",
+      "decidedLabel": "判断",
+      "badges": {
+        "overdue": "期限超過",
+        "actionNeeded": "対応が必要",
+        "onTime": "期限内"
+      },
+      "daysLeft_other": "残り{{count}}日",
+      "daysOverdue_other": "{{count}}日超過",
+      "daysEarly_other": "期限の{{count}}日前",
+      "daysLate_other": "期限の{{count}}日後",
+      "pending": "リクエストの送信から{{days}}以内に判断して返金する必要があります。期限は{{date}}です。",
+      "pendingOverdue": "{{date}}に期限が過ぎました。できるだけ早くお客様に返金してください。",
+      "decidedOnTime": "{{windowDays}}日間の返金期間内に判断しました。期限は{{date}}でした。",
+      "decidedLate": "返金期限の{{date}}を過ぎてから判断しました。"
+    },
+    "items": {
+      "heading": "撤回された商品",
+      "reject": "却下",
+      "approve": "承認",
+      "total": "撤回の合計",
+      "sku": "SKU: {{sku}}",
+      "quantity": "数量: {{count}}",
+      "shipping": {
+        "notShipped": "未発送",
+        "partlyShipped": "一部発送済み",
+        "shipped": "発送済み"
+      },
+      "partiallyShippedBanner": "この注文の一部は発送済みです。未発送の商品は引き続き保留できますが、発送済みの商品には返品が必要です。"
+    },
+    "return": {
+      "heading": "返品",
+      "status": "ステータス",
+      "created": "作成日",
+      "body": "撤回された商品について、Shopifyで返品が作成されました。",
+      "openBody": "商品が返送されたら、「処理して返金」を選択してください。返品された商品の代金がお客様に返金され、返品がクローズされます。",
+      "alreadyRefundedBody": "この返品の商品はすでに返金済みです。商品が返送されたら、Shopifyで返品をクローズしてください。"
+    },
+    "processReturnModal": {
+      "heading": "返品を処理して返金",
+      "calculating": "返金額を計算しています…",
+      "nothingToProcess": "この返品で処理するものは残っていません。Shopifyですでに処理またはクローズされている可能性があります。",
+      "nothingToRefund": "この返品の商品はすでに返金済みのため、返金するものは残っていません。",
+      "unsupportedPayment": "この注文の支払いはアプリから返金できません。Shopifyで返品を処理して返金してください。",
+      "itemsHeading": "返品{{name}}の商品",
+      "subtotal": "商品の小計",
+      "shippingLine": "元の配送料",
+      "total": "返金合計",
+      "body": "返品された商品を処理済みにし、元の支払い方法に返金して、返品をクローズします。Shopifyからお客様に返金の領収書がメールで送信されます。この操作は元に戻せません。",
+      "confirmAmount": "{{amount}}を返金",
+      "confirm": "処理して返金"
+    },
+    "payment": {
+      "heading": "支払い",
+      "status": "支払いステータス",
+      "subtotal": "撤回の小計",
+      "shipping": "注文の配送料",
+      "total": "注文合計",
+      "refunded": "返金済み",
+      "unavailable": "現在、支払いの詳細を利用できません。"
+    },
+    "activity": {
+      "heading": "アクティビティ",
+      "noteLabel": "メモを追加",
+      "notePlaceholder": "メモを追加…",
+      "post": "投稿",
+      "noteHelp": "メモはあなたとスタッフだけが閲覧できます。お客様には表示されません。",
+      "submitted": "{{source}}から撤回リクエストが送信されました",
+      "decided": {
+        "approved": "リクエストを承認しました",
+        "rejected": "リクエストを却下しました"
+      },
+      "note": "メモ: {{body}}",
+      "entry": "{{label}}: {{message}}",
+      "actions": {
+        "resolve_branch": "自動化を開始",
+        "run_automation": "自動化",
+        "automation_completed": "自動化が完了",
+        "hold_fulfillment": "発送の保留",
+        "schedule_fallback": "予定されたフォローアップ",
+        "release_hold": "発送の保留を解除",
+        "cancel_order_immediate": "注文をキャンセルして返金",
+        "cancel_order_scheduled": "注文をキャンセルして返金",
+        "cancel_order_manual": "注文をキャンセルして返金",
+        "cancel_order": "注文をキャンセルして返金",
+        "refund": "返金",
+        "tag_before_ship": "注文にタグを付与",
+        "tag_after_delivery": "注文にタグを付与",
+        "order_tag_add": "注文タグを追加",
+        "order_tag_remove": "注文タグを削除",
+        "create_return": "返品",
+        "refresh_return": "返品ステータスを更新",
+        "process_return": "処理して返金",
+        "fetch_shop_contact": "ストアの連絡先情報",
+        "customer_email": "お客様への確認メール",
+        "merchant_email": "新しいリクエストの通知",
+        "notify_customer": "判断結果のメール",
+        "notify_merchant": "通知を受け取りました"
+      },
+      "messages": {
+        "noTags": "タグが設定されていません",
+        "tagged": "注文に{{tags}}のタグを付けました",
+        "noHoldableOrders": "現在、この注文で保留できるものはありません",
+        "held": "発送されないよう商品を保留しました",
+        "holdOff": "確認のための発送保留は無効です",
+        "tagBeforeShipOff": "発送前のタグ付けは無効です",
+        "tagAfterDeliveryOff": "発送後のタグ付けは無効です",
+        "fallbackHold": "リクエストを承認または却下するまで、注文は保留されたままです",
+        "fallbackInvalidDays": "フォローアップを予定できませんでした。日数が無効です。",
+        "scheduledRelease": "保留の解除を{{date}}に予定しました",
+        "scheduledCancel": "キャンセルと返金を{{date}}に予定しました",
+        "canceled": "注文をキャンセルして返金しました",
+        "returnCreated": "Shopifyで返品を作成しました",
+        "returnNoMatch": "リクエストされた商品はいずれも返品できません",
+        "notifiedByEmail": "アプリとメールで通知しました",
+        "notifiedEmailFailed": "アプリで通知しました。通知メールの送信に失敗しました: {{error}}",
+        "notifiedInAppOnly": "アプリで通知しました。通知メールは送信されませんでした。",
+        "emailSent": "送信済み",
+        "emailFailed": "失敗: {{error}}",
+        "emailNotSent": "受信者がいないか、メールが設定されていないため送信されませんでした",
+        "orderNotFound": "この注文はShopifyで見つかりません",
+        "alreadyCanceled": "注文はすでにキャンセルされていました",
+        "branchBeforeShip": "注文がまだ発送されていないため、発送前のステップを実行しました",
+        "branchAfterDelivery": "注文が発送済みのため、発送後のステップを実行しました",
+        "branchPartiallyShipped": "注文が一部発送済みのため、発送済みと未発送の商品それぞれのステップを実行しました",
+        "noUnshippedItemsRequested": "リクエストされた商品に発送待ちのものがないため、何も保留しませんでした",
+        "fallbackCancelPartiallyShipped": "注文が一部発送済みのため、注文全体をキャンセルすることはできません。リクエストを承認または却下するまで、リクエストされた商品は保留されたままです。",
+        "returnNothingShipped": "リクエストされた商品はいずれも発送されていないため、返品は不要でした",
+        "runCompleted": "自動化が完了しました",
+        "runFailed": "1つ以上の自動化ステップが失敗しました",
+        "runSkipped": "自動化をスキップしました",
+        "scheduledSkippedApproved": "リクエストはすでに承認されていたため、予定された操作は実行されませんでした",
+        "scheduledSkippedRejected": "リクエストはすでに却下されていたため、予定された操作は実行されませんでした",
+        "noHoldsPlaced": "このリクエストでは保留は行われませんでした",
+        "holdsAlreadyReleased": "保留はすでに解除されていました",
+        "holdReleased": "注文を再び発送できるようになりました",
+        "holdExists": "このリクエストにはすでに保留が設定されています",
+        "decisionSkipped": "スタッフがお客様へのメール送信を行わないことを選択しました",
+        "decisionSent": "判断結果をお客様にメールで送信しました",
+        "decisionFailed": "判断結果のメールの送信に失敗しました: {{error}}",
+        "decisionNotConfigured": "メールが設定されていないため、判断結果のメールは送信されませんでした",
+        "refunded": "{{amount}}を返金しました",
+        "noReturn": "このリクエストには返品がありません",
+        "returnStatus": "返品ステータス: {{status}}",
+        "returnProcessed": "返品を処理し、{{amount}}を返金しました",
+        "returnNothingToProcess": "この返品で処理するものは残っていません",
+        "returnNothingToRefund": "この返品の商品はすでに返金済みです",
+        "returnPaymentUnsupported": "この支払いはアプリから返金できません。Shopifyで返品を処理してください。",
+        "refundNothingRefundable": "リクエストされた商品はいずれも返金できません。すでに返金済みの可能性があります。",
+        "refundNoSuggestion": "Shopifyでこれらの商品の返金額を算出できませんでした。Shopifyで返金してください。",
+        "refundCoveredByReturn": "撤回された商品はすべて未処理の返品に含まれています。返品の「処理して返金」を使用して返金してください。",
+        "tagsRemoved": "削除した注文タグ: {{tags}}",
+        "tagsAdded": "追加した注文タグ: {{tags}}"
+      }
+    },
+    "order": {
+      "heading": "注文",
+      "order": "注文",
+      "placed": "注文日",
+      "payment": "支払い",
+      "fulfillment": "発送"
+    },
+    "customer": {
+      "heading": "お客様",
+      "avatarFallback": "お客様",
+      "contactHeading": "連絡先情報",
+      "email": "メールアドレス",
+      "language": "言語",
+      "shippingHeading": "配送先住所"
+    },
+    "automation": {
+      "heading": "自動化",
+      "stage": "段階",
+      "stages": {
+        "before_ship": "発送前",
+        "partially_shipped": "一部発送済み",
+        "after_delivery": "発送後"
+      },
+      "hold": "発送の保留",
+      "holdStates": {
+        "onHold": "保留中",
+        "released": "解除済み",
+        "none": "なし"
+      },
+      "canceled": "キャンセル済み",
+      "return": "返品"
+    },
+    "emails": {
+      "heading": "メール履歴",
+      "customerConfirmation": "お客様への撤回確認",
+      "merchantNotification": "新しいリクエストの通知",
+      "decision": "判断結果のメール",
+      "statuses": {
+        "sent": "送信済み",
+        "failed": "失敗",
+        "notSent": "未送信"
+      }
+    },
+    "tags": {
+      "heading": "注文タグ",
+      "label": "注文タグを追加",
+      "placeholder": "タグを追加",
+      "remove": "タグ「{{tag}}」を削除",
+      "savedToast": "注文タグを保存しました"
+    },
+    "reason": {
+      "heading": "撤回の理由",
+      "quoted": "「{{reason}}」",
+      "none": "理由の記載なし"
+    },
+    "decidedToast": {
+      "approved": "撤回リクエストを承認しました",
+      "rejected": "撤回リクエストを却下しました"
+    },
+    "cancelModal": {
+      "heading": "注文をキャンセルしますか？",
+      "body": "お客様が撤回していない商品も含め、Shopifyで注文全体がキャンセルされます。注文は元の支払い方法に返金されて在庫に戻され、Shopifyからお客様にメールが送信されます。この操作は元に戻せません。",
+      "keep": "注文を残す",
+      "confirm": "注文をキャンセルして返金"
+    },
+    "createReturnModal": {
+      "heading": "撤回された商品の返品を作成",
+      "itemsHeading": "返品する商品",
+      "subtotal": "商品の小計",
+      "checking": "返品できる商品を確認しています…",
+      "nothingToReturn": "撤回された商品はまだ発送されていないため、返品するものはありません。発送されないよう保留するか、返金して注文から削除してください。",
+      "notShipped_other": "撤回された商品のうち{{count}}点は、まだ発送されていないため含まれていません。",
+      "notReturnable_other": "撤回された商品のうち{{count}}点は、すでに返品済みのため含まれていません。",
+      "body": "上記の商品について、Shopifyで返品を作成します。お客様への返金は行われません。商品が返送されたら、返品の「処理して返金」を選択してください。",
+      "cancel": "キャンセル",
+      "confirm": "返品を作成"
+    },
+    "decisionModal": {
+      "headingApprove": "撤回リクエストを承認しますか？",
+      "headingReject": "撤回リクエストを却下しますか？",
+      "approveAndSend": "承認してメールを送信",
+      "rejectAndSend": "却下してメールを送信",
+      "approve": "承認",
+      "reject": "却下",
+      "loadingLabel": "メールのプレビューを読み込み中",
+      "loading": "お客様へのメールを準備しています…",
+      "sendEmail": "お客様にメールを送信",
+      "language": "このメールはお客様の言語である{{language}}で作成されています。変更内容はこのメールにのみ適用されます。",
+      "subject": "件名",
+      "body": "メール本文",
+      "editHtml": "HTMLを編集",
+      "htmlLabel": "メールのHTML",
+      "previewTitle": "メールのプレビュー",
+      "templateUnchanged": "変更内容はこのメールにのみ適用されます。保存済みのテンプレートは変更されません。",
+      "noEmail": "お客様にメールは送信されません。必要に応じて個別にご連絡ください。",
+      "holdReleased": "この注文の発送の保留も解除され、注文を再び発送できるようになります。"
+    },
+    "refundModal": {
+      "heading": "撤回された商品を返金",
+      "calculatingLabel": "返金額を計算中",
+      "calculating": "返金額を計算しています…",
+      "nothingToRefund": "この注文で返金するものはありません。撤回された商品がすでに返金済みか、注文がキャンセルされている可能性があります。",
+      "itemsHeading": "返金する商品",
+      "subtotal": "商品の小計",
+      "shippingLine": "元の配送料",
+      "amount": "返金額",
+      "total": "返金合計",
+      "body": "撤回された商品は元の支払い方法に返金され、可能な場合は在庫に戻されます。Shopifyからお客様に返金の領収書がメールで送信されます。",
+      "includesShipping": "お客様が注文全体を撤回したため、元の配送料も含まれています。",
+      "unshippedItems": "未発送の商品は注文から削除されるため、発送されません。",
+      "inReturn_other": "撤回された商品のうち{{count}}点は、返品{{name}}に含まれているため対象外です。返品の「処理して返金」で返金してください。",
+      "allInReturn": "撤回された商品はすべて返品{{name}}に含まれています。返品の「処理して返金」で返金してください。返品もクローズされます。",
+      "irreversible": "この操作は元に戻せません。",
+      "confirmAmount": "{{amount}}を返金",
+      "confirm": "返金"
+    },
+    "shopifyNotes": {
+      "holdAutomatic": "注文{{order}}の撤回リクエストはスタッフの確認待ちです",
+      "holdManual": "注文{{order}}の撤回リクエストはスタッフによって保留されました",
+      "canceled": "お客様が購入を撤回したため、{{appName}}によってキャンセルされました (リクエスト{{id}})。",
+      "refunded": "お客様が購入を撤回したため、{{appName}}によって返金されました (リクエスト{{id}})。",
+      "returnReason": "撤回リクエスト: {{reason}}",
+      "returnReasonNone": "撤回リクエスト (理由の記載なし)"
+    }
+  },
+  "emailTemplates": {
+    "pageTitle": "通知",
+    "loadError": "通知を読み込めませんでした",
+    "saveError": "通知を保存できませんでした",
+    "savedToast": "通知を保存しました",
+    "resetToast": "{{name}}をデフォルトに戻しました",
+    "sender": {
+      "heading": "送信元",
+      "description": "この設定は、アプリがストアに代わって送信するすべてのメールに適用されます。認証済みの独自のアドレスから送信し、お客様からの返信先を選択してください。",
+      "emailLabel": "送信元メールアドレス",
+      "emailPlaceholder": "notifications@withdrawaleasy.com",
+      "detailsVerified": "メールはこのアドレスから送信されます。",
+      "detailsPending": "このアドレスに送信したコードを入力して認証してください。",
+      "detailsDefault": "空欄のままにすると、{{email}}からメールが送信されます。",
+      "detailsDefaultFallback": "空欄のままにすると、アプリのデフォルトのアドレスからメールが送信されます。",
+      "freeProviderWarning": "GmailやYahooなどの無料メールサービスは認証できません。このアドレスから送信されたメールには「via brevosend.com」と表示されます。より信頼感のある印象にするには、ストアのドメインのアドレスを使用してください。",
+      "codeLabel": "認証コード",
+      "codeDetails": "お送りしたメールに記載された6桁のコードを入力してください。",
+      "verifyCode": "コードを認証",
+      "checkStatus": "認証状況を確認",
+      "verifyEmail": "メールアドレスを認証",
+      "codeSent": "{{email}}に認証コードを送信しました。",
+      "notVerifiedYet": "このメールアドレスはまだ認証されていません。受信トレイでコードを確認して、もう一度お試しください。",
+      "replyToLabel": "返信先メールアドレス",
+      "replyToPlaceholder": "support@yourstore.com",
+      "replyToDetails": "デフォルトでは、お客様からの返信はストアのメールアドレスに届きます。別の宛先で受け取るには、異なるアドレスを入力してください。"
+    },
+    "domain": {
+      "heading": "ドメイン認証",
+      "description": "ドメインを認証すると、メールに「via brevosend.com」と表示されなくなります。任意ですが、ストアのドメインから送信する場合はおすすめです。",
+      "label": "ドメイン",
+      "placeholder": "yourstore.com",
+      "details": "myshopify.comのドメインではなく、メールの送信に使用するドメインを入力してください。",
+      "freeProviderWarning": "GmailやYahooなどの無料メールサービスは認証できません。代わりにストアのドメインを入力してください。",
+      "columns": {
+        "record": "レコード",
+        "type": "タイプ",
+        "host": "ホスト",
+        "value": "値"
+      },
+      "records": {
+        "brevo_code": "ドメインの所有権",
+        "dkim_record": "DKIM",
+        "dkim1Record": "DKIM 1",
+        "dkim2Record": "DKIM 2",
+        "dmarc_record": "DMARC"
+      },
+      "copyHost": "ホストをコピー",
+      "copyValue": "値をコピー",
+      "verifyRecords": "DNSレコードを確認",
+      "authenticate": "ドメインを認証",
+      "pendingInfo": "ドメインプロバイダーでこれらのレコードを追加してから、「DNSレコードを確認」を選択してください。",
+      "notVerifiedYet": "ドメインはまだ認証されていません。DNSの変更が反映されるまで時間がかかる場合があるため、後でもう一度お試しください。"
+    },
+    "notification": {
+      "heading": "メールテンプレート",
+      "emailLabel": "メール",
+      "language": "言語",
+      "languageDetails": "言語を選択すると、その言語でこのメールを編集できます。言語ごとに個別に保存されます。お客様にはご自身の言語でメールが届きます。",
+      "send": "このメールを送信する",
+      "requiredDetails": "このメールはEU法で義務付けられているため、無効にできません。",
+      "merchantDetails": "このメールの受信を停止するには無効にしてください。",
+      "decisionDetails": "無効にすると、このメールはデフォルトで送信されなくなります。個別のリクエストを承認または却下するときに送信を選択することもできます。",
+      "subject": "件名",
+      "reset": "デフォルトに戻す",
+      "customized": "カスタマイズ済み"
+    },
+    "templates": {
+      "customerConfirmation": {
+        "name": "お客様への撤回確認",
+        "description": "お客様が撤回リクエストを送信するとすぐに送信されます。"
+      },
+      "merchantNotification": {
+        "name": "新しいリクエストの通知",
+        "description": "お客様が新しい撤回リクエストを送信すると、ストアの連絡先メールアドレスに送信されます。返信するとお客様にメールを送れます。"
+      },
+      "withdrawalApproved": {
+        "name": "撤回の承認",
+        "description": "撤回リクエストを承認したときにお客様に送信されます。送信前に確認・編集できます。"
+      },
+      "withdrawalRejected": {
+        "name": "撤回の却下",
+        "description": "撤回リクエストを却下したときにお客様に送信されます。送信前に確認・編集できます。"
+      }
+    },
+    "merchantDefaults": {
+      "subject": "新しい撤回リクエスト — 注文{{order}}",
+      "heading": "新しい撤回リクエスト",
+      "intro": "お客様から撤回リクエストが送信されました。確認に必要な情報は以下のとおりです。",
+      "rows": {
+        "name": "名前",
+        "email": "メールアドレス",
+        "date": "日付",
+        "orderNumber": "注文番号",
+        "reference": "参照番号",
+        "reason": "理由"
+      },
+      "button": "リクエストを表示",
+      "itemsHeading": "リクエストされた商品",
+      "footnote": "管理画面でリクエストを開いて承認または却下してください。返金期限は管理画面で自動的に追跡されます。"
+    },
+    "body": {
+      "heading": "メール本文",
+      "editCode": "コードを編集",
+      "htmlLabel": "メール本文のHTML",
+      "previewHeading": "メールのプレビュー"
+    },
+    "variables": {
+      "heading": "変数",
+      "help": "変数を選択すると、カーソル位置に挿入されます。",
+      "insert": "{{label}}を挿入: {{description}}",
+      "groups": {
+        "customer": "お客様",
+        "order": "注文",
+        "withdrawal": "撤回",
+        "request": "リクエスト",
+        "shop": "ストア"
+      },
+      "tokens": {
+        "customer": {
+          "first_name": {
+            "label": "名",
+            "description": "お客様の名"
+          },
+          "last_name": {
+            "label": "姓",
+            "description": "お客様の姓"
+          },
+          "email": {
+            "label": "メールアドレス",
+            "description": "お客様のメールアドレス"
+          }
+        },
+        "order": {
+          "name": {
+            "label": "注文番号",
+            "description": "注文番号 (例: #2138)"
+          },
+          "id": {
+            "label": "注文ID",
+            "description": "注文の内部ID"
+          }
+        },
+        "withdrawal": {
+          "request_id": {
+            "label": "参照番号",
+            "description": "撤回リクエストの参照番号"
+          },
+          "submitted_at": {
+            "label": "送信日",
+            "description": "リクエストが送信された日時"
+          },
+          "reason": {
+            "label": "理由",
+            "description": "お客様が記載した理由 (ある場合)"
+          },
+          "selected_products": {
+            "label": "選択された商品 (テキスト)",
+            "description": "リクエストされた商品のカンマ区切りリスト"
+          }
+        },
+        "request": {
+          "status": {
+            "label": "ステータス",
+            "description": "リクエストの現在のステータス"
+          },
+          "url": {
+            "label": "リクエストのリンク",
+            "description": "アプリ内のリクエストへのリンク"
+          }
+        },
+        "shop": {
+          "name": {
+            "label": "ストア名",
+            "description": "ストアの名前"
+          },
+          "email": {
+            "label": "ストアのメールアドレス",
+            "description": "ストアの連絡先メールアドレス"
+          }
+        }
+      }
+    },
+    "validation": {
+      "email": "有効なメールアドレスを入力してください。",
+      "subjectRequired": "件名を入力してください。",
+      "subjectTooLong": "件名は{{max}}文字以内で入力してください。",
+      "bodyRequired": "メール本文を入力してください。"
+    }
+  },
+  "sample": {
+    "customerName": "山田 花子",
+    "items": {
+      "lamp": {
+        "title": "Fjord テーブルランプ",
+        "variant": "オーク / L"
+      },
+      "candleHolder": {
+        "title": "Tind キャンドルホルダー",
+        "variant": "真鍮"
+      }
+    },
+    "reason": "気が変わった"
+  },
+  "faqs": {
+    "pageTitle": "よくある質問",
+    "searchLabel": "よくある質問を検索",
+    "searchPlaceholder": "「返金」や「期限」などで質問を検索",
+    "noResults": "「{{query}}」に一致する質問はありません",
+    "noResultsHelp": "別のキーワードをお試しいただくか、下記からサポートにお問い合わせください。",
+    "showAnswer": "回答を表示: {{question}}",
+    "hideAnswer": "回答を非表示: {{question}}",
+    "groups": {
+      "gettingStarted": "はじめに",
+      "deadline": "撤回期限",
+      "requests": "リクエストの対応",
+      "emailsLanguages": "メールと言語"
+    },
+    "actions": {
+      "goToSettings": "設定に移動",
+      "goToRequests": "リクエストに移動",
+      "goToNotifications": "通知に移動"
+    },
+    "stillStuck": {
+      "heading": "他にご質問はありますか？",
+      "body": "サポートチームがすべてのメールを確認し、回答します。",
+      "link": "サポートに問い合わせる"
+    },
+    "items": {
+      "what-it-does": {
+        "question": "このアプリでは何ができますか？",
+        "paragraphs": [
+          "EU法の定めに従い、EUのお客様が購入を撤回するための明確な方法を提供します。また、すべてのリクエストを1か所で管理できます。",
+          "お客様は注文からフォームを開き、撤回したい商品を選択して確認します。各リクエストは、商品、理由、返金期限とともにリクエストページに表示されます。必要なメールはアプリが代わりに送信します。"
+        ]
+      },
+      "where-form-appears": {
+        "question": "お客様は撤回フォームをどこで見つけられますか？",
+        "paragraphs": [
+          "フォームは2か所に表示できます。どちらか一方、または両方を使用できます:"
+        ],
+        "bullets": [
+          "注文状況ページ: チェックアウト後や、注文確認メールのリンクを開いたときにお客様が表示するページです。",
+          "ストアのページ: 後から戻ってくるお客様のための、オンラインストア内のページです。お客様は注文番号とメールアドレスで注文を検索します。"
+        ],
+        "closing": "設定で各場所を有効にしてから、それぞれのアプリブロックを1回追加してください。ホームの設定ガイドで、追加済みのブロックを確認できます。"
+      },
+      "form-not-showing": {
+        "question": "お客様に撤回フォームが表示されないのはなぜですか？",
+        "paragraphs": [
+          "よくある原因から順に、次の点を確認してください:"
+        ],
+        "bullets": [
+          "フォームが無効になっているか、お客様が使用している場所が設定で有効になっていません。",
+          "そのページにアプリブロックがまだ追加されていません。",
+          "注文の配送先が対象国に含まれていません。",
+          "注文の撤回期間が終了しています。",
+          "注文がキャンセルされているか、すでに保留中のリクエストがあります。各注文で同時に保留できるリクエストは1件のみです。"
+        ]
+      },
+      "deadline": {
+        "question": "撤回期間はいつ始まり、いつ終わりますか？",
+        "paragraphs": [
+          "EU法では、期間は注文日ではなく、お客様が商品を受け取った日から始まります。お客様は商品の到着前であればいつでも撤回できます。"
+        ],
+        "bullets": [
+          "未発送: 期間はまだ始まっていないため、お客様はいつでも撤回できます。",
+          "配達済み: 期間は配送業者の配達日から始まり、{{withdrawalDays}}続きます。日数は設定で変更できます。",
+          "発送済みで配達日なし: アプリは配送業者の配達予定日を使用します。予定日がない場合は、発送日に推定配送日数を加えた日を使用します。"
+        ]
+      },
+      "transit-days": {
+        "question": "推定配送日数は何に使われますか？",
+        "paragraphs": [
+          "多くの配送業者はShopifyに配達日を送信しません。配達日がないと撤回期間の開始日がわからないため、アプリは発送日に推定配送日数を加算します。",
+          "荷物が届くまでのおおよその日数を設定してください。現在は{{transitDays}}です。わからない場合は長めに設定してください。短すぎると、お客様の撤回期間が早く終了してしまう可能性があります。"
+        ]
+      },
+      "split-shipments": {
+        "question": "注文が複数の荷物で発送された場合はどうなりますか？",
+        "paragraphs": [
+          "撤回期間は最後の荷物が届いた時点から始まります。お客様が撤回したためにアプリが保留している商品は発送されないため、対象外です。",
+          "注文の一部のみが発送された状態でお客様が撤回した場合、アプリはそれぞれを個別に処理します:"
+        ],
+        "bullets": [
+          "未発送の商品: 発送されないようアプリで保留できます。",
+          "発送済みの商品: アプリで返品を作成できます。"
+        ],
+        "closing": "お客様がすでに受け取った商品までキャンセルされてしまうため、アプリが一部発送済みの注文をキャンセルすることはありません。"
+      },
+      "after-submit": {
+        "question": "お客様がリクエストを送信すると、どうなりますか？",
+        "paragraphs": [
+          "次の順番で処理が行われます:"
+        ],
+        "bullets": [
+          "リクエストが「保留中」としてリクエストページに表示されます。",
+          "お客様に確認メールが届きます。撤回の証明となるため、このメールは必ず送信されます。",
+          "新しいリクエストの通知が有効な場合は、あなたにもメールが届きます。",
+          "自動化の設定が実行されます。たとえば、発送の保留や注文へのタグ付けを行えます。"
+        ]
+      },
+      "automation": {
+        "question": "自動化の設定では何ができますか？",
+        "paragraphs": [
+          "リクエストが届くと実行されます。アプリで行える処理は、注文が発送済みかどうかによって異なります:"
+        ],
+        "bullets": [
+          "注文の発送前: リクエストの確認中に何も発送されないよう、発送を保留します。注文全体をすぐにキャンセルして返金するよう設定することもできます。",
+          "注文の発送後: 発送済みの商品について、Shopifyで返品を作成します。",
+          "一部発送済み: 両方が適用されます。リクエストされた商品のうち未発送のものだけを保留し、発送済みのものについて返品を作成します。"
+        ],
+        "closing": "いずれの場合も、注文にタグを付けることもできます。自動化によってリクエストが承認または却下されることはありません。判断するのは常にあなたです。"
+      },
+      "partial-withdrawal": {
+        "question": "お客様は一部の商品のみを撤回できますか？",
+        "paragraphs": [
+          "はい。お客様は撤回する商品を選択できます。リクエスト、返金、返品にはそれらの商品のみが含まれます。元の配送料は、お客様が注文全体を撤回した場合にのみ返金されます。",
+          "各注文で同時に保留できるリクエストは1件です。承認または却下した後、お客様は別の商品について新しいリクエストを送信できます。"
+        ]
+      },
+      "reason": {
+        "question": "お客様は理由を伝える必要がありますか？",
+        "paragraphs": [
+          "いいえ。EU法では撤回に理由は必要ないため、理由欄は常に任意です。設定では、提示する理由を選択したり、理由を尋ねないようにしたりできます。"
+        ]
+      },
+      "refund": {
+        "question": "撤回の返金はどのように行いますか？",
+        "paragraphs": [
+          "リクエストページからリクエストを開きます。返金方法は商品の状況によって異なります:"
+        ],
+        "bullets": [
+          "返品に含まれていない商品: 「返金」を選択します。未発送の商品は注文から削除されるため、発送されません。",
+          "返品に含まれている商品: 商品が返送されたら、返品の「処理して返金」を選択します。お客様に返金され、返品がクローズされます。",
+          "まだ何も発送されていない場合: 「その他の操作」から注文全体をキャンセルして返金することもできます。"
+        ],
+        "closing": "EU法では、撤回から{{refundDays}}以内に返金する必要があります。残り時間はリクエストページで確認できます。リクエストを承認する前に返金してください。"
+      },
+      "returns": {
+        "question": "返品はどのような仕組みですか？",
+        "paragraphs": [
+          "返品は、お客様が返送する商品をShopifyに伝えるものです。リクエストが届いたときにアプリで作成するか、リクエストページで「返品を作成」を選択して作成できます。",
+          "返品には発送済みの商品のみが含まれます。返品を作成しただけではお客様に返金されません。商品が返送されたら、返品の「処理して返金」を選択してください。"
+        ]
+      },
+      "decision-lock": {
+        "question": "リクエストを承認または却下すると、注文に対する操作が無効になるのはなぜですか？",
+        "paragraphs": [
+          "承認または却下すると、リクエストは完了します。その後は、注文が誤って変更されないよう、返金、保留、返品、キャンセルが無効になります。そのため、承認する前に返金してください。",
+          "判断すると、アプリが設定した発送の保留も解除されます。解除に失敗した場合でも、「発送の保留を解除」を選択できます。"
+        ]
+      },
+      "emails": {
+        "question": "アプリはどのようなメールを送信しますか？編集はできますか？",
+        "paragraphs": [
+          "アプリは{{emailCount}}種類のメールを送信します。すべて通知ページで編集できます:"
+        ],
+        "bullets": [
+          "お客様への撤回確認: お客様がリクエストを送信したときに送信されます。常に有効です。",
+          "新しいリクエストの通知: ストアの連絡先メールアドレスに送信されます。無効にできます。",
+          "撤回の承認: リクエストを承認したときにお客様に送信されます。事前に確認することも、無効にすることもできます。",
+          "撤回の却下: リクエストを却下したときにお客様に送信されます。事前に確認することも、無効にすることもできます。"
+        ],
+        "closing": "各メールの件名と本文はすべての言語で編集でき、注文番号やお客様の名前などの変数も追加できます。入力に合わせてプレビューが更新されます。"
+      },
+      "countries-languages": {
+        "question": "アプリはどの国と言語に対応していますか？",
+        "paragraphs": [
+          "デフォルトでは、すべてのEU加盟国が対象です。一部の国にのみ販売している場合は、設定で「特定の国」を選択してください。",
+          "フォームは{{languageCount}}言語に対応しています: {{languages}}。お客様にはご自身の言語で表示されます。",
+          "基本言語は英語です。翻訳欄を空欄にした場合、お客様には英語のテキストが表示されます。"
+        ]
+      }
+    }
+  },
+  "featureRequest": {
+    "pageTitle": "機能をリクエストする",
+    "intro": "アプリに追加してほしい機能をお聞かせください。すべてのリクエストに目を通しています。",
+    "sentHeading": "機能リクエストを送信しました",
+    "sentBody": "アイデアをお寄せいただきありがとうございます。",
+    "firstName": "名",
+    "lastName": "姓",
+    "email": "メールアドレス",
+    "request": "どのような機能をご希望ですか？",
+    "requestPlaceholder": "機能の内容と、ストアにどのように役立つかをご記入ください",
+    "submit": "リクエストを送信"
+  },
+  "pricing": {
+    "pageTitle": "料金プラン",
+    "pricePerMonth": "月額{{price}}",
+    "currentPlan": "現在のプラン",
+    "choosePlan": "{{plan}}を選択",
+    "switchedToast": "{{plan}}プランに変更しました",
+    "plans": {
+      "free": {
+        "name": "Free",
+        "features": [
+          "撤回リクエストは月10件まで",
+          "メール通知"
+        ]
+      },
+      "starter": {
+        "name": "Starter",
+        "features": [
+          "撤回リクエスト無制限",
+          "カスタムフォーム項目",
+          "メール通知"
+        ]
+      },
+      "pro": {
+        "name": "Pro",
+        "features": [
+          "Starterのすべての機能",
+          "優先サポート",
+          "自動返金"
+        ]
+      }
+    },
+    "switchError": "プランを変更できませんでした"
+  }
+}

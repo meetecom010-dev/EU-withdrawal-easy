@@ -1,0 +1,1282 @@
+{
+  "common": {
+    "add": "Přidat",
+    "backToHome": "Zpět na úvod",
+    "cancel": "Zrušit",
+    "delete": "Smazat",
+    "discard": "Zahodit",
+    "done": "Hotovo",
+    "dayCount_one": "{{count}} den",
+    "dayCount_few": "{{count}} dny",
+    "dayCount_many": "{{count}} dne",
+    "dayCount_other": "{{count}} dní",
+    "emptyValue": "—",
+    "noMatches": "Pro „{{query}}“ nebyly nalezeny žádné výsledky.",
+    "preview": "Náhled",
+    "remove": "Odebrat",
+    "save": "Uložit",
+    "verified": "Ověřeno"
+  },
+  "nav": {
+    "home": "Úvod",
+    "withdrawalRequests": "Žádosti",
+    "formSetup": "Nastavení",
+    "emailTemplates": "Oznámení",
+    "pricing": "Ceník"
+  },
+  "errors": {
+    "generic": "Něco se pokazilo. Zkuste to znovu.",
+    "requestFailed": "Něco se pokazilo (chyba {{status}}). Zkuste to znovu.",
+    "methodNotAllowed": "Tato akce není podporována.",
+    "unknownAction": "Tato akce není podporována.",
+    "noValidFields": "Není co aktualizovat.",
+    "emailServiceUnavailable": "Nepodařilo se připojit k e-mailové službě. Zkuste to znovu za několik minut.",
+    "emailServiceNotConfigured": "Odesílání e-mailů zatím není nastavené. Obraťte se na podporu.",
+    "requestNotFound": "Tato žádost o odstoupení neexistuje nebo byla smazána.",
+    "requestDecided": "Tato žádost již byla schválena nebo zamítnuta, takže akce s objednávkou už nejsou k dispozici.",
+    "unknownDecision": "Vyberte, zda chcete tuto žádost schválit, nebo zamítnout.",
+    "invalidStatus": "Vyberte platný stav této žádosti.",
+    "noteRequired": "Zadejte poznámku.",
+    "orderNotFound": "Tuto objednávku nelze v Shopify najít.",
+    "invalidEmail": "Zadejte platnou e-mailovou adresu.",
+    "featureRequestIncomplete": "Před odesláním návrhu vyplňte všechna pole.",
+    "senderCodeRequired": "Zadejte ověřovací kód z e-mailu.",
+    "senderNotFound": "Tuto adresu odesílatele se nepodařilo najít. Odeberte ji a přidejte znovu, abyste získali nový kód.",
+    "senderNotStarted": "Nejprve ověřte e-mail odesílatele.",
+    "senderIdMissing": "Tuto adresu odesílatele se nepodařilo zaregistrovat. Zkuste to znovu.",
+    "domainInvalid": "Zadejte platnou doménu, například vasobchod.cz.",
+    "domainFreeProvider": "Bezplatné e-mailové služby, jako je Gmail nebo Yahoo, nelze ověřit. Použijte raději doménu svého obchodu."
+  },
+  "auth": {
+    "login": {
+      "heading": "Přihlásit se",
+      "shopLabel": "Doména obchodu",
+      "shopDetails": "example.myshopify.com",
+      "submit": "Přihlásit se",
+      "missingShop": "Pro přihlášení zadejte doménu svého obchodu.",
+      "invalidShop": "Zadejte platnou doménu obchodu, například example.myshopify.com."
+    }
+  },
+  "status": {
+    "pending": "Čeká na vyřízení",
+    "approved": "Schváleno",
+    "rejected": "Zamítnuto"
+  },
+  "sourceInline": {
+    "order_status": "stránky stavu objednávky",
+    "standalone_page": "stránky vašeho obchodu"
+  },
+  "placements": {
+    "orderStatus": {
+      "label": "Stránka stavu objednávky",
+      "details": "Zobrazit formulář pro odstoupení na stránce stavu objednávky, kterou zákazníci vidí po dokončení objednávky."
+    },
+    "storefront": {
+      "label": "Stránka obchodu",
+      "details": "Zobrazit formulář pro odstoupení na samostatné stránce v šabloně, aby ho zákazníci našli i mimo stránku stavu objednávky."
+    }
+  },
+  "orderStatus": {
+    "financial": {
+      "PENDING": "Platba čeká",
+      "AUTHORIZED": "Autorizováno",
+      "PARTIALLY_PAID": "Částečně zaplaceno",
+      "PAID": "Zaplaceno",
+      "PARTIALLY_REFUNDED": "Částečně refundováno",
+      "REFUNDED": "Refundováno",
+      "VOIDED": "Stornováno",
+      "EXPIRED": "Platnost vypršela"
+    },
+    "fulfillment": {
+      "UNFULFILLED": "Nevyřízeno",
+      "PENDING_FULFILLMENT": "Vyřízení čeká",
+      "OPEN": "Otevřeno",
+      "IN_PROGRESS": "Probíhá",
+      "ON_HOLD": "Pozastaveno",
+      "PARTIALLY_FULFILLED": "Částečně vyřízeno",
+      "FULFILLED": "Vyřízeno",
+      "RESTOCKED": "Vráceno na sklad",
+      "SCHEDULED": "Naplánováno"
+    },
+    "return": {
+      "REQUESTED": "Vyžádáno",
+      "OPEN": "Otevřeno",
+      "CLOSED": "Uzavřeno",
+      "DECLINED": "Odmítnuto",
+      "CANCELED": "Zrušeno"
+    }
+  },
+  "stats": {
+    "heading": "Přehled",
+    "description": "Souhrn vašich žádostí o odstoupení",
+    "viewRequests": "Zobrazit žádosti",
+    "total": "Žádosti celkem",
+    "today": "Odesláno dnes",
+    "pending": "Čeká na vyřízení",
+    "closed": "Uzavřeno",
+    "requestCount_one": "{{count}} žádost",
+    "requestCount_few": "{{count}} žádosti",
+    "requestCount_many": "{{count}} žádosti",
+    "requestCount_other": "{{count}} žádostí"
+  },
+  "home": {
+    "pageTitle": "Úvod",
+    "loadError": "Nástěnku se nepodařilo načíst",
+    "saveErrorHeading": "Změnu se nepodařilo uložit",
+    "saveErrorAction": "Zkuste to znovu, nebo změnu proveďte v Nastavení.",
+    "setupBanner": {
+      "heading_one": "Zbývá {{count}} krok nastavení",
+      "heading_few": "Zbývají {{count}} kroky nastavení",
+      "heading_many": "Zbývá {{count}} kroku nastavení",
+      "heading_other": "Zbývá {{count}} kroků nastavení",
+      "body": "Dokončete tyto kroky, aby byl formulář pro odstoupení připravený: {{steps}}."
+    },
+    "setupGuide": {
+      "heading": "Průvodce nastavením",
+      "description": "Pomocí tohoto průvodce zveřejníte formulář pro odstoupení ve svém obchodě.",
+      "progress": "Dokončeno {{completed}} z {{total}} úkolů",
+      "dismiss": "Zavřít průvodce nastavením",
+      "collapse": "Sbalit průvodce nastavením",
+      "expand": "Rozbalit průvodce nastavením",
+      "showStep": "Zobrazit podrobnosti: {{step}}",
+      "hideStep": "Skrýt podrobnosti: {{step}}",
+      "steps": {
+        "form": {
+          "label": "Zapněte formulář pro odstoupení",
+          "description": "Zapněte formulář a vyberte, kde ho zákazníci uvidí. Pole, důvody a texty už mají výchozí znění. Kdykoli je můžete změnit v Nastavení.",
+          "checkbox": "Zapnout formulář pro odstoupení",
+          "cta": "Přejít do Nastavení",
+          "placementHeading": "Vyberte, kde zákazníci formulář uvidí",
+          "placementDescription": "Vyberte alespoň jedno místo. Každé místo potřebuje vlastní blok aplikace, než zákazníci formulář uvidí."
+        },
+        "blocks": {
+          "label": "Přidejte do obchodu bloky aplikace",
+          "description": "Přidejte blok aplikace pro každé místo, které jste vybrali v předchozím kroku.",
+          "locked": "Dokončete krok {{step}} a vyberte, kde se formulář zobrazí. Potom zde můžete přidat bloky aplikace.",
+          "surfaces": {
+            "orderStatus": "Stránka stavu objednávky",
+            "theme": "Stránka obchodu"
+          },
+          "live": {
+            "orderStatus": "Blok aplikace je aktivní na stránce stavu objednávky.",
+            "theme": "Blok aplikace je aktivní na stránce vašeho obchodu."
+          }
+        }
+      }
+    },
+    "help": {
+      "heading": "Nápověda a zdroje",
+      "support": {
+        "title": "E-mailová podpora",
+        "description": "Máte dotaz? Náš tým podpory vám pomůže.",
+        "link": "Kontaktovat podporu"
+      },
+      "faqs": {
+        "title": "Časté dotazy",
+        "description": "Najděte odpovědi na časté dotazy k nastavení a používání aplikace.",
+        "link": "Zobrazit časté dotazy"
+      },
+      "featureRequest": {
+        "title": "Návrhy funkcí",
+        "description": "Máte nápad pro aplikaci? Napište nám, co byste chtěli.",
+        "link": "Navrhnout funkci"
+      }
+    }
+  },
+  "blockSetup": {
+    "autoUpdate": "Tato zpráva sama zmizí několik sekund po uložení bloku aplikace.",
+    "addAppBlock": "Přidat blok aplikace",
+    "orderStatus": {
+      "heading": "Přidejte blok aplikace na stránku stavu objednávky",
+      "body": "Zákazníci formulář pro odstoupení na stránce stavu objednávky neuvidí, dokud nepřidáte blok aplikace. Postup:",
+      "steps": {
+        "open": "Níže vyberte <strong>Přidat blok aplikace</strong>. Stránka stavu objednávky se otevře v editoru pokladny.",
+        "add": "V postranním panelu vyberte <strong>Přidat blok aplikace</strong>.",
+        "choose": "Vyberte <strong>Formulář pro odstoupení</strong>.",
+        "save": "Vyberte <strong>Uložit</strong>."
+      }
+    },
+    "storefront": {
+      "heading": "Přidejte blok aplikace na stránku obchodu",
+      "body": "Vyberte šablonu stránky a potom Přidat blok aplikace. Otevře se editor šablony s formulářem pro odstoupení již přidaným jako sekce.",
+      "templateLabel": "Šablona stránky",
+      "templates": {
+        "page": "Výchozí stránka",
+        "index": "Domovská stránka",
+        "product": "Stránky produktů",
+        "collection": "Stránky kolekcí",
+        "cart": "Stránka košíku"
+      },
+      "steps": {
+        "open": "Vyberte <strong>Přidat blok aplikace</strong> a otevře se editor šablony s přidanou sekcí.",
+        "move": "Přetáhněte sekci na požadované místo na stránce.",
+        "save": "Vyberte <strong>Uložit</strong>."
+      }
+    }
+  },
+  "onboarding": {
+    "pageTitle": "Začínáme",
+    "heading": "Připravte svůj obchod na odstoupení od smlouvy v EU",
+    "intro_one": "Dokončete tento {{count}} krok a nabídněte zákazníkům z EU zákonný způsob, jak odstoupit od nákupu.",
+    "intro_few": "Dokončete tyto {{count}} kroky a nabídněte zákazníkům z EU zákonný způsob, jak odstoupit od nákupu.",
+    "intro_many": "Dokončete tyto kroky ({{count}}) a nabídněte zákazníkům z EU zákonný způsob, jak odstoupit od nákupu.",
+    "intro_other": "Dokončete těchto {{count}} kroků a nabídněte zákazníkům z EU zákonný způsob, jak odstoupit od nákupu.",
+    "stepBadge": "Krok {{current}} z {{total}}",
+    "completedToast": "Nastavení dokončeno",
+    "steps": {
+      "welcome": {
+        "title": "Vítejte",
+        "description": "Co aplikace dělá"
+      },
+      "form": {
+        "title": "Formulář pro odstoupení",
+        "description": "Zapněte formulář"
+      }
+    },
+    "actions": {
+      "getStarted": "Začít",
+      "continue": "Pokračovat",
+      "finish": "Dokončit nastavení",
+      "skip": "Přeskočit nastavení",
+      "back": "Zpět"
+    },
+    "help": {
+      "heading": "Potřebujete pomoc?",
+      "body": "Máte dotaz? <supportLink>Kontaktujte podporu</supportLink>."
+    },
+    "welcome": {
+      "heading": "Vítejte v aplikaci {{appName}}",
+      "setupTime": "Zabere asi 1 minutu",
+      "law": "Od 19. června 2026 musí obchody, které prodávají zákazníkům v EU, nabízet u každé objednávky dvoukrokový způsob odstoupení od smlouvy (směrnice EU 2023/2673, článek 11a). Samotné zásady vracení zboží nestačí.",
+      "app": "{{appName}} přidá tlačítko pro odstoupení na stránku stavu objednávky, na stránku vašeho e-shopu nebo na obě. Zajistí potvrzení ve 2 krocích a odešle povinný potvrzovací e-mail. Všechny žádosti spravujete na jednom místě.",
+      "imageAlt": "Zákazník odstupuje od objednávky",
+      "requirementsHeading": "Co zákon vyžaduje",
+      "requirements": {
+        "button": "Jasně označené tlačítko pro odstoupení, které zákazníci snadno najdou",
+        "twoStep": "Proces ve 2 krocích: zákazník odstoupení odešle a poté ho potvrdí",
+        "email": "Automatický potvrzovací e-mail, který si zákazník může uschovat"
+      },
+      "penaltyHeading": "Co se stane, pokud požadavky nesplníte",
+      "penalty": "Pokud tlačítko pro odstoupení chybí nebo nefunguje, zákon prodlužuje {{days}}denní lhůtu pro odstoupení. Zákazníci pak mají na odstoupení od každé dotčené objednávky 12 měsíců a {{days}} dní."
+    },
+    "form": {
+      "heading": "Zapněte formulář pro odstoupení",
+      "body": "Zákazníci odstoupení odešlou a potom ho potvrdí v samostatném kroku, jak vyžaduje právo EU. Formulář obsahuje výchozí právní texty. Zákazníci mají na odstoupení {{days}} od doručení.",
+      "switch": "Zapnout formulář pro odstoupení",
+      "later": "To vše můžete později změnit v Nastavení.",
+      "loadError": "Nastavení formuláře se nepodařilo načíst. Nastavení můžete dokončit teď a formulář zapnout později v Nastavení.",
+      "saveError": "Volby formuláře se nepodařilo uložit. Zkuste to znovu, nebo nastavení dokončete bez nich a nastavte je později v Nastavení.",
+      "finishWithoutSaving": "Dokončit bez uložení",
+      "placementError": "Vyberte alespoň jedno místo, nebo formulář vypněte."
+    },
+    "finishError": "Nastavení se nepodařilo dokončit. Zkuste to znovu."
+  },
+  "formSetup": {
+    "pageTitle": "Nastavení",
+    "loadError": "Nastavení se nepodařilo načíst",
+    "saveError": "Nastavení se nepodařilo uložit",
+    "savedToast": "Nastavení uloženo",
+    "enable": {
+      "heading": "Formulář pro odstoupení",
+      "description": "Vyberte, zda zákazníci mohou odesílat žádosti o odstoupení a kde formulář uvidí.",
+      "checkbox": "Zapnout formulář pro odstoupení",
+      "details": "Pokud je tato možnost vypnutá, zákazníci nemohou žádosti o odstoupení odeslat nikde.",
+      "orderStatus": "Zobrazit na stránce stavu objednávky",
+      "storefront": "Zobrazit na stránce obchodu"
+    },
+    "countries": {
+      "heading": "Způsobilé země",
+      "description": "Zákazníci uvidí formulář pro odstoupení, jen pokud se jejich objednávka odesílá do jedné z těchto zemí.",
+      "all": "Všechny země EU ({{count}}) (doporučeno)",
+      "allDetails": "Právo na odstoupení od smlouvy platí v celé EU.",
+      "specific": "Vybrané země",
+      "specificDetails": "Vyberte země níže. Kdykoli to můžete změnit.",
+      "pickerLabel": "Země",
+      "pickerPlaceholder": "Hledat země"
+    },
+    "content": {
+      "heading": "Obsah formuláře",
+      "tabs": {
+        "step1": "1. Podrobnosti",
+        "confirm": "2. Potvrzení",
+        "done": "3. Hotovo"
+      },
+      "language": "Jazyk",
+      "languageDetails": "Vyberte jazyk, ve kterém chcete upravit obsah formuláře. Každý jazyk se ukládá zvlášť.",
+      "beforeDelivery": {
+        "heading": "Před doručením",
+        "description": "Zobrazuje se na první obrazovce formuláře a v kroku Podrobnosti, dokud objednávka není doručena, a to i během přepravy."
+      },
+      "afterDelivery": {
+        "heading": "Po doručení",
+        "description": "Zobrazí se místo toho, jakmile Shopify označí objednávku jako doručenou."
+      },
+      "title": "Nadpis",
+      "description": "Popis",
+      "itemHeading": "Nadpis výběru položek",
+      "customerDetails": {
+        "heading": "Údaje zákazníka",
+        "description": "Vyplní se z objednávky. Zákazníci tato pole nemohou upravit.",
+        "locked": "Uzamčeno",
+        "fullName": "Celé jméno",
+        "email": "E-mail",
+        "orderNumber": "Číslo objednávky"
+      },
+      "reason": {
+        "heading": "Důvod odstoupení",
+        "checkbox": "Ptát se na důvod",
+        "details": "Zákazníci nikdy nemusí uvádět důvod. Právo EU vyžaduje, aby toto pole bylo nepovinné.",
+        "label": "Popisek pole s důvodem",
+        "optionsHeading": "Možnosti důvodu",
+        "optionsHelp": "Zákazníci vybírají z tohoto seznamu. Možnosti přidejte, odeberte nebo přeformulujte tak, aby odpovídaly vašemu obchodu. Na konec se vždy přidá možnost „Jiné“ s textovým polem.",
+        "removeOption": "Odebrat {{option}}",
+        "addLabel": "Přidat důvod",
+        "addPlaceholder": "Například: Objednáno omylem",
+        "translatedHelp": "Přeložte každou možnost. Chcete-li možnosti přidat nebo odebrat, přepněte na angličtinu.",
+        "translatedEmpty": "Nejprve přidejte možnosti důvodu v angličtině."
+      },
+      "continueButton": "Popisek tlačítka Pokračovat",
+      "confirm": {
+        "heading": "Nadpis potvrzení",
+        "messageBefore": "Zpráva před doručením",
+        "messageAfter": "Zpráva po doručení",
+        "declaration": "Prohlášení",
+        "button": "Popisek tlačítka Potvrdit"
+      },
+      "done": {
+        "titleBefore": "Nadpis před doručením",
+        "messageBefore": "Zpráva před doručením",
+        "titleAfter": "Nadpis po doručení",
+        "messageAfter": "Zpráva po doručení"
+      }
+    },
+    "automation": {
+      "heading": "Automatizace",
+      "description": "Vyberte, co aplikace udělá, když zákazník odešle žádost o odstoupení.",
+      "beforeShip": {
+        "heading": "Před odesláním objednávky",
+        "description": "Platí, když žádost přijde dříve, než byla odeslána jakákoli položka.",
+        "hold": "Pozastavit vyřízení kvůli kontrole",
+        "holdDetails": "Pozastaví vyřízení, dokud žádost neschválíte nebo nezamítnete. Po vašem rozhodnutí se pozastavení uvolní.",
+        "tagDetails": "Označte štítkem objednávky, ke kterým přišla žádost před odesláním, aby je vaši zaměstnanci našli v seznamu objednávek."
+      },
+      "fallback": {
+        "label": "Co se stane s objednávkou",
+        "hold": "Ponechat ji pozastavenou, dokud žádost neschválíte nebo nezamítnete",
+        "cancelNow": "Ihned zrušit celou objednávku a vrátit peníze",
+        "releaseN": "Uvolnit pozastavení po stanoveném počtu dní",
+        "cancelN": "Zrušit celou objednávku a vrátit peníze po stanoveném počtu dní",
+        "cancelWarning": "Tím se zruší celá objednávka a vrátí se peníze za ni, i když zákazník odstoupil jen od některých položek. Shopify zákazníkovi pošle e-mail o zrušení.",
+        "days": "Počet dní"
+      },
+      "afterDelivery": {
+        "heading": "Po odeslání objednávky",
+        "description": "Platí, když žádost přijde po odeslání alespoň jedné položky, i když ještě nebyla doručena. Všechny žádosti se i tak zobrazí na stránce Žádosti.",
+        "createReturn": "Vytvořit vratku",
+        "createReturnDetails": "Vytvořit v Shopify vratku pro požadované položky, které už byly odeslány.",
+        "tagDetails": "Označte štítkem objednávky, ke kterým přišla žádost po odeslání."
+      },
+      "tag": {
+        "checkbox": "Označit objednávku štítkem",
+        "label": "Štítky objednávky",
+        "placeholder": "Přidat štítek"
+      }
+    },
+    "deadline": {
+      "heading": "Lhůta pro odstoupení",
+      "description": "Lhůta pro odstoupení začíná doručením objednávky, ne jejím vytvořením. Právo EU vyžaduje alespoň {{days}}.",
+      "days": "Počet dní na odstoupení po doručení",
+      "daysDetails": "Kolik času mají zákazníci na odstoupení po doručení objednávky.",
+      "transit": "Odhadovaná doba přepravy (dny)",
+      "transitDetails": "Použije se, když dopravce neposkytne datum doručení ani odhad. Aplikace tyto dny přičte k datu odeslání."
+    },
+    "validation": {
+      "countryMode": "Vyberte, které země jsou způsobilé.",
+      "euCountries": "Vyberte alespoň jednu zemi.",
+      "title": "Zadejte nadpis.",
+      "description": "Zadejte popis.",
+      "itemHeading": "Zadejte nadpis seznamu položek.",
+      "continueButton": "Zadejte popisek tlačítka Pokračovat.",
+      "heading": "Zadejte nadpis.",
+      "confirmMessage": "Zadejte potvrzovací zprávu.",
+      "declaration": "Zadejte prohlášení, které musí zákazníci přijmout.",
+      "confirmButton": "Zadejte popisek tlačítka Potvrdit.",
+      "message": "Zadejte zprávu.",
+      "reasonLabel": "Zadejte popisek pole s důvodem.",
+      "reasonOptions": "Přidejte alespoň jeden důvod.",
+      "reasonOptionTranslation": "Zadejte překlad tohoto důvodu.",
+      "fallback": "Vyberte, co se stane s objednávkou.",
+      "daysRange": "Zadejte počet dní od {{min}} do {{max}}.",
+      "tags": "Přidejte alespoň jeden štítek, nebo označování štítky vypněte.",
+      "afterDeliveryAction": "Vyberte, co se stane po odeslání objednávky."
+    },
+    "preview": {
+      "heading": "Živý náhled",
+      "compliantBadge": "Splňuje požadavek 2 kroků",
+      "surfaceLabel": "Náhled",
+      "surfaces": {
+        "orderStatus": "Stránka stavu objednávky",
+        "theme": "Stránka obchodu"
+      },
+      "stageLabel": "Stav doručení",
+      "stages": {
+        "beforeDelivery": "Zatím nedoručeno",
+        "delivered": "Doručeno"
+      },
+      "banner": {
+        "orderStatus": "Takto formulář uvidí zákazníci na stránce stavu objednávky. Vyzkoušejte ho pomocí tlačítek, nebo přejděte na konkrétní krok pomocí karet v části Obsah formuláře.",
+        "theme": "Takto formulář uvidí zákazníci na stránce vašeho obchodu. Začíná krokem „Najděte svou objednávku“, protože návštěvníci obchodu nejsou přihlášení."
+      },
+      "restart": "Spustit náhled znovu",
+      "position": {
+        "entry": "Úvodní karta",
+        "lookup": "Najděte svou objednávku",
+        "step": "Krok {{current}} z {{total}}"
+      },
+      "storefront": {
+        "start": "Zahájit žádost o odstoupení",
+        "findOrderHeading": "Najděte svou objednávku",
+        "findOrderBody": "Zadejte údaje objednávky a zahajte žádost o odstoupení.",
+        "fullName": "Celé jméno",
+        "email": "E-mail",
+        "orderNumber": "Číslo objednávky",
+        "continue": "Pokračovat",
+        "steps": {
+          "step1": "Podrobnosti",
+          "confirm": "Potvrzení",
+          "done": "Hotovo"
+        },
+        "stepOf": "Krok {{current}} z {{total}}",
+        "stepProgress": "Krok {{current}} z {{total}}: {{label}}",
+        "reasonPlaceholder": "Vyberte důvod (nepovinné)",
+        "otherReason": "Jiné",
+        "yourReason": "Váš důvod",
+        "yourReasonPlaceholder": "Napište nám důvod",
+        "selectItem": "Pro pokračování vyberte alespoň jednu položku.",
+        "itemsToWithdraw": "Položky k odstoupení ({{count}})",
+        "selectedTotal": "Celkem za vybrané položky",
+        "previous": "Zpět",
+        "submittedOn": "Odesláno {{date}}"
+      }
+    }
+  },
+  "requests": {
+    "pageTitle": "Žádosti",
+    "searchLabel": "Hledat žádosti o odstoupení",
+    "searchPlaceholder": "Hledat podle čísla objednávky, jména zákazníka nebo e-mailu",
+    "export": "Exportovat",
+    "exportSelected": "Exportovat vybrané",
+    "tabs": {
+      "all": "Vše",
+      "withCount": "{{label}} ({{count}})"
+    },
+    "empty": {
+      "imageAlt": "",
+      "heading": "Zatím žádné žádosti o odstoupení",
+      "body": "Zde se zobrazí žádosti o odstoupení od vašich zákazníků.",
+      "filteredHeading": "Nenalezeny žádné žádosti o odstoupení",
+      "filteredBody": "Zkuste změnit hledaný výraz nebo filtr."
+    },
+    "table": {
+      "selectAll": "Vybrat všechny žádosti o odstoupení",
+      "selectRow": "Vybrat objednávku {{order}}",
+      "selectedCount": "Vybráno: {{count}}",
+      "order": "Objednávka",
+      "customer": "Zákazník",
+      "items": "Položky",
+      "value": "Hodnota",
+      "status": "Stav",
+      "submitted": "Odesláno",
+      "actions": "Akce",
+      "itemCount_one": "{{count}} položka",
+      "itemCount_few": "{{count}} položky",
+      "itemCount_many": "{{count}} položky",
+      "itemCount_other": "{{count}} položek",
+      "viewRow": "Zobrazit žádost k objednávce {{order}}",
+      "deleteRow": "Smazat žádost k objednávce {{order}}"
+    },
+    "delete": {
+      "heading_one": "Smazat žádost o odstoupení?",
+      "heading_few": "Smazat {{count}} žádosti o odstoupení?",
+      "heading_many": "Smazat žádosti o odstoupení ({{count}})?",
+      "heading_other": "Smazat {{count}} žádostí o odstoupení?",
+      "body_one": "Tato žádost o odstoupení bude trvale smazána. Tuto akci nelze vrátit zpět.",
+      "body_few": "Tyto {{count}} žádosti o odstoupení budou trvale smazány. Tuto akci nelze vrátit zpět.",
+      "body_many": "Žádosti o odstoupení ({{count}}) budou trvale smazány. Tuto akci nelze vrátit zpět.",
+      "body_other": "Těchto {{count}} žádostí o odstoupení bude trvale smazáno. Tuto akci nelze vrátit zpět.",
+      "confirm_one": "Smazat žádost",
+      "confirm_few": "Smazat žádosti",
+      "confirm_many": "Smazat žádosti",
+      "confirm_other": "Smazat žádosti",
+      "toast_one": "Žádost o odstoupení byla smazána",
+      "toast_few": "Byly smazány {{count}} žádosti o odstoupení",
+      "toast_many": "Smazané žádosti o odstoupení: {{count}}",
+      "toast_other": "Bylo smazáno {{count}} žádostí o odstoupení"
+    },
+    "csv": {
+      "filename": "zadosti-o-odstoupeni-{{date}}.csv",
+      "order": "Objednávka",
+      "customerName": "Jméno zákazníka",
+      "customerEmail": "E-mail zákazníka",
+      "country": "Země",
+      "items": "Položky",
+      "value": "Hodnota",
+      "reason": "Důvod",
+      "status": "Stav",
+      "submitted": "Odesláno",
+      "decided": "Rozhodnuto"
+    }
+  },
+  "requestDetail": {
+    "pageTitle": "Žádost o odstoupení",
+    "backLink": "Žádosti",
+    "submittedLine": "Odesláno {{date}} ze {{source}}",
+    "previous": "Předchozí žádost",
+    "next": "Další žádost",
+    "badges": {
+      "canceled": "Zrušeno",
+      "onHold": "Pozastaveno",
+      "return": "Vratka: {{status}}"
+    },
+    "actions": {
+      "refund": "Vrátit peníze",
+      "more": "Další akce",
+      "cancelOrder": "Zrušit objednávku",
+      "placeHold": "Pozastavit vyřízení",
+      "releaseHold": "Uvolnit pozastavení vyřízení",
+      "createReturn": "Vytvořit vratku",
+      "processReturn": "Zpracovat a vrátit peníze",
+      "viewOrder": "Zobrazit objednávku"
+    },
+    "banners": {
+      "orderUnavailableHeading": "Podrobnosti objednávky nejsou k dispozici",
+      "orderUnavailableBody": "{{error}} Akce s objednávkou nelze použít, dokud se nenačtou podrobnosti objednávky.",
+      "actionFailedHeading": "Tuto akci se nepodařilo dokončit",
+      "actionFailedAction": "Podrobnosti najdete níže v části Aktivita.",
+      "canceled": "Tato objednávka byla zrušena. Akce s objednávkou už nejsou k dispozici."
+    },
+    "deadline": {
+      "heading": "Lhůta pro vrácení peněz",
+      "pendingLabel": "Zbývající čas na rozhodnutí a vrácení peněz",
+      "decidedLabel": "Rozhodnutí",
+      "badges": {
+        "overdue": "Po lhůtě",
+        "actionNeeded": "Vyžaduje akci",
+        "onTime": "Včas"
+      },
+      "daysLeft_one": "Zbývá {{count}} den",
+      "daysLeft_few": "Zbývají {{count}} dny",
+      "daysLeft_many": "Zbývá {{count}} dne",
+      "daysLeft_other": "Zbývá {{count}} dní",
+      "daysOverdue_one": "{{count}} den po lhůtě",
+      "daysOverdue_few": "{{count}} dny po lhůtě",
+      "daysOverdue_many": "{{count}} dne po lhůtě",
+      "daysOverdue_other": "{{count}} dní po lhůtě",
+      "daysEarly_one": "{{count}} den před koncem lhůty",
+      "daysEarly_few": "{{count}} dny před koncem lhůty",
+      "daysEarly_many": "{{count}} dne před koncem lhůty",
+      "daysEarly_other": "{{count}} dní před koncem lhůty",
+      "daysLate_one": "{{count}} den po konci lhůty",
+      "daysLate_few": "{{count}} dny po konci lhůty",
+      "daysLate_many": "{{count}} dne po konci lhůty",
+      "daysLate_other": "{{count}} dní po konci lhůty",
+      "pending": "Od odeslání žádosti máte {{days}} na rozhodnutí a vrácení peněz. Lhůta končí {{date}}.",
+      "pendingOverdue": "Lhůta skončila {{date}}. Vraťte zákazníkovi peníze co nejdříve.",
+      "decidedOnTime": "Rozhodnuto v rámci {{windowDays}}denní lhůty pro vrácení peněz. Lhůta končila {{date}}.",
+      "decidedLate": "Rozhodnuto po uplynutí lhůty pro vrácení peněz ({{date}})."
+    },
+    "items": {
+      "heading": "Položky, od kterých zákazník odstoupil",
+      "reject": "Zamítnout",
+      "approve": "Schválit",
+      "total": "Celkem za odstoupení",
+      "sku": "SKU: {{sku}}",
+      "quantity": "Množství: {{count}}",
+      "shipping": {
+        "notShipped": "Zatím neodesláno",
+        "partlyShipped": "Částečně odesláno",
+        "shipped": "Odesláno"
+      },
+      "partiallyShippedBanner": "Část této objednávky byla odeslána. Neodeslané položky lze stále pozastavit, pro odeslané položky je potřeba vratka."
+    },
+    "return": {
+      "heading": "Vratka",
+      "status": "Stav",
+      "created": "Vytvořeno",
+      "body": "V Shopify byla vytvořena vratka pro položky, od kterých zákazník odstoupil.",
+      "openBody": "Až se položky vrátí, vyberte Zpracovat a vrátit peníze. Zákazníkovi se vrátí peníze za vrácené položky a vratka se uzavře.",
+      "alreadyRefundedBody": "Peníze za položky v této vratce již byly vráceny. Až se položky vrátí, uzavřete vratku v Shopify."
+    },
+    "processReturnModal": {
+      "heading": "Zpracovat vratku a vrátit peníze",
+      "calculating": "Výpočet částky k vrácení…",
+      "nothingToProcess": "V této vratce už není co zpracovat. Možná už byla v Shopify zpracována nebo uzavřena.",
+      "nothingToRefund": "Peníze za položky v této vratce již byly vráceny, takže už není co vracet.",
+      "unsupportedPayment": "Platbu za tuto objednávku nelze vrátit z aplikace. Zpracujte vratku a vraťte peníze v Shopify.",
+      "itemsHeading": "Položky ve vratce {{name}}",
+      "subtotal": "Mezisoučet položek",
+      "shippingLine": "Původní doprava",
+      "total": "Celkem k vrácení",
+      "body": "Tím se vrácené položky označí jako zpracované, peníze se vrátí původním způsobem platby a vratka se uzavře. Shopify zákazníkovi pošle e-mailem potvrzení o vrácení peněz. Tuto akci nelze vrátit zpět.",
+      "confirmAmount": "Vrátit {{amount}}",
+      "confirm": "Zpracovat a vrátit peníze"
+    },
+    "payment": {
+      "heading": "Platba",
+      "status": "Stav platby",
+      "subtotal": "Mezisoučet odstoupení",
+      "shipping": "Doprava objednávky",
+      "total": "Celkem za objednávku",
+      "refunded": "Vráceno",
+      "unavailable": "Podrobnosti platby teď nejsou k dispozici."
+    },
+    "activity": {
+      "heading": "Aktivita",
+      "noteLabel": "Přidat poznámku",
+      "notePlaceholder": "Přidat poznámku…",
+      "post": "Zveřejnit",
+      "noteHelp": "Poznámky vidíte jen vy a vaši zaměstnanci. Zákazníci je nikdy neuvidí.",
+      "submitted": "Žádost o odstoupení odeslána ze {{source}}",
+      "decided": {
+        "approved": "Žádost schválena",
+        "rejected": "Žádost zamítnuta"
+      },
+      "note": "Poznámka: {{body}}",
+      "entry": "{{label}}: {{message}}",
+      "actions": {
+        "resolve_branch": "Automatizace spuštěna",
+        "run_automation": "Automatizace",
+        "automation_completed": "Automatizace dokončena",
+        "hold_fulfillment": "Pozastavení vyřízení",
+        "schedule_fallback": "Naplánovaná následná akce",
+        "release_hold": "Pozastavení vyřízení uvolněno",
+        "cancel_order_immediate": "Objednávka zrušena a peníze vráceny",
+        "cancel_order_scheduled": "Objednávka zrušena a peníze vráceny",
+        "cancel_order_manual": "Objednávka zrušena a peníze vráceny",
+        "cancel_order": "Objednávka zrušena a peníze vráceny",
+        "refund": "Vrácení peněz",
+        "tag_before_ship": "Objednávka označena štítkem",
+        "tag_after_delivery": "Objednávka označena štítkem",
+        "order_tag_add": "Štítky objednávky přidány",
+        "order_tag_remove": "Štítky objednávky odebrány",
+        "create_return": "Vratka",
+        "refresh_return": "Stav vratky aktualizován",
+        "process_return": "Zpracovat a vrátit peníze",
+        "fetch_shop_contact": "Kontaktní údaje obchodu",
+        "customer_email": "Potvrzovací e-mail zákazníkovi",
+        "merchant_email": "Oznámení o nové žádosti",
+        "notify_customer": "E-mail o rozhodnutí",
+        "notify_merchant": "Obdrželi jste oznámení"
+      },
+      "messages": {
+        "noTags": "Nejsou nastavené žádné štítky",
+        "tagged": "Objednávka označena štítky: {{tags}}",
+        "noHoldableOrders": "U této objednávky teď nelze nic pozastavit",
+        "held": "Položky pozastaveny, aby nebyly odeslány",
+        "holdOff": "Pozastavení vyřízení kvůli kontrole je vypnuté",
+        "tagBeforeShipOff": "Označování štítky před odesláním je vypnuté",
+        "tagAfterDeliveryOff": "Označování štítky po odeslání je vypnuté",
+        "fallbackHold": "Objednávka zůstává pozastavená, dokud žádost neschválíte nebo nezamítnete",
+        "fallbackInvalidDays": "Následnou akci se nepodařilo naplánovat. Počet dní není platný.",
+        "scheduledRelease": "Uvolnění pozastavení naplánováno na {{date}}",
+        "scheduledCancel": "Zrušení a vrácení peněz naplánováno na {{date}}",
+        "canceled": "Objednávka zrušena a peníze vráceny",
+        "returnCreated": "Vratka vytvořena v Shopify",
+        "returnNoMatch": "Žádnou z požadovaných položek nelze vrátit",
+        "notifiedByEmail": "Oznámeno v aplikaci a e-mailem",
+        "notifiedEmailFailed": "Oznámeno v aplikaci. Oznamovací e-mail se nepodařilo odeslat: {{error}}",
+        "notifiedInAppOnly": "Oznámeno v aplikaci. Oznamovací e-mail nebyl odeslán.",
+        "emailSent": "Odesláno",
+        "emailFailed": "Nezdařilo se: {{error}}",
+        "emailNotSent": "Neodesláno, protože chybí příjemce nebo e-mail není nastavený",
+        "orderNotFound": "Tuto objednávku nelze v Shopify najít",
+        "alreadyCanceled": "Objednávka už byla zrušena",
+        "branchBeforeShip": "Objednávka ještě nebyla odeslána, proto proběhly kroky před odesláním",
+        "branchAfterDelivery": "Objednávka byla odeslána, proto proběhly kroky po odeslání",
+        "branchPartiallyShipped": "Objednávka byla odeslána částečně, proto proběhly kroky pro odeslané i neodeslané položky",
+        "noUnshippedItemsRequested": "Žádná z požadovaných položek nečeká na odeslání, proto nebylo nic pozastaveno",
+        "fallbackCancelPartiallyShipped": "Objednávka byla odeslána částečně, proto ji nelze zrušit celou. Požadované položky zůstávají pozastavené, dokud žádost neschválíte nebo nezamítnete.",
+        "returnNothingShipped": "Žádná z požadovaných položek nebyla odeslána, proto vratka nebyla potřeba",
+        "runCompleted": "Automatizace dokončena",
+        "runFailed": "Jeden nebo více kroků automatizace selhalo",
+        "runSkipped": "Automatizace přeskočena",
+        "scheduledSkippedApproved": "Žádost už byla schválena, proto naplánovaná akce neproběhla",
+        "scheduledSkippedRejected": "Žádost už byla zamítnuta, proto naplánovaná akce neproběhla",
+        "noHoldsPlaced": "U této žádosti nebylo nic pozastaveno",
+        "holdsAlreadyReleased": "Pozastavení už byla uvolněna",
+        "holdReleased": "Objednávku lze znovu vyřídit",
+        "holdExists": "U této žádosti už pozastavení existuje",
+        "decisionSkipped": "Zaměstnanec se rozhodl zákazníkovi e-mail neposlat",
+        "decisionSent": "Zákazníkovi byl odeslán e-mail o rozhodnutí",
+        "decisionFailed": "E-mail o rozhodnutí se nepodařilo odeslat: {{error}}",
+        "decisionNotConfigured": "E-mail o rozhodnutí nebyl odeslán, protože e-mail není nastavený",
+        "refunded": "Vráceno {{amount}}",
+        "noReturn": "K této žádosti neexistuje žádná vratka",
+        "returnStatus": "Stav vratky: {{status}}",
+        "returnProcessed": "Vratka zpracována a vráceno {{amount}}",
+        "returnNothingToProcess": "V této vratce už není co zpracovat",
+        "returnNothingToRefund": "Peníze za položky v této vratce již byly vráceny",
+        "returnPaymentUnsupported": "Tuto platbu nelze vrátit z aplikace. Zpracujte vratku v Shopify.",
+        "refundNothingRefundable": "Za žádnou z požadovaných položek nelze vrátit peníze. Možná již byly vráceny.",
+        "refundNoSuggestion": "Shopify nedokázal vypočítat vrácení peněz za tyto položky. Vraťte peníze v Shopify.",
+        "refundCoveredByReturn": "Všechny položky, od kterých zákazník odstoupil, jsou v otevřené vratce. Peníze za ně vrátíte pomocí akce Zpracovat a vrátit peníze u vratky.",
+        "tagsRemoved": "Odebrané štítky objednávky: {{tags}}",
+        "tagsAdded": "Přidané štítky objednávky: {{tags}}"
+      }
+    },
+    "order": {
+      "heading": "Objednávka",
+      "order": "Objednávka",
+      "placed": "Vytvořeno",
+      "payment": "Platba",
+      "fulfillment": "Vyřízení"
+    },
+    "customer": {
+      "heading": "Zákazník",
+      "avatarFallback": "Zákazník",
+      "contactHeading": "Kontaktní údaje",
+      "email": "E-mail",
+      "language": "Jazyk",
+      "shippingHeading": "Doručovací adresa"
+    },
+    "automation": {
+      "heading": "Automatizace",
+      "stage": "Fáze",
+      "stages": {
+        "before_ship": "Před odesláním",
+        "partially_shipped": "Částečně odesláno",
+        "after_delivery": "Po odeslání"
+      },
+      "hold": "Pozastavení vyřízení",
+      "holdStates": {
+        "onHold": "Pozastaveno",
+        "released": "Uvolněno",
+        "none": "Žádné"
+      },
+      "canceled": "Zrušeno",
+      "return": "Vratka"
+    },
+    "emails": {
+      "heading": "Historie e-mailů",
+      "customerConfirmation": "Potvrzení odstoupení zákazníkovi",
+      "merchantNotification": "Oznámení o nové žádosti",
+      "decision": "E-mail o rozhodnutí",
+      "statuses": {
+        "sent": "Odesláno",
+        "failed": "Nezdařilo se",
+        "notSent": "Neodesláno"
+      }
+    },
+    "tags": {
+      "heading": "Štítky objednávky",
+      "label": "Přidat štítek objednávky",
+      "placeholder": "Přidat štítek",
+      "remove": "Odebrat štítek {{tag}}",
+      "savedToast": "Štítky objednávky uloženy"
+    },
+    "reason": {
+      "heading": "Důvod odstoupení",
+      "quoted": "„{{reason}}“",
+      "none": "Důvod nebyl uveden"
+    },
+    "decidedToast": {
+      "approved": "Žádost o odstoupení schválena",
+      "rejected": "Žádost o odstoupení zamítnuta"
+    },
+    "cancelModal": {
+      "heading": "Zrušit objednávku?",
+      "body": "Tím se v Shopify zruší celá objednávka, včetně položek, od kterých zákazník neodstoupil. Peníze se vrátí původním způsobem platby, položky se vrátí na sklad a Shopify zákazníkovi pošle e-mail. Tuto akci nelze vrátit zpět.",
+      "keep": "Ponechat objednávku",
+      "confirm": "Zrušit objednávku a vrátit peníze"
+    },
+    "createReturnModal": {
+      "heading": "Vytvořit vratku pro položky, od kterých zákazník odstoupil",
+      "itemsHeading": "Položky k vrácení",
+      "subtotal": "Mezisoučet položek",
+      "checking": "Ověřování, které položky lze vrátit…",
+      "nothingToReturn": "Žádná z položek, od kterých zákazník odstoupil, zatím nebyla odeslána, takže není co vracet. Pozastavte je, aby nebyly odeslány, nebo za ně vraťte peníze, aby se odebraly z objednávky.",
+      "notShipped_one": "{{count}} položka, od které zákazník odstoupil, není zahrnuta, protože ještě nebyla odeslána.",
+      "notShipped_few": "{{count}} položky, od kterých zákazník odstoupil, nejsou zahrnuty, protože ještě nebyly odeslány.",
+      "notShipped_many": "Položky, od kterých zákazník odstoupil ({{count}}), nejsou zahrnuty, protože ještě nebyly odeslány.",
+      "notShipped_other": "{{count}} položek, od kterých zákazník odstoupil, není zahrnuto, protože ještě nebyly odeslány.",
+      "notReturnable_one": "{{count}} položka, od které zákazník odstoupil, není zahrnuta, protože už byla vrácena.",
+      "notReturnable_few": "{{count}} položky, od kterých zákazník odstoupil, nejsou zahrnuty, protože už byly vráceny.",
+      "notReturnable_many": "Položky, od kterých zákazník odstoupil ({{count}}), nejsou zahrnuty, protože už byly vráceny.",
+      "notReturnable_other": "{{count}} položek, od kterých zákazník odstoupil, není zahrnuto, protože už byly vráceny.",
+      "body": "Tím se v Shopify vytvoří vratka pro výše uvedené položky. Zákazníkovi se tím nevrátí peníze. Až se položky vrátí, vyberte u vratky Zpracovat a vrátit peníze.",
+      "cancel": "Zrušit",
+      "confirm": "Vytvořit vratku"
+    },
+    "decisionModal": {
+      "headingApprove": "Schválit žádost o odstoupení?",
+      "headingReject": "Zamítnout žádost o odstoupení?",
+      "approveAndSend": "Schválit a odeslat e-mail",
+      "rejectAndSend": "Zamítnout a odeslat e-mail",
+      "approve": "Schválit",
+      "reject": "Zamítnout",
+      "loadingLabel": "Načítání náhledu e-mailu",
+      "loading": "Příprava e-mailu pro zákazníka…",
+      "sendEmail": "Odeslat e-mail zákazníkovi",
+      "language": "Tento e-mail je v jazyce {{language}}, tedy v jazyce zákazníka. Vaše změny platí jen pro tento e-mail.",
+      "subject": "Předmět",
+      "body": "Text e-mailu",
+      "editHtml": "Upravit HTML",
+      "htmlLabel": "HTML e-mailu",
+      "previewTitle": "Náhled e-mailu",
+      "templateUnchanged": "Vaše změny platí jen pro tento e-mail. Uložená šablona se nezmění.",
+      "noEmail": "Zákazník neobdrží e-mail. V případě potřeby ho můžete kontaktovat zvlášť.",
+      "holdReleased": "Tím se také uvolní pozastavení vyřízení této objednávky, takže ji bude možné znovu vyřídit."
+    },
+    "refundModal": {
+      "heading": "Vrátit peníze za položky, od kterých zákazník odstoupil",
+      "calculatingLabel": "Výpočet vrácení peněz",
+      "calculating": "Výpočet částky k vrácení…",
+      "nothingToRefund": "U této objednávky není co vracet. Peníze za položky, od kterých zákazník odstoupil, už možná byly vráceny, nebo byla objednávka zrušena.",
+      "itemsHeading": "Položky k vrácení peněz",
+      "subtotal": "Mezisoučet položek",
+      "shippingLine": "Původní doprava",
+      "amount": "Částka k vrácení",
+      "total": "Celkem k vrácení",
+      "body": "Peníze za položky, od kterých zákazník odstoupil, se vrátí původním způsobem platby a položky se podle možností vrátí na sklad. Shopify zákazníkovi pošle e-mailem potvrzení o vrácení peněz.",
+      "includesShipping": "Zákazník odstoupil od celé objednávky, proto je zahrnuto i původní poštovné.",
+      "unshippedItems": "Položky, které ještě nebyly odeslány, se z objednávky odeberou, takže nebudou odeslány.",
+      "inReturn_one": "{{count}} položka, od které zákazník odstoupil, není zahrnuta, protože je ve vratce {{name}}. Peníze za ni vrátíte pomocí akce Zpracovat a vrátit peníze u vratky.",
+      "inReturn_few": "{{count}} položky, od kterých zákazník odstoupil, nejsou zahrnuty, protože jsou ve vratce {{name}}. Peníze za ně vrátíte pomocí akce Zpracovat a vrátit peníze u vratky.",
+      "inReturn_many": "Položky, od kterých zákazník odstoupil ({{count}}), nejsou zahrnuty, protože jsou ve vratce {{name}}. Peníze za ně vrátíte pomocí akce Zpracovat a vrátit peníze u vratky.",
+      "inReturn_other": "{{count}} položek, od kterých zákazník odstoupil, není zahrnuto, protože jsou ve vratce {{name}}. Peníze za ně vrátíte pomocí akce Zpracovat a vrátit peníze u vratky.",
+      "allInReturn": "Všechny položky, od kterých zákazník odstoupil, jsou ve vratce {{name}}. Peníze za ně vrátíte pomocí akce Zpracovat a vrátit peníze u vratky, čímž se vratka také uzavře.",
+      "irreversible": "Tuto akci nelze vrátit zpět.",
+      "confirmAmount": "Vrátit {{amount}}",
+      "confirm": "Vrátit peníze"
+    },
+    "shopifyNotes": {
+      "holdAutomatic": "Žádost o odstoupení k objednávce {{order}} čeká na kontrolu zaměstnancem",
+      "holdManual": "Žádost o odstoupení k objednávce {{order}} pozastavil zaměstnanec",
+      "canceled": "Zrušeno aplikací {{appName}}, protože zákazník odstoupil od nákupu (žádost {{id}}).",
+      "refunded": "Peníze vráceny aplikací {{appName}}, protože zákazník odstoupil od nákupu (žádost {{id}}).",
+      "returnReason": "Žádost o odstoupení: {{reason}}",
+      "returnReasonNone": "Žádost o odstoupení (důvod nebyl uveden)"
+    }
+  },
+  "emailTemplates": {
+    "pageTitle": "Oznámení",
+    "loadError": "Oznámení se nepodařilo načíst",
+    "saveError": "Oznámení se nepodařilo uložit",
+    "savedToast": "Oznámení uložena",
+    "resetToast": "{{name}}: obnoveno výchozí nastavení",
+    "sender": {
+      "heading": "Odesílatel",
+      "description": "Tato nastavení platí pro každý e-mail, který aplikace za váš obchod odešle. Odesílejte z vlastní ověřené adresy a vyberte, kam budou chodit odpovědi zákazníků.",
+      "emailLabel": "E-mail odesílatele",
+      "emailPlaceholder": "notifications@withdrawaleasy.com",
+      "detailsVerified": "E-maily se odesílají z této adresy.",
+      "detailsPending": "Adresu ověříte zadáním kódu, který jsme na ni poslali.",
+      "detailsDefault": "Pokud pole necháte prázdné, e-maily se budou odesílat z adresy {{email}}.",
+      "detailsDefaultFallback": "Pokud pole necháte prázdné, e-maily se budou odesílat z výchozí adresy aplikace.",
+      "freeProviderWarning": "Bezplatné e-mailové služby, jako je Gmail nebo Yahoo, nelze ověřit. Zákazníci u e-mailů z této adresy uvidí „via brevosend.com“. Pro profesionálnější dojem použijte adresu na doméně svého obchodu.",
+      "codeLabel": "Ověřovací kód",
+      "codeDetails": "Zadejte šestimístný kód z e-mailu, který jsme vám poslali.",
+      "verifyCode": "Ověřit kód",
+      "checkStatus": "Zkontrolovat stav ověření",
+      "verifyEmail": "Ověřit e-mail",
+      "codeSent": "Na adresu {{email}} jsme poslali ověřovací kód.",
+      "notVerifiedYet": "Tento e-mail zatím není ověřený. Najděte kód ve své schránce a zkuste to znovu.",
+      "replyToLabel": "E-mail pro odpovědi",
+      "replyToPlaceholder": "podpora@vasobchod.cz",
+      "replyToDetails": "Odpovědi zákazníků ve výchozím nastavení chodí na e-mail vašeho obchodu. Chcete-li je dostávat jinam, zadejte jinou adresu."
+    },
+    "domain": {
+      "heading": "Ověření domény",
+      "description": "Ověřte svou doménu, aby zákazníci u vašich e-mailů neviděli „via brevosend.com“. Je to nepovinné, ale doporučujeme to, pokud odesíláte z domény svého obchodu.",
+      "label": "Doména",
+      "placeholder": "vasobchod.cz",
+      "details": "Zadejte doménu, ze které odesíláte e-maily, ne doménu myshopify.com.",
+      "freeProviderWarning": "Bezplatné e-mailové služby, jako je Gmail nebo Yahoo, nelze ověřit. Zadejte raději doménu svého obchodu.",
+      "columns": {
+        "record": "Záznam",
+        "type": "Typ",
+        "host": "Hostitel",
+        "value": "Hodnota"
+      },
+      "records": {
+        "brevo_code": "Vlastnictví domény",
+        "dkim_record": "DKIM",
+        "dkim1Record": "DKIM 1",
+        "dkim2Record": "DKIM 2",
+        "dmarc_record": "DMARC"
+      },
+      "copyHost": "Kopírovat hostitele",
+      "copyValue": "Kopírovat hodnotu",
+      "verifyRecords": "Ověřit záznamy DNS",
+      "authenticate": "Ověřit doménu",
+      "pendingInfo": "Přidejte tyto záznamy u poskytovatele domény a potom vyberte Ověřit záznamy DNS.",
+      "notVerifiedYet": "Vaše doména zatím není ověřená. Změny DNS se mohou projevit až po nějaké době, zkuste to proto později."
+    },
+    "notification": {
+      "heading": "Šablona e-mailu",
+      "emailLabel": "E-mail",
+      "language": "Jazyk",
+      "languageDetails": "Vyberte jazyk, ve kterém chcete tento e-mail upravit. Každý jazyk se ukládá zvlášť. Zákazníci dostávají e-maily ve svém jazyce.",
+      "send": "Odesílat tento e-mail",
+      "requiredDetails": "Tento e-mail vyžaduje právo EU, proto ho nelze vypnout.",
+      "merchantDetails": "Vypnutím přestanete tento e-mail dostávat.",
+      "decisionDetails": "Vypnutím se tento e-mail přestane ve výchozím nastavení odesílat. Při schvalování nebo zamítání jednotlivé žádosti ho stále můžete odeslat.",
+      "subject": "Předmět",
+      "reset": "Obnovit výchozí",
+      "customized": "Upraveno"
+    },
+    "templates": {
+      "customerConfirmation": {
+        "name": "Potvrzení odstoupení zákazníkovi",
+        "description": "Odesílá se zákazníkům hned po odeslání žádosti o odstoupení."
+      },
+      "merchantNotification": {
+        "name": "Oznámení o nové žádosti",
+        "description": "Odesílá se na kontaktní e-mail vašeho obchodu, když zákazník odešle novou žádost o odstoupení. Odpovědí na něj napíšete zákazníkovi."
+      },
+      "withdrawalApproved": {
+        "name": "Odstoupení schváleno",
+        "description": "Odesílá se zákazníkům, když schválíte jejich žádost o odstoupení. Před odesláním ho můžete zkontrolovat a upravit."
+      },
+      "withdrawalRejected": {
+        "name": "Odstoupení zamítnuto",
+        "description": "Odesílá se zákazníkům, když zamítnete jejich žádost o odstoupení. Před odesláním ho můžete zkontrolovat a upravit."
+      }
+    },
+    "merchantDefaults": {
+      "subject": "Nová žádost o odstoupení – objednávka {{order}}",
+      "heading": "Nová žádost o odstoupení",
+      "intro": "Zákazník odeslal žádost o odstoupení. Zde najdete vše, co potřebujete k jejímu posouzení.",
+      "rows": {
+        "name": "Jméno",
+        "email": "E-mail",
+        "date": "Datum",
+        "orderNumber": "Číslo objednávky",
+        "reference": "Referenční číslo",
+        "reason": "Důvod"
+      },
+      "button": "Zobrazit žádost",
+      "itemsHeading": "Požadované položky",
+      "footnote": "Otevřete žádost v administraci a schvalte ji nebo zamítněte. Lhůta pro vrácení peněz se tam sleduje automaticky."
+    },
+    "body": {
+      "heading": "Text e-mailu",
+      "editCode": "Upravit kód",
+      "htmlLabel": "HTML text e-mailu",
+      "previewHeading": "Náhled e-mailu"
+    },
+    "variables": {
+      "heading": "Proměnné",
+      "help": "Výběrem proměnné ji vložíte na pozici kurzoru.",
+      "insert": "Vložit {{label}}: {{description}}",
+      "groups": {
+        "customer": "Zákazník",
+        "order": "Objednávka",
+        "withdrawal": "Odstoupení",
+        "request": "Žádost",
+        "shop": "Obchod"
+      },
+      "tokens": {
+        "customer": {
+          "first_name": {
+            "label": "Jméno",
+            "description": "Křestní jméno zákazníka"
+          },
+          "last_name": {
+            "label": "Příjmení",
+            "description": "Příjmení zákazníka"
+          },
+          "email": {
+            "label": "E-mail",
+            "description": "E-mailová adresa zákazníka"
+          }
+        },
+        "order": {
+          "name": {
+            "label": "Číslo objednávky",
+            "description": "Číslo objednávky, například #2138"
+          },
+          "id": {
+            "label": "ID objednávky",
+            "description": "Interní ID objednávky"
+          }
+        },
+        "withdrawal": {
+          "request_id": {
+            "label": "Referenční číslo",
+            "description": "Referenční číslo žádosti o odstoupení"
+          },
+          "submitted_at": {
+            "label": "Datum odeslání",
+            "description": "Datum a čas odeslání žádosti"
+          },
+          "reason": {
+            "label": "Důvod",
+            "description": "Důvod, který zákazník uvedl, pokud nějaký uvedl"
+          },
+          "selected_products": {
+            "label": "Vybrané produkty (text)",
+            "description": "Požadované položky jako seznam oddělený čárkami"
+          }
+        },
+        "request": {
+          "status": {
+            "label": "Stav",
+            "description": "Aktuální stav žádosti"
+          },
+          "url": {
+            "label": "Odkaz na žádost",
+            "description": "Odkaz na žádost v aplikaci"
+          }
+        },
+        "shop": {
+          "name": {
+            "label": "Název obchodu",
+            "description": "Název vašeho obchodu"
+          },
+          "email": {
+            "label": "E-mail obchodu",
+            "description": "Kontaktní e-mailová adresa vašeho obchodu"
+          }
+        }
+      }
+    },
+    "validation": {
+      "email": "Zadejte platnou e-mailovou adresu.",
+      "subjectRequired": "Zadejte předmět.",
+      "subjectTooLong": "Předmět může mít nejvýše {{max}} znaků.",
+      "bodyRequired": "Zadejte text e-mailu."
+    }
+  },
+  "sample": {
+    "customerName": "Jana Nováková",
+    "items": {
+      "lamp": {
+        "title": "Stolní lampa Fjord",
+        "variant": "Dub / Velká"
+      },
+      "candleHolder": {
+        "title": "Svícen Tind",
+        "variant": "Mosaz"
+      }
+    },
+    "reason": "Rozmyslela jsem si to"
+  },
+  "faqs": {
+    "pageTitle": "Časté dotazy",
+    "searchLabel": "Hledat v častých dotazech",
+    "searchPlaceholder": "Hledejte dotazy, například „vrácení peněz“ nebo „lhůta“",
+    "noResults": "Hledanému výrazu „{{query}}“ neodpovídají žádné dotazy",
+    "noResultsHelp": "Zkuste jiné slovo nebo kontaktujte podporu níže.",
+    "showAnswer": "Zobrazit odpověď: {{question}}",
+    "hideAnswer": "Skrýt odpověď: {{question}}",
+    "groups": {
+      "gettingStarted": "Začínáme",
+      "deadline": "Lhůta pro odstoupení",
+      "requests": "Vyřizování žádostí",
+      "emailsLanguages": "E-maily a jazyky"
+    },
+    "actions": {
+      "goToSettings": "Přejít do Nastavení",
+      "goToRequests": "Přejít na Žádosti",
+      "goToNotifications": "Přejít na Oznámení"
+    },
+    "stillStuck": {
+      "heading": "Máte další dotazy?",
+      "body": "Náš tým podpory čte a odpovídá na každý e-mail.",
+      "link": "Kontaktovat podporu"
+    },
+    "items": {
+      "what-it-does": {
+        "question": "Co aplikace dělá?",
+        "paragraphs": [
+          "Dává vašim zákazníkům z EU jasný způsob, jak odstoupit od nákupu, jak vyžaduje právo EU. Zároveň vám dává jedno místo pro správu všech žádostí.",
+          "Zákazníci otevřou formulář ze své objednávky, vyberou položky, od kterých chtějí odstoupit, a potvrdí to. Každá žádost se pak zobrazí na stránce Žádosti s položkami, důvodem a vaší lhůtou pro vrácení peněz. Aplikace za vás odešle povinné e-maily."
+        ]
+      },
+      "where-form-appears": {
+        "question": "Kde zákazníci najdou formulář pro odstoupení?",
+        "paragraphs": [
+          "Formulář můžete zobrazit na 2 místech. Použijte jedno nebo obě:"
+        ],
+        "bullets": [
+          "Stránka stavu objednávky: stránka, kterou zákazníci vidí po dokončení objednávky a po otevření odkazu v potvrzovacím e-mailu objednávky.",
+          "Stránka obchodu: stránka ve vašem e-shopu pro zákazníky, kteří se vrátí později. Objednávku najdou pomocí čísla objednávky a e-mailu."
+        ],
+        "closing": "Zapněte každé místo v Nastavení a potom jednou přidejte jeho blok aplikace. Průvodce nastavením na Úvodu ukazuje, které bloky jsou přidané."
+      },
+      "form-not-showing": {
+        "question": "Proč zákazník nevidí formulář pro odstoupení?",
+        "paragraphs": [
+          "Zkontrolujte tyto body, počínaje nejčastějším:"
+        ],
+        "bullets": [
+          "Formulář je vypnutý, nebo místo, které zákazník používá, není v Nastavení zapnuté.",
+          "Blok aplikace na tuto stránku ještě nebyl přidán.",
+          "Objednávka se neodesílá do žádné z vašich způsobilých zemí.",
+          "Lhůta pro odstoupení od objednávky uplynula.",
+          "Objednávka byla zrušena nebo už má žádost čekající na vyřízení. Každá objednávka může mít najednou jen 1 žádost čekající na vyřízení."
+        ]
+      },
+      "deadline": {
+        "question": "Kdy lhůta pro odstoupení začíná a končí?",
+        "paragraphs": [
+          "Podle práva EU lhůta začíná, když zákazník položky obdrží, ne když objedná. Zákazníci mohou odstoupit také kdykoli předtím, než položky dorazí."
+        ],
+        "bullets": [
+          "Zatím neodesláno: lhůta ještě nezačala, takže zákazníci mohou vždy odstoupit.",
+          "Doručeno: lhůta začíná datem doručení od dopravce a trvá {{withdrawalDays}}. Počet dní můžete změnit v Nastavení.",
+          "Odesláno, ale bez data doručení: aplikace použije odhadované datum doručení od dopravce. Pokud není k dispozici, použije datum odeslání plus vaši odhadovanou dobu přepravy."
+        ]
+      },
+      "transit-days": {
+        "question": "K čemu slouží odhadovaná doba přepravy?",
+        "paragraphs": [
+          "Mnoho dopravců neposílá do Shopify datum doručení. Bez něj aplikace neví, kdy začíná lhůta pro odstoupení, a proto přičte k datu odeslání vaši odhadovanou dobu přepravy.",
+          "Nastavte ji přibližně na dobu, za kterou vaše zásilky dorazí. Momentálně je to {{transitDays}}. Pokud si nejste jisti, zvolte delší dobu. Příliš krátká doba může zákazníkovi lhůtu pro odstoupení ukončit předčasně."
+        ]
+      },
+      "split-shipments": {
+        "question": "Co když se objednávka odesílá ve více než 1 balíku?",
+        "paragraphs": [
+          "Lhůta pro odstoupení začíná doručením posledního balíku. Položky, které aplikace pozastavila, protože od nich zákazník odstoupil, se nepočítají, protože nebudou odeslány.",
+          "Pokud zákazník odstoupí, když byla odeslána jen část objednávky, aplikace řeší každou část zvlášť:"
+        ],
+        "bullets": [
+          "Neodeslané položky: aplikace je může pozastavit, aby nebyly odeslány.",
+          "Odeslané položky: aplikace pro ně může vytvořit vratku."
+        ],
+        "closing": "Aplikace nikdy neruší částečně odeslanou objednávku, protože by tím zrušila i položky, které už zákazník má."
+      },
+      "after-submit": {
+        "question": "Co se stane, když zákazník odešle žádost?",
+        "paragraphs": [
+          "Stane se toto, v tomto pořadí:"
+        ],
+        "bullets": [
+          "Žádost se zobrazí na stránce Žádosti se stavem Čeká na vyřízení.",
+          "Zákazník obdrží potvrzovací e-mail. Odesílá se vždy, protože je to jeho doklad o odstoupení.",
+          "E-mail dostanete i vy, pokud je zapnuté oznámení o nové žádosti.",
+          "Spustí se vaše nastavení automatizace. Aplikace například může pozastavit vyřízení nebo označit objednávku štítkem."
+        ]
+      },
+      "automation": {
+        "question": "Co dělá nastavení automatizace?",
+        "paragraphs": [
+          "Spustí se, když přijde žádost. Co aplikace může udělat, závisí na tom, zda byla objednávka odeslána:"
+        ],
+        "bullets": [
+          "Před odesláním objednávky: pozastavit vyřízení, aby se nic neodeslalo, zatímco žádost posuzujete. Aplikace může také rovnou zrušit celou objednávku a vrátit peníze.",
+          "Po odeslání objednávky: vytvořit v Shopify vratku pro odeslané položky.",
+          "Částečně odesláno: platí obojí. Aplikace pozastaví jen požadované položky, které nebyly odeslány, a pro odeslané vytvoří vratku."
+        ],
+        "closing": "V každém případě může aplikace objednávku také označit štítkem. Automatizace nikdy žádost neschválí ani nezamítne. Rozhodujete vždy vy."
+      },
+      "partial-withdrawal": {
+        "question": "Může zákazník odstoupit jen od některých položek?",
+        "paragraphs": [
+          "Ano. Zákazníci vybírají, od kterých položek odstupují. Žádost, vrácení peněz i případná vratka zahrnují jen tyto položky. Původní poštovné se vrací jen tehdy, když zákazník odstoupí od celé objednávky.",
+          "Každá objednávka může mít najednou 1 žádost čekající na vyřízení. Po jejím schválení nebo zamítnutí může zákazník poslat novou žádost pro jiné položky."
+        ]
+      },
+      "reason": {
+        "question": "Musí zákazníci uvádět důvod?",
+        "paragraphs": [
+          "Ne. Podle práva EU zákazníci k odstoupení nepotřebují důvod, proto je pole s důvodem vždy nepovinné. V Nastavení můžete vybrat, jaké důvody nabízet, nebo se na důvod přestat ptát."
+        ]
+      },
+      "refund": {
+        "question": "Jak vrátím peníze za odstoupení?",
+        "paragraphs": [
+          "Otevřete žádost na stránce Žádosti. Způsob vrácení peněz závisí na tom, kde jsou položky:"
+        ],
+        "bullets": [
+          "Položky, které nejsou ve vratce: vyberte Vrátit peníze. Neodeslané položky se z objednávky odeberou, takže nebudou odeslány.",
+          "Položky ve vratce: až se vrátí, vyberte u vratky Zpracovat a vrátit peníze. Zákazníkovi se vrátí peníze a vratka se uzavře.",
+          "Zatím nic nebylo odesláno: celou objednávku můžete také zrušit a vrátit peníze v nabídce Další akce."
+        ],
+        "closing": "Právo EU vám na vrácení peněz dává {{refundDays}} od odstoupení. Stránka žádosti ukazuje, kolik času zbývá. Peníze vraťte dřív, než žádost schválíte."
+      },
+      "returns": {
+        "question": "Jak fungují vratky?",
+        "paragraphs": [
+          "Vratka Shopify sděluje, které položky zákazník posílá zpět. Aplikace ji může vytvořit, když přijde žádost, nebo můžete na stránce žádosti vybrat Vytvořit vratku.",
+          "Vratka zahrnuje jen odeslané položky. Jejím vytvořením se zákazníkovi peníze nevrátí. Až se položky vrátí, vyberte u vratky Zpracovat a vrátit peníze."
+        ]
+      },
+      "decision-lock": {
+        "question": "Proč se akce s objednávkou po schválení nebo zamítnutí žádosti vypnou?",
+        "paragraphs": [
+          "Schválením nebo zamítnutím se žádost uzavře. Potom se vypne vracení peněz, pozastavení, vratky i rušení, aby se objednávka omylem nezměnila. Proto vracejte peníze ještě před schválením.",
+          "Rozhodnutím se také uvolní každé pozastavení vyřízení, které aplikace nastavila. Pokud se uvolnění nezdaří, můžete stále vybrat Uvolnit pozastavení vyřízení."
+        ]
+      },
+      "emails": {
+        "question": "Jaké e-maily aplikace odesílá a mohu je upravit?",
+        "paragraphs": [
+          "Aplikace odesílá e-maily ({{emailCount}}). Všechny můžete upravit na stránce Oznámení:"
+        ],
+        "bullets": [
+          "Potvrzení odstoupení zákazníkovi: odesílá se, když zákazník odešle žádost. Je vždy zapnuté.",
+          "Oznámení o nové žádosti: odesílá se na kontaktní e-mail vašeho obchodu. Můžete ho vypnout.",
+          "Odstoupení schváleno: odesílá se zákazníkovi, když žádost schválíte. Můžete ho nejprve zkontrolovat, nebo vypnout.",
+          "Odstoupení zamítnuto: odesílá se zákazníkovi, když žádost zamítnete. Můžete ho nejprve zkontrolovat, nebo vypnout."
+        ],
+        "closing": "Předmět i text každého e-mailu můžete upravit v každém jazyce a přidat proměnné, jako je číslo objednávky nebo jméno zákazníka. Náhled se aktualizuje během psaní."
+      },
+      "countries-languages": {
+        "question": "Které země a jazyky aplikace podporuje?",
+        "paragraphs": [
+          "Ve výchozím nastavení jsou způsobilé všechny země EU. Pokud prodáváte jen do některých z nich, vyberte v Nastavení Vybrané země.",
+          "Formulář je k dispozici v těchto jazycích ({{languageCount}}): {{languages}}. Zákazníci ho vidí ve svém jazyce.",
+          "Základním jazykem je angličtina. Pokud přeložené pole necháte prázdné, zákazníci místo něj uvidí anglický text."
+        ]
+      }
+    }
+  },
+  "featureRequest": {
+    "pageTitle": "Navrhnout funkci",
+    "intro": "Napište nám, co byste v aplikaci chtěli. Čteme každý návrh.",
+    "sentHeading": "Návrh funkce odeslán",
+    "sentBody": "Děkujeme, že jste se o svůj nápad podělili s naším týmem.",
+    "firstName": "Jméno",
+    "lastName": "Příjmení",
+    "email": "E-mail",
+    "request": "Jakou funkci byste chtěli?",
+    "requestPlaceholder": "Popište funkci a jak by vašemu obchodu pomohla",
+    "submit": "Odeslat návrh"
+  },
+  "pricing": {
+    "pageTitle": "Ceník",
+    "pricePerMonth": "{{price}} měsíčně",
+    "currentPlan": "Aktuální tarif",
+    "choosePlan": "Zvolit {{plan}}",
+    "switchedToast": "Přepnuto na tarif {{plan}}",
+    "plans": {
+      "free": {
+        "name": "Free",
+        "features": [
+          "Až 10 žádostí o odstoupení měsíčně",
+          "E-mailová oznámení"
+        ]
+      },
+      "starter": {
+        "name": "Starter",
+        "features": [
+          "Neomezený počet žádostí o odstoupení",
+          "Vlastní pole formuláře",
+          "E-mailová oznámení"
+        ]
+      },
+      "pro": {
+        "name": "Pro",
+        "features": [
+          "Vše z tarifu Starter",
+          "Prioritní podpora",
+          "Automatické vracení peněz"
+        ]
+      }
+    },
+    "switchError": "Tarif se nepodařilo změnit"
+  }
+}

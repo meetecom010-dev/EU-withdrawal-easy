@@ -1,0 +1,1250 @@
+{
+  "common": {
+    "add": "Hinzufügen",
+    "backToHome": "Zurück zur Startseite",
+    "cancel": "Abbrechen",
+    "delete": "Löschen",
+    "discard": "Verwerfen",
+    "done": "Fertig",
+    "dayCount_one": "{{count}} Tag",
+    "dayCount_other": "{{count}} Tage",
+    "emptyValue": "—",
+    "noMatches": "Keine Ergebnisse für „{{query}}“.",
+    "preview": "Vorschau",
+    "remove": "Entfernen",
+    "save": "Speichern",
+    "verified": "Verifiziert"
+  },
+  "nav": {
+    "home": "Startseite",
+    "withdrawalRequests": "Anfragen",
+    "formSetup": "Einstellungen",
+    "emailTemplates": "Benachrichtigungen",
+    "pricing": "Preise"
+  },
+  "errors": {
+    "generic": "Etwas ist schiefgelaufen. Versuche es erneut.",
+    "requestFailed": "Etwas ist schiefgelaufen (Fehler {{status}}). Versuche es erneut.",
+    "methodNotAllowed": "Diese Aktion wird nicht unterstützt.",
+    "unknownAction": "Diese Aktion wird nicht unterstützt.",
+    "noValidFields": "Es gibt nichts zu aktualisieren.",
+    "emailServiceUnavailable": "Wir konnten keine Verbindung zum E-Mail-Dienst herstellen. Versuche es in ein paar Minuten erneut.",
+    "emailServiceNotConfigured": "Der E-Mail-Versand ist noch nicht eingerichtet. Wende dich an den Support.",
+    "requestNotFound": "Diese Widerrufsanfrage existiert nicht oder wurde gelöscht.",
+    "requestDecided": "Diese Anfrage wurde bereits genehmigt oder abgelehnt, daher sind keine Bestellaktionen mehr verfügbar.",
+    "unknownDecision": "Wähle, ob du diese Anfrage genehmigen oder ablehnen möchtest.",
+    "invalidStatus": "Wähle einen gültigen Status für diese Anfrage.",
+    "noteRequired": "Gib eine Notiz ein.",
+    "orderNotFound": "Diese Bestellung wurde in Shopify nicht gefunden.",
+    "invalidEmail": "Gib eine gültige E-Mail-Adresse ein.",
+    "featureRequestIncomplete": "Fülle alle Felder aus, bevor du deine Anfrage sendest.",
+    "senderCodeRequired": "Gib den Bestätigungscode aus deiner E-Mail ein.",
+    "senderNotFound": "Wir konnten diese Absender-E-Mail nicht finden. Entferne sie und füge sie erneut hinzu, um einen neuen Code zu erhalten.",
+    "senderNotStarted": "Verifiziere zuerst deine Absender-E-Mail.",
+    "senderIdMissing": "Wir konnten diese Absender-E-Mail nicht registrieren. Versuche es erneut.",
+    "domainInvalid": "Gib eine gültige Domain ein, z. B. deinshop.com.",
+    "domainFreeProvider": "Kostenlose E-Mail-Anbieter wie Gmail und Yahoo können nicht authentifiziert werden. Verwende stattdessen die Domain deines Shops."
+  },
+  "auth": {
+    "login": {
+      "heading": "Anmelden",
+      "shopLabel": "Shop-Domain",
+      "shopDetails": "example.myshopify.com",
+      "submit": "Anmelden",
+      "missingShop": "Gib deine Shop-Domain ein, um dich anzumelden.",
+      "invalidShop": "Gib eine gültige Shop-Domain ein, z. B. example.myshopify.com."
+    }
+  },
+  "status": {
+    "pending": "Ausstehend",
+    "approved": "Genehmigt",
+    "rejected": "Abgelehnt"
+  },
+  "sourceInline": {
+    "order_status": "der Bestellstatusseite",
+    "standalone_page": "deiner Shop-Seite"
+  },
+  "placements": {
+    "orderStatus": {
+      "label": "Bestellstatusseite",
+      "details": "Zeige das Widerrufsformular auf der Bestellstatusseite an, die Kunden nach dem Checkout sehen."
+    },
+    "storefront": {
+      "label": "Shop-Seite",
+      "details": "Zeige das Widerrufsformular auf einer eigenen Seite in deinem Theme an, damit Kunden es auch außerhalb der Bestellstatusseite finden."
+    }
+  },
+  "orderStatus": {
+    "financial": {
+      "PENDING": "Zahlung ausstehend",
+      "AUTHORIZED": "Autorisiert",
+      "PARTIALLY_PAID": "Teilweise bezahlt",
+      "PAID": "Bezahlt",
+      "PARTIALLY_REFUNDED": "Teilweise erstattet",
+      "REFUNDED": "Erstattet",
+      "VOIDED": "Storniert",
+      "EXPIRED": "Abgelaufen"
+    },
+    "fulfillment": {
+      "UNFULFILLED": "Nicht ausgeführt",
+      "PENDING_FULFILLMENT": "Ausführung ausstehend",
+      "OPEN": "Offen",
+      "IN_PROGRESS": "In Bearbeitung",
+      "ON_HOLD": "Zurückgehalten",
+      "PARTIALLY_FULFILLED": "Teilweise ausgeführt",
+      "FULFILLED": "Ausgeführt",
+      "RESTOCKED": "Wieder auf Lager",
+      "SCHEDULED": "Geplant"
+    },
+    "return": {
+      "REQUESTED": "Angefordert",
+      "OPEN": "Offen",
+      "CLOSED": "Geschlossen",
+      "DECLINED": "Abgelehnt",
+      "CANCELED": "Storniert"
+    }
+  },
+  "stats": {
+    "heading": "Übersicht",
+    "description": "Ein Überblick über deine Widerrufsanfragen",
+    "viewRequests": "Anfragen ansehen",
+    "total": "Anfragen gesamt",
+    "today": "Heute eingereicht",
+    "pending": "Ausstehend",
+    "closed": "Abgeschlossen",
+    "requestCount_one": "{{count}} Anfrage",
+    "requestCount_other": "{{count}} Anfragen"
+  },
+  "home": {
+    "pageTitle": "Startseite",
+    "loadError": "Dein Dashboard konnte nicht geladen werden",
+    "saveErrorHeading": "Deine Änderung konnte nicht gespeichert werden",
+    "saveErrorAction": "Versuche es erneut oder nimm die Änderung in den Einstellungen vor.",
+    "setupBanner": {
+      "heading_one": "Noch {{count}} Einrichtungsschritt",
+      "heading_other": "Noch {{count}} Einrichtungsschritte",
+      "body": "Schließe diese Schritte ab, um dein Widerrufsformular bereitzustellen: {{steps}}."
+    },
+    "setupGuide": {
+      "heading": "Einrichtungsleitfaden",
+      "description": "Mit diesem Leitfaden bringst du dein Widerrufsformular in deinen Shop.",
+      "progress": "{{completed}} von {{total}} Aufgaben erledigt",
+      "dismiss": "Einrichtungsleitfaden ausblenden",
+      "collapse": "Einrichtungsleitfaden einklappen",
+      "expand": "Einrichtungsleitfaden ausklappen",
+      "showStep": "Details für {{step}} anzeigen",
+      "hideStep": "Details für {{step}} ausblenden",
+      "steps": {
+        "form": {
+          "label": "Widerrufsformular aktivieren",
+          "description": "Aktiviere das Formular und wähle, wo Kunden es sehen. Felder, Gründe und Texte sind bereits mit Standardtexten ausgefüllt. Du kannst sie jederzeit in den Einstellungen ändern.",
+          "checkbox": "Widerrufsformular aktivieren",
+          "cta": "Zu den Einstellungen",
+          "placementHeading": "Wähle, wo Kunden das Formular sehen",
+          "placementDescription": "Wähle mindestens einen Ort. Für jeden Ort muss der App-Block hinzugefügt werden, bevor Kunden das Formular sehen."
+        },
+        "blocks": {
+          "label": "App-Blöcke zu deinem Shop hinzufügen",
+          "description": "Füge für jeden Ort, den du im vorherigen Schritt gewählt hast, einen App-Block hinzu.",
+          "locked": "Schließe Schritt {{step}} ab, um zu wählen, wo das Formular erscheint. Danach kannst du hier die App-Blöcke hinzufügen.",
+          "surfaces": {
+            "orderStatus": "Bestellstatusseite",
+            "theme": "Shop-Seite"
+          },
+          "live": {
+            "orderStatus": "Der App-Block ist auf deiner Bestellstatusseite live.",
+            "theme": "Der App-Block ist auf deiner Shop-Seite live."
+          }
+        }
+      }
+    },
+    "help": {
+      "heading": "Hilfe und Ressourcen",
+      "support": {
+        "title": "E-Mail-Support",
+        "description": "Hast du eine Frage? Unser Support-Team hilft dir gern.",
+        "link": "Support kontaktieren"
+      },
+      "faqs": {
+        "title": "FAQs",
+        "description": "Antworten auf häufige Fragen zur Einrichtung und Nutzung der App.",
+        "link": "FAQs ansehen"
+      },
+      "featureRequest": {
+        "title": "Funktionswünsche",
+        "description": "Hast du eine Idee für die App? Sag uns, was du dir wünschst.",
+        "link": "Funktion vorschlagen"
+      }
+    }
+  },
+  "blockSetup": {
+    "autoUpdate": "Diese Meldung verschwindet von selbst ein paar Sekunden, nachdem du den App-Block gespeichert hast.",
+    "addAppBlock": "App-Block hinzufügen",
+    "orderStatus": {
+      "heading": "App-Block zu deiner Bestellstatusseite hinzufügen",
+      "body": "Kunden sehen das Widerrufsformular auf der Bestellstatusseite erst, wenn du den App-Block hinzufügst. So geht's:",
+      "steps": {
+        "open": "Wähle unten <strong>App-Block hinzufügen</strong>. Die Bestellstatusseite öffnet sich im Checkout-Editor.",
+        "add": "Wähle in der Seitenleiste <strong>App-Block hinzufügen</strong>.",
+        "choose": "Wähle <strong>Widerrufsformular</strong>.",
+        "save": "Wähle <strong>Speichern</strong>."
+      }
+    },
+    "storefront": {
+      "heading": "App-Block zu einer Shop-Seite hinzufügen",
+      "body": "Wähle eine Seitenvorlage und dann App-Block hinzufügen. Der Theme-Editor öffnet sich mit dem Widerrufsformular bereits als Abschnitt hinzugefügt.",
+      "templateLabel": "Seitenvorlage",
+      "templates": {
+        "page": "Standardseite",
+        "index": "Startseite",
+        "product": "Produktseiten",
+        "collection": "Kategorieseiten",
+        "cart": "Warenkorbseite"
+      },
+      "steps": {
+        "open": "Wähle <strong>App-Block hinzufügen</strong>, um den Theme-Editor mit dem hinzugefügten Abschnitt zu öffnen.",
+        "move": "Ziehe den Abschnitt an die gewünschte Stelle auf der Seite.",
+        "save": "Wähle <strong>Speichern</strong>."
+      }
+    }
+  },
+  "onboarding": {
+    "pageTitle": "Los geht's",
+    "heading": "Mach deinen Shop bereit für EU-Widerrufe",
+    "intro_one": "Schließe diesen {{count}} Schritt ab, um deinen EU-Kunden eine rechtskonforme Möglichkeit zum Widerruf eines Kaufs zu bieten.",
+    "intro_other": "Schließe diese {{count}} Schritte ab, um deinen EU-Kunden eine rechtskonforme Möglichkeit zum Widerruf eines Kaufs zu bieten.",
+    "stepBadge": "Schritt {{current}} von {{total}}",
+    "completedToast": "Einrichtung abgeschlossen",
+    "steps": {
+      "welcome": {
+        "title": "Willkommen",
+        "description": "Was die App macht"
+      },
+      "form": {
+        "title": "Widerrufsformular",
+        "description": "Formular aktivieren"
+      }
+    },
+    "actions": {
+      "getStarted": "Los geht's",
+      "continue": "Weiter",
+      "finish": "Einrichtung abschließen",
+      "skip": "Einrichtung überspringen",
+      "back": "Zurück"
+    },
+    "help": {
+      "heading": "Brauchst du Hilfe?",
+      "body": "Hast du eine Frage? <supportLink>Support kontaktieren</supportLink>."
+    },
+    "welcome": {
+      "heading": "Willkommen bei {{appName}}",
+      "setupTime": "Dauert etwa 1 Minute",
+      "law": "Seit dem 19. Juni 2026 müssen Shops, die an Kunden in der EU verkaufen, für jede Bestellung einen Widerruf in 2 Schritten ermöglichen (EU-Richtlinie 2023/2673, Artikel 11a). Eine Rückgaberichtlinie allein reicht nicht aus.",
+      "app": "{{appName}} fügt einen Widerrufsbutton zu deiner Bestellstatusseite, einer Seite in deinem Onlineshop oder beiden hinzu. Die App übernimmt die Bestätigung in 2 Schritten und sendet die vorgeschriebene Bestätigungs-E-Mail. Alle Anfragen verwaltest du an einem Ort.",
+      "imageAlt": "Ein Kunde widerruft eine Bestellung",
+      "requirementsHeading": "Was das Gesetz verlangt",
+      "requirements": {
+        "button": "Einen klar beschrifteten Widerrufsbutton, den Kunden leicht finden",
+        "twoStep": "Einen Prozess in 2 Schritten: Kunden reichen ihren Widerruf ein und bestätigen ihn dann",
+        "email": "Eine automatische Bestätigungs-E-Mail, die Kunden aufbewahren können"
+      },
+      "penaltyHeading": "Was passiert, wenn du die Vorgaben nicht einhältst",
+      "penalty": "Fehlt der Widerrufsbutton oder funktioniert er nicht, verlängert sich die {{days}}-tägige Widerrufsfrist per Gesetz. Kunden haben dann 12 Monate und {{days}} Tage Zeit, jede betroffene Bestellung zu widerrufen."
+    },
+    "form": {
+      "heading": "Widerrufsformular aktivieren",
+      "body": "Kunden reichen ihren Widerruf ein und bestätigen ihn in einem separaten Schritt, wie es das EU-Recht verlangt. Das Formular enthält rechtliche Standardtexte. Kunden haben ab Lieferung {{days}} Zeit für den Widerruf.",
+      "switch": "Widerrufsformular aktivieren",
+      "later": "Du kannst all das später in den Einstellungen ändern.",
+      "loadError": "Deine Formulareinstellungen konnten nicht geladen werden. Du kannst die Einrichtung jetzt abschließen und das Formular später in den Einstellungen aktivieren.",
+      "saveError": "Deine Formularauswahl konnte nicht gespeichert werden. Versuche es erneut oder schließe die Einrichtung ohne sie ab und lege sie später in den Einstellungen fest.",
+      "finishWithoutSaving": "Ohne Speichern abschließen",
+      "placementError": "Wähle mindestens einen Ort oder deaktiviere das Formular."
+    },
+    "finishError": "Die Einrichtung konnte nicht abgeschlossen werden. Versuche es erneut."
+  },
+  "formSetup": {
+    "pageTitle": "Einstellungen",
+    "loadError": "Einstellungen konnten nicht geladen werden",
+    "saveError": "Einstellungen konnten nicht gespeichert werden",
+    "savedToast": "Einstellungen gespeichert",
+    "enable": {
+      "heading": "Widerrufsformular",
+      "description": "Lege fest, ob Kunden Widerrufsanfragen einreichen können und wo sie das Formular sehen.",
+      "checkbox": "Widerrufsformular aktivieren",
+      "details": "Ist diese Option deaktiviert, können Kunden nirgendwo Widerrufsanfragen einreichen.",
+      "orderStatus": "Auf der Bestellstatusseite anzeigen",
+      "storefront": "Auf einer Shop-Seite anzeigen"
+    },
+    "countries": {
+      "heading": "Berechtigte Länder",
+      "description": "Kunden sehen das Widerrufsformular nur, wenn ihre Bestellung in eines dieser Länder versendet wird.",
+      "all": "Alle {{count}} EU-Länder (empfohlen)",
+      "allDetails": "Das Widerrufsrecht gilt in der gesamten EU.",
+      "specific": "Bestimmte Länder",
+      "specificDetails": "Wähle unten die Länder aus. Du kannst das jederzeit ändern.",
+      "pickerLabel": "Länder",
+      "pickerPlaceholder": "Länder suchen"
+    },
+    "content": {
+      "heading": "Formularinhalt",
+      "tabs": {
+        "step1": "1. Details",
+        "confirm": "2. Bestätigen",
+        "done": "3. Fertig"
+      },
+      "language": "Sprache",
+      "languageDetails": "Wähle eine Sprache, um den Formularinhalt in dieser Sprache zu bearbeiten. Jede Sprache wird separat gespeichert.",
+      "beforeDelivery": {
+        "heading": "Vor der Lieferung",
+        "description": "Wird auf dem ersten Bildschirm des Formulars und im Schritt Details angezeigt, bis die Bestellung geliefert ist, auch während sie unterwegs ist."
+      },
+      "afterDelivery": {
+        "heading": "Nach der Lieferung",
+        "description": "Wird stattdessen angezeigt, sobald Shopify die Bestellung als geliefert markiert."
+      },
+      "title": "Titel",
+      "description": "Beschreibung",
+      "itemHeading": "Überschrift der Artikelauswahl",
+      "customerDetails": {
+        "heading": "Kundendaten",
+        "description": "Werden aus der Bestellung übernommen. Kunden können diese Felder nicht bearbeiten.",
+        "locked": "Gesperrt",
+        "fullName": "Vollständiger Name",
+        "email": "E-Mail",
+        "orderNumber": "Bestellnummer"
+      },
+      "reason": {
+        "heading": "Grund für den Widerruf",
+        "checkbox": "Nach einem Grund fragen",
+        "details": "Kunden müssen nie einen Grund angeben. Nach EU-Recht muss dieses Feld optional sein.",
+        "label": "Beschriftung des Grundfelds",
+        "optionsHeading": "Auswahlmöglichkeiten für Gründe",
+        "optionsHelp": "Kunden wählen aus dieser Liste. Füge Optionen hinzu, entferne sie oder formuliere sie passend zu deinem Shop um. Eine Option „Sonstiges“ mit Textfeld wird immer am Ende hinzugefügt.",
+        "removeOption": "{{option}} entfernen",
+        "addLabel": "Grund hinzufügen",
+        "addPlaceholder": "Zum Beispiel: Versehentlich bestellt",
+        "translatedHelp": "Übersetze jede Option. Um Optionen hinzuzufügen oder zu entfernen, wechsle zu Englisch.",
+        "translatedEmpty": "Füge zuerst Gründe auf Englisch hinzu."
+      },
+      "continueButton": "Beschriftung des Weiter-Buttons",
+      "confirm": {
+        "heading": "Überschrift der Bestätigung",
+        "messageBefore": "Nachricht vor der Lieferung",
+        "messageAfter": "Nachricht nach der Lieferung",
+        "declaration": "Erklärung",
+        "button": "Beschriftung des Bestätigen-Buttons"
+      },
+      "done": {
+        "titleBefore": "Titel vor der Lieferung",
+        "messageBefore": "Nachricht vor der Lieferung",
+        "titleAfter": "Titel nach der Lieferung",
+        "messageAfter": "Nachricht nach der Lieferung"
+      }
+    },
+    "automation": {
+      "heading": "Automatisierung",
+      "description": "Lege fest, was die App tut, wenn ein Kunde eine Widerrufsanfrage einreicht.",
+      "beforeShip": {
+        "heading": "Vor dem Versand der Bestellung",
+        "description": "Gilt, wenn eine Anfrage eingeht, bevor Artikel versendet wurden.",
+        "hold": "Ausführung zur Prüfung zurückhalten",
+        "holdDetails": "Pausiere die Ausführung, bis du die Anfrage genehmigst oder ablehnst. Die Zurückhaltung wird aufgehoben, sobald du entscheidest.",
+        "tagDetails": "Versieh Bestellungen, für die vor dem Versand eine Anfrage eingeht, mit einem Tag, damit dein Team sie in der Bestellliste findet."
+      },
+      "fallback": {
+        "label": "Was mit der Bestellung passiert",
+        "hold": "Zurückhalten, bis du die Anfrage genehmigst oder ablehnst",
+        "cancelNow": "Gesamte Bestellung sofort stornieren und erstatten",
+        "releaseN": "Zurückhaltung nach einer festgelegten Anzahl von Tagen aufheben",
+        "cancelN": "Gesamte Bestellung nach einer festgelegten Anzahl von Tagen stornieren und erstatten",
+        "cancelWarning": "Dadurch wird die gesamte Bestellung storniert und erstattet, auch wenn der Kunde nur einige Artikel widerrufen hat. Shopify informiert den Kunden per E-Mail über die Stornierung.",
+        "days": "Anzahl der Tage"
+      },
+      "afterDelivery": {
+        "heading": "Nach dem Versand der Bestellung",
+        "description": "Gilt, wenn eine Anfrage eingeht, nachdem mindestens ein Artikel versendet wurde, auch wenn er noch nicht geliefert wurde. Jede Anfrage erscheint trotzdem auf der Seite Anfragen.",
+        "createReturn": "Rücksendung erstellen",
+        "createReturnDetails": "Erstelle in Shopify eine Rücksendung für die angefragten, bereits versendeten Artikel.",
+        "tagDetails": "Versieh Bestellungen, für die nach dem Versand eine Anfrage eingeht, mit einem Tag."
+      },
+      "tag": {
+        "checkbox": "Bestellung taggen",
+        "label": "Bestell-Tags",
+        "placeholder": "Tag hinzufügen"
+      }
+    },
+    "deadline": {
+      "heading": "Widerrufsfrist",
+      "description": "Die Widerrufsfrist beginnt mit der Lieferung der Bestellung, nicht mit der Bestellung selbst. Nach EU-Recht beträgt sie mindestens {{days}}.",
+      "days": "Tage für den Widerruf nach der Lieferung",
+      "daysDetails": "Wie lange Kunden nach der Lieferung ihrer Bestellung Zeit für den Widerruf haben.",
+      "transit": "Geschätzte Versanddauer (Tage)",
+      "transitDetails": "Wird verwendet, wenn der Versanddienstleister kein Lieferdatum und keine Schätzung übermittelt. Die App addiert diese Tage zum Versanddatum."
+    },
+    "validation": {
+      "countryMode": "Wähle aus, welche Länder berechtigt sind.",
+      "euCountries": "Wähle mindestens ein Land aus.",
+      "title": "Gib einen Titel ein.",
+      "description": "Gib eine Beschreibung ein.",
+      "itemHeading": "Gib eine Überschrift für die Artikelliste ein.",
+      "continueButton": "Gib eine Beschriftung für den Weiter-Button ein.",
+      "heading": "Gib eine Überschrift ein.",
+      "confirmMessage": "Gib eine Bestätigungsnachricht ein.",
+      "declaration": "Gib die Erklärung ein, die Kunden akzeptieren müssen.",
+      "confirmButton": "Gib eine Beschriftung für den Bestätigen-Button ein.",
+      "message": "Gib eine Nachricht ein.",
+      "reasonLabel": "Gib eine Beschriftung für das Grundfeld ein.",
+      "reasonOptions": "Füge mindestens einen Grund hinzu.",
+      "reasonOptionTranslation": "Gib eine Übersetzung für diesen Grund ein.",
+      "fallback": "Wähle aus, was mit der Bestellung passiert.",
+      "daysRange": "Gib eine Anzahl von Tagen zwischen {{min}} und {{max}} ein.",
+      "tags": "Füge mindestens einen Tag hinzu oder deaktiviere das Taggen.",
+      "afterDeliveryAction": "Wähle aus, was nach dem Versand der Bestellung passiert."
+    },
+    "preview": {
+      "heading": "Live-Vorschau",
+      "compliantBadge": "2-Schritt-konform",
+      "surfaceLabel": "Vorschau",
+      "surfaces": {
+        "orderStatus": "Bestellstatusseite",
+        "theme": "Shop-Seite"
+      },
+      "stageLabel": "Lieferstatus",
+      "stages": {
+        "beforeDelivery": "Noch nicht geliefert",
+        "delivered": "Geliefert"
+      },
+      "banner": {
+        "orderStatus": "So sehen Kunden das Formular auf der Bestellstatusseite. Wähle die Buttons aus, um es auszuprobieren, oder springe mit den Tabs unter Formularinhalt zu einem bestimmten Schritt.",
+        "theme": "So sehen Kunden das Formular auf deiner Shop-Seite. Es beginnt mit dem Schritt „Bestellung finden“, da Shop-Besucher nicht angemeldet sind."
+      },
+      "restart": "Vorschau neu starten",
+      "position": {
+        "entry": "Einstiegskarte",
+        "lookup": "Bestellung finden",
+        "step": "Schritt {{current}} von {{total}}"
+      },
+      "storefront": {
+        "start": "Widerrufsanfrage starten",
+        "findOrderHeading": "Bestellung finden",
+        "findOrderBody": "Gib deine Bestelldaten ein, um deine Widerrufsanfrage zu starten.",
+        "fullName": "Vollständiger Name",
+        "email": "E-Mail",
+        "orderNumber": "Bestellnummer",
+        "continue": "Weiter",
+        "steps": {
+          "step1": "Details",
+          "confirm": "Bestätigen",
+          "done": "Fertig"
+        },
+        "stepOf": "Schritt {{current}} von {{total}}",
+        "stepProgress": "Schritt {{current}} von {{total}}: {{label}}",
+        "reasonPlaceholder": "Grund auswählen (optional)",
+        "otherReason": "Sonstiges",
+        "yourReason": "Dein Grund",
+        "yourReasonPlaceholder": "Nenne uns deinen Grund",
+        "selectItem": "Wähle mindestens einen Artikel aus, um fortzufahren.",
+        "itemsToWithdraw": "Zu widerrufende Artikel ({{count}})",
+        "selectedTotal": "Summe der ausgewählten Artikel",
+        "previous": "Zurück",
+        "submittedOn": "Eingereicht am {{date}}"
+      }
+    }
+  },
+  "requests": {
+    "pageTitle": "Anfragen",
+    "searchLabel": "Widerrufsanfragen durchsuchen",
+    "searchPlaceholder": "Nach Bestellnummer, Kundenname oder E-Mail suchen",
+    "export": "Exportieren",
+    "exportSelected": "Auswahl exportieren",
+    "tabs": {
+      "all": "Alle",
+      "withCount": "{{label}} ({{count}})"
+    },
+    "empty": {
+      "imageAlt": "",
+      "heading": "Noch keine Widerrufsanfragen",
+      "body": "Widerrufsanfragen deiner Kunden werden hier angezeigt.",
+      "filteredHeading": "Keine Widerrufsanfragen gefunden",
+      "filteredBody": "Ändere den Suchbegriff oder den Filter."
+    },
+    "table": {
+      "selectAll": "Alle Widerrufsanfragen auswählen",
+      "selectRow": "Bestellung {{order}} auswählen",
+      "selectedCount": "{{count}} ausgewählt",
+      "order": "Bestellung",
+      "customer": "Kunde",
+      "items": "Artikel",
+      "value": "Wert",
+      "status": "Status",
+      "submitted": "Eingereicht",
+      "actions": "Aktionen",
+      "itemCount_one": "{{count}} Artikel",
+      "itemCount_other": "{{count}} Artikel",
+      "viewRow": "Anfrage für Bestellung {{order}} ansehen",
+      "deleteRow": "Anfrage für Bestellung {{order}} löschen"
+    },
+    "delete": {
+      "heading_one": "Widerrufsanfrage löschen?",
+      "heading_other": "{{count}} Widerrufsanfragen löschen?",
+      "body_one": "Diese Widerrufsanfrage wird endgültig gelöscht. Das kann nicht rückgängig gemacht werden.",
+      "body_other": "Diese {{count}} Widerrufsanfragen werden endgültig gelöscht. Das kann nicht rückgängig gemacht werden.",
+      "confirm_one": "Anfrage löschen",
+      "confirm_other": "Anfragen löschen",
+      "toast_one": "Widerrufsanfrage gelöscht",
+      "toast_other": "{{count}} Widerrufsanfragen gelöscht"
+    },
+    "csv": {
+      "filename": "widerrufsanfragen-{{date}}.csv",
+      "order": "Bestellung",
+      "customerName": "Kundenname",
+      "customerEmail": "Kunden-E-Mail",
+      "country": "Land",
+      "items": "Artikel",
+      "value": "Wert",
+      "reason": "Grund",
+      "status": "Status",
+      "submitted": "Eingereicht",
+      "decided": "Entschieden"
+    }
+  },
+  "requestDetail": {
+    "pageTitle": "Widerrufsanfrage",
+    "backLink": "Anfragen",
+    "submittedLine": "Eingereicht am {{date}} über {{source}}",
+    "previous": "Vorherige Anfrage",
+    "next": "Nächste Anfrage",
+    "badges": {
+      "canceled": "Storniert",
+      "onHold": "Zurückgehalten",
+      "return": "Rücksendung: {{status}}"
+    },
+    "actions": {
+      "refund": "Erstatten",
+      "more": "Weitere Aktionen",
+      "cancelOrder": "Bestellung stornieren",
+      "placeHold": "Ausführung zurückhalten",
+      "releaseHold": "Zurückhaltung der Ausführung aufheben",
+      "createReturn": "Rücksendung erstellen",
+      "processReturn": "Bearbeiten und erstatten",
+      "viewOrder": "Bestellung ansehen"
+    },
+    "banners": {
+      "orderUnavailableHeading": "Bestelldetails nicht verfügbar",
+      "orderUnavailableBody": "{{error}} Bestellaktionen sind erst verfügbar, wenn die Bestelldetails geladen sind.",
+      "actionFailedHeading": "Diese Aktion konnte nicht abgeschlossen werden",
+      "actionFailedAction": "Details findest du unten unter Aktivität.",
+      "canceled": "Diese Bestellung wurde storniert. Bestellaktionen sind nicht mehr verfügbar."
+    },
+    "deadline": {
+      "heading": "Erstattungsfrist",
+      "pendingLabel": "Verbleibende Zeit für Entscheidung und Erstattung",
+      "decidedLabel": "Entscheidung",
+      "badges": {
+        "overdue": "Überfällig",
+        "actionNeeded": "Handlung erforderlich",
+        "onTime": "Rechtzeitig"
+      },
+      "daysLeft_one": "Noch {{count}} Tag",
+      "daysLeft_other": "Noch {{count}} Tage",
+      "daysOverdue_one": "{{count}} Tag überfällig",
+      "daysOverdue_other": "{{count}} Tage überfällig",
+      "daysEarly_one": "{{count}} Tag vor Fristende",
+      "daysEarly_other": "{{count}} Tage vor Fristende",
+      "daysLate_one": "{{count}} Tag nach Fristende",
+      "daysLate_other": "{{count}} Tage nach Fristende",
+      "pending": "Du hast ab Eingang der Anfrage {{days}} Zeit, um zu entscheiden und zu erstatten. Die Frist endet am {{date}}.",
+      "pendingOverdue": "Die Frist ist am {{date}} abgelaufen. Erstatte dem Kunden den Betrag so schnell wie möglich.",
+      "decidedOnTime": "Innerhalb der {{windowDays}}-tägigen Erstattungsfrist entschieden. Die Frist endete am {{date}}.",
+      "decidedLate": "Nach Ablauf der Erstattungsfrist am {{date}} entschieden."
+    },
+    "items": {
+      "heading": "Widerrufene Artikel",
+      "reject": "Ablehnen",
+      "approve": "Genehmigen",
+      "total": "Widerrufen gesamt",
+      "sku": "SKU: {{sku}}",
+      "quantity": "Menge: {{count}}",
+      "shipping": {
+        "notShipped": "Noch nicht versendet",
+        "partlyShipped": "Teilweise versendet",
+        "shipped": "Versendet"
+      },
+      "partiallyShippedBanner": "Ein Teil dieser Bestellung wurde versendet. Noch nicht versendete Artikel können weiterhin zurückgehalten werden, für versendete Artikel ist eine Rücksendung nötig."
+    },
+    "return": {
+      "heading": "Rücksendung",
+      "status": "Status",
+      "created": "Erstellt",
+      "body": "Für die widerrufenen Artikel wurde in Shopify eine Rücksendung erstellt.",
+      "openBody": "Wenn die Artikel zurück sind, wähle Bearbeiten und erstatten. Damit wird dem Kunden der Betrag für die zurückgesendeten Artikel erstattet und die Rücksendung geschlossen.",
+      "alreadyRefundedBody": "Die Artikel in dieser Rücksendung wurden bereits erstattet. Schließe die Rücksendung in Shopify, sobald sie zurück sind."
+    },
+    "processReturnModal": {
+      "heading": "Rücksendung bearbeiten und erstatten",
+      "calculating": "Erstattungsbetrag wird berechnet …",
+      "nothingToProcess": "Bei dieser Rücksendung gibt es nichts mehr zu bearbeiten. Möglicherweise wurde sie in Shopify bereits bearbeitet oder geschlossen.",
+      "nothingToRefund": "Die Artikel in dieser Rücksendung wurden bereits erstattet, es gibt also nichts mehr zu erstatten.",
+      "unsupportedPayment": "Die Zahlung dieser Bestellung kann nicht über die App erstattet werden. Bearbeite die Rücksendung und erstatte sie stattdessen in Shopify.",
+      "itemsHeading": "Artikel in Rücksendung {{name}}",
+      "subtotal": "Zwischensumme der Artikel",
+      "shippingLine": "Ursprünglicher Versand",
+      "total": "Erstattung gesamt",
+      "body": "Dadurch werden die zurückgesendeten Artikel als bearbeitet markiert, auf die ursprüngliche Zahlungsmethode erstattet und die Rücksendung geschlossen. Shopify sendet dem Kunden per E-Mail einen Erstattungsbeleg. Das kann nicht rückgängig gemacht werden.",
+      "confirmAmount": "{{amount}} erstatten",
+      "confirm": "Bearbeiten und erstatten"
+    },
+    "payment": {
+      "heading": "Zahlung",
+      "status": "Zahlungsstatus",
+      "subtotal": "Zwischensumme Widerruf",
+      "shipping": "Versand der Bestellung",
+      "total": "Bestellsumme",
+      "refunded": "Erstattet",
+      "unavailable": "Zahlungsdetails sind gerade nicht verfügbar."
+    },
+    "activity": {
+      "heading": "Aktivität",
+      "noteLabel": "Notiz hinzufügen",
+      "notePlaceholder": "Notiz hinzufügen …",
+      "post": "Posten",
+      "noteHelp": "Nur du und deine Mitarbeiter sehen Notizen. Kunden sehen sie nie.",
+      "submitted": "Widerrufsanfrage über {{source}} eingereicht",
+      "decided": {
+        "approved": "Anfrage genehmigt",
+        "rejected": "Anfrage abgelehnt"
+      },
+      "note": "Notiz: {{body}}",
+      "entry": "{{label}}: {{message}}",
+      "actions": {
+        "resolve_branch": "Automatisierung gestartet",
+        "run_automation": "Automatisierung",
+        "automation_completed": "Automatisierung abgeschlossen",
+        "hold_fulfillment": "Zurückhaltung der Ausführung",
+        "schedule_fallback": "Geplante Folgeaktion",
+        "release_hold": "Zurückhaltung der Ausführung aufgehoben",
+        "cancel_order_immediate": "Bestellung storniert und erstattet",
+        "cancel_order_scheduled": "Bestellung storniert und erstattet",
+        "cancel_order_manual": "Bestellung storniert und erstattet",
+        "cancel_order": "Bestellung storniert und erstattet",
+        "refund": "Erstattung",
+        "tag_before_ship": "Bestellung getaggt",
+        "tag_after_delivery": "Bestellung getaggt",
+        "order_tag_add": "Bestell-Tags hinzugefügt",
+        "order_tag_remove": "Bestell-Tags entfernt",
+        "create_return": "Rücksendung",
+        "refresh_return": "Rücksendestatus aktualisiert",
+        "process_return": "Bearbeiten und erstatten",
+        "fetch_shop_contact": "Kontaktdaten des Shops",
+        "customer_email": "Bestätigungs-E-Mail an den Kunden",
+        "merchant_email": "Benachrichtigung über neue Anfrage",
+        "notify_customer": "E-Mail zur Entscheidung",
+        "notify_merchant": "Du wurdest benachrichtigt"
+      },
+      "messages": {
+        "noTags": "Es sind keine Tags eingerichtet",
+        "tagged": "Bestellung mit {{tags}} getaggt",
+        "noHoldableOrders": "Bei dieser Bestellung kann gerade nichts zurückgehalten werden",
+        "held": "Artikel zurückgehalten, damit sie nicht versendet werden",
+        "holdOff": "Das Zurückhalten der Ausführung zur Prüfung ist deaktiviert",
+        "tagBeforeShipOff": "Das Taggen vor dem Versand ist deaktiviert",
+        "tagAfterDeliveryOff": "Das Taggen nach dem Versand ist deaktiviert",
+        "fallbackHold": "Die Bestellung bleibt zurückgehalten, bis du die Anfrage genehmigst oder ablehnst",
+        "fallbackInvalidDays": "Die Folgeaktion konnte nicht geplant werden. Die Anzahl der Tage ist ungültig.",
+        "scheduledRelease": "Aufhebung der Zurückhaltung für {{date}} geplant",
+        "scheduledCancel": "Stornierung und Erstattung für {{date}} geplant",
+        "canceled": "Bestellung storniert und erstattet",
+        "returnCreated": "Rücksendung in Shopify erstellt",
+        "returnNoMatch": "Keiner der angefragten Artikel kann zurückgesendet werden",
+        "notifiedByEmail": "In der App und per E-Mail benachrichtigt",
+        "notifiedEmailFailed": "In der App benachrichtigt. Die Benachrichtigungs-E-Mail ist fehlgeschlagen: {{error}}",
+        "notifiedInAppOnly": "In der App benachrichtigt. Die Benachrichtigungs-E-Mail wurde nicht gesendet.",
+        "emailSent": "Gesendet",
+        "emailFailed": "Fehlgeschlagen: {{error}}",
+        "emailNotSent": "Nicht gesendet, da kein Empfänger vorhanden oder E-Mail nicht eingerichtet ist",
+        "orderNotFound": "Diese Bestellung wurde in Shopify nicht gefunden",
+        "alreadyCanceled": "Die Bestellung war bereits storniert",
+        "branchBeforeShip": "Die Bestellung wurde noch nicht versendet, daher wurden die Schritte vor dem Versand ausgeführt",
+        "branchAfterDelivery": "Die Bestellung wurde versendet, daher wurden die Schritte nach dem Versand ausgeführt",
+        "branchPartiallyShipped": "Die Bestellung wurde teilweise versendet, daher wurden die Schritte für versendete und nicht versendete Artikel ausgeführt",
+        "noUnshippedItemsRequested": "Keiner der angefragten Artikel wartet auf den Versand, daher wurde nichts zurückgehalten",
+        "fallbackCancelPartiallyShipped": "Die Bestellung wurde teilweise versendet und kann daher nicht vollständig storniert werden. Die angefragten Artikel bleiben zurückgehalten, bis du die Anfrage genehmigst oder ablehnst.",
+        "returnNothingShipped": "Keiner der angefragten Artikel wurde versendet, daher war keine Rücksendung nötig",
+        "runCompleted": "Automatisierung abgeschlossen",
+        "runFailed": "Mindestens ein Automatisierungsschritt ist fehlgeschlagen",
+        "runSkipped": "Automatisierung übersprungen",
+        "scheduledSkippedApproved": "Die Anfrage wurde bereits genehmigt, daher wurde die geplante Aktion nicht ausgeführt",
+        "scheduledSkippedRejected": "Die Anfrage wurde bereits abgelehnt, daher wurde die geplante Aktion nicht ausgeführt",
+        "noHoldsPlaced": "Für diese Anfrage wurde nichts zurückgehalten",
+        "holdsAlreadyReleased": "Die Zurückhaltungen wurden bereits aufgehoben",
+        "holdReleased": "Die Bestellung kann wieder ausgeführt werden",
+        "holdExists": "Für diese Anfrage besteht bereits eine Zurückhaltung",
+        "decisionSkipped": "Ein Mitarbeiter hat entschieden, dem Kunden keine E-Mail zu senden",
+        "decisionSent": "Kunde per E-Mail über die Entscheidung informiert",
+        "decisionFailed": "E-Mail zur Entscheidung fehlgeschlagen: {{error}}",
+        "decisionNotConfigured": "Die E-Mail zur Entscheidung wurde nicht gesendet, da E-Mail nicht eingerichtet ist",
+        "refunded": "{{amount}} erstattet",
+        "noReturn": "Für diese Anfrage gibt es keine Rücksendung",
+        "returnStatus": "Rücksendestatus: {{status}}",
+        "returnProcessed": "Rücksendung bearbeitet und {{amount}} erstattet",
+        "returnNothingToProcess": "Bei dieser Rücksendung gibt es nichts mehr zu bearbeiten",
+        "returnNothingToRefund": "Die Artikel in dieser Rücksendung wurden bereits erstattet",
+        "returnPaymentUnsupported": "Diese Zahlung kann nicht über die App erstattet werden. Bearbeite die Rücksendung in Shopify.",
+        "refundNothingRefundable": "Keiner der angefragten Artikel kann erstattet werden. Möglicherweise wurden sie bereits erstattet.",
+        "refundNoSuggestion": "Shopify konnte für diese Artikel keine Erstattung ermitteln. Erstatte sie stattdessen in Shopify.",
+        "refundCoveredByReturn": "Alle widerrufenen Artikel befinden sich in der offenen Rücksendung. Verwende Bearbeiten und erstatten bei der Rücksendung, um sie zu erstatten.",
+        "tagsRemoved": "Bestell-Tags entfernt: {{tags}}",
+        "tagsAdded": "Bestell-Tags hinzugefügt: {{tags}}"
+      }
+    },
+    "order": {
+      "heading": "Bestellung",
+      "order": "Bestellung",
+      "placed": "Aufgegeben",
+      "payment": "Zahlung",
+      "fulfillment": "Ausführung"
+    },
+    "customer": {
+      "heading": "Kunde",
+      "avatarFallback": "Kunde",
+      "contactHeading": "Kontaktinformationen",
+      "email": "E-Mail",
+      "language": "Sprache",
+      "shippingHeading": "Lieferadresse"
+    },
+    "automation": {
+      "heading": "Automatisierung",
+      "stage": "Phase",
+      "stages": {
+        "before_ship": "Vor dem Versand",
+        "partially_shipped": "Teilweise versendet",
+        "after_delivery": "Nach dem Versand"
+      },
+      "hold": "Zurückhaltung der Ausführung",
+      "holdStates": {
+        "onHold": "Zurückgehalten",
+        "released": "Aufgehoben",
+        "none": "Keine"
+      },
+      "canceled": "Storniert",
+      "return": "Rücksendung"
+    },
+    "emails": {
+      "heading": "E-Mail-Verlauf",
+      "customerConfirmation": "Widerrufsbestätigung an den Kunden",
+      "merchantNotification": "Benachrichtigung über neue Anfrage",
+      "decision": "E-Mail zur Entscheidung",
+      "statuses": {
+        "sent": "Gesendet",
+        "failed": "Fehlgeschlagen",
+        "notSent": "Nicht gesendet"
+      }
+    },
+    "tags": {
+      "heading": "Bestell-Tags",
+      "label": "Bestell-Tag hinzufügen",
+      "placeholder": "Tag hinzufügen",
+      "remove": "Tag {{tag}} entfernen",
+      "savedToast": "Bestell-Tags gespeichert"
+    },
+    "reason": {
+      "heading": "Grund für den Widerruf",
+      "quoted": "„{{reason}}“",
+      "none": "Kein Grund angegeben"
+    },
+    "decidedToast": {
+      "approved": "Widerrufsanfrage genehmigt",
+      "rejected": "Widerrufsanfrage abgelehnt"
+    },
+    "cancelModal": {
+      "heading": "Bestellung stornieren?",
+      "body": "Dadurch wird die gesamte Bestellung in Shopify storniert, einschließlich der Artikel, die der Kunde nicht widerrufen hat. Die Bestellung wird auf die ursprüngliche Zahlungsmethode erstattet und die Artikel werden wieder eingelagert. Shopify benachrichtigt den Kunden per E-Mail. Das kann nicht rückgängig gemacht werden.",
+      "keep": "Bestellung behalten",
+      "confirm": "Bestellung stornieren und erstatten"
+    },
+    "createReturnModal": {
+      "heading": "Rücksendung für widerrufene Artikel erstellen",
+      "itemsHeading": "Zurückzusendende Artikel",
+      "subtotal": "Zwischensumme der Artikel",
+      "checking": "Es wird geprüft, welche Artikel zurückgesendet werden können …",
+      "nothingToReturn": "Keiner der widerrufenen Artikel wurde bisher versendet, es gibt also nichts zurückzusenden. Halte sie zurück, damit sie nicht versendet werden, oder erstatte sie, um sie aus der Bestellung zu entfernen.",
+      "notShipped_one": "{{count}} widerrufener Artikel ist nicht enthalten, da er noch nicht versendet wurde.",
+      "notShipped_other": "{{count}} widerrufene Artikel sind nicht enthalten, da sie noch nicht versendet wurden.",
+      "notReturnable_one": "{{count}} widerrufener Artikel ist nicht enthalten, da er bereits zurückgesendet wurde.",
+      "notReturnable_other": "{{count}} widerrufene Artikel sind nicht enthalten, da sie bereits zurückgesendet wurden.",
+      "body": "Dadurch wird in Shopify eine Rücksendung für die oben genannten Artikel erstellt. Dem Kunden wird dabei nichts erstattet. Wenn die Artikel zurück sind, wähle bei der Rücksendung Bearbeiten und erstatten.",
+      "cancel": "Abbrechen",
+      "confirm": "Rücksendung erstellen"
+    },
+    "decisionModal": {
+      "headingApprove": "Widerrufsanfrage genehmigen?",
+      "headingReject": "Widerrufsanfrage ablehnen?",
+      "approveAndSend": "Genehmigen und E-Mail senden",
+      "rejectAndSend": "Ablehnen und E-Mail senden",
+      "approve": "Genehmigen",
+      "reject": "Ablehnen",
+      "loadingLabel": "E-Mail-Vorschau wird geladen",
+      "loading": "Kunden-E-Mail wird vorbereitet …",
+      "sendEmail": "E-Mail an den Kunden senden",
+      "language": "Diese E-Mail ist auf {{language}}, der Sprache des Kunden. Deine Änderungen gelten nur für diese E-Mail.",
+      "subject": "Betreff",
+      "body": "E-Mail-Text",
+      "editHtml": "HTML bearbeiten",
+      "htmlLabel": "E-Mail-HTML",
+      "previewTitle": "E-Mail-Vorschau",
+      "templateUnchanged": "Deine Änderungen gelten nur für diese E-Mail. Deine gespeicherte Vorlage bleibt unverändert.",
+      "noEmail": "Der Kunde erhält keine E-Mail. Du kannst ihn bei Bedarf separat kontaktieren.",
+      "holdReleased": "Dadurch wird auch die Zurückhaltung der Ausführung für diese Bestellung aufgehoben, sodass sie wieder ausgeführt werden kann."
+    },
+    "refundModal": {
+      "heading": "Widerrufene Artikel erstatten",
+      "calculatingLabel": "Erstattung wird berechnet",
+      "calculating": "Erstattungsbetrag wird berechnet …",
+      "nothingToRefund": "Bei dieser Bestellung gibt es nichts zu erstatten. Möglicherweise wurden die widerrufenen Artikel bereits erstattet oder die Bestellung wurde storniert.",
+      "itemsHeading": "Zu erstattende Artikel",
+      "subtotal": "Zwischensumme der Artikel",
+      "shippingLine": "Ursprünglicher Versand",
+      "amount": "Erstattungsbetrag",
+      "total": "Erstattung gesamt",
+      "body": "Die widerrufenen Artikel werden auf die ursprüngliche Zahlungsmethode erstattet und wenn möglich wieder eingelagert. Shopify sendet dem Kunden per E-Mail einen Erstattungsbeleg.",
+      "includesShipping": "Der Kunde hat die gesamte Bestellung widerrufen, daher sind die ursprünglichen Versandkosten enthalten.",
+      "unshippedItems": "Noch nicht versendete Artikel werden aus der Bestellung entfernt und daher nicht versendet.",
+      "inReturn_one": "{{count}} widerrufener Artikel ist nicht enthalten, da er sich in Rücksendung {{name}} befindet. Erstatte ihn mit Bearbeiten und erstatten bei der Rücksendung.",
+      "inReturn_other": "{{count}} widerrufene Artikel sind nicht enthalten, da sie sich in Rücksendung {{name}} befinden. Erstatte sie mit Bearbeiten und erstatten bei der Rücksendung.",
+      "allInReturn": "Alle widerrufenen Artikel befinden sich in Rücksendung {{name}}. Erstatte sie mit Bearbeiten und erstatten bei der Rücksendung, wodurch diese auch geschlossen wird.",
+      "irreversible": "Das kann nicht rückgängig gemacht werden.",
+      "confirmAmount": "{{amount}} erstatten",
+      "confirm": "Erstatten"
+    },
+    "shopifyNotes": {
+      "holdAutomatic": "Widerrufsanfrage für Bestellung {{order}} wartet auf Prüfung durch Mitarbeiter",
+      "holdManual": "Widerrufsanfrage für Bestellung {{order}} wurde von Mitarbeitern zurückgehalten",
+      "canceled": "Von {{appName}} storniert, da der Kunde den Kauf widerrufen hat (Anfrage {{id}}).",
+      "refunded": "Von {{appName}} erstattet, da der Kunde den Kauf widerrufen hat (Anfrage {{id}}).",
+      "returnReason": "Widerrufsanfrage: {{reason}}",
+      "returnReasonNone": "Widerrufsanfrage (kein Grund angegeben)"
+    }
+  },
+  "emailTemplates": {
+    "pageTitle": "Benachrichtigungen",
+    "loadError": "Benachrichtigungen konnten nicht geladen werden",
+    "saveError": "Benachrichtigungen konnten nicht gespeichert werden",
+    "savedToast": "Benachrichtigungen gespeichert",
+    "resetToast": "{{name}} auf Standard zurückgesetzt",
+    "sender": {
+      "heading": "Absender",
+      "description": "Diese Einstellungen gelten für jede E-Mail, die die App für deinen Shop sendet. Sende von deiner eigenen verifizierten Adresse und lege fest, wohin Antworten von Kunden gehen.",
+      "emailLabel": "Absender-E-Mail",
+      "emailPlaceholder": "notifications@withdrawaleasy.com",
+      "detailsVerified": "E-Mails werden von dieser Adresse gesendet.",
+      "detailsPending": "Gib den Code ein, den wir an diese Adresse gesendet haben, um sie zu verifizieren.",
+      "detailsDefault": "Wenn du dieses Feld leer lässt, werden E-Mails von {{email}} gesendet.",
+      "detailsDefaultFallback": "Wenn du dieses Feld leer lässt, werden E-Mails von der Standardadresse der App gesendet.",
+      "freeProviderWarning": "Kostenlose E-Mail-Anbieter wie Gmail und Yahoo können nicht authentifiziert werden. Kunden sehen bei E-Mails von dieser Adresse „via brevosend.com“. Für einen professionelleren Auftritt verwende eine Adresse mit der Domain deines Shops.",
+      "codeLabel": "Bestätigungscode",
+      "codeDetails": "Gib den 6-stelligen Code aus der E-Mail ein, die wir dir gesendet haben.",
+      "verifyCode": "Code bestätigen",
+      "checkStatus": "Verifizierungsstatus prüfen",
+      "verifyEmail": "E-Mail verifizieren",
+      "codeSent": "Wir haben einen Bestätigungscode an {{email}} gesendet.",
+      "notVerifiedYet": "Diese E-Mail ist noch nicht verifiziert. Suche in deinem Posteingang nach dem Code und versuche es dann erneut.",
+      "replyToLabel": "Antwortadresse",
+      "replyToPlaceholder": "support@deinshop.com",
+      "replyToDetails": "Antworten von Kunden gehen standardmäßig an die E-Mail-Adresse deines Shops. Wenn Antworten an eine andere Adresse gehen sollen, gib sie hier ein."
+    },
+    "domain": {
+      "heading": "Domain-Authentifizierung",
+      "description": "Authentifiziere deine Domain, damit Kunden bei deinen E-Mails nicht „via brevosend.com“ sehen. Das ist optional, wird aber empfohlen, wenn du von der Domain deines Shops sendest.",
+      "label": "Domain",
+      "placeholder": "deinshop.com",
+      "details": "Gib die Domain ein, von der du E-Mails sendest, nicht deine myshopify.com-Domain.",
+      "freeProviderWarning": "Kostenlose E-Mail-Anbieter wie Gmail und Yahoo können nicht authentifiziert werden. Gib stattdessen die Domain deines Shops ein.",
+      "columns": {
+        "record": "Eintrag",
+        "type": "Typ",
+        "host": "Host",
+        "value": "Wert"
+      },
+      "records": {
+        "brevo_code": "Domain-Inhaberschaft",
+        "dkim_record": "DKIM",
+        "dkim1Record": "DKIM 1",
+        "dkim2Record": "DKIM 2",
+        "dmarc_record": "DMARC"
+      },
+      "copyHost": "Host kopieren",
+      "copyValue": "Wert kopieren",
+      "verifyRecords": "DNS-Einträge prüfen",
+      "authenticate": "Domain authentifizieren",
+      "pendingInfo": "Füge diese Einträge bei deinem Domain-Anbieter hinzu und wähle dann DNS-Einträge prüfen.",
+      "notVerifiedYet": "Deine Domain ist noch nicht verifiziert. DNS-Änderungen können eine Weile dauern. Versuche es später erneut."
+    },
+    "notification": {
+      "heading": "E-Mail-Vorlage",
+      "emailLabel": "E-Mail",
+      "language": "Sprache",
+      "languageDetails": "Wähle eine Sprache, um diese E-Mail in dieser Sprache zu bearbeiten. Jede Sprache wird separat gespeichert. Kunden erhalten E-Mails in ihrer eigenen Sprache.",
+      "send": "Diese E-Mail senden",
+      "requiredDetails": "Diese E-Mail ist nach EU-Recht vorgeschrieben und kann daher nicht deaktiviert werden.",
+      "merchantDetails": "Deaktiviere diese Option, um diese E-Mail nicht mehr zu erhalten.",
+      "decisionDetails": "Deaktiviere diese Option, um diese E-Mail standardmäßig nicht mehr zu senden. Du kannst sie trotzdem senden, wenn du eine einzelne Anfrage genehmigst oder ablehnst.",
+      "subject": "Betreff",
+      "reset": "Auf Standard zurücksetzen",
+      "customized": "Angepasst"
+    },
+    "templates": {
+      "customerConfirmation": {
+        "name": "Widerrufsbestätigung an den Kunden",
+        "description": "Wird an Kunden gesendet, sobald sie eine Widerrufsanfrage einreichen."
+      },
+      "merchantNotification": {
+        "name": "Benachrichtigung über neue Anfrage",
+        "description": "Wird an die Kontakt-E-Mail deines Shops gesendet, wenn ein Kunde eine neue Widerrufsanfrage einreicht. Antworte darauf, um dem Kunden eine E-Mail zu senden."
+      },
+      "withdrawalApproved": {
+        "name": "Widerruf genehmigt",
+        "description": "Wird an Kunden gesendet, wenn du ihre Widerrufsanfrage genehmigst. Du kannst sie vor dem Senden prüfen und bearbeiten."
+      },
+      "withdrawalRejected": {
+        "name": "Widerruf abgelehnt",
+        "description": "Wird an Kunden gesendet, wenn du ihre Widerrufsanfrage ablehnst. Du kannst sie vor dem Senden prüfen und bearbeiten."
+      }
+    },
+    "merchantDefaults": {
+      "subject": "Neue Widerrufsanfrage – Bestellung {{order}}",
+      "heading": "Neue Widerrufsanfrage",
+      "intro": "Ein Kunde hat eine Widerrufsanfrage eingereicht. Hier findest du alles, was du zur Prüfung brauchst.",
+      "rows": {
+        "name": "Name",
+        "email": "E-Mail",
+        "date": "Datum",
+        "orderNumber": "Bestellnummer",
+        "reference": "Referenznummer",
+        "reason": "Grund"
+      },
+      "button": "Anfrage ansehen",
+      "itemsHeading": "Angefragte Artikel",
+      "footnote": "Öffne die Anfrage in deinem Admin, um sie zu genehmigen oder abzulehnen. Die Erstattungsfrist wird dort automatisch verfolgt."
+    },
+    "body": {
+      "heading": "E-Mail-Text",
+      "editCode": "Code bearbeiten",
+      "htmlLabel": "HTML-Text der E-Mail",
+      "previewHeading": "E-Mail-Vorschau"
+    },
+    "variables": {
+      "heading": "Variablen",
+      "help": "Wähle eine Variable aus, um sie an der Cursorposition einzufügen.",
+      "insert": "{{label}} einfügen: {{description}}",
+      "groups": {
+        "customer": "Kunde",
+        "order": "Bestellung",
+        "withdrawal": "Widerruf",
+        "request": "Anfrage",
+        "shop": "Shop"
+      },
+      "tokens": {
+        "customer": {
+          "first_name": {
+            "label": "Vorname",
+            "description": "Der Vorname des Kunden"
+          },
+          "last_name": {
+            "label": "Nachname",
+            "description": "Der Nachname des Kunden"
+          },
+          "email": {
+            "label": "E-Mail",
+            "description": "Die E-Mail-Adresse des Kunden"
+          }
+        },
+        "order": {
+          "name": {
+            "label": "Bestellnummer",
+            "description": "Die Bestellnummer, z. B. #2138"
+          },
+          "id": {
+            "label": "Bestell-ID",
+            "description": "Die interne ID der Bestellung"
+          }
+        },
+        "withdrawal": {
+          "request_id": {
+            "label": "Referenznummer",
+            "description": "Die Referenznummer der Widerrufsanfrage"
+          },
+          "submitted_at": {
+            "label": "Einreichungsdatum",
+            "description": "Datum und Uhrzeit der Einreichung der Anfrage"
+          },
+          "reason": {
+            "label": "Grund",
+            "description": "Der vom Kunden angegebene Grund, falls vorhanden"
+          },
+          "selected_products": {
+            "label": "Ausgewählte Produkte (Text)",
+            "description": "Die angefragten Artikel als kommagetrennte Liste"
+          }
+        },
+        "request": {
+          "status": {
+            "label": "Status",
+            "description": "Der aktuelle Status der Anfrage"
+          },
+          "url": {
+            "label": "Link zur Anfrage",
+            "description": "Ein Link zur Anfrage in der App"
+          }
+        },
+        "shop": {
+          "name": {
+            "label": "Shopname",
+            "description": "Der Name deines Shops"
+          },
+          "email": {
+            "label": "Shop-E-Mail",
+            "description": "Die Kontakt-E-Mail-Adresse deines Shops"
+          }
+        }
+      }
+    },
+    "validation": {
+      "email": "Gib eine gültige E-Mail-Adresse ein.",
+      "subjectRequired": "Gib einen Betreff ein.",
+      "subjectTooLong": "Der Betreff darf höchstens {{max}} Zeichen lang sein.",
+      "bodyRequired": "Gib einen E-Mail-Text ein."
+    }
+  },
+  "sample": {
+    "customerName": "Erika Mustermann",
+    "items": {
+      "lamp": {
+        "title": "Fjord Tischlampe",
+        "variant": "Eiche / Groß"
+      },
+      "candleHolder": {
+        "title": "Tind Kerzenhalter",
+        "variant": "Messing"
+      }
+    },
+    "reason": "Ich habe es mir anders überlegt"
+  },
+  "faqs": {
+    "pageTitle": "FAQs",
+    "searchLabel": "FAQs durchsuchen",
+    "searchPlaceholder": "Fragen durchsuchen, z. B. „Erstattung“ oder „Frist“",
+    "noResults": "Keine Fragen passen zu „{{query}}“",
+    "noResultsHelp": "Versuche es mit einem anderen Wort oder kontaktiere unten den Support.",
+    "showAnswer": "Antwort anzeigen: {{question}}",
+    "hideAnswer": "Antwort ausblenden: {{question}}",
+    "groups": {
+      "gettingStarted": "Erste Schritte",
+      "deadline": "Widerrufsfrist",
+      "requests": "Anfragen bearbeiten",
+      "emailsLanguages": "E-Mails und Sprachen"
+    },
+    "actions": {
+      "goToSettings": "Zu den Einstellungen",
+      "goToRequests": "Zu den Anfragen",
+      "goToNotifications": "Zu den Benachrichtigungen"
+    },
+    "stillStuck": {
+      "heading": "Noch Fragen?",
+      "body": "Unser Support-Team liest und beantwortet jede E-Mail.",
+      "link": "Support kontaktieren"
+    },
+    "items": {
+      "what-it-does": {
+        "question": "Was macht die App?",
+        "paragraphs": [
+          "Sie gibt deinen EU-Kunden eine klare Möglichkeit, einen Kauf zu widerrufen, wie es das EU-Recht verlangt. Außerdem verwaltest du alle Anfragen an einem Ort.",
+          "Kunden öffnen das Formular über ihre Bestellung, wählen die Artikel aus, die sie widerrufen möchten, und bestätigen. Jede Anfrage erscheint dann auf der Seite Anfragen mit den Artikeln, dem Grund und deiner Erstattungsfrist. Die App sendet die vorgeschriebenen E-Mails für dich."
+        ]
+      },
+      "where-form-appears": {
+        "question": "Wo finden Kunden das Widerrufsformular?",
+        "paragraphs": [
+          "Du kannst das Formular an 2 Orten anzeigen. Nutze einen oder beide:"
+        ],
+        "bullets": [
+          "Bestellstatusseite: die Seite, die Kunden nach dem Checkout sehen und wenn sie den Link in ihrer Bestellbestätigung öffnen.",
+          "Shop-Seite: eine Seite in deinem Onlineshop für Kunden, die später zurückkommen. Sie finden ihre Bestellung mit Bestellnummer und E-Mail."
+        ],
+        "closing": "Aktiviere jeden Ort in den Einstellungen und füge dann einmalig seinen App-Block hinzu. Der Einrichtungsleitfaden auf der Startseite zeigt, welche Blöcke hinzugefügt sind."
+      },
+      "form-not-showing": {
+        "question": "Warum sieht ein Kunde das Widerrufsformular nicht?",
+        "paragraphs": [
+          "Prüfe diese Punkte, beginnend mit dem häufigsten:"
+        ],
+        "bullets": [
+          "Das Formular ist deaktiviert oder der Ort, den der Kunde nutzt, ist in den Einstellungen nicht aktiviert.",
+          "Der App-Block wurde noch nicht zu dieser Seite hinzugefügt.",
+          "Die Bestellung wird nicht in eines deiner berechtigten Länder versendet.",
+          "Die Widerrufsfrist für die Bestellung ist abgelaufen.",
+          "Die Bestellung wurde storniert oder hat bereits eine ausstehende Anfrage. Jede Bestellung kann jeweils nur 1 ausstehende Anfrage haben."
+        ]
+      },
+      "deadline": {
+        "question": "Wann beginnt und endet die Widerrufsfrist?",
+        "paragraphs": [
+          "Nach EU-Recht beginnt die Frist, wenn der Kunde die Artikel erhält, nicht bei der Bestellung. Kunden können auch jederzeit vor Ankunft der Artikel widerrufen."
+        ],
+        "bullets": [
+          "Noch nicht versendet: Die Frist hat noch nicht begonnen, Kunden können also jederzeit widerrufen.",
+          "Geliefert: Die Frist beginnt mit dem Lieferdatum des Versanddienstleisters und dauert {{withdrawalDays}}. Die Anzahl der Tage kannst du in den Einstellungen ändern.",
+          "Versendet, aber ohne Lieferdatum: Die App verwendet das voraussichtliche Lieferdatum des Versanddienstleisters. Gibt es keines, verwendet sie das Versanddatum plus deine geschätzte Versanddauer."
+        ]
+      },
+      "transit-days": {
+        "question": "Wofür wird die geschätzte Versanddauer verwendet?",
+        "paragraphs": [
+          "Viele Versanddienstleister übermitteln kein Lieferdatum an Shopify. Ohne dieses Datum weiß die App nicht, wann die Widerrufsfrist beginnt, und addiert daher deine geschätzte Versanddauer zum Versanddatum.",
+          "Stelle sie ungefähr auf die Zeit ein, die deine Pakete bis zur Ankunft brauchen. Aktuell beträgt sie {{transitDays}}. Wenn du dir unsicher bist, wähle eine längere Zeit. Eine zu kurze Zeit kann die Widerrufsfrist eines Kunden vorzeitig beenden."
+        ]
+      },
+      "split-shipments": {
+        "question": "Was passiert, wenn eine Bestellung in mehr als 1 Paket versendet wird?",
+        "paragraphs": [
+          "Die Widerrufsfrist beginnt, wenn das letzte Paket ankommt. Artikel, die die App zurückhält, weil der Kunde sie widerrufen hat, zählen nicht, da sie nicht versendet werden.",
+          "Widerruft ein Kunde, während erst ein Teil der Bestellung versendet wurde, behandelt die App jeden Teil separat:"
+        ],
+        "bullets": [
+          "Noch nicht versendete Artikel: Die App kann sie zurückhalten, damit sie nicht versendet werden.",
+          "Bereits versendete Artikel: Die App kann eine Rücksendung für sie erstellen."
+        ],
+        "closing": "Die App storniert nie eine teilweise versendete Bestellung, da dadurch auch Artikel storniert würden, die der Kunde bereits hat."
+      },
+      "after-submit": {
+        "question": "Was passiert, nachdem ein Kunde eine Anfrage eingereicht hat?",
+        "paragraphs": [
+          "Folgendes passiert in dieser Reihenfolge:"
+        ],
+        "bullets": [
+          "Die Anfrage erscheint auf der Seite Anfragen als Ausstehend.",
+          "Der Kunde erhält eine Bestätigungs-E-Mail. Sie wird immer gesendet, da sie sein Nachweis für den Widerruf ist.",
+          "Auch du erhältst eine E-Mail, wenn die Benachrichtigung über neue Anfragen aktiviert ist.",
+          "Deine Automatisierungseinstellungen werden ausgeführt. Die App kann zum Beispiel die Ausführung zurückhalten oder die Bestellung taggen."
+        ]
+      },
+      "automation": {
+        "question": "Was bewirken die Automatisierungseinstellungen?",
+        "paragraphs": [
+          "Sie werden ausgeführt, wenn eine Anfrage eingeht. Was die App tun kann, hängt davon ab, ob die Bestellung versendet wurde:"
+        ],
+        "bullets": [
+          "Vor dem Versand: Die Ausführung zurückhalten, damit nichts versendet wird, während du die Anfrage prüfst. Du kannst die App auch die gesamte Bestellung sofort stornieren und erstatten lassen.",
+          "Nach dem Versand: In Shopify eine Rücksendung für die versendeten Artikel erstellen.",
+          "Teilweise versendet: Beides gilt. Die App hält nur die angefragten, noch nicht versendeten Artikel zurück und erstellt eine Rücksendung für die bereits versendeten."
+        ],
+        "closing": "In jedem Fall kann die App die Bestellung auch taggen. Die Automatisierung genehmigt oder lehnt nie eine Anfrage ab. Die Entscheidung triffst immer du."
+      },
+      "partial-withdrawal": {
+        "question": "Kann ein Kunde nur einige Artikel widerrufen?",
+        "paragraphs": [
+          "Ja. Kunden wählen aus, welche Artikel sie widerrufen. Die Anfrage, die Erstattung und eine eventuelle Rücksendung umfassen nur diese Artikel. Die ursprünglichen Versandkosten werden nur erstattet, wenn der Kunde die gesamte Bestellung widerruft.",
+          "Jede Bestellung kann jeweils 1 ausstehende Anfrage haben. Nachdem du sie genehmigt oder abgelehnt hast, kann der Kunde eine neue Anfrage für andere Artikel senden."
+        ]
+      },
+      "reason": {
+        "question": "Müssen Kunden einen Grund angeben?",
+        "paragraphs": [
+          "Nein. Nach EU-Recht brauchen Kunden keinen Grund für einen Widerruf, daher ist das Grundfeld immer optional. In den Einstellungen kannst du festlegen, welche Gründe angeboten werden, oder die Abfrage ganz deaktivieren."
+        ]
+      },
+      "refund": {
+        "question": "Wie erstatte ich einen Widerruf?",
+        "paragraphs": [
+          "Öffne die Anfrage über die Seite Anfragen. Wie du erstattest, hängt davon ab, wo sich die Artikel befinden:"
+        ],
+        "bullets": [
+          "Artikel, die nicht in einer Rücksendung sind: Wähle Erstatten. Noch nicht versendete Artikel werden aus der Bestellung entfernt und daher nicht versendet.",
+          "Artikel in einer Rücksendung: Wenn sie zurück sind, wähle bei der Rücksendung Bearbeiten und erstatten. Damit wird dem Kunden der Betrag erstattet und die Rücksendung geschlossen.",
+          "Noch nichts versendet: Du kannst die gesamte Bestellung auch über Weitere Aktionen stornieren und erstatten."
+        ],
+        "closing": "Nach EU-Recht hast du ab dem Widerruf {{refundDays}} Zeit für die Erstattung. Die Anfrageseite zeigt, wie viel Zeit noch bleibt. Erstatte, bevor du die Anfrage genehmigst."
+      },
+      "returns": {
+        "question": "Wie funktionieren Rücksendungen?",
+        "paragraphs": [
+          "Eine Rücksendung teilt Shopify mit, welche Artikel der Kunde zurückschickt. Die App kann sie beim Eingang einer Anfrage erstellen, oder du wählst Rücksendung erstellen auf der Anfrageseite.",
+          "Eine Rücksendung umfasst nur bereits versendete Artikel. Durch das Erstellen wird dem Kunden nichts erstattet. Wenn die Artikel zurück sind, wähle bei der Rücksendung Bearbeiten und erstatten."
+        ]
+      },
+      "decision-lock": {
+        "question": "Warum sind Bestellaktionen deaktiviert, nachdem ich eine Anfrage genehmigt oder abgelehnt habe?",
+        "paragraphs": [
+          "Mit dem Genehmigen oder Ablehnen ist die Anfrage abgeschlossen. Danach sind Erstattungen, Zurückhaltungen, Rücksendungen und Stornierungen deaktiviert, damit die Bestellung nicht versehentlich geändert wird. Deshalb solltest du vor dem Genehmigen erstatten.",
+          "Mit der Entscheidung wird auch jede von der App gesetzte Zurückhaltung der Ausführung aufgehoben. Schlägt das fehl, kannst du trotzdem Zurückhaltung der Ausführung aufheben wählen."
+        ]
+      },
+      "emails": {
+        "question": "Welche E-Mails sendet die App, und kann ich sie bearbeiten?",
+        "paragraphs": [
+          "Die App sendet {{emailCount}} E-Mails. Du kannst alle auf der Seite Benachrichtigungen bearbeiten:"
+        ],
+        "bullets": [
+          "Widerrufsbestätigung an den Kunden: wird gesendet, wenn ein Kunde eine Anfrage einreicht. Sie ist immer aktiv.",
+          "Benachrichtigung über neue Anfrage: wird an die Kontakt-E-Mail deines Shops gesendet. Du kannst sie deaktivieren.",
+          "Widerruf genehmigt: wird an den Kunden gesendet, wenn du eine Anfrage genehmigst. Du kannst sie vorher prüfen oder deaktivieren.",
+          "Widerruf abgelehnt: wird an den Kunden gesendet, wenn du eine Anfrage ablehnst. Du kannst sie vorher prüfen oder deaktivieren."
+        ],
+        "closing": "Du kannst Betreff und Text jeder E-Mail in jeder Sprache bearbeiten und Variablen wie die Bestellnummer oder den Namen des Kunden einfügen. Die Vorschau wird während der Eingabe aktualisiert."
+      },
+      "countries-languages": {
+        "question": "Welche Länder und Sprachen unterstützt die App?",
+        "paragraphs": [
+          "Alle EU-Länder sind standardmäßig berechtigt. Wenn du nur an einige davon verkaufst, wähle in den Einstellungen Bestimmte Länder.",
+          "Das Formular gibt es in {{languageCount}} Sprachen: {{languages}}. Kunden sehen es in ihrer eigenen Sprache.",
+          "Englisch ist die Basissprache. Wenn du ein übersetztes Feld leer lässt, sehen Kunden stattdessen den englischen Text."
+        ]
+      }
+    }
+  },
+  "featureRequest": {
+    "pageTitle": "Funktion vorschlagen",
+    "intro": "Sag uns, was du dir für die App wünschst. Wir lesen jeden Vorschlag.",
+    "sentHeading": "Funktionswunsch gesendet",
+    "sentBody": "Danke, dass du deine Idee mit unserem Team teilst.",
+    "firstName": "Vorname",
+    "lastName": "Nachname",
+    "email": "E-Mail",
+    "request": "Welche Funktion wünschst du dir?",
+    "requestPlaceholder": "Beschreibe die Funktion und wie sie deinem Shop helfen würde",
+    "submit": "Vorschlag senden"
+  },
+  "pricing": {
+    "pageTitle": "Preise",
+    "pricePerMonth": "{{price}} pro Monat",
+    "currentPlan": "Aktueller Tarif",
+    "choosePlan": "{{plan}} wählen",
+    "switchedToast": "Zum Tarif {{plan}} gewechselt",
+    "plans": {
+      "free": {
+        "name": "Free",
+        "features": [
+          "Bis zu 10 Widerrufsanfragen pro Monat",
+          "E-Mail-Benachrichtigungen"
+        ]
+      },
+      "starter": {
+        "name": "Starter",
+        "features": [
+          "Unbegrenzte Widerrufsanfragen",
+          "Benutzerdefinierte Formularfelder",
+          "E-Mail-Benachrichtigungen"
+        ]
+      },
+      "pro": {
+        "name": "Pro",
+        "features": [
+          "Alles aus Starter",
+          "Priorisierter Support",
+          "Automatisierte Erstattungen"
+        ]
+      }
+    },
+    "switchError": "Dein Tarif konnte nicht geändert werden"
+  }
+}

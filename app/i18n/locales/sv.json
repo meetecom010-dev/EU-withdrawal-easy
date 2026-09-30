@@ -1,0 +1,1250 @@
+{
+  "common": {
+    "add": "Lägg till",
+    "backToHome": "Tillbaka till startsidan",
+    "cancel": "Avbryt",
+    "delete": "Radera",
+    "discard": "Släng",
+    "done": "Klar",
+    "dayCount_one": "{{count}} dag",
+    "dayCount_other": "{{count}} dagar",
+    "emptyValue": "—",
+    "noMatches": "Inga resultat för ”{{query}}”.",
+    "preview": "Förhandsgranska",
+    "remove": "Ta bort",
+    "save": "Spara",
+    "verified": "Verifierad"
+  },
+  "nav": {
+    "home": "Start",
+    "withdrawalRequests": "Begäranden",
+    "formSetup": "Inställningar",
+    "emailTemplates": "Aviseringar",
+    "pricing": "Priser"
+  },
+  "errors": {
+    "generic": "Något gick fel. Försök igen.",
+    "requestFailed": "Något gick fel (fel {{status}}). Försök igen.",
+    "methodNotAllowed": "Den här åtgärden stöds inte.",
+    "unknownAction": "Den här åtgärden stöds inte.",
+    "noValidFields": "Det finns inget att uppdatera.",
+    "emailServiceUnavailable": "Vi kunde inte ansluta till e-posttjänsten. Försök igen om några minuter.",
+    "emailServiceNotConfigured": "E-postutskick är inte konfigurerat ännu. Kontakta supporten för hjälp.",
+    "requestNotFound": "Den här ångerbegäran finns inte eller har raderats.",
+    "requestDecided": "Den här begäran har redan godkänts eller avvisats, så orderåtgärder är inte längre tillgängliga.",
+    "unknownDecision": "Välj om du vill godkänna eller avvisa den här begäran.",
+    "invalidStatus": "Välj en giltig status för den här begäran.",
+    "noteRequired": "Ange en anteckning.",
+    "orderNotFound": "Den här ordern kan inte hittas i Shopify.",
+    "invalidEmail": "Ange en giltig e-postadress.",
+    "featureRequestIncomplete": "Fyll i alla fält innan du skickar din begäran.",
+    "senderCodeRequired": "Ange verifieringskoden från ditt e-postmeddelande.",
+    "senderNotFound": "Vi kunde inte hitta den här avsändaradressen. Ta bort den och lägg till den igen för att få en ny kod.",
+    "senderNotStarted": "Verifiera din avsändaradress först.",
+    "senderIdMissing": "Vi kunde inte registrera den här avsändaradressen. Försök igen.",
+    "domainInvalid": "Ange en giltig domän, till exempel dinbutik.se.",
+    "domainFreeProvider": "Gratis e-postleverantörer som Gmail och Yahoo kan inte autentiseras. Använd din butiks domän i stället."
+  },
+  "auth": {
+    "login": {
+      "heading": "Logga in",
+      "shopLabel": "Butiksdomän",
+      "shopDetails": "example.myshopify.com",
+      "submit": "Logga in",
+      "missingShop": "Ange din butiksdomän för att logga in.",
+      "invalidShop": "Ange en giltig butiksdomän, till exempel example.myshopify.com."
+    }
+  },
+  "status": {
+    "pending": "Väntande",
+    "approved": "Godkänd",
+    "rejected": "Avvisad"
+  },
+  "sourceInline": {
+    "order_status": "orderstatussidan",
+    "standalone_page": "din butikssida"
+  },
+  "placements": {
+    "orderStatus": {
+      "label": "Orderstatussida",
+      "details": "Visa ångerformuläret på orderstatussidan som kunderna ser efter kassan."
+    },
+    "storefront": {
+      "label": "Butikssida",
+      "details": "Visa ångerformuläret på en egen sida i ditt tema, så att kunderna hittar det utanför orderstatussidan."
+    }
+  },
+  "orderStatus": {
+    "financial": {
+      "PENDING": "Betalning väntar",
+      "AUTHORIZED": "Auktoriserad",
+      "PARTIALLY_PAID": "Delvis betald",
+      "PAID": "Betald",
+      "PARTIALLY_REFUNDED": "Delvis återbetald",
+      "REFUNDED": "Återbetald",
+      "VOIDED": "Makulerad",
+      "EXPIRED": "Utgången"
+    },
+    "fulfillment": {
+      "UNFULFILLED": "Ej distribuerad",
+      "PENDING_FULFILLMENT": "Distribution väntar",
+      "OPEN": "Öppen",
+      "IN_PROGRESS": "Pågår",
+      "ON_HOLD": "Pausad",
+      "PARTIALLY_FULFILLED": "Delvis distribuerad",
+      "FULFILLED": "Distribuerad",
+      "RESTOCKED": "Återlagd i lager",
+      "SCHEDULED": "Schemalagd"
+    },
+    "return": {
+      "REQUESTED": "Begärd",
+      "OPEN": "Öppen",
+      "CLOSED": "Stängd",
+      "DECLINED": "Avböjd",
+      "CANCELED": "Annullerad"
+    }
+  },
+  "stats": {
+    "heading": "Översikt",
+    "description": "En ögonblicksbild av dina ångerbegäranden",
+    "viewRequests": "Visa begäranden",
+    "total": "Totalt antal begäranden",
+    "today": "Skickade i dag",
+    "pending": "Väntande",
+    "closed": "Avslutade",
+    "requestCount_one": "{{count}} begäran",
+    "requestCount_other": "{{count}} begäranden"
+  },
+  "home": {
+    "pageTitle": "Start",
+    "loadError": "Det gick inte att läsa in din instrumentpanel",
+    "saveErrorHeading": "Det gick inte att spara din ändring",
+    "saveErrorAction": "Försök igen eller gör ändringen i Inställningar.",
+    "setupBanner": {
+      "heading_one": "{{count}} konfigurationssteg kvar",
+      "heading_other": "{{count}} konfigurationssteg kvar",
+      "body": "Slutför de här stegen för att göra ditt ångerformulär klart: {{steps}}."
+    },
+    "setupGuide": {
+      "heading": "Konfigurationsguide",
+      "description": "Använd den här guiden för att publicera ditt ångerformulär i butiken.",
+      "progress": "{{completed}} av {{total}} uppgifter slutförda",
+      "dismiss": "Stäng konfigurationsguiden",
+      "collapse": "Fäll ihop konfigurationsguiden",
+      "expand": "Fäll ut konfigurationsguiden",
+      "showStep": "Visa detaljer för {{step}}",
+      "hideStep": "Dölj detaljer för {{step}}",
+      "steps": {
+        "form": {
+          "label": "Aktivera ditt ångerformulär",
+          "description": "Aktivera formuläret och välj var kunderna ser det. Fält, orsaker och texter har redan standardtext. Du kan ändra dem när som helst i Inställningar.",
+          "checkbox": "Aktivera ångerformulär",
+          "cta": "Gå till Inställningar",
+          "placementHeading": "Välj var kunderna ser formuläret",
+          "placementDescription": "Välj minst en plats. Varje plats behöver sitt appblock innan kunderna kan se formuläret."
+        },
+        "blocks": {
+          "label": "Lägg till appblocken i din butik",
+          "description": "Lägg till ett appblock för varje plats du valde i föregående steg.",
+          "locked": "Slutför steg {{step}} för att välja var formuläret visas. Sedan kan du lägga till appblocken här.",
+          "surfaces": {
+            "orderStatus": "Orderstatussida",
+            "theme": "Butikssida"
+          },
+          "live": {
+            "orderStatus": "Appblocket är publicerat på din orderstatussida.",
+            "theme": "Appblocket är publicerat på din butikssida."
+          }
+        }
+      }
+    },
+    "help": {
+      "heading": "Hjälp och resurser",
+      "support": {
+        "title": "E-postsupport",
+        "description": "Har du en fråga? Vårt supportteam kan hjälpa dig.",
+        "link": "Kontakta supporten"
+      },
+      "faqs": {
+        "title": "Vanliga frågor",
+        "description": "Hitta svar på vanliga frågor om hur du konfigurerar och använder appen.",
+        "link": "Visa vanliga frågor"
+      },
+      "featureRequest": {
+        "title": "Funktionsförslag",
+        "description": "Har du en idé för appen? Berätta vad du vill se.",
+        "link": "Föreslå en funktion"
+      }
+    }
+  },
+  "blockSetup": {
+    "autoUpdate": "Det här meddelandet försvinner av sig självt några sekunder efter att du har sparat appblocket.",
+    "addAppBlock": "Lägg till appblock",
+    "orderStatus": {
+      "heading": "Lägg till appblocket på din orderstatussida",
+      "body": "Kunderna kan inte se ångerformuläret på orderstatussidan förrän du lägger till appblocket. Så här lägger du till det:",
+      "steps": {
+        "open": "Välj <strong>Lägg till appblock</strong> nedan. Orderstatussidan öppnas i kassaredigeraren.",
+        "add": "Välj <strong>Lägg till appblock</strong> i sidofältet.",
+        "choose": "Välj <strong>Ångerformulär</strong>.",
+        "save": "Välj <strong>Spara</strong>."
+      }
+    },
+    "storefront": {
+      "heading": "Lägg till appblocket på en butikssida",
+      "body": "Välj en sidmall och välj sedan Lägg till appblock. Temaredigeraren öppnas med ångerformuläret redan tillagt som ett avsnitt.",
+      "templateLabel": "Sidmall",
+      "templates": {
+        "page": "Standardsida",
+        "index": "Startsida",
+        "product": "Produktsidor",
+        "collection": "Kollektionssidor",
+        "cart": "Varukorgssida"
+      },
+      "steps": {
+        "open": "Välj <strong>Lägg till appblock</strong> för att öppna temaredigeraren med avsnittet tillagt.",
+        "move": "Dra avsnittet dit du vill ha det på sidan.",
+        "save": "Välj <strong>Spara</strong>."
+      }
+    }
+  },
+  "onboarding": {
+    "pageTitle": "Kom igång",
+    "heading": "Gör din butik redo för ånger inom EU",
+    "intro_one": "Slutför det här {{count}} steget för att ge dina EU-kunder ett regelenligt sätt att ångra ett köp.",
+    "intro_other": "Slutför de här {{count}} stegen för att ge dina EU-kunder ett regelenligt sätt att ångra ett köp.",
+    "stepBadge": "Steg {{current}} av {{total}}",
+    "completedToast": "Konfigurationen är klar",
+    "steps": {
+      "welcome": {
+        "title": "Välkommen",
+        "description": "Vad appen gör"
+      },
+      "form": {
+        "title": "Ångerformulär",
+        "description": "Aktivera ditt formulär"
+      }
+    },
+    "actions": {
+      "getStarted": "Kom igång",
+      "continue": "Fortsätt",
+      "finish": "Slutför konfigurationen",
+      "skip": "Hoppa över konfigurationen",
+      "back": "Tillbaka"
+    },
+    "help": {
+      "heading": "Behöver du hjälp?",
+      "body": "Har du en fråga? <supportLink>Kontakta supporten</supportLink>."
+    },
+    "welcome": {
+      "heading": "Välkommen till {{appName}}",
+      "setupTime": "Tar ungefär 1 minut",
+      "law": "Sedan den 19 juni 2026 måste butiker som säljer till kunder i EU erbjuda ett sätt att ångra varje order i 2 steg (EU-direktiv 2023/2673, artikel 11a). Det räcker inte med enbart en returpolicy.",
+      "app": "{{appName}} lägger till en ångerknapp på din orderstatussida, en sida i din onlinebutik eller båda. Appen hanterar bekräftelsen i 2 steg och skickar det obligatoriska bekräftelsemejlet. Du hanterar alla begäranden på ett ställe.",
+      "imageAlt": "En kund som ångrar en order",
+      "requirementsHeading": "Vad lagen kräver",
+      "requirements": {
+        "button": "En tydligt märkt ångerknapp som kunderna lätt hittar",
+        "twoStep": "En process i 2 steg: kunderna skickar sin ånger och bekräftar den sedan",
+        "email": "Ett automatiskt bekräftelsemejl som kunderna kan spara"
+      },
+      "penaltyHeading": "Vad som händer om du inte följer reglerna",
+      "penalty": "Om ångerknappen saknas eller inte fungerar förlänger lagen ångerfristen på {{days}} dagar. Kunderna får då 12 månader och {{days}} dagar på sig att ångra varje berörd order."
+    },
+    "form": {
+      "heading": "Aktivera ditt ångerformulär",
+      "body": "Kunderna skickar sin ånger och bekräftar den i ett separat steg, enligt EU-lagstiftningen. Formuläret har juridisk standardtext. Kunderna har {{days}} på sig att ångra sig, räknat från leveransen.",
+      "switch": "Aktivera ångerformulär",
+      "later": "Du kan ändra allt detta senare i Inställningar.",
+      "loadError": "Det gick inte att läsa in dina formulärinställningar. Du kan slutföra konfigurationen nu och aktivera formuläret senare i Inställningar.",
+      "saveError": "Det gick inte att spara dina formulärval. Försök igen, eller slutför konfigurationen utan dem och ställ in dem senare i Inställningar.",
+      "finishWithoutSaving": "Slutför utan att spara",
+      "placementError": "Välj minst en plats eller inaktivera formuläret."
+    },
+    "finishError": "Det gick inte att slutföra konfigurationen. Försök igen."
+  },
+  "formSetup": {
+    "pageTitle": "Inställningar",
+    "loadError": "Det gick inte att läsa in inställningarna",
+    "saveError": "Det gick inte att spara inställningarna",
+    "savedToast": "Inställningarna har sparats",
+    "enable": {
+      "heading": "Ångerformulär",
+      "description": "Välj om kunderna kan skicka ångerbegäranden och var de ser formuläret.",
+      "checkbox": "Aktivera ångerformulär",
+      "details": "När detta är inaktiverat kan kunderna inte skicka ångerbegäranden någonstans.",
+      "orderStatus": "Visa på orderstatussidan",
+      "storefront": "Visa på en butikssida"
+    },
+    "countries": {
+      "heading": "Berättigade länder",
+      "description": "Kunderna ser bara ångerformuläret om deras order skickas till något av dessa länder.",
+      "all": "Alla {{count}} EU-länder (rekommenderas)",
+      "allDetails": "Ångerrätten gäller i hela EU.",
+      "specific": "Specifika länder",
+      "specificDetails": "Välj länder nedan. Du kan ändra detta när som helst.",
+      "pickerLabel": "Länder",
+      "pickerPlaceholder": "Sök länder"
+    },
+    "content": {
+      "heading": "Formulärinnehåll",
+      "tabs": {
+        "step1": "1. Uppgifter",
+        "confirm": "2. Bekräfta",
+        "done": "3. Klar"
+      },
+      "language": "Språk",
+      "languageDetails": "Välj ett språk för att redigera formulärinnehållet på det språket. Varje språk sparas separat.",
+      "beforeDelivery": {
+        "heading": "Före leverans",
+        "description": "Visas på formulärets första skärm och i steget Uppgifter tills ordern har levererats, även medan den är på väg."
+      },
+      "afterDelivery": {
+        "heading": "Efter leverans",
+        "description": "Visas i stället när Shopify markerar ordern som levererad."
+      },
+      "title": "Rubrik",
+      "description": "Beskrivning",
+      "itemHeading": "Rubrik för artikelval",
+      "customerDetails": {
+        "heading": "Kunduppgifter",
+        "description": "Fylls i från ordern. Kunderna kan inte redigera de här fälten.",
+        "locked": "Låst",
+        "fullName": "Fullständigt namn",
+        "email": "E-post",
+        "orderNumber": "Ordernummer"
+      },
+      "reason": {
+        "heading": "Orsak till ånger",
+        "checkbox": "Fråga efter en orsak",
+        "details": "Kunderna behöver aldrig ange en orsak. Enligt EU-lagstiftningen måste detta fält vara valfritt.",
+        "label": "Etikett för orsaksfältet",
+        "optionsHeading": "Orsaksalternativ",
+        "optionsHelp": "Kunderna väljer från den här listan. Lägg till, ta bort eller formulera om alternativen så att de passar din butik. Ett alternativ ”Annat” med en textruta läggs alltid till sist.",
+        "removeOption": "Ta bort {{option}}",
+        "addLabel": "Lägg till en orsak",
+        "addPlaceholder": "Till exempel: Beställde av misstag",
+        "translatedHelp": "Översätt varje alternativ. Byt till engelska för att lägga till eller ta bort alternativ.",
+        "translatedEmpty": "Lägg först till orsaksalternativ på engelska."
+      },
+      "continueButton": "Etikett för Fortsätt-knappen",
+      "confirm": {
+        "heading": "Bekräftelserubrik",
+        "messageBefore": "Meddelande före leverans",
+        "messageAfter": "Meddelande efter leverans",
+        "declaration": "Försäkran",
+        "button": "Etikett för Bekräfta-knappen"
+      },
+      "done": {
+        "titleBefore": "Rubrik före leverans",
+        "messageBefore": "Meddelande före leverans",
+        "titleAfter": "Rubrik efter leverans",
+        "messageAfter": "Meddelande efter leverans"
+      }
+    },
+    "automation": {
+      "heading": "Automatisering",
+      "description": "Välj vad appen gör när en kund skickar en ångerbegäran.",
+      "beforeShip": {
+        "heading": "Innan ordern skickas",
+        "description": "Gäller när en begäran kommer in innan några artiklar har skickats.",
+        "hold": "Pausa distributionen för granskning",
+        "holdDetails": "Pausa distributionen tills du godkänner eller avvisar begäran. Pausen hävs när du fattar ditt beslut.",
+        "tagDetails": "Tagga ordrar som får en begäran innan de skickas, så att din personal hittar dem i orderlistan."
+      },
+      "fallback": {
+        "label": "Vad som händer med ordern",
+        "hold": "Behåll den pausad tills du godkänner eller avvisar begäran",
+        "cancelNow": "Annullera hela ordern och återbetala den direkt",
+        "releaseN": "Häv pausen efter ett angivet antal dagar",
+        "cancelN": "Annullera hela ordern och återbetala den efter ett angivet antal dagar",
+        "cancelWarning": "Detta annullerar och återbetalar hela ordern, även om kunden bara har ångrat några artiklar. Shopify mejlar kunden om annulleringen.",
+        "days": "Antal dagar"
+      },
+      "afterDelivery": {
+        "heading": "Efter att ordern har skickats",
+        "description": "Gäller när en begäran kommer in efter att minst en artikel har skickats, även om den inte har levererats än. Varje begäran visas ändå på sidan Begäranden.",
+        "createReturn": "Skapa en retur",
+        "createReturnDetails": "Skapa en retur i Shopify för de begärda artiklar som har skickats.",
+        "tagDetails": "Tagga ordrar som får en begäran efter att de har skickats."
+      },
+      "tag": {
+        "checkbox": "Tagga ordern",
+        "label": "Ordertaggar",
+        "placeholder": "Lägg till en tagg"
+      }
+    },
+    "deadline": {
+      "heading": "Ångerfrist",
+      "description": "Ångerfristen börjar när ordern levereras, inte när den läggs. EU-lagstiftningen kräver minst {{days}}.",
+      "days": "Dagar att ångra sig efter leverans",
+      "daysDetails": "Hur länge kunderna har på sig att ångra sig efter att deras order har levererats.",
+      "transit": "Beräknad transporttid (dagar)",
+      "transitDetails": "Används när transportören inte delar ett leveransdatum eller en uppskattning. Appen lägger till dessa dagar till leveransdatumet för utskicket."
+    },
+    "validation": {
+      "countryMode": "Välj vilka länder som är berättigade.",
+      "euCountries": "Välj minst ett land.",
+      "title": "Ange en rubrik.",
+      "description": "Ange en beskrivning.",
+      "itemHeading": "Ange en rubrik för artikellistan.",
+      "continueButton": "Ange en etikett för Fortsätt-knappen.",
+      "heading": "Ange en rubrik.",
+      "confirmMessage": "Ange ett bekräftelsemeddelande.",
+      "declaration": "Ange den försäkran som kunderna måste godkänna.",
+      "confirmButton": "Ange en etikett för Bekräfta-knappen.",
+      "message": "Ange ett meddelande.",
+      "reasonLabel": "Ange en etikett för orsaksfältet.",
+      "reasonOptions": "Lägg till minst en orsak.",
+      "reasonOptionTranslation": "Ange en översättning för den här orsaken.",
+      "fallback": "Välj vad som händer med ordern.",
+      "daysRange": "Ange ett antal dagar från {{min}} till {{max}}.",
+      "tags": "Lägg till minst en tagg eller inaktivera taggning.",
+      "afterDeliveryAction": "Välj vad som händer efter att ordern har skickats."
+    },
+    "preview": {
+      "heading": "Liveförhandsgranskning",
+      "compliantBadge": "Uppfyller 2-stegskravet",
+      "surfaceLabel": "Förhandsgranskning",
+      "surfaces": {
+        "orderStatus": "Orderstatussida",
+        "theme": "Butikssida"
+      },
+      "stageLabel": "Leveransstatus",
+      "stages": {
+        "beforeDelivery": "Inte levererad än",
+        "delivered": "Levererad"
+      },
+      "banner": {
+        "orderStatus": "Så här ser kunderna det på orderstatussidan. Välj knapparna för att prova, eller använd flikarna i Formulärinnehåll för att gå till ett visst steg.",
+        "theme": "Så här ser kunderna det på din butikssida. Det börjar med steget ”Hitta din order”, eftersom butiksbesökare inte är inloggade."
+      },
+      "restart": "Starta om förhandsgranskningen",
+      "position": {
+        "entry": "Startkort",
+        "lookup": "Hitta din order",
+        "step": "Steg {{current}} av {{total}}"
+      },
+      "storefront": {
+        "start": "Starta ångerbegäran",
+        "findOrderHeading": "Hitta din order",
+        "findOrderBody": "Ange dina orderuppgifter för att starta din ångerbegäran.",
+        "fullName": "Fullständigt namn",
+        "email": "E-post",
+        "orderNumber": "Ordernummer",
+        "continue": "Fortsätt",
+        "steps": {
+          "step1": "Uppgifter",
+          "confirm": "Bekräfta",
+          "done": "Klar"
+        },
+        "stepOf": "Steg {{current}} av {{total}}",
+        "stepProgress": "Steg {{current}} av {{total}}: {{label}}",
+        "reasonPlaceholder": "Välj en orsak (valfritt)",
+        "otherReason": "Annat",
+        "yourReason": "Din orsak",
+        "yourReasonPlaceholder": "Berätta varför",
+        "selectItem": "Välj minst en artikel för att fortsätta.",
+        "itemsToWithdraw": "Artiklar att ångra ({{count}})",
+        "selectedTotal": "Summa för valda artiklar",
+        "previous": "Föregående",
+        "submittedOn": "Skickad {{date}}"
+      }
+    }
+  },
+  "requests": {
+    "pageTitle": "Begäranden",
+    "searchLabel": "Sök bland ångerbegäranden",
+    "searchPlaceholder": "Sök på ordernummer, kundnamn eller e-post",
+    "export": "Exportera",
+    "exportSelected": "Exportera valda",
+    "tabs": {
+      "all": "Alla",
+      "withCount": "{{label}} ({{count}})"
+    },
+    "empty": {
+      "imageAlt": "",
+      "heading": "Inga ångerbegäranden än",
+      "body": "Ångerbegäranden från dina kunder visas här.",
+      "filteredHeading": "Inga ångerbegäranden hittades",
+      "filteredBody": "Prova att ändra sökordet eller filtret."
+    },
+    "table": {
+      "selectAll": "Välj alla ångerbegäranden",
+      "selectRow": "Välj order {{order}}",
+      "selectedCount": "{{count}} valda",
+      "order": "Order",
+      "customer": "Kund",
+      "items": "Artiklar",
+      "value": "Värde",
+      "status": "Status",
+      "submitted": "Skickad",
+      "actions": "Åtgärder",
+      "itemCount_one": "{{count}} artikel",
+      "itemCount_other": "{{count}} artiklar",
+      "viewRow": "Visa begäran för order {{order}}",
+      "deleteRow": "Radera begäran för order {{order}}"
+    },
+    "delete": {
+      "heading_one": "Radera ångerbegäran?",
+      "heading_other": "Radera {{count}} ångerbegäranden?",
+      "body_one": "Den här ångerbegäran raderas permanent. Detta kan inte ångras.",
+      "body_other": "Dessa {{count}} ångerbegäranden raderas permanent. Detta kan inte ångras.",
+      "confirm_one": "Radera begäran",
+      "confirm_other": "Radera begäranden",
+      "toast_one": "Ångerbegäran raderad",
+      "toast_other": "{{count}} ångerbegäranden raderade"
+    },
+    "csv": {
+      "filename": "angerbegaranden-{{date}}.csv",
+      "order": "Order",
+      "customerName": "Kundnamn",
+      "customerEmail": "Kundens e-post",
+      "country": "Land",
+      "items": "Artiklar",
+      "value": "Värde",
+      "reason": "Orsak",
+      "status": "Status",
+      "submitted": "Skickad",
+      "decided": "Beslutad"
+    }
+  },
+  "requestDetail": {
+    "pageTitle": "Ångerbegäran",
+    "backLink": "Begäranden",
+    "submittedLine": "Skickad {{date}} från {{source}}",
+    "previous": "Föregående begäran",
+    "next": "Nästa begäran",
+    "badges": {
+      "canceled": "Annullerad",
+      "onHold": "Pausad",
+      "return": "Retur: {{status}}"
+    },
+    "actions": {
+      "refund": "Återbetala",
+      "more": "Fler åtgärder",
+      "cancelOrder": "Annullera order",
+      "placeHold": "Pausa distribution",
+      "releaseHold": "Häv paus i distributionen",
+      "createReturn": "Skapa retur",
+      "processReturn": "Behandla och återbetala",
+      "viewOrder": "Visa order"
+    },
+    "banners": {
+      "orderUnavailableHeading": "Orderuppgifterna är inte tillgängliga",
+      "orderUnavailableBody": "{{error}} Du kan inte använda orderåtgärder förrän orderuppgifterna har lästs in.",
+      "actionFailedHeading": "Det gick inte att slutföra åtgärden",
+      "actionFailedAction": "Se Aktivitet nedan för mer information.",
+      "canceled": "Den här ordern har annullerats. Orderåtgärder är inte längre tillgängliga."
+    },
+    "deadline": {
+      "heading": "Återbetalningsfrist",
+      "pendingLabel": "Tid kvar att fatta beslut och återbetala",
+      "decidedLabel": "Beslut",
+      "badges": {
+        "overdue": "Försenad",
+        "actionNeeded": "Åtgärd krävs",
+        "onTime": "I tid"
+      },
+      "daysLeft_one": "{{count}} dag kvar",
+      "daysLeft_other": "{{count}} dagar kvar",
+      "daysOverdue_one": "{{count}} dag försenad",
+      "daysOverdue_other": "{{count}} dagar försenad",
+      "daysEarly_one": "{{count}} dag före fristen",
+      "daysEarly_other": "{{count}} dagar före fristen",
+      "daysLate_one": "{{count}} dag efter fristen",
+      "daysLate_other": "{{count}} dagar efter fristen",
+      "pending": "Du har {{days}} från att begäran skickades att fatta beslut och återbetala. Fristen löper ut {{date}}.",
+      "pendingOverdue": "Fristen löpte ut {{date}}. Återbetala kunden så snart som möjligt.",
+      "decidedOnTime": "Beslutad inom återbetalningsfristen på {{windowDays}} dagar. Fristen löpte ut {{date}}.",
+      "decidedLate": "Beslutad efter återbetalningsfristen {{date}}."
+    },
+    "items": {
+      "heading": "Ångrade artiklar",
+      "reject": "Avvisa",
+      "approve": "Godkänn",
+      "total": "Totalt ångrat",
+      "sku": "Artikelnummer: {{sku}}",
+      "quantity": "Antal: {{count}}",
+      "shipping": {
+        "notShipped": "Inte skickad än",
+        "partlyShipped": "Delvis skickad",
+        "shipped": "Skickad"
+      },
+      "partiallyShippedBanner": "En del av den här ordern har skickats. Artiklar som inte har skickats än kan fortfarande pausas, och skickade artiklar behöver en retur."
+    },
+    "return": {
+      "heading": "Retur",
+      "status": "Status",
+      "created": "Skapad",
+      "body": "En retur har skapats i Shopify för de ångrade artiklarna.",
+      "openBody": "Välj Behandla och återbetala när artiklarna har kommit tillbaka. Då återbetalas kunden för de returnerade artiklarna och returen stängs.",
+      "alreadyRefundedBody": "Artiklarna i den här returen har redan återbetalats. Stäng returen i Shopify när de har kommit tillbaka."
+    },
+    "processReturnModal": {
+      "heading": "Behandla retur och återbetala",
+      "calculating": "Beräknar återbetalningsbeloppet …",
+      "nothingToProcess": "Det finns inget kvar att behandla i den här returen. Den kan redan ha behandlats eller stängts i Shopify.",
+      "nothingToRefund": "Artiklarna i den här returen har redan återbetalats, så det finns inget kvar att återbetala.",
+      "unsupportedPayment": "Betalningen för den här ordern kan inte återbetalas från appen. Behandla returen och återbetala den i Shopify i stället.",
+      "itemsHeading": "Artiklar i retur {{name}}",
+      "subtotal": "Delsumma för artiklar",
+      "shippingLine": "Ursprunglig frakt",
+      "total": "Total återbetalning",
+      "body": "Detta markerar de returnerade artiklarna som behandlade, återbetalar dem till den ursprungliga betalningsmetoden och stänger returen. Shopify mejlar kunden ett återbetalningskvitto. Detta kan inte ångras.",
+      "confirmAmount": "Återbetala {{amount}}",
+      "confirm": "Behandla och återbetala"
+    },
+    "payment": {
+      "heading": "Betalning",
+      "status": "Betalningsstatus",
+      "subtotal": "Delsumma för ånger",
+      "shipping": "Orderns frakt",
+      "total": "Ordersumma",
+      "refunded": "Återbetalt",
+      "unavailable": "Betalningsuppgifterna är inte tillgängliga just nu."
+    },
+    "activity": {
+      "heading": "Aktivitet",
+      "noteLabel": "Lägg till en anteckning",
+      "notePlaceholder": "Lägg till en anteckning …",
+      "post": "Publicera",
+      "noteHelp": "Bara du och din personal kan se anteckningar. Kunderna ser dem aldrig.",
+      "submitted": "Ångerbegäran skickad från {{source}}",
+      "decided": {
+        "approved": "Begäran godkänd",
+        "rejected": "Begäran avvisad"
+      },
+      "note": "Anteckning: {{body}}",
+      "entry": "{{label}}: {{message}}",
+      "actions": {
+        "resolve_branch": "Automatiseringen startade",
+        "run_automation": "Automatisering",
+        "automation_completed": "Automatiseringen är klar",
+        "hold_fulfillment": "Paus i distributionen",
+        "schedule_fallback": "Schemalagd uppföljning",
+        "release_hold": "Pausen i distributionen hävdes",
+        "cancel_order_immediate": "Ordern annullerades och återbetalades",
+        "cancel_order_scheduled": "Ordern annullerades och återbetalades",
+        "cancel_order_manual": "Ordern annullerades och återbetalades",
+        "cancel_order": "Ordern annullerades och återbetalades",
+        "refund": "Återbetalning",
+        "tag_before_ship": "Ordern taggades",
+        "tag_after_delivery": "Ordern taggades",
+        "order_tag_add": "Ordertaggar lades till",
+        "order_tag_remove": "Ordertaggar togs bort",
+        "create_return": "Retur",
+        "refresh_return": "Returstatus uppdaterad",
+        "process_return": "Behandla och återbetala",
+        "fetch_shop_contact": "Butikens kontaktuppgifter",
+        "customer_email": "Bekräftelsemejl till kunden",
+        "merchant_email": "Avisering om ny begäran",
+        "notify_customer": "Mejl om beslut",
+        "notify_merchant": "Du har aviserats"
+      },
+      "messages": {
+        "noTags": "Inga taggar har konfigurerats",
+        "tagged": "Ordern taggades med {{tags}}",
+        "noHoldableOrders": "Inget i den här ordern kan pausas just nu",
+        "held": "Artiklarna pausades så att de inte skickas",
+        "holdOff": "Paus i distributionen för granskning är inaktiverad",
+        "tagBeforeShipOff": "Taggning före utskick är inaktiverad",
+        "tagAfterDeliveryOff": "Taggning efter utskick är inaktiverad",
+        "fallbackHold": "Ordern förblir pausad tills du godkänner eller avvisar begäran",
+        "fallbackInvalidDays": "Det gick inte att schemalägga uppföljningen. Antalet dagar är ogiltigt.",
+        "scheduledRelease": "Hävning av pausen schemalagd till {{date}}",
+        "scheduledCancel": "Annullering och återbetalning schemalagd till {{date}}",
+        "canceled": "Ordern annullerades och återbetalades",
+        "returnCreated": "Retur skapad i Shopify",
+        "returnNoMatch": "Ingen av de begärda artiklarna kan returneras",
+        "notifiedByEmail": "Aviserad i appen och via e-post",
+        "notifiedEmailFailed": "Aviserad i appen. Aviseringsmejlet misslyckades: {{error}}",
+        "notifiedInAppOnly": "Aviserad i appen. Aviseringsmejlet skickades inte.",
+        "emailSent": "Skickat",
+        "emailFailed": "Misslyckades: {{error}}",
+        "emailNotSent": "Skickades inte eftersom det saknas mottagare eller e-post inte är konfigurerat",
+        "orderNotFound": "Den här ordern kan inte hittas i Shopify",
+        "alreadyCanceled": "Ordern var redan annullerad",
+        "branchBeforeShip": "Ordern har inte skickats än, så stegen före utskick kördes",
+        "branchAfterDelivery": "Ordern har skickats, så stegen efter utskick kördes",
+        "branchPartiallyShipped": "Ordern är delvis skickad, så stegen för skickade och ej skickade artiklar kördes",
+        "noUnshippedItemsRequested": "Ingen av de begärda artiklarna väntar på att skickas, så inget pausades",
+        "fallbackCancelPartiallyShipped": "Ordern är delvis skickad och kan därför inte annulleras i sin helhet. De begärda artiklarna förblir pausade tills du godkänner eller avvisar begäran.",
+        "returnNothingShipped": "Ingen av de begärda artiklarna har skickats, så ingen retur behövdes",
+        "runCompleted": "Automatiseringen slutfördes",
+        "runFailed": "Ett eller flera automatiseringssteg misslyckades",
+        "runSkipped": "Automatiseringen hoppades över",
+        "scheduledSkippedApproved": "Begäran var redan godkänd, så den schemalagda åtgärden kördes inte",
+        "scheduledSkippedRejected": "Begäran var redan avvisad, så den schemalagda åtgärden kördes inte",
+        "noHoldsPlaced": "Inga pauser lades för den här begäran",
+        "holdsAlreadyReleased": "Pauserna var redan hävda",
+        "holdReleased": "Ordern kan distribueras igen",
+        "holdExists": "Det finns redan en paus för den här begäran",
+        "decisionSkipped": "Personalen valde att inte mejla kunden",
+        "decisionSent": "Kunden mejlades om beslutet",
+        "decisionFailed": "Mejlet om beslutet misslyckades: {{error}}",
+        "decisionNotConfigured": "Mejlet om beslutet skickades inte eftersom e-post inte är konfigurerat",
+        "refunded": "{{amount}} återbetalades",
+        "noReturn": "Det finns ingen retur för den här begäran",
+        "returnStatus": "Returstatus: {{status}}",
+        "returnProcessed": "Returen behandlades och {{amount}} återbetalades",
+        "returnNothingToProcess": "Det finns inget kvar att behandla i den här returen",
+        "returnNothingToRefund": "Artiklarna i den här returen har redan återbetalats",
+        "returnPaymentUnsupported": "Den här betalningen kan inte återbetalas från appen. Behandla returen i Shopify.",
+        "refundNothingRefundable": "Ingen av de begärda artiklarna kan återbetalas. De kan redan ha återbetalats.",
+        "refundNoSuggestion": "Shopify kunde inte beräkna en återbetalning för de här artiklarna. Återbetala dem i Shopify i stället.",
+        "refundCoveredByReturn": "Alla ångrade artiklar finns i den öppna returen. Använd Behandla och återbetala på returen för att återbetala dem.",
+        "tagsRemoved": "Ordertaggar som togs bort: {{tags}}",
+        "tagsAdded": "Ordertaggar som lades till: {{tags}}"
+      }
+    },
+    "order": {
+      "heading": "Order",
+      "order": "Order",
+      "placed": "Lagd",
+      "payment": "Betalning",
+      "fulfillment": "Distribution"
+    },
+    "customer": {
+      "heading": "Kund",
+      "avatarFallback": "Kund",
+      "contactHeading": "Kontaktuppgifter",
+      "email": "E-post",
+      "language": "Språk",
+      "shippingHeading": "Leveransadress"
+    },
+    "automation": {
+      "heading": "Automatisering",
+      "stage": "Fas",
+      "stages": {
+        "before_ship": "Före utskick",
+        "partially_shipped": "Delvis skickad",
+        "after_delivery": "Efter utskick"
+      },
+      "hold": "Paus i distributionen",
+      "holdStates": {
+        "onHold": "Pausad",
+        "released": "Hävd",
+        "none": "Ingen"
+      },
+      "canceled": "Annullerad",
+      "return": "Retur"
+    },
+    "emails": {
+      "heading": "E-posthistorik",
+      "customerConfirmation": "Ångerbekräftelse till kunden",
+      "merchantNotification": "Avisering om ny begäran",
+      "decision": "Mejl om beslut",
+      "statuses": {
+        "sent": "Skickat",
+        "failed": "Misslyckades",
+        "notSent": "Inte skickat"
+      }
+    },
+    "tags": {
+      "heading": "Ordertaggar",
+      "label": "Lägg till ordertagg",
+      "placeholder": "Lägg till en tagg",
+      "remove": "Ta bort taggen {{tag}}",
+      "savedToast": "Ordertaggarna har sparats"
+    },
+    "reason": {
+      "heading": "Orsak till ånger",
+      "quoted": "”{{reason}}”",
+      "none": "Ingen orsak angavs"
+    },
+    "decidedToast": {
+      "approved": "Ångerbegäran godkänd",
+      "rejected": "Ångerbegäran avvisad"
+    },
+    "cancelModal": {
+      "heading": "Annullera ordern?",
+      "body": "Detta annullerar hela ordern i Shopify, inklusive artiklar som kunden inte har ångrat. Ordern återbetalas till den ursprungliga betalningsmetoden och artiklarna läggs tillbaka i lager, och Shopify mejlar kunden. Detta kan inte ångras.",
+      "keep": "Behåll ordern",
+      "confirm": "Annullera och återbetala ordern"
+    },
+    "createReturnModal": {
+      "heading": "Skapa retur för ångrade artiklar",
+      "itemsHeading": "Artiklar att returnera",
+      "subtotal": "Delsumma för artiklar",
+      "checking": "Kontrollerar vilka artiklar som kan returneras …",
+      "nothingToReturn": "Ingen av de ångrade artiklarna har skickats än, så det finns inget att returnera. Pausa dem så att de inte skickas, eller återbetala dem för att ta bort dem från ordern.",
+      "notShipped_one": "{{count}} ångrad artikel ingår inte eftersom den inte har skickats än.",
+      "notShipped_other": "{{count}} ångrade artiklar ingår inte eftersom de inte har skickats än.",
+      "notReturnable_one": "{{count}} ångrad artikel ingår inte eftersom den redan har returnerats.",
+      "notReturnable_other": "{{count}} ångrade artiklar ingår inte eftersom de redan har returnerats.",
+      "body": "Detta skapar en retur i Shopify för artiklarna ovan. Kunden återbetalas inte. Välj Behandla och återbetala på returen när artiklarna har kommit tillbaka.",
+      "cancel": "Avbryt",
+      "confirm": "Skapa retur"
+    },
+    "decisionModal": {
+      "headingApprove": "Godkänna ångerbegäran?",
+      "headingReject": "Avvisa ångerbegäran?",
+      "approveAndSend": "Godkänn och skicka mejl",
+      "rejectAndSend": "Avvisa och skicka mejl",
+      "approve": "Godkänn",
+      "reject": "Avvisa",
+      "loadingLabel": "Läser in förhandsgranskning av mejlet",
+      "loading": "Förbereder mejlet till kunden …",
+      "sendEmail": "Skicka mejl till kunden",
+      "language": "Det här mejlet är på {{language}}, kundens språk. Dina ändringar gäller bara det här mejlet.",
+      "subject": "Ämne",
+      "body": "Mejltext",
+      "editHtml": "Redigera HTML",
+      "htmlLabel": "Mejlets HTML",
+      "previewTitle": "Förhandsgranskning av mejlet",
+      "templateUnchanged": "Dina ändringar gäller bara det här mejlet. Din sparade mall ändras inte.",
+      "noEmail": "Kunden får inget mejl. Du kan kontakta kunden separat om det behövs.",
+      "holdReleased": "Detta häver också pausen i distributionen för den här ordern, så att den kan distribueras igen."
+    },
+    "refundModal": {
+      "heading": "Återbetala ångrade artiklar",
+      "calculatingLabel": "Beräknar återbetalningen",
+      "calculating": "Beräknar återbetalningsbeloppet …",
+      "nothingToRefund": "Det finns inget att återbetala för den här ordern. De ångrade artiklarna kan redan ha återbetalats, eller så kan ordern ha annullerats.",
+      "itemsHeading": "Artiklar att återbetala",
+      "subtotal": "Delsumma för artiklar",
+      "shippingLine": "Ursprunglig frakt",
+      "amount": "Återbetalningsbelopp",
+      "total": "Total återbetalning",
+      "body": "De ångrade artiklarna återbetalas till den ursprungliga betalningsmetoden och läggs tillbaka i lager när det är möjligt. Shopify mejlar kunden ett återbetalningskvitto.",
+      "includesShipping": "Kunden har ångrat hela ordern, så den ursprungliga fraktkostnaden ingår.",
+      "unshippedItems": "Artiklar som inte har skickats än tas bort från ordern och skickas därför inte.",
+      "inReturn_one": "{{count}} ångrad artikel ingår inte eftersom den finns i retur {{name}}. Återbetala den med Behandla och återbetala på returen.",
+      "inReturn_other": "{{count}} ångrade artiklar ingår inte eftersom de finns i retur {{name}}. Återbetala dem med Behandla och återbetala på returen.",
+      "allInReturn": "Alla ångrade artiklar finns i retur {{name}}. Återbetala dem med Behandla och återbetala på returen, vilket även stänger den.",
+      "irreversible": "Detta kan inte ångras.",
+      "confirmAmount": "Återbetala {{amount}}",
+      "confirm": "Återbetala"
+    },
+    "shopifyNotes": {
+      "holdAutomatic": "Ångerbegäran för order {{order}} väntar på granskning av personalen",
+      "holdManual": "Ångerbegäran för order {{order}} pausades av personalen",
+      "canceled": "Annullerad av {{appName}} eftersom kunden ångrade köpet (begäran {{id}}).",
+      "refunded": "Återbetald av {{appName}} eftersom kunden ångrade köpet (begäran {{id}}).",
+      "returnReason": "Ångerbegäran: {{reason}}",
+      "returnReasonNone": "Ångerbegäran (ingen orsak angavs)"
+    }
+  },
+  "emailTemplates": {
+    "pageTitle": "Aviseringar",
+    "loadError": "Det gick inte att läsa in aviseringarna",
+    "saveError": "Det gick inte att spara aviseringarna",
+    "savedToast": "Aviseringarna har sparats",
+    "resetToast": "{{name}} har återställts till standard",
+    "sender": {
+      "heading": "Avsändare",
+      "description": "De här inställningarna gäller alla mejl som appen skickar för din butik. Skicka från din egen verifierade adress och välj vart kundernas svar ska gå.",
+      "emailLabel": "Avsändaradress",
+      "emailPlaceholder": "notifications@withdrawaleasy.com",
+      "detailsVerified": "Mejl skickas från den här adressen.",
+      "detailsPending": "Ange koden vi skickade till den här adressen för att verifiera den.",
+      "detailsDefault": "Om du lämnar fältet tomt skickas mejlen från {{email}}.",
+      "detailsDefaultFallback": "Om du lämnar fältet tomt skickas mejlen från appens standardadress.",
+      "freeProviderWarning": "Gratis e-postleverantörer som Gmail och Yahoo kan inte autentiseras. Kunderna ser ”via brevosend.com” i mejl från den här adressen. För ett mer professionellt intryck kan du använda en adress på din butiks domän.",
+      "codeLabel": "Verifieringskod",
+      "codeDetails": "Ange den 6-siffriga koden från mejlet vi skickade till dig.",
+      "verifyCode": "Verifiera kod",
+      "checkStatus": "Kontrollera verifieringsstatus",
+      "verifyEmail": "Verifiera e-postadress",
+      "codeSent": "Vi har skickat en verifieringskod till {{email}}.",
+      "notVerifiedYet": "Den här e-postadressen är inte verifierad än. Leta efter koden i din inkorg och försök igen.",
+      "replyToLabel": "Svarsadress",
+      "replyToPlaceholder": "support@dinbutik.se",
+      "replyToDetails": "Kundernas svar går som standard till butikens e-postadress. Ange en annan adress om du vill att svaren ska gå någon annanstans."
+    },
+    "domain": {
+      "heading": "Domänautentisering",
+      "description": "Autentisera din domän så att kunderna inte ser ”via brevosend.com” i dina mejl. Det är valfritt, men vi rekommenderar det om du skickar från din butiks domän.",
+      "label": "Domän",
+      "placeholder": "dinbutik.se",
+      "details": "Ange domänen som du skickar mejl från, inte din myshopify.com-domän.",
+      "freeProviderWarning": "Gratis e-postleverantörer som Gmail och Yahoo kan inte autentiseras. Ange din butiks domän i stället.",
+      "columns": {
+        "record": "Post",
+        "type": "Typ",
+        "host": "Värd",
+        "value": "Värde"
+      },
+      "records": {
+        "brevo_code": "Domänägarskap",
+        "dkim_record": "DKIM",
+        "dkim1Record": "DKIM 1",
+        "dkim2Record": "DKIM 2",
+        "dmarc_record": "DMARC"
+      },
+      "copyHost": "Kopiera värd",
+      "copyValue": "Kopiera värde",
+      "verifyRecords": "Verifiera DNS-poster",
+      "authenticate": "Autentisera domän",
+      "pendingInfo": "Lägg till de här posterna hos din domänleverantör och välj sedan Verifiera DNS-poster.",
+      "notVerifiedYet": "Din domän är inte verifierad än. DNS-ändringar kan ta en stund att uppdateras, så försök igen senare."
+    },
+    "notification": {
+      "heading": "Mejlmall",
+      "emailLabel": "Mejl",
+      "language": "Språk",
+      "languageDetails": "Välj ett språk för att redigera det här mejlet på det språket. Varje språk sparas separat. Kunderna får mejl på sitt eget språk.",
+      "send": "Skicka det här mejlet",
+      "requiredDetails": "EU-lagstiftningen kräver det här mejlet, så det kan inte inaktiveras.",
+      "merchantDetails": "Inaktivera för att sluta få det här mejlet.",
+      "decisionDetails": "Inaktivera för att sluta skicka det här mejlet som standard. Du kan fortfarande välja att skicka det när du godkänner eller avvisar en enskild begäran.",
+      "subject": "Ämne",
+      "reset": "Återställ till standard",
+      "customized": "Anpassad"
+    },
+    "templates": {
+      "customerConfirmation": {
+        "name": "Ångerbekräftelse till kunden",
+        "description": "Skickas till kunderna så snart de skickar en ångerbegäran."
+      },
+      "merchantNotification": {
+        "name": "Avisering om ny begäran",
+        "description": "Skickas till butikens kontaktadress när en kund skickar en ny ångerbegäran. Svara på mejlet för att mejla kunden."
+      },
+      "withdrawalApproved": {
+        "name": "Ånger godkänd",
+        "description": "Skickas till kunderna när du godkänner deras ångerbegäran. Du kan granska och redigera det innan det skickas."
+      },
+      "withdrawalRejected": {
+        "name": "Ånger avvisad",
+        "description": "Skickas till kunderna när du avvisar deras ångerbegäran. Du kan granska och redigera det innan det skickas."
+      }
+    },
+    "merchantDefaults": {
+      "subject": "Ny ångerbegäran – order {{order}}",
+      "heading": "Ny ångerbegäran",
+      "intro": "En kund har skickat en ångerbegäran. Här är allt du behöver för att granska den.",
+      "rows": {
+        "name": "Namn",
+        "email": "E-post",
+        "date": "Datum",
+        "orderNumber": "Ordernummer",
+        "reference": "Referensnummer",
+        "reason": "Orsak"
+      },
+      "button": "Visa begäran",
+      "itemsHeading": "Begärda artiklar",
+      "footnote": "Öppna begäran i din admin för att godkänna eller avvisa den. Återbetalningsfristen följs upp automatiskt där."
+    },
+    "body": {
+      "heading": "Mejltext",
+      "editCode": "Redigera kod",
+      "htmlLabel": "Mejlets HTML-text",
+      "previewHeading": "Förhandsgranskning av mejlet"
+    },
+    "variables": {
+      "heading": "Variabler",
+      "help": "Välj en variabel för att infoga den vid markören.",
+      "insert": "Infoga {{label}}: {{description}}",
+      "groups": {
+        "customer": "Kund",
+        "order": "Order",
+        "withdrawal": "Ånger",
+        "request": "Begäran",
+        "shop": "Butik"
+      },
+      "tokens": {
+        "customer": {
+          "first_name": {
+            "label": "Förnamn",
+            "description": "Kundens förnamn"
+          },
+          "last_name": {
+            "label": "Efternamn",
+            "description": "Kundens efternamn"
+          },
+          "email": {
+            "label": "E-post",
+            "description": "Kundens e-postadress"
+          }
+        },
+        "order": {
+          "name": {
+            "label": "Ordernummer",
+            "description": "Ordernumret, till exempel #2138"
+          },
+          "id": {
+            "label": "Order-ID",
+            "description": "Orderns interna ID"
+          }
+        },
+        "withdrawal": {
+          "request_id": {
+            "label": "Referensnummer",
+            "description": "Ångerbegärans referensnummer"
+          },
+          "submitted_at": {
+            "label": "Datum då begäran skickades",
+            "description": "Datum och tid då begäran skickades"
+          },
+          "reason": {
+            "label": "Orsak",
+            "description": "Orsaken som kunden angav, om någon"
+          },
+          "selected_products": {
+            "label": "Valda produkter (text)",
+            "description": "De begärda artiklarna som en kommaavgränsad lista"
+          }
+        },
+        "request": {
+          "status": {
+            "label": "Status",
+            "description": "Begärans aktuella status"
+          },
+          "url": {
+            "label": "Länk till begäran",
+            "description": "En länk till begäran i appen"
+          }
+        },
+        "shop": {
+          "name": {
+            "label": "Butikens namn",
+            "description": "Din butiks namn"
+          },
+          "email": {
+            "label": "Butikens e-post",
+            "description": "Din butiks kontaktadress"
+          }
+        }
+      }
+    },
+    "validation": {
+      "email": "Ange en giltig e-postadress.",
+      "subjectRequired": "Ange ett ämne.",
+      "subjectTooLong": "Ämnet får vara högst {{max}} tecken.",
+      "bodyRequired": "Ange en mejltext."
+    }
+  },
+  "sample": {
+    "customerName": "Anna Andersson",
+    "items": {
+      "lamp": {
+        "title": "Fjord bordslampa",
+        "variant": "Ek / Stor"
+      },
+      "candleHolder": {
+        "title": "Tind ljushållare",
+        "variant": "Mässing"
+      }
+    },
+    "reason": "Jag har ändrat mig"
+  },
+  "faqs": {
+    "pageTitle": "Vanliga frågor",
+    "searchLabel": "Sök bland vanliga frågor",
+    "searchPlaceholder": "Sök frågor, till exempel ”återbetalning” eller ”frist”",
+    "noResults": "Inga frågor matchar ”{{query}}”",
+    "noResultsHelp": "Prova ett annat ord eller kontakta supporten nedan.",
+    "showAnswer": "Visa svar: {{question}}",
+    "hideAnswer": "Dölj svar: {{question}}",
+    "groups": {
+      "gettingStarted": "Kom igång",
+      "deadline": "Ångerfrist",
+      "requests": "Hantera begäranden",
+      "emailsLanguages": "Mejl och språk"
+    },
+    "actions": {
+      "goToSettings": "Gå till Inställningar",
+      "goToRequests": "Gå till Begäranden",
+      "goToNotifications": "Gå till Aviseringar"
+    },
+    "stillStuck": {
+      "heading": "Har du fler frågor?",
+      "body": "Vårt supportteam läser och besvarar varje mejl.",
+      "link": "Kontakta supporten"
+    },
+    "items": {
+      "what-it-does": {
+        "question": "Vad gör appen?",
+        "paragraphs": [
+          "Den ger dina EU-kunder ett tydligt sätt att ångra ett köp, enligt EU-lagstiftningen. Den ger dig också ett ställe där du hanterar alla begäranden.",
+          "Kunderna öppnar formuläret från sin order, väljer de artiklar de vill ångra och bekräftar. Varje begäran visas sedan på sidan Begäranden med artiklarna, orsaken och din återbetalningsfrist. Appen skickar de obligatoriska mejlen åt dig."
+        ]
+      },
+      "where-form-appears": {
+        "question": "Var hittar kunderna ångerformuläret?",
+        "paragraphs": [
+          "Du kan visa formuläret på 2 ställen. Använd det ena eller båda:"
+        ],
+        "bullets": [
+          "Orderstatussida: sidan som kunderna ser efter kassan och när de öppnar länken i orderbekräftelsen.",
+          "Butikssida: en sida i din onlinebutik för kunder som kommer tillbaka senare. De hittar sin order med ordernummer och e-postadress."
+        ],
+        "closing": "Aktivera varje plats i Inställningar och lägg sedan till dess appblock en gång. Konfigurationsguiden på Start visar vilka block som har lagts till."
+      },
+      "form-not-showing": {
+        "question": "Varför ser en kund inte ångerformuläret?",
+        "paragraphs": [
+          "Kontrollera följande, med början i det vanligaste:"
+        ],
+        "bullets": [
+          "Formuläret är inaktiverat, eller så är platsen som kunden använder inte aktiverad i Inställningar.",
+          "Appblocket har inte lagts till på den sidan än.",
+          "Ordern skickas inte till något av dina berättigade länder.",
+          "Ångerfristen för ordern har löpt ut.",
+          "Ordern har annullerats eller har redan en väntande begäran. Varje order kan bara ha 1 väntande begäran åt gången."
+        ]
+      },
+      "deadline": {
+        "question": "När börjar och slutar ångerfristen?",
+        "paragraphs": [
+          "Enligt EU-lagstiftningen börjar fristen när kunden tar emot artiklarna, inte när hen beställer. Kunderna kan också ångra sig när som helst innan artiklarna kommer fram."
+        ],
+        "bullets": [
+          "Inte skickad än: fristen har inte börjat, så kunderna kan alltid ångra sig.",
+          "Levererad: fristen börjar på transportörens leveransdatum och varar i {{withdrawalDays}}. Du kan ändra antalet dagar i Inställningar.",
+          "Skickad, men utan leveransdatum: appen använder transportörens beräknade leveransdatum. Om det saknas används utskicksdatumet plus din beräknade transporttid."
+        ]
+      },
+      "transit-days": {
+        "question": "Vad används den beräknade transporttiden till?",
+        "paragraphs": [
+          "Många transportörer skickar inget leveransdatum till Shopify. Utan det kan appen inte avgöra när ångerfristen börjar, så den lägger till din beräknade transporttid till utskicksdatumet.",
+          "Ställ in den på ungefär hur lång tid dina paket tar att komma fram. Just nu är den {{transitDays}}. Välj en längre tid om du är osäker. En för kort tid kan få en kunds ångerfrist att sluta i förtid."
+        ]
+      },
+      "split-shipments": {
+        "question": "Vad händer om en order skickas i mer än 1 paket?",
+        "paragraphs": [
+          "Ångerfristen börjar när det sista paketet kommer fram. Artiklar som appen pausar eftersom kunden har ångrat dem räknas inte, eftersom de inte skickas.",
+          "Om en kund ångrar sig när bara en del av ordern har skickats hanterar appen varje del separat:"
+        ],
+        "bullets": [
+          "Artiklar som inte har skickats: appen kan pausa dem så att de inte skickas.",
+          "Artiklar som har skickats: appen kan skapa en retur för dem."
+        ],
+        "closing": "Appen annullerar aldrig en delvis skickad order, eftersom det även skulle annullera artiklar som kunden redan har."
+      },
+      "after-submit": {
+        "question": "Vad händer efter att en kund har skickat en begäran?",
+        "paragraphs": [
+          "Följande händer, i den här ordningen:"
+        ],
+        "bullets": [
+          "Begäran visas på sidan Begäranden som Väntande.",
+          "Kunden får ett bekräftelsemejl. Det skickas alltid, eftersom det är kundens bevis på ångern.",
+          "Du får också ett mejl, om aviseringen om ny begäran är aktiverad.",
+          "Dina automatiseringsinställningar körs. Appen kan till exempel pausa distributionen eller tagga ordern."
+        ]
+      },
+      "automation": {
+        "question": "Vad gör automatiseringsinställningarna?",
+        "paragraphs": [
+          "De körs när en begäran kommer in. Vad appen kan göra beror på om ordern har skickats:"
+        ],
+        "bullets": [
+          "Innan ordern skickas: pausa distributionen så att inget skickas medan du granskar begäran. Du kan också låta appen annullera och återbetala hela ordern direkt.",
+          "Efter att ordern har skickats: skapa en retur i Shopify för de skickade artiklarna.",
+          "Delvis skickad: båda gäller. Appen pausar bara de begärda artiklar som inte har skickats och skapar en retur för dem som har skickats."
+        ],
+        "closing": "I alla fall kan appen även tagga ordern. Automatiseringen godkänner eller avvisar aldrig en begäran. Det är alltid du som beslutar."
+      },
+      "partial-withdrawal": {
+        "question": "Kan en kund ångra bara några artiklar?",
+        "paragraphs": [
+          "Ja. Kunderna väljer vilka artiklar de ångrar. Begäran, återbetalningen och eventuell retur omfattar bara de artiklarna. Den ursprungliga fraktkostnaden återbetalas bara när kunden ångrar hela ordern.",
+          "Varje order kan ha 1 väntande begäran åt gången. När du har godkänt eller avvisat den kan kunden skicka en ny begäran för andra artiklar."
+        ]
+      },
+      "reason": {
+        "question": "Måste kunderna ange en orsak?",
+        "paragraphs": [
+          "Nej. Enligt EU-lagstiftningen behöver kunderna ingen orsak för att ångra sig, så orsaksfältet är alltid valfritt. I Inställningar kan du välja vilka orsaker som ska erbjudas, eller sluta fråga efter en orsak."
+        ]
+      },
+      "refund": {
+        "question": "Hur återbetalar jag en ånger?",
+        "paragraphs": [
+          "Öppna begäran från sidan Begäranden. Hur du återbetalar beror på var artiklarna finns:"
+        ],
+        "bullets": [
+          "Artiklar som inte finns i en retur: välj Återbetala. Artiklar som inte har skickats än tas bort från ordern och skickas därför inte.",
+          "Artiklar i en retur: välj Behandla och återbetala på returen när de har kommit tillbaka. Då återbetalas kunden och returen stängs.",
+          "Inget har skickats än: du kan också annullera och återbetala hela ordern via Fler åtgärder."
+        ],
+        "closing": "Enligt EU-lagstiftningen har du {{refundDays}} från ångern att återbetala. Sidan för begäran visar hur mycket tid som återstår. Återbetala innan du godkänner begäran."
+      },
+      "returns": {
+        "question": "Hur fungerar returer?",
+        "paragraphs": [
+          "En retur talar om för Shopify vilka artiklar kunden skickar tillbaka. Appen kan skapa en när en begäran kommer in, eller så kan du välja Skapa retur på sidan för begäran.",
+          "En retur omfattar bara artiklar som har skickats. Kunden återbetalas inte när returen skapas. Välj Behandla och återbetala på returen när artiklarna har kommit tillbaka."
+        ]
+      },
+      "decision-lock": {
+        "question": "Varför inaktiveras orderåtgärderna efter att jag har godkänt eller avvisat en begäran?",
+        "paragraphs": [
+          "När du godkänner eller avvisar avslutas begäran. Därefter inaktiveras återbetalningar, pauser, returer och annulleringar så att ordern inte ändras av misstag. Därför bör du återbetala innan du godkänner.",
+          "Beslutet häver också alla pauser i distributionen som appen har lagt. Om det misslyckas kan du fortfarande välja Häv paus i distributionen."
+        ]
+      },
+      "emails": {
+        "question": "Vilka mejl skickar appen, och kan jag redigera dem?",
+        "paragraphs": [
+          "Appen skickar {{emailCount}} mejl. Du kan redigera alla på sidan Aviseringar:"
+        ],
+        "bullets": [
+          "Ångerbekräftelse till kunden: skickas när en kund skickar en begäran. Det är alltid aktiverat.",
+          "Avisering om ny begäran: skickas till butikens kontaktadress. Du kan inaktivera det.",
+          "Ånger godkänd: skickas till kunden när du godkänner en begäran. Du kan granska det först eller inaktivera det.",
+          "Ånger avvisad: skickas till kunden när du avvisar en begäran. Du kan granska det först eller inaktivera det."
+        ],
+        "closing": "Du kan redigera ämne och text i varje mejl på alla språk och lägga till variabler som ordernumret eller kundens namn. Förhandsgranskningen uppdateras medan du skriver."
+      },
+      "countries-languages": {
+        "question": "Vilka länder och språk stöder appen?",
+        "paragraphs": [
+          "Alla EU-länder är berättigade som standard. Om du bara säljer till några av dem väljer du Specifika länder i Inställningar.",
+          "Formuläret finns på {{languageCount}} språk: {{languages}}. Kunderna ser det på sitt eget språk.",
+          "Engelska är basspråket. Om du lämnar ett översatt fält tomt ser kunderna den engelska texten i stället."
+        ]
+      }
+    }
+  },
+  "featureRequest": {
+    "pageTitle": "Föreslå en funktion",
+    "intro": "Berätta vad du vill se i appen. Vi läser alla förslag.",
+    "sentHeading": "Funktionsförslaget har skickats",
+    "sentBody": "Tack för att du delade din idé med vårt team.",
+    "firstName": "Förnamn",
+    "lastName": "Efternamn",
+    "email": "E-post",
+    "request": "Vilken funktion vill du ha?",
+    "requestPlaceholder": "Beskriv funktionen och hur den skulle hjälpa din butik",
+    "submit": "Skicka förslag"
+  },
+  "pricing": {
+    "pageTitle": "Priser",
+    "pricePerMonth": "{{price}} per månad",
+    "currentPlan": "Nuvarande abonnemang",
+    "choosePlan": "Välj {{plan}}",
+    "switchedToast": "Bytte till abonnemanget {{plan}}",
+    "plans": {
+      "free": {
+        "name": "Free",
+        "features": [
+          "Upp till 10 ångerbegäranden per månad",
+          "E-postaviseringar"
+        ]
+      },
+      "starter": {
+        "name": "Starter",
+        "features": [
+          "Obegränsat antal ångerbegäranden",
+          "Anpassade formulärfält",
+          "E-postaviseringar"
+        ]
+      },
+      "pro": {
+        "name": "Pro",
+        "features": [
+          "Allt i Starter",
+          "Prioriterad support",
+          "Automatiska återbetalningar"
+        ]
+      }
+    },
+    "switchError": "Det gick inte att byta abonnemang"
+  }
+}

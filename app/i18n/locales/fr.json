@@ -1,0 +1,1266 @@
+{
+  "common": {
+    "add": "Ajouter",
+    "backToHome": "Retour à l'accueil",
+    "cancel": "Annuler",
+    "delete": "Supprimer",
+    "discard": "Ignorer",
+    "done": "Terminé",
+    "dayCount_one": "{{count}} jour",
+    "dayCount_other": "{{count}} jours",
+    "dayCount_many": "{{count}} jours",
+    "emptyValue": "—",
+    "noMatches": "Aucun résultat pour « {{query}} ».",
+    "preview": "Aperçu",
+    "remove": "Retirer",
+    "save": "Enregistrer",
+    "verified": "Vérifié"
+  },
+  "nav": {
+    "home": "Accueil",
+    "withdrawalRequests": "Demandes",
+    "formSetup": "Paramètres",
+    "emailTemplates": "Notifications",
+    "pricing": "Tarifs"
+  },
+  "errors": {
+    "generic": "Une erreur s'est produite. Réessayez.",
+    "requestFailed": "Une erreur s'est produite (erreur {{status}}). Réessayez.",
+    "methodNotAllowed": "Cette action n'est pas prise en charge.",
+    "unknownAction": "Cette action n'est pas prise en charge.",
+    "noValidFields": "Il n'y a rien à mettre à jour.",
+    "emailServiceUnavailable": "Impossible de se connecter au service d'e-mail. Réessayez dans quelques minutes.",
+    "emailServiceNotConfigured": "L'envoi d'e-mails n'est pas encore configuré. Contactez l'assistance.",
+    "requestNotFound": "Cette demande de rétractation n'existe pas ou a été supprimée.",
+    "requestDecided": "Cette demande a déjà été approuvée ou refusée. Les actions sur la commande ne sont donc plus disponibles.",
+    "unknownDecision": "Choisissez d'approuver ou de refuser cette demande.",
+    "invalidStatus": "Choisissez un statut valide pour cette demande.",
+    "noteRequired": "Saisissez une note.",
+    "orderNotFound": "Cette commande est introuvable dans Shopify.",
+    "invalidEmail": "Saisissez une adresse e-mail valide.",
+    "featureRequestIncomplete": "Remplissez tous les champs avant d'envoyer votre demande.",
+    "senderCodeRequired": "Saisissez le code de vérification reçu par e-mail.",
+    "senderNotFound": "Impossible de trouver cette adresse d'expéditeur. Supprimez-la et ajoutez-la de nouveau pour recevoir un nouveau code.",
+    "senderNotStarted": "Vérifiez d'abord votre adresse d'expéditeur.",
+    "senderIdMissing": "Impossible d'enregistrer cette adresse d'expéditeur. Réessayez.",
+    "domainInvalid": "Saisissez un domaine valide, comme votreboutique.com.",
+    "domainFreeProvider": "Les fournisseurs d'e-mail gratuits comme Gmail et Yahoo ne peuvent pas être authentifiés. Utilisez plutôt le domaine de votre boutique."
+  },
+  "auth": {
+    "login": {
+      "heading": "Se connecter",
+      "shopLabel": "Domaine de la boutique",
+      "shopDetails": "example.myshopify.com",
+      "submit": "Se connecter",
+      "missingShop": "Saisissez le domaine de votre boutique pour vous connecter.",
+      "invalidShop": "Saisissez un domaine de boutique valide, comme example.myshopify.com."
+    }
+  },
+  "status": {
+    "pending": "En attente",
+    "approved": "Approuvée",
+    "rejected": "Refusée"
+  },
+  "sourceInline": {
+    "order_status": "la page d'état de la commande",
+    "standalone_page": "votre page de boutique"
+  },
+  "placements": {
+    "orderStatus": {
+      "label": "Page d'état de la commande",
+      "details": "Affichez le formulaire de rétractation sur la page d'état de la commande que les clients voient après le paiement."
+    },
+    "storefront": {
+      "label": "Page de boutique",
+      "details": "Affichez le formulaire de rétractation sur une page dédiée de votre thème, pour que les clients le trouvent en dehors de la page d'état de la commande."
+    }
+  },
+  "orderStatus": {
+    "financial": {
+      "PENDING": "Paiement en attente",
+      "AUTHORIZED": "Autorisé",
+      "PARTIALLY_PAID": "Partiellement payé",
+      "PAID": "Payé",
+      "PARTIALLY_REFUNDED": "Partiellement remboursé",
+      "REFUNDED": "Remboursé",
+      "VOIDED": "Annulé",
+      "EXPIRED": "Expiré"
+    },
+    "fulfillment": {
+      "UNFULFILLED": "Non traité",
+      "PENDING_FULFILLMENT": "Traitement en attente",
+      "OPEN": "Ouvert",
+      "IN_PROGRESS": "En cours",
+      "ON_HOLD": "En suspens",
+      "PARTIALLY_FULFILLED": "Partiellement traité",
+      "FULFILLED": "Traité",
+      "RESTOCKED": "Réapprovisionné",
+      "SCHEDULED": "Planifié"
+    },
+    "return": {
+      "REQUESTED": "Demandé",
+      "OPEN": "Ouvert",
+      "CLOSED": "Fermé",
+      "DECLINED": "Refusé",
+      "CANCELED": "Annulé"
+    }
+  },
+  "stats": {
+    "heading": "Vue d'ensemble",
+    "description": "Un aperçu de vos demandes de rétractation",
+    "viewRequests": "Voir les demandes",
+    "total": "Total des demandes",
+    "today": "Soumises aujourd'hui",
+    "pending": "En attente",
+    "closed": "Clôturées",
+    "requestCount_one": "{{count}} demande",
+    "requestCount_other": "{{count}} demandes",
+    "requestCount_many": "{{count}} demandes"
+  },
+  "home": {
+    "pageTitle": "Accueil",
+    "loadError": "Impossible de charger votre tableau de bord",
+    "saveErrorHeading": "Impossible d'enregistrer votre modification",
+    "saveErrorAction": "Réessayez ou effectuez la modification dans les Paramètres.",
+    "setupBanner": {
+      "heading_one": "Il reste {{count}} étape de configuration",
+      "heading_other": "Il reste {{count}} étapes de configuration",
+      "heading_many": "Il reste {{count}} étapes de configuration",
+      "body": "Terminez ces étapes pour préparer votre formulaire de rétractation : {{steps}}."
+    },
+    "setupGuide": {
+      "heading": "Guide de configuration",
+      "description": "Suivez ce guide pour mettre en ligne votre formulaire de rétractation sur votre boutique.",
+      "progress": "{{completed}} tâches sur {{total}} terminées",
+      "dismiss": "Masquer le guide de configuration",
+      "collapse": "Réduire le guide de configuration",
+      "expand": "Développer le guide de configuration",
+      "showStep": "Afficher les détails de {{step}}",
+      "hideStep": "Masquer les détails de {{step}}",
+      "steps": {
+        "form": {
+          "label": "Activer votre formulaire de rétractation",
+          "description": "Activez le formulaire et choisissez où les clients le voient. Les champs, les motifs et les textes sont déjà remplis par défaut. Vous pouvez les modifier à tout moment dans les Paramètres.",
+          "checkbox": "Activer le formulaire de rétractation",
+          "cta": "Aller aux Paramètres",
+          "placementHeading": "Choisissez où les clients voient le formulaire",
+          "placementDescription": "Sélectionnez au moins un emplacement. Chaque emplacement a besoin de son bloc d'application pour que les clients voient le formulaire."
+        },
+        "blocks": {
+          "label": "Ajouter les blocs d'application à votre boutique",
+          "description": "Ajoutez un bloc d'application pour chaque emplacement choisi à l'étape précédente.",
+          "locked": "Terminez l'étape {{step}} pour choisir où le formulaire apparaît. Vous pourrez ensuite ajouter les blocs d'application ici.",
+          "surfaces": {
+            "orderStatus": "Page d'état de la commande",
+            "theme": "Page de boutique"
+          },
+          "live": {
+            "orderStatus": "Le bloc d'application est en ligne sur votre page d'état de la commande.",
+            "theme": "Le bloc d'application est en ligne sur votre page de boutique."
+          }
+        }
+      }
+    },
+    "help": {
+      "heading": "Aide et ressources",
+      "support": {
+        "title": "Assistance par e-mail",
+        "description": "Une question ? Notre équipe d'assistance peut vous aider.",
+        "link": "Contacter l'assistance"
+      },
+      "faqs": {
+        "title": "FAQ",
+        "description": "Trouvez des réponses aux questions fréquentes sur la configuration et l'utilisation de l'application.",
+        "link": "Voir la FAQ"
+      },
+      "featureRequest": {
+        "title": "Suggestions de fonctionnalités",
+        "description": "Vous avez une idée pour l'application ? Dites-nous ce que vous aimeriez voir.",
+        "link": "Suggérer une fonctionnalité"
+      }
+    }
+  },
+  "blockSetup": {
+    "autoUpdate": "Ce message disparaît automatiquement quelques secondes après l'enregistrement du bloc d'application.",
+    "addAppBlock": "Ajouter le bloc d'application",
+    "orderStatus": {
+      "heading": "Ajouter le bloc d'application à votre page d'état de la commande",
+      "body": "Les clients ne voient pas le formulaire de rétractation sur la page d'état de la commande tant que vous n'avez pas ajouté le bloc d'application. Pour l'ajouter :",
+      "steps": {
+        "open": "Sélectionnez <strong>Ajouter le bloc d'application</strong> ci-dessous. La page d'état de la commande s'ouvre dans l'éditeur de paiement.",
+        "add": "Dans la barre latérale, sélectionnez <strong>Ajouter un bloc d'application</strong>.",
+        "choose": "Sélectionnez <strong>Formulaire de rétractation</strong>.",
+        "save": "Sélectionnez <strong>Enregistrer</strong>."
+      }
+    },
+    "storefront": {
+      "heading": "Ajouter le bloc d'application à une page de boutique",
+      "body": "Choisissez un modèle de page, puis sélectionnez Ajouter le bloc d'application. L'éditeur de thème s'ouvre avec le formulaire de rétractation déjà ajouté en tant que section.",
+      "templateLabel": "Modèle de page",
+      "templates": {
+        "page": "Page par défaut",
+        "index": "Page d'accueil",
+        "product": "Pages produit",
+        "collection": "Pages de collection",
+        "cart": "Page du panier"
+      },
+      "steps": {
+        "open": "Sélectionnez <strong>Ajouter le bloc d'application</strong> pour ouvrir l'éditeur de thème avec la section ajoutée.",
+        "move": "Faites glisser la section à l'endroit souhaité sur la page.",
+        "save": "Sélectionnez <strong>Enregistrer</strong>."
+      }
+    }
+  },
+  "onboarding": {
+    "pageTitle": "Commencer",
+    "heading": "Préparez votre boutique aux rétractations dans l'UE",
+    "intro_one": "Terminez cette {{count}} étape pour offrir à vos clients de l'UE un moyen conforme de se rétracter d'un achat.",
+    "intro_other": "Terminez ces {{count}} étapes pour offrir à vos clients de l'UE un moyen conforme de se rétracter d'un achat.",
+    "intro_many": "Terminez ces {{count}} étapes pour offrir à vos clients de l'UE un moyen conforme de se rétracter d'un achat.",
+    "stepBadge": "Étape {{current}} sur {{total}}",
+    "completedToast": "Configuration terminée",
+    "steps": {
+      "welcome": {
+        "title": "Bienvenue",
+        "description": "Ce que fait l'application"
+      },
+      "form": {
+        "title": "Formulaire de rétractation",
+        "description": "Activez votre formulaire"
+      }
+    },
+    "actions": {
+      "getStarted": "Commencer",
+      "continue": "Continuer",
+      "finish": "Terminer la configuration",
+      "skip": "Passer la configuration",
+      "back": "Retour"
+    },
+    "help": {
+      "heading": "Besoin d'aide ?",
+      "body": "Une question ? <supportLink>Contactez l'assistance</supportLink>."
+    },
+    "welcome": {
+      "heading": "Bienvenue dans {{appName}}",
+      "setupTime": "Environ 1 minute",
+      "law": "Depuis le 19 juin 2026, les boutiques qui vendent à des clients de l'UE doivent proposer un moyen de rétractation en 2 étapes pour chaque commande (directive UE 2023/2673, article 11 bis). Une politique de retour seule ne suffit pas.",
+      "app": "{{appName}} ajoute un bouton de rétractation à votre page d'état de la commande, à une page de votre boutique en ligne, ou aux deux. L'application gère la confirmation en 2 étapes et envoie l'e-mail de confirmation obligatoire. Vous gérez toutes les demandes au même endroit.",
+      "imageAlt": "Un client se rétracte d'une commande",
+      "requirementsHeading": "Ce qu'exige la loi",
+      "requirements": {
+        "button": "Un bouton de rétractation clairement libellé, facile à trouver pour les clients",
+        "twoStep": "Un processus en 2 étapes : les clients soumettent leur rétractation, puis la confirment",
+        "email": "Un e-mail de confirmation automatique que les clients peuvent conserver"
+      },
+      "penaltyHeading": "Ce qui se passe si vous n'êtes pas en conformité",
+      "penalty": "Si le bouton de rétractation est absent ou ne fonctionne pas, la loi prolonge le délai de rétractation de {{days}} jours. Les clients disposent alors de 12 mois et {{days}} jours pour se rétracter de chaque commande concernée."
+    },
+    "form": {
+      "heading": "Activer votre formulaire de rétractation",
+      "body": "Les clients soumettent leur rétractation, puis la confirment dans une étape distincte, comme l'exige le droit de l'UE. Le formulaire inclut des mentions légales par défaut. Les clients disposent de {{days}} à compter de la livraison pour se rétracter.",
+      "switch": "Activer le formulaire de rétractation",
+      "later": "Vous pourrez tout modifier plus tard dans les Paramètres.",
+      "loadError": "Impossible de charger les paramètres de votre formulaire. Vous pouvez terminer la configuration maintenant et activer le formulaire plus tard dans les Paramètres.",
+      "saveError": "Impossible d'enregistrer vos choix pour le formulaire. Réessayez, ou terminez la configuration sans eux et définissez-les plus tard dans les Paramètres.",
+      "finishWithoutSaving": "Terminer sans enregistrer",
+      "placementError": "Sélectionnez au moins un emplacement ou désactivez le formulaire."
+    },
+    "finishError": "Impossible de terminer la configuration. Réessayez."
+  },
+  "formSetup": {
+    "pageTitle": "Paramètres",
+    "loadError": "Impossible de charger les paramètres",
+    "saveError": "Impossible d'enregistrer les paramètres",
+    "savedToast": "Paramètres enregistrés",
+    "enable": {
+      "heading": "Formulaire de rétractation",
+      "description": "Choisissez si les clients peuvent soumettre des demandes de rétractation et où ils voient le formulaire.",
+      "checkbox": "Activer le formulaire de rétractation",
+      "details": "Lorsque cette option est désactivée, les clients ne peuvent soumettre de demande de rétractation nulle part.",
+      "orderStatus": "Afficher sur la page d'état de la commande",
+      "storefront": "Afficher sur une page de boutique"
+    },
+    "countries": {
+      "heading": "Pays éligibles",
+      "description": "Les clients ne voient le formulaire de rétractation que si leur commande est expédiée dans l'un de ces pays.",
+      "all": "Les {{count}} pays de l'UE (recommandé)",
+      "allDetails": "Le droit de rétractation s'applique dans toute l'UE.",
+      "specific": "Pays spécifiques",
+      "specificDetails": "Choisissez les pays ci-dessous. Vous pouvez modifier ce choix à tout moment.",
+      "pickerLabel": "Pays",
+      "pickerPlaceholder": "Rechercher des pays"
+    },
+    "content": {
+      "heading": "Contenu du formulaire",
+      "tabs": {
+        "step1": "1. Détails",
+        "confirm": "2. Confirmer",
+        "done": "3. Terminé"
+      },
+      "language": "Langue",
+      "languageDetails": "Choisissez une langue pour modifier le contenu du formulaire dans cette langue. Chaque langue est enregistrée séparément.",
+      "beforeDelivery": {
+        "heading": "Avant la livraison",
+        "description": "Affiché sur le premier écran du formulaire et à l'étape Détails jusqu'à la livraison de la commande, y compris pendant l'acheminement."
+      },
+      "afterDelivery": {
+        "heading": "Après la livraison",
+        "description": "Affiché à la place dès que Shopify marque la commande comme livrée."
+      },
+      "title": "Titre",
+      "description": "Description",
+      "itemHeading": "Titre de la sélection d'articles",
+      "customerDetails": {
+        "heading": "Informations du client",
+        "description": "Remplies à partir de la commande. Les clients ne peuvent pas modifier ces champs.",
+        "locked": "Verrouillé",
+        "fullName": "Nom complet",
+        "email": "E-mail",
+        "orderNumber": "Numéro de commande"
+      },
+      "reason": {
+        "heading": "Motif de la rétractation",
+        "checkbox": "Demander un motif",
+        "details": "Les clients n'ont jamais à donner de motif. Le droit de l'UE exige que ce champ soit facultatif.",
+        "label": "Libellé du champ motif",
+        "optionsHeading": "Options de motif",
+        "optionsHelp": "Les clients choisissent dans cette liste. Ajoutez, supprimez ou reformulez les options selon votre boutique. Une option « Autre » avec une zone de texte est toujours ajoutée à la fin.",
+        "removeOption": "Retirer {{option}}",
+        "addLabel": "Ajouter un motif",
+        "addPlaceholder": "Par exemple, Commandé par erreur",
+        "translatedHelp": "Traduisez chaque option. Pour ajouter ou supprimer des options, passez à l'anglais.",
+        "translatedEmpty": "Ajoutez d'abord des options de motif en anglais."
+      },
+      "continueButton": "Libellé du bouton Continuer",
+      "confirm": {
+        "heading": "Titre de la confirmation",
+        "messageBefore": "Message avant la livraison",
+        "messageAfter": "Message après la livraison",
+        "declaration": "Déclaration",
+        "button": "Libellé du bouton Confirmer"
+      },
+      "done": {
+        "titleBefore": "Titre avant la livraison",
+        "messageBefore": "Message avant la livraison",
+        "titleAfter": "Titre après la livraison",
+        "messageAfter": "Message après la livraison"
+      }
+    },
+    "automation": {
+      "heading": "Automatisation",
+      "description": "Choisissez ce que fait l'application lorsqu'un client soumet une demande de rétractation.",
+      "beforeShip": {
+        "heading": "Avant l'expédition de la commande",
+        "description": "S'applique lorsqu'une demande arrive avant l'expédition de tout article.",
+        "hold": "Suspendre le traitement pour examen",
+        "holdDetails": "Mettez le traitement en pause jusqu'à ce que vous approuviez ou refusiez la demande. La suspension est levée lorsque vous décidez.",
+        "tagDetails": "Ajoutez une balise aux commandes qui reçoivent une demande avant l'expédition, pour que votre équipe les retrouve dans la liste des commandes."
+      },
+      "fallback": {
+        "label": "Ce qui arrive à la commande",
+        "hold": "La garder en suspens jusqu'à ce que vous approuviez ou refusiez la demande",
+        "cancelNow": "Annuler toute la commande et la rembourser immédiatement",
+        "releaseN": "Lever la suspension après un nombre de jours défini",
+        "cancelN": "Annuler toute la commande et la rembourser après un nombre de jours défini",
+        "cancelWarning": "Cela annule et rembourse la commande entière, même si le client ne s'est rétracté que de certains articles. Shopify envoie au client un e-mail concernant l'annulation.",
+        "days": "Nombre de jours"
+      },
+      "afterDelivery": {
+        "heading": "Après l'expédition de la commande",
+        "description": "S'applique lorsqu'une demande arrive après l'expédition d'au moins un article, même s'il n'a pas encore été livré. Chaque demande apparaît quand même sur la page Demandes.",
+        "createReturn": "Créer un retour",
+        "createReturnDetails": "Créez un retour dans Shopify pour les articles demandés qui ont été expédiés.",
+        "tagDetails": "Ajoutez une balise aux commandes qui reçoivent une demande après l'expédition."
+      },
+      "tag": {
+        "checkbox": "Ajouter une balise à la commande",
+        "label": "Balises de commande",
+        "placeholder": "Ajouter une balise"
+      }
+    },
+    "deadline": {
+      "heading": "Délai de rétractation",
+      "description": "Le délai de rétractation commence à la livraison de la commande, pas à sa passation. Le droit de l'UE exige au moins {{days}}.",
+      "days": "Jours pour se rétracter après la livraison",
+      "daysDetails": "Durée dont disposent les clients pour se rétracter après la livraison de leur commande.",
+      "transit": "Délai d'acheminement estimé (jours)",
+      "transitDetails": "Utilisé lorsque le transporteur ne fournit ni date de livraison ni estimation. L'application ajoute ces jours à la date d'expédition."
+    },
+    "validation": {
+      "countryMode": "Choisissez les pays éligibles.",
+      "euCountries": "Sélectionnez au moins un pays.",
+      "title": "Saisissez un titre.",
+      "description": "Saisissez une description.",
+      "itemHeading": "Saisissez un titre pour la liste d'articles.",
+      "continueButton": "Saisissez un libellé pour le bouton Continuer.",
+      "heading": "Saisissez un titre.",
+      "confirmMessage": "Saisissez un message de confirmation.",
+      "declaration": "Saisissez la déclaration que les clients doivent accepter.",
+      "confirmButton": "Saisissez un libellé pour le bouton Confirmer.",
+      "message": "Saisissez un message.",
+      "reasonLabel": "Saisissez un libellé pour le champ motif.",
+      "reasonOptions": "Ajoutez au moins un motif.",
+      "reasonOptionTranslation": "Saisissez une traduction pour ce motif.",
+      "fallback": "Choisissez ce qui arrive à la commande.",
+      "daysRange": "Saisissez un nombre de jours compris entre {{min}} et {{max}}.",
+      "tags": "Ajoutez au moins une balise ou désactivez l'ajout de balises.",
+      "afterDeliveryAction": "Choisissez ce qui se passe après l'expédition de la commande."
+    },
+    "preview": {
+      "heading": "Aperçu en direct",
+      "compliantBadge": "Conforme 2 étapes",
+      "surfaceLabel": "Aperçu",
+      "surfaces": {
+        "orderStatus": "Page d'état de la commande",
+        "theme": "Page de boutique"
+      },
+      "stageLabel": "État de la livraison",
+      "stages": {
+        "beforeDelivery": "Pas encore livrée",
+        "delivered": "Livrée"
+      },
+      "banner": {
+        "orderStatus": "Voici ce que les clients voient sur la page d'état de la commande. Sélectionnez les boutons pour l'essayer, ou utilisez les onglets de Contenu du formulaire pour aller à une étape précise.",
+        "theme": "Voici ce que les clients voient sur votre page de boutique. Elle commence par une étape « Retrouver votre commande », car les visiteurs de la boutique ne sont pas connectés."
+      },
+      "restart": "Relancer l'aperçu",
+      "position": {
+        "entry": "Carte d'accès",
+        "lookup": "Retrouver votre commande",
+        "step": "Étape {{current}} sur {{total}}"
+      },
+      "storefront": {
+        "start": "Commencer une demande de rétractation",
+        "findOrderHeading": "Retrouver votre commande",
+        "findOrderBody": "Saisissez les informations de votre commande pour commencer votre demande de rétractation.",
+        "fullName": "Nom complet",
+        "email": "E-mail",
+        "orderNumber": "Numéro de commande",
+        "continue": "Continuer",
+        "steps": {
+          "step1": "Détails",
+          "confirm": "Confirmer",
+          "done": "Terminé"
+        },
+        "stepOf": "Étape {{current}} sur {{total}}",
+        "stepProgress": "Étape {{current}} sur {{total}} : {{label}}",
+        "reasonPlaceholder": "Sélectionnez un motif (facultatif)",
+        "otherReason": "Autre",
+        "yourReason": "Votre motif",
+        "yourReasonPlaceholder": "Indiquez-nous votre motif",
+        "selectItem": "Sélectionnez au moins un article pour continuer.",
+        "itemsToWithdraw": "Articles concernés par la rétractation ({{count}})",
+        "selectedTotal": "Total des articles sélectionnés",
+        "previous": "Précédent",
+        "submittedOn": "Soumise le {{date}}"
+      }
+    }
+  },
+  "requests": {
+    "pageTitle": "Demandes",
+    "searchLabel": "Rechercher des demandes de rétractation",
+    "searchPlaceholder": "Rechercher par numéro de commande, nom du client ou e-mail",
+    "export": "Exporter",
+    "exportSelected": "Exporter la sélection",
+    "tabs": {
+      "all": "Toutes",
+      "withCount": "{{label}} ({{count}})"
+    },
+    "empty": {
+      "imageAlt": "",
+      "heading": "Aucune demande de rétractation pour l'instant",
+      "body": "Les demandes de rétractation de vos clients apparaîtront ici.",
+      "filteredHeading": "Aucune demande de rétractation trouvée",
+      "filteredBody": "Essayez de modifier le terme de recherche ou le filtre."
+    },
+    "table": {
+      "selectAll": "Sélectionner toutes les demandes de rétractation",
+      "selectRow": "Sélectionner la commande {{order}}",
+      "selectedCount": "{{count}} sélectionnée(s)",
+      "order": "Commande",
+      "customer": "Client",
+      "items": "Articles",
+      "value": "Valeur",
+      "status": "Statut",
+      "submitted": "Soumise",
+      "actions": "Actions",
+      "itemCount_one": "{{count}} article",
+      "itemCount_other": "{{count}} articles",
+      "itemCount_many": "{{count}} articles",
+      "viewRow": "Voir la demande pour la commande {{order}}",
+      "deleteRow": "Supprimer la demande pour la commande {{order}}"
+    },
+    "delete": {
+      "heading_one": "Supprimer la demande de rétractation ?",
+      "heading_other": "Supprimer {{count}} demandes de rétractation ?",
+      "heading_many": "Supprimer {{count}} demandes de rétractation ?",
+      "body_one": "Cette demande de rétractation sera définitivement supprimée. Cette action est irréversible.",
+      "body_other": "Ces {{count}} demandes de rétractation seront définitivement supprimées. Cette action est irréversible.",
+      "body_many": "Ces {{count}} demandes de rétractation seront définitivement supprimées. Cette action est irréversible.",
+      "confirm_one": "Supprimer la demande",
+      "confirm_other": "Supprimer les demandes",
+      "confirm_many": "Supprimer les demandes",
+      "toast_one": "Demande de rétractation supprimée",
+      "toast_other": "{{count}} demandes de rétractation supprimées",
+      "toast_many": "{{count}} demandes de rétractation supprimées"
+    },
+    "csv": {
+      "filename": "demandes-de-retractation-{{date}}.csv",
+      "order": "Commande",
+      "customerName": "Nom du client",
+      "customerEmail": "E-mail du client",
+      "country": "Pays",
+      "items": "Articles",
+      "value": "Valeur",
+      "reason": "Motif",
+      "status": "Statut",
+      "submitted": "Soumise",
+      "decided": "Décidée"
+    }
+  },
+  "requestDetail": {
+    "pageTitle": "Demande de rétractation",
+    "backLink": "Demandes",
+    "submittedLine": "Soumise le {{date}} depuis {{source}}",
+    "previous": "Demande précédente",
+    "next": "Demande suivante",
+    "badges": {
+      "canceled": "Annulée",
+      "onHold": "En suspens",
+      "return": "Retour : {{status}}"
+    },
+    "actions": {
+      "refund": "Rembourser",
+      "more": "Plus d'actions",
+      "cancelOrder": "Annuler la commande",
+      "placeHold": "Suspendre le traitement",
+      "releaseHold": "Lever la suspension du traitement",
+      "createReturn": "Créer un retour",
+      "processReturn": "Traiter et rembourser",
+      "viewOrder": "Voir la commande"
+    },
+    "banners": {
+      "orderUnavailableHeading": "Détails de la commande indisponibles",
+      "orderUnavailableBody": "{{error}} Vous ne pouvez pas utiliser les actions sur la commande tant que ses détails ne sont pas chargés.",
+      "actionFailedHeading": "Impossible de terminer cette action",
+      "actionFailedAction": "Consultez l'Activité ci-dessous pour plus de détails.",
+      "canceled": "Cette commande a été annulée. Les actions sur la commande ne sont plus disponibles."
+    },
+    "deadline": {
+      "heading": "Délai de remboursement",
+      "pendingLabel": "Temps restant pour décider et rembourser",
+      "decidedLabel": "Décision",
+      "badges": {
+        "overdue": "En retard",
+        "actionNeeded": "Action requise",
+        "onTime": "Dans les délais"
+      },
+      "daysLeft_one": "{{count}} jour restant",
+      "daysLeft_other": "{{count}} jours restants",
+      "daysLeft_many": "{{count}} jours restants",
+      "daysOverdue_one": "{{count}} jour de retard",
+      "daysOverdue_other": "{{count}} jours de retard",
+      "daysOverdue_many": "{{count}} jours de retard",
+      "daysEarly_one": "{{count}} jour avant l'échéance",
+      "daysEarly_other": "{{count}} jours avant l'échéance",
+      "daysEarly_many": "{{count}} jours avant l'échéance",
+      "daysLate_one": "{{count}} jour après l'échéance",
+      "daysLate_other": "{{count}} jours après l'échéance",
+      "daysLate_many": "{{count}} jours après l'échéance",
+      "pending": "Vous disposez de {{days}} à compter de la soumission de la demande pour décider et rembourser. L'échéance est le {{date}}.",
+      "pendingOverdue": "L'échéance est passée le {{date}}. Remboursez le client dès que possible.",
+      "decidedOnTime": "Décidée dans le délai de remboursement de {{windowDays}} jours. L'échéance était le {{date}}.",
+      "decidedLate": "Décidée après l'échéance de remboursement du {{date}}."
+    },
+    "items": {
+      "heading": "Articles concernés",
+      "reject": "Refuser",
+      "approve": "Approuver",
+      "total": "Total concerné",
+      "sku": "SKU : {{sku}}",
+      "quantity": "Quantité : {{count}}",
+      "shipping": {
+        "notShipped": "Pas encore expédié",
+        "partlyShipped": "Partiellement expédié",
+        "shipped": "Expédié"
+      },
+      "partiallyShippedBanner": "Une partie de cette commande a été expédiée. Les articles non expédiés peuvent encore être suspendus, et les articles expédiés nécessitent un retour."
+    },
+    "return": {
+      "heading": "Retour",
+      "status": "Statut",
+      "created": "Créé",
+      "body": "Un retour a été créé dans Shopify pour les articles concernés par la rétractation.",
+      "openBody": "Une fois les articles revenus, sélectionnez Traiter et rembourser. Le client est alors remboursé pour les articles retournés et le retour est fermé.",
+      "alreadyRefundedBody": "Les articles de ce retour ont déjà été remboursés. Fermez le retour dans Shopify une fois qu'ils sont revenus."
+    },
+    "processReturnModal": {
+      "heading": "Traiter le retour et rembourser",
+      "calculating": "Calcul du montant du remboursement…",
+      "nothingToProcess": "Il n'y a plus rien à traiter sur ce retour. Il a peut-être déjà été traité ou fermé dans Shopify.",
+      "nothingToRefund": "Les articles de ce retour ont déjà été remboursés, il n'y a donc plus rien à rembourser.",
+      "unsupportedPayment": "Le paiement de cette commande ne peut pas être remboursé depuis l'application. Traitez le retour et remboursez-le plutôt dans Shopify.",
+      "itemsHeading": "Articles du retour {{name}}",
+      "subtotal": "Sous-total des articles",
+      "shippingLine": "Expédition d'origine",
+      "total": "Remboursement total",
+      "body": "Cette action marque les articles retournés comme traités, les rembourse sur le moyen de paiement d'origine et ferme le retour. Shopify envoie au client un reçu de remboursement par e-mail. Cette action est irréversible.",
+      "confirmAmount": "Rembourser {{amount}}",
+      "confirm": "Traiter et rembourser"
+    },
+    "payment": {
+      "heading": "Paiement",
+      "status": "Statut du paiement",
+      "subtotal": "Sous-total de la rétractation",
+      "shipping": "Expédition de la commande",
+      "total": "Total de la commande",
+      "refunded": "Remboursé",
+      "unavailable": "Les détails du paiement ne sont pas disponibles pour le moment."
+    },
+    "activity": {
+      "heading": "Activité",
+      "noteLabel": "Ajouter une note",
+      "notePlaceholder": "Ajouter une note…",
+      "post": "Publier",
+      "noteHelp": "Seuls vous et votre équipe pouvez voir les notes. Les clients ne les voient jamais.",
+      "submitted": "Demande de rétractation soumise depuis {{source}}",
+      "decided": {
+        "approved": "Demande approuvée",
+        "rejected": "Demande refusée"
+      },
+      "note": "Note : {{body}}",
+      "entry": "{{label}} : {{message}}",
+      "actions": {
+        "resolve_branch": "Automatisation démarrée",
+        "run_automation": "Automatisation",
+        "automation_completed": "Automatisation terminée",
+        "hold_fulfillment": "Suspension du traitement",
+        "schedule_fallback": "Suivi planifié",
+        "release_hold": "Suspension du traitement levée",
+        "cancel_order_immediate": "Commande annulée et remboursée",
+        "cancel_order_scheduled": "Commande annulée et remboursée",
+        "cancel_order_manual": "Commande annulée et remboursée",
+        "cancel_order": "Commande annulée et remboursée",
+        "refund": "Remboursement",
+        "tag_before_ship": "Balise ajoutée à la commande",
+        "tag_after_delivery": "Balise ajoutée à la commande",
+        "order_tag_add": "Balises de commande ajoutées",
+        "order_tag_remove": "Balises de commande retirées",
+        "create_return": "Retour",
+        "refresh_return": "Statut du retour actualisé",
+        "process_return": "Traiter et rembourser",
+        "fetch_shop_contact": "Coordonnées de la boutique",
+        "customer_email": "E-mail de confirmation au client",
+        "merchant_email": "Notification de nouvelle demande",
+        "notify_customer": "E-mail de décision",
+        "notify_merchant": "Vous avez été notifié"
+      },
+      "messages": {
+        "noTags": "Aucune balise n'est configurée",
+        "tagged": "Balise {{tags}} ajoutée à la commande",
+        "noHoldableOrders": "Rien sur cette commande ne peut être suspendu pour le moment",
+        "held": "Articles suspendus pour qu'ils ne soient pas expédiés",
+        "holdOff": "La suspension du traitement pour examen est désactivée",
+        "tagBeforeShipOff": "L'ajout de balises avant l'expédition est désactivé",
+        "tagAfterDeliveryOff": "L'ajout de balises après l'expédition est désactivé",
+        "fallbackHold": "La commande reste en suspens jusqu'à ce que vous approuviez ou refusiez la demande",
+        "fallbackInvalidDays": "Impossible de planifier le suivi. Le nombre de jours n'est pas valide.",
+        "scheduledRelease": "Levée de la suspension planifiée le {{date}}",
+        "scheduledCancel": "Annulation et remboursement planifiés le {{date}}",
+        "canceled": "Commande annulée et remboursée",
+        "returnCreated": "Retour créé dans Shopify",
+        "returnNoMatch": "Aucun des articles demandés ne peut être retourné",
+        "notifiedByEmail": "Notifié dans l'application et par e-mail",
+        "notifiedEmailFailed": "Notifié dans l'application. L'e-mail de notification a échoué : {{error}}",
+        "notifiedInAppOnly": "Notifié dans l'application. L'e-mail de notification n'a pas été envoyé.",
+        "emailSent": "Envoyé",
+        "emailFailed": "Échec : {{error}}",
+        "emailNotSent": "Non envoyé, car il n'y a pas de destinataire ou l'e-mail n'est pas configuré",
+        "orderNotFound": "Cette commande est introuvable dans Shopify",
+        "alreadyCanceled": "La commande était déjà annulée",
+        "branchBeforeShip": "La commande n'a pas encore été expédiée, les étapes avant expédition ont donc été exécutées",
+        "branchAfterDelivery": "La commande a été expédiée, les étapes après expédition ont donc été exécutées",
+        "branchPartiallyShipped": "La commande est partiellement expédiée, les étapes pour les articles expédiés et non expédiés ont donc été exécutées",
+        "noUnshippedItemsRequested": "Aucun des articles demandés n'est en attente d'expédition, rien n'a donc été suspendu",
+        "fallbackCancelPartiallyShipped": "La commande est partiellement expédiée et ne peut donc pas être annulée entièrement. Les articles demandés restent en suspens jusqu'à ce que vous approuviez ou refusiez la demande.",
+        "returnNothingShipped": "Aucun des articles demandés n'a été expédié, aucun retour n'était donc nécessaire",
+        "runCompleted": "Automatisation terminée",
+        "runFailed": "Une ou plusieurs étapes d'automatisation ont échoué",
+        "runSkipped": "Automatisation ignorée",
+        "scheduledSkippedApproved": "La demande était déjà approuvée, l'action planifiée n'a donc pas été exécutée",
+        "scheduledSkippedRejected": "La demande était déjà refusée, l'action planifiée n'a donc pas été exécutée",
+        "noHoldsPlaced": "Aucune suspension n'a été placée pour cette demande",
+        "holdsAlreadyReleased": "Les suspensions étaient déjà levées",
+        "holdReleased": "La commande peut de nouveau être traitée",
+        "holdExists": "Une suspension est déjà en place pour cette demande",
+        "decisionSkipped": "L'équipe a choisi de ne pas envoyer d'e-mail au client",
+        "decisionSent": "E-mail envoyé au client concernant la décision",
+        "decisionFailed": "L'e-mail de décision a échoué : {{error}}",
+        "decisionNotConfigured": "L'e-mail de décision n'a pas été envoyé, car l'e-mail n'est pas configuré",
+        "refunded": "{{amount}} remboursé",
+        "noReturn": "Il n'y a pas de retour pour cette demande",
+        "returnStatus": "Statut du retour : {{status}}",
+        "returnProcessed": "Retour traité et {{amount}} remboursé",
+        "returnNothingToProcess": "Il n'y a plus rien à traiter sur ce retour",
+        "returnNothingToRefund": "Les articles de ce retour ont déjà été remboursés",
+        "returnPaymentUnsupported": "Ce paiement ne peut pas être remboursé depuis l'application. Traitez le retour dans Shopify.",
+        "refundNothingRefundable": "Aucun des articles demandés ne peut être remboursé. Ils ont peut-être déjà été remboursés.",
+        "refundNoSuggestion": "Shopify n'a pas pu calculer de remboursement pour ces articles. Remboursez-les plutôt dans Shopify.",
+        "refundCoveredByReturn": "Tous les articles concernés sont dans le retour ouvert. Utilisez Traiter et rembourser sur le retour pour les rembourser.",
+        "tagsRemoved": "Balises de commande retirées : {{tags}}",
+        "tagsAdded": "Balises de commande ajoutées : {{tags}}"
+      }
+    },
+    "order": {
+      "heading": "Commande",
+      "order": "Commande",
+      "placed": "Passée le",
+      "payment": "Paiement",
+      "fulfillment": "Traitement"
+    },
+    "customer": {
+      "heading": "Client",
+      "avatarFallback": "Client",
+      "contactHeading": "Coordonnées",
+      "email": "E-mail",
+      "language": "Langue",
+      "shippingHeading": "Adresse d'expédition"
+    },
+    "automation": {
+      "heading": "Automatisation",
+      "stage": "Étape",
+      "stages": {
+        "before_ship": "Avant l'expédition",
+        "partially_shipped": "Partiellement expédiée",
+        "after_delivery": "Après l'expédition"
+      },
+      "hold": "Suspension du traitement",
+      "holdStates": {
+        "onHold": "En suspens",
+        "released": "Levée",
+        "none": "Aucune"
+      },
+      "canceled": "Annulée",
+      "return": "Retour"
+    },
+    "emails": {
+      "heading": "Historique des e-mails",
+      "customerConfirmation": "Confirmation de rétractation au client",
+      "merchantNotification": "Notification de nouvelle demande",
+      "decision": "E-mail de décision",
+      "statuses": {
+        "sent": "Envoyé",
+        "failed": "Échec",
+        "notSent": "Non envoyé"
+      }
+    },
+    "tags": {
+      "heading": "Balises de commande",
+      "label": "Ajouter une balise de commande",
+      "placeholder": "Ajouter une balise",
+      "remove": "Retirer la balise {{tag}}",
+      "savedToast": "Balises de commande enregistrées"
+    },
+    "reason": {
+      "heading": "Motif de la rétractation",
+      "quoted": "« {{reason}} »",
+      "none": "Aucun motif indiqué"
+    },
+    "decidedToast": {
+      "approved": "Demande de rétractation approuvée",
+      "rejected": "Demande de rétractation refusée"
+    },
+    "cancelModal": {
+      "heading": "Annuler la commande ?",
+      "body": "Cette action annule toute la commande dans Shopify, y compris les articles dont le client ne s'est pas rétracté. La commande est remboursée sur le moyen de paiement d'origine et réapprovisionnée, et Shopify envoie un e-mail au client. Cette action est irréversible.",
+      "keep": "Conserver la commande",
+      "confirm": "Annuler et rembourser la commande"
+    },
+    "createReturnModal": {
+      "heading": "Créer un retour pour les articles concernés",
+      "itemsHeading": "Articles à retourner",
+      "subtotal": "Sous-total des articles",
+      "checking": "Vérification des articles pouvant être retournés…",
+      "nothingToReturn": "Aucun des articles concernés n'a encore été expédié, il n'y a donc rien à retourner. Suspendez-les pour qu'ils ne soient pas expédiés, ou remboursez-les pour les retirer de la commande.",
+      "notShipped_one": "{{count}} article concerné n'est pas inclus, car il n'a pas encore été expédié.",
+      "notShipped_other": "{{count}} articles concernés ne sont pas inclus, car ils n'ont pas encore été expédiés.",
+      "notShipped_many": "{{count}} articles concernés ne sont pas inclus, car ils n'ont pas encore été expédiés.",
+      "notReturnable_one": "{{count}} article concerné n'est pas inclus, car il a déjà été retourné.",
+      "notReturnable_other": "{{count}} articles concernés ne sont pas inclus, car ils ont déjà été retournés.",
+      "notReturnable_many": "{{count}} articles concernés ne sont pas inclus, car ils ont déjà été retournés.",
+      "body": "Cette action crée un retour dans Shopify pour les articles ci-dessus. Elle ne rembourse pas le client. Une fois les articles revenus, sélectionnez Traiter et rembourser sur le retour.",
+      "cancel": "Annuler",
+      "confirm": "Créer le retour"
+    },
+    "decisionModal": {
+      "headingApprove": "Approuver la demande de rétractation ?",
+      "headingReject": "Refuser la demande de rétractation ?",
+      "approveAndSend": "Approuver et envoyer l'e-mail",
+      "rejectAndSend": "Refuser et envoyer l'e-mail",
+      "approve": "Approuver",
+      "reject": "Refuser",
+      "loadingLabel": "Chargement de l'aperçu de l'e-mail",
+      "loading": "Préparation de l'e-mail au client…",
+      "sendEmail": "Envoyer l'e-mail au client",
+      "language": "Cet e-mail est en {{language}}, la langue du client. Vos modifications ne s'appliquent qu'à cet e-mail.",
+      "subject": "Objet",
+      "body": "Corps de l'e-mail",
+      "editHtml": "Modifier le HTML",
+      "htmlLabel": "HTML de l'e-mail",
+      "previewTitle": "Aperçu de l'e-mail",
+      "templateUnchanged": "Vos modifications ne s'appliquent qu'à cet e-mail. Votre modèle enregistré ne changera pas.",
+      "noEmail": "Le client ne recevra pas d'e-mail. Vous pouvez le contacter séparément si nécessaire.",
+      "holdReleased": "Cela lève aussi la suspension du traitement de cette commande, qui pourra de nouveau être traitée."
+    },
+    "refundModal": {
+      "heading": "Rembourser les articles concernés",
+      "calculatingLabel": "Calcul du remboursement",
+      "calculating": "Calcul du montant du remboursement…",
+      "nothingToRefund": "Il n'y a rien à rembourser sur cette commande. Les articles concernés ont peut-être déjà été remboursés, ou la commande a peut-être été annulée.",
+      "itemsHeading": "Articles à rembourser",
+      "subtotal": "Sous-total des articles",
+      "shippingLine": "Expédition d'origine",
+      "amount": "Montant du remboursement",
+      "total": "Remboursement total",
+      "body": "Les articles concernés sont remboursés sur le moyen de paiement d'origine et réapprovisionnés si possible. Shopify envoie au client un reçu de remboursement par e-mail.",
+      "includesShipping": "Le client s'est rétracté de toute la commande, les frais d'expédition d'origine sont donc inclus.",
+      "unshippedItems": "Les articles non encore expédiés sont retirés de la commande et ne seront donc pas envoyés.",
+      "inReturn_one": "{{count}} article concerné n'est pas inclus, car il fait partie du retour {{name}}. Remboursez-le avec Traiter et rembourser sur le retour.",
+      "inReturn_other": "{{count}} articles concernés ne sont pas inclus, car ils font partie du retour {{name}}. Remboursez-les avec Traiter et rembourser sur le retour.",
+      "inReturn_many": "{{count}} articles concernés ne sont pas inclus, car ils font partie du retour {{name}}. Remboursez-les avec Traiter et rembourser sur le retour.",
+      "allInReturn": "Tous les articles concernés font partie du retour {{name}}. Remboursez-les avec Traiter et rembourser sur le retour, ce qui le ferme également.",
+      "irreversible": "Cette action est irréversible.",
+      "confirmAmount": "Rembourser {{amount}}",
+      "confirm": "Rembourser"
+    },
+    "shopifyNotes": {
+      "holdAutomatic": "La demande de rétractation pour la commande {{order}} attend l'examen de l'équipe",
+      "holdManual": "La demande de rétractation pour la commande {{order}} a été suspendue par l'équipe",
+      "canceled": "Annulée par {{appName}}, car le client s'est rétracté de l'achat (demande {{id}}).",
+      "refunded": "Remboursée par {{appName}}, car le client s'est rétracté de l'achat (demande {{id}}).",
+      "returnReason": "Demande de rétractation : {{reason}}",
+      "returnReasonNone": "Demande de rétractation (aucun motif indiqué)"
+    }
+  },
+  "emailTemplates": {
+    "pageTitle": "Notifications",
+    "loadError": "Impossible de charger les notifications",
+    "saveError": "Impossible d'enregistrer les notifications",
+    "savedToast": "Notifications enregistrées",
+    "resetToast": "{{name}} réinitialisé par défaut",
+    "sender": {
+      "heading": "Expéditeur",
+      "description": "Ces paramètres s'appliquent à chaque e-mail envoyé par l'application pour votre boutique. Envoyez depuis votre propre adresse vérifiée et choisissez où arrivent les réponses des clients.",
+      "emailLabel": "E-mail de l'expéditeur",
+      "emailPlaceholder": "notifications@withdrawaleasy.com",
+      "detailsVerified": "Les e-mails sont envoyés depuis cette adresse.",
+      "detailsPending": "Saisissez le code envoyé à cette adresse pour la vérifier.",
+      "detailsDefault": "Si vous laissez ce champ vide, les e-mails sont envoyés depuis {{email}}.",
+      "detailsDefaultFallback": "Si vous laissez ce champ vide, les e-mails sont envoyés depuis l'adresse par défaut de l'application.",
+      "freeProviderWarning": "Les fournisseurs d'e-mail gratuits comme Gmail et Yahoo ne peuvent pas être authentifiés. Les clients verront « via brevosend.com » sur les e-mails envoyés depuis cette adresse. Pour un rendu plus professionnel, utilisez une adresse sur le domaine de votre boutique.",
+      "codeLabel": "Code de vérification",
+      "codeDetails": "Saisissez le code à 6 chiffres de l'e-mail que nous vous avons envoyé.",
+      "verifyCode": "Vérifier le code",
+      "checkStatus": "Vérifier l'état de la vérification",
+      "verifyEmail": "Vérifier l'e-mail",
+      "codeSent": "Nous avons envoyé un code de vérification à {{email}}.",
+      "notVerifiedYet": "Cet e-mail n'est pas encore vérifié. Recherchez le code dans votre boîte de réception, puis réessayez.",
+      "replyToLabel": "E-mail de réponse",
+      "replyToPlaceholder": "support@votreboutique.com",
+      "replyToDetails": "Par défaut, les réponses des clients arrivent à l'e-mail de votre boutique. Pour les recevoir ailleurs, saisissez une autre adresse."
+    },
+    "domain": {
+      "heading": "Authentification du domaine",
+      "description": "Authentifiez votre domaine pour que les clients ne voient pas « via brevosend.com » sur vos e-mails. C'est facultatif, mais recommandé si vous envoyez depuis le domaine de votre boutique.",
+      "label": "Domaine",
+      "placeholder": "votreboutique.com",
+      "details": "Saisissez le domaine depuis lequel vous envoyez vos e-mails, pas votre domaine myshopify.com.",
+      "freeProviderWarning": "Les fournisseurs d'e-mail gratuits comme Gmail et Yahoo ne peuvent pas être authentifiés. Saisissez plutôt le domaine de votre boutique.",
+      "columns": {
+        "record": "Enregistrement",
+        "type": "Type",
+        "host": "Hôte",
+        "value": "Valeur"
+      },
+      "records": {
+        "brevo_code": "Propriété du domaine",
+        "dkim_record": "DKIM",
+        "dkim1Record": "DKIM 1",
+        "dkim2Record": "DKIM 2",
+        "dmarc_record": "DMARC"
+      },
+      "copyHost": "Copier l'hôte",
+      "copyValue": "Copier la valeur",
+      "verifyRecords": "Vérifier les enregistrements DNS",
+      "authenticate": "Authentifier le domaine",
+      "pendingInfo": "Ajoutez ces enregistrements chez votre fournisseur de domaine, puis sélectionnez Vérifier les enregistrements DNS.",
+      "notVerifiedYet": "Votre domaine n'est pas encore vérifié. Les modifications DNS peuvent prendre du temps, réessayez plus tard."
+    },
+    "notification": {
+      "heading": "Modèle d'e-mail",
+      "emailLabel": "E-mail",
+      "language": "Langue",
+      "languageDetails": "Choisissez une langue pour modifier cet e-mail dans cette langue. Chaque langue est enregistrée séparément. Les clients reçoivent les e-mails dans leur propre langue.",
+      "send": "Envoyer cet e-mail",
+      "requiredDetails": "Le droit de l'UE exige cet e-mail, il ne peut donc pas être désactivé.",
+      "merchantDetails": "Désactivez cette option pour ne plus recevoir cet e-mail.",
+      "decisionDetails": "Désactivez cette option pour ne plus envoyer cet e-mail par défaut. Vous pourrez toujours choisir de l'envoyer lorsque vous approuvez ou refusez une demande.",
+      "subject": "Objet",
+      "reset": "Réinitialiser par défaut",
+      "customized": "Personnalisé"
+    },
+    "templates": {
+      "customerConfirmation": {
+        "name": "Confirmation de rétractation au client",
+        "description": "Envoyé aux clients dès qu'ils soumettent une demande de rétractation."
+      },
+      "merchantNotification": {
+        "name": "Notification de nouvelle demande",
+        "description": "Envoyé à l'e-mail de contact de votre boutique lorsqu'un client soumet une nouvelle demande de rétractation. Répondez-y pour écrire au client."
+      },
+      "withdrawalApproved": {
+        "name": "Rétractation approuvée",
+        "description": "Envoyé aux clients lorsque vous approuvez leur demande de rétractation. Vous pouvez le vérifier et le modifier avant l'envoi."
+      },
+      "withdrawalRejected": {
+        "name": "Rétractation refusée",
+        "description": "Envoyé aux clients lorsque vous refusez leur demande de rétractation. Vous pouvez le vérifier et le modifier avant l'envoi."
+      }
+    },
+    "merchantDefaults": {
+      "subject": "Nouvelle demande de rétractation — commande {{order}}",
+      "heading": "Nouvelle demande de rétractation",
+      "intro": "Un client a soumis une demande de rétractation. Voici tout ce dont vous avez besoin pour l'examiner.",
+      "rows": {
+        "name": "Nom",
+        "email": "E-mail",
+        "date": "Date",
+        "orderNumber": "Numéro de commande",
+        "reference": "Numéro de référence",
+        "reason": "Motif"
+      },
+      "button": "Voir la demande",
+      "itemsHeading": "Articles demandés",
+      "footnote": "Ouvrez la demande dans votre interface administrateur pour l'approuver ou la refuser. Le délai de remboursement y est suivi automatiquement."
+    },
+    "body": {
+      "heading": "Corps de l'e-mail",
+      "editCode": "Modifier le code",
+      "htmlLabel": "Corps HTML de l'e-mail",
+      "previewHeading": "Aperçu de l'e-mail"
+    },
+    "variables": {
+      "heading": "Variables",
+      "help": "Sélectionnez une variable pour l'insérer à l'emplacement du curseur.",
+      "insert": "Insérer {{label}} : {{description}}",
+      "groups": {
+        "customer": "Client",
+        "order": "Commande",
+        "withdrawal": "Rétractation",
+        "request": "Demande",
+        "shop": "Boutique"
+      },
+      "tokens": {
+        "customer": {
+          "first_name": {
+            "label": "Prénom",
+            "description": "Le prénom du client"
+          },
+          "last_name": {
+            "label": "Nom",
+            "description": "Le nom de famille du client"
+          },
+          "email": {
+            "label": "E-mail",
+            "description": "L'adresse e-mail du client"
+          }
+        },
+        "order": {
+          "name": {
+            "label": "Numéro de commande",
+            "description": "Le numéro de commande, comme #2138"
+          },
+          "id": {
+            "label": "ID de commande",
+            "description": "L'identifiant interne de la commande"
+          }
+        },
+        "withdrawal": {
+          "request_id": {
+            "label": "Numéro de référence",
+            "description": "Le numéro de référence de la demande de rétractation"
+          },
+          "submitted_at": {
+            "label": "Date de soumission",
+            "description": "La date et l'heure de soumission de la demande"
+          },
+          "reason": {
+            "label": "Motif",
+            "description": "Le motif indiqué par le client, le cas échéant"
+          },
+          "selected_products": {
+            "label": "Produits sélectionnés (texte)",
+            "description": "Les articles demandés sous forme de liste séparée par des virgules"
+          }
+        },
+        "request": {
+          "status": {
+            "label": "Statut",
+            "description": "Le statut actuel de la demande"
+          },
+          "url": {
+            "label": "Lien de la demande",
+            "description": "Un lien vers la demande dans l'application"
+          }
+        },
+        "shop": {
+          "name": {
+            "label": "Nom de la boutique",
+            "description": "Le nom de votre boutique"
+          },
+          "email": {
+            "label": "E-mail de la boutique",
+            "description": "L'adresse e-mail de contact de votre boutique"
+          }
+        }
+      }
+    },
+    "validation": {
+      "email": "Saisissez une adresse e-mail valide.",
+      "subjectRequired": "Saisissez un objet.",
+      "subjectTooLong": "L'objet doit contenir au maximum {{max}} caractères.",
+      "bodyRequired": "Saisissez le corps de l'e-mail."
+    }
+  },
+  "sample": {
+    "customerName": "Marie Dupont",
+    "items": {
+      "lamp": {
+        "title": "Lampe de table Fjord",
+        "variant": "Chêne / Grand"
+      },
+      "candleHolder": {
+        "title": "Bougeoir Tind",
+        "variant": "Laiton"
+      }
+    },
+    "reason": "J'ai changé d'avis"
+  },
+  "faqs": {
+    "pageTitle": "FAQ",
+    "searchLabel": "Rechercher dans la FAQ",
+    "searchPlaceholder": "Rechercher des questions, comme « remboursement » ou « délai »",
+    "noResults": "Aucune question ne correspond à « {{query}} »",
+    "noResultsHelp": "Essayez un autre mot ou contactez l'assistance ci-dessous.",
+    "showAnswer": "Afficher la réponse : {{question}}",
+    "hideAnswer": "Masquer la réponse : {{question}}",
+    "groups": {
+      "gettingStarted": "Premiers pas",
+      "deadline": "Délai de rétractation",
+      "requests": "Gestion des demandes",
+      "emailsLanguages": "E-mails et langues"
+    },
+    "actions": {
+      "goToSettings": "Aller aux Paramètres",
+      "goToRequests": "Aller aux Demandes",
+      "goToNotifications": "Aller aux Notifications"
+    },
+    "stillStuck": {
+      "heading": "Vous avez encore des questions ?",
+      "body": "Notre équipe d'assistance lit chaque e-mail et y répond.",
+      "link": "Contacter l'assistance"
+    },
+    "items": {
+      "what-it-does": {
+        "question": "Que fait l'application ?",
+        "paragraphs": [
+          "Elle offre à vos clients de l'UE un moyen clair de se rétracter d'un achat, comme l'exige le droit de l'UE. Elle vous permet aussi de gérer toutes les demandes au même endroit.",
+          "Les clients ouvrent le formulaire depuis leur commande, choisissent les articles dont ils veulent se rétracter, puis confirment. Chaque demande apparaît ensuite sur la page Demandes avec les articles, le motif et votre délai de remboursement. L'application envoie les e-mails obligatoires pour vous."
+        ]
+      },
+      "where-form-appears": {
+        "question": "Où les clients trouvent-ils le formulaire de rétractation ?",
+        "paragraphs": [
+          "Vous pouvez afficher le formulaire à 2 endroits. Utilisez l'un ou les deux :"
+        ],
+        "bullets": [
+          "Page d'état de la commande : la page que les clients voient après le paiement et lorsqu'ils ouvrent le lien de leur e-mail de confirmation de commande.",
+          "Page de boutique : une page de votre boutique en ligne, pour les clients qui reviennent plus tard. Ils retrouvent leur commande avec leur numéro de commande et leur e-mail."
+        ],
+        "closing": "Activez chaque emplacement dans les Paramètres, puis ajoutez une fois son bloc d'application. Le guide de configuration de l'Accueil indique quels blocs sont ajoutés."
+      },
+      "form-not-showing": {
+        "question": "Pourquoi un client ne voit-il pas le formulaire de rétractation ?",
+        "paragraphs": [
+          "Vérifiez ces points, en commençant par le plus fréquent :"
+        ],
+        "bullets": [
+          "Le formulaire est désactivé, ou l'emplacement utilisé par le client n'est pas activé dans les Paramètres.",
+          "Le bloc d'application n'a pas encore été ajouté à cette page.",
+          "La commande n'est pas expédiée dans l'un de vos pays éligibles.",
+          "Le délai de rétractation de la commande est expiré.",
+          "La commande a été annulée ou a déjà une demande en attente. Chaque commande ne peut avoir qu'1 demande en attente à la fois."
+        ]
+      },
+      "deadline": {
+        "question": "Quand le délai de rétractation commence-t-il et se termine-t-il ?",
+        "paragraphs": [
+          "Selon le droit de l'UE, le délai commence lorsque le client reçoit les articles, et non lorsqu'il passe commande. Les clients peuvent aussi se rétracter à tout moment avant l'arrivée des articles."
+        ],
+        "bullets": [
+          "Pas encore expédiée : le délai n'a pas commencé, les clients peuvent donc toujours se rétracter.",
+          "Livrée : le délai commence à la date de livraison indiquée par le transporteur et dure {{withdrawalDays}}. Vous pouvez modifier le nombre de jours dans les Paramètres.",
+          "Expédiée, mais sans date de livraison : l'application utilise la date de livraison estimée du transporteur. S'il n'y en a pas, elle utilise la date d'expédition plus votre délai d'acheminement estimé."
+        ]
+      },
+      "transit-days": {
+        "question": "À quoi sert le délai d'acheminement estimé ?",
+        "paragraphs": [
+          "De nombreux transporteurs n'envoient pas de date de livraison à Shopify. Sans elle, l'application ne peut pas savoir quand le délai de rétractation commence. Elle ajoute donc votre délai d'acheminement estimé à la date d'expédition.",
+          "Réglez-le sur la durée approximative d'acheminement de vos colis. Actuellement, il est de {{transitDays}}. En cas de doute, choisissez une durée plus longue. Une durée trop courte peut mettre fin prématurément au délai de rétractation d'un client."
+        ]
+      },
+      "split-shipments": {
+        "question": "Que se passe-t-il si une commande est expédiée en plus d'1 colis ?",
+        "paragraphs": [
+          "Le délai de rétractation commence à l'arrivée du dernier colis. Les articles que l'application suspend parce que le client s'en est rétracté ne comptent pas, puisqu'ils ne seront pas expédiés.",
+          "Si un client se rétracte alors qu'une partie seulement de la commande a été expédiée, l'application traite chaque partie séparément :"
+        ],
+        "bullets": [
+          "Articles non expédiés : l'application peut les suspendre pour qu'ils ne soient pas expédiés.",
+          "Articles expédiés : l'application peut créer un retour pour eux."
+        ],
+        "closing": "L'application n'annule jamais une commande partiellement expédiée, car cela annulerait aussi des articles que le client a déjà reçus."
+      },
+      "after-submit": {
+        "question": "Que se passe-t-il après qu'un client a soumis une demande ?",
+        "paragraphs": [
+          "Voici ce qui se passe, dans cet ordre :"
+        ],
+        "bullets": [
+          "La demande apparaît sur la page Demandes avec le statut En attente.",
+          "Le client reçoit un e-mail de confirmation. Il est toujours envoyé, car c'est sa preuve de rétractation.",
+          "Vous recevez aussi un e-mail si la notification de nouvelle demande est activée.",
+          "Vos paramètres d'automatisation s'exécutent. Par exemple, l'application peut suspendre le traitement ou ajouter une balise à la commande."
+        ]
+      },
+      "automation": {
+        "question": "À quoi servent les paramètres d'automatisation ?",
+        "paragraphs": [
+          "Ils s'exécutent à l'arrivée d'une demande. Ce que l'application peut faire dépend de l'expédition ou non de la commande :"
+        ],
+        "bullets": [
+          "Avant l'expédition : suspendre le traitement pour que rien ne soit expédié pendant que vous examinez la demande. Vous pouvez aussi demander à l'application d'annuler et de rembourser immédiatement toute la commande.",
+          "Après l'expédition : créer un retour dans Shopify pour les articles expédiés.",
+          "Partiellement expédiée : les deux s'appliquent. L'application suspend uniquement les articles demandés non expédiés et crée un retour pour ceux qui l'ont été."
+        ],
+        "closing": "Dans chaque cas, l'application peut aussi ajouter une balise à la commande. L'automatisation n'approuve ni ne refuse jamais une demande. C'est toujours vous qui décidez."
+      },
+      "partial-withdrawal": {
+        "question": "Un client peut-il se rétracter de certains articles seulement ?",
+        "paragraphs": [
+          "Oui. Les clients choisissent les articles dont ils se rétractent. La demande, le remboursement et un éventuel retour ne concernent que ces articles. Les frais d'expédition d'origine ne sont remboursés que si le client se rétracte de toute la commande.",
+          "Chaque commande peut avoir 1 demande en attente à la fois. Après que vous l'avez approuvée ou refusée, le client peut envoyer une nouvelle demande pour d'autres articles."
+        ]
+      },
+      "reason": {
+        "question": "Les clients doivent-ils donner un motif ?",
+        "paragraphs": [
+          "Non. Selon le droit de l'UE, les clients n'ont pas besoin de motif pour se rétracter : le champ motif est donc toujours facultatif. Dans les Paramètres, vous pouvez choisir les motifs proposés ou ne plus en demander."
+        ]
+      },
+      "refund": {
+        "question": "Comment rembourser une rétractation ?",
+        "paragraphs": [
+          "Ouvrez la demande depuis la page Demandes. La façon de rembourser dépend de l'emplacement des articles :"
+        ],
+        "bullets": [
+          "Articles qui ne sont pas dans un retour : sélectionnez Rembourser. Les articles non encore expédiés sont retirés de la commande et ne seront donc pas envoyés.",
+          "Articles dans un retour : une fois revenus, sélectionnez Traiter et rembourser sur le retour. Le client est remboursé et le retour est fermé.",
+          "Rien n'a encore été expédié : vous pouvez aussi annuler et rembourser toute la commande depuis Plus d'actions."
+        ],
+        "closing": "Le droit de l'UE vous accorde {{refundDays}} à compter de la rétractation pour rembourser. La page de la demande indique le temps restant. Remboursez avant d'approuver la demande."
+      },
+      "returns": {
+        "question": "Comment fonctionnent les retours ?",
+        "paragraphs": [
+          "Un retour indique à Shopify quels articles le client renvoie. L'application peut en créer un à l'arrivée d'une demande, ou vous pouvez sélectionner Créer un retour sur la page de la demande.",
+          "Un retour n'inclut que les articles expédiés. Le créer ne rembourse pas le client. Une fois les articles revenus, sélectionnez Traiter et rembourser sur le retour."
+        ]
+      },
+      "decision-lock": {
+        "question": "Pourquoi les actions sur la commande sont-elles désactivées après l'approbation ou le refus d'une demande ?",
+        "paragraphs": [
+          "Approuver ou refuser clôture la demande. Ensuite, les remboursements, suspensions, retours et annulations sont désactivés, pour que la commande ne soit pas modifiée par erreur. C'est pourquoi vous devez rembourser avant d'approuver.",
+          "La décision lève aussi toute suspension du traitement placée par l'application. Si cette levée échoue, vous pouvez toujours sélectionner Lever la suspension du traitement."
+        ]
+      },
+      "emails": {
+        "question": "Quels e-mails l'application envoie-t-elle, et puis-je les modifier ?",
+        "paragraphs": [
+          "L'application envoie {{emailCount}} e-mails. Vous pouvez tous les modifier sur la page Notifications :"
+        ],
+        "bullets": [
+          "Confirmation de rétractation au client : envoyé lorsqu'un client soumet une demande. Il est toujours activé.",
+          "Notification de nouvelle demande : envoyé à l'e-mail de contact de votre boutique. Vous pouvez le désactiver.",
+          "Rétractation approuvée : envoyé au client lorsque vous approuvez une demande. Vous pouvez le vérifier avant, ou le désactiver.",
+          "Rétractation refusée : envoyé au client lorsque vous refusez une demande. Vous pouvez le vérifier avant, ou le désactiver."
+        ],
+        "closing": "Vous pouvez modifier l'objet et le corps de chaque e-mail dans chaque langue, et ajouter des variables comme le numéro de commande ou le nom du client. L'aperçu se met à jour pendant la saisie."
+      },
+      "countries-languages": {
+        "question": "Quels pays et quelles langues l'application prend-elle en charge ?",
+        "paragraphs": [
+          "Tous les pays de l'UE sont éligibles par défaut. Si vous ne vendez qu'à certains d'entre eux, sélectionnez Pays spécifiques dans les Paramètres.",
+          "Le formulaire est disponible en {{languageCount}} langues : {{languages}}. Les clients le voient dans leur propre langue.",
+          "L'anglais est la langue de base. Si vous laissez un champ traduit vide, les clients voient le texte anglais à la place."
+        ]
+      }
+    }
+  },
+  "featureRequest": {
+    "pageTitle": "Suggérer une fonctionnalité",
+    "intro": "Dites-nous ce que vous aimeriez voir dans l'application. Nous lisons chaque suggestion.",
+    "sentHeading": "Suggestion envoyée",
+    "sentBody": "Merci d'avoir partagé votre idée avec notre équipe.",
+    "firstName": "Prénom",
+    "lastName": "Nom",
+    "email": "E-mail",
+    "request": "Quelle fonctionnalité souhaitez-vous ?",
+    "requestPlaceholder": "Décrivez la fonctionnalité et comment elle aiderait votre boutique",
+    "submit": "Envoyer la suggestion"
+  },
+  "pricing": {
+    "pageTitle": "Tarifs",
+    "pricePerMonth": "{{price}} par mois",
+    "currentPlan": "Forfait actuel",
+    "choosePlan": "Choisir {{plan}}",
+    "switchedToast": "Passage au forfait {{plan}} effectué",
+    "plans": {
+      "free": {
+        "name": "Free",
+        "features": [
+          "Jusqu'à 10 demandes de rétractation par mois",
+          "Notifications par e-mail"
+        ]
+      },
+      "starter": {
+        "name": "Starter",
+        "features": [
+          "Demandes de rétractation illimitées",
+          "Champs de formulaire personnalisés",
+          "Notifications par e-mail"
+        ]
+      },
+      "pro": {
+        "name": "Pro",
+        "features": [
+          "Tout le forfait Starter",
+          "Assistance prioritaire",
+          "Remboursements automatisés"
+        ]
+      }
+    },
+    "switchError": "Impossible de changer de forfait"
+  }
+}

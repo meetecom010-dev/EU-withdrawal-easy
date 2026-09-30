@@ -1,0 +1,1234 @@
+{
+  "common": {
+    "add": "Thêm",
+    "backToHome": "Quay lại Trang chủ",
+    "cancel": "Hủy",
+    "delete": "Xóa",
+    "discard": "Loại bỏ",
+    "done": "Xong",
+    "dayCount_other": "{{count}} ngày",
+    "emptyValue": "—",
+    "noMatches": "Không có kết quả cho \"{{query}}\".",
+    "preview": "Xem trước",
+    "remove": "Gỡ",
+    "save": "Lưu",
+    "verified": "Đã xác minh"
+  },
+  "nav": {
+    "home": "Trang chủ",
+    "withdrawalRequests": "Yêu cầu",
+    "formSetup": "Cài đặt",
+    "emailTemplates": "Thông báo",
+    "pricing": "Bảng giá"
+  },
+  "errors": {
+    "generic": "Đã xảy ra lỗi. Hãy thử lại.",
+    "requestFailed": "Đã xảy ra lỗi (lỗi {{status}}). Hãy thử lại.",
+    "methodNotAllowed": "Thao tác này không được hỗ trợ.",
+    "unknownAction": "Thao tác này không được hỗ trợ.",
+    "noValidFields": "Không có gì để cập nhật.",
+    "emailServiceUnavailable": "Không thể kết nối với dịch vụ email. Hãy thử lại sau vài phút.",
+    "emailServiceNotConfigured": "Chưa thiết lập tính năng gửi email. Hãy liên hệ bộ phận hỗ trợ.",
+    "requestNotFound": "Yêu cầu rút lại này không tồn tại hoặc đã bị xóa.",
+    "requestDecided": "Yêu cầu này đã được chấp thuận hoặc từ chối nên không còn thao tác nào với đơn hàng.",
+    "unknownDecision": "Chọn chấp thuận hoặc từ chối yêu cầu này.",
+    "invalidStatus": "Chọn trạng thái hợp lệ cho yêu cầu này.",
+    "noteRequired": "Nhập ghi chú.",
+    "orderNotFound": "Không tìm thấy đơn hàng này trong Shopify.",
+    "invalidEmail": "Nhập địa chỉ email hợp lệ.",
+    "featureRequestIncomplete": "Điền tất cả các trường trước khi gửi yêu cầu.",
+    "senderCodeRequired": "Nhập mã xác minh trong email của bạn.",
+    "senderNotFound": "Không tìm thấy email người gửi này. Hãy gỡ rồi thêm lại để nhận mã mới.",
+    "senderNotStarted": "Hãy xác minh email người gửi trước.",
+    "senderIdMissing": "Không thể đăng ký email người gửi này. Hãy thử lại.",
+    "domainInvalid": "Nhập tên miền hợp lệ, chẳng hạn như yourstore.com.",
+    "domainFreeProvider": "Không thể xác thực các nhà cung cấp email miễn phí như Gmail và Yahoo. Hãy dùng tên miền của cửa hàng."
+  },
+  "auth": {
+    "login": {
+      "heading": "Đăng nhập",
+      "shopLabel": "Tên miền cửa hàng",
+      "shopDetails": "example.myshopify.com",
+      "submit": "Đăng nhập",
+      "missingShop": "Nhập tên miền cửa hàng để đăng nhập.",
+      "invalidShop": "Nhập tên miền cửa hàng hợp lệ, chẳng hạn như example.myshopify.com."
+    }
+  },
+  "status": {
+    "pending": "Đang chờ",
+    "approved": "Đã chấp thuận",
+    "rejected": "Đã từ chối"
+  },
+  "sourceInline": {
+    "order_status": "trang trạng thái đơn hàng",
+    "standalone_page": "trang cửa hàng của bạn"
+  },
+  "placements": {
+    "orderStatus": {
+      "label": "Trang trạng thái đơn hàng",
+      "details": "Hiển thị biểu mẫu rút lại trên trang trạng thái đơn hàng mà khách hàng thấy sau khi thanh toán."
+    },
+    "storefront": {
+      "label": "Trang cửa hàng",
+      "details": "Hiển thị biểu mẫu rút lại trên một trang riêng trong chủ đề để khách hàng có thể tìm thấy biểu mẫu ngoài trang trạng thái đơn hàng."
+    }
+  },
+  "orderStatus": {
+    "financial": {
+      "PENDING": "Đang chờ thanh toán",
+      "AUTHORIZED": "Đã ủy quyền",
+      "PARTIALLY_PAID": "Đã thanh toán một phần",
+      "PAID": "Đã thanh toán",
+      "PARTIALLY_REFUNDED": "Đã hoàn tiền một phần",
+      "REFUNDED": "Đã hoàn tiền",
+      "VOIDED": "Đã vô hiệu",
+      "EXPIRED": "Đã hết hạn"
+    },
+    "fulfillment": {
+      "UNFULFILLED": "Chưa xử lý",
+      "PENDING_FULFILLMENT": "Đang chờ xử lý",
+      "OPEN": "Đang mở",
+      "IN_PROGRESS": "Đang thực hiện",
+      "ON_HOLD": "Đang tạm giữ",
+      "PARTIALLY_FULFILLED": "Đã xử lý một phần",
+      "FULFILLED": "Đã xử lý",
+      "RESTOCKED": "Đã nhập lại kho",
+      "SCHEDULED": "Đã lên lịch"
+    },
+    "return": {
+      "REQUESTED": "Đã yêu cầu",
+      "OPEN": "Đang mở",
+      "CLOSED": "Đã đóng",
+      "DECLINED": "Đã từ chối",
+      "CANCELED": "Đã hủy"
+    }
+  },
+  "stats": {
+    "heading": "Tổng quan",
+    "description": "Tổng quan về các yêu cầu rút lại",
+    "viewRequests": "Xem yêu cầu",
+    "total": "Tổng số yêu cầu",
+    "today": "Gửi hôm nay",
+    "pending": "Đang chờ",
+    "closed": "Đã đóng",
+    "requestCount_other": "{{count}} yêu cầu"
+  },
+  "home": {
+    "pageTitle": "Trang chủ",
+    "loadError": "Không thể tải bảng điều khiển",
+    "saveErrorHeading": "Không thể lưu thay đổi",
+    "saveErrorAction": "Hãy thử lại hoặc thực hiện thay đổi trong Cài đặt.",
+    "setupBanner": {
+      "heading_other": "Còn {{count}} bước thiết lập",
+      "body": "Hoàn tất các bước sau để chuẩn bị biểu mẫu rút lại: {{steps}}."
+    },
+    "setupGuide": {
+      "heading": "Hướng dẫn thiết lập",
+      "description": "Làm theo hướng dẫn này để đưa biểu mẫu rút lại lên cửa hàng.",
+      "progress": "Đã hoàn tất {{completed}}/{{total}} tác vụ",
+      "dismiss": "Đóng hướng dẫn thiết lập",
+      "collapse": "Thu gọn hướng dẫn thiết lập",
+      "expand": "Mở rộng hướng dẫn thiết lập",
+      "showStep": "Hiển thị chi tiết của {{step}}",
+      "hideStep": "Ẩn chi tiết của {{step}}",
+      "steps": {
+        "form": {
+          "label": "Bật biểu mẫu rút lại",
+          "description": "Bật biểu mẫu và chọn nơi khách hàng thấy biểu mẫu. Các trường, lý do và nội dung đã có văn bản mặc định. Bạn có thể thay đổi bất cứ lúc nào trong Cài đặt.",
+          "checkbox": "Bật biểu mẫu rút lại",
+          "cta": "Đi tới Cài đặt",
+          "placementHeading": "Chọn nơi khách hàng thấy biểu mẫu",
+          "placementDescription": "Chọn ít nhất một vị trí. Mỗi vị trí cần có khối ứng dụng thì khách hàng mới thấy được biểu mẫu."
+        },
+        "blocks": {
+          "label": "Thêm khối ứng dụng vào cửa hàng",
+          "description": "Thêm một khối ứng dụng cho mỗi vị trí bạn đã chọn ở bước trước.",
+          "locked": "Hoàn tất bước {{step}} để chọn nơi hiển thị biểu mẫu. Sau đó, bạn có thể thêm khối ứng dụng tại đây.",
+          "surfaces": {
+            "orderStatus": "Trang trạng thái đơn hàng",
+            "theme": "Trang cửa hàng"
+          },
+          "live": {
+            "orderStatus": "Khối ứng dụng đã hoạt động trên trang trạng thái đơn hàng.",
+            "theme": "Khối ứng dụng đã hoạt động trên trang cửa hàng."
+          }
+        }
+      }
+    },
+    "help": {
+      "heading": "Trợ giúp và tài nguyên",
+      "support": {
+        "title": "Hỗ trợ qua email",
+        "description": "Bạn có câu hỏi? Đội ngũ hỗ trợ của chúng tôi luôn sẵn sàng giúp đỡ.",
+        "link": "Liên hệ hỗ trợ"
+      },
+      "faqs": {
+        "title": "Câu hỏi thường gặp",
+        "description": "Tìm câu trả lời cho các câu hỏi thường gặp về cách thiết lập và sử dụng ứng dụng.",
+        "link": "Xem câu hỏi thường gặp"
+      },
+      "featureRequest": {
+        "title": "Đề xuất tính năng",
+        "description": "Bạn có ý tưởng cho ứng dụng? Hãy cho chúng tôi biết bạn muốn có gì.",
+        "link": "Đề xuất tính năng"
+      }
+    }
+  },
+  "blockSetup": {
+    "autoUpdate": "Thông báo này sẽ tự biến mất vài giây sau khi bạn lưu khối ứng dụng.",
+    "addAppBlock": "Thêm khối ứng dụng",
+    "orderStatus": {
+      "heading": "Thêm khối ứng dụng vào trang trạng thái đơn hàng",
+      "body": "Khách hàng sẽ không thấy biểu mẫu rút lại trên trang trạng thái đơn hàng cho đến khi bạn thêm khối ứng dụng. Cách thêm:",
+      "steps": {
+        "open": "Chọn <strong>Thêm khối ứng dụng</strong> bên dưới. Trang trạng thái đơn hàng sẽ mở trong trình chỉnh sửa trang thanh toán.",
+        "add": "Trong thanh bên, chọn <strong>Thêm khối ứng dụng</strong>.",
+        "choose": "Chọn <strong>Biểu mẫu rút lại</strong>.",
+        "save": "Chọn <strong>Lưu</strong>."
+      }
+    },
+    "storefront": {
+      "heading": "Thêm khối ứng dụng vào trang cửa hàng",
+      "body": "Chọn một mẫu trang rồi chọn Thêm khối ứng dụng. Trình chỉnh sửa chủ đề sẽ mở với biểu mẫu rút lại đã được thêm dưới dạng một mục.",
+      "templateLabel": "Mẫu trang",
+      "templates": {
+        "page": "Trang mặc định",
+        "index": "Trang chủ",
+        "product": "Trang sản phẩm",
+        "collection": "Trang danh mục",
+        "cart": "Trang giỏ hàng"
+      },
+      "steps": {
+        "open": "Chọn <strong>Thêm khối ứng dụng</strong> để mở trình chỉnh sửa chủ đề với mục đã được thêm.",
+        "move": "Kéo mục đến vị trí bạn muốn trên trang.",
+        "save": "Chọn <strong>Lưu</strong>."
+      }
+    }
+  },
+  "onboarding": {
+    "pageTitle": "Bắt đầu",
+    "heading": "Chuẩn bị cửa hàng cho việc rút lại tại EU",
+    "intro_other": "Hoàn tất {{count}} bước này để cung cấp cho khách hàng tại EU cách rút lại giao dịch mua theo đúng quy định.",
+    "stepBadge": "Bước {{current}}/{{total}}",
+    "completedToast": "Đã hoàn tất thiết lập",
+    "steps": {
+      "welcome": {
+        "title": "Chào mừng",
+        "description": "Chức năng của ứng dụng"
+      },
+      "form": {
+        "title": "Biểu mẫu rút lại",
+        "description": "Bật biểu mẫu"
+      }
+    },
+    "actions": {
+      "getStarted": "Bắt đầu",
+      "continue": "Tiếp tục",
+      "finish": "Hoàn tất thiết lập",
+      "skip": "Bỏ qua thiết lập",
+      "back": "Quay lại"
+    },
+    "help": {
+      "heading": "Cần trợ giúp?",
+      "body": "Bạn có câu hỏi? <supportLink>Liên hệ hỗ trợ</supportLink>."
+    },
+    "welcome": {
+      "heading": "Chào mừng bạn đến với {{appName}}",
+      "setupTime": "Mất khoảng 1 phút",
+      "law": "Kể từ ngày 19 tháng 6 năm 2026, các cửa hàng bán cho khách hàng tại EU phải cung cấp cách rút lại 2 bước cho mọi đơn hàng (Chỉ thị EU 2023/2673, Điều 11a). Chỉ có chính sách trả hàng là chưa đủ.",
+      "app": "{{appName}} thêm nút rút lại vào trang trạng thái đơn hàng, một trang trong cửa hàng trực tuyến hoặc cả hai. Ứng dụng xử lý bước xác nhận 2 bước và gửi email xác nhận bắt buộc. Bạn có thể quản lý mọi yêu cầu tại một nơi.",
+      "imageAlt": "Khách hàng đang rút lại một đơn hàng",
+      "requirementsHeading": "Yêu cầu của pháp luật",
+      "requirements": {
+        "button": "Nút rút lại có nhãn rõ ràng để khách hàng dễ dàng tìm thấy",
+        "twoStep": "Quy trình 2 bước: khách hàng gửi yêu cầu rút lại rồi xác nhận",
+        "email": "Email xác nhận tự động mà khách hàng có thể lưu giữ"
+      },
+      "penaltyHeading": "Điều gì xảy ra nếu bạn không tuân thủ",
+      "penalty": "Nếu thiếu nút rút lại hoặc nút không hoạt động, pháp luật sẽ gia hạn thời hạn rút lại {{days}} ngày. Khi đó, khách hàng có 12 tháng và {{days}} ngày để rút lại mỗi đơn hàng bị ảnh hưởng."
+    },
+    "form": {
+      "heading": "Bật biểu mẫu rút lại",
+      "body": "Khách hàng gửi yêu cầu rút lại rồi xác nhận ở một bước riêng, theo quy định của pháp luật EU. Biểu mẫu có sẵn nội dung pháp lý mặc định. Khách hàng có {{days}} để rút lại, tính từ ngày giao hàng.",
+      "switch": "Bật biểu mẫu rút lại",
+      "later": "Bạn có thể thay đổi tất cả những điều này sau trong Cài đặt.",
+      "loadError": "Không thể tải cài đặt biểu mẫu. Bạn có thể hoàn tất thiết lập ngay bây giờ và bật biểu mẫu sau trong Cài đặt.",
+      "saveError": "Không thể lưu các lựa chọn cho biểu mẫu. Hãy thử lại, hoặc hoàn tất thiết lập mà không lưu và đặt lại sau trong Cài đặt.",
+      "finishWithoutSaving": "Hoàn tất mà không lưu",
+      "placementError": "Chọn ít nhất một vị trí hoặc tắt biểu mẫu."
+    },
+    "finishError": "Không thể hoàn tất thiết lập. Hãy thử lại."
+  },
+  "formSetup": {
+    "pageTitle": "Cài đặt",
+    "loadError": "Không thể tải cài đặt",
+    "saveError": "Không thể lưu cài đặt",
+    "savedToast": "Đã lưu cài đặt",
+    "enable": {
+      "heading": "Biểu mẫu rút lại",
+      "description": "Chọn xem khách hàng có thể gửi yêu cầu rút lại hay không và nơi họ thấy biểu mẫu.",
+      "checkbox": "Bật biểu mẫu rút lại",
+      "details": "Khi tắt, khách hàng không thể gửi yêu cầu rút lại ở bất kỳ đâu.",
+      "orderStatus": "Hiển thị trên trang trạng thái đơn hàng",
+      "storefront": "Hiển thị trên trang cửa hàng"
+    },
+    "countries": {
+      "heading": "Quốc gia đủ điều kiện",
+      "description": "Khách hàng chỉ thấy biểu mẫu rút lại nếu đơn hàng được giao đến một trong các quốc gia này.",
+      "all": "Tất cả {{count}} quốc gia EU (khuyên dùng)",
+      "allDetails": "Quyền rút lại áp dụng trên toàn EU.",
+      "specific": "Quốc gia cụ thể",
+      "specificDetails": "Chọn quốc gia bên dưới. Bạn có thể thay đổi bất cứ lúc nào.",
+      "pickerLabel": "Quốc gia",
+      "pickerPlaceholder": "Tìm kiếm quốc gia"
+    },
+    "content": {
+      "heading": "Nội dung biểu mẫu",
+      "tabs": {
+        "step1": "1. Chi tiết",
+        "confirm": "2. Xác nhận",
+        "done": "3. Xong"
+      },
+      "language": "Ngôn ngữ",
+      "languageDetails": "Chọn ngôn ngữ để chỉnh sửa nội dung biểu mẫu bằng ngôn ngữ đó. Mỗi ngôn ngữ được lưu riêng.",
+      "beforeDelivery": {
+        "heading": "Trước khi giao hàng",
+        "description": "Hiển thị trên màn hình đầu tiên của biểu mẫu và ở bước Chi tiết cho đến khi đơn hàng được giao, kể cả khi đang vận chuyển."
+      },
+      "afterDelivery": {
+        "heading": "Sau khi giao hàng",
+        "description": "Hiển thị thay thế khi Shopify đánh dấu đơn hàng là đã giao."
+      },
+      "title": "Tiêu đề",
+      "description": "Mô tả",
+      "itemHeading": "Tiêu đề phần chọn mặt hàng",
+      "customerDetails": {
+        "heading": "Thông tin khách hàng",
+        "description": "Được điền từ đơn hàng. Khách hàng không thể chỉnh sửa các trường này.",
+        "locked": "Đã khóa",
+        "fullName": "Họ và tên",
+        "email": "Email",
+        "orderNumber": "Mã đơn hàng"
+      },
+      "reason": {
+        "heading": "Lý do rút lại",
+        "checkbox": "Hỏi lý do",
+        "details": "Khách hàng không bao giờ phải nêu lý do. Pháp luật EU yêu cầu trường này là tùy chọn.",
+        "label": "Nhãn trường lý do",
+        "optionsHeading": "Tùy chọn lý do",
+        "optionsHelp": "Khách hàng chọn từ danh sách này. Thêm, gỡ hoặc viết lại các tùy chọn cho phù hợp với cửa hàng. Tùy chọn \"Khác\" kèm ô văn bản luôn được thêm vào cuối.",
+        "removeOption": "Gỡ {{option}}",
+        "addLabel": "Thêm lý do",
+        "addPlaceholder": "Ví dụ: Đặt nhầm",
+        "translatedHelp": "Dịch từng tùy chọn. Để thêm hoặc gỡ tùy chọn, hãy chuyển sang tiếng Anh.",
+        "translatedEmpty": "Hãy thêm tùy chọn lý do bằng tiếng Anh trước."
+      },
+      "continueButton": "Nhãn nút Tiếp tục",
+      "confirm": {
+        "heading": "Tiêu đề xác nhận",
+        "messageBefore": "Thông điệp trước khi giao hàng",
+        "messageAfter": "Thông điệp sau khi giao hàng",
+        "declaration": "Tuyên bố",
+        "button": "Nhãn nút Xác nhận"
+      },
+      "done": {
+        "titleBefore": "Tiêu đề trước khi giao hàng",
+        "messageBefore": "Thông điệp trước khi giao hàng",
+        "titleAfter": "Tiêu đề sau khi giao hàng",
+        "messageAfter": "Thông điệp sau khi giao hàng"
+      }
+    },
+    "automation": {
+      "heading": "Tự động hóa",
+      "description": "Chọn thao tác ứng dụng thực hiện khi khách hàng gửi yêu cầu rút lại.",
+      "beforeShip": {
+        "heading": "Trước khi gửi đơn hàng",
+        "description": "Áp dụng khi yêu cầu đến trước khi bất kỳ mặt hàng nào được gửi đi.",
+        "hold": "Tạm giữ việc xử lý để xem xét",
+        "holdDetails": "Tạm dừng xử lý đơn hàng cho đến khi bạn chấp thuận hoặc từ chối yêu cầu. Việc tạm giữ được gỡ khi bạn quyết định.",
+        "tagDetails": "Gắn thẻ các đơn hàng nhận được yêu cầu trước khi gửi để nhân viên có thể tìm thấy trong danh sách đơn hàng."
+      },
+      "fallback": {
+        "label": "Điều gì xảy ra với đơn hàng",
+        "hold": "Tiếp tục tạm giữ cho đến khi bạn chấp thuận hoặc từ chối yêu cầu",
+        "cancelNow": "Hủy toàn bộ đơn hàng và hoàn tiền ngay",
+        "releaseN": "Gỡ tạm giữ sau một số ngày đã định",
+        "cancelN": "Hủy toàn bộ đơn hàng và hoàn tiền sau một số ngày đã định",
+        "cancelWarning": "Thao tác này sẽ hủy và hoàn tiền toàn bộ đơn hàng, kể cả khi khách hàng chỉ rút lại một số mặt hàng. Shopify sẽ gửi email thông báo hủy cho khách hàng.",
+        "days": "Số ngày"
+      },
+      "afterDelivery": {
+        "heading": "Sau khi gửi đơn hàng",
+        "description": "Áp dụng khi yêu cầu đến sau khi ít nhất một mặt hàng đã được gửi đi, kể cả khi chưa giao. Mọi yêu cầu vẫn hiển thị trên trang Yêu cầu.",
+        "createReturn": "Tạo đơn trả hàng",
+        "createReturnDetails": "Tạo đơn trả hàng trong Shopify cho các mặt hàng được yêu cầu đã gửi đi.",
+        "tagDetails": "Gắn thẻ các đơn hàng nhận được yêu cầu sau khi gửi."
+      },
+      "tag": {
+        "checkbox": "Gắn thẻ đơn hàng",
+        "label": "Thẻ đơn hàng",
+        "placeholder": "Thêm thẻ"
+      }
+    },
+    "deadline": {
+      "heading": "Thời hạn rút lại",
+      "description": "Thời hạn rút lại bắt đầu khi đơn hàng được giao, không phải khi đặt hàng. Pháp luật EU yêu cầu tối thiểu {{days}}.",
+      "days": "Số ngày được rút lại sau khi giao hàng",
+      "daysDetails": "Khoảng thời gian khách hàng có thể rút lại sau khi đơn hàng được giao.",
+      "transit": "Thời gian vận chuyển ước tính (ngày)",
+      "transitDetails": "Được dùng khi hãng vận chuyển không cung cấp ngày giao hoặc ngày dự kiến. Ứng dụng sẽ cộng số ngày này vào ngày gửi hàng."
+    },
+    "validation": {
+      "countryMode": "Chọn quốc gia đủ điều kiện.",
+      "euCountries": "Chọn ít nhất một quốc gia.",
+      "title": "Nhập tiêu đề.",
+      "description": "Nhập mô tả.",
+      "itemHeading": "Nhập tiêu đề cho danh sách mặt hàng.",
+      "continueButton": "Nhập nhãn cho nút Tiếp tục.",
+      "heading": "Nhập tiêu đề.",
+      "confirmMessage": "Nhập thông điệp xác nhận.",
+      "declaration": "Nhập tuyên bố mà khách hàng phải chấp nhận.",
+      "confirmButton": "Nhập nhãn cho nút Xác nhận.",
+      "message": "Nhập thông điệp.",
+      "reasonLabel": "Nhập nhãn cho trường lý do.",
+      "reasonOptions": "Thêm ít nhất một lý do.",
+      "reasonOptionTranslation": "Nhập bản dịch cho lý do này.",
+      "fallback": "Chọn điều gì xảy ra với đơn hàng.",
+      "daysRange": "Nhập số ngày từ {{min}} đến {{max}}.",
+      "tags": "Thêm ít nhất một thẻ hoặc tắt tính năng gắn thẻ.",
+      "afterDeliveryAction": "Chọn điều gì xảy ra sau khi gửi đơn hàng."
+    },
+    "preview": {
+      "heading": "Xem trước trực tiếp",
+      "compliantBadge": "Tuân thủ quy trình 2 bước",
+      "surfaceLabel": "Xem trước",
+      "surfaces": {
+        "orderStatus": "Trang trạng thái đơn hàng",
+        "theme": "Trang cửa hàng"
+      },
+      "stageLabel": "Trạng thái giao hàng",
+      "stages": {
+        "beforeDelivery": "Chưa giao",
+        "delivered": "Đã giao"
+      },
+      "banner": {
+        "orderStatus": "Đây là những gì khách hàng thấy trên trang trạng thái đơn hàng. Chọn các nút để dùng thử, hoặc dùng các tab trong Nội dung biểu mẫu để chuyển đến một bước cụ thể.",
+        "theme": "Đây là những gì khách hàng thấy trên trang cửa hàng. Biểu mẫu bắt đầu bằng bước \"Tìm đơn hàng\" vì khách truy cập cửa hàng chưa đăng nhập."
+      },
+      "restart": "Bắt đầu lại bản xem trước",
+      "position": {
+        "entry": "Thẻ bắt đầu",
+        "lookup": "Tìm đơn hàng",
+        "step": "Bước {{current}}/{{total}}"
+      },
+      "storefront": {
+        "start": "Bắt đầu yêu cầu rút lại",
+        "findOrderHeading": "Tìm đơn hàng",
+        "findOrderBody": "Nhập thông tin đơn hàng để bắt đầu yêu cầu rút lại.",
+        "fullName": "Họ và tên",
+        "email": "Email",
+        "orderNumber": "Mã đơn hàng",
+        "continue": "Tiếp tục",
+        "steps": {
+          "step1": "Chi tiết",
+          "confirm": "Xác nhận",
+          "done": "Xong"
+        },
+        "stepOf": "Bước {{current}}/{{total}}",
+        "stepProgress": "Bước {{current}}/{{total}}: {{label}}",
+        "reasonPlaceholder": "Chọn lý do (tùy chọn)",
+        "otherReason": "Khác",
+        "yourReason": "Lý do của bạn",
+        "yourReasonPlaceholder": "Cho chúng tôi biết lý do của bạn",
+        "selectItem": "Chọn ít nhất một mặt hàng để tiếp tục.",
+        "itemsToWithdraw": "Mặt hàng cần rút lại ({{count}})",
+        "selectedTotal": "Tổng mặt hàng đã chọn",
+        "previous": "Trước",
+        "submittedOn": "Đã gửi vào {{date}}"
+      }
+    }
+  },
+  "requests": {
+    "pageTitle": "Yêu cầu",
+    "searchLabel": "Tìm kiếm yêu cầu rút lại",
+    "searchPlaceholder": "Tìm theo mã đơn hàng, tên khách hàng hoặc email",
+    "export": "Xuất",
+    "exportSelected": "Xuất mục đã chọn",
+    "tabs": {
+      "all": "Tất cả",
+      "withCount": "{{label}} ({{count}})"
+    },
+    "empty": {
+      "imageAlt": "",
+      "heading": "Chưa có yêu cầu rút lại",
+      "body": "Yêu cầu rút lại từ khách hàng sẽ hiển thị tại đây.",
+      "filteredHeading": "Không tìm thấy yêu cầu rút lại",
+      "filteredBody": "Hãy thử thay đổi từ khóa tìm kiếm hoặc bộ lọc."
+    },
+    "table": {
+      "selectAll": "Chọn tất cả yêu cầu rút lại",
+      "selectRow": "Chọn đơn hàng {{order}}",
+      "selectedCount": "Đã chọn {{count}}",
+      "order": "Đơn hàng",
+      "customer": "Khách hàng",
+      "items": "Mặt hàng",
+      "value": "Giá trị",
+      "status": "Trạng thái",
+      "submitted": "Đã gửi",
+      "actions": "Thao tác",
+      "itemCount_other": "{{count}} mặt hàng",
+      "viewRow": "Xem yêu cầu của đơn hàng {{order}}",
+      "deleteRow": "Xóa yêu cầu của đơn hàng {{order}}"
+    },
+    "delete": {
+      "heading_other": "Xóa {{count}} yêu cầu rút lại?",
+      "body_other": "{{count}} yêu cầu rút lại sẽ bị xóa vĩnh viễn. Không thể hoàn tác thao tác này.",
+      "confirm_other": "Xóa",
+      "toast_other": "Đã xóa {{count}} yêu cầu rút lại"
+    },
+    "csv": {
+      "filename": "withdrawal-requests-{{date}}.csv",
+      "order": "Đơn hàng",
+      "customerName": "Tên khách hàng",
+      "customerEmail": "Email khách hàng",
+      "country": "Quốc gia",
+      "items": "Mặt hàng",
+      "value": "Giá trị",
+      "reason": "Lý do",
+      "status": "Trạng thái",
+      "submitted": "Đã gửi",
+      "decided": "Đã quyết định"
+    }
+  },
+  "requestDetail": {
+    "pageTitle": "Yêu cầu rút lại",
+    "backLink": "Yêu cầu",
+    "submittedLine": "Đã gửi vào {{date}} từ {{source}}",
+    "previous": "Yêu cầu trước",
+    "next": "Yêu cầu tiếp theo",
+    "badges": {
+      "canceled": "Đã hủy",
+      "onHold": "Đang tạm giữ",
+      "return": "Trả hàng: {{status}}"
+    },
+    "actions": {
+      "refund": "Hoàn tiền",
+      "more": "Thao tác khác",
+      "cancelOrder": "Hủy đơn hàng",
+      "placeHold": "Tạm giữ việc xử lý",
+      "releaseHold": "Gỡ tạm giữ việc xử lý",
+      "createReturn": "Tạo đơn trả hàng",
+      "processReturn": "Xử lý và hoàn tiền",
+      "viewOrder": "Xem đơn hàng"
+    },
+    "banners": {
+      "orderUnavailableHeading": "Không có thông tin chi tiết đơn hàng",
+      "orderUnavailableBody": "{{error}} Bạn không thể dùng thao tác với đơn hàng cho đến khi thông tin chi tiết đơn hàng được tải.",
+      "actionFailedHeading": "Không thể hoàn tất thao tác này",
+      "actionFailedAction": "Xem Hoạt động bên dưới để biết chi tiết.",
+      "canceled": "Đơn hàng này đã bị hủy. Không còn thao tác nào với đơn hàng."
+    },
+    "deadline": {
+      "heading": "Thời hạn hoàn tiền",
+      "pendingLabel": "Thời gian còn lại để quyết định và hoàn tiền",
+      "decidedLabel": "Quyết định",
+      "badges": {
+        "overdue": "Quá hạn",
+        "actionNeeded": "Cần xử lý",
+        "onTime": "Đúng hạn"
+      },
+      "daysLeft_other": "Còn {{count}} ngày",
+      "daysOverdue_other": "Quá hạn {{count}} ngày",
+      "daysEarly_other": "{{count}} ngày trước thời hạn",
+      "daysLate_other": "{{count}} ngày sau thời hạn",
+      "pending": "Bạn có {{days}} kể từ khi yêu cầu được gửi để quyết định và hoàn tiền. Thời hạn là {{date}}.",
+      "pendingOverdue": "Thời hạn đã qua vào {{date}}. Hãy hoàn tiền cho khách hàng càng sớm càng tốt.",
+      "decidedOnTime": "Đã quyết định trong thời hạn hoàn tiền {{windowDays}} ngày. Thời hạn là {{date}}.",
+      "decidedLate": "Đã quyết định sau thời hạn hoàn tiền {{date}}."
+    },
+    "items": {
+      "heading": "Mặt hàng đã rút lại",
+      "reject": "Từ chối",
+      "approve": "Chấp thuận",
+      "total": "Tổng đã rút lại",
+      "sku": "SKU: {{sku}}",
+      "quantity": "Số lượng: {{count}}",
+      "shipping": {
+        "notShipped": "Chưa gửi",
+        "partlyShipped": "Đã gửi một phần",
+        "shipped": "Đã gửi"
+      },
+      "partiallyShippedBanner": "Một phần đơn hàng này đã được gửi. Các mặt hàng chưa gửi vẫn có thể tạm giữ, còn các mặt hàng đã gửi cần có đơn trả hàng."
+    },
+    "return": {
+      "heading": "Trả hàng",
+      "status": "Trạng thái",
+      "created": "Đã tạo",
+      "body": "Đã tạo đơn trả hàng trong Shopify cho các mặt hàng đã rút lại.",
+      "openBody": "Khi nhận lại mặt hàng, hãy chọn Xử lý và hoàn tiền. Thao tác này sẽ hoàn tiền cho khách hàng đối với các mặt hàng đã trả và đóng đơn trả hàng.",
+      "alreadyRefundedBody": "Các mặt hàng trong đơn trả hàng này đã được hoàn tiền. Hãy đóng đơn trả hàng trong Shopify khi nhận lại mặt hàng."
+    },
+    "processReturnModal": {
+      "heading": "Xử lý trả hàng và hoàn tiền",
+      "calculating": "Đang tính số tiền hoàn…",
+      "nothingToProcess": "Không còn gì để xử lý trong đơn trả hàng này. Đơn có thể đã được xử lý hoặc đóng trong Shopify.",
+      "nothingToRefund": "Các mặt hàng trong đơn trả hàng này đã được hoàn tiền nên không còn gì để hoàn tiền.",
+      "unsupportedPayment": "Không thể hoàn tiền khoản thanh toán của đơn hàng này từ ứng dụng. Hãy xử lý trả hàng và hoàn tiền trong Shopify.",
+      "itemsHeading": "Mặt hàng trong đơn trả hàng {{name}}",
+      "subtotal": "Tổng phụ mặt hàng",
+      "shippingLine": "Phí vận chuyển ban đầu",
+      "total": "Tổng tiền hoàn",
+      "body": "Thao tác này đánh dấu các mặt hàng trả lại là đã xử lý, hoàn tiền về phương thức thanh toán ban đầu và đóng đơn trả hàng. Shopify sẽ gửi biên nhận hoàn tiền qua email cho khách hàng. Không thể hoàn tác thao tác này.",
+      "confirmAmount": "Hoàn tiền {{amount}}",
+      "confirm": "Xử lý và hoàn tiền"
+    },
+    "payment": {
+      "heading": "Thanh toán",
+      "status": "Trạng thái thanh toán",
+      "subtotal": "Tổng phụ rút lại",
+      "shipping": "Phí vận chuyển đơn hàng",
+      "total": "Tổng đơn hàng",
+      "refunded": "Đã hoàn tiền",
+      "unavailable": "Hiện không có thông tin chi tiết thanh toán."
+    },
+    "activity": {
+      "heading": "Hoạt động",
+      "noteLabel": "Thêm ghi chú",
+      "notePlaceholder": "Thêm ghi chú…",
+      "post": "Đăng",
+      "noteHelp": "Chỉ bạn và nhân viên mới xem được ghi chú. Khách hàng không bao giờ thấy ghi chú.",
+      "submitted": "Yêu cầu rút lại đã được gửi từ {{source}}",
+      "decided": {
+        "approved": "Đã chấp thuận yêu cầu",
+        "rejected": "Đã từ chối yêu cầu"
+      },
+      "note": "Ghi chú: {{body}}",
+      "entry": "{{label}}: {{message}}",
+      "actions": {
+        "resolve_branch": "Đã bắt đầu tự động hóa",
+        "run_automation": "Tự động hóa",
+        "automation_completed": "Đã hoàn tất tự động hóa",
+        "hold_fulfillment": "Tạm giữ việc xử lý",
+        "schedule_fallback": "Thao tác tiếp theo đã lên lịch",
+        "release_hold": "Đã gỡ tạm giữ việc xử lý",
+        "cancel_order_immediate": "Đã hủy và hoàn tiền đơn hàng",
+        "cancel_order_scheduled": "Đã hủy và hoàn tiền đơn hàng",
+        "cancel_order_manual": "Đã hủy và hoàn tiền đơn hàng",
+        "cancel_order": "Đã hủy và hoàn tiền đơn hàng",
+        "refund": "Hoàn tiền",
+        "tag_before_ship": "Đã gắn thẻ đơn hàng",
+        "tag_after_delivery": "Đã gắn thẻ đơn hàng",
+        "order_tag_add": "Đã thêm thẻ đơn hàng",
+        "order_tag_remove": "Đã gỡ thẻ đơn hàng",
+        "create_return": "Trả hàng",
+        "refresh_return": "Đã làm mới trạng thái trả hàng",
+        "process_return": "Xử lý và hoàn tiền",
+        "fetch_shop_contact": "Thông tin liên hệ của cửa hàng",
+        "customer_email": "Email xác nhận cho khách hàng",
+        "merchant_email": "Thông báo yêu cầu mới",
+        "notify_customer": "Email thông báo quyết định",
+        "notify_merchant": "Bạn đã được thông báo"
+      },
+      "messages": {
+        "noTags": "Chưa thiết lập thẻ nào",
+        "tagged": "Đã gắn thẻ {{tags}} cho đơn hàng",
+        "noHoldableOrders": "Hiện không có gì trong đơn hàng này có thể tạm giữ",
+        "held": "Đã tạm giữ mặt hàng để không bị gửi đi",
+        "holdOff": "Tính năng tạm giữ việc xử lý để xem xét đang tắt",
+        "tagBeforeShipOff": "Tính năng gắn thẻ trước khi gửi đang tắt",
+        "tagAfterDeliveryOff": "Tính năng gắn thẻ sau khi gửi đang tắt",
+        "fallbackHold": "Đơn hàng vẫn được tạm giữ cho đến khi bạn chấp thuận hoặc từ chối yêu cầu",
+        "fallbackInvalidDays": "Không thể lên lịch thao tác tiếp theo. Số ngày không hợp lệ.",
+        "scheduledRelease": "Đã lên lịch gỡ tạm giữ vào {{date}}",
+        "scheduledCancel": "Đã lên lịch hủy và hoàn tiền vào {{date}}",
+        "canceled": "Đã hủy và hoàn tiền đơn hàng",
+        "returnCreated": "Đã tạo đơn trả hàng trong Shopify",
+        "returnNoMatch": "Không mặt hàng nào được yêu cầu có thể trả lại",
+        "notifiedByEmail": "Đã thông báo trong ứng dụng và qua email",
+        "notifiedEmailFailed": "Đã thông báo trong ứng dụng. Gửi email thông báo không thành công: {{error}}",
+        "notifiedInAppOnly": "Đã thông báo trong ứng dụng. Chưa gửi email thông báo.",
+        "emailSent": "Đã gửi",
+        "emailFailed": "Không thành công: {{error}}",
+        "emailNotSent": "Chưa gửi vì không có người nhận hoặc chưa thiết lập email",
+        "orderNotFound": "Không tìm thấy đơn hàng này trong Shopify",
+        "alreadyCanceled": "Đơn hàng đã bị hủy trước đó",
+        "branchBeforeShip": "Đơn hàng chưa được gửi nên đã chạy các bước trước khi gửi",
+        "branchAfterDelivery": "Đơn hàng đã được gửi nên đã chạy các bước sau khi gửi",
+        "branchPartiallyShipped": "Đơn hàng đã được gửi một phần nên đã chạy các bước cho mặt hàng đã gửi và chưa gửi",
+        "noUnshippedItemsRequested": "Không mặt hàng nào được yêu cầu đang chờ gửi nên không có gì được tạm giữ",
+        "fallbackCancelPartiallyShipped": "Đơn hàng đã được gửi một phần nên không thể hủy toàn bộ. Các mặt hàng được yêu cầu vẫn được tạm giữ cho đến khi bạn chấp thuận hoặc từ chối yêu cầu.",
+        "returnNothingShipped": "Không mặt hàng nào được yêu cầu đã được gửi nên không cần trả hàng",
+        "runCompleted": "Đã hoàn tất tự động hóa",
+        "runFailed": "Một hoặc nhiều bước tự động hóa không thành công",
+        "runSkipped": "Đã bỏ qua tự động hóa",
+        "scheduledSkippedApproved": "Yêu cầu đã được chấp thuận nên thao tác đã lên lịch không được chạy",
+        "scheduledSkippedRejected": "Yêu cầu đã bị từ chối nên thao tác đã lên lịch không được chạy",
+        "noHoldsPlaced": "Không có tạm giữ nào cho yêu cầu này",
+        "holdsAlreadyReleased": "Các tạm giữ đã được gỡ trước đó",
+        "holdReleased": "Có thể xử lý lại đơn hàng",
+        "holdExists": "Đã có tạm giữ cho yêu cầu này",
+        "decisionSkipped": "Nhân viên đã chọn không gửi email cho khách hàng",
+        "decisionSent": "Đã gửi email thông báo quyết định cho khách hàng",
+        "decisionFailed": "Gửi email thông báo quyết định không thành công: {{error}}",
+        "decisionNotConfigured": "Chưa gửi email thông báo quyết định vì chưa thiết lập email",
+        "refunded": "Đã hoàn tiền {{amount}}",
+        "noReturn": "Không có đơn trả hàng cho yêu cầu này",
+        "returnStatus": "Trạng thái trả hàng: {{status}}",
+        "returnProcessed": "Đã xử lý trả hàng và hoàn tiền {{amount}}",
+        "returnNothingToProcess": "Không còn gì để xử lý trong đơn trả hàng này",
+        "returnNothingToRefund": "Các mặt hàng trong đơn trả hàng này đã được hoàn tiền",
+        "returnPaymentUnsupported": "Không thể hoàn tiền khoản thanh toán này từ ứng dụng. Hãy xử lý trả hàng trong Shopify.",
+        "refundNothingRefundable": "Không mặt hàng nào được yêu cầu có thể hoàn tiền. Có thể chúng đã được hoàn tiền.",
+        "refundNoSuggestion": "Shopify không thể tính khoản hoàn tiền cho các mặt hàng này. Hãy hoàn tiền trong Shopify.",
+        "refundCoveredByReturn": "Tất cả mặt hàng đã rút lại đều nằm trong đơn trả hàng đang mở. Hãy dùng Xử lý và hoàn tiền trên đơn trả hàng để hoàn tiền.",
+        "tagsRemoved": "Đã gỡ thẻ đơn hàng: {{tags}}",
+        "tagsAdded": "Đã thêm thẻ đơn hàng: {{tags}}"
+      }
+    },
+    "order": {
+      "heading": "Đơn hàng",
+      "order": "Đơn hàng",
+      "placed": "Ngày đặt",
+      "payment": "Thanh toán",
+      "fulfillment": "Xử lý đơn hàng"
+    },
+    "customer": {
+      "heading": "Khách hàng",
+      "avatarFallback": "Khách hàng",
+      "contactHeading": "Thông tin liên hệ",
+      "email": "Email",
+      "language": "Ngôn ngữ",
+      "shippingHeading": "Địa chỉ giao hàng"
+    },
+    "automation": {
+      "heading": "Tự động hóa",
+      "stage": "Giai đoạn",
+      "stages": {
+        "before_ship": "Trước khi gửi",
+        "partially_shipped": "Đã gửi một phần",
+        "after_delivery": "Sau khi gửi"
+      },
+      "hold": "Tạm giữ việc xử lý",
+      "holdStates": {
+        "onHold": "Đang tạm giữ",
+        "released": "Đã gỡ",
+        "none": "Không có"
+      },
+      "canceled": "Đã hủy",
+      "return": "Trả hàng"
+    },
+    "emails": {
+      "heading": "Lịch sử email",
+      "customerConfirmation": "Xác nhận rút lại cho khách hàng",
+      "merchantNotification": "Thông báo yêu cầu mới",
+      "decision": "Email thông báo quyết định",
+      "statuses": {
+        "sent": "Đã gửi",
+        "failed": "Không thành công",
+        "notSent": "Chưa gửi"
+      }
+    },
+    "tags": {
+      "heading": "Thẻ đơn hàng",
+      "label": "Thêm thẻ đơn hàng",
+      "placeholder": "Thêm thẻ",
+      "remove": "Gỡ thẻ {{tag}}",
+      "savedToast": "Đã lưu thẻ đơn hàng"
+    },
+    "reason": {
+      "heading": "Lý do rút lại",
+      "quoted": "\"{{reason}}\"",
+      "none": "Không nêu lý do"
+    },
+    "decidedToast": {
+      "approved": "Đã chấp thuận yêu cầu rút lại",
+      "rejected": "Đã từ chối yêu cầu rút lại"
+    },
+    "cancelModal": {
+      "heading": "Hủy đơn hàng?",
+      "body": "Thao tác này sẽ hủy toàn bộ đơn hàng trong Shopify, bao gồm cả các mặt hàng khách hàng không rút lại. Đơn hàng sẽ được hoàn tiền về phương thức thanh toán ban đầu và nhập lại kho, đồng thời Shopify sẽ gửi email cho khách hàng. Không thể hoàn tác thao tác này.",
+      "keep": "Giữ đơn hàng",
+      "confirm": "Hủy và hoàn tiền đơn hàng"
+    },
+    "createReturnModal": {
+      "heading": "Tạo đơn trả hàng cho mặt hàng đã rút lại",
+      "itemsHeading": "Mặt hàng cần trả",
+      "subtotal": "Tổng phụ mặt hàng",
+      "checking": "Đang kiểm tra những mặt hàng có thể trả lại…",
+      "nothingToReturn": "Chưa có mặt hàng đã rút lại nào được gửi đi nên không có gì để trả lại. Hãy tạm giữ để các mặt hàng không bị gửi đi, hoặc hoàn tiền để gỡ khỏi đơn hàng.",
+      "notShipped_other": "{{count}} mặt hàng đã rút lại không được bao gồm vì chưa được gửi đi.",
+      "notReturnable_other": "{{count}} mặt hàng đã rút lại không được bao gồm vì đã được trả lại.",
+      "body": "Thao tác này tạo đơn trả hàng trong Shopify cho các mặt hàng ở trên. Khách hàng sẽ không được hoàn tiền. Khi nhận lại mặt hàng, hãy chọn Xử lý và hoàn tiền trên đơn trả hàng.",
+      "cancel": "Hủy",
+      "confirm": "Tạo đơn trả hàng"
+    },
+    "decisionModal": {
+      "headingApprove": "Chấp thuận yêu cầu rút lại?",
+      "headingReject": "Từ chối yêu cầu rút lại?",
+      "approveAndSend": "Chấp thuận và gửi email",
+      "rejectAndSend": "Từ chối và gửi email",
+      "approve": "Chấp thuận",
+      "reject": "Từ chối",
+      "loadingLabel": "Đang tải bản xem trước email",
+      "loading": "Đang chuẩn bị email cho khách hàng…",
+      "sendEmail": "Gửi email cho khách hàng",
+      "language": "Email này bằng {{language}}, ngôn ngữ của khách hàng. Thay đổi của bạn chỉ áp dụng cho email này.",
+      "subject": "Tiêu đề",
+      "body": "Nội dung email",
+      "editHtml": "Chỉnh sửa HTML",
+      "htmlLabel": "HTML của email",
+      "previewTitle": "Xem trước email",
+      "templateUnchanged": "Thay đổi của bạn chỉ áp dụng cho email này. Mẫu đã lưu sẽ không thay đổi.",
+      "noEmail": "Khách hàng sẽ không nhận được email. Bạn có thể liên hệ riêng với khách hàng nếu cần.",
+      "holdReleased": "Thao tác này cũng gỡ tạm giữ việc xử lý của đơn hàng để có thể xử lý lại đơn hàng."
+    },
+    "refundModal": {
+      "heading": "Hoàn tiền mặt hàng đã rút lại",
+      "calculatingLabel": "Đang tính khoản hoàn tiền",
+      "calculating": "Đang tính số tiền hoàn…",
+      "nothingToRefund": "Không có gì để hoàn tiền trong đơn hàng này. Có thể các mặt hàng đã rút lại đã được hoàn tiền, hoặc đơn hàng đã bị hủy.",
+      "itemsHeading": "Mặt hàng cần hoàn tiền",
+      "subtotal": "Tổng phụ mặt hàng",
+      "shippingLine": "Phí vận chuyển ban đầu",
+      "amount": "Số tiền hoàn",
+      "total": "Tổng tiền hoàn",
+      "body": "Các mặt hàng đã rút lại sẽ được hoàn tiền về phương thức thanh toán ban đầu và nhập lại kho nếu có thể. Shopify sẽ gửi biên nhận hoàn tiền qua email cho khách hàng.",
+      "includesShipping": "Khách hàng đã rút lại toàn bộ đơn hàng nên phí vận chuyển ban đầu cũng được hoàn.",
+      "unshippedItems": "Các mặt hàng chưa gửi sẽ bị gỡ khỏi đơn hàng nên sẽ không được gửi đi.",
+      "inReturn_other": "{{count}} mặt hàng đã rút lại không được bao gồm vì nằm trong đơn trả hàng {{name}}. Hãy hoàn tiền bằng Xử lý và hoàn tiền trên đơn trả hàng.",
+      "allInReturn": "Tất cả mặt hàng đã rút lại đều nằm trong đơn trả hàng {{name}}. Hãy hoàn tiền bằng Xử lý và hoàn tiền trên đơn trả hàng, thao tác này cũng sẽ đóng đơn trả hàng.",
+      "irreversible": "Không thể hoàn tác thao tác này.",
+      "confirmAmount": "Hoàn tiền {{amount}}",
+      "confirm": "Hoàn tiền"
+    },
+    "shopifyNotes": {
+      "holdAutomatic": "Yêu cầu rút lại cho đơn hàng {{order}} đang chờ nhân viên xem xét",
+      "holdManual": "Yêu cầu rút lại cho đơn hàng {{order}} đã được nhân viên tạm giữ",
+      "canceled": "Đã hủy bởi {{appName}} vì khách hàng đã rút lại giao dịch mua (yêu cầu {{id}}).",
+      "refunded": "Đã hoàn tiền bởi {{appName}} vì khách hàng đã rút lại giao dịch mua (yêu cầu {{id}}).",
+      "returnReason": "Yêu cầu rút lại: {{reason}}",
+      "returnReasonNone": "Yêu cầu rút lại (không nêu lý do)"
+    }
+  },
+  "emailTemplates": {
+    "pageTitle": "Thông báo",
+    "loadError": "Không thể tải thông báo",
+    "saveError": "Không thể lưu thông báo",
+    "savedToast": "Đã lưu thông báo",
+    "resetToast": "Đã đặt lại {{name}} về mặc định",
+    "sender": {
+      "heading": "Người gửi",
+      "description": "Các cài đặt này áp dụng cho mọi email ứng dụng gửi thay cho cửa hàng. Hãy gửi từ địa chỉ đã xác minh của riêng bạn và chọn nơi nhận phản hồi của khách hàng.",
+      "emailLabel": "Email người gửi",
+      "emailPlaceholder": "notifications@withdrawaleasy.com",
+      "detailsVerified": "Email được gửi từ địa chỉ này.",
+      "detailsPending": "Nhập mã chúng tôi đã gửi đến địa chỉ này để xác minh.",
+      "detailsDefault": "Nếu để trống, email sẽ được gửi từ {{email}}.",
+      "detailsDefaultFallback": "Nếu để trống, email sẽ được gửi từ địa chỉ mặc định của ứng dụng.",
+      "freeProviderWarning": "Không thể xác thực các nhà cung cấp email miễn phí như Gmail và Yahoo. Khách hàng sẽ thấy \"via brevosend.com\" trong email từ địa chỉ này. Để chuyên nghiệp hơn, hãy dùng địa chỉ thuộc tên miền của cửa hàng.",
+      "codeLabel": "Mã xác minh",
+      "codeDetails": "Nhập mã gồm 6 chữ số trong email chúng tôi đã gửi cho bạn.",
+      "verifyCode": "Xác minh mã",
+      "checkStatus": "Kiểm tra trạng thái xác minh",
+      "verifyEmail": "Xác minh email",
+      "codeSent": "Chúng tôi đã gửi mã xác minh đến {{email}}.",
+      "notVerifiedYet": "Email này chưa được xác minh. Hãy kiểm tra hộp thư đến để lấy mã rồi thử lại.",
+      "replyToLabel": "Email nhận phản hồi",
+      "replyToPlaceholder": "support@yourstore.com",
+      "replyToDetails": "Theo mặc định, phản hồi của khách hàng sẽ được gửi đến email của cửa hàng. Để gửi đến nơi khác, hãy nhập một địa chỉ khác."
+    },
+    "domain": {
+      "heading": "Xác thực tên miền",
+      "description": "Xác thực tên miền để khách hàng không thấy \"via brevosend.com\" trong email của bạn. Việc này là tùy chọn, nhưng chúng tôi khuyên dùng nếu bạn gửi từ tên miền của cửa hàng.",
+      "label": "Tên miền",
+      "placeholder": "yourstore.com",
+      "details": "Nhập tên miền bạn dùng để gửi email, không phải tên miền myshopify.com.",
+      "freeProviderWarning": "Không thể xác thực các nhà cung cấp email miễn phí như Gmail và Yahoo. Hãy nhập tên miền của cửa hàng.",
+      "columns": {
+        "record": "Bản ghi",
+        "type": "Loại",
+        "host": "Máy chủ",
+        "value": "Giá trị"
+      },
+      "records": {
+        "brevo_code": "Quyền sở hữu tên miền",
+        "dkim_record": "DKIM",
+        "dkim1Record": "DKIM 1",
+        "dkim2Record": "DKIM 2",
+        "dmarc_record": "DMARC"
+      },
+      "copyHost": "Sao chép máy chủ",
+      "copyValue": "Sao chép giá trị",
+      "verifyRecords": "Xác minh bản ghi DNS",
+      "authenticate": "Xác thực tên miền",
+      "pendingInfo": "Thêm các bản ghi này tại nhà cung cấp tên miền rồi chọn Xác minh bản ghi DNS.",
+      "notVerifiedYet": "Tên miền của bạn chưa được xác minh. Thay đổi DNS có thể mất một thời gian để cập nhật, vì vậy hãy thử lại sau."
+    },
+    "notification": {
+      "heading": "Mẫu email",
+      "emailLabel": "Email",
+      "language": "Ngôn ngữ",
+      "languageDetails": "Chọn ngôn ngữ để chỉnh sửa email này bằng ngôn ngữ đó. Mỗi ngôn ngữ được lưu riêng. Khách hàng nhận email bằng ngôn ngữ của họ.",
+      "send": "Gửi email này",
+      "requiredDetails": "Pháp luật EU yêu cầu email này nên không thể tắt.",
+      "merchantDetails": "Tắt để ngừng nhận email này.",
+      "decisionDetails": "Tắt để ngừng gửi email này theo mặc định. Bạn vẫn có thể chọn gửi khi chấp thuận hoặc từ chối từng yêu cầu.",
+      "subject": "Tiêu đề",
+      "reset": "Đặt lại về mặc định",
+      "customized": "Đã tùy chỉnh"
+    },
+    "templates": {
+      "customerConfirmation": {
+        "name": "Xác nhận rút lại cho khách hàng",
+        "description": "Được gửi cho khách hàng ngay khi họ gửi yêu cầu rút lại."
+      },
+      "merchantNotification": {
+        "name": "Thông báo yêu cầu mới",
+        "description": "Được gửi đến email liên hệ của cửa hàng khi khách hàng gửi yêu cầu rút lại mới. Trả lời email để liên hệ với khách hàng."
+      },
+      "withdrawalApproved": {
+        "name": "Đã chấp thuận rút lại",
+        "description": "Được gửi cho khách hàng khi bạn chấp thuận yêu cầu rút lại của họ. Bạn có thể xem lại và chỉnh sửa trước khi gửi."
+      },
+      "withdrawalRejected": {
+        "name": "Đã từ chối rút lại",
+        "description": "Được gửi cho khách hàng khi bạn từ chối yêu cầu rút lại của họ. Bạn có thể xem lại và chỉnh sửa trước khi gửi."
+      }
+    },
+    "merchantDefaults": {
+      "subject": "Yêu cầu rút lại mới — đơn hàng {{order}}",
+      "heading": "Yêu cầu rút lại mới",
+      "intro": "Một khách hàng đã gửi yêu cầu rút lại. Dưới đây là mọi thông tin bạn cần để xem xét.",
+      "rows": {
+        "name": "Tên",
+        "email": "Email",
+        "date": "Ngày",
+        "orderNumber": "Mã đơn hàng",
+        "reference": "Mã tham chiếu",
+        "reason": "Lý do"
+      },
+      "button": "Xem yêu cầu",
+      "itemsHeading": "Mặt hàng được yêu cầu",
+      "footnote": "Mở yêu cầu trong trang quản trị để chấp thuận hoặc từ chối. Thời hạn hoàn tiền được theo dõi tự động tại đó."
+    },
+    "body": {
+      "heading": "Nội dung email",
+      "editCode": "Chỉnh sửa mã",
+      "htmlLabel": "Nội dung HTML của email",
+      "previewHeading": "Xem trước email"
+    },
+    "variables": {
+      "heading": "Biến",
+      "help": "Chọn một biến để chèn vào vị trí con trỏ.",
+      "insert": "Chèn {{label}}: {{description}}",
+      "groups": {
+        "customer": "Khách hàng",
+        "order": "Đơn hàng",
+        "withdrawal": "Rút lại",
+        "request": "Yêu cầu",
+        "shop": "Cửa hàng"
+      },
+      "tokens": {
+        "customer": {
+          "first_name": {
+            "label": "Tên",
+            "description": "Tên của khách hàng"
+          },
+          "last_name": {
+            "label": "Họ",
+            "description": "Họ của khách hàng"
+          },
+          "email": {
+            "label": "Email",
+            "description": "Địa chỉ email của khách hàng"
+          }
+        },
+        "order": {
+          "name": {
+            "label": "Mã đơn hàng",
+            "description": "Mã đơn hàng, chẳng hạn như #2138"
+          },
+          "id": {
+            "label": "ID đơn hàng",
+            "description": "ID nội bộ của đơn hàng"
+          }
+        },
+        "withdrawal": {
+          "request_id": {
+            "label": "Mã tham chiếu",
+            "description": "Mã tham chiếu của yêu cầu rút lại"
+          },
+          "submitted_at": {
+            "label": "Ngày gửi",
+            "description": "Ngày và giờ gửi yêu cầu"
+          },
+          "reason": {
+            "label": "Lý do",
+            "description": "Lý do khách hàng nêu (nếu có)"
+          },
+          "selected_products": {
+            "label": "Sản phẩm đã chọn (văn bản)",
+            "description": "Các mặt hàng được yêu cầu dưới dạng danh sách phân tách bằng dấu phẩy"
+          }
+        },
+        "request": {
+          "status": {
+            "label": "Trạng thái",
+            "description": "Trạng thái hiện tại của yêu cầu"
+          },
+          "url": {
+            "label": "Liên kết yêu cầu",
+            "description": "Liên kết đến yêu cầu trong ứng dụng"
+          }
+        },
+        "shop": {
+          "name": {
+            "label": "Tên cửa hàng",
+            "description": "Tên cửa hàng của bạn"
+          },
+          "email": {
+            "label": "Email cửa hàng",
+            "description": "Địa chỉ email liên hệ của cửa hàng"
+          }
+        }
+      }
+    },
+    "validation": {
+      "email": "Nhập địa chỉ email hợp lệ.",
+      "subjectRequired": "Nhập tiêu đề.",
+      "subjectTooLong": "Tiêu đề không được dài quá {{max}} ký tự.",
+      "bodyRequired": "Nhập nội dung email."
+    }
+  },
+  "sample": {
+    "customerName": "Nguyễn Thu Hà",
+    "items": {
+      "lamp": {
+        "title": "Đèn bàn Fjord",
+        "variant": "Gỗ sồi / Lớn"
+      },
+      "candleHolder": {
+        "title": "Chân nến Tind",
+        "variant": "Đồng thau"
+      }
+    },
+    "reason": "Tôi đổi ý"
+  },
+  "faqs": {
+    "pageTitle": "Câu hỏi thường gặp",
+    "searchLabel": "Tìm kiếm câu hỏi thường gặp",
+    "searchPlaceholder": "Tìm câu hỏi, chẳng hạn như \"hoàn tiền\" hoặc \"thời hạn\"",
+    "noResults": "Không có câu hỏi nào khớp với \"{{query}}\"",
+    "noResultsHelp": "Hãy thử từ khác hoặc liên hệ hỗ trợ bên dưới.",
+    "showAnswer": "Hiển thị câu trả lời: {{question}}",
+    "hideAnswer": "Ẩn câu trả lời: {{question}}",
+    "groups": {
+      "gettingStarted": "Bắt đầu",
+      "deadline": "Thời hạn rút lại",
+      "requests": "Xử lý yêu cầu",
+      "emailsLanguages": "Email và ngôn ngữ"
+    },
+    "actions": {
+      "goToSettings": "Đi tới Cài đặt",
+      "goToRequests": "Đi tới Yêu cầu",
+      "goToNotifications": "Đi tới Thông báo"
+    },
+    "stillStuck": {
+      "heading": "Bạn vẫn còn câu hỏi?",
+      "body": "Đội ngũ hỗ trợ của chúng tôi đọc và trả lời mọi email.",
+      "link": "Liên hệ hỗ trợ"
+    },
+    "items": {
+      "what-it-does": {
+        "question": "Ứng dụng có chức năng gì?",
+        "paragraphs": [
+          "Ứng dụng cung cấp cho khách hàng tại EU một cách rõ ràng để rút lại giao dịch mua theo yêu cầu của pháp luật EU. Ứng dụng cũng giúp bạn quản lý mọi yêu cầu tại một nơi.",
+          "Khách hàng mở biểu mẫu từ đơn hàng, chọn mặt hàng muốn rút lại rồi xác nhận. Sau đó, mỗi yêu cầu sẽ hiển thị trên trang Yêu cầu cùng các mặt hàng, lý do và thời hạn hoàn tiền của bạn. Ứng dụng sẽ gửi các email bắt buộc thay cho bạn."
+        ]
+      },
+      "where-form-appears": {
+        "question": "Khách hàng tìm thấy biểu mẫu rút lại ở đâu?",
+        "paragraphs": [
+          "Bạn có thể hiển thị biểu mẫu ở 2 nơi. Dùng một hoặc cả hai:"
+        ],
+        "bullets": [
+          "Trang trạng thái đơn hàng: trang khách hàng thấy sau khi thanh toán và khi mở liên kết trong email xác nhận đơn hàng.",
+          "Trang cửa hàng: một trang trong cửa hàng trực tuyến dành cho khách hàng quay lại sau. Họ tìm đơn hàng bằng mã đơn hàng và email."
+        ],
+        "closing": "Bật từng vị trí trong Cài đặt, sau đó thêm khối ứng dụng của vị trí đó một lần. Hướng dẫn thiết lập trên Trang chủ cho biết những khối nào đã được thêm."
+      },
+      "form-not-showing": {
+        "question": "Tại sao khách hàng không thấy biểu mẫu rút lại?",
+        "paragraphs": [
+          "Hãy kiểm tra các điểm sau, bắt đầu từ nguyên nhân thường gặp nhất:"
+        ],
+        "bullets": [
+          "Biểu mẫu đang tắt, hoặc vị trí khách hàng đang dùng chưa được bật trong Cài đặt.",
+          "Chưa thêm khối ứng dụng vào trang đó.",
+          "Đơn hàng không được giao đến quốc gia đủ điều kiện nào của bạn.",
+          "Thời hạn rút lại của đơn hàng đã kết thúc.",
+          "Đơn hàng đã bị hủy hoặc đã có yêu cầu đang chờ. Mỗi đơn hàng chỉ có thể có 1 yêu cầu đang chờ tại một thời điểm."
+        ]
+      },
+      "deadline": {
+        "question": "Thời hạn rút lại bắt đầu và kết thúc khi nào?",
+        "paragraphs": [
+          "Theo pháp luật EU, thời hạn bắt đầu khi khách hàng nhận được mặt hàng, không phải khi đặt hàng. Khách hàng cũng có thể rút lại bất cứ lúc nào trước khi mặt hàng đến nơi."
+        ],
+        "bullets": [
+          "Chưa gửi: thời hạn chưa bắt đầu nên khách hàng luôn có thể rút lại.",
+          "Đã giao: thời hạn bắt đầu từ ngày giao hàng do hãng vận chuyển cung cấp và kéo dài {{withdrawalDays}}. Bạn có thể thay đổi số ngày trong Cài đặt.",
+          "Đã gửi nhưng không có ngày giao: ứng dụng dùng ngày giao dự kiến của hãng vận chuyển. Nếu không có, ứng dụng dùng ngày gửi cộng với thời gian vận chuyển ước tính của bạn."
+        ]
+      },
+      "transit-days": {
+        "question": "Thời gian vận chuyển ước tính được dùng để làm gì?",
+        "paragraphs": [
+          "Nhiều hãng vận chuyển không gửi ngày giao hàng cho Shopify. Khi không có ngày này, ứng dụng không biết thời hạn rút lại bắt đầu khi nào nên sẽ cộng thời gian vận chuyển ước tính của bạn vào ngày gửi.",
+          "Hãy đặt giá trị này bằng khoảng thời gian gói hàng thường mất để đến nơi. Hiện tại, giá trị là {{transitDays}}. Nếu không chắc chắn, hãy chọn thời gian dài hơn. Thời gian quá ngắn có thể khiến thời hạn rút lại của khách hàng kết thúc sớm."
+        ]
+      },
+      "split-shipments": {
+        "question": "Nếu đơn hàng được gửi trong nhiều hơn 1 gói hàng thì sao?",
+        "paragraphs": [
+          "Thời hạn rút lại bắt đầu khi gói hàng cuối cùng đến nơi. Các mặt hàng ứng dụng tạm giữ vì khách hàng đã rút lại không được tính, vì chúng sẽ không được gửi đi.",
+          "Nếu khách hàng rút lại khi chỉ một phần đơn hàng đã được gửi, ứng dụng sẽ xử lý từng phần riêng:"
+        ],
+        "bullets": [
+          "Mặt hàng chưa gửi: ứng dụng có thể tạm giữ để chúng không bị gửi đi.",
+          "Mặt hàng đã gửi: ứng dụng có thể tạo đơn trả hàng cho chúng."
+        ],
+        "closing": "Ứng dụng không bao giờ hủy đơn hàng đã gửi một phần, vì như vậy cũng sẽ hủy các mặt hàng khách hàng đã nhận."
+      },
+      "after-submit": {
+        "question": "Điều gì xảy ra sau khi khách hàng gửi yêu cầu?",
+        "paragraphs": [
+          "Các bước sau diễn ra theo thứ tự:"
+        ],
+        "bullets": [
+          "Yêu cầu hiển thị trên trang Yêu cầu với trạng thái Đang chờ.",
+          "Khách hàng nhận được email xác nhận. Email này luôn được gửi vì đây là bằng chứng rút lại của khách hàng.",
+          "Bạn cũng nhận được email nếu bật Thông báo yêu cầu mới.",
+          "Cài đặt tự động hóa của bạn sẽ chạy. Ví dụ: ứng dụng có thể tạm giữ việc xử lý hoặc gắn thẻ đơn hàng."
+        ]
+      },
+      "automation": {
+        "question": "Cài đặt tự động hóa có tác dụng gì?",
+        "paragraphs": [
+          "Các cài đặt này chạy khi có yêu cầu mới. Những gì ứng dụng có thể làm phụ thuộc vào việc đơn hàng đã được gửi hay chưa:"
+        ],
+        "bullets": [
+          "Trước khi gửi đơn hàng: tạm giữ việc xử lý để không có gì được gửi đi trong lúc bạn xem xét yêu cầu. Bạn cũng có thể để ứng dụng hủy và hoàn tiền toàn bộ đơn hàng ngay lập tức.",
+          "Sau khi gửi đơn hàng: tạo đơn trả hàng trong Shopify cho các mặt hàng đã gửi.",
+          "Đã gửi một phần: áp dụng cả hai. Ứng dụng chỉ tạm giữ những mặt hàng được yêu cầu chưa gửi và tạo đơn trả hàng cho những mặt hàng đã gửi."
+        ],
+        "closing": "Trong mọi trường hợp, ứng dụng cũng có thể gắn thẻ đơn hàng. Tự động hóa không bao giờ chấp thuận hay từ chối yêu cầu. Bạn luôn là người quyết định."
+      },
+      "partial-withdrawal": {
+        "question": "Khách hàng có thể chỉ rút lại một số mặt hàng không?",
+        "paragraphs": [
+          "Có. Khách hàng chọn mặt hàng muốn rút lại. Yêu cầu, khoản hoàn tiền và đơn trả hàng (nếu có) chỉ bao gồm những mặt hàng đó. Phí vận chuyển ban đầu chỉ được hoàn khi khách hàng rút lại toàn bộ đơn hàng.",
+          "Mỗi đơn hàng có thể có 1 yêu cầu đang chờ tại một thời điểm. Sau khi bạn chấp thuận hoặc từ chối, khách hàng có thể gửi yêu cầu mới cho các mặt hàng khác."
+        ]
+      },
+      "reason": {
+        "question": "Khách hàng có phải nêu lý do không?",
+        "paragraphs": [
+          "Không. Theo pháp luật EU, khách hàng không cần lý do để rút lại, vì vậy trường lý do luôn là tùy chọn. Trong Cài đặt, bạn có thể chọn lý do để đưa ra hoặc ngừng hỏi lý do."
+        ]
+      },
+      "refund": {
+        "question": "Làm cách nào để hoàn tiền cho yêu cầu rút lại?",
+        "paragraphs": [
+          "Mở yêu cầu từ trang Yêu cầu. Cách hoàn tiền phụ thuộc vào vị trí của mặt hàng:"
+        ],
+        "bullets": [
+          "Mặt hàng không nằm trong đơn trả hàng: chọn Hoàn tiền. Các mặt hàng chưa gửi sẽ bị gỡ khỏi đơn hàng nên sẽ không được gửi đi.",
+          "Mặt hàng nằm trong đơn trả hàng: khi nhận lại, chọn Xử lý và hoàn tiền trên đơn trả hàng. Thao tác này hoàn tiền cho khách hàng và đóng đơn trả hàng.",
+          "Chưa gửi mặt hàng nào: bạn cũng có thể hủy và hoàn tiền toàn bộ đơn hàng từ Thao tác khác."
+        ],
+        "closing": "Pháp luật EU cho bạn {{refundDays}} kể từ khi rút lại để hoàn tiền. Trang yêu cầu cho biết thời gian còn lại. Hãy hoàn tiền trước khi chấp thuận yêu cầu."
+      },
+      "returns": {
+        "question": "Trả hàng hoạt động như thế nào?",
+        "paragraphs": [
+          "Đơn trả hàng cho Shopify biết khách hàng đang gửi lại những mặt hàng nào. Ứng dụng có thể tạo đơn khi có yêu cầu mới, hoặc bạn có thể chọn Tạo đơn trả hàng trên trang yêu cầu.",
+          "Đơn trả hàng chỉ bao gồm các mặt hàng đã gửi. Việc tạo đơn không hoàn tiền cho khách hàng. Khi nhận lại mặt hàng, hãy chọn Xử lý và hoàn tiền trên đơn trả hàng."
+        ]
+      },
+      "decision-lock": {
+        "question": "Tại sao các thao tác với đơn hàng bị tắt sau khi tôi chấp thuận hoặc từ chối yêu cầu?",
+        "paragraphs": [
+          "Việc chấp thuận hoặc từ chối sẽ kết thúc yêu cầu. Sau đó, hoàn tiền, tạm giữ, trả hàng và hủy đơn sẽ bị tắt để đơn hàng không bị thay đổi do nhầm lẫn. Vì vậy, bạn nên hoàn tiền trước khi chấp thuận.",
+          "Việc quyết định cũng gỡ mọi tạm giữ việc xử lý do ứng dụng đặt. Nếu gỡ không thành công, bạn vẫn có thể chọn Gỡ tạm giữ việc xử lý."
+        ]
+      },
+      "emails": {
+        "question": "Ứng dụng gửi những email nào và tôi có thể chỉnh sửa không?",
+        "paragraphs": [
+          "Ứng dụng gửi {{emailCount}} email. Bạn có thể chỉnh sửa tất cả trên trang Thông báo:"
+        ],
+        "bullets": [
+          "Xác nhận rút lại cho khách hàng: được gửi khi khách hàng gửi yêu cầu. Email này luôn bật.",
+          "Thông báo yêu cầu mới: được gửi đến email liên hệ của cửa hàng. Bạn có thể tắt email này.",
+          "Đã chấp thuận rút lại: được gửi cho khách hàng khi bạn chấp thuận yêu cầu. Bạn có thể xem lại trước hoặc tắt email này.",
+          "Đã từ chối rút lại: được gửi cho khách hàng khi bạn từ chối yêu cầu. Bạn có thể xem lại trước hoặc tắt email này."
+        ],
+        "closing": "Bạn có thể chỉnh sửa tiêu đề và nội dung của từng email bằng mọi ngôn ngữ, đồng thời thêm biến như mã đơn hàng hoặc tên khách hàng. Bản xem trước sẽ cập nhật khi bạn nhập."
+      },
+      "countries-languages": {
+        "question": "Ứng dụng hỗ trợ những quốc gia và ngôn ngữ nào?",
+        "paragraphs": [
+          "Theo mặc định, tất cả quốc gia EU đều đủ điều kiện. Nếu bạn chỉ bán cho một số quốc gia, hãy chọn Quốc gia cụ thể trong Cài đặt.",
+          "Biểu mẫu có {{languageCount}} ngôn ngữ: {{languages}}. Khách hàng thấy biểu mẫu bằng ngôn ngữ của họ.",
+          "Tiếng Anh là ngôn ngữ gốc. Nếu bạn để trống một trường đã dịch, khách hàng sẽ thấy văn bản tiếng Anh thay thế."
+        ]
+      }
+    }
+  },
+  "featureRequest": {
+    "pageTitle": "Đề xuất tính năng",
+    "intro": "Hãy cho chúng tôi biết bạn muốn thấy gì trong ứng dụng. Chúng tôi đọc mọi đề xuất.",
+    "sentHeading": "Đã gửi đề xuất tính năng",
+    "sentBody": "Cảm ơn bạn đã chia sẻ ý tưởng với đội ngũ của chúng tôi.",
+    "firstName": "Tên",
+    "lastName": "Họ",
+    "email": "Email",
+    "request": "Bạn muốn có tính năng nào?",
+    "requestPlaceholder": "Mô tả tính năng và cách tính năng đó giúp ích cho cửa hàng của bạn",
+    "submit": "Gửi đề xuất"
+  },
+  "pricing": {
+    "pageTitle": "Bảng giá",
+    "pricePerMonth": "{{price}} mỗi tháng",
+    "currentPlan": "Gói hiện tại",
+    "choosePlan": "Chọn {{plan}}",
+    "switchedToast": "Đã chuyển sang gói {{plan}}",
+    "plans": {
+      "free": {
+        "name": "Free",
+        "features": [
+          "Tối đa 10 yêu cầu rút lại mỗi tháng",
+          "Thông báo qua email"
+        ]
+      },
+      "starter": {
+        "name": "Starter",
+        "features": [
+          "Không giới hạn yêu cầu rút lại",
+          "Trường biểu mẫu tùy chỉnh",
+          "Thông báo qua email"
+        ]
+      },
+      "pro": {
+        "name": "Pro",
+        "features": [
+          "Mọi tính năng của gói Starter",
+          "Hỗ trợ ưu tiên",
+          "Hoàn tiền tự động"
+        ]
+      }
+    },
+    "switchError": "Không thể thay đổi gói của bạn"
+  }
+}
