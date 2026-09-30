@@ -2,6 +2,8 @@ import { authenticate } from "../shopify.server";
 import connectDB from "../db.server";
 import WithdrawalRequest from "../models/withdrawal-request.server";
 
+const escapeRegExp = (value) => value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
 // Mandatory GDPR webhook: erase one customer's PII. Matches on the customer's
 // email and on the orders Shopify flagged for redaction (converted to the
 // gid://shopify/Order/... form WithdrawalRequest.orderId is stored in, since
@@ -18,7 +20,13 @@ export const action = async ({ request }) => {
   );
 
   const matchers = [];
-  if (customerEmail) matchers.push({ customerEmail });
+  // Case-insensitive: the stored email comes from whatever surface the
+  // customer submitted on, so its casing can differ from Shopify's record.
+  if (customerEmail) {
+    matchers.push({
+      customerEmail: { $regex: `^${escapeRegExp(customerEmail)}$`, $options: "i" },
+    });
+  }
   if (orderGids.length > 0) matchers.push({ orderId: { $in: orderGids } });
 
   if (matchers.length === 0) {
@@ -33,6 +41,10 @@ export const action = async ({ request }) => {
         customerName: "",
         customerEmail: "",
         shippingAddress: "",
+        // Free text the customer typed, and staff notes written about them —
+        // either can hold personal data.
+        reason: "",
+        notes: [],
       },
     },
   );
