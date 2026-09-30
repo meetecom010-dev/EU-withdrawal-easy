@@ -8,6 +8,18 @@ name = "Meet: EU withdrawal"
 [webhooks]
 api_version = "2026-07"
 
+[[webhooks.subscriptions]]
+compliance_topics = [ "customers/data_request" ]
+uri = "/webhooks/customers/data_request"
+
+[[webhooks.subscriptions]]
+compliance_topics = [ "customers/redact" ]
+uri = "/webhooks/customers/redact"
+
+[[webhooks.subscriptions]]
+compliance_topics = [ "shop/redact" ]
+uri = "/webhooks/shop/redact"
+
 [app_proxy]
 url = "https://eu-withdrawal-easy.fly.dev/proxy/withdrawal-easy"
 subpath = "withdrawal-easy"
