@@ -20,5 +20,15 @@
   "item.select": "Sélectionner {{title}}",
   "item.remove": "Retirer {{title}}",
   "item.fallbackTitle": "Article",
-  "error.submit": "Une erreur s'est produite lors de l'envoi de votre demande. Veuillez réessayer."
+  "error.submit": "Une erreur s'est produite lors de l'envoi de votre demande. Réessayez.",
+  "error.order_not_found": "Nous n'avons pas trouvé cette commande.",
+  "error.invalid_items": "Les articles sélectionnés ne font pas partie de cette commande. Actualisez la page et réessayez.",
+  "error.duplicate_request": "Une demande de rétractation pour cette commande est déjà en cours d'examen.",
+  "error.rate_limited": "Trop de tentatives. Patientez quelques minutes, puis réessayez.",
+  "eligibility.order_not_found": "Nous n'avons pas trouvé cette commande.",
+  "eligibility.order_cancelled": "Cette commande a été annulée : il n'y a donc rien à rétracter.",
+  "eligibility.already_requested": "Nous avons déjà reçu une demande de rétractation pour cette commande et nous l'examinons.",
+  "eligibility.deadline_passed": "Le délai de rétractation de cette commande a pris fin le {{date}}. Contactez-nous si vous pensez qu'il s'agit d'une erreur.",
+  "eligibility.deadline_passed_no_date": "Le délai de rétractation de cette commande a pris fin. Contactez-nous si vous pensez qu'il s'agit d'une erreur.",
+  "eligibility.not_eligible": "Il n'est plus possible de se rétracter de cette commande."
 }

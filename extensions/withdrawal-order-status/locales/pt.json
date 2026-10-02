@@ -20,5 +20,15 @@
   "item.select": "Selecionar {{title}}",
   "item.remove": "Remover {{title}}",
   "item.fallbackTitle": "Artigo",
-  "error.submit": "Ocorreu um erro ao enviar o seu pedido. Por favor, tente novamente."
+  "error.submit": "Ocorreu um erro ao enviar o seu pedido. Tente novamente.",
+  "error.order_not_found": "Não encontrámos esta encomenda.",
+  "error.invalid_items": "Os artigos selecionados não fazem parte desta encomenda. Atualize a página e tente novamente.",
+  "error.duplicate_request": "Já estamos a analisar um pedido de desistência para esta encomenda.",
+  "error.rate_limited": "Demasiadas tentativas. Aguarde alguns minutos e tente novamente.",
+  "eligibility.order_not_found": "Não encontrámos esta encomenda.",
+  "eligibility.order_cancelled": "Esta encomenda foi cancelada, por isso não há nada de que desistir.",
+  "eligibility.already_requested": "Já recebemos um pedido de desistência para esta encomenda e estamos a analisá-lo.",
+  "eligibility.deadline_passed": "O prazo de desistência desta encomenda terminou a {{date}}. Contacte-nos se achar que isto está errado.",
+  "eligibility.deadline_passed_no_date": "O prazo de desistência desta encomenda terminou. Contacte-nos se achar que isto está errado.",
+  "eligibility.not_eligible": "Já não é possível desistir desta encomenda."
 }

@@ -20,5 +20,15 @@
   "item.select": "Välj {{title}}",
   "item.remove": "Ta bort {{title}}",
   "item.fallbackTitle": "Artikel",
-  "error.submit": "Något gick fel när din begäran skickades. Försök igen."
+  "error.submit": "Något gick fel när din begäran skickades. Försök igen.",
+  "error.order_not_found": "Vi hittade inte den här beställningen.",
+  "error.invalid_items": "De valda artiklarna finns inte i den här beställningen. Uppdatera sidan och försök igen.",
+  "error.duplicate_request": "En ångerbegäran för den här beställningen granskas redan.",
+  "error.rate_limited": "För många försök. Vänta några minuter och försök igen.",
+  "eligibility.order_not_found": "Vi hittade inte den här beställningen.",
+  "eligibility.order_cancelled": "Den här beställningen har avbrutits, så det finns inget att ångra.",
+  "eligibility.already_requested": "Vi har redan tagit emot en ångerbegäran för den här beställningen och granskar den.",
+  "eligibility.deadline_passed": "Ångerfristen för den här beställningen gick ut den {{date}}. Kontakta oss om du tror att detta är fel.",
+  "eligibility.deadline_passed_no_date": "Ångerfristen för den här beställningen har gått ut. Kontakta oss om du tror att detta är fel.",
+  "eligibility.not_eligible": "Det går inte längre att ångra den här beställningen."
 }

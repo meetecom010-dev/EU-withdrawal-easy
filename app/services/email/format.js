@@ -15,20 +15,35 @@ export function escapeHtml(value) {
     .replace(/'/g, "&#39;");
 }
 
-export function formatDate(value) {
+// The Intl locale for an email: the buyer's language when known ("de" -> German
+// month names and number format), British English otherwise — the format these
+// emails have always used. The stored locale comes from the customer's browser,
+// so anything Intl doesn't accept (e.g. "x") falls back too, rather than
+// throwing while the email is rendered.
+export function emailLocale(locale) {
+  const lang = String(locale ?? "").toLowerCase().split(/[-_]/)[0];
+  if (!lang || lang === "en") return "en-GB";
+  try {
+    return Intl.DateTimeFormat.supportedLocalesOf([lang]).length > 0 ? lang : "en-GB";
+  } catch {
+    return "en-GB";
+  }
+}
+
+export function formatDate(value, locale) {
   if (!value) return "";
   const date = value instanceof Date ? value : new Date(value);
   if (Number.isNaN(date.getTime())) return "";
-  return date.toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
+  return date.toLocaleDateString(emailLocale(locale), { day: "numeric", month: "long", year: "numeric" });
 }
 
 // Date + time, for the "Submitted on" / "Date" fields where the exact moment
 // matters (e.g. the merchant summary). e.g. "24 July 2026 at 23:30".
-export function formatDateTime(value) {
+export function formatDateTime(value, locale) {
   if (!value) return "";
   const date = value instanceof Date ? value : new Date(value);
   if (Number.isNaN(date.getTime())) return "";
-  return date.toLocaleString("en-GB", {
+  return date.toLocaleString(emailLocale(locale), {
     day: "numeric",
     month: "long",
     year: "numeric",
@@ -37,10 +52,10 @@ export function formatDateTime(value) {
   });
 }
 
-export function formatMoney(price) {
+export function formatMoney(price, locale) {
   if (!price || price.amount == null || !price.currencyCode) return "";
   try {
-    return new Intl.NumberFormat("en-GB", {
+    return new Intl.NumberFormat(emailLocale(locale), {
       style: "currency",
       currency: price.currencyCode,
     }).format(Number(price.amount));

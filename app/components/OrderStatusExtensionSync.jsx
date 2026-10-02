@@ -6,6 +6,7 @@ import { updateOrderStatusBlockStatus } from "../utils/api/shop";
 const ORDER_STATUS_EXTENSION_HANDLE = "withdrawal-order-status";
 const ORDER_STATUS_EXTENSION_TARGET = "customer-account.order-status.block.render";
 const EXTENSION_CHECK_INTERVAL_MS = 10_000;
+const EXTENSION_RECHECK_INTERVAL_MS = 60_000;
 
 // Mounted once for the whole authenticated app shell (see routes/_app.jsx).
 // Keeps Shop.orderStatusBlockAdded (Context + database) in sync with the
@@ -49,10 +50,26 @@ export default function OrderStatusExtensionSync() {
     }
   }, [shopify, patchShop]);
 
+  // Checks quickly while the block isn't placed yet (the setup guide promises
+  // the status updates a few seconds after the merchant saves), then only
+  // occasionally once it is, to notice a removal. Skipped while the tab is in
+  // the background.
   useEffect(() => {
-    syncStatus();
-    const intervalId = setInterval(syncStatus, EXTENSION_CHECK_INTERVAL_MS);
-    return () => clearInterval(intervalId);
+    let timeoutId;
+    let stopped = false;
+    const tick = async () => {
+      if (typeof document === "undefined" || !document.hidden) await syncStatus();
+      if (stopped) return;
+      timeoutId = setTimeout(
+        tick,
+        lastPersistedRef.current ? EXTENSION_RECHECK_INTERVAL_MS : EXTENSION_CHECK_INTERVAL_MS,
+      );
+    };
+    tick();
+    return () => {
+      stopped = true;
+      clearTimeout(timeoutId);
+    };
   }, [syncStatus]);
 
   return null;

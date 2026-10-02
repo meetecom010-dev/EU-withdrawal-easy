@@ -10,6 +10,8 @@ export default function RenderedEmail({ html, height = "600px" }) {
     <iframe
       title={t("emailTemplates.body.previewHeading")}
       srcDoc={html}
+      // No scripts: the HTML is merchant-edited and must not run in the app.
+      sandbox="allow-same-origin allow-popups"
       style={{
         width: "100%",
         height,

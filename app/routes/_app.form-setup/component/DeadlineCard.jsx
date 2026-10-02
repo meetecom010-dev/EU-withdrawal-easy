@@ -14,12 +14,13 @@ export default function DeadlineCard({ settings, update, errors = {}, dismissErr
             days: t("common.dayCount", { count: LEGAL_MIN_WITHDRAWAL_DAYS }),
           })}
         </s-paragraph>
-        <s-grid gridTemplateColumns="1fr 1fr" gap="large-100">
+        <s-query-container>
+        <s-grid gridTemplateColumns="@container (inline-size > 500px) 1fr 1fr, 1fr" gap="large-100">
           <s-number-field
             label={t("formSetup.deadline.days")}
             details={t("formSetup.deadline.daysDetails")}
             value={String(settings.deadline.daysAfterDelivery)}
-            min={1}
+            min={LEGAL_MIN_WITHDRAWAL_DAYS}
             max={365}
             error={errors["deadline.daysAfterDelivery"]}
             onInput={(e) =>
@@ -40,6 +41,7 @@ export default function DeadlineCard({ settings, update, errors = {}, dismissErr
             onFocus={() => dismissError("deadline.estimatedTransitDays")}
           ></s-number-field>
         </s-grid>
+        </s-query-container>
       </s-stack>
     </s-section>
   );

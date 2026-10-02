@@ -13,7 +13,8 @@
     "preview": "Forhåndsvis",
     "remove": "Fjern",
     "save": "Gem",
-    "verified": "Bekræftet"
+    "verified": "Bekræftet",
+    "retry": "Prøv igen"
   },
   "nav": {
     "home": "Start",
@@ -31,7 +32,7 @@
     "emailServiceUnavailable": "Vi kunne ikke oprette forbindelse til e-mailtjenesten. Prøv igen om et par minutter.",
     "emailServiceNotConfigured": "Afsendelse af e-mails er ikke konfigureret endnu. Kontakt support for at få hjælp.",
     "requestNotFound": "Denne fortrydelsesanmodning findes ikke eller er blevet slettet.",
-    "requestDecided": "Denne anmodning er allerede godkendt eller afvist, så ordrehandlinger er ikke længere tilgængelige.",
+    "requestDecided": "Denne anmodning er afvist, så ordrehandlinger er ikke længere tilgængelige.",
     "unknownDecision": "Vælg, om du vil godkende eller afvise denne anmodning.",
     "invalidStatus": "Vælg en gyldig status for denne anmodning.",
     "noteRequired": "Angiv en note.",
@@ -43,7 +44,8 @@
     "senderNotStarted": "Bekræft din afsenderadresse først.",
     "senderIdMissing": "Vi kunne ikke registrere denne afsenderadresse. Prøv igen.",
     "domainInvalid": "Angiv et gyldigt domæne, f.eks. dinbutik.dk.",
-    "domainFreeProvider": "Gratis e-mailudbydere som Gmail og Yahoo kan ikke godkendes. Brug din butiks domæne i stedet."
+    "domainFreeProvider": "Gratis e-mailudbydere som Gmail og Yahoo kan ikke godkendes. Brug din butiks domæne i stedet.",
+    "alreadyDecided": "Denne anmodning er allerede godkendt eller afvist."
   },
   "auth": {
     "login": {
@@ -249,7 +251,8 @@
         "email": "En automatisk bekræftelsesmail, som kunderne kan gemme"
       },
       "penaltyHeading": "Hvad der sker, hvis du ikke overholder reglerne",
-      "penalty": "Hvis fortrydelsesknappen mangler eller ikke virker, forlænger loven fortrydelsesfristen på {{days}} dage. Kunderne får så 12 måneder og {{days}} dage til at fortryde hver berørt ordre."
+      "penalty": "Hvis fortrydelsesknappen mangler eller ikke virker, kan du risikere sanktioner efter national lovgivning, og kunderne kan få meget længere end {{days}} dage til at fortryde.",
+      "disclaimer": "Dette er generel information, ikke juridisk rådgivning."
     },
     "form": {
       "heading": "Aktivér din fortrydelsesformular",
@@ -279,8 +282,8 @@
     "countries": {
       "heading": "Berettigede lande",
       "description": "Kunderne ser kun fortrydelsesformularen, hvis deres ordre sendes til et af disse lande.",
-      "all": "Alle {{count}} EU-lande (anbefales)",
-      "allDetails": "Fortrydelsesretten gælder i hele EU.",
+      "all": "Alle {{count}} EU- og EØS-lande (anbefales)",
+      "allDetails": "Fortrydelsesretten gælder i hele EU og EØS.",
       "specific": "Bestemte lande",
       "specificDetails": "Vælg lande nedenfor. Du kan til enhver tid ændre dette.",
       "pickerLabel": "Lande",
@@ -340,7 +343,8 @@
         "messageBefore": "Besked før levering",
         "titleAfter": "Titel efter levering",
         "messageAfter": "Besked efter levering"
-      }
+      },
+      "daysHint": "Skriv {{days}} for at vise din fortrydelsesfrist i dage."
     },
     "automation": {
       "heading": "Automatisering",
@@ -349,7 +353,7 @@
         "heading": "Før ordren afsendes",
         "description": "Gælder, når en anmodning modtages, før nogen varer er afsendt.",
         "hold": "Tilbagehold udførelse til gennemgang",
-        "holdDetails": "Sæt udførelsen på pause, indtil du godkender eller afviser anmodningen. Tilbageholdelsen ophæves, når du træffer din beslutning.",
+        "holdDetails": "Sæt udførelsen på pause, mens du gennemgår anmodningen. Hvis du afviser den, ophæves tilbageholdelsen. Når du har godkendt den, skal du refundere de fortrudte varer og derefter ophæve tilbageholdelsen.",
         "tagDetails": "Tag ordrer, der modtager en anmodning, før de afsendes, så dit personale kan finde dem på ordrelisten."
       },
       "fallback": {
@@ -404,7 +408,7 @@
     },
     "preview": {
       "heading": "Live-forhåndsvisning",
-      "compliantBadge": "Overholder 2-trinskravet",
+      "compliantBadge": "Bekræftelse i 2 trin",
       "surfaceLabel": "Forhåndsvisning",
       "surfaces": {
         "orderStatus": "Ordrestatusside",
@@ -795,7 +799,8 @@
       "previewTitle": "Forhåndsvisning af e-mail",
       "templateUnchanged": "Dine ændringer gælder kun for denne e-mail. Din gemte skabelon ændres ikke.",
       "noEmail": "Kunden får ikke en e-mail. Du kan kontakte kunden separat, hvis det er nødvendigt.",
-      "holdReleased": "Dette ophæver også tilbageholdelsen af udførelsen for denne ordre, så den kan udføres igen."
+      "holdReleased": "Dette ophæver også tilbageholdelsen af udførelsen for denne ordre, så den kan udføres igen.",
+      "holdKept": "Tilbageholdelsen af udførelsen bevares, så de fortrudte varer ikke sendes. Refunder dem, eller annuller ordren, og ophæv derefter tilbageholdelsen for de varer, der stadig skal sendes."
     },
     "refundModal": {
       "heading": "Refunder fortrudte varer",
@@ -836,7 +841,7 @@
       "heading": "Afsender",
       "description": "Disse indstillinger gælder for alle e-mails, som appen sender for din butik. Send fra din egen bekræftede adresse, og vælg, hvor svar fra kunder skal hen.",
       "emailLabel": "Afsenderadresse",
-      "emailPlaceholder": "notifications@withdrawaleasy.com",
+      "emailPlaceholder": "orders@yourstore.com",
       "detailsVerified": "E-mails sendes fra denne adresse.",
       "detailsPending": "Angiv den kode, vi sendte til denne adresse, for at bekræfte den.",
       "detailsDefault": "Hvis du lader feltet være tomt, sendes e-mails fra {{email}}.",
@@ -1163,7 +1168,7 @@
           "Varer i en returnering: når de er kommet tilbage, skal du vælge Behandl og refunder på returneringen. Så refunderes kunden, og returneringen lukkes.",
           "Intet er afsendt endnu: du kan også annullere og refundere hele ordren fra Flere handlinger."
         ],
-        "closing": "EU-lovgivningen giver dig {{refundDays}} fra fortrydelsen til at refundere. Anmodningssiden viser, hvor meget tid der er tilbage. Refunder, før du godkender anmodningen."
+        "closing": "EU-lovgivningen giver dig {{refundDays}} fra fortrydelsen til at refundere. Anmodningssiden viser, hvor meget tid der er tilbage."
       },
       "returns": {
         "question": "Hvordan fungerer returneringer?",
@@ -1173,10 +1178,10 @@
         ]
       },
       "decision-lock": {
-        "question": "Hvorfor deaktiveres ordrehandlinger, når jeg har godkendt eller afvist en anmodning?",
+        "question": "Hvad sker der, når jeg godkender eller afviser en anmodning?",
         "paragraphs": [
-          "Når du godkender eller afviser, afsluttes anmodningen. Derefter deaktiveres refunderinger, tilbageholdelser, returneringer og annulleringer, så ordren ikke ændres ved en fejl. Derfor bør du refundere, før du godkender.",
-          "Beslutningen ophæver også enhver tilbageholdelse af udførelsen, som appen har foretaget. Hvis ophævelsen mislykkes, kan du stadig vælge Ophæv tilbageholdelse af udførelse."
+          "Når du godkender, bevares den tilbageholdelse af udførelsen, som appen har foretaget, så de fortrudte varer ikke sendes. Refunder derefter varerne, opret en returnering, eller annuller ordren fra anmodningssiden. Ophæv til sidst tilbageholdelsen, så resten af ordren kan sendes.",
+          "Når du afviser, afsluttes anmodningen. Appens tilbageholdelse af udførelsen ophæves, og refunderinger, tilbageholdelser, returneringer og annulleringer deaktiveres, så ordren ikke ændres ved en fejl. Hvis ophævelsen mislykkes, kan du stadig vælge Ophæv tilbageholdelse af udførelse."
         ]
       },
       "emails": {
@@ -1195,7 +1200,7 @@
       "countries-languages": {
         "question": "Hvilke lande og sprog understøtter appen?",
         "paragraphs": [
-          "Alle EU-lande er som standard berettigede. Hvis du kun sælger til nogle af dem, skal du vælge Bestemte lande i Indstillinger.",
+          "Alle EU- og EØS-lande er som standard berettigede. Hvis du kun sælger til nogle af dem, skal du vælge Bestemte lande i Indstillinger.",
           "Formularen findes på {{languageCount}} sprog: {{languages}}. Kunderne ser den på deres eget sprog.",
           "Engelsk er grundsproget. Hvis du lader et oversat felt være tomt, ser kunderne den engelske tekst i stedet."
         ]

@@ -4,8 +4,8 @@ import { translateError } from "../../i18n/errors";
 import { getRequestT } from "../../i18n/server";
 import {
   addWithdrawalRequestNote,
+  findAdjacentRequestIds,
   getWithdrawalRequestById,
-  listWithdrawalRequests,
   updateWithdrawalRequestStatus,
 } from "../../services/withdrawal-request.server";
 import {
@@ -45,17 +45,37 @@ const ORDER_ACTION_INTENTS = new Set([
   "process-return",
 ]);
 
+// Every intent this action handles. Anything else is refused up front instead
+// of falling through to the decision branch.
+const KNOWN_INTENTS = new Set([
+  ...ORDER_ACTION_INTENTS,
+  "decide",
+  "decision-preview",
+  "note",
+  "order-tags-save",
+  "release-hold",
+]);
+
+// The staged tag edits from the save bar: a JSON array of strings, or nothing.
+function parseTagList(value) {
+  try {
+    const parsed = JSON.parse(value || "[]");
+    return Array.isArray(parsed) ? parsed.filter((tag) => typeof tag === "string") : [];
+  } catch {
+    return [];
+  }
+}
+
 export const loader = async ({ request, params }) => {
   const { admin, session } = await authenticate.admin(request);
   const t = getRequestT(request);
-  const [withdrawalRequest, allRequests] = await Promise.all([
-    getWithdrawalRequestById(session.shop, params.id),
-    listWithdrawalRequests(session.shop),
-  ]);
+  const withdrawalRequest = await getWithdrawalRequestById(session.shop, params.id);
 
   if (!withdrawalRequest) {
     throw data({ error: t("errors.requestNotFound") }, { status: 404 });
   }
+
+  const adjacentPromise = findAdjacentRequestIds(session.shop, withdrawalRequest);
 
   // Live order state drives the contextual actions and keeps the Order tags in
   // sync. Fail soft: if Shopify can't be reached the page still renders the
@@ -89,15 +109,15 @@ export const loader = async ({ request, params }) => {
     }
   }
 
-  const index = allRequests.findIndex((r) => r.id === withdrawalRequest.id);
+  const { prevId, nextId } = await adjacentPromise;
   return {
     withdrawalRequest,
     orderState,
     orderStateError,
     returnRefundAvailable,
     shopDomain: session.shop,
-    prevId: index > 0 ? allRequests[index - 1].id : null,
-    nextId: index >= 0 && index < allRequests.length - 1 ? allRequests[index + 1].id : null,
+    prevId,
+    nextId,
   };
 };
 
@@ -111,13 +131,18 @@ export const action = async ({ request, params }) => {
   const formData = await request.formData();
   const intent = formData.get("intent");
 
-  // Order actions only apply while the request is pending. Once it's approved
-  // or rejected the page disables them, and this refuses them too, so a stale
-  // tab can't refund, cancel, hold or return against a decided request.
+  if (!KNOWN_INTENTS.has(intent)) {
+    return data({ error: t("errors.unknownAction") }, { status: 400 });
+  }
+
+  // Order actions apply while the request is pending and after it's approved
+  // (an approved withdrawal still has to be refunded, returned or cancelled).
+  // Once it's rejected the page disables them, and this refuses them too, so a
+  // stale tab can't refund, cancel, hold or return against a rejected request.
   if (ORDER_ACTION_INTENTS.has(intent)) {
     const reqDoc = await getWithdrawalRequestById(session.shop, params.id);
     if (!reqDoc) return data({ error: t("errors.requestNotFound") }, { status: 404 });
-    if (reqDoc.status !== "pending") {
+    if (reqDoc.status === "rejected") {
       return data({ error: t("errors.requestDecided") }, { status: 409 });
     }
   }
@@ -167,8 +192,8 @@ export const action = async ({ request, params }) => {
   // the whole batch here when the save bar's Save is clicked (the loader
   // reads tags live, so no local copy is kept between saves).
   if (intent === "order-tags-save") {
-    const added = JSON.parse(formData.get("added") || "[]");
-    const removed = JSON.parse(formData.get("removed") || "[]");
+    const added = parseTagList(formData.get("added"));
+    const removed = parseTagList(formData.get("removed"));
     const withdrawalRequest = await syncOrderTagsForRequest(session.shop, params.id, { added, removed });
     return { withdrawalRequest };
   }
@@ -250,7 +275,25 @@ export const action = async ({ request, params }) => {
   const emailSubject = formData.get("subject") ?? "";
   const emailHtml = formData.get("html") ?? "";
 
-  const withdrawalRequest = await updateWithdrawalRequestStatus(session.shop, params.id, status);
+  if (!DECISION_TEMPLATE[status]) {
+    return data({ error: t("errors.unknownDecision") }, { status: 400 });
+  }
+  // A request is decided once. Deciding again (a double click, a stale tab)
+  // would re-send the customer's decision email.
+  const current = await getWithdrawalRequestById(session.shop, params.id);
+  if (!current) return data({ error: t("errors.requestNotFound") }, { status: 404 });
+  if (current.status !== "pending") {
+    return { withdrawalRequest: current, decided: false, error: t("errors.alreadyDecided") };
+  }
+
+  const withdrawalRequest = await updateWithdrawalRequestStatus(session.shop, params.id, status, {
+    onlyIfPending: true,
+  });
+  // Another decision landed between the check above and this write.
+  if (!withdrawalRequest) {
+    const latest = await getWithdrawalRequestById(session.shop, params.id);
+    return { withdrawalRequest: latest, decided: false, error: t("errors.alreadyDecided") };
+  }
 
   // Deliberately not surfaced as a failure of the decision itself — a Shopify or
   // email hiccup is recorded in the request's automation log either way.

@@ -14,7 +14,8 @@
     "preview": "Anteprima",
     "remove": "Rimuovi",
     "save": "Salva",
-    "verified": "Verificato"
+    "verified": "Verificato",
+    "retry": "Riprova"
   },
   "nav": {
     "home": "Home",
@@ -32,7 +33,7 @@
     "emailServiceUnavailable": "Impossibile connettersi al servizio email. Riprova tra qualche minuto.",
     "emailServiceNotConfigured": "L'invio delle email non è ancora configurato. Contatta l'assistenza.",
     "requestNotFound": "Questa richiesta di recesso non esiste o è stata eliminata.",
-    "requestDecided": "Questa richiesta è già stata approvata o rifiutata, quindi le azioni sull'ordine non sono più disponibili.",
+    "requestDecided": "Questa richiesta è stata rifiutata, quindi le azioni sull'ordine non sono più disponibili.",
     "unknownDecision": "Scegli se approvare o rifiutare questa richiesta.",
     "invalidStatus": "Scegli uno stato valido per questa richiesta.",
     "noteRequired": "Inserisci una nota.",
@@ -44,7 +45,8 @@
     "senderNotStarted": "Verifica prima la tua email del mittente.",
     "senderIdMissing": "Impossibile registrare questa email del mittente. Riprova.",
     "domainInvalid": "Inserisci un dominio valido, ad esempio iltuonegozio.com.",
-    "domainFreeProvider": "I provider email gratuiti come Gmail e Yahoo non possono essere autenticati. Usa invece il dominio del tuo negozio."
+    "domainFreeProvider": "I provider email gratuiti come Gmail e Yahoo non possono essere autenticati. Usa invece il dominio del tuo negozio.",
+    "alreadyDecided": "Questa richiesta è già stata approvata o rifiutata."
   },
   "auth": {
     "login": {
@@ -253,7 +255,8 @@
         "email": "Un'email di conferma automatica che i clienti possano conservare"
       },
       "penaltyHeading": "Cosa succede se non rispetti la normativa",
-      "penalty": "Se il pulsante di recesso manca o non funziona, la legge estende il periodo di recesso di {{days}} giorni. I clienti hanno quindi 12 mesi e {{days}} giorni per recedere da ogni ordine interessato."
+      "penalty": "Se il pulsante di recesso manca o non funziona, rischi sanzioni secondo la legge nazionale e i clienti potrebbero avere molto più di {{days}} giorni per recedere.",
+      "disclaimer": "Queste sono informazioni generali, non una consulenza legale."
     },
     "form": {
       "heading": "Attiva il modulo di recesso",
@@ -283,8 +286,8 @@
     "countries": {
       "heading": "Paesi idonei",
       "description": "I clienti vedono il modulo di recesso solo se il loro ordine viene spedito in uno di questi paesi.",
-      "all": "Tutti i {{count}} paesi UE (consigliato)",
-      "allDetails": "Il diritto di recesso si applica in tutta l'UE.",
+      "all": "Tutti i {{count}} paesi UE e SEE (consigliato)",
+      "allDetails": "Il diritto di recesso si applica in tutta l'UE e il SEE.",
       "specific": "Paesi specifici",
       "specificDetails": "Scegli i paesi qui sotto. Puoi modificarli in qualsiasi momento.",
       "pickerLabel": "Paesi",
@@ -344,7 +347,8 @@
         "messageBefore": "Messaggio prima della consegna",
         "titleAfter": "Titolo dopo la consegna",
         "messageAfter": "Messaggio dopo la consegna"
-      }
+      },
+      "daysHint": "Scrivi {{days}} per mostrare il tuo periodo di recesso in giorni."
     },
     "automation": {
       "heading": "Automazione",
@@ -353,7 +357,7 @@
         "heading": "Prima della spedizione dell'ordine",
         "description": "Si applica quando una richiesta arriva prima che siano stati spediti articoli.",
         "hold": "Sospendi l'evasione per la revisione",
-        "holdDetails": "Sospendi l'evasione finché non approvi o rifiuti la richiesta. La sospensione viene rimossa quando decidi.",
+        "holdDetails": "Sospendi l'evasione mentre esamini la richiesta. Se la rifiuti, la sospensione viene rimossa. Dopo averla approvata, rimborsa gli articoli oggetto di recesso e poi rimuovi la sospensione.",
         "tagDetails": "Aggiungi un tag agli ordini che ricevono una richiesta prima della spedizione, così il tuo staff può trovarli nell'elenco degli ordini."
       },
       "fallback": {
@@ -408,7 +412,7 @@
     },
     "preview": {
       "heading": "Anteprima dal vivo",
-      "compliantBadge": "Conforme in 2 passaggi",
+      "compliantBadge": "Conferma in 2 passaggi",
       "surfaceLabel": "Anteprima",
       "surfaces": {
         "orderStatus": "Pagina di stato dell'ordine",
@@ -810,7 +814,8 @@
       "previewTitle": "Anteprima email",
       "templateUnchanged": "Le modifiche si applicano solo a questa email. Il modello salvato non cambierà.",
       "noEmail": "Il cliente non riceverà un'email. Se necessario, puoi contattarlo separatamente.",
-      "holdReleased": "Questa operazione rimuove anche la sospensione dell'evasione su questo ordine, così l'ordine può essere di nuovo evaso."
+      "holdReleased": "Questa operazione rimuove anche la sospensione dell'evasione su questo ordine, così l'ordine può essere di nuovo evaso.",
+      "holdKept": "La sospensione dell'evasione resta attiva, così gli articoli oggetto di recesso non vengono spediti. Rimborsali o annulla l'ordine, poi rimuovi la sospensione per ciò che resta da spedire."
     },
     "refundModal": {
       "heading": "Rimborsa gli articoli oggetto del recesso",
@@ -852,7 +857,7 @@
       "heading": "Mittente",
       "description": "Queste impostazioni si applicano a ogni email che l'app invia per il tuo negozio. Invia dal tuo indirizzo verificato e scegli dove arrivano le risposte dei clienti.",
       "emailLabel": "Email del mittente",
-      "emailPlaceholder": "notifications@withdrawaleasy.com",
+      "emailPlaceholder": "orders@yourstore.com",
       "detailsVerified": "Le email vengono inviate da questo indirizzo.",
       "detailsPending": "Inserisci il codice che abbiamo inviato a questo indirizzo per verificarlo.",
       "detailsDefault": "Se lasci vuoto questo campo, le email vengono inviate da {{email}}.",
@@ -1179,7 +1184,7 @@
           "Articoli in un reso: quando tornano, seleziona Elabora e rimborsa sul reso. In questo modo il cliente viene rimborsato e il reso viene chiuso.",
           "Nulla è stato ancora spedito: puoi anche annullare e rimborsare l'intero ordine da Altre azioni."
         ],
-        "closing": "La normativa UE ti concede {{refundDays}} dal recesso per effettuare il rimborso. La pagina della richiesta mostra quanto tempo rimane. Rimborsa prima di approvare la richiesta."
+        "closing": "La normativa UE ti concede {{refundDays}} dal recesso per effettuare il rimborso. La pagina della richiesta mostra quanto tempo rimane."
       },
       "returns": {
         "question": "Come funzionano i resi?",
@@ -1189,10 +1194,10 @@
         ]
       },
       "decision-lock": {
-        "question": "Perché le azioni sull'ordine vengono disattivate dopo che approvo o rifiuto una richiesta?",
+        "question": "Cosa succede quando approvo o rifiuto una richiesta?",
         "paragraphs": [
-          "Approvare o rifiutare conclude la richiesta. Dopo, rimborsi, sospensioni, resi e annullamenti vengono disattivati, così l'ordine non può essere modificato per errore. Per questo dovresti rimborsare prima di approvare.",
-          "La decisione rimuove anche qualsiasi sospensione dell'evasione applicata dall'app. Se la rimozione non riesce, puoi comunque selezionare Rimuovi sospensione dell'evasione."
+          "Se approvi, qualsiasi sospensione dell'evasione applicata dall'app resta attiva, così gli articoli oggetto di recesso non vengono spediti. Poi, dalla pagina della richiesta, rimborsa gli articoli, crea un reso o annulla l'ordine. Infine rimuovi la sospensione, così il resto dell'ordine può essere spedito.",
+          "Se rifiuti, la richiesta si conclude. La sospensione dell'evasione applicata dall'app viene rimossa e rimborsi, sospensioni, resi e annullamenti vengono disattivati, così l'ordine non può essere modificato per errore. Se la rimozione non riesce, puoi comunque selezionare Rimuovi sospensione dell'evasione."
         ]
       },
       "emails": {
@@ -1211,7 +1216,7 @@
       "countries-languages": {
         "question": "Quali paesi e lingue supporta l'app?",
         "paragraphs": [
-          "Tutti i paesi UE sono idonei per impostazione predefinita. Se vendi solo in alcuni di essi, seleziona Paesi specifici nelle Impostazioni.",
+          "Tutti i paesi UE e SEE sono idonei per impostazione predefinita. Se vendi solo in alcuni di essi, seleziona Paesi specifici nelle Impostazioni.",
           "Il modulo è disponibile in {{languageCount}} lingue: {{languages}}. I clienti lo vedono nella propria lingua.",
           "L'inglese è la lingua di base. Se lasci vuoto un campo tradotto, i clienti vedono al suo posto il testo in inglese."
         ]

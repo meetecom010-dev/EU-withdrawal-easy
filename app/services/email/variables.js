@@ -151,7 +151,7 @@ function localeStrings(map, locale) {
   return map[lang] ?? map.en;
 }
 
-function renderLineItemsHtml(items = [], strings = LINE_ITEM_STRINGS.en) {
+function renderLineItemsHtml(items = [], strings = LINE_ITEM_STRINGS.en, locale = "") {
   if (!items.length) {
     return `<p style="margin:0 0 20px;font-size:14px;color:#6d7175">${strings.none}</p>`;
   }
@@ -160,7 +160,7 @@ function renderLineItemsHtml(items = [], strings = LINE_ITEM_STRINGS.en) {
       const title = escapeHtml(item.title || strings.item);
       const qty = item.quantity ?? 1;
       const variant = item.variantTitle ? escapeHtml(item.variantTitle) : "";
-      const price = escapeHtml(formatMoney(item.price));
+      const price = escapeHtml(formatMoney(item.price, locale));
       const thumb = item.imageUrl
         ? `<img src="${escapeHtml(item.imageUrl)}" alt="${title}" width="56" height="56" style="width:56px;height:56px;object-fit:cover;border-radius:8px;border:1px solid #e1e3e5;display:block" />`
         : `<div style="width:56px;height:56px;border-radius:8px;border:1px solid #e1e3e5;background:#f1f2f3"></div>`;
@@ -207,10 +207,10 @@ export function buildLiquidData(vars = {}) {
     },
     withdrawal: {
       request_id: vars.requestId || "",
-      submitted_at: formatDateTime(vars.submissionDate),
+      submitted_at: formatDateTime(vars.submissionDate, vars.locale),
       reason: vars.reason || "",
       selected_products: products,
-      line_items: renderLineItemsHtml(vars.items, lineItemStrings),
+      line_items: renderLineItemsHtml(vars.items, lineItemStrings, vars.locale),
     },
     request: {
       status: statusLabel(vars.status, vars.locale),

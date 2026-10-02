@@ -7,10 +7,13 @@ import { findOpenWithdrawalRequest } from "./withdrawal-request.server";
 // Why a customer can't submit. The code lets the extension pick its own copy
 // if it wants to; the message is the fallback it can render as-is.
 export class WithdrawalNotAllowedError extends Error {
-  constructor(code, message) {
+  constructor(code, message, { expiresAt = null } = {}) {
     super(message);
     this.name = "WithdrawalNotAllowedError";
     this.code = code;
+    // When the window closed, so a client can word the message in the
+    // customer's own language instead of showing the English fallback.
+    this.expiresAt = expiresAt;
   }
 }
 
@@ -103,6 +106,7 @@ export async function assertWithdrawalAllowed(shop, orderId, options) {
     throw new WithdrawalNotAllowedError(
       eligibility.code,
       eligibility.message || "This order is no longer eligible for withdrawal.",
+      { expiresAt: eligibility.window?.expiresAt ?? null },
     );
   }
   return eligibility;

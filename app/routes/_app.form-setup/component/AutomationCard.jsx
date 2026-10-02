@@ -81,6 +81,8 @@ function TagInput({ tags = [], onChange, error, onDismissError }) {
         label={t("formSetup.automation.tag.label")}
         labelAccessibilityVisibility="exclusive"
         placeholder={t("formSetup.automation.tag.placeholder")}
+        // Shopify rejects order tags longer than 40 characters.
+        maxLength={40}
         value={value}
         // "Add at least one tag" belongs to the tag list, and this composer is
         // the control that fixes it.

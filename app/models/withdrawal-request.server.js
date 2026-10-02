@@ -206,6 +206,9 @@ withdrawalRequestSchema.index(
   { unique: true, partialFilterExpression: { status: "pending" } },
 );
 
+// The requests list (newest first) and the detail page's previous/next lookup.
+withdrawalRequestSchema.index({ shop: 1, submittedAt: -1, _id: -1 });
+
 // Drives the job runner's "what's due?" scan (app/services/automation-jobs.server.js).
 withdrawalRequestSchema.index({ shop: 1, "automation.fallbackDueAt": 1 });
 

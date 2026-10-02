@@ -1,4 +1,4 @@
-import { getFixedT } from "../../i18n/config";
+import { activeT } from "../../i18n/active";
 
 // Generic fetch wrapper shared by every resource file in app/utils/api/.
 // Every backend endpoint lives at /api/<name> (see app/routes/api/<name>.jsx,
@@ -22,7 +22,7 @@ export async function apiFetch(path, { method = "GET", body } = {}) {
 
   if (!response.ok) {
     throw new Error(
-      data.error || getFixedT(locale || undefined)("errors.requestFailed", { status: response.status }),
+      data.error || activeT("errors.requestFailed", { status: response.status }),
     );
   }
 

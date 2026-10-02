@@ -97,6 +97,7 @@ export async function recordFormEvent({ orderId, type, sessionId }) {
 /**
  * @param {{
  *   orderId: string,
+ *   confirmationNumber: string,
  *   orderName?: string,
  *   customerName?: string,
  *   customerEmail?: string,
@@ -132,12 +133,13 @@ export async function submitWithdrawalRequest(payload) {
     // written for the customer. Surfacing it beats "something went wrong",
     // which would leave them retrying a submission that can never succeed.
     const body = await response.json().catch(() => null);
-    /** @type {Error & { code?: string | null, status?: number }} */
+    /** @type {Error & { code?: string | null, status?: number, expiresAt?: string | null }} */
     const error = new Error(
       body?.error ?? `Failed to submit withdrawal request (${response.status})`,
     );
     error.code = body?.code ?? null;
     error.status = response.status;
+    error.expiresAt = body?.expiresAt ?? null;
     throw error;
   }
 

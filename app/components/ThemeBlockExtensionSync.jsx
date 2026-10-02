@@ -12,6 +12,7 @@ import { updateThemeBlockAdded } from "../utils/api/shop";
 // The block-level handle is the real, reliable discriminator.
 const THEME_BLOCK_HANDLE = "withdrawal-form";
 const EXTENSION_CHECK_INTERVAL_MS = 5_000;
+const EXTENSION_RECHECK_INTERVAL_MS = 60_000;
 
 // Mounted once for the whole authenticated app shell (see routes/_app.jsx),
 // same as OrderStatusExtensionSync — keeps Shop.themeBlockAdded (Context +
@@ -61,10 +62,26 @@ export default function ThemeBlockExtensionSync() {
     }
   }, [shopify, patchShop]);
 
+  // Checks quickly while the block isn't placed yet (the setup guide promises
+  // the status updates a few seconds after the merchant saves), then only
+  // occasionally once it is, to notice a removal. Skipped while the tab is in
+  // the background.
   useEffect(() => {
-    syncStatus();
-    const intervalId = setInterval(syncStatus, EXTENSION_CHECK_INTERVAL_MS);
-    return () => clearInterval(intervalId);
+    let timeoutId;
+    let stopped = false;
+    const tick = async () => {
+      if (typeof document === "undefined" || !document.hidden) await syncStatus();
+      if (stopped) return;
+      timeoutId = setTimeout(
+        tick,
+        lastPersistedRef.current ? EXTENSION_RECHECK_INTERVAL_MS : EXTENSION_CHECK_INTERVAL_MS,
+      );
+    };
+    tick();
+    return () => {
+      stopped = true;
+      clearTimeout(timeoutId);
+    };
   }, [syncStatus]);
 
   return null;

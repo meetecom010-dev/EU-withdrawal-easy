@@ -4,6 +4,24 @@
 // (app/models/app-settings.server.js), not here.
 
 import { fillTranslationDefaults } from "./translations";
+import { DEFAULT_WITHDRAWAL_DAYS, LEGAL_MIN_WITHDRAWAL_DAYS } from "../../constants";
+
+// The withdrawal period customers actually get: the merchant's setting, never
+// below the legal minimum (older settings may predate that validation).
+export function effectiveWithdrawalDays(deadline) {
+  const days = Number(deadline?.daysAfterDelivery);
+  return Math.max(Number.isFinite(days) && days > 0 ? days : DEFAULT_WITHDRAWAL_DAYS, LEGAL_MIN_WITHDRAWAL_DAYS);
+}
+
+// Customer-facing copy can say {{days}} instead of a fixed number, so it
+// always matches the withdrawal period set under Withdrawal deadline.
+export function fillLabelPlaceholders(labels, days) {
+  const out = {};
+  for (const [key, value] of Object.entries(labels ?? {})) {
+    out[key] = typeof value === "string" ? value.replace(/\{\{\s*days\s*\}\}/g, String(days)) : value;
+  }
+  return out;
+}
 
 export const EU_COUNTRIES = [
   { code: "AT", name: "Austria" },
@@ -33,6 +51,11 @@ export const EU_COUNTRIES = [
   { code: "SI", name: "Slovenia" },
   { code: "ES", name: "Spain" },
   { code: "SE", name: "Sweden" },
+  // EEA members outside the EU. The Consumer Rights Directive (and its right
+  // of withdrawal) applies there too.
+  { code: "IS", name: "Iceland" },
+  { code: "LI", name: "Liechtenstein" },
+  { code: "NO", name: "Norway" },
 ];
 
 export const AVAILABLE_LANGUAGES = [
@@ -168,8 +191,13 @@ export function resolveLabelsForLocale(settings, locale) {
   const t =
     lang && lang !== BASE_LOCALE && offered.includes(lang) ? translations[lang] : null;
 
+  const days = effectiveWithdrawalDays(settings.deadline);
+
   if (!t) {
-    return { labels: baseLabels, reasonField: { ...baseReason, options: baseReason.options ?? [] } };
+    return {
+      labels: fillLabelPlaceholders(baseLabels, days),
+      reasonField: { ...baseReason, options: baseReason.options ?? [] },
+    };
   }
 
   const pick = (translated, fallback) =>
@@ -184,7 +212,7 @@ export function resolveLabelsForLocale(settings, locale) {
   const options = baseOptions.map((opt, i) => pick(t.reasonOptions?.[i], opt));
 
   return {
-    labels,
+    labels: fillLabelPlaceholders(labels, days),
     reasonField: { ...baseReason, label: pick(t.reasonLabel, baseReason.label), options },
   };
 }

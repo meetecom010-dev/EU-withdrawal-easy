@@ -9,14 +9,14 @@ const labelsSchema = new Schema(
     step1Description: {
       type: String,
       default:
-        "You have the right to withdraw from this purchase within 14 days without giving any reason.",
+        "You have the right to withdraw from this purchase within {{days}} days without giving any reason.",
     },
     itemSelectionHeading: { type: String, default: "Select the items you want to withdraw" },
     deliveredTitle: { type: String, default: "Withdraw from your delivered order" },
     deliveredDescription: {
       type: String,
       default:
-        "Your order has been delivered. You can still withdraw from your purchase within 14 days of delivery.",
+        "Your order has been delivered. You can still withdraw from your purchase within {{days}} days of delivery.",
     },
     deliveredItemSelectionHeading: {
       type: String,
@@ -40,10 +40,10 @@ const labelsSchema = new Schema(
       type: String,
       default: "We've received your withdrawal request and will be in touch shortly.",
     },
-    deliveredSubmittedTitle: { type: String, default: "Return request submitted" },
+    deliveredSubmittedTitle: { type: String, default: "Withdrawal request submitted" },
     deliveredSubmittedMessage: {
       type: String,
-      default: "We've received your return request and will send further instructions by email.",
+      default: "We've received your withdrawal request and will email you instructions for returning the items.",
     },
     step1ButtonLabel: { type: String, default: "Continue" },
     confirmButtonLabel: { type: String, default: "Confirm withdrawal" },
@@ -111,7 +111,7 @@ const formSettingsSchema = new Schema(
     languages: { type: [String], default: ["en"] },
     reasonField: {
       enabled: { type: Boolean, default: true },
-      label: { type: String, default: "Reason for return" },
+      label: { type: String, default: "Reason for withdrawal" },
       options: {
         type: [String],
         default: ["Changed my mind", "Wrong size", "Item arrived damaged", "Prefer not to say"],

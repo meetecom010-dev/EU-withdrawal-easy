@@ -12,7 +12,8 @@
     "preview": "預覽",
     "remove": "移除",
     "save": "儲存",
-    "verified": "已驗證"
+    "verified": "已驗證",
+    "retry": "重試"
   },
   "nav": {
     "home": "首頁",
@@ -30,7 +31,7 @@
     "emailServiceUnavailable": "無法連線至電子郵件服務，請過幾分鐘再試一次。",
     "emailServiceNotConfigured": "尚未設定電子郵件寄送功能，請聯絡支援團隊。",
     "requestNotFound": "此撤回申請不存在或已刪除。",
-    "requestDecided": "此申請已核准或拒絕，因此無法再使用訂單操作。",
+    "requestDecided": "此申請已遭拒絕，因此無法再使用訂單操作。",
     "unknownDecision": "請選擇要核准或拒絕此申請。",
     "invalidStatus": "請為此申請選擇有效的狀態。",
     "noteRequired": "請輸入備註。",
@@ -42,7 +43,8 @@
     "senderNotStarted": "請先驗證寄件者電子郵件。",
     "senderIdMissing": "無法註冊此寄件者電子郵件，請再試一次。",
     "domainInvalid": "請輸入有效的網域，例如 yourstore.com。",
-    "domainFreeProvider": "Gmail 和 Yahoo 等免費電子郵件服務無法驗證，請改用商店的網域。"
+    "domainFreeProvider": "Gmail 和 Yahoo 等免費電子郵件服務無法驗證，請改用商店的網域。",
+    "alreadyDecided": "此申請已核准或拒絕。"
   },
   "auth": {
     "login": {
@@ -245,7 +247,8 @@
         "email": "顧客可以保留的自動確認電子郵件"
       },
       "penaltyHeading": "未遵守規定的後果",
-      "penalty": "如果沒有撤回按鈕或按鈕無法使用，法律會延長 {{days}} 天的撤回期。屆時顧客將有 12 個月又 {{days}} 天的時間撤回每筆受影響的訂單。"
+      "penalty": "如果沒有撤回按鈕或按鈕無法使用，你可能會依各國法律受到處罰，顧客的撤回期也可能遠超過 {{days}} 天。",
+      "disclaimer": "這是一般資訊，並非法律建議。"
     },
     "form": {
       "heading": "啟用撤回表單",
@@ -275,8 +278,8 @@
     "countries": {
       "heading": "適用國家/地區",
       "description": "只有當訂單寄送至以下國家/地區之一時，顧客才會看到撤回表單。",
-      "all": "全部 {{count}} 個歐盟國家/地區 (建議)",
-      "allDetails": "撤回權適用於整個歐盟。",
+      "all": "全部 {{count}} 個歐盟和歐洲經濟區國家/地區 (建議)",
+      "allDetails": "撤回權適用於整個歐盟和歐洲經濟區。",
       "specific": "特定國家/地區",
       "specificDetails": "請在下方選擇國家/地區，你隨時可以變更。",
       "pickerLabel": "國家/地區",
@@ -336,7 +339,8 @@
         "messageBefore": "送達前訊息",
         "titleAfter": "送達後標題",
         "messageAfter": "送達後訊息"
-      }
+      },
+      "daysHint": "輸入 {{days}} 即可以天數顯示你的撤回期。"
     },
     "automation": {
       "heading": "自動化",
@@ -345,7 +349,7 @@
         "heading": "訂單出貨前",
         "description": "適用於在任何商品出貨前收到的申請。",
         "hold": "暫停出貨以便審核",
-        "holdDetails": "在你核准或拒絕申請前暫停出貨。你做出決定後，暫停就會解除。",
+        "holdDetails": "在你審查申請期間暫停出貨。拒絕申請會解除暫停。核准後，請為撤回的商品退款，再解除暫停。",
         "tagDetails": "為出貨前收到申請的訂單加上標籤，方便員工在訂單清單中找到。"
       },
       "fallback": {
@@ -400,7 +404,7 @@
     },
     "preview": {
       "heading": "即時預覽",
-      "compliantBadge": "符合兩步驟規定",
+      "compliantBadge": "兩步驟確認",
       "surfaceLabel": "預覽",
       "surfaces": {
         "orderStatus": "訂單狀態頁面",
@@ -780,7 +784,8 @@
       "previewTitle": "電子郵件預覽",
       "templateUnchanged": "你的變更只會套用到此電子郵件，已儲存的範本不會變更。",
       "noEmail": "顧客不會收到電子郵件。如有需要，你可以另外聯絡顧客。",
-      "holdReleased": "此操作也會解除此訂單的出貨暫停，讓訂單可以重新出貨。"
+      "holdReleased": "此操作也會解除此訂單的出貨暫停，讓訂單可以重新出貨。",
+      "holdKept": "出貨暫停會保留，以免撤回的商品被寄出。請為這些商品退款或取消訂單，再為仍需出貨的商品解除暫停。"
     },
     "refundModal": {
       "heading": "為撤回的商品退款",
@@ -820,7 +825,7 @@
       "heading": "寄件者",
       "description": "這些設定適用於應用程式代表商店寄送的所有電子郵件。請使用你自己已驗證的地址寄送，並選擇顧客回覆的收件地址。",
       "emailLabel": "寄件者電子郵件",
-      "emailPlaceholder": "notifications@withdrawaleasy.com",
+      "emailPlaceholder": "orders@yourstore.com",
       "detailsVerified": "電子郵件會從此地址寄出。",
       "detailsPending": "輸入我們寄到此地址的驗證碼以完成驗證。",
       "detailsDefault": "如果留空，電子郵件會從 {{email}} 寄出。",
@@ -1147,7 +1152,7 @@
           "退貨中的商品：商品寄回後，在退貨中選取「處理並退款」。這會為顧客退款並關閉退貨。",
           "尚未寄出任何商品：你也可以透過「更多操作」取消整筆訂單並退款。"
         ],
-        "closing": "歐盟法律規定，你必須在撤回後 {{refundDays}}內完成退款。申請頁面會顯示剩餘時間。請在核准申請前退款。"
+        "closing": "歐盟法律規定，你必須在撤回後 {{refundDays}}內完成退款。申請頁面會顯示剩餘時間。"
       },
       "returns": {
         "question": "退貨是如何運作的？",
@@ -1157,10 +1162,10 @@
         ]
       },
       "decision-lock": {
-        "question": "為什麼核准或拒絕申請後，訂單操作就會關閉？",
+        "question": "核准或拒絕申請後會發生什麼事？",
         "paragraphs": [
-          "核准或拒絕即代表申請已結案。之後，退款、暫停、退貨和取消都會關閉，以免訂單遭到誤改。因此，你應該在核准前完成退款。",
-          "做出決定也會解除應用程式設定的所有出貨暫停。如果解除失敗，你仍然可以選取「解除出貨暫停」。"
+          "核准後，應用程式設定的出貨暫停會保留，以免撤回的商品被寄出。接著，請在申請頁面為商品退款、建立退貨或取消訂單。最後解除暫停，讓訂單的其餘部分可以出貨。",
+          "拒絕即代表申請已結案。應用程式設定的出貨暫停會解除，退款、暫停、退貨和取消都會關閉，以免訂單遭到誤改。如果解除失敗，你仍然可以選取「解除出貨暫停」。"
         ]
       },
       "emails": {
@@ -1179,7 +1184,7 @@
       "countries-languages": {
         "question": "應用程式支援哪些國家/地區和語言？",
         "paragraphs": [
-          "根據預設，所有歐盟國家/地區皆適用。如果你只銷售到其中部分國家/地區，請在「設定」中選擇「特定國家/地區」。",
+          "根據預設，所有歐盟和歐洲經濟區國家/地區皆適用。如果你只銷售到其中部分國家/地區，請在「設定」中選擇「特定國家/地區」。",
           "表單提供 {{languageCount}} 種語言：{{languages}}。顧客會看到自己語言的表單。",
           "英文為基礎語言。如果你將某個翻譯欄位留空，顧客會看到對應的英文文字。"
         ]

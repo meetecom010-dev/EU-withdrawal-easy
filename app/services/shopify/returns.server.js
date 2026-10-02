@@ -42,10 +42,10 @@ const RETURNABLE_FULFILLMENTS_QUERY = `#graphql
 // describes it — and OTHER is exactly the value Shopify pairs with a free-text
 // returnReasonNote, which carries the customer's own words.
 //
-// (An earlier revision tried returnReasonDefinitionId, a field that only
-// exists from 2026-04. The app's Admin client runs 2025-10, where the
-// returnReasonDefinitions query doesn't exist at all — that mismatch was the
-// "Field 'returnReasonDefinitions' doesn't exist on type 'QueryRoot'" error.)
+// The Admin client now runs 2026-07, where returnReason is deprecated in favour
+// of returnReasonDefinitionId but still accepted (validated against the
+// 2026-07 schema). Moving to returnReasonDefinitionId means looking up the
+// shop's "Other" definition first — do that before Shopify removes the field.
 const RETURN_REASON = "OTHER";
 
 const RETURN_CREATE_MUTATION = `#graphql

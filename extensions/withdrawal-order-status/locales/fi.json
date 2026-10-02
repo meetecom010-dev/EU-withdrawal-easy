@@ -20,5 +20,15 @@
   "item.select": "Valitse {{title}}",
   "item.remove": "Poista {{title}}",
   "item.fallbackTitle": "Tuote",
-  "error.submit": "Pyyntösi lähettämisessä tapahtui virhe. Yritä uudelleen."
+  "error.submit": "Pyyntösi lähettämisessä tapahtui virhe. Yritä uudelleen.",
+  "error.order_not_found": "Emme löytäneet tätä tilausta.",
+  "error.invalid_items": "Valitut tuotteet eivät kuulu tähän tilaukseen. Päivitä sivu ja yritä uudelleen.",
+  "error.duplicate_request": "Tätä tilausta koskevaa peruutuspyyntöä käsitellään jo.",
+  "error.rate_limited": "Liian monta yritystä. Odota muutama minuutti ja yritä uudelleen.",
+  "eligibility.order_not_found": "Emme löytäneet tätä tilausta.",
+  "eligibility.order_cancelled": "Tämä tilaus on peruttu, joten peruutettavaa ei ole.",
+  "eligibility.already_requested": "Olemme jo vastaanottaneet tätä tilausta koskevan peruutuspyynnön ja käsittelemme sitä.",
+  "eligibility.deadline_passed": "Tämän tilauksen peruutusaika päättyi {{date}}. Ota meihin yhteyttä, jos tämä on mielestäsi virhe.",
+  "eligibility.deadline_passed_no_date": "Tämän tilauksen peruutusaika on päättynyt. Ota meihin yhteyttä, jos tämä on mielestäsi virhe.",
+  "eligibility.not_eligible": "Tätä tilausta ei voi enää peruuttaa."
 }

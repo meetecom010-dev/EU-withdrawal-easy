@@ -14,7 +14,8 @@
     "preview": "Vista previa",
     "remove": "Quitar",
     "save": "Guardar",
-    "verified": "Verificado"
+    "verified": "Verificado",
+    "retry": "Reintentar"
   },
   "nav": {
     "home": "Inicio",
@@ -32,7 +33,7 @@
     "emailServiceUnavailable": "No pudimos conectarnos al servicio de correo electrónico. Inténtalo de nuevo en unos minutos.",
     "emailServiceNotConfigured": "El envío de correos electrónicos aún no está configurado. Ponte en contacto con el soporte.",
     "requestNotFound": "Esta solicitud de desistimiento no existe o se eliminó.",
-    "requestDecided": "Esta solicitud ya se aprobó o se rechazó, por lo que las acciones del pedido ya no están disponibles.",
+    "requestDecided": "Esta solicitud se rechazó, por lo que las acciones del pedido ya no están disponibles.",
     "unknownDecision": "Elige si quieres aprobar o rechazar esta solicitud.",
     "invalidStatus": "Elige un estado válido para esta solicitud.",
     "noteRequired": "Ingresa una nota.",
@@ -44,7 +45,8 @@
     "senderNotStarted": "Primero verifica tu correo electrónico del remitente.",
     "senderIdMissing": "No pudimos registrar este correo electrónico del remitente. Inténtalo de nuevo.",
     "domainInvalid": "Ingresa un dominio válido, como tutienda.com.",
-    "domainFreeProvider": "Los proveedores de correo electrónico gratuitos como Gmail y Yahoo no se pueden autenticar. Usa el dominio de tu tienda."
+    "domainFreeProvider": "Los proveedores de correo electrónico gratuitos como Gmail y Yahoo no se pueden autenticar. Usa el dominio de tu tienda.",
+    "alreadyDecided": "Esta solicitud ya se aprobó o se rechazó."
   },
   "auth": {
     "login": {
@@ -253,7 +255,8 @@
         "email": "Un correo electrónico de confirmación automático que los clientes puedan conservar"
       },
       "penaltyHeading": "Qué pasa si no cumples",
-      "penalty": "Si falta el botón de desistimiento o no funciona, la ley amplía el plazo de desistimiento de {{days}} días. Los clientes tienen entonces 12 meses y {{days}} días para desistir de cada pedido afectado."
+      "penalty": "Si falta el botón de desistimiento o no funciona, podrías enfrentarte a sanciones según la legislación nacional, y los clientes podrían tener mucho más de {{days}} días para desistir.",
+      "disclaimer": "Esta es información general, no asesoramiento legal."
     },
     "form": {
       "heading": "Activa tu formulario de desistimiento",
@@ -283,8 +286,8 @@
     "countries": {
       "heading": "Países elegibles",
       "description": "Los clientes solo ven el formulario de desistimiento si su pedido se envía a uno de estos países.",
-      "all": "Los {{count}} países de la UE (recomendado)",
-      "allDetails": "El derecho de desistimiento se aplica en toda la UE.",
+      "all": "Los {{count}} países de la UE y el EEE (recomendado)",
+      "allDetails": "El derecho de desistimiento se aplica en toda la UE y el EEE.",
       "specific": "Países específicos",
       "specificDetails": "Elige los países a continuación. Puedes cambiarlo cuando quieras.",
       "pickerLabel": "Países",
@@ -344,7 +347,8 @@
         "messageBefore": "Mensaje antes de la entrega",
         "titleAfter": "Título después de la entrega",
         "messageAfter": "Mensaje después de la entrega"
-      }
+      },
+      "daysHint": "Escribe {{days}} para mostrar tu plazo de desistimiento en días."
     },
     "automation": {
       "heading": "Automatización",
@@ -353,7 +357,7 @@
         "heading": "Antes de que se envíe el pedido",
         "description": "Se aplica cuando llega una solicitud antes de que se haya enviado algún artículo.",
         "hold": "Retener la preparación para revisarla",
-        "holdDetails": "Pausa la preparación hasta que apruebes o rechaces la solicitud. La retención se libera cuando decides.",
+        "holdDetails": "Pausa la preparación mientras revisas la solicitud. Si la rechazas, se libera la retención. Después de aprobarla, reembolsa los artículos desistidos y luego libera la retención.",
         "tagDetails": "Etiqueta los pedidos que reciben una solicitud antes de enviarse, para que tu personal pueda encontrarlos en la lista de pedidos."
       },
       "fallback": {
@@ -408,7 +412,7 @@
     },
     "preview": {
       "heading": "Vista previa en vivo",
-      "compliantBadge": "Conforme en 2 pasos",
+      "compliantBadge": "Confirmación en 2 pasos",
       "surfaceLabel": "Vista previa",
       "surfaces": {
         "orderStatus": "Página de estado del pedido",
@@ -810,7 +814,8 @@
       "previewTitle": "Vista previa del correo electrónico",
       "templateUnchanged": "Tus cambios solo se aplican a este correo electrónico. Tu plantilla guardada no cambiará.",
       "noEmail": "El cliente no recibirá un correo electrónico. Puedes ponerte en contacto con él por separado si lo necesitas.",
-      "holdReleased": "Esto también libera la retención de preparación de este pedido, para que se pueda volver a preparar."
+      "holdReleased": "Esto también libera la retención de preparación de este pedido, para que se pueda volver a preparar.",
+      "holdKept": "La retención de preparación se mantiene para que los artículos desistidos no se envíen. Reembólsalos o cancela el pedido y luego libera la retención para lo que quede por enviar."
     },
     "refundModal": {
       "heading": "Reembolsar artículos del desistimiento",
@@ -852,7 +857,7 @@
       "heading": "Remitente",
       "description": "Esta configuración se aplica a todos los correos electrónicos que la aplicación envía para tu tienda. Envía desde tu propia dirección verificada y elige adónde van las respuestas de los clientes.",
       "emailLabel": "Correo electrónico del remitente",
-      "emailPlaceholder": "notifications@withdrawaleasy.com",
+      "emailPlaceholder": "orders@yourstore.com",
       "detailsVerified": "Los correos electrónicos se envían desde esta dirección.",
       "detailsPending": "Ingresa el código que enviamos a esta dirección para verificarla.",
       "detailsDefault": "Si dejas este campo vacío, los correos electrónicos se envían desde {{email}}.",
@@ -1179,7 +1184,7 @@
           "Artículos en una devolución: cuando vuelvan, selecciona Procesar y reembolsar en la devolución. Así se reembolsa al cliente y se cierra la devolución.",
           "Aún no se ha enviado nada: también puedes cancelar y reembolsar todo el pedido desde Más acciones."
         ],
-        "closing": "La legislación de la UE te da {{refundDays}} desde el desistimiento para reembolsar. La página de la solicitud muestra cuánto tiempo queda. Reembolsa antes de aprobar la solicitud."
+        "closing": "La legislación de la UE te da {{refundDays}} desde el desistimiento para reembolsar. La página de la solicitud muestra cuánto tiempo queda."
       },
       "returns": {
         "question": "¿Cómo funcionan las devoluciones?",
@@ -1189,10 +1194,10 @@
         ]
       },
       "decision-lock": {
-        "question": "¿Por qué se desactivan las acciones del pedido después de aprobar o rechazar una solicitud?",
+        "question": "¿Qué pasa cuando apruebo o rechazo una solicitud?",
         "paragraphs": [
-          "Aprobar o rechazar finaliza la solicitud. Después, los reembolsos, las retenciones, las devoluciones y las cancelaciones se desactivan para que el pedido no se modifique por error. Por eso debes reembolsar antes de aprobar.",
-          "Decidir también libera cualquier retención de preparación que haya aplicado la aplicación. Si la liberación falla, aún puedes seleccionar Liberar retención de preparación."
+          "Al aprobar, se mantiene cualquier retención de preparación que haya aplicado la aplicación, para que los artículos desistidos no se envíen. Después, desde la página de la solicitud, reembolsa los artículos, crea una devolución o cancela el pedido. Por último, libera la retención para que se pueda enviar el resto del pedido.",
+          "Rechazar finaliza la solicitud. Se libera la retención de preparación de la aplicación y se desactivan los reembolsos, las retenciones, las devoluciones y las cancelaciones para que el pedido no se modifique por error. Si la liberación falla, aún puedes seleccionar Liberar retención de preparación."
         ]
       },
       "emails": {
@@ -1211,7 +1216,7 @@
       "countries-languages": {
         "question": "¿Qué países e idiomas admite la aplicación?",
         "paragraphs": [
-          "Todos los países de la UE son elegibles de forma predeterminada. Si solo vendes a algunos, selecciona Países específicos en Configuración.",
+          "Todos los países de la UE y el EEE son elegibles de forma predeterminada. Si solo vendes a algunos, selecciona Países específicos en Configuración.",
           "El formulario está disponible en {{languageCount}} idiomas: {{languages}}. Los clientes lo ven en su propio idioma.",
           "El inglés es el idioma base. Si dejas vacío un campo traducido, los clientes ven el texto en inglés en su lugar."
         ]

@@ -20,5 +20,15 @@
   "item.select": "Pasirinkti {{title}}",
   "item.remove": "Pašalinti {{title}}",
   "item.fallbackTitle": "Prekė",
-  "error.submit": "Pateikiant jūsų prašymą įvyko klaida. Bandykite dar kartą."
+  "error.submit": "Pateikiant jūsų prašymą įvyko klaida. Bandykite dar kartą.",
+  "error.order_not_found": "Neradome šio užsakymo.",
+  "error.invalid_items": "Pasirinktų prekių šiame užsakyme nėra. Atnaujinkite puslapį ir bandykite dar kartą.",
+  "error.duplicate_request": "Šio užsakymo atsisakymo prašymas jau nagrinėjamas.",
+  "error.rate_limited": "Per daug bandymų. Palaukite kelias minutes ir bandykite dar kartą.",
+  "eligibility.order_not_found": "Neradome šio užsakymo.",
+  "eligibility.order_cancelled": "Šis užsakymas atšauktas, todėl nėra ko atsisakyti.",
+  "eligibility.already_requested": "Jau gavome šio užsakymo atsisakymo prašymą ir jį nagrinėjame.",
+  "eligibility.deadline_passed": "Šio užsakymo atsisakymo laikotarpis baigėsi {{date}}. Susisiekite su mumis, jei manote, kad tai klaida.",
+  "eligibility.deadline_passed_no_date": "Šio užsakymo atsisakymo laikotarpis baigėsi. Susisiekite su mumis, jei manote, kad tai klaida.",
+  "eligibility.not_eligible": "Šio užsakymo nebegalima atsisakyti."
 }

@@ -42,10 +42,12 @@
     }
   }
 
-  // Copied verbatim from extensions/withdrawal-order-status/locales/en.default.json
-  // so the two surfaces read identically. This surface's chrome is
-  // English-only for now (the merchant's own copy — headings, reasons,
-  // declaration — already comes through localized via /form-settings).
+  // English defaults, the same copy as
+  // extensions/withdrawal-order-status/locales/en.default.json so the two
+  // surfaces read identically. The block's Liquid renders the storefront
+  // language's version (this extension's locales/*.json) into a
+  // <script data-withdrawly-strings> that applyStrings() merges over these
+  // before the first render. [tokens] are filled in by fill().
   const STRINGS = {
     entryStart: "Start withdrawal request",
     lookupHeading: "Find your order",
@@ -55,25 +57,106 @@
     fieldOrderNumber: "Order number",
     lookupContinue: "Continue",
     lookingUp: "Looking up…",
+    reasonLabel: "Reason for withdrawal",
     reasonPlaceholder: "Select a reason (optional)",
     otherOption: "Other",
     otherReasonLabel: "Your reason",
     otherReasonPlaceholder: "Tell us your reason",
     selectItem: "Select at least one item to continue.",
-    itemsToWithdraw: (n) => `Items to withdraw (${n})`,
+    itemsToWithdraw: "Items to withdraw ([count])",
     selectedTotal: "Selected items total",
     previous: "Previous",
-    submittedOn: (date) => `Submitted on ${date}`,
+    submittedOn: "Submitted on [date]",
     submitting: "Submitting…",
     stepLookup: "Look up",
     stepDetails: "Details",
     stepConfirm: "Confirm",
     stepDone: "Done",
-    stepOf: (current, total) => `Step ${current} of ${total}`,
+    stepOf: "Step [current] of [total]",
     fallbackTitle: "Item",
-    errorSubmit: "Something went wrong submitting your request. Please try again.",
-    orderNotFound: "We couldn't find an order matching those details.",
+    errorSubmit: "Something went wrong submitting your request. Try again.",
+    // Keyed by the `code` the app proxy returns.
+    errors: {
+      order_not_found: "We couldn't find an order matching those details.",
+      order_cancelled: "This order has been canceled, so there's nothing to withdraw from.",
+      already_requested: "We've already received a withdrawal request for this order and are reviewing it.",
+      deadline_passed: "The withdrawal period for this order ended on [date]. Contact us if you think this is wrong.",
+      deadline_passed_no_date: "The withdrawal period for this order has ended. Contact us if you think this is wrong.",
+      not_eligible: "This order can no longer be withdrawn from.",
+      country_not_eligible: "This order isn't eligible for a withdrawal request.",
+      duplicate_request: "A withdrawal request for this order is already being reviewed.",
+      rate_limited: "Too many attempts. Wait a few minutes and try again.",
+      invalid_items: "The selected items aren't on this order. Refresh the page and try again.",
+      missing_fields: "Enter your email and order number.",
+      store_unavailable: "Withdrawals aren't available right now. Contact the store for help.",
+    },
   };
+
+  // locales/*.json key -> STRINGS key.
+  const STRING_KEYS = {
+    entry_start: "entryStart",
+    lookup_heading: "lookupHeading",
+    lookup_sub: "lookupSub",
+    field_name: "fieldName",
+    field_email: "fieldEmail",
+    field_order_number: "fieldOrderNumber",
+    lookup_continue: "lookupContinue",
+    looking_up: "lookingUp",
+    reason_label: "reasonLabel",
+    reason_placeholder: "reasonPlaceholder",
+    other_option: "otherOption",
+    other_reason_label: "otherReasonLabel",
+    other_reason_placeholder: "otherReasonPlaceholder",
+    select_item: "selectItem",
+    items_to_withdraw: "itemsToWithdraw",
+    selected_total: "selectedTotal",
+    previous: "previous",
+    submitted_on: "submittedOn",
+    submitting: "submitting",
+    step_lookup: "stepLookup",
+    step_details: "stepDetails",
+    step_confirm: "stepConfirm",
+    step_done: "stepDone",
+    step_of: "stepOf",
+    fallback_title: "fallbackTitle",
+    error_submit: "errorSubmit",
+  };
+
+  // A missing translation comes back from Liquid as "translation missing: …"
+  // (or empty) — keep the English default for those.
+  function usable(value) {
+    return typeof value === "string" && value.trim() !== "" && !value.startsWith("translation missing");
+  }
+
+  function applyStrings(translated) {
+    if (!translated || typeof translated !== "object") return;
+    for (const [key, target] of Object.entries(STRING_KEYS)) {
+      if (usable(translated[key])) STRINGS[target] = translated[key];
+    }
+    for (const [code, value] of Object.entries(translated.errors ?? {})) {
+      if (usable(value)) STRINGS.errors[code] = value;
+    }
+  }
+
+  function fill(template, values) {
+    return String(template).replace(/\[(\w+)\]/g, (match, key) =>
+      values[key] !== undefined ? String(values[key]) : match,
+    );
+  }
+
+  // The customer-facing text for a failed lookup/submit: translated from the
+  // error's code, never the server's English message.
+  function errorMessageFor(error, fallback) {
+    const code = error?.code;
+    if (code === "deadline_passed") {
+      const date = error.expiresAt ? new Date(error.expiresAt) : null;
+      return date && !Number.isNaN(date.getTime())
+        ? fill(STRINGS.errors.deadline_passed, { date: formatSubmittedDate(date) })
+        : STRINGS.errors.deadline_passed_no_date;
+    }
+    if (code === "form_disabled") return STRINGS.errors.not_eligible;
+    return (code && STRINGS.errors[code]) || fallback;
+  }
 
   // Merchant-facing notices, only ever rendered inside the theme editor
   // (request.design_mode) — customers still get nothing when the form is off.
@@ -112,7 +195,7 @@
   function formatMoney(price) {
     if (!price || price.amount == null) return "";
     try {
-      return new Intl.NumberFormat(undefined, {
+      return new Intl.NumberFormat(document.documentElement.lang || undefined, {
         style: "currency",
         currency: price.currencyCode,
       }).format(price.amount);
@@ -121,17 +204,25 @@
     }
   }
 
+  // Lookup items carry the unit price; a row shows (and the total sums) the
+  // price for all its units, the same way the order status page shows lines.
+  function lineTotal(item) {
+    if (!item.price || item.price.amount == null) return null;
+    const quantity = Number(item.quantity) > 0 ? Number(item.quantity) : 1;
+    return { amount: item.price.amount * quantity, currencyCode: item.price.currencyCode };
+  }
+
   function sumMoney(items) {
-    const priced = items.filter((item) => item.price);
+    const priced = items.map(lineTotal).filter(Boolean);
     if (!priced.length) return null;
-    const currencyCode = priced[0].price.currencyCode;
-    const amount = priced.reduce((total, item) => total + item.price.amount, 0);
+    const currencyCode = priced[0].currencyCode;
+    const amount = priced.reduce((total, price) => total + price.amount, 0);
     return { amount, currencyCode };
   }
 
   function formatSubmittedDate(date) {
     try {
-      return new Intl.DateTimeFormat(undefined, { dateStyle: "long" }).format(date);
+      return new Intl.DateTimeFormat(document.documentElement.lang || undefined, { dateStyle: "long" }).format(date);
     } catch {
       return date.toLocaleDateString();
     }
@@ -143,6 +234,7 @@
     if (!response.ok) {
       const error = new Error(data.error || `Request failed (${response.status})`);
       error.code = data.code || null;
+      error.expiresAt = data.expiresAt || null;
       error.status = response.status;
       throw error;
     }
@@ -158,7 +250,7 @@
       <div class="withdrawly__stepheader">
         <div class="withdrawly__stepheader-row">
           <span class="withdrawly__stepname">${escapeHtml(label)}</span>
-          <span class="withdrawly__stepof">${escapeHtml(STRINGS.stepOf(current, total))}</span>
+          <span class="withdrawly__stepof">${escapeHtml(fill(STRINGS.stepOf, { current, total }))}</span>
         </div>
         <div class="withdrawly__progress">
           <div class="withdrawly__progress-fill" data-progress="${percent}" style="width:${percent}%"></div>
@@ -173,6 +265,16 @@
   class WithdrawalWidget {
     constructor(root) {
       this.root = root;
+      // Read the translated strings before the first render replaces the
+      // block's markup (the <script> lives inside the widget root).
+      const stringsEl = root.querySelector("script[data-withdrawly-strings]");
+      if (stringsEl) {
+        try {
+          applyStrings(JSON.parse(stringsEl.textContent));
+        } catch (error) {
+          console.error("[withdrawly] couldn't read translations", error);
+        }
+      }
       this.designMode = root.dataset.designMode === "true";
       this.proxyBase = null;
       this.settings = null;
@@ -387,7 +489,7 @@
         const euCountries = this.settings.euCountries ?? [];
         const countryCode = data.order.shippingAddress?.countryCode;
         if (euCountries.length && countryCode && !euCountries.includes(countryCode)) {
-          this.renderLookup("This order isn't eligible for a withdrawal request.");
+          this.renderLookup(STRINGS.errors.country_not_eligible);
           return;
         }
 
@@ -397,7 +499,7 @@
         this.selected = new Set();
         this.renderDetails();
       } catch (error) {
-        this.renderLookup(error.message || STRINGS.orderNotFound);
+        this.renderLookup(errorMessageFor(error, STRINGS.errors.order_not_found));
       } finally {
         submitBtn.disabled = false;
         submitBtn.textContent = originalLabel;
@@ -426,7 +528,7 @@
               ${item.variantTitle ? `<span class="withdrawly__item-variant">${escapeHtml(item.variantTitle)}</span>` : ""}
             </span>
           </div>
-          <span class="withdrawly__item-price">${escapeHtml(formatMoney(item.price))}</span>
+          <span class="withdrawly__item-price">${escapeHtml(formatMoney(lineTotal(item)))}</span>
         </div>
       `;
     }
@@ -437,7 +539,7 @@
       const options = reasonField.options ?? [];
       return `
         <label class="withdrawly__field">
-          <span>${escapeHtml(reasonField.label || "Reason for return")}</span>
+          <span>${escapeHtml(reasonField.label || STRINGS.reasonLabel)}</span>
           <select data-reason>
             <option value="" ${this.reason === "" ? "selected" : ""}>${escapeHtml(STRINGS.reasonPlaceholder)}</option>
             ${options
@@ -536,7 +638,7 @@
             ${stepHeaderHtml(2, 3, STRINGS.stepConfirm)}
             <h2 class="withdrawly__heading">${escapeHtml(labels.confirmHeading)}</h2>
             <p class="withdrawly__sub">${escapeHtml(labels.confirmMessage)}</p>
-            <p class="withdrawly__subheading">${escapeHtml(STRINGS.itemsToWithdraw(selectedItems.length))}</p>
+            <p class="withdrawly__subheading">${escapeHtml(fill(STRINGS.itemsToWithdraw, { count: selectedItems.length }))}</p>
             <div class="withdrawly__items">
               ${selectedItems.map((item) => this.itemRowHtml(item, false)).join("")}
             </div>
@@ -589,6 +691,10 @@
             orderName: this.order.name,
             customerName: this.customerName,
             customerEmail: this.customerEmail,
+            // Proof of ownership: the backend checks these against the order
+            // again, exactly as the lookup step did.
+            email: this.customerEmail,
+            orderNumber: this.order.name,
             countryCode: this.order.shippingAddress?.countryCode ?? "",
             locale: (document.documentElement.lang || "en").split("-")[0],
             reason: this.reason === OTHER_REASON_VALUE ? this.otherReason.trim() : this.reason,
@@ -609,7 +715,7 @@
         this.submittedAt = new Date();
         this.renderDone();
       } catch (error) {
-        this.renderConfirm(error.message || STRINGS.errorSubmit);
+        this.renderConfirm(errorMessageFor(error, STRINGS.errorSubmit));
       } finally {
         this.submitting = false;
         submitBtn.disabled = false;
@@ -632,9 +738,9 @@
             <p class="withdrawly__sub">${escapeHtml(labels.submittedMessage)}</p>
             <div class="withdrawly__submitted">
               <span class="withdrawly__check" aria-hidden="true">&#10003;</span>
-              <span>${escapeHtml(STRINGS.submittedOn(formatSubmittedDate(this.submittedAt ?? new Date())))}</span>
+              <span>${escapeHtml(fill(STRINGS.submittedOn, { date: formatSubmittedDate(this.submittedAt ?? new Date()) }))}</span>
             </div>
-            <p class="withdrawly__subheading">${escapeHtml(STRINGS.itemsToWithdraw(selectedItems.length))}</p>
+            <p class="withdrawly__subheading">${escapeHtml(fill(STRINGS.itemsToWithdraw, { count: selectedItems.length }))}</p>
             <div class="withdrawly__items">
               ${selectedItems.map((item) => this.itemRowHtml(item, false)).join("")}
             </div>

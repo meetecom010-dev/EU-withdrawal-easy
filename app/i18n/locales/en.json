@@ -13,7 +13,8 @@
     "preview": "Preview",
     "remove": "Remove",
     "save": "Save",
-    "verified": "Verified"
+    "verified": "Verified",
+    "retry": "Try again"
   },
   "nav": {
     "home": "Home",
@@ -31,7 +32,7 @@
     "emailServiceUnavailable": "We couldn't connect to the email service. Try again in a few minutes.",
     "emailServiceNotConfigured": "Email sending isn't set up yet. Contact support for help.",
     "requestNotFound": "This withdrawal request doesn't exist or was deleted.",
-    "requestDecided": "This request has already been approved or rejected, so order actions are no longer available.",
+    "requestDecided": "This request was rejected, so order actions are no longer available.",
     "unknownDecision": "Choose whether to approve or reject this request.",
     "invalidStatus": "Choose a valid status for this request.",
     "noteRequired": "Enter a note.",
@@ -43,7 +44,8 @@
     "senderNotStarted": "Verify your sender email first.",
     "senderIdMissing": "We couldn't register this sender email. Try again.",
     "domainInvalid": "Enter a valid domain, like yourstore.com.",
-    "domainFreeProvider": "Free email providers like Gmail and Yahoo can't be authenticated. Use your store's domain instead."
+    "domainFreeProvider": "Free email providers like Gmail and Yahoo can't be authenticated. Use your store's domain instead.",
+    "alreadyDecided": "This request was already approved or rejected."
   },
   "auth": {
     "login": {
@@ -249,7 +251,8 @@
         "email": "An automatic confirmation email that customers can keep"
       },
       "penaltyHeading": "What happens if you don't comply",
-      "penalty": "If the withdrawal button is missing or doesn't work, the law extends the {{days}}-day withdrawal period. Customers then get 12 months and {{days}} days to withdraw from each affected order."
+      "penalty": "If the withdrawal button is missing or doesn't work, you may face penalties under national law, and customers may get much longer than {{days}} days to withdraw.",
+      "disclaimer": "This is general information, not legal advice."
     },
     "form": {
       "heading": "Turn on your withdrawal form",
@@ -279,8 +282,8 @@
     "countries": {
       "heading": "Eligible countries",
       "description": "Customers only see the withdrawal form if their order ships to one of these countries.",
-      "all": "All {{count}} EU countries (recommended)",
-      "allDetails": "The right of withdrawal applies across the EU.",
+      "all": "All {{count}} EU and EEA countries (recommended)",
+      "allDetails": "The right of withdrawal applies across the EU and the EEA.",
       "specific": "Specific countries",
       "specificDetails": "Choose countries below. You can change this anytime.",
       "pickerLabel": "Countries",
@@ -340,7 +343,8 @@
         "messageBefore": "Message before delivery",
         "titleAfter": "Title after delivery",
         "messageAfter": "Message after delivery"
-      }
+      },
+      "daysHint": "Type {{days}} to show your withdrawal period in days."
     },
     "automation": {
       "heading": "Automation",
@@ -349,7 +353,7 @@
         "heading": "Before the order ships",
         "description": "Applies when a request arrives before any items have shipped.",
         "hold": "Hold fulfillment for review",
-        "holdDetails": "Pause fulfillment until you approve or reject the request. The hold is released when you decide.",
+        "holdDetails": "Pause fulfillment while you review the request. Rejecting it releases the hold. After you approve it, refund the withdrawn items, then release the hold.",
         "tagDetails": "Tag orders that get a request before they ship, so your staff can find them in your orders list."
       },
       "fallback": {
@@ -404,7 +408,7 @@
     },
     "preview": {
       "heading": "Live preview",
-      "compliantBadge": "2-step compliant",
+      "compliantBadge": "2-step confirmation",
       "surfaceLabel": "Preview",
       "surfaces": {
         "orderStatus": "Order status page",
@@ -795,7 +799,8 @@
       "previewTitle": "Email preview",
       "templateUnchanged": "Your changes only apply to this email. Your saved template won't change.",
       "noEmail": "The customer won't get an email. You can contact them separately if you need to.",
-      "holdReleased": "This also releases the fulfillment hold on this order, so the order can be fulfilled again."
+      "holdReleased": "This also releases the fulfillment hold on this order, so the order can be fulfilled again.",
+      "holdKept": "The fulfillment hold stays on so the withdrawn items don't ship. Refund them or cancel the order, then release the hold for anything left to ship."
     },
     "refundModal": {
       "heading": "Refund withdrawn items",
@@ -836,7 +841,7 @@
       "heading": "Sender",
       "description": "These settings apply to every email the app sends for your store. Send from your own verified address, and choose where customer replies go.",
       "emailLabel": "Sender email",
-      "emailPlaceholder": "notifications@withdrawaleasy.com",
+      "emailPlaceholder": "orders@yourstore.com",
       "detailsVerified": "Emails are sent from this address.",
       "detailsPending": "Enter the code we sent to this address to verify it.",
       "detailsDefault": "If you leave this blank, emails are sent from {{email}}.",
@@ -1163,7 +1168,7 @@
           "Items in a return: when they're back, select Process and refund on the return. This refunds the customer and closes the return.",
           "Nothing has shipped yet: you can also cancel and refund the whole order from More actions."
         ],
-        "closing": "EU law gives you {{refundDays}} from the withdrawal to refund. The request page shows how much time is left. Refund before you approve the request."
+        "closing": "EU law gives you {{refundDays}} from the withdrawal to refund. The request page shows how much time is left."
       },
       "returns": {
         "question": "How do returns work?",
@@ -1173,10 +1178,10 @@
         ]
       },
       "decision-lock": {
-        "question": "Why are order actions turned off after I approve or reject a request?",
+        "question": "What happens when I approve or reject a request?",
         "paragraphs": [
-          "Approving or rejecting finishes the request. After that, refunds, holds, returns, and cancellations are turned off, so the order can't be changed by mistake. That's why you should refund before you approve.",
-          "Deciding also releases any fulfillment hold the app placed. If that release fails, you can still select Release fulfillment hold."
+          "Approving keeps any fulfillment hold the app placed, so the withdrawn items don't ship. Next, refund the items, create a return, or cancel the order from the request page. Then release the hold so the rest of the order can ship.",
+          "Rejecting finishes the request. It releases the app's fulfillment hold and turns off refunds, holds, returns, and cancellations, so the order can't be changed by mistake. If the release fails, you can still select Release fulfillment hold."
         ]
       },
       "emails": {
@@ -1195,7 +1200,7 @@
       "countries-languages": {
         "question": "Which countries and languages does the app support?",
         "paragraphs": [
-          "All EU countries are eligible by default. If you only sell to some of them, select Specific countries in Settings.",
+          "All EU and EEA countries are eligible by default. If you only sell to some of them, select Specific countries in Settings.",
           "The form comes in {{languageCount}} languages: {{languages}}. Customers see it in their own language.",
           "English is the base language. If you leave a translated field blank, customers see the English text for it instead."
         ]

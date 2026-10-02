@@ -14,7 +14,8 @@
     "preview": "Pré-visualizar",
     "remove": "Remover",
     "save": "Salvar",
-    "verified": "Verificado"
+    "verified": "Verificado",
+    "retry": "Tentar novamente"
   },
   "nav": {
     "home": "Início",
@@ -32,7 +33,7 @@
     "emailServiceUnavailable": "Não foi possível conectar ao serviço de e-mail. Tente novamente em alguns minutos.",
     "emailServiceNotConfigured": "O envio de e-mails ainda não está configurado. Entre em contato com o suporte.",
     "requestNotFound": "Esta solicitação de desistência não existe ou foi excluída.",
-    "requestDecided": "Esta solicitação já foi aprovada ou rejeitada, então as ações do pedido não estão mais disponíveis.",
+    "requestDecided": "Esta solicitação foi rejeitada, então as ações do pedido não estão mais disponíveis.",
     "unknownDecision": "Escolha se deseja aprovar ou rejeitar esta solicitação.",
     "invalidStatus": "Escolha um status válido para esta solicitação.",
     "noteRequired": "Insira uma observação.",
@@ -44,7 +45,8 @@
     "senderNotStarted": "Verifique seu e-mail de remetente primeiro.",
     "senderIdMissing": "Não foi possível registrar este e-mail de remetente. Tente novamente.",
     "domainInvalid": "Insira um domínio válido, como sualoja.com.",
-    "domainFreeProvider": "Provedores de e-mail gratuitos como Gmail e Yahoo não podem ser autenticados. Use o domínio da sua loja."
+    "domainFreeProvider": "Provedores de e-mail gratuitos como Gmail e Yahoo não podem ser autenticados. Use o domínio da sua loja.",
+    "alreadyDecided": "Esta solicitação já foi aprovada ou rejeitada."
   },
   "auth": {
     "login": {
@@ -253,7 +255,8 @@
         "email": "Um e-mail de confirmação automático que os clientes possam guardar"
       },
       "penaltyHeading": "O que acontece se você não cumprir a lei",
-      "penalty": "Se o botão de desistência não existir ou não funcionar, a lei prorroga o prazo de desistência de {{days}} dias. Os clientes passam a ter 12 meses e {{days}} dias para desistir de cada pedido afetado."
+      "penalty": "Se o botão de desistência não existir ou não funcionar, você pode sofrer sanções conforme a legislação nacional, e os clientes podem ter muito mais do que {{days}} dias para desistir.",
+      "disclaimer": "Estas são informações gerais, não aconselhamento jurídico."
     },
     "form": {
       "heading": "Ative seu formulário de desistência",
@@ -283,8 +286,8 @@
     "countries": {
       "heading": "Países qualificados",
       "description": "Os clientes só veem o formulário de desistência se o pedido for enviado para um destes países.",
-      "all": "Todos os {{count}} países da UE (recomendado)",
-      "allDetails": "O direito de desistência se aplica em toda a UE.",
+      "all": "Todos os {{count}} países da UE e do EEE (recomendado)",
+      "allDetails": "O direito de desistência se aplica em toda a UE e no EEE.",
       "specific": "Países específicos",
       "specificDetails": "Escolha os países abaixo. Você pode alterar isso quando quiser.",
       "pickerLabel": "Países",
@@ -344,7 +347,8 @@
         "messageBefore": "Mensagem antes da entrega",
         "titleAfter": "Título após a entrega",
         "messageAfter": "Mensagem após a entrega"
-      }
+      },
+      "daysHint": "Digite {{days}} para mostrar seu prazo de desistência em dias."
     },
     "automation": {
       "heading": "Automação",
@@ -353,7 +357,7 @@
         "heading": "Antes do envio do pedido",
         "description": "Aplica-se quando uma solicitação chega antes do envio de qualquer item.",
         "hold": "Suspender o processamento para análise",
-        "holdDetails": "Pause o processamento até você aprovar ou rejeitar a solicitação. A suspensão é liberada quando você decide.",
+        "holdDetails": "Pause o processamento enquanto você analisa a solicitação. Se você a rejeitar, a suspensão será liberada. Depois de aprová-la, reembolse os itens da desistência e libere a suspensão.",
         "tagDetails": "Adicione tags aos pedidos que recebem uma solicitação antes do envio, para que sua equipe os encontre na lista de pedidos."
       },
       "fallback": {
@@ -408,7 +412,7 @@
     },
     "preview": {
       "heading": "Pré-visualização ao vivo",
-      "compliantBadge": "Conforme em 2 etapas",
+      "compliantBadge": "Confirmação em 2 etapas",
       "surfaceLabel": "Pré-visualização",
       "surfaces": {
         "orderStatus": "Página de status do pedido",
@@ -810,7 +814,8 @@
       "previewTitle": "Pré-visualização do e-mail",
       "templateUnchanged": "Suas alterações se aplicam somente a este e-mail. Seu modelo salvo não será alterado.",
       "noEmail": "O cliente não receberá um e-mail. Você pode entrar em contato separadamente, se necessário.",
-      "holdReleased": "Isso também libera a suspensão do processamento deste pedido, para que ele possa ser processado novamente."
+      "holdReleased": "Isso também libera a suspensão do processamento deste pedido, para que ele possa ser processado novamente.",
+      "holdKept": "A suspensão do processamento é mantida para que os itens da desistência não sejam enviados. Reembolse-os ou cancele o pedido e depois libere a suspensão para o que ainda precisa ser enviado."
     },
     "refundModal": {
       "heading": "Reembolsar itens da desistência",
@@ -852,7 +857,7 @@
       "heading": "Remetente",
       "description": "Estas configurações se aplicam a todos os e-mails que o app envia para sua loja. Envie a partir do seu próprio endereço verificado e escolha para onde vão as respostas dos clientes.",
       "emailLabel": "E-mail do remetente",
-      "emailPlaceholder": "notifications@withdrawaleasy.com",
+      "emailPlaceholder": "orders@yourstore.com",
       "detailsVerified": "Os e-mails são enviados a partir deste endereço.",
       "detailsPending": "Insira o código que enviamos para este endereço para verificá-lo.",
       "detailsDefault": "Se você deixar este campo em branco, os e-mails serão enviados a partir de {{email}}.",
@@ -1179,7 +1184,7 @@
           "Itens em uma devolução: quando voltarem, selecione Processar e reembolsar na devolução. Isso reembolsa o cliente e fecha a devolução.",
           "Nada foi enviado ainda: você também pode cancelar e reembolsar o pedido inteiro em Mais ações."
         ],
-        "closing": "A legislação da UE dá a você {{refundDays}} a partir da desistência para reembolsar. A página da solicitação mostra quanto tempo resta. Reembolse antes de aprovar a solicitação."
+        "closing": "A legislação da UE dá a você {{refundDays}} a partir da desistência para reembolsar. A página da solicitação mostra quanto tempo resta."
       },
       "returns": {
         "question": "Como funcionam as devoluções?",
@@ -1189,10 +1194,10 @@
         ]
       },
       "decision-lock": {
-        "question": "Por que as ações do pedido são desativadas depois que aprovo ou rejeito uma solicitação?",
+        "question": "O que acontece quando aprovo ou rejeito uma solicitação?",
         "paragraphs": [
-          "Aprovar ou rejeitar encerra a solicitação. Depois disso, reembolsos, suspensões, devoluções e cancelamentos são desativados para que o pedido não seja alterado por engano. Por isso, você deve reembolsar antes de aprovar.",
-          "A decisão também libera qualquer suspensão de processamento aplicada pelo app. Se a liberação falhar, você ainda pode selecionar Liberar suspensão do processamento."
+          "Ao aprovar, qualquer suspensão de processamento aplicada pelo app é mantida para que os itens da desistência não sejam enviados. Em seguida, na página da solicitação, reembolse os itens, crie uma devolução ou cancele o pedido. Por fim, libere a suspensão para que o restante do pedido possa ser enviado.",
+          "Rejeitar encerra a solicitação. A suspensão de processamento do app é liberada, e reembolsos, suspensões, devoluções e cancelamentos são desativados para que o pedido não seja alterado por engano. Se a liberação falhar, você ainda pode selecionar Liberar suspensão do processamento."
         ]
       },
       "emails": {
@@ -1211,7 +1216,7 @@
       "countries-languages": {
         "question": "Quais países e idiomas o app oferece?",
         "paragraphs": [
-          "Todos os países da UE são qualificados por padrão. Se você vende apenas para alguns deles, selecione Países específicos em Configurações.",
+          "Todos os países da UE e do EEE são qualificados por padrão. Se você vende apenas para alguns deles, selecione Países específicos em Configurações.",
           "O formulário está disponível em {{languageCount}} idiomas: {{languages}}. Os clientes o veem no próprio idioma.",
           "O inglês é o idioma base. Se você deixar um campo traduzido em branco, os clientes verão o texto em inglês no lugar."
         ]

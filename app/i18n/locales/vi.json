@@ -12,7 +12,8 @@
     "preview": "Xem trước",
     "remove": "Gỡ",
     "save": "Lưu",
-    "verified": "Đã xác minh"
+    "verified": "Đã xác minh",
+    "retry": "Thử lại"
   },
   "nav": {
     "home": "Trang chủ",
@@ -30,7 +31,7 @@
     "emailServiceUnavailable": "Không thể kết nối với dịch vụ email. Hãy thử lại sau vài phút.",
     "emailServiceNotConfigured": "Chưa thiết lập tính năng gửi email. Hãy liên hệ bộ phận hỗ trợ.",
     "requestNotFound": "Yêu cầu rút lại này không tồn tại hoặc đã bị xóa.",
-    "requestDecided": "Yêu cầu này đã được chấp thuận hoặc từ chối nên không còn thao tác nào với đơn hàng.",
+    "requestDecided": "Yêu cầu này đã bị từ chối nên không còn thao tác nào với đơn hàng.",
     "unknownDecision": "Chọn chấp thuận hoặc từ chối yêu cầu này.",
     "invalidStatus": "Chọn trạng thái hợp lệ cho yêu cầu này.",
     "noteRequired": "Nhập ghi chú.",
@@ -42,7 +43,8 @@
     "senderNotStarted": "Hãy xác minh email người gửi trước.",
     "senderIdMissing": "Không thể đăng ký email người gửi này. Hãy thử lại.",
     "domainInvalid": "Nhập tên miền hợp lệ, chẳng hạn như yourstore.com.",
-    "domainFreeProvider": "Không thể xác thực các nhà cung cấp email miễn phí như Gmail và Yahoo. Hãy dùng tên miền của cửa hàng."
+    "domainFreeProvider": "Không thể xác thực các nhà cung cấp email miễn phí như Gmail và Yahoo. Hãy dùng tên miền của cửa hàng.",
+    "alreadyDecided": "Yêu cầu này đã được chấp thuận hoặc từ chối."
   },
   "auth": {
     "login": {
@@ -245,7 +247,8 @@
         "email": "Email xác nhận tự động mà khách hàng có thể lưu giữ"
       },
       "penaltyHeading": "Điều gì xảy ra nếu bạn không tuân thủ",
-      "penalty": "Nếu thiếu nút rút lại hoặc nút không hoạt động, pháp luật sẽ gia hạn thời hạn rút lại {{days}} ngày. Khi đó, khách hàng có 12 tháng và {{days}} ngày để rút lại mỗi đơn hàng bị ảnh hưởng."
+      "penalty": "Nếu thiếu nút rút lại hoặc nút không hoạt động, bạn có thể bị xử phạt theo luật quốc gia và khách hàng có thể có thời hạn rút lại dài hơn {{days}} ngày rất nhiều.",
+      "disclaimer": "Đây là thông tin chung, không phải tư vấn pháp lý."
     },
     "form": {
       "heading": "Bật biểu mẫu rút lại",
@@ -275,8 +278,8 @@
     "countries": {
       "heading": "Quốc gia đủ điều kiện",
       "description": "Khách hàng chỉ thấy biểu mẫu rút lại nếu đơn hàng được giao đến một trong các quốc gia này.",
-      "all": "Tất cả {{count}} quốc gia EU (khuyên dùng)",
-      "allDetails": "Quyền rút lại áp dụng trên toàn EU.",
+      "all": "Tất cả {{count}} quốc gia EU và EEA (khuyên dùng)",
+      "allDetails": "Quyền rút lại áp dụng trên toàn EU và EEA.",
       "specific": "Quốc gia cụ thể",
       "specificDetails": "Chọn quốc gia bên dưới. Bạn có thể thay đổi bất cứ lúc nào.",
       "pickerLabel": "Quốc gia",
@@ -336,7 +339,8 @@
         "messageBefore": "Thông điệp trước khi giao hàng",
         "titleAfter": "Tiêu đề sau khi giao hàng",
         "messageAfter": "Thông điệp sau khi giao hàng"
-      }
+      },
+      "daysHint": "Nhập {{days}} để hiển thị thời hạn rút lại theo số ngày."
     },
     "automation": {
       "heading": "Tự động hóa",
@@ -345,7 +349,7 @@
         "heading": "Trước khi gửi đơn hàng",
         "description": "Áp dụng khi yêu cầu đến trước khi bất kỳ mặt hàng nào được gửi đi.",
         "hold": "Tạm giữ việc xử lý để xem xét",
-        "holdDetails": "Tạm dừng xử lý đơn hàng cho đến khi bạn chấp thuận hoặc từ chối yêu cầu. Việc tạm giữ được gỡ khi bạn quyết định.",
+        "holdDetails": "Tạm dừng xử lý đơn hàng trong khi bạn xem xét yêu cầu. Nếu bạn từ chối, việc tạm giữ sẽ được gỡ. Sau khi chấp thuận, hãy hoàn tiền cho các mặt hàng được rút lại rồi gỡ tạm giữ.",
         "tagDetails": "Gắn thẻ các đơn hàng nhận được yêu cầu trước khi gửi để nhân viên có thể tìm thấy trong danh sách đơn hàng."
       },
       "fallback": {
@@ -400,7 +404,7 @@
     },
     "preview": {
       "heading": "Xem trước trực tiếp",
-      "compliantBadge": "Tuân thủ quy trình 2 bước",
+      "compliantBadge": "Xác nhận 2 bước",
       "surfaceLabel": "Xem trước",
       "surfaces": {
         "orderStatus": "Trang trạng thái đơn hàng",
@@ -780,7 +784,8 @@
       "previewTitle": "Xem trước email",
       "templateUnchanged": "Thay đổi của bạn chỉ áp dụng cho email này. Mẫu đã lưu sẽ không thay đổi.",
       "noEmail": "Khách hàng sẽ không nhận được email. Bạn có thể liên hệ riêng với khách hàng nếu cần.",
-      "holdReleased": "Thao tác này cũng gỡ tạm giữ việc xử lý của đơn hàng để có thể xử lý lại đơn hàng."
+      "holdReleased": "Thao tác này cũng gỡ tạm giữ việc xử lý của đơn hàng để có thể xử lý lại đơn hàng.",
+      "holdKept": "Việc tạm giữ xử lý đơn hàng vẫn được giữ để các mặt hàng được rút lại không bị gửi đi. Hãy hoàn tiền cho chúng hoặc hủy đơn hàng, rồi gỡ tạm giữ cho những mặt hàng còn cần gửi."
     },
     "refundModal": {
       "heading": "Hoàn tiền mặt hàng đã rút lại",
@@ -820,7 +825,7 @@
       "heading": "Người gửi",
       "description": "Các cài đặt này áp dụng cho mọi email ứng dụng gửi thay cho cửa hàng. Hãy gửi từ địa chỉ đã xác minh của riêng bạn và chọn nơi nhận phản hồi của khách hàng.",
       "emailLabel": "Email người gửi",
-      "emailPlaceholder": "notifications@withdrawaleasy.com",
+      "emailPlaceholder": "orders@yourstore.com",
       "detailsVerified": "Email được gửi từ địa chỉ này.",
       "detailsPending": "Nhập mã chúng tôi đã gửi đến địa chỉ này để xác minh.",
       "detailsDefault": "Nếu để trống, email sẽ được gửi từ {{email}}.",
@@ -1147,7 +1152,7 @@
           "Mặt hàng nằm trong đơn trả hàng: khi nhận lại, chọn Xử lý và hoàn tiền trên đơn trả hàng. Thao tác này hoàn tiền cho khách hàng và đóng đơn trả hàng.",
           "Chưa gửi mặt hàng nào: bạn cũng có thể hủy và hoàn tiền toàn bộ đơn hàng từ Thao tác khác."
         ],
-        "closing": "Pháp luật EU cho bạn {{refundDays}} kể từ khi rút lại để hoàn tiền. Trang yêu cầu cho biết thời gian còn lại. Hãy hoàn tiền trước khi chấp thuận yêu cầu."
+        "closing": "Pháp luật EU cho bạn {{refundDays}} kể từ khi rút lại để hoàn tiền. Trang yêu cầu cho biết thời gian còn lại."
       },
       "returns": {
         "question": "Trả hàng hoạt động như thế nào?",
@@ -1157,10 +1162,10 @@
         ]
       },
       "decision-lock": {
-        "question": "Tại sao các thao tác với đơn hàng bị tắt sau khi tôi chấp thuận hoặc từ chối yêu cầu?",
+        "question": "Điều gì xảy ra khi tôi chấp thuận hoặc từ chối yêu cầu?",
         "paragraphs": [
-          "Việc chấp thuận hoặc từ chối sẽ kết thúc yêu cầu. Sau đó, hoàn tiền, tạm giữ, trả hàng và hủy đơn sẽ bị tắt để đơn hàng không bị thay đổi do nhầm lẫn. Vì vậy, bạn nên hoàn tiền trước khi chấp thuận.",
-          "Việc quyết định cũng gỡ mọi tạm giữ việc xử lý do ứng dụng đặt. Nếu gỡ không thành công, bạn vẫn có thể chọn Gỡ tạm giữ việc xử lý."
+          "Khi chấp thuận, mọi tạm giữ việc xử lý do ứng dụng đặt vẫn được giữ để các mặt hàng được rút lại không bị gửi đi. Tiếp theo, trên trang yêu cầu, hãy hoàn tiền cho các mặt hàng, tạo đơn trả hàng hoặc hủy đơn hàng. Cuối cùng, hãy gỡ tạm giữ để phần còn lại của đơn hàng có thể được gửi đi.",
+          "Việc từ chối sẽ kết thúc yêu cầu. Tạm giữ việc xử lý của ứng dụng được gỡ, đồng thời hoàn tiền, tạm giữ, trả hàng và hủy đơn sẽ bị tắt để đơn hàng không bị thay đổi do nhầm lẫn. Nếu gỡ không thành công, bạn vẫn có thể chọn Gỡ tạm giữ việc xử lý."
         ]
       },
       "emails": {
@@ -1179,7 +1184,7 @@
       "countries-languages": {
         "question": "Ứng dụng hỗ trợ những quốc gia và ngôn ngữ nào?",
         "paragraphs": [
-          "Theo mặc định, tất cả quốc gia EU đều đủ điều kiện. Nếu bạn chỉ bán cho một số quốc gia, hãy chọn Quốc gia cụ thể trong Cài đặt.",
+          "Theo mặc định, tất cả quốc gia EU và EEA đều đủ điều kiện. Nếu bạn chỉ bán cho một số quốc gia, hãy chọn Quốc gia cụ thể trong Cài đặt.",
           "Biểu mẫu có {{languageCount}} ngôn ngữ: {{languages}}. Khách hàng thấy biểu mẫu bằng ngôn ngữ của họ.",
           "Tiếng Anh là ngôn ngữ gốc. Nếu bạn để trống một trường đã dịch, khách hàng sẽ thấy văn bản tiếng Anh thay thế."
         ]

@@ -800,7 +800,8 @@ export async function releaseHoldsForRequest(admin, request, releasedBy) {
 
 /**
  * Called when staff approve or reject a request in the admin. Retires anything
- * still scheduled and lets the order move again.
+ * still scheduled, sends the decision email, and — on a rejection — releases
+ * the app's holds so the order moves again.
  */
 export async function handleManualDecision(shop, requestId, { email } = {}) {
   await connectDB();
@@ -809,8 +810,14 @@ export async function handleManualDecision(shop, requestId, { email } = {}) {
 
   await cancelJobsForRequest(request._id);
 
+  // Only a rejection lets the order ship as normal. An approved withdrawal
+  // keeps its hold: releasing it would ship the very items the customer
+  // withdrew from. Staff refund those items (or cancel the order) from the
+  // request page, then release the hold for anything left to ship.
   const needsHoldRelease =
-    (request.automation.holds ?? []).length > 0 && !request.automation.holdsReleasedAt;
+    request.status === "rejected" &&
+    (request.automation.holds ?? []).length > 0 &&
+    !request.automation.holdsReleasedAt;
   const decided = request.status === "approved" || request.status === "rejected";
 
   if (needsHoldRelease) {

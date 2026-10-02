@@ -13,7 +13,8 @@
     "preview": "Förhandsgranska",
     "remove": "Ta bort",
     "save": "Spara",
-    "verified": "Verifierad"
+    "verified": "Verifierad",
+    "retry": "Försök igen"
   },
   "nav": {
     "home": "Start",
@@ -31,7 +32,7 @@
     "emailServiceUnavailable": "Vi kunde inte ansluta till e-posttjänsten. Försök igen om några minuter.",
     "emailServiceNotConfigured": "E-postutskick är inte konfigurerat ännu. Kontakta supporten för hjälp.",
     "requestNotFound": "Den här ångerbegäran finns inte eller har raderats.",
-    "requestDecided": "Den här begäran har redan godkänts eller avvisats, så orderåtgärder är inte längre tillgängliga.",
+    "requestDecided": "Den här begäran har avvisats, så orderåtgärder är inte längre tillgängliga.",
     "unknownDecision": "Välj om du vill godkänna eller avvisa den här begäran.",
     "invalidStatus": "Välj en giltig status för den här begäran.",
     "noteRequired": "Ange en anteckning.",
@@ -43,7 +44,8 @@
     "senderNotStarted": "Verifiera din avsändaradress först.",
     "senderIdMissing": "Vi kunde inte registrera den här avsändaradressen. Försök igen.",
     "domainInvalid": "Ange en giltig domän, till exempel dinbutik.se.",
-    "domainFreeProvider": "Gratis e-postleverantörer som Gmail och Yahoo kan inte autentiseras. Använd din butiks domän i stället."
+    "domainFreeProvider": "Gratis e-postleverantörer som Gmail och Yahoo kan inte autentiseras. Använd din butiks domän i stället.",
+    "alreadyDecided": "Den här begäran har redan godkänts eller avvisats."
   },
   "auth": {
     "login": {
@@ -249,7 +251,8 @@
         "email": "Ett automatiskt bekräftelsemejl som kunderna kan spara"
       },
       "penaltyHeading": "Vad som händer om du inte följer reglerna",
-      "penalty": "Om ångerknappen saknas eller inte fungerar förlänger lagen ångerfristen på {{days}} dagar. Kunderna får då 12 månader och {{days}} dagar på sig att ångra varje berörd order."
+      "penalty": "Om ångerknappen saknas eller inte fungerar kan du riskera sanktioner enligt nationell lag, och kunderna kan få betydligt längre än {{days}} dagar på sig att ångra sig.",
+      "disclaimer": "Detta är allmän information, inte juridisk rådgivning."
     },
     "form": {
       "heading": "Aktivera ditt ångerformulär",
@@ -279,8 +282,8 @@
     "countries": {
       "heading": "Berättigade länder",
       "description": "Kunderna ser bara ångerformuläret om deras order skickas till något av dessa länder.",
-      "all": "Alla {{count}} EU-länder (rekommenderas)",
-      "allDetails": "Ångerrätten gäller i hela EU.",
+      "all": "Alla {{count}} EU- och EES-länder (rekommenderas)",
+      "allDetails": "Ångerrätten gäller i hela EU och EES.",
       "specific": "Specifika länder",
       "specificDetails": "Välj länder nedan. Du kan ändra detta när som helst.",
       "pickerLabel": "Länder",
@@ -340,7 +343,8 @@
         "messageBefore": "Meddelande före leverans",
         "titleAfter": "Rubrik efter leverans",
         "messageAfter": "Meddelande efter leverans"
-      }
+      },
+      "daysHint": "Skriv {{days}} för att visa din ångerfrist i dagar."
     },
     "automation": {
       "heading": "Automatisering",
@@ -349,7 +353,7 @@
         "heading": "Innan ordern skickas",
         "description": "Gäller när en begäran kommer in innan några artiklar har skickats.",
         "hold": "Pausa distributionen för granskning",
-        "holdDetails": "Pausa distributionen tills du godkänner eller avvisar begäran. Pausen hävs när du fattar ditt beslut.",
+        "holdDetails": "Pausa distributionen medan du granskar begäran. Om du avvisar den hävs pausen. När du har godkänt den återbetalar du de ångrade artiklarna och häver sedan pausen.",
         "tagDetails": "Tagga ordrar som får en begäran innan de skickas, så att din personal hittar dem i orderlistan."
       },
       "fallback": {
@@ -404,7 +408,7 @@
     },
     "preview": {
       "heading": "Liveförhandsgranskning",
-      "compliantBadge": "Uppfyller 2-stegskravet",
+      "compliantBadge": "Bekräftelse i 2 steg",
       "surfaceLabel": "Förhandsgranskning",
       "surfaces": {
         "orderStatus": "Orderstatussida",
@@ -795,7 +799,8 @@
       "previewTitle": "Förhandsgranskning av mejlet",
       "templateUnchanged": "Dina ändringar gäller bara det här mejlet. Din sparade mall ändras inte.",
       "noEmail": "Kunden får inget mejl. Du kan kontakta kunden separat om det behövs.",
-      "holdReleased": "Detta häver också pausen i distributionen för den här ordern, så att den kan distribueras igen."
+      "holdReleased": "Detta häver också pausen i distributionen för den här ordern, så att den kan distribueras igen.",
+      "holdKept": "Pausen i distributionen ligger kvar så att de ångrade artiklarna inte skickas. Återbetala dem eller avbryt ordern och häv sedan pausen för det som återstår att skicka."
     },
     "refundModal": {
       "heading": "Återbetala ångrade artiklar",
@@ -836,7 +841,7 @@
       "heading": "Avsändare",
       "description": "De här inställningarna gäller alla mejl som appen skickar för din butik. Skicka från din egen verifierade adress och välj vart kundernas svar ska gå.",
       "emailLabel": "Avsändaradress",
-      "emailPlaceholder": "notifications@withdrawaleasy.com",
+      "emailPlaceholder": "orders@yourstore.com",
       "detailsVerified": "Mejl skickas från den här adressen.",
       "detailsPending": "Ange koden vi skickade till den här adressen för att verifiera den.",
       "detailsDefault": "Om du lämnar fältet tomt skickas mejlen från {{email}}.",
@@ -1163,7 +1168,7 @@
           "Artiklar i en retur: välj Behandla och återbetala på returen när de har kommit tillbaka. Då återbetalas kunden och returen stängs.",
           "Inget har skickats än: du kan också annullera och återbetala hela ordern via Fler åtgärder."
         ],
-        "closing": "Enligt EU-lagstiftningen har du {{refundDays}} från ångern att återbetala. Sidan för begäran visar hur mycket tid som återstår. Återbetala innan du godkänner begäran."
+        "closing": "Enligt EU-lagstiftningen har du {{refundDays}} från ångern att återbetala. Sidan för begäran visar hur mycket tid som återstår."
       },
       "returns": {
         "question": "Hur fungerar returer?",
@@ -1173,10 +1178,10 @@
         ]
       },
       "decision-lock": {
-        "question": "Varför inaktiveras orderåtgärderna efter att jag har godkänt eller avvisat en begäran?",
+        "question": "Vad händer när jag godkänner eller avvisar en begäran?",
         "paragraphs": [
-          "När du godkänner eller avvisar avslutas begäran. Därefter inaktiveras återbetalningar, pauser, returer och annulleringar så att ordern inte ändras av misstag. Därför bör du återbetala innan du godkänner.",
-          "Beslutet häver också alla pauser i distributionen som appen har lagt. Om det misslyckas kan du fortfarande välja Häv paus i distributionen."
+          "När du godkänner ligger appens paus i distributionen kvar så att de ångrade artiklarna inte skickas. Återbetala sedan artiklarna, skapa en retur eller avbryt ordern från sidan för begäran. Häv till sist pausen så att resten av ordern kan skickas.",
+          "När du avvisar avslutas begäran. Appens paus i distributionen hävs och återbetalningar, pauser, returer och annulleringar inaktiveras så att ordern inte ändras av misstag. Om det misslyckas kan du fortfarande välja Häv paus i distributionen."
         ]
       },
       "emails": {
@@ -1195,7 +1200,7 @@
       "countries-languages": {
         "question": "Vilka länder och språk stöder appen?",
         "paragraphs": [
-          "Alla EU-länder är berättigade som standard. Om du bara säljer till några av dem väljer du Specifika länder i Inställningar.",
+          "Alla EU- och EES-länder är berättigade som standard. Om du bara säljer till några av dem väljer du Specifika länder i Inställningar.",
           "Formuläret finns på {{languageCount}} språk: {{languages}}. Kunderna ser det på sitt eget språk.",
           "Engelska är basspråket. Om du lämnar ett översatt fält tomt ser kunderna den engelska texten i stället."
         ]

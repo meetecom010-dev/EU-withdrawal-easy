@@ -12,7 +12,9 @@ primary_region = 'fra'
   force_https = true
   auto_stop_machines = 'stop'
   auto_start_machines = true
-  min_machines_running = 0
+  # One machine stays up: Shopify's webhooks (including the mandatory privacy
+  # ones) must be answered within 5 seconds, and a cold start can take longer.
+  min_machines_running = 1
   processes = ['app']
 
 [[vm]]

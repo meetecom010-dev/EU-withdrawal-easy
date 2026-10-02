@@ -20,5 +20,15 @@
   "item.select": "Seleziona {{title}}",
   "item.remove": "Rimuovi {{title}}",
   "item.fallbackTitle": "Articolo",
-  "error.submit": "Si è verificato un errore durante l'invio della richiesta. Riprova."
+  "error.submit": "Si è verificato un errore durante l'invio della richiesta. Riprova.",
+  "error.order_not_found": "Non abbiamo trovato questo ordine.",
+  "error.invalid_items": "Gli articoli selezionati non fanno parte di questo ordine. Aggiorna la pagina e riprova.",
+  "error.duplicate_request": "Stiamo già esaminando una richiesta di recesso per questo ordine.",
+  "error.rate_limited": "Troppi tentativi. Attendi qualche minuto e riprova.",
+  "eligibility.order_not_found": "Non abbiamo trovato questo ordine.",
+  "eligibility.order_cancelled": "Questo ordine è stato annullato, quindi non c'è nulla da cui recedere.",
+  "eligibility.already_requested": "Abbiamo già ricevuto una richiesta di recesso per questo ordine e la stiamo esaminando.",
+  "eligibility.deadline_passed": "Il periodo di recesso per questo ordine è terminato il {{date}}. Contattaci se pensi che si tratti di un errore.",
+  "eligibility.deadline_passed_no_date": "Il periodo di recesso per questo ordine è terminato. Contattaci se pensi che si tratti di un errore.",
+  "eligibility.not_eligible": "Non è più possibile recedere da questo ordine."
 }

@@ -67,7 +67,8 @@ export default function FeatureRequest() {
 
           <s-paragraph color="subdued">{t("featureRequest.intro")}</s-paragraph>
 
-          <s-grid gridTemplateColumns="1fr 1fr" gap="base">
+          <s-query-container>
+          <s-grid gridTemplateColumns="@container (inline-size > 500px) 1fr 1fr, 1fr" gap="base">
             <s-text-field
               label={t("featureRequest.firstName")}
               value={form.firstName}
@@ -81,6 +82,7 @@ export default function FeatureRequest() {
               required
             ></s-text-field>
           </s-grid>
+          </s-query-container>
 
           <s-email-field
             label={t("featureRequest.email")}

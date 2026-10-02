@@ -13,7 +13,8 @@
     "preview": "Önizle",
     "remove": "Kaldır",
     "save": "Kaydet",
-    "verified": "Doğrulandı"
+    "verified": "Doğrulandı",
+    "retry": "Tekrar dene"
   },
   "nav": {
     "home": "Ana sayfa",
@@ -31,7 +32,7 @@
     "emailServiceUnavailable": "E-posta hizmetine bağlanılamadı. Birkaç dakika sonra tekrar deneyin.",
     "emailServiceNotConfigured": "E-posta gönderimi henüz ayarlanmadı. Yardım için destek ekibiyle iletişime geçin.",
     "requestNotFound": "Bu cayma talebi mevcut değil veya silinmiş.",
-    "requestDecided": "Bu talep zaten onaylandı veya reddedildi. Bu nedenle sipariş işlemleri artık kullanılamaz.",
+    "requestDecided": "Bu talep reddedildi. Bu nedenle sipariş işlemleri artık kullanılamaz.",
     "unknownDecision": "Bu talebi onaylamayı veya reddetmeyi seçin.",
     "invalidStatus": "Bu talep için geçerli bir durum seçin.",
     "noteRequired": "Bir not girin.",
@@ -43,7 +44,8 @@
     "senderNotStarted": "Önce gönderici e-postanızı doğrulayın.",
     "senderIdMissing": "Bu gönderici e-postası kaydedilemedi. Tekrar deneyin.",
     "domainInvalid": "magazaniz.com gibi geçerli bir alan adı girin.",
-    "domainFreeProvider": "Gmail ve Yahoo gibi ücretsiz e-posta sağlayıcılarının kimliği doğrulanamaz. Bunun yerine mağazanızın alan adını kullanın."
+    "domainFreeProvider": "Gmail ve Yahoo gibi ücretsiz e-posta sağlayıcılarının kimliği doğrulanamaz. Bunun yerine mağazanızın alan adını kullanın.",
+    "alreadyDecided": "Bu talep zaten onaylandı veya reddedildi."
   },
   "auth": {
     "login": {
@@ -249,7 +251,8 @@
         "email": "Müşterilerin saklayabileceği otomatik bir onay e-postası"
       },
       "penaltyHeading": "Uymazsanız ne olur?",
-      "penalty": "Cayma düğmesi yoksa veya çalışmıyorsa yasa, {{days}} günlük cayma süresini uzatır. Bu durumda müşterilerin etkilenen her siparişten caymak için 12 ay {{days}} günü olur."
+      "penalty": "Cayma düğmesi yoksa veya çalışmıyorsa ulusal mevzuata göre yaptırımlarla karşılaşabilirsiniz ve müşteriler caymak için {{days}} günden çok daha uzun süreye sahip olabilir.",
+      "disclaimer": "Bu bilgiler geneldir, hukuki tavsiye değildir."
     },
     "form": {
       "heading": "Cayma formunuzu etkinleştirin",
@@ -279,8 +282,8 @@
     "countries": {
       "heading": "Uygun ülkeler",
       "description": "Müşteriler cayma formunu yalnızca siparişleri bu ülkelerden birine gönderiliyorsa görür.",
-      "all": "Tüm {{count}} AB ülkesi (önerilir)",
-      "allDetails": "Cayma hakkı tüm AB'de geçerlidir.",
+      "all": "Tüm {{count}} AB ve AEA ülkesi (önerilir)",
+      "allDetails": "Cayma hakkı tüm AB'de ve AEA'da geçerlidir.",
       "specific": "Belirli ülkeler",
       "specificDetails": "Aşağıdan ülkeleri seçin. Bunu istediğiniz zaman değiştirebilirsiniz.",
       "pickerLabel": "Ülkeler",
@@ -340,7 +343,8 @@
         "messageBefore": "Teslimattan önceki mesaj",
         "titleAfter": "Teslimattan sonraki başlık",
         "messageAfter": "Teslimattan sonraki mesaj"
-      }
+      },
+      "daysHint": "Cayma sürenizi gün olarak göstermek için {{days}} yazın."
     },
     "automation": {
       "heading": "Otomasyon",
@@ -349,7 +353,7 @@
         "heading": "Sipariş gönderilmeden önce",
         "description": "Herhangi bir ürün gönderilmeden önce gelen talepler için geçerlidir.",
         "hold": "İnceleme için karşılamayı beklet",
-        "holdDetails": "Talebi onaylayana veya reddedene kadar karşılamayı duraklatın. Karar verdiğinizde bekletme kaldırılır.",
+        "holdDetails": "Talebi incelerken karşılamayı duraklatın. Talebi reddederseniz bekletme kaldırılır. Onayladıktan sonra cayılan ürünlerin parasını iade edin, ardından bekletmeyi kaldırın.",
         "tagDetails": "Personelinizin sipariş listesinde bulabilmesi için gönderilmeden önce talep alan siparişleri etiketleyin."
       },
       "fallback": {
@@ -404,7 +408,7 @@
     },
     "preview": {
       "heading": "Canlı önizleme",
-      "compliantBadge": "2 adıma uygun",
+      "compliantBadge": "2 adımlı onay",
       "surfaceLabel": "Önizleme",
       "surfaces": {
         "orderStatus": "Sipariş durumu sayfası",
@@ -795,7 +799,8 @@
       "previewTitle": "E-posta önizlemesi",
       "templateUnchanged": "Değişiklikleriniz yalnızca bu e-posta için geçerlidir. Kayıtlı şablonunuz değişmez.",
       "noEmail": "Müşteriye e-posta gönderilmez. Gerekirse müşteriyle ayrıca iletişime geçebilirsiniz.",
-      "holdReleased": "Bu işlem, siparişin yeniden karşılanabilmesi için bu siparişteki karşılama bekletmesini de kaldırır."
+      "holdReleased": "Bu işlem, siparişin yeniden karşılanabilmesi için bu siparişteki karşılama bekletmesini de kaldırır.",
+      "holdKept": "Cayılan ürünler gönderilmesin diye karşılama bekletmesi devam eder. Bu ürünlerin parasını iade edin veya siparişi iptal edin, ardından gönderilecek kalan ürünler için bekletmeyi kaldırın."
     },
     "refundModal": {
       "heading": "Cayılan ürünler için para iadesi yap",
@@ -836,7 +841,7 @@
       "heading": "Gönderici",
       "description": "Bu ayarlar, uygulamanın mağazanız için gönderdiği her e-posta için geçerlidir. Kendi doğrulanmış adresinizden gönderin ve müşteri yanıtlarının nereye gideceğini seçin.",
       "emailLabel": "Gönderici e-postası",
-      "emailPlaceholder": "notifications@withdrawaleasy.com",
+      "emailPlaceholder": "orders@yourstore.com",
       "detailsVerified": "E-postalar bu adresten gönderilir.",
       "detailsPending": "Doğrulamak için bu adrese gönderdiğimiz kodu girin.",
       "detailsDefault": "Bu alanı boş bırakırsanız e-postalar {{email}} adresinden gönderilir.",
@@ -1163,7 +1168,7 @@
           "İadedeki ürünler: Ürünler geri geldiğinde iadede İşle ve para iadesi yap'ı seçin. Bu işlem müşteriye para iadesi yapar ve iadeyi kapatır.",
           "Henüz hiçbir şey gönderilmedi: Diğer işlemler menüsünden siparişin tamamını iptal edip para iadesi de yapabilirsiniz."
         ],
-        "closing": "AB mevzuatı, para iadesi için size caymadan itibaren {{refundDays}} süre tanır. Talep sayfası ne kadar süre kaldığını gösterir. Talebi onaylamadan önce para iadesi yapın."
+        "closing": "AB mevzuatı, para iadesi için size caymadan itibaren {{refundDays}} süre tanır. Talep sayfası ne kadar süre kaldığını gösterir."
       },
       "returns": {
         "question": "İadeler nasıl çalışır?",
@@ -1173,10 +1178,10 @@
         ]
       },
       "decision-lock": {
-        "question": "Bir talebi onayladıktan veya reddettikten sonra sipariş işlemleri neden kapanıyor?",
+        "question": "Bir talebi onayladığımda veya reddettiğimde ne olur?",
         "paragraphs": [
-          "Onaylamak veya reddetmek talebi sonlandırır. Bundan sonra para iadeleri, bekletmeler, iadeler ve iptaller kapatılır, böylece sipariş yanlışlıkla değiştirilemez. Bu yüzden onaylamadan önce para iadesi yapmalısınız.",
-          "Karar vermek, uygulamanın uyguladığı tüm karşılama bekletmelerini de kaldırır. Kaldırma başarısız olursa Karşılama bekletmesini kaldır'ı yine de seçebilirsiniz."
+          "Onayladığınızda, cayılan ürünler gönderilmesin diye uygulamanın uyguladığı karşılama bekletmesi devam eder. Ardından talep sayfasından ürünlerin parasını iade edin, iade oluşturun veya siparişi iptal edin. Son olarak siparişin geri kalanının gönderilebilmesi için bekletmeyi kaldırın.",
+          "Reddetmek talebi sonlandırır. Uygulamanın karşılama bekletmesi kaldırılır ve sipariş yanlışlıkla değiştirilemesin diye para iadeleri, bekletmeler, iadeler ve iptaller kapatılır. Kaldırma başarısız olursa Karşılama bekletmesini kaldır'ı yine de seçebilirsiniz."
         ]
       },
       "emails": {
@@ -1195,7 +1200,7 @@
       "countries-languages": {
         "question": "Uygulama hangi ülkeleri ve dilleri destekliyor?",
         "paragraphs": [
-          "Tüm AB ülkeleri varsayılan olarak uygundur. Yalnızca bazılarına satış yapıyorsanız Ayarlar'da Belirli ülkeler'i seçin.",
+          "Tüm AB ve AEA ülkeleri varsayılan olarak uygundur. Yalnızca bazılarına satış yapıyorsanız Ayarlar'da Belirli ülkeler'i seçin.",
           "Form {{languageCount}} dilde sunulur: {{languages}}. Müşteriler formu kendi dillerinde görür.",
           "Temel dil İngilizcedir. Çevrilmiş bir alanı boş bırakırsanız müşteriler bunun yerine İngilizce metni görür."
         ]

@@ -13,7 +13,8 @@
     "preview": "Esikatsele",
     "remove": "Poista",
     "save": "Tallenna",
-    "verified": "Vahvistettu"
+    "verified": "Vahvistettu",
+    "retry": "Yritä uudelleen"
   },
   "nav": {
     "home": "Etusivu",
@@ -31,7 +32,7 @@
     "emailServiceUnavailable": "Sähköpostipalveluun ei saatu yhteyttä. Yritä uudelleen muutaman minuutin kuluttua.",
     "emailServiceNotConfigured": "Sähköpostien lähetystä ei ole vielä määritetty. Ota yhteyttä tukeen.",
     "requestNotFound": "Tätä peruutuspyyntöä ei ole olemassa tai se on poistettu.",
-    "requestDecided": "Tämä pyyntö on jo hyväksytty tai hylätty, joten tilaustoiminnot eivät ole enää käytettävissä.",
+    "requestDecided": "Tämä pyyntö on hylätty, joten tilaustoiminnot eivät ole enää käytettävissä.",
     "unknownDecision": "Valitse, hyväksytkö vai hylkäätkö tämän pyynnön.",
     "invalidStatus": "Valitse tälle pyynnölle kelvollinen tila.",
     "noteRequired": "Kirjoita muistiinpano.",
@@ -43,7 +44,8 @@
     "senderNotStarted": "Vahvista ensin lähettäjän sähköpostiosoite.",
     "senderIdMissing": "Lähettäjän sähköpostiosoitetta ei voitu rekisteröidä. Yritä uudelleen.",
     "domainInvalid": "Anna kelvollinen verkkotunnus, esimerkiksi kauppasi.fi.",
-    "domainFreeProvider": "Ilmaisia sähköpostipalveluja, kuten Gmailia ja Yahoota, ei voi todentaa. Käytä sen sijaan kauppasi verkkotunnusta."
+    "domainFreeProvider": "Ilmaisia sähköpostipalveluja, kuten Gmailia ja Yahoota, ei voi todentaa. Käytä sen sijaan kauppasi verkkotunnusta.",
+    "alreadyDecided": "Tämä pyyntö on jo hyväksytty tai hylätty."
   },
   "auth": {
     "login": {
@@ -249,7 +251,8 @@
         "email": "Automaattinen vahvistussähköposti, jonka asiakas voi säilyttää"
       },
       "penaltyHeading": "Mitä tapahtuu, jos et noudata vaatimuksia",
-      "penalty": "Jos peruutuspainike puuttuu tai ei toimi, laki pidentää {{days}} päivän peruutusaikaa. Asiakkailla on silloin 12 kuukautta ja {{days}} päivää aikaa peruuttaa jokainen asianomainen tilaus."
+      "penalty": "Jos peruutuspainike puuttuu tai ei toimi, voit saada seuraamuksia kansallisen lain mukaan, ja asiakkaat voivat saada paljon yli {{days}} päivää aikaa peruuttaa.",
+      "disclaimer": "Tämä on yleistä tietoa, ei oikeudellista neuvontaa."
     },
     "form": {
       "heading": "Ota peruutuslomake käyttöön",
@@ -279,8 +282,8 @@
     "countries": {
       "heading": "Kelpoiset maat",
       "description": "Asiakkaat näkevät peruutuslomakkeen vain, jos tilaus toimitetaan johonkin näistä maista.",
-      "all": "Kaikki {{count}} EU-maata (suositus)",
-      "allDetails": "Peruutusoikeus on voimassa koko EU:ssa.",
+      "all": "Kaikki {{count}} EU- ja ETA-maata (suositus)",
+      "allDetails": "Peruutusoikeus on voimassa koko EU:ssa ja ETA-alueella.",
       "specific": "Tietyt maat",
       "specificDetails": "Valitse maat alta. Voit muuttaa valintaa milloin tahansa.",
       "pickerLabel": "Maat",
@@ -340,7 +343,8 @@
         "messageBefore": "Viesti ennen toimitusta",
         "titleAfter": "Otsikko toimituksen jälkeen",
         "messageAfter": "Viesti toimituksen jälkeen"
-      }
+      },
+      "daysHint": "Kirjoita {{days}}, niin peruutusaikasi näytetään päivinä."
     },
     "automation": {
       "heading": "Automaatio",
@@ -349,7 +353,7 @@
         "heading": "Ennen tilauksen lähettämistä",
         "description": "Koskee pyyntöjä, jotka saapuvat ennen kuin yhtään tuotetta on lähetetty.",
         "hold": "Pidätä toimitus tarkistusta varten",
-        "holdDetails": "Keskeytä toimitus, kunnes hyväksyt tai hylkäät pyynnön. Pidätys vapautetaan, kun teet päätöksen.",
+        "holdDetails": "Keskeytä toimitus, kun tarkistat pyyntöä. Jos hylkäät sen, pidätys vapautetaan. Kun olet hyväksynyt sen, hyvitä peruutetut tuotteet ja vapauta sitten pidätys.",
         "tagDetails": "Lisää tunniste tilauksiin, joista saapuu pyyntö ennen lähettämistä, jotta henkilökunta löytää ne tilausluettelosta."
       },
       "fallback": {
@@ -404,7 +408,7 @@
     },
     "preview": {
       "heading": "Reaaliaikainen esikatselu",
-      "compliantBadge": "2-vaiheinen, vaatimusten mukainen",
+      "compliantBadge": "2-vaiheinen vahvistus",
       "surfaceLabel": "Esikatselu",
       "surfaces": {
         "orderStatus": "Tilauksen tilasivu",
@@ -795,7 +799,8 @@
       "previewTitle": "Sähköpostin esikatselu",
       "templateUnchanged": "Muutoksesi koskevat vain tätä sähköpostia. Tallennettu mallisi ei muutu.",
       "noEmail": "Asiakas ei saa sähköpostia. Voit tarvittaessa ottaa yhteyttä asiakkaaseen erikseen.",
-      "holdReleased": "Tämä vapauttaa myös tämän tilauksen toimituksen pidätyksen, jotta tilaus voidaan taas toimittaa."
+      "holdReleased": "Tämä vapauttaa myös tämän tilauksen toimituksen pidätyksen, jotta tilaus voidaan taas toimittaa.",
+      "holdKept": "Toimituksen pidätys säilyy, jotta peruutettuja tuotteita ei lähetetä. Hyvitä ne tai peruuta tilaus ja vapauta sitten pidätys jäljellä olevia lähetettäviä tuotteita varten."
     },
     "refundModal": {
       "heading": "Hyvitä peruutetut tuotteet",
@@ -836,7 +841,7 @@
       "heading": "Lähettäjä",
       "description": "Nämä asetukset koskevat kaikkia sähköposteja, joita sovellus lähettää kauppasi puolesta. Lähetä omasta vahvistetusta osoitteestasi ja valitse, minne asiakkaiden vastaukset menevät.",
       "emailLabel": "Lähettäjän sähköposti",
-      "emailPlaceholder": "notifications@withdrawaleasy.com",
+      "emailPlaceholder": "orders@yourstore.com",
       "detailsVerified": "Sähköpostit lähetetään tästä osoitteesta.",
       "detailsPending": "Vahvista osoite antamalla koodi, jonka lähetimme siihen.",
       "detailsDefault": "Jos jätät tämän tyhjäksi, sähköpostit lähetetään osoitteesta {{email}}.",
@@ -1163,7 +1168,7 @@
           "Palautuksessa olevat tuotteet: kun ne ovat palanneet, valitse palautuksessa Käsittele ja hyvitä. Tämä hyvittää asiakasta ja sulkee palautuksen.",
           "Mitään ei ole vielä lähetetty: voit myös peruuttaa ja hyvittää koko tilauksen kohdasta Lisää toimintoja."
         ],
-        "closing": "EU-lainsäädäntö antaa sinulle peruutuksesta alkaen {{refundDays}} aikaa hyvittää. Pyynnön sivulla näkyy, paljonko aikaa on jäljellä. Hyvitä ennen kuin hyväksyt pyynnön."
+        "closing": "EU-lainsäädäntö antaa sinulle peruutuksesta alkaen {{refundDays}} aikaa hyvittää. Pyynnön sivulla näkyy, paljonko aikaa on jäljellä."
       },
       "returns": {
         "question": "Miten palautukset toimivat?",
@@ -1173,10 +1178,10 @@
         ]
       },
       "decision-lock": {
-        "question": "Miksi tilaustoiminnot poistetaan käytöstä, kun hyväksyn tai hylkään pyynnön?",
+        "question": "Mitä tapahtuu, kun hyväksyn tai hylkään pyynnön?",
         "paragraphs": [
-          "Hyväksyminen tai hylkääminen päättää pyynnön. Sen jälkeen hyvitykset, pidätykset, palautukset ja peruutukset poistetaan käytöstä, jotta tilausta ei muuteta vahingossa. Siksi sinun kannattaa hyvittää ennen hyväksymistä.",
-          "Päätös vapauttaa myös kaikki sovelluksen tekemät toimituksen pidätykset. Jos vapautus epäonnistuu, voit silti valita Vapauta toimituksen pidätys."
+          "Hyväksyminen säilyttää sovelluksen tekemän toimituksen pidätyksen, jotta peruutettuja tuotteita ei lähetetä. Hyvitä sen jälkeen tuotteet, luo palautus tai peruuta tilaus pyynnön sivulla. Vapauta lopuksi pidätys, jotta loput tilauksesta voidaan lähettää.",
+          "Hylkääminen päättää pyynnön. Sovelluksen toimituksen pidätys vapautetaan, ja hyvitykset, pidätykset, palautukset ja peruutukset poistetaan käytöstä, jotta tilausta ei muuteta vahingossa. Jos vapautus epäonnistuu, voit silti valita Vapauta toimituksen pidätys."
         ]
       },
       "emails": {
@@ -1195,7 +1200,7 @@
       "countries-languages": {
         "question": "Mitä maita ja kieliä sovellus tukee?",
         "paragraphs": [
-          "Kaikki EU-maat ovat oletuksena kelpoisia. Jos myyt vain osaan niistä, valitse Asetuksissa Tietyt maat.",
+          "Kaikki EU- ja ETA-maat ovat oletuksena kelpoisia. Jos myyt vain osaan niistä, valitse Asetuksissa Tietyt maat.",
           "Lomake on saatavilla {{languageCount}} kielellä: {{languages}}. Asiakkaat näkevät sen omalla kielellään.",
           "Englanti on peruskieli. Jos jätät käännetyn kentän tyhjäksi, asiakkaat näkevät sen sijaan englanninkielisen tekstin."
         ]

@@ -13,7 +13,8 @@
     "preview": "Voorbeeld",
     "remove": "Verwijderen",
     "save": "Opslaan",
-    "verified": "Geverifieerd"
+    "verified": "Geverifieerd",
+    "retry": "Opnieuw proberen"
   },
   "nav": {
     "home": "Start",
@@ -31,7 +32,7 @@
     "emailServiceUnavailable": "We konden geen verbinding maken met de e-mailservice. Probeer het over een paar minuten opnieuw.",
     "emailServiceNotConfigured": "Het verzenden van e-mails is nog niet ingesteld. Neem contact op met support.",
     "requestNotFound": "Dit herroepingsverzoek bestaat niet of is verwijderd.",
-    "requestDecided": "Dit verzoek is al goedgekeurd of afgewezen, dus bestellingsacties zijn niet meer beschikbaar.",
+    "requestDecided": "Dit verzoek is afgewezen, dus bestellingsacties zijn niet meer beschikbaar.",
     "unknownDecision": "Kies of je dit verzoek wilt goedkeuren of afwijzen.",
     "invalidStatus": "Kies een geldige status voor dit verzoek.",
     "noteRequired": "Voer een notitie in.",
@@ -43,7 +44,8 @@
     "senderNotStarted": "Verifieer eerst je afzenderadres.",
     "senderIdMissing": "We konden dit afzenderadres niet registreren. Probeer het opnieuw.",
     "domainInvalid": "Voer een geldig domein in, zoals jouwwinkel.com.",
-    "domainFreeProvider": "Gratis e-mailproviders zoals Gmail en Yahoo kunnen niet worden geverifieerd. Gebruik in plaats daarvan het domein van je winkel."
+    "domainFreeProvider": "Gratis e-mailproviders zoals Gmail en Yahoo kunnen niet worden geverifieerd. Gebruik in plaats daarvan het domein van je winkel.",
+    "alreadyDecided": "Dit verzoek is al goedgekeurd of afgewezen."
   },
   "auth": {
     "login": {
@@ -249,7 +251,8 @@
         "email": "Een automatische bevestigingsmail die klanten kunnen bewaren"
       },
       "penaltyHeading": "Wat er gebeurt als je je niet aan de regels houdt",
-      "penalty": "Als de herroepingsknop ontbreekt of niet werkt, verlengt de wet de herroepingstermijn van {{days}} dagen. Klanten hebben dan 12 maanden en {{days}} dagen om elke betrokken bestelling te herroepen."
+      "penalty": "Als de herroepingsknop ontbreekt of niet werkt, riskeer je sancties volgens nationaal recht en kunnen klanten veel langer dan {{days}} dagen de tijd krijgen om te herroepen.",
+      "disclaimer": "Dit is algemene informatie, geen juridisch advies."
     },
     "form": {
       "heading": "Je herroepingsformulier inschakelen",
@@ -279,8 +282,8 @@
     "countries": {
       "heading": "Geschikte landen",
       "description": "Klanten zien het herroepingsformulier alleen als hun bestelling naar een van deze landen wordt verzonden.",
-      "all": "Alle {{count}} EU-landen (aanbevolen)",
-      "allDetails": "Het herroepingsrecht geldt in de hele EU.",
+      "all": "Alle {{count}} EU- en EER-landen (aanbevolen)",
+      "allDetails": "Het herroepingsrecht geldt in de hele EU en de EER.",
       "specific": "Specifieke landen",
       "specificDetails": "Kies hieronder de landen. Je kunt dit altijd wijzigen.",
       "pickerLabel": "Landen",
@@ -340,7 +343,8 @@
         "messageBefore": "Bericht vóór levering",
         "titleAfter": "Titel na levering",
         "messageAfter": "Bericht na levering"
-      }
+      },
+      "daysHint": "Typ {{days}} om je herroepingstermijn in dagen te tonen."
     },
     "automation": {
       "heading": "Automatisering",
@@ -349,7 +353,7 @@
         "heading": "Voordat de bestelling wordt verzonden",
         "description": "Geldt wanneer een verzoek binnenkomt voordat er artikelen zijn verzonden.",
         "hold": "Uitvoering in de wacht zetten voor beoordeling",
-        "holdDetails": "Pauzeer de uitvoering totdat je het verzoek goedkeurt of afwijst. De wachtstatus wordt opgeheven zodra je beslist.",
+        "holdDetails": "Pauzeer de uitvoering terwijl je het verzoek beoordeelt. Als je het afwijst, wordt de wachtstatus opgeheven. Nadat je het hebt goedgekeurd, betaal je de herroepen artikelen terug en hef je daarna de wachtstatus op.",
         "tagDetails": "Tag bestellingen die vóór verzending een verzoek krijgen, zodat je medewerkers ze in je bestellingenlijst kunnen vinden."
       },
       "fallback": {
@@ -404,7 +408,7 @@
     },
     "preview": {
       "heading": "Live voorbeeld",
-      "compliantBadge": "Conform in 2 stappen",
+      "compliantBadge": "Bevestiging in 2 stappen",
       "surfaceLabel": "Voorbeeld",
       "surfaces": {
         "orderStatus": "Bestelstatuspagina",
@@ -795,7 +799,8 @@
       "previewTitle": "E-mailvoorbeeld",
       "templateUnchanged": "Je wijzigingen gelden alleen voor deze e-mail. Je opgeslagen sjabloon verandert niet.",
       "noEmail": "De klant ontvangt geen e-mail. Je kunt indien nodig apart contact met de klant opnemen.",
-      "holdReleased": "Hiermee wordt ook de wachtstatus van de uitvoering voor deze bestelling opgeheven, zodat de bestelling weer kan worden uitgevoerd."
+      "holdReleased": "Hiermee wordt ook de wachtstatus van de uitvoering voor deze bestelling opgeheven, zodat de bestelling weer kan worden uitgevoerd.",
+      "holdKept": "De wachtstatus van de uitvoering blijft staan, zodat de herroepen artikelen niet worden verzonden. Betaal ze terug of annuleer de bestelling en hef daarna de wachtstatus op voor wat nog moet worden verzonden."
     },
     "refundModal": {
       "heading": "Herroepen artikelen terugbetalen",
@@ -836,7 +841,7 @@
       "heading": "Afzender",
       "description": "Deze instellingen gelden voor elke e-mail die de app voor je winkel verstuurt. Verstuur vanaf je eigen geverifieerde adres en kies waar antwoorden van klanten naartoe gaan.",
       "emailLabel": "Afzenderadres",
-      "emailPlaceholder": "notifications@withdrawaleasy.com",
+      "emailPlaceholder": "orders@yourstore.com",
       "detailsVerified": "E-mails worden vanaf dit adres verzonden.",
       "detailsPending": "Voer de code in die we naar dit adres hebben gestuurd om het te verifiëren.",
       "detailsDefault": "Als je dit leeg laat, worden e-mails verzonden vanaf {{email}}.",
@@ -1163,7 +1168,7 @@
           "Artikelen in een retour: selecteer Verwerken en terugbetalen bij de retour zodra ze terug zijn. Daarmee krijgt de klant het geld terug en wordt de retour gesloten.",
           "Er is nog niets verzonden: je kunt de hele bestelling ook annuleren en terugbetalen via Meer acties."
         ],
-        "closing": "Volgens de EU-wetgeving heb je vanaf de herroeping {{refundDays}} om terug te betalen. De verzoekpagina laat zien hoeveel tijd er nog over is. Betaal terug voordat je het verzoek goedkeurt."
+        "closing": "Volgens de EU-wetgeving heb je vanaf de herroeping {{refundDays}} om terug te betalen. De verzoekpagina laat zien hoeveel tijd er nog over is."
       },
       "returns": {
         "question": "Hoe werken retouren?",
@@ -1173,10 +1178,10 @@
         ]
       },
       "decision-lock": {
-        "question": "Waarom zijn bestellingsacties uitgeschakeld nadat ik een verzoek heb goedgekeurd of afgewezen?",
+        "question": "Wat gebeurt er als ik een verzoek goedkeur of afwijs?",
         "paragraphs": [
-          "Met goedkeuren of afwijzen wordt het verzoek afgerond. Daarna zijn terugbetalingen, wachtstatussen, retouren en annuleringen uitgeschakeld, zodat de bestelling niet per ongeluk wordt gewijzigd. Daarom moet je terugbetalen voordat je goedkeurt.",
-          "Een beslissing heft ook elke wachtstatus op die de app voor de uitvoering heeft ingesteld. Als dat mislukt, kun je nog steeds Wachtstatus van uitvoering opheffen selecteren."
+          "Bij goedkeuren blijft elke wachtstatus van de uitvoering die de app heeft ingesteld staan, zodat de herroepen artikelen niet worden verzonden. Betaal daarna op de verzoekpagina de artikelen terug, maak een retour aan of annuleer de bestelling. Hef ten slotte de wachtstatus op zodat de rest van de bestelling kan worden verzonden.",
+          "Met afwijzen wordt het verzoek afgerond. De wachtstatus van de app wordt opgeheven en terugbetalingen, wachtstatussen, retouren en annuleringen worden uitgeschakeld, zodat de bestelling niet per ongeluk wordt gewijzigd. Als het opheffen mislukt, kun je nog steeds Wachtstatus van uitvoering opheffen selecteren."
         ]
       },
       "emails": {
@@ -1195,7 +1200,7 @@
       "countries-languages": {
         "question": "Welke landen en talen ondersteunt de app?",
         "paragraphs": [
-          "Alle EU-landen zijn standaard geschikt. Als je maar aan een deel ervan verkoopt, selecteer je Specifieke landen in Instellingen.",
+          "Alle EU- en EER-landen zijn standaard geschikt. Als je maar aan een deel ervan verkoopt, selecteer je Specifieke landen in Instellingen.",
           "Het formulier is beschikbaar in {{languageCount}} talen: {{languages}}. Klanten zien het in hun eigen taal.",
           "Engels is de basistaal. Als je een vertaald veld leeg laat, zien klanten in plaats daarvan de Engelse tekst."
         ]

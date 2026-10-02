@@ -15,7 +15,8 @@ export default function WelcomeStep() {
     <s-stack direction="block" gap="large-100">
       <s-stack direction="block" gap="small-200">
 
-        <s-grid gridTemplateColumns="1fr 240px" gap="large-500">
+        <s-query-container>
+        <s-grid gridTemplateColumns="@container (inline-size > 560px) 1fr 240px, 1fr" gap="large-500">
           <s-stack gap="base">
             <s-stack direction="block" gap="small-500">
               <s-heading>{t("onboarding.welcome.heading", { appName: APP_NAME })}</s-heading>
@@ -35,6 +36,7 @@ export default function WelcomeStep() {
             />
           </s-stack>
         </s-grid>
+        </s-query-container>
       </s-stack>
       <s-divider></s-divider>
       <s-stack direction="block" gap="small-200">
@@ -54,6 +56,7 @@ export default function WelcomeStep() {
         <s-paragraph>
           {t("onboarding.welcome.penalty", { days: LEGAL_MIN_WITHDRAWAL_DAYS })}
         </s-paragraph>
+        <s-paragraph>{t("onboarding.welcome.disclaimer")}</s-paragraph>
       </s-banner>
     </s-stack>
   );

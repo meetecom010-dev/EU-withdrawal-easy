@@ -8,8 +8,8 @@ declare global {
 
   // `process` isn't a real global in the extension's runtime — referencing
   // it is guarded with try/catch at runtime (see src/lib/config.js).
-  // Declared as `any` purely to satisfy the editor/type-checker.
-  const process: any;
+  // Declared purely to satisfy the editor/type-checker.
+  const process: { env: Record<string, string | undefined> };
 }
 
 export {};

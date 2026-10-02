@@ -20,11 +20,21 @@
   "item.select": "Select {{title}}",
   "item.remove": "Remove {{title}}",
   "item.fallbackTitle": "Item",
-  "error.submit": "Something went wrong submitting your request. Please try again.",
+  "error.submit": "Something went wrong submitting your request. Try again.",
   "editor.form_disabled.heading": "Withdrawal form is turned off",
   "editor.form_disabled.body": "Customers can't see this block yet. In the app, go to Settings and select \"Turn on withdrawal form\" and \"Show on order status page\".",
   "editor.surface_disabled.heading": "Order status page form is turned off",
   "editor.surface_disabled.body": "Customers can't see this block yet. In the app, go to Settings and select \"Show on order status page\".",
   "editor.unreachable.heading": "Couldn't reach the app",
-  "editor.unreachable.body": "The withdrawal form couldn't load its settings. Check that the app is still installed, then try again in a few minutes. If this keeps happening, contact support."
+  "editor.unreachable.body": "The withdrawal form couldn't load its settings. Check that the app is still installed, then try again in a few minutes. If this keeps happening, contact support.",
+  "error.order_not_found": "We couldn't find this order.",
+  "error.invalid_items": "The selected items aren't on this order. Refresh the page and try again.",
+  "error.duplicate_request": "A withdrawal request for this order is already being reviewed.",
+  "error.rate_limited": "Too many attempts. Wait a few minutes and try again.",
+  "eligibility.order_not_found": "We couldn't find this order.",
+  "eligibility.order_cancelled": "This order has been canceled, so there's nothing to withdraw from.",
+  "eligibility.already_requested": "We've already received a withdrawal request for this order and are reviewing it.",
+  "eligibility.deadline_passed": "The withdrawal period for this order ended on {{date}}. Contact us if you think this is wrong.",
+  "eligibility.deadline_passed_no_date": "The withdrawal period for this order has ended. Contact us if you think this is wrong.",
+  "eligibility.not_eligible": "This order can no longer be withdrawn from."
 }

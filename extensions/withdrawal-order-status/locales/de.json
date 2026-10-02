@@ -20,5 +20,15 @@
   "item.select": "{{title}} auswählen",
   "item.remove": "{{title}} entfernen",
   "item.fallbackTitle": "Artikel",
-  "error.submit": "Beim Übermitteln Ihres Antrags ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut."
+  "error.submit": "Beim Übermitteln Ihres Antrags ist ein Fehler aufgetreten. Versuchen Sie es erneut.",
+  "error.order_not_found": "Wir konnten diese Bestellung nicht finden.",
+  "error.invalid_items": "Die ausgewählten Artikel gehören nicht zu dieser Bestellung. Laden Sie die Seite neu und versuchen Sie es erneut.",
+  "error.duplicate_request": "Ein Widerrufsantrag für diese Bestellung wird bereits geprüft.",
+  "error.rate_limited": "Zu viele Versuche. Warten Sie einige Minuten und versuchen Sie es dann erneut.",
+  "eligibility.order_not_found": "Wir konnten diese Bestellung nicht finden.",
+  "eligibility.order_cancelled": "Diese Bestellung wurde storniert, daher gibt es nichts zu widerrufen.",
+  "eligibility.already_requested": "Wir haben bereits einen Widerrufsantrag für diese Bestellung erhalten und prüfen ihn.",
+  "eligibility.deadline_passed": "Die Widerrufsfrist für diese Bestellung ist am {{date}} abgelaufen. Kontaktieren Sie uns, wenn Sie glauben, dass das nicht stimmt.",
+  "eligibility.deadline_passed_no_date": "Die Widerrufsfrist für diese Bestellung ist abgelaufen. Kontaktieren Sie uns, wenn Sie glauben, dass das nicht stimmt.",
+  "eligibility.not_eligible": "Für diese Bestellung ist kein Widerruf mehr möglich."
 }

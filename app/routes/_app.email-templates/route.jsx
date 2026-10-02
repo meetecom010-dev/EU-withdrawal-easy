@@ -221,6 +221,10 @@ export default function EmailTemplates() {
       <s-page heading={t("emailTemplates.pageTitle")}>
         <s-banner tone="critical" heading={t("emailTemplates.loadError")}>
           <s-paragraph>{loadError}</s-paragraph>
+          {/* Loading runs once on mount, so a fresh load is the retry. */}
+          <s-button slot="secondary-actions" onClick={() => window.location.reload()}>
+            {t("common.retry")}
+          </s-button>
         </s-banner>
       </s-page>
     );

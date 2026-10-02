@@ -294,6 +294,8 @@ function OrderTagsSection({ tags, tagText, onTagTextChange, onRemove, disabled }
           label={t("requestDetail.tags.label")}
           labelAccessibilityVisibility="exclusive"
           placeholder={t("requestDetail.tags.placeholder")}
+          // Shopify rejects order tags longer than 40 characters.
+          maxLength={40}
           value={tagText}
           disabled={disabled || undefined}
           onInput={(event) => onTagTextChange(event.currentTarget.value)}
@@ -396,6 +398,9 @@ export default function RequestDetail({
   // A failed order action shows in a banner at the top of the page; toasts are
   // only for results that worked.
   const [actionError, setActionError] = useState(null);
+  // An order action that had nothing to do (e.g. nothing left to hold). The
+  // explanation is too long for a toast, so it gets an info banner instead.
+  const [actionNotice, setActionNotice] = useState(null);
 
   const deciding = decideFetcher.state !== "idle";
   const actionBusy = actionFetcher.state !== "idle";
@@ -454,10 +459,11 @@ export default function RequestDetail({
   const holdable = (orderState?.holdableFulfillmentOrders ?? []).length > 0;
   const canRefund = Boolean(orderState?.hasRefundableItems);
   const isPending = withdrawalRequest.status === "pending";
-  // Once a request is approved or rejected it's finished: every order action
-  // (refund, cancel, hold, return) stays visible but disabled, so nothing can
-  // change the order on a decided request. The server refuses them too.
-  const actionsLocked = actionBusy || !isPending;
+  // An approved withdrawal still needs its refund (and return, or cancellation
+  // if nothing shipped), so order actions stay available after approval. Only a
+  // rejected request is finished: its order actions stay visible but disabled,
+  // and the server refuses them too.
+  const actionsLocked = actionBusy || withdrawalRequest.status === "rejected";
 
   // The Shopify-order-page style subtitle shown under the order number: when
   // and where the customer submitted the withdrawal, e.g.
@@ -509,11 +515,19 @@ export default function RequestDetail({
   }, [orderTagFetcher.state, orderTagFetcher.data]);
 
   useEffect(() => {
-    if (decideFetcher.state === "idle" && decideFetcher.data?.decided) {
-      shopify.toast.show(
-        t(`requestDetail.decidedToast.${decideFetcher.data.withdrawalRequest.status}`),
-      );
-      navigate("/withdrawal-requests");
+    if (decideFetcher.state !== "idle" || !decideFetcher.data) return;
+    // Refused (e.g. already decided in another tab): say why instead of
+    // silently doing nothing.
+    if (decideFetcher.data.error && !decideFetcher.data.decided) {
+      setActionError(decideFetcher.data.error);
+      return;
+    }
+    if (decideFetcher.data.decided) {
+      const status = decideFetcher.data.withdrawalRequest.status;
+      shopify.toast.show(t(`requestDetail.decidedToast.${status}`));
+      // A rejected request is finished. An approved one usually still needs
+      // its refund (and return or cancellation), so stay on it.
+      if (status === "rejected") navigate("/withdrawal-requests");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps -- only react to the decide fetcher settling
   }, [decideFetcher.state, decideFetcher.data]);
@@ -537,8 +551,13 @@ export default function RequestDetail({
     const log = actionFetcher.data.withdrawalRequest.automation?.log ?? [];
     const last = log[log.length - 1];
     if (last?.outcome === "failed") {
+      setActionNotice(null);
       setActionError(activityMessage(last));
+    } else if (last?.outcome === "skipped") {
+      setActionError(null);
+      setActionNotice(activityMessage(last));
     } else if (last) {
+      setActionNotice(null);
       shopify.toast.show(activityMessage(last));
     }
     shopify.modal.hide(REFUND_MODAL_ID);
@@ -808,7 +827,7 @@ export default function RequestDetail({
         {/* Page-level banners get their own group with room below, so they
             don't sit flush against the cards. Rendered only when one shows,
             so pages without a banner keep their normal spacing. */}
-        {(orderStateError || actionError || cancelled) && (
+        {(orderStateError || actionError || actionNotice || cancelled) && (
           <s-stack direction="block" gap="base" padding="none none base none">
             {orderStateError && (
               <s-banner tone="warning" heading={t("requestDetail.banners.orderUnavailableHeading")}>
@@ -825,6 +844,12 @@ export default function RequestDetail({
               >
                 <s-paragraph>{actionError}</s-paragraph>
                 <s-paragraph>{t("requestDetail.banners.actionFailedAction")}</s-paragraph>
+              </s-banner>
+            )}
+
+            {actionNotice && (
+              <s-banner tone="info" dismissible onDismiss={() => setActionNotice(null)}>
+                <s-paragraph>{actionNotice}</s-paragraph>
               </s-banner>
             )}
 

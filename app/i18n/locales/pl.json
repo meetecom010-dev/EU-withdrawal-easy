@@ -15,7 +15,8 @@
     "preview": "Podgląd",
     "remove": "Usuń",
     "save": "Zapisz",
-    "verified": "Zweryfikowano"
+    "verified": "Zweryfikowano",
+    "retry": "Spróbuj ponownie"
   },
   "nav": {
     "home": "Strona główna",
@@ -33,7 +34,7 @@
     "emailServiceUnavailable": "Nie udało się połączyć z usługą e-mail. Spróbuj ponownie za kilka minut.",
     "emailServiceNotConfigured": "Wysyłanie e-maili nie zostało jeszcze skonfigurowane. Skontaktuj się z pomocą techniczną.",
     "requestNotFound": "To zgłoszenie odstąpienia nie istnieje lub zostało usunięte.",
-    "requestDecided": "To zgłoszenie zostało już zatwierdzone lub odrzucone, więc działania na zamówieniu nie są już dostępne.",
+    "requestDecided": "To zgłoszenie zostało odrzucone, więc działania na zamówieniu nie są już dostępne.",
     "unknownDecision": "Wybierz, czy chcesz zatwierdzić, czy odrzucić to zgłoszenie.",
     "invalidStatus": "Wybierz prawidłowy status tego zgłoszenia.",
     "noteRequired": "Wpisz notatkę.",
@@ -45,7 +46,8 @@
     "senderNotStarted": "Najpierw zweryfikuj adres e-mail nadawcy.",
     "senderIdMissing": "Nie udało się zarejestrować tego adresu nadawcy. Spróbuj ponownie.",
     "domainInvalid": "Wpisz prawidłową domenę, np. twojsklep.pl.",
-    "domainFreeProvider": "Darmowych dostawców poczty, takich jak Gmail i Yahoo, nie można uwierzytelnić. Użyj domeny swojego sklepu."
+    "domainFreeProvider": "Darmowych dostawców poczty, takich jak Gmail i Yahoo, nie można uwierzytelnić. Użyj domeny swojego sklepu.",
+    "alreadyDecided": "To zgłoszenie zostało już zatwierdzone lub odrzucone."
   },
   "auth": {
     "login": {
@@ -257,7 +259,8 @@
         "email": "Automatycznego e-maila z potwierdzeniem, który klienci mogą zachować"
       },
       "penaltyHeading": "Co się stanie, jeśli nie spełnisz wymogów",
-      "penalty": "Jeśli brakuje przycisku odstąpienia lub nie działa, prawo wydłuża {{days}}-dniowy termin na odstąpienie. Klienci mają wtedy 12 miesięcy i {{days}} dni na odstąpienie od każdego takiego zamówienia."
+      "penalty": "Jeśli brakuje przycisku odstąpienia lub nie działa, grożą Ci sankcje zgodnie z prawem krajowym, a klienci mogą mieć znacznie więcej niż {{days}} dni na odstąpienie.",
+      "disclaimer": "To informacje ogólne, a nie porada prawna."
     },
     "form": {
       "heading": "Włącz formularz odstąpienia",
@@ -287,8 +290,8 @@
     "countries": {
       "heading": "Kwalifikujące się kraje",
       "description": "Klienci widzą formularz odstąpienia tylko wtedy, gdy ich zamówienie jest wysyłane do jednego z tych krajów.",
-      "all": "Wszystkie kraje UE: {{count}} (zalecane)",
-      "allDetails": "Prawo odstąpienia od umowy obowiązuje w całej UE.",
+      "all": "Wszystkie kraje UE i EOG: {{count}} (zalecane)",
+      "allDetails": "Prawo odstąpienia od umowy obowiązuje w całej UE i EOG.",
       "specific": "Wybrane kraje",
       "specificDetails": "Wybierz kraje poniżej. Możesz to zmienić w dowolnym momencie.",
       "pickerLabel": "Kraje",
@@ -348,7 +351,8 @@
         "messageBefore": "Wiadomość przed dostawą",
         "titleAfter": "Tytuł po dostawie",
         "messageAfter": "Wiadomość po dostawie"
-      }
+      },
+      "daysHint": "Wpisz {{days}}, aby pokazać termin na odstąpienie w dniach."
     },
     "automation": {
       "heading": "Automatyzacja",
@@ -357,7 +361,7 @@
         "heading": "Przed wysyłką zamówienia",
         "description": "Dotyczy zgłoszeń, które wpłyną, zanim jakikolwiek produkt zostanie wysłany.",
         "hold": "Wstrzymaj realizację do weryfikacji",
-        "holdDetails": "Wstrzymaj realizację, dopóki nie zatwierdzisz lub nie odrzucisz zgłoszenia. Wstrzymanie zostanie zwolnione po podjęciu decyzji.",
+        "holdDetails": "Wstrzymaj realizację na czas rozpatrywania zgłoszenia. Odrzucenie zgłoszenia zwalnia wstrzymanie. Po zatwierdzeniu zwróć środki za produkty objęte odstąpieniem, a następnie zwolnij wstrzymanie.",
         "tagDetails": "Oznaczaj tagiem zamówienia, dla których zgłoszenie wpłynęło przed wysyłką, aby pracownicy mogli je znaleźć na liście zamówień."
       },
       "fallback": {
@@ -412,7 +416,7 @@
     },
     "preview": {
       "heading": "Podgląd na żywo",
-      "compliantBadge": "Zgodne z wymogiem 2 etapów",
+      "compliantBadge": "Potwierdzenie w 2 etapach",
       "surfaceLabel": "Podgląd",
       "surfaces": {
         "orderStatus": "Strona statusu zamówienia",
@@ -825,7 +829,8 @@
       "previewTitle": "Podgląd e-maila",
       "templateUnchanged": "Twoje zmiany dotyczą tylko tego e-maila. Zapisany szablon się nie zmieni.",
       "noEmail": "Klient nie otrzyma e-maila. W razie potrzeby możesz skontaktować się z nim osobno.",
-      "holdReleased": "Spowoduje to również zwolnienie wstrzymania realizacji tego zamówienia, aby można je było ponownie realizować."
+      "holdReleased": "Spowoduje to również zwolnienie wstrzymania realizacji tego zamówienia, aby można je było ponownie realizować.",
+      "holdKept": "Wstrzymanie realizacji pozostaje, aby produkty objęte odstąpieniem nie zostały wysłane. Zwróć za nie środki lub anuluj zamówienie, a następnie zwolnij wstrzymanie dla pozostałych produktów do wysłania."
     },
     "refundModal": {
       "heading": "Zwróć środki za produkty objęte odstąpieniem",
@@ -868,7 +873,7 @@
       "heading": "Nadawca",
       "description": "Te ustawienia dotyczą każdego e-maila wysyłanego przez aplikację w imieniu Twojego sklepu. Wysyłaj z własnego zweryfikowanego adresu i wybierz, dokąd trafiają odpowiedzi klientów.",
       "emailLabel": "Adres e-mail nadawcy",
-      "emailPlaceholder": "notifications@withdrawaleasy.com",
+      "emailPlaceholder": "orders@yourstore.com",
       "detailsVerified": "E-maile są wysyłane z tego adresu.",
       "detailsPending": "Wpisz kod wysłany na ten adres, aby go zweryfikować.",
       "detailsDefault": "Jeśli zostawisz to pole puste, e-maile będą wysyłane z adresu {{email}}.",
@@ -1195,7 +1200,7 @@
           "Produkty w zwrocie: gdy wrócą, wybierz w zwrocie Przetwórz i zwróć środki. Klient otrzyma zwrot środków, a zwrot zostanie zamknięty.",
           "Nic nie zostało jeszcze wysłane: możesz też anulować całe zamówienie i zwrócić środki w menu Więcej działań."
         ],
-        "closing": "Prawo UE daje Ci {{refundDays}} od odstąpienia na zwrot środków. Strona zgłoszenia pokazuje, ile czasu zostało. Zwróć środki, zanim zatwierdzisz zgłoszenie."
+        "closing": "Prawo UE daje Ci {{refundDays}} od odstąpienia na zwrot środków. Strona zgłoszenia pokazuje, ile czasu zostało."
       },
       "returns": {
         "question": "Jak działają zwroty?",
@@ -1205,10 +1210,10 @@
         ]
       },
       "decision-lock": {
-        "question": "Dlaczego działania na zamówieniu są wyłączone po zatwierdzeniu lub odrzuceniu zgłoszenia?",
+        "question": "Co się dzieje, gdy zatwierdzę lub odrzucę zgłoszenie?",
         "paragraphs": [
-          "Zatwierdzenie lub odrzucenie kończy zgłoszenie. Potem zwroty środków, wstrzymania, zwroty i anulowania są wyłączone, aby zamówienie nie zostało zmienione przez pomyłkę. Dlatego zwróć środki, zanim zatwierdzisz zgłoszenie.",
-          "Decyzja zwalnia też każde wstrzymanie realizacji nałożone przez aplikację. Jeśli to się nie uda, nadal możesz wybrać Zwolnij wstrzymanie realizacji."
+          "Po zatwierdzeniu wstrzymanie realizacji nałożone przez aplikację pozostaje, aby produkty objęte odstąpieniem nie zostały wysłane. Następnie na stronie zgłoszenia zwróć środki za produkty, utwórz zwrot lub anuluj zamówienie. Na koniec zwolnij wstrzymanie, aby można było wysłać resztę zamówienia.",
+          "Odrzucenie kończy zgłoszenie. Wstrzymanie realizacji nałożone przez aplikację zostaje zwolnione, a zwroty środków, wstrzymania, zwroty i anulowania są wyłączone, aby zamówienie nie zostało zmienione przez pomyłkę. Jeśli zwolnienie się nie uda, nadal możesz wybrać Zwolnij wstrzymanie realizacji."
         ]
       },
       "emails": {
@@ -1227,7 +1232,7 @@
       "countries-languages": {
         "question": "Jakie kraje i języki obsługuje aplikacja?",
         "paragraphs": [
-          "Domyślnie kwalifikują się wszystkie kraje UE. Jeśli sprzedajesz tylko do niektórych z nich, wybierz Wybrane kraje w Ustawieniach.",
+          "Domyślnie kwalifikują się wszystkie kraje UE i EOG. Jeśli sprzedajesz tylko do niektórych z nich, wybierz Wybrane kraje w Ustawieniach.",
           "Formularz jest dostępny w tylu językach: {{languageCount}} ({{languages}}). Klienci widzą go w swoim języku.",
           "Językiem bazowym jest angielski. Jeśli zostawisz przetłumaczone pole puste, klienci zobaczą w nim tekst angielski."
         ]

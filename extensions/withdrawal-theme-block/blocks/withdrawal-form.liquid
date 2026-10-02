@@ -5,7 +5,57 @@
   {% if request.design_mode %}data-design-mode="true"{% endif %}
   style="--withdrawly-accent: {{ block.settings.accent_color | default: '#2b45a8' }};"
   {{ block.shopify_attributes }}
-></div>
+>
+  {%- comment -%}
+    Customer-facing text in the storefront's language (locales/*.json).
+    Read by withdrawal-form.js before it first renders; [tokens] are filled
+    in there, so Liquid never interpolates them.
+  {%- endcomment -%}
+  <script type="application/json" data-withdrawly-strings>
+  {
+    "entry_start": {{ "withdrawal.entry_start" | t | json }},
+    "lookup_heading": {{ "withdrawal.lookup_heading" | t | json }},
+    "lookup_sub": {{ "withdrawal.lookup_sub" | t | json }},
+    "field_name": {{ "withdrawal.field_name" | t | json }},
+    "field_email": {{ "withdrawal.field_email" | t | json }},
+    "field_order_number": {{ "withdrawal.field_order_number" | t | json }},
+    "lookup_continue": {{ "withdrawal.lookup_continue" | t | json }},
+    "looking_up": {{ "withdrawal.looking_up" | t | json }},
+    "reason_label": {{ "withdrawal.reason_label" | t | json }},
+    "reason_placeholder": {{ "withdrawal.reason_placeholder" | t | json }},
+    "other_option": {{ "withdrawal.other_option" | t | json }},
+    "other_reason_label": {{ "withdrawal.other_reason_label" | t | json }},
+    "other_reason_placeholder": {{ "withdrawal.other_reason_placeholder" | t | json }},
+    "select_item": {{ "withdrawal.select_item" | t | json }},
+    "items_to_withdraw": {{ "withdrawal.items_to_withdraw" | t | json }},
+    "selected_total": {{ "withdrawal.selected_total" | t | json }},
+    "previous": {{ "withdrawal.previous" | t | json }},
+    "submitted_on": {{ "withdrawal.submitted_on" | t | json }},
+    "submitting": {{ "withdrawal.submitting" | t | json }},
+    "step_lookup": {{ "withdrawal.step_lookup" | t | json }},
+    "step_details": {{ "withdrawal.step_details" | t | json }},
+    "step_confirm": {{ "withdrawal.step_confirm" | t | json }},
+    "step_done": {{ "withdrawal.step_done" | t | json }},
+    "step_of": {{ "withdrawal.step_of" | t | json }},
+    "fallback_title": {{ "withdrawal.fallback_title" | t | json }},
+    "error_submit": {{ "withdrawal.error_submit" | t | json }},
+    "errors": {
+      "order_not_found": {{ "withdrawal.errors.order_not_found" | t | json }},
+      "order_cancelled": {{ "withdrawal.errors.order_cancelled" | t | json }},
+      "already_requested": {{ "withdrawal.errors.already_requested" | t | json }},
+      "deadline_passed": {{ "withdrawal.errors.deadline_passed" | t | json }},
+      "deadline_passed_no_date": {{ "withdrawal.errors.deadline_passed_no_date" | t | json }},
+      "not_eligible": {{ "withdrawal.errors.not_eligible" | t | json }},
+      "country_not_eligible": {{ "withdrawal.errors.country_not_eligible" | t | json }},
+      "duplicate_request": {{ "withdrawal.errors.duplicate_request" | t | json }},
+      "rate_limited": {{ "withdrawal.errors.rate_limited" | t | json }},
+      "invalid_items": {{ "withdrawal.errors.invalid_items" | t | json }},
+      "missing_fields": {{ "withdrawal.errors.missing_fields" | t | json }},
+      "store_unavailable": {{ "withdrawal.errors.store_unavailable" | t | json }}
+    }
+  }
+  </script>
+</div>
 
 <script src="{{ 'withdrawal-form.js' | asset_url }}" defer="defer"></script>
 

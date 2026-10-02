@@ -144,7 +144,13 @@ export default function Onboarding({ onComplete }) {
             {t("onboarding.intro", { count: STEPS.length })}
           </s-paragraph>
         </s-stack>
-        <s-grid gridTemplateColumns="230px minmax(0, 1fr)" gap="base" alignItems="start">
+        {/* Sidebar beside the step on a wide page, stacked above it on a phone. */}
+        <s-query-container>
+        <s-grid
+          gridTemplateColumns="@container (inline-size > 700px) 230px minmax(0, 1fr), minmax(0, 1fr)"
+          gap="base"
+          alignItems="start"
+        >
           <OnboardingSidebar steps={STEPS} currentIndex={stepIndex} />
 
           <s-box padding="large-100" borderWidth="base" borderRadius="large" background="base">
@@ -215,6 +221,7 @@ export default function Onboarding({ onComplete }) {
             </s-stack>
           </s-box>
         </s-grid>
+        </s-query-container>
       </s-stack>
     </s-page>
   );

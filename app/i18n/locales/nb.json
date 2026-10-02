@@ -13,7 +13,8 @@
     "preview": "Forhåndsvis",
     "remove": "Fjern",
     "save": "Lagre",
-    "verified": "Bekreftet"
+    "verified": "Bekreftet",
+    "retry": "Prøv igjen"
   },
   "nav": {
     "home": "Hjem",
@@ -31,7 +32,7 @@
     "emailServiceUnavailable": "Vi kunne ikke koble til e-posttjenesten. Prøv igjen om noen minutter.",
     "emailServiceNotConfigured": "Utsending av e-post er ikke konfigurert ennå. Kontakt kundestøtte for hjelp.",
     "requestNotFound": "Denne angreforespørselen finnes ikke eller er slettet.",
-    "requestDecided": "Denne forespørselen er allerede godkjent eller avvist, så ordrehandlinger er ikke lenger tilgjengelige.",
+    "requestDecided": "Denne forespørselen er avvist, så ordrehandlinger er ikke lenger tilgjengelige.",
     "unknownDecision": "Velg om du vil godkjenne eller avvise denne forespørselen.",
     "invalidStatus": "Velg en gyldig status for denne forespørselen.",
     "noteRequired": "Skriv inn et notat.",
@@ -43,7 +44,8 @@
     "senderNotStarted": "Bekreft avsenderadressen din først.",
     "senderIdMissing": "Vi kunne ikke registrere denne avsenderadressen. Prøv igjen.",
     "domainInvalid": "Skriv inn et gyldig domene, for eksempel dinbutikk.no.",
-    "domainFreeProvider": "Gratis e-postleverandører som Gmail og Yahoo kan ikke autentiseres. Bruk butikkens domene i stedet."
+    "domainFreeProvider": "Gratis e-postleverandører som Gmail og Yahoo kan ikke autentiseres. Bruk butikkens domene i stedet.",
+    "alreadyDecided": "Denne forespørselen er allerede godkjent eller avvist."
   },
   "auth": {
     "login": {
@@ -249,7 +251,8 @@
         "email": "En automatisk bekreftelses-e-post som kundene kan ta vare på"
       },
       "penaltyHeading": "Hva som skjer hvis du ikke følger reglene",
-      "penalty": "Hvis angreknappen mangler eller ikke fungerer, forlenger loven angrefristen på {{days}} dager. Kundene får da 12 måneder og {{days}} dager på å angre hver berørt ordre."
+      "penalty": "Hvis angreknappen mangler eller ikke fungerer, kan du risikere sanksjoner etter nasjonal lov, og kundene kan få mye lengre enn {{days}} dager på å angre.",
+      "disclaimer": "Dette er generell informasjon, ikke juridisk rådgivning."
     },
     "form": {
       "heading": "Aktiver angreskjemaet",
@@ -279,8 +282,8 @@
     "countries": {
       "heading": "Kvalifiserte land",
       "description": "Kundene ser bare angreskjemaet hvis ordren sendes til ett av disse landene.",
-      "all": "Alle {{count}} EU-land (anbefales)",
-      "allDetails": "Angreretten gjelder i hele EU.",
+      "all": "Alle {{count}} EU- og EØS-land (anbefales)",
+      "allDetails": "Angreretten gjelder i hele EU og EØS.",
       "specific": "Bestemte land",
       "specificDetails": "Velg land nedenfor. Du kan endre dette når som helst.",
       "pickerLabel": "Land",
@@ -340,7 +343,8 @@
         "messageBefore": "Melding før levering",
         "titleAfter": "Tittel etter levering",
         "messageAfter": "Melding etter levering"
-      }
+      },
+      "daysHint": "Skriv {{days}} for å vise angrefristen din i dager."
     },
     "automation": {
       "heading": "Automatisering",
@@ -349,7 +353,7 @@
         "heading": "Før ordren sendes",
         "description": "Gjelder når en forespørsel kommer inn før noen varer er sendt.",
         "hold": "Hold tilbake oppfyllelse for gjennomgang",
-        "holdDetails": "Sett oppfyllelsen på pause til du godkjenner eller avviser forespørselen. Tilbakeholdelsen oppheves når du tar en beslutning.",
+        "holdDetails": "Sett oppfyllelsen på pause mens du vurderer forespørselen. Hvis du avviser den, oppheves tilbakeholdelsen. Når du har godkjent den, refunderer du de angrede varene og opphever deretter tilbakeholdelsen.",
         "tagDetails": "Merk ordrer som får en forespørsel før de sendes, slik at de ansatte finner dem i ordrelisten."
       },
       "fallback": {
@@ -404,7 +408,7 @@
     },
     "preview": {
       "heading": "Direkte forhåndsvisning",
-      "compliantBadge": "Oppfyller 2-trinnskravet",
+      "compliantBadge": "Bekreftelse i 2 trinn",
       "surfaceLabel": "Forhåndsvisning",
       "surfaces": {
         "orderStatus": "Ordrestatusside",
@@ -795,7 +799,8 @@
       "previewTitle": "Forhåndsvisning av e-post",
       "templateUnchanged": "Endringene dine gjelder bare denne e-posten. Den lagrede malen endres ikke.",
       "noEmail": "Kunden får ingen e-post. Du kan kontakte kunden separat om nødvendig.",
-      "holdReleased": "Dette opphever også tilbakeholdelsen av oppfyllelsen for denne ordren, slik at den kan oppfylles igjen."
+      "holdReleased": "Dette opphever også tilbakeholdelsen av oppfyllelsen for denne ordren, slik at den kan oppfylles igjen.",
+      "holdKept": "Tilbakeholdelsen av oppfyllelsen beholdes, slik at de angrede varene ikke sendes. Refunder dem eller kanseller ordren, og opphev deretter tilbakeholdelsen for det som fortsatt skal sendes."
     },
     "refundModal": {
       "heading": "Refunder angrede varer",
@@ -836,7 +841,7 @@
       "heading": "Avsender",
       "description": "Disse innstillingene gjelder for all e-post appen sender for butikken din. Send fra din egen bekreftede adresse, og velg hvor svar fra kunder skal gå.",
       "emailLabel": "Avsenderadresse",
-      "emailPlaceholder": "notifications@withdrawaleasy.com",
+      "emailPlaceholder": "orders@yourstore.com",
       "detailsVerified": "E-post sendes fra denne adressen.",
       "detailsPending": "Skriv inn koden vi sendte til denne adressen, for å bekrefte den.",
       "detailsDefault": "Hvis du lar feltet stå tomt, sendes e-post fra {{email}}.",
@@ -1163,7 +1168,7 @@
           "Varer i en retur: når de er kommet tilbake, velger du Behandle og refundere på returen. Da refunderes kunden, og returen lukkes.",
           "Ingenting er sendt ennå: du kan også kansellere og refundere hele ordren fra Flere handlinger."
         ],
-        "closing": "EU-retten gir deg {{refundDays}} fra angringen til å refundere. Forespørselssiden viser hvor mye tid som gjenstår. Refunder før du godkjenner forespørselen."
+        "closing": "EU-retten gir deg {{refundDays}} fra angringen til å refundere. Forespørselssiden viser hvor mye tid som gjenstår."
       },
       "returns": {
         "question": "Hvordan fungerer returer?",
@@ -1173,10 +1178,10 @@
         ]
       },
       "decision-lock": {
-        "question": "Hvorfor deaktiveres ordrehandlingene etter at jeg har godkjent eller avvist en forespørsel?",
+        "question": "Hva skjer når jeg godkjenner eller avviser en forespørsel?",
         "paragraphs": [
-          "Når du godkjenner eller avviser, avsluttes forespørselen. Deretter deaktiveres refusjoner, tilbakeholdelser, returer og kanselleringer, slik at ordren ikke endres ved en feil. Derfor bør du refundere før du godkjenner.",
-          "Avgjørelsen opphever også alle tilbakeholdelser av oppfyllelse som appen har lagt inn. Hvis opphevingen mislykkes, kan du fortsatt velge Opphev tilbakeholdelse av oppfyllelse."
+          "Når du godkjenner, beholdes tilbakeholdelsen av oppfyllelse som appen har lagt inn, slik at de angrede varene ikke sendes. Refunder deretter varene, opprett en retur eller kanseller ordren fra forespørselssiden. Opphev til slutt tilbakeholdelsen slik at resten av ordren kan sendes.",
+          "Når du avviser, avsluttes forespørselen. Appens tilbakeholdelse av oppfyllelse oppheves, og refusjoner, tilbakeholdelser, returer og kanselleringer deaktiveres, slik at ordren ikke endres ved en feil. Hvis opphevingen mislykkes, kan du fortsatt velge Opphev tilbakeholdelse av oppfyllelse."
         ]
       },
       "emails": {
@@ -1195,7 +1200,7 @@
       "countries-languages": {
         "question": "Hvilke land og språk støtter appen?",
         "paragraphs": [
-          "Alle EU-land er kvalifisert som standard. Hvis du bare selger til noen av dem, velger du Bestemte land i Innstillinger.",
+          "Alle EU- og EØS-land er kvalifisert som standard. Hvis du bare selger til noen av dem, velger du Bestemte land i Innstillinger.",
           "Skjemaet finnes på {{languageCount}} språk: {{languages}}. Kundene ser det på sitt eget språk.",
           "Engelsk er grunnspråket. Hvis du lar et oversatt felt stå tomt, ser kundene den engelske teksten i stedet."
         ]

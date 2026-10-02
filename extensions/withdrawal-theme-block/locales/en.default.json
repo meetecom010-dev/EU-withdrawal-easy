@@ -1,1 +1,44 @@
-{}
+{
+  "withdrawal": {
+    "entry_start": "Start withdrawal request",
+    "lookup_heading": "Find your order",
+    "lookup_sub": "Enter your order details to start your withdrawal request.",
+    "field_name": "Full name",
+    "field_email": "Email",
+    "field_order_number": "Order number",
+    "lookup_continue": "Continue",
+    "looking_up": "Looking up…",
+    "reason_label": "Reason for withdrawal",
+    "reason_placeholder": "Select a reason (optional)",
+    "other_option": "Other",
+    "other_reason_label": "Your reason",
+    "other_reason_placeholder": "Tell us your reason",
+    "select_item": "Select at least one item to continue.",
+    "items_to_withdraw": "Items to withdraw ([count])",
+    "selected_total": "Selected items total",
+    "previous": "Previous",
+    "submitted_on": "Submitted on [date]",
+    "submitting": "Submitting…",
+    "step_lookup": "Look up",
+    "step_details": "Details",
+    "step_confirm": "Confirm",
+    "step_done": "Done",
+    "step_of": "Step [current] of [total]",
+    "fallback_title": "Item",
+    "error_submit": "Something went wrong submitting your request. Try again.",
+    "errors": {
+      "order_not_found": "We couldn't find an order matching those details.",
+      "order_cancelled": "This order has been canceled, so there's nothing to withdraw from.",
+      "already_requested": "We've already received a withdrawal request for this order and are reviewing it.",
+      "deadline_passed": "The withdrawal period for this order ended on [date]. Contact us if you think this is wrong.",
+      "deadline_passed_no_date": "The withdrawal period for this order has ended. Contact us if you think this is wrong.",
+      "not_eligible": "This order can no longer be withdrawn from.",
+      "country_not_eligible": "This order isn't eligible for a withdrawal request.",
+      "duplicate_request": "A withdrawal request for this order is already being reviewed.",
+      "rate_limited": "Too many attempts. Wait a few minutes and try again.",
+      "invalid_items": "The selected items aren't on this order. Refresh the page and try again.",
+      "missing_fields": "Enter your email and order number.",
+      "store_unavailable": "Withdrawals aren't available right now. Contact the store for help."
+    }
+  }
+}

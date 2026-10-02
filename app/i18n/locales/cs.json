@@ -15,7 +15,8 @@
     "preview": "Náhled",
     "remove": "Odebrat",
     "save": "Uložit",
-    "verified": "Ověřeno"
+    "verified": "Ověřeno",
+    "retry": "Zkusit znovu"
   },
   "nav": {
     "home": "Úvod",
@@ -33,7 +34,7 @@
     "emailServiceUnavailable": "Nepodařilo se připojit k e-mailové službě. Zkuste to znovu za několik minut.",
     "emailServiceNotConfigured": "Odesílání e-mailů zatím není nastavené. Obraťte se na podporu.",
     "requestNotFound": "Tato žádost o odstoupení neexistuje nebo byla smazána.",
-    "requestDecided": "Tato žádost již byla schválena nebo zamítnuta, takže akce s objednávkou už nejsou k dispozici.",
+    "requestDecided": "Tato žádost byla zamítnuta, takže akce s objednávkou už nejsou k dispozici.",
     "unknownDecision": "Vyberte, zda chcete tuto žádost schválit, nebo zamítnout.",
     "invalidStatus": "Vyberte platný stav této žádosti.",
     "noteRequired": "Zadejte poznámku.",
@@ -45,7 +46,8 @@
     "senderNotStarted": "Nejprve ověřte e-mail odesílatele.",
     "senderIdMissing": "Tuto adresu odesílatele se nepodařilo zaregistrovat. Zkuste to znovu.",
     "domainInvalid": "Zadejte platnou doménu, například vasobchod.cz.",
-    "domainFreeProvider": "Bezplatné e-mailové služby, jako je Gmail nebo Yahoo, nelze ověřit. Použijte raději doménu svého obchodu."
+    "domainFreeProvider": "Bezplatné e-mailové služby, jako je Gmail nebo Yahoo, nelze ověřit. Použijte raději doménu svého obchodu.",
+    "alreadyDecided": "Tato žádost již byla schválena nebo zamítnuta."
   },
   "auth": {
     "login": {
@@ -257,7 +259,8 @@
         "email": "Automatický potvrzovací e-mail, který si zákazník může uschovat"
       },
       "penaltyHeading": "Co se stane, pokud požadavky nesplníte",
-      "penalty": "Pokud tlačítko pro odstoupení chybí nebo nefunguje, zákon prodlužuje {{days}}denní lhůtu pro odstoupení. Zákazníci pak mají na odstoupení od každé dotčené objednávky 12 měsíců a {{days}} dní."
+      "penalty": "Pokud tlačítko pro odstoupení chybí nebo nefunguje, hrozí vám sankce podle vnitrostátního práva a zákazníci mohou mít na odstoupení mnohem déle než {{days}} dní.",
+      "disclaimer": "Jde o obecné informace, nikoli o právní poradenství."
     },
     "form": {
       "heading": "Zapněte formulář pro odstoupení",
@@ -287,8 +290,8 @@
     "countries": {
       "heading": "Způsobilé země",
       "description": "Zákazníci uvidí formulář pro odstoupení, jen pokud se jejich objednávka odesílá do jedné z těchto zemí.",
-      "all": "Všechny země EU ({{count}}) (doporučeno)",
-      "allDetails": "Právo na odstoupení od smlouvy platí v celé EU.",
+      "all": "Všechny země EU a EHP ({{count}}) (doporučeno)",
+      "allDetails": "Právo na odstoupení od smlouvy platí v celé EU a EHP.",
       "specific": "Vybrané země",
       "specificDetails": "Vyberte země níže. Kdykoli to můžete změnit.",
       "pickerLabel": "Země",
@@ -348,7 +351,8 @@
         "messageBefore": "Zpráva před doručením",
         "titleAfter": "Nadpis po doručení",
         "messageAfter": "Zpráva po doručení"
-      }
+      },
+      "daysHint": "Zadáním {{days}} zobrazíte lhůtu pro odstoupení ve dnech."
     },
     "automation": {
       "heading": "Automatizace",
@@ -357,7 +361,7 @@
         "heading": "Před odesláním objednávky",
         "description": "Platí, když žádost přijde dříve, než byla odeslána jakákoli položka.",
         "hold": "Pozastavit vyřízení kvůli kontrole",
-        "holdDetails": "Pozastaví vyřízení, dokud žádost neschválíte nebo nezamítnete. Po vašem rozhodnutí se pozastavení uvolní.",
+        "holdDetails": "Pozastaví vyřízení, dokud žádost posuzujete. Zamítnutím žádosti se pozastavení uvolní. Po schválení vraťte peníze za odstoupené položky a pak pozastavení uvolněte.",
         "tagDetails": "Označte štítkem objednávky, ke kterým přišla žádost před odesláním, aby je vaši zaměstnanci našli v seznamu objednávek."
       },
       "fallback": {
@@ -412,7 +416,7 @@
     },
     "preview": {
       "heading": "Živý náhled",
-      "compliantBadge": "Splňuje požadavek 2 kroků",
+      "compliantBadge": "Potvrzení ve 2 krocích",
       "surfaceLabel": "Náhled",
       "surfaces": {
         "orderStatus": "Stránka stavu objednávky",
@@ -825,7 +829,8 @@
       "previewTitle": "Náhled e-mailu",
       "templateUnchanged": "Vaše změny platí jen pro tento e-mail. Uložená šablona se nezmění.",
       "noEmail": "Zákazník neobdrží e-mail. V případě potřeby ho můžete kontaktovat zvlášť.",
-      "holdReleased": "Tím se také uvolní pozastavení vyřízení této objednávky, takže ji bude možné znovu vyřídit."
+      "holdReleased": "Tím se také uvolní pozastavení vyřízení této objednávky, takže ji bude možné znovu vyřídit.",
+      "holdKept": "Pozastavení vyřízení zůstane, aby se odstoupené položky neodeslaly. Vraťte za ně peníze nebo objednávku zrušte a pak pozastavení uvolněte pro zbývající položky k odeslání."
     },
     "refundModal": {
       "heading": "Vrátit peníze za položky, od kterých zákazník odstoupil",
@@ -868,7 +873,7 @@
       "heading": "Odesílatel",
       "description": "Tato nastavení platí pro každý e-mail, který aplikace za váš obchod odešle. Odesílejte z vlastní ověřené adresy a vyberte, kam budou chodit odpovědi zákazníků.",
       "emailLabel": "E-mail odesílatele",
-      "emailPlaceholder": "notifications@withdrawaleasy.com",
+      "emailPlaceholder": "orders@yourstore.com",
       "detailsVerified": "E-maily se odesílají z této adresy.",
       "detailsPending": "Adresu ověříte zadáním kódu, který jsme na ni poslali.",
       "detailsDefault": "Pokud pole necháte prázdné, e-maily se budou odesílat z adresy {{email}}.",
@@ -1195,7 +1200,7 @@
           "Položky ve vratce: až se vrátí, vyberte u vratky Zpracovat a vrátit peníze. Zákazníkovi se vrátí peníze a vratka se uzavře.",
           "Zatím nic nebylo odesláno: celou objednávku můžete také zrušit a vrátit peníze v nabídce Další akce."
         ],
-        "closing": "Právo EU vám na vrácení peněz dává {{refundDays}} od odstoupení. Stránka žádosti ukazuje, kolik času zbývá. Peníze vraťte dřív, než žádost schválíte."
+        "closing": "Právo EU vám na vrácení peněz dává {{refundDays}} od odstoupení. Stránka žádosti ukazuje, kolik času zbývá."
       },
       "returns": {
         "question": "Jak fungují vratky?",
@@ -1205,10 +1210,10 @@
         ]
       },
       "decision-lock": {
-        "question": "Proč se akce s objednávkou po schválení nebo zamítnutí žádosti vypnou?",
+        "question": "Co se stane, když žádost schválím nebo zamítnu?",
         "paragraphs": [
-          "Schválením nebo zamítnutím se žádost uzavře. Potom se vypne vracení peněz, pozastavení, vratky i rušení, aby se objednávka omylem nezměnila. Proto vracejte peníze ještě před schválením.",
-          "Rozhodnutím se také uvolní každé pozastavení vyřízení, které aplikace nastavila. Pokud se uvolnění nezdaří, můžete stále vybrat Uvolnit pozastavení vyřízení."
+          "Schválením zůstane zachováno pozastavení vyřízení, které aplikace nastavila, aby se odstoupené položky neodeslaly. Potom na stránce žádosti vraťte za položky peníze, vytvořte vratku nebo objednávku zrušte. Nakonec pozastavení uvolněte, aby se mohl odeslat zbytek objednávky.",
+          "Zamítnutím se žádost uzavře. Uvolní se pozastavení vyřízení od aplikace a vypne se vracení peněz, pozastavení, vratky i rušení, aby se objednávka omylem nezměnila. Pokud se uvolnění nezdaří, můžete stále vybrat Uvolnit pozastavení vyřízení."
         ]
       },
       "emails": {
@@ -1227,7 +1232,7 @@
       "countries-languages": {
         "question": "Které země a jazyky aplikace podporuje?",
         "paragraphs": [
-          "Ve výchozím nastavení jsou způsobilé všechny země EU. Pokud prodáváte jen do některých z nich, vyberte v Nastavení Vybrané země.",
+          "Ve výchozím nastavení jsou způsobilé všechny země EU a EHP. Pokud prodáváte jen do některých z nich, vyberte v Nastavení Vybrané země.",
           "Formulář je k dispozici v těchto jazycích ({{languageCount}}): {{languages}}. Zákazníci ho vidí ve svém jazyce.",
           "Základním jazykem je angličtina. Pokud přeložené pole necháte prázdné, zákazníci místo něj uvidí anglický text."
         ]

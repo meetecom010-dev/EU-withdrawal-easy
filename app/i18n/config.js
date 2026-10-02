@@ -1,25 +1,5 @@
 import i18next from "i18next";
-import cs from "./locales/cs.json";
-import da from "./locales/da.json";
-import de from "./locales/de.json";
 import en from "./locales/en.json";
-import es from "./locales/es.json";
-import fi from "./locales/fi.json";
-import fr from "./locales/fr.json";
-import it from "./locales/it.json";
-import ja from "./locales/ja.json";
-import ko from "./locales/ko.json";
-import nb from "./locales/nb.json";
-import nl from "./locales/nl.json";
-import pl from "./locales/pl.json";
-import ptBR from "./locales/pt-BR.json";
-import ptPT from "./locales/pt-PT.json";
-import sv from "./locales/sv.json";
-import th from "./locales/th.json";
-import tr from "./locales/tr.json";
-import vi from "./locales/vi.json";
-import zhCN from "./locales/zh-CN.json";
-import zhTW from "./locales/zh-TW.json";
 
 // Admin (merchant-facing) translations. Customer-facing copy is localized
 // separately: the storefront form in routes/_app.form-setup/translations.js and
@@ -29,40 +9,46 @@ import zhTW from "./locales/zh-TW.json";
 // The admin ships in every language the Shopify admin itself offers, so the
 // merchant's admin language (Shopify's `locale` param) always has a match.
 //
+// Only English is bundled here: it's the fallback for every language and the
+// default-locale text server code records. The other languages live in
+// resources.server.js, and the root loader sends the browser just the one the
+// merchant is using — shipping all of them made every admin page download
+// over a megabyte of translations it would never show.
+//
 // Adding a language:
 //   1. Copy locales/en.json to locales/<code>.json and translate the values
 //      (keep every key; plural keys use i18next's suffixes, and each language
 //      needs every category Intl.PluralRules reports for it, e.g. _few/_many
 //      for Polish and Czech, _many for French, Spanish, Italian, Portuguese).
-//   2. Import it above and add it to RESOURCES.
+//   2. Add the code to SUPPORTED_LOCALES below and import the file in
+//      resources.server.js.
 // Everything else (locale detection, fallbacks, <html lang>) reads
-// SUPPORTED_LOCALES, so nothing outside this file needs to change.
-const RESOURCES = {
-  en: { translation: en },
-  cs: { translation: cs },
-  da: { translation: da },
-  de: { translation: de },
-  es: { translation: es },
-  fi: { translation: fi },
-  fr: { translation: fr },
-  it: { translation: it },
-  ja: { translation: ja },
-  ko: { translation: ko },
-  nb: { translation: nb },
-  nl: { translation: nl },
-  pl: { translation: pl },
-  "pt-BR": { translation: ptBR },
-  "pt-PT": { translation: ptPT },
-  sv: { translation: sv },
-  th: { translation: th },
-  tr: { translation: tr },
-  vi: { translation: vi },
-  "zh-CN": { translation: zhCN },
-  "zh-TW": { translation: zhTW },
-};
-
+// SUPPORTED_LOCALES, so nothing else needs to change.
 export const DEFAULT_LOCALE = "en";
-export const SUPPORTED_LOCALES = Object.keys(RESOURCES);
+
+export const SUPPORTED_LOCALES = [
+  "en",
+  "cs",
+  "da",
+  "de",
+  "es",
+  "fi",
+  "fr",
+  "it",
+  "ja",
+  "ko",
+  "nb",
+  "nl",
+  "pl",
+  "pt-BR",
+  "pt-PT",
+  "sv",
+  "th",
+  "tr",
+  "vi",
+  "zh-CN",
+  "zh-TW",
+];
 
 // Codes that name a supported language differently: Norwegian as "no"/"nn",
 // Portuguese and Chinese without a region, and Chinese script or region
@@ -102,14 +88,24 @@ export function resolveLocale(candidate) {
   return matchLocale(candidate) ?? DEFAULT_LOCALE;
 }
 
-// A fresh, fully initialised instance per call. Resources are bundled, so
-// initialisation is synchronous — no suspense or loading state on either the
-// server or the client. A separate instance (rather than changeLanguage on a
-// shared one) keeps concurrent server renders in different locales isolated.
-export function createI18n(locale = DEFAULT_LOCALE) {
+/**
+ * A fresh, fully initialised instance per call. Resources are passed in, so
+ * initialisation is synchronous — no suspense or loading state on either the
+ * server or the client. A separate instance (rather than changeLanguage on a
+ * shared one) keeps concurrent server renders in different locales isolated.
+ *
+ * @param {string} locale
+ * @param {Record<string, object>} [translations] extra languages by code
+ *   (English is always included as the fallback).
+ */
+export function createI18n(locale = DEFAULT_LOCALE, translations = {}) {
+  const resources = { en: { translation: en } };
+  for (const [code, translation] of Object.entries(translations)) {
+    if (translation) resources[code] = { translation };
+  }
   const instance = i18next.createInstance();
   instance.init({
-    resources: RESOURCES,
+    resources,
     lng: resolveLocale(locale),
     fallbackLng: DEFAULT_LOCALE,
     supportedLngs: SUPPORTED_LOCALES,
@@ -122,16 +118,8 @@ export function createI18n(locale = DEFAULT_LOCALE) {
   return instance;
 }
 
-// Shared read-only instance for code with no request or React context (server
-// services, validation messages recorded in English). Only ever read through
-// getFixedT, which never mutates the instance's language, so sharing it across
-// concurrent requests is safe.
-const sharedI18n = createI18n(DEFAULT_LOCALE);
-
-export function getFixedT(locale = DEFAULT_LOCALE) {
-  return sharedI18n.getFixedT(resolveLocale(locale));
-}
-
 // Default-locale translator, for text that's stored or sent before any
-// merchant locale is known (automation log fallbacks, notes on Shopify orders).
-export const tDefault = getFixedT(DEFAULT_LOCALE);
+// merchant locale is known (automation log fallbacks, notes on Shopify
+// orders). Read-only: getFixedT never mutates the shared instance's language,
+// so sharing it across concurrent requests is safe.
+export const tDefault = createI18n(DEFAULT_LOCALE).getFixedT(DEFAULT_LOCALE);

@@ -14,6 +14,8 @@
 // merchant's "Estimated transit days" setting is for: shipped date + transit
 // days stands in for the missing delivery date.
 
+import { LEGAL_MIN_WITHDRAWAL_DAYS } from "../constants";
+
 const DAY_MS = 24 * 60 * 60 * 1000;
 
 function addDays(date, days) {
@@ -115,7 +117,9 @@ export function resolveWithdrawalWindow(orderContext, deadline, now = new Date()
     };
   }
 
-  const expiresAt = addDays(delivery.date, daysAfterDelivery);
+  // Never shorter than the legal minimum, even for a setting saved before the
+  // form enforced it — the error goes in the customer's favour.
+  const expiresAt = addDays(delivery.date, Math.max(daysAfterDelivery, LEGAL_MIN_WITHDRAWAL_DAYS));
   const isEligible = now <= expiresAt;
 
   return {

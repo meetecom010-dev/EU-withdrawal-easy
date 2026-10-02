@@ -38,12 +38,15 @@ export default function StatsGrid({ stats, showHeader = true, showViewRequestsBu
             )}
           </s-grid>
         )}
-        <s-grid gridTemplateColumns="1fr 1fr 1fr 1fr" gap="base">
-          <StatCard title={t("stats.total")} count={stats.openRequests + stats.closedRequests} />
-          <StatCard title={t("stats.today")} count={stats.submittedToday} />
-          <StatCard title={t("stats.pending")} count={stats.openRequests} />
-          <StatCard title={t("stats.closed")} count={stats.closedRequests} />
-        </s-grid>
+        {/* Four across on a wide page, two across on a phone. */}
+        <s-query-container>
+          <s-grid gridTemplateColumns="@container (inline-size > 600px) 1fr 1fr 1fr 1fr, 1fr 1fr" gap="base">
+            <StatCard title={t("stats.total")} count={stats.openRequests + stats.closedRequests} />
+            <StatCard title={t("stats.today")} count={stats.submittedToday} />
+            <StatCard title={t("stats.pending")} count={stats.openRequests} />
+            <StatCard title={t("stats.closed")} count={stats.closedRequests} />
+          </s-grid>
+        </s-query-container>
       </s-stack>
     </s-section>
   );

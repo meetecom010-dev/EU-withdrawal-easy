@@ -1,4 +1,7 @@
-import { DEFAULT_LOCALE, getFixedT, matchLocale, resolveLocale } from "./config";
+import { DEFAULT_LOCALE, matchLocale, resolveLocale } from "./config";
+import { getFixedT, translationsFor } from "./resources.server";
+
+export { translationsFor };
 
 // Shopify appends `locale` (the merchant's admin language) to the embedded
 // app URL on every document load. Later data requests don't carry it, so the

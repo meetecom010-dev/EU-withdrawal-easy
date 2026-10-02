@@ -14,7 +14,8 @@
     "preview": "Pré-visualizar",
     "remove": "Remover",
     "save": "Guardar",
-    "verified": "Verificado"
+    "verified": "Verificado",
+    "retry": "Tentar novamente"
   },
   "nav": {
     "home": "Início",
@@ -32,7 +33,7 @@
     "emailServiceUnavailable": "Não foi possível ligar ao serviço de e-mail. Tente novamente dentro de alguns minutos.",
     "emailServiceNotConfigured": "O envio de e-mails ainda não está configurado. Contacte o suporte.",
     "requestNotFound": "Este pedido de livre resolução não existe ou foi eliminado.",
-    "requestDecided": "Este pedido já foi aprovado ou rejeitado, pelo que as ações da encomenda já não estão disponíveis.",
+    "requestDecided": "Este pedido foi rejeitado, pelo que as ações da encomenda já não estão disponíveis.",
     "unknownDecision": "Escolha se pretende aprovar ou rejeitar este pedido.",
     "invalidStatus": "Escolha um estado válido para este pedido.",
     "noteRequired": "Introduza uma nota.",
@@ -44,7 +45,8 @@
     "senderNotStarted": "Verifique primeiro o seu e-mail de remetente.",
     "senderIdMissing": "Não foi possível registar este e-mail de remetente. Tente novamente.",
     "domainInvalid": "Introduza um domínio válido, como asualoja.com.",
-    "domainFreeProvider": "Os fornecedores de e-mail gratuitos, como o Gmail e o Yahoo, não podem ser autenticados. Utilize antes o domínio da sua loja."
+    "domainFreeProvider": "Os fornecedores de e-mail gratuitos, como o Gmail e o Yahoo, não podem ser autenticados. Utilize antes o domínio da sua loja.",
+    "alreadyDecided": "Este pedido já foi aprovado ou rejeitado."
   },
   "auth": {
     "login": {
@@ -253,7 +255,8 @@
         "email": "Um e-mail de confirmação automático que os clientes possam guardar"
       },
       "penaltyHeading": "O que acontece se não cumprir",
-      "penalty": "Se o botão de livre resolução não existir ou não funcionar, a lei prolonga o prazo de livre resolução de {{days}} dias. Os clientes passam a ter 12 meses e {{days}} dias para exercer a livre resolução de cada encomenda afetada."
+      "penalty": "Se o botão de livre resolução não existir ou não funcionar, pode sofrer sanções ao abrigo da lei nacional, e os clientes podem ter muito mais do que {{days}} dias para exercer a livre resolução.",
+      "disclaimer": "Esta é informação geral, não aconselhamento jurídico."
     },
     "form": {
       "heading": "Ativar o formulário de livre resolução",
@@ -283,8 +286,8 @@
     "countries": {
       "heading": "Países elegíveis",
       "description": "Os clientes só veem o formulário de livre resolução se a encomenda for enviada para um destes países.",
-      "all": "Todos os {{count}} países da UE (recomendado)",
-      "allDetails": "O direito de livre resolução aplica-se em toda a UE.",
+      "all": "Todos os {{count}} países da UE e do EEE (recomendado)",
+      "allDetails": "O direito de livre resolução aplica-se em toda a UE e no EEE.",
       "specific": "Países específicos",
       "specificDetails": "Escolha os países abaixo. Pode alterar isto a qualquer momento.",
       "pickerLabel": "Países",
@@ -344,7 +347,8 @@
         "messageBefore": "Mensagem antes da entrega",
         "titleAfter": "Título após a entrega",
         "messageAfter": "Mensagem após a entrega"
-      }
+      },
+      "daysHint": "Escreva {{days}} para mostrar o seu prazo de livre resolução em dias."
     },
     "automation": {
       "heading": "Automatização",
@@ -353,7 +357,7 @@
         "heading": "Antes do envio da encomenda",
         "description": "Aplica-se quando um pedido chega antes do envio de qualquer artigo.",
         "hold": "Suspender o processamento para análise",
-        "holdDetails": "Pause o processamento até aprovar ou rejeitar o pedido. A suspensão é levantada quando decidir.",
+        "holdDetails": "Pause o processamento enquanto analisa o pedido. Se o rejeitar, a suspensão é levantada. Depois de o aprovar, reembolse os artigos da livre resolução e levante a suspensão.",
         "tagDetails": "Adicione etiquetas às encomendas que recebem um pedido antes do envio, para que a sua equipa as encontre na lista de encomendas."
       },
       "fallback": {
@@ -408,7 +412,7 @@
     },
     "preview": {
       "heading": "Pré-visualização em direto",
-      "compliantBadge": "Conforme em 2 passos",
+      "compliantBadge": "Confirmação em 2 passos",
       "surfaceLabel": "Pré-visualização",
       "surfaces": {
         "orderStatus": "Página de estado da encomenda",
@@ -810,7 +814,8 @@
       "previewTitle": "Pré-visualização do e-mail",
       "templateUnchanged": "As suas alterações aplicam-se apenas a este e-mail. O modelo guardado não será alterado.",
       "noEmail": "O cliente não receberá um e-mail. Pode contactá-lo separadamente, se necessário.",
-      "holdReleased": "Esta ação também levanta a suspensão do processamento desta encomenda, para que possa voltar a ser processada."
+      "holdReleased": "Esta ação também levanta a suspensão do processamento desta encomenda, para que possa voltar a ser processada.",
+      "holdKept": "A suspensão do processamento mantém-se para que os artigos da livre resolução não sejam enviados. Reembolse-os ou cancele a encomenda e depois levante a suspensão para o que ainda falta enviar."
     },
     "refundModal": {
       "heading": "Reembolsar os artigos da livre resolução",
@@ -852,7 +857,7 @@
       "heading": "Remetente",
       "description": "Estas definições aplicam-se a todos os e-mails que a aplicação envia pela sua loja. Envie a partir do seu próprio endereço verificado e escolha para onde vão as respostas dos clientes.",
       "emailLabel": "E-mail do remetente",
-      "emailPlaceholder": "notifications@withdrawaleasy.com",
+      "emailPlaceholder": "orders@yourstore.com",
       "detailsVerified": "Os e-mails são enviados a partir deste endereço.",
       "detailsPending": "Introduza o código que enviámos para este endereço para o verificar.",
       "detailsDefault": "Se deixar este campo em branco, os e-mails são enviados a partir de {{email}}.",
@@ -1179,7 +1184,7 @@
           "Artigos numa devolução: quando forem devolvidos, selecione Processar e reembolsar na devolução. Assim, o cliente é reembolsado e a devolução é fechada.",
           "Ainda nada foi enviado: também pode cancelar e reembolsar toda a encomenda em Mais ações."
         ],
-        "closing": "A legislação da UE dá-lhe {{refundDays}} a contar da livre resolução para reembolsar. A página do pedido mostra quanto tempo falta. Reembolse antes de aprovar o pedido."
+        "closing": "A legislação da UE dá-lhe {{refundDays}} a contar da livre resolução para reembolsar. A página do pedido mostra quanto tempo falta."
       },
       "returns": {
         "question": "Como funcionam as devoluções?",
@@ -1189,10 +1194,10 @@
         ]
       },
       "decision-lock": {
-        "question": "Porque é que as ações da encomenda ficam desativadas depois de aprovar ou rejeitar um pedido?",
+        "question": "O que acontece quando aprovo ou rejeito um pedido?",
         "paragraphs": [
-          "Aprovar ou rejeitar conclui o pedido. Depois disso, os reembolsos, as suspensões, as devoluções e os cancelamentos ficam desativados, para que a encomenda não seja alterada por engano. É por isso que deve reembolsar antes de aprovar.",
-          "A decisão também levanta qualquer suspensão do processamento aplicada pela aplicação. Se o levantamento falhar, pode continuar a selecionar Levantar suspensão do processamento."
+          "Ao aprovar, qualquer suspensão do processamento aplicada pela aplicação mantém-se, para que os artigos da livre resolução não sejam enviados. Depois, na página do pedido, reembolse os artigos, crie uma devolução ou cancele a encomenda. Por fim, levante a suspensão para que o resto da encomenda possa ser enviado.",
+          "Rejeitar conclui o pedido. A suspensão do processamento aplicada pela aplicação é levantada, e os reembolsos, as suspensões, as devoluções e os cancelamentos ficam desativados, para que a encomenda não seja alterada por engano. Se o levantamento falhar, pode continuar a selecionar Levantar suspensão do processamento."
         ]
       },
       "emails": {
@@ -1211,7 +1216,7 @@
       "countries-languages": {
         "question": "Que países e idiomas são suportados pela aplicação?",
         "paragraphs": [
-          "Todos os países da UE são elegíveis por predefinição. Se só vender para alguns deles, selecione Países específicos nas Definições.",
+          "Todos os países da UE e do EEE são elegíveis por predefinição. Se só vender para alguns deles, selecione Países específicos nas Definições.",
           "O formulário está disponível em {{languageCount}} idiomas: {{languages}}. Os clientes veem-no no próprio idioma.",
           "O inglês é o idioma base. Se deixar um campo traduzido em branco, os clientes veem o texto em inglês em alternativa."
         ]

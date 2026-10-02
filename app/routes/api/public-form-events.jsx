@@ -4,6 +4,7 @@ import {
   PUBLIC_FORM_EVENT_TYPES,
   recordFormEvent,
 } from "../../services/form-events/index.server";
+import { hit, LIMITS } from "../../services/rate-limit.server";
 
 // POST /api/public-form-events -> records a pre-submission funnel event
 // (button viewed / form opened) from the order-status extension. These happen
@@ -29,8 +30,16 @@ async function handleRequest(request) {
   if (!PUBLIC_FORM_EVENT_TYPES.has(type)) {
     return cors(Response.json({ error: "Unsupported event type" }, { status: 400 }));
   }
-  if (!body?.orderId) {
+  // Order ids are always Order GIDs on this surface; anything else is junk
+  // that would otherwise create a stray FormEvent document.
+  if (typeof body?.orderId !== "string" || !/^gid:\/\/shopify\/Order\/\d+$/.test(body.orderId)) {
     return cors(Response.json({ error: "orderId is required" }, { status: 400 }));
+  }
+
+  // Funnel pings are cheap per call but each can create a document, so one
+  // customer can't flood the collection.
+  if (!hit(`events:${shop}:${sessionToken.sub ?? ""}`, LIMITS.eventsPerCustomer)) {
+    return cors(Response.json({ error: "Too many requests" }, { status: 429 }));
   }
 
   await recordFormEvent(shop, body.orderId, {

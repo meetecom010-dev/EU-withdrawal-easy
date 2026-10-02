@@ -8,7 +8,7 @@ import {
   submitWithdrawalRequest,
 } from "./lib/api.js";
 import { resolveLabels } from "./lib/labels.js";
-import { t } from "./lib/i18n.js";
+import { t, eligibilityMessage, submitErrorMessage } from "./lib/i18n.js";
 import StepProgress from "./components/StepProgress.jsx";
 import StepDetails, { OTHER_REASON_VALUE } from "./components/StepDetails.jsx";
 import StepConfirm from "./components/StepConfirm.jsx";
@@ -71,7 +71,7 @@ export default function WithdrawalForm() {
   // load. Drives which set of merchant copy renders, and whether the
   // withdrawal window is still open at all.
   const [eligibility, setEligibility] = useState(
-    /** @type {{ isEligible: boolean, code: string | null, message: string, stage: string } | null} */ (
+    /** @type {{ isEligible: boolean, code: string | null, message: string, stage: string, expiresAt?: string | null } | null} */ (
       null
     ),
   );
@@ -179,13 +179,15 @@ export default function WithdrawalForm() {
     customer?.email ||
     orderCustomer?.customerEmail ||
     "";
-  // The order's country, carried over from checkout — falls back to the
-  // shipping/billing address if it's somehow unset. Only orders in one of
-  // the merchant's selected countries (CountriesCard in form-setup) should
-  // see the form.
+  // Where the order ships, which is what the merchant's country setting is
+  // about ("if their order ships to one of these countries"). Falls back to
+  // the checkout's market country, then billing, when the address isn't
+  // available (e.g. digital-only orders or no protected customer data access).
+  // Only orders in one of the merchant's selected countries (CountriesCard in
+  // form-setup) should see the form.
   const buyerCountryCode =
-    shopify.localization.country.value?.isoCode ??
     shopify.shippingAddress?.value?.countryCode ??
+    shopify.localization.country.value?.isoCode ??
     shopify.billingAddress?.value?.countryCode;
   // The editor previews the form on a sample order, so the per-order gates
   // (country, deadline, existing request) are skipped there — the merchant
@@ -245,6 +247,9 @@ export default function WithdrawalForm() {
       const selectedLines = lines.filter((line) => selectedLineIds.includes(line.id));
       await submitWithdrawalRequest({
         orderId: order?.id ?? "",
+        // Proves the order is this buyer's — the backend checks it against
+        // Shopify before recording anything.
+        confirmationNumber,
         orderName: order?.name ?? "",
         customerName: fullName,
         customerEmail: email,
@@ -296,9 +301,9 @@ export default function WithdrawalForm() {
     } catch (error) {
       console.error("[withdrawal-form] Couldn't submit withdrawal request", error);
       // A rejection the customer can act on (already requested, deadline
-      // passed) comes back with its own wording; anything else is a genuine
-      // fault and gets the retry message.
-      setSubmitError(error.code ? error.message : t("error.submit"));
+      // passed) is shown in their language from its code; anything else is a
+      // genuine fault and gets the retry message.
+      setSubmitError(submitErrorMessage(error));
     } finally {
       setSubmitting(false);
     }
@@ -351,7 +356,9 @@ export default function WithdrawalForm() {
     if (!effectiveEligibility.message) return null;
     return (
       <s-section>
-        <s-banner tone="info">{effectiveEligibility.message}</s-banner>
+        <s-banner tone="info">
+          {eligibilityMessage(effectiveEligibility.code, effectiveEligibility.expiresAt)}
+        </s-banner>
       </s-section>
     );
   }

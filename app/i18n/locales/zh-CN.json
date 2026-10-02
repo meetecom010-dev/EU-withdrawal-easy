@@ -12,7 +12,8 @@
     "preview": "预览",
     "remove": "移除",
     "save": "保存",
-    "verified": "已验证"
+    "verified": "已验证",
+    "retry": "重试"
   },
   "nav": {
     "home": "主页",
@@ -30,7 +31,7 @@
     "emailServiceUnavailable": "无法连接到邮件服务。请几分钟后重试。",
     "emailServiceNotConfigured": "尚未设置邮件发送。请联系支持团队获取帮助。",
     "requestNotFound": "此撤回申请不存在或已被删除。",
-    "requestDecided": "此申请已被批准或拒绝，因此订单操作不再可用。",
+    "requestDecided": "此申请已被拒绝，因此订单操作不再可用。",
     "unknownDecision": "请选择批准还是拒绝此申请。",
     "invalidStatus": "请为此申请选择有效的状态。",
     "noteRequired": "请输入备注。",
@@ -42,7 +43,8 @@
     "senderNotStarted": "请先验证发件人邮箱。",
     "senderIdMissing": "无法注册此发件人邮箱。请重试。",
     "domainInvalid": "请输入有效的域名，例如 yourstore.com。",
-    "domainFreeProvider": "Gmail 和 Yahoo 等免费邮箱服务无法验证。请改用您商店的域名。"
+    "domainFreeProvider": "Gmail 和 Yahoo 等免费邮箱服务无法验证。请改用您商店的域名。",
+    "alreadyDecided": "此申请已被批准或拒绝。"
   },
   "auth": {
     "login": {
@@ -245,7 +247,8 @@
         "email": "客户可以保存的自动确认邮件"
       },
       "penaltyHeading": "不合规的后果",
-      "penalty": "如果缺少撤回按钮或按钮无法使用，法律将延长 {{days}} 天的撤回期。届时客户将有 12 个月零 {{days}} 天的时间撤回每个受影响的订单。"
+      "penalty": "如果缺少撤回按钮或按钮无法使用，您可能会依据各国法律受到处罚，客户的撤回期也可能远超 {{days}} 天。",
+      "disclaimer": "这是一般信息，不构成法律建议。"
     },
     "form": {
       "heading": "启用撤回表单",
@@ -275,8 +278,8 @@
     "countries": {
       "heading": "适用国家/地区",
       "description": "只有当订单配送到以下国家/地区之一时，客户才会看到撤回表单。",
-      "all": "全部 {{count}} 个欧盟国家/地区（推荐）",
-      "allDetails": "撤回权适用于整个欧盟。",
+      "all": "全部 {{count}} 个欧盟和欧洲经济区国家/地区（推荐）",
+      "allDetails": "撤回权适用于整个欧盟和欧洲经济区。",
       "specific": "特定国家/地区",
       "specificDetails": "请在下方选择国家/地区。您可以随时更改。",
       "pickerLabel": "国家/地区",
@@ -336,7 +339,8 @@
         "messageBefore": "送达前消息",
         "titleAfter": "送达后标题",
         "messageAfter": "送达后消息"
-      }
+      },
+      "daysHint": "输入 {{days}} 可按天数显示您的撤回期。"
     },
     "automation": {
       "heading": "自动化",
@@ -345,7 +349,7 @@
         "heading": "订单发货前",
         "description": "适用于在任何商品发货前收到的申请。",
         "hold": "暂缓发货以便审核",
-        "holdDetails": "在您批准或拒绝申请之前暂停发货。您做出决定后，暂缓将被解除。",
+        "holdDetails": "在您审核申请期间暂停发货。拒绝申请会解除暂缓。批准后，请为撤回的商品退款，然后解除暂缓。",
         "tagDetails": "为发货前收到申请的订单添加标签，方便员工在订单列表中找到它们。"
       },
       "fallback": {
@@ -400,7 +404,7 @@
     },
     "preview": {
       "heading": "实时预览",
-      "compliantBadge": "符合两步要求",
+      "compliantBadge": "两步确认",
       "surfaceLabel": "预览",
       "surfaces": {
         "orderStatus": "订单状态页面",
@@ -780,7 +784,8 @@
       "previewTitle": "邮件预览",
       "templateUnchanged": "您的更改仅适用于此邮件。已保存的模板不会改变。",
       "noEmail": "客户不会收到邮件。如有需要，您可以单独联系客户。",
-      "holdReleased": "此操作还会解除此订单的发货暂缓，使订单可以重新发货。"
+      "holdReleased": "此操作还会解除此订单的发货暂缓，使订单可以重新发货。",
+      "holdKept": "发货暂缓将保留，以免撤回的商品被发出。请为这些商品退款或取消订单，然后为仍需发货的商品解除暂缓。"
     },
     "refundModal": {
       "heading": "为撤回的商品退款",
@@ -820,7 +825,7 @@
       "heading": "发件人",
       "description": "这些设置适用于应用为您的商店发送的所有邮件。使用您自己已验证的地址发送，并选择客户回复的接收地址。",
       "emailLabel": "发件人邮箱",
-      "emailPlaceholder": "notifications@withdrawaleasy.com",
+      "emailPlaceholder": "orders@yourstore.com",
       "detailsVerified": "邮件将从此地址发送。",
       "detailsPending": "输入我们发送到此地址的验证码以完成验证。",
       "detailsDefault": "如果留空，邮件将从 {{email}} 发送。",
@@ -1147,7 +1152,7 @@
           "退货中的商品：商品寄回后，在退货中选择“处理并退款”。这会为客户退款并关闭退货。",
           "尚未发出任何商品：您也可以通过“更多操作”取消整个订单并退款。"
         ],
-        "closing": "欧盟法律规定，您需要在撤回后 {{refundDays}}内完成退款。申请页面会显示剩余时间。请在批准申请之前退款。"
+        "closing": "欧盟法律规定，您需要在撤回后 {{refundDays}}内完成退款。申请页面会显示剩余时间。"
       },
       "returns": {
         "question": "退货是如何运作的？",
@@ -1157,10 +1162,10 @@
         ]
       },
       "decision-lock": {
-        "question": "为什么批准或拒绝申请后，订单操作会被关闭？",
+        "question": "批准或拒绝申请后会发生什么？",
         "paragraphs": [
-          "批准或拒绝即表示申请已结束。此后，退款、暂缓、退货和取消都会被关闭，以免订单被误改。因此，您应该在批准前完成退款。",
-          "做出决定也会解除应用设置的所有发货暂缓。如果解除失败，您仍然可以选择“解除发货暂缓”。"
+          "批准后，应用设置的发货暂缓会保留，以免撤回的商品被发出。接下来，请在申请页面为商品退款、创建退货或取消订单。最后解除暂缓，让订单的其余部分可以发货。",
+          "拒绝即表示申请已结束。应用设置的发货暂缓会被解除，退款、暂缓、退货和取消都会被关闭，以免订单被误改。如果解除失败，您仍然可以选择“解除发货暂缓”。"
         ]
       },
       "emails": {
@@ -1179,7 +1184,7 @@
       "countries-languages": {
         "question": "应用支持哪些国家/地区和语言？",
         "paragraphs": [
-          "默认情况下，所有欧盟国家/地区均适用。如果您只向其中部分国家/地区销售，请在“设置”中选择“特定国家/地区”。",
+          "默认情况下，所有欧盟和欧洲经济区国家/地区均适用。如果您只向其中部分国家/地区销售，请在“设置”中选择“特定国家/地区”。",
           "表单提供 {{languageCount}} 种语言：{{languages}}。客户会看到其自己语言的表单。",
           "英语是基础语言。如果您将某个翻译字段留空，客户将看到对应的英语文本。"
         ]

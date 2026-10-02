@@ -20,5 +20,15 @@
   "item.select": "{{title}} selecteren",
   "item.remove": "{{title}} verwijderen",
   "item.fallbackTitle": "Artikel",
-  "error.submit": "Er is iets misgegaan bij het verzenden van uw verzoek. Probeer het opnieuw."
+  "error.submit": "Er is iets misgegaan bij het verzenden van uw verzoek. Probeer het opnieuw.",
+  "error.order_not_found": "We konden deze bestelling niet vinden.",
+  "error.invalid_items": "De geselecteerde artikelen horen niet bij deze bestelling. Vernieuw de pagina en probeer het opnieuw.",
+  "error.duplicate_request": "Er wordt al een herroepingsverzoek voor deze bestelling beoordeeld.",
+  "error.rate_limited": "Te veel pogingen. Wacht een paar minuten en probeer het opnieuw.",
+  "eligibility.order_not_found": "We konden deze bestelling niet vinden.",
+  "eligibility.order_cancelled": "Deze bestelling is geannuleerd, dus er valt niets te herroepen.",
+  "eligibility.already_requested": "We hebben al een herroepingsverzoek voor deze bestelling ontvangen en beoordelen het.",
+  "eligibility.deadline_passed": "De herroepingstermijn voor deze bestelling is verlopen op {{date}}. Neem contact met ons op als u denkt dat dit niet klopt.",
+  "eligibility.deadline_passed_no_date": "De herroepingstermijn voor deze bestelling is verlopen. Neem contact met ons op als u denkt dat dit niet klopt.",
+  "eligibility.not_eligible": "Deze bestelling kan niet meer worden herroepen."
 }

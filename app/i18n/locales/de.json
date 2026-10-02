@@ -13,7 +13,8 @@
     "preview": "Vorschau",
     "remove": "Entfernen",
     "save": "Speichern",
-    "verified": "Verifiziert"
+    "verified": "Verifiziert",
+    "retry": "Erneut versuchen"
   },
   "nav": {
     "home": "Startseite",
@@ -31,7 +32,7 @@
     "emailServiceUnavailable": "Wir konnten keine Verbindung zum E-Mail-Dienst herstellen. Versuche es in ein paar Minuten erneut.",
     "emailServiceNotConfigured": "Der E-Mail-Versand ist noch nicht eingerichtet. Wende dich an den Support.",
     "requestNotFound": "Diese Widerrufsanfrage existiert nicht oder wurde gelöscht.",
-    "requestDecided": "Diese Anfrage wurde bereits genehmigt oder abgelehnt, daher sind keine Bestellaktionen mehr verfügbar.",
+    "requestDecided": "Diese Anfrage wurde abgelehnt, daher sind keine Bestellaktionen mehr verfügbar.",
     "unknownDecision": "Wähle, ob du diese Anfrage genehmigen oder ablehnen möchtest.",
     "invalidStatus": "Wähle einen gültigen Status für diese Anfrage.",
     "noteRequired": "Gib eine Notiz ein.",
@@ -43,7 +44,8 @@
     "senderNotStarted": "Verifiziere zuerst deine Absender-E-Mail.",
     "senderIdMissing": "Wir konnten diese Absender-E-Mail nicht registrieren. Versuche es erneut.",
     "domainInvalid": "Gib eine gültige Domain ein, z. B. deinshop.com.",
-    "domainFreeProvider": "Kostenlose E-Mail-Anbieter wie Gmail und Yahoo können nicht authentifiziert werden. Verwende stattdessen die Domain deines Shops."
+    "domainFreeProvider": "Kostenlose E-Mail-Anbieter wie Gmail und Yahoo können nicht authentifiziert werden. Verwende stattdessen die Domain deines Shops.",
+    "alreadyDecided": "Diese Anfrage wurde bereits genehmigt oder abgelehnt."
   },
   "auth": {
     "login": {
@@ -249,7 +251,8 @@
         "email": "Eine automatische Bestätigungs-E-Mail, die Kunden aufbewahren können"
       },
       "penaltyHeading": "Was passiert, wenn du die Vorgaben nicht einhältst",
-      "penalty": "Fehlt der Widerrufsbutton oder funktioniert er nicht, verlängert sich die {{days}}-tägige Widerrufsfrist per Gesetz. Kunden haben dann 12 Monate und {{days}} Tage Zeit, jede betroffene Bestellung zu widerrufen."
+      "penalty": "Fehlt der Widerrufsbutton oder funktioniert er nicht, drohen dir Sanktionen nach nationalem Recht, und Kunden können deutlich länger als {{days}} Tage Zeit für den Widerruf haben.",
+      "disclaimer": "Dies sind allgemeine Informationen, keine Rechtsberatung."
     },
     "form": {
       "heading": "Widerrufsformular aktivieren",
@@ -279,8 +282,8 @@
     "countries": {
       "heading": "Berechtigte Länder",
       "description": "Kunden sehen das Widerrufsformular nur, wenn ihre Bestellung in eines dieser Länder versendet wird.",
-      "all": "Alle {{count}} EU-Länder (empfohlen)",
-      "allDetails": "Das Widerrufsrecht gilt in der gesamten EU.",
+      "all": "Alle {{count}} Länder der EU und des EWR (empfohlen)",
+      "allDetails": "Das Widerrufsrecht gilt in der gesamten EU und im EWR.",
       "specific": "Bestimmte Länder",
       "specificDetails": "Wähle unten die Länder aus. Du kannst das jederzeit ändern.",
       "pickerLabel": "Länder",
@@ -340,7 +343,8 @@
         "messageBefore": "Nachricht vor der Lieferung",
         "titleAfter": "Titel nach der Lieferung",
         "messageAfter": "Nachricht nach der Lieferung"
-      }
+      },
+      "daysHint": "Gib {{days}} ein, um deine Widerrufsfrist in Tagen anzuzeigen."
     },
     "automation": {
       "heading": "Automatisierung",
@@ -349,7 +353,7 @@
         "heading": "Vor dem Versand der Bestellung",
         "description": "Gilt, wenn eine Anfrage eingeht, bevor Artikel versendet wurden.",
         "hold": "Ausführung zur Prüfung zurückhalten",
-        "holdDetails": "Pausiere die Ausführung, bis du die Anfrage genehmigst oder ablehnst. Die Zurückhaltung wird aufgehoben, sobald du entscheidest.",
+        "holdDetails": "Pausiere die Ausführung, während du die Anfrage prüfst. Wenn du sie ablehnst, wird die Zurückhaltung aufgehoben. Nachdem du sie genehmigt hast, erstatte die widerrufenen Artikel und hebe dann die Zurückhaltung auf.",
         "tagDetails": "Versieh Bestellungen, für die vor dem Versand eine Anfrage eingeht, mit einem Tag, damit dein Team sie in der Bestellliste findet."
       },
       "fallback": {
@@ -404,7 +408,7 @@
     },
     "preview": {
       "heading": "Live-Vorschau",
-      "compliantBadge": "2-Schritt-konform",
+      "compliantBadge": "Bestätigung in 2 Schritten",
       "surfaceLabel": "Vorschau",
       "surfaces": {
         "orderStatus": "Bestellstatusseite",
@@ -795,7 +799,8 @@
       "previewTitle": "E-Mail-Vorschau",
       "templateUnchanged": "Deine Änderungen gelten nur für diese E-Mail. Deine gespeicherte Vorlage bleibt unverändert.",
       "noEmail": "Der Kunde erhält keine E-Mail. Du kannst ihn bei Bedarf separat kontaktieren.",
-      "holdReleased": "Dadurch wird auch die Zurückhaltung der Ausführung für diese Bestellung aufgehoben, sodass sie wieder ausgeführt werden kann."
+      "holdReleased": "Dadurch wird auch die Zurückhaltung der Ausführung für diese Bestellung aufgehoben, sodass sie wieder ausgeführt werden kann.",
+      "holdKept": "Die Zurückhaltung der Ausführung bleibt bestehen, damit die widerrufenen Artikel nicht versendet werden. Erstatte sie oder storniere die Bestellung und hebe dann die Zurückhaltung für alles auf, was noch versendet werden soll."
     },
     "refundModal": {
       "heading": "Widerrufene Artikel erstatten",
@@ -836,7 +841,7 @@
       "heading": "Absender",
       "description": "Diese Einstellungen gelten für jede E-Mail, die die App für deinen Shop sendet. Sende von deiner eigenen verifizierten Adresse und lege fest, wohin Antworten von Kunden gehen.",
       "emailLabel": "Absender-E-Mail",
-      "emailPlaceholder": "notifications@withdrawaleasy.com",
+      "emailPlaceholder": "orders@yourstore.com",
       "detailsVerified": "E-Mails werden von dieser Adresse gesendet.",
       "detailsPending": "Gib den Code ein, den wir an diese Adresse gesendet haben, um sie zu verifizieren.",
       "detailsDefault": "Wenn du dieses Feld leer lässt, werden E-Mails von {{email}} gesendet.",
@@ -1163,7 +1168,7 @@
           "Artikel in einer Rücksendung: Wenn sie zurück sind, wähle bei der Rücksendung Bearbeiten und erstatten. Damit wird dem Kunden der Betrag erstattet und die Rücksendung geschlossen.",
           "Noch nichts versendet: Du kannst die gesamte Bestellung auch über Weitere Aktionen stornieren und erstatten."
         ],
-        "closing": "Nach EU-Recht hast du ab dem Widerruf {{refundDays}} Zeit für die Erstattung. Die Anfrageseite zeigt, wie viel Zeit noch bleibt. Erstatte, bevor du die Anfrage genehmigst."
+        "closing": "Nach EU-Recht hast du ab dem Widerruf {{refundDays}} Zeit für die Erstattung. Die Anfrageseite zeigt, wie viel Zeit noch bleibt."
       },
       "returns": {
         "question": "Wie funktionieren Rücksendungen?",
@@ -1173,10 +1178,10 @@
         ]
       },
       "decision-lock": {
-        "question": "Warum sind Bestellaktionen deaktiviert, nachdem ich eine Anfrage genehmigt oder abgelehnt habe?",
+        "question": "Was passiert, wenn ich eine Anfrage genehmige oder ablehne?",
         "paragraphs": [
-          "Mit dem Genehmigen oder Ablehnen ist die Anfrage abgeschlossen. Danach sind Erstattungen, Zurückhaltungen, Rücksendungen und Stornierungen deaktiviert, damit die Bestellung nicht versehentlich geändert wird. Deshalb solltest du vor dem Genehmigen erstatten.",
-          "Mit der Entscheidung wird auch jede von der App gesetzte Zurückhaltung der Ausführung aufgehoben. Schlägt das fehl, kannst du trotzdem Zurückhaltung der Ausführung aufheben wählen."
+          "Beim Genehmigen bleibt jede von der App gesetzte Zurückhaltung der Ausführung bestehen, damit die widerrufenen Artikel nicht versendet werden. Erstatte dann auf der Anfrageseite die Artikel, erstelle eine Rücksendung oder storniere die Bestellung. Hebe anschließend die Zurückhaltung auf, damit der Rest der Bestellung versendet werden kann.",
+          "Mit dem Ablehnen ist die Anfrage abgeschlossen. Die Zurückhaltung der App wird aufgehoben, und Erstattungen, Zurückhaltungen, Rücksendungen und Stornierungen werden deaktiviert, damit die Bestellung nicht versehentlich geändert wird. Schlägt das Aufheben fehl, kannst du trotzdem Zurückhaltung der Ausführung aufheben wählen."
         ]
       },
       "emails": {
@@ -1195,7 +1200,7 @@
       "countries-languages": {
         "question": "Welche Länder und Sprachen unterstützt die App?",
         "paragraphs": [
-          "Alle EU-Länder sind standardmäßig berechtigt. Wenn du nur an einige davon verkaufst, wähle in den Einstellungen Bestimmte Länder.",
+          "Alle Länder der EU und des EWR sind standardmäßig berechtigt. Wenn du nur an einige davon verkaufst, wähle in den Einstellungen Bestimmte Länder.",
           "Das Formular gibt es in {{languageCount}} Sprachen: {{languages}}. Kunden sehen es in ihrer eigenen Sprache.",
           "Englisch ist die Basissprache. Wenn du ein übersetztes Feld leer lässt, sehen Kunden stattdessen den englischen Text."
         ]

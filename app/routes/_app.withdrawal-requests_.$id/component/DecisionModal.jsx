@@ -117,6 +117,8 @@ export default function DecisionModal({
                 <iframe
                   title={t("requestDetail.decisionModal.previewTitle")}
                   srcDoc={html}
+                  // No scripts: the HTML is editable and must not run in the app.
+                  sandbox="allow-same-origin allow-popups"
                   style={{
                     width: "100%",
                     height: "440px",
@@ -133,8 +135,14 @@ export default function DecisionModal({
             <s-text color="subdued">{t("requestDetail.decisionModal.noEmail")}</s-text>
           )}
 
+          {/* Rejecting frees the order to ship. Approving keeps the hold, so
+              the withdrawn items can't ship before they're refunded. */}
           {releasesHold && (
-            <s-text color="subdued">{t("requestDetail.decisionModal.holdReleased")}</s-text>
+            <s-text color="subdued">
+              {approve
+                ? t("requestDetail.decisionModal.holdKept")
+                : t("requestDetail.decisionModal.holdReleased")}
+            </s-text>
           )}
         </s-stack>
       )}

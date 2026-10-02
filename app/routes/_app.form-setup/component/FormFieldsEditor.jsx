@@ -79,6 +79,9 @@ export default function FormFieldsEditor({
   const { languageName } = useFormatters();
   const [newReason, setNewReason] = useState("");
   const options = settings.reasonField.options ?? [];
+  // Shown under the description fields. The token is passed in as a value so
+  // it prints literally instead of being filled in by the translation.
+  const daysHint = t("formSetup.content.daysHint", { days: "{{days}}" });
 
   // "en" edits the base copy (labels / reasonField); any other code edits that
   // locale's sparse translation, with the English value shown as a placeholder.
@@ -197,6 +200,7 @@ export default function FormFieldsEditor({
               <s-text-area
                 label={t("formSetup.content.description")}
                 rows={2}
+                details={daysHint}
                 {...labelField("step1Description")}
               ></s-text-area>
               <s-text-field
@@ -214,6 +218,7 @@ export default function FormFieldsEditor({
               <s-text-area
                 label={t("formSetup.content.description")}
                 rows={2}
+                details={daysHint}
                 {...labelField("deliveredDescription")}
               ></s-text-area>
               <s-text-field

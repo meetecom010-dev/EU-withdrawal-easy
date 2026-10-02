@@ -198,7 +198,7 @@ const ORDER_LOOKUP_QUERY = `#graphql
           city
           provinceCode
           zip
-          countryCode
+          countryCodeV2
         }
         fulfillments(first: 20) {
           deliveredAt
@@ -209,6 +209,7 @@ const ORDER_LOOKUP_QUERY = `#graphql
             id
             title
             quantity
+            currentQuantity
             refundableQuantity
             sku
             image {
@@ -216,7 +217,7 @@ const ORDER_LOOKUP_QUERY = `#graphql
               altText
             }
             discountedUnitPriceSet {
-              shopMoney {
+              presentmentMoney {
                 amount
                 currencyCode
               }
@@ -227,6 +228,55 @@ const ORDER_LOOKUP_QUERY = `#graphql
                 name
                 value
               }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
+// Everything a withdrawal submission is allowed to record, read straight from
+// Shopify so nothing the customer's browser sends is trusted: the proof of
+// ownership (confirmation number / contact email + order name), who the
+// customer is, where it ships, and the real line items with their prices.
+const SUBMISSION_ORDER_QUERY = `#graphql
+  query WithdrawalSubmissionOrder($id: ID!) {
+    order(id: $id) {
+      id
+      name
+      email
+      confirmationNumber
+      customer {
+        displayName
+      }
+      shippingAddress {
+        name
+        address1
+        address2
+        city
+        provinceCode
+        zip
+        countryCodeV2
+      }
+      lineItems(first: 100) {
+        nodes {
+          id
+          title
+          quantity
+          currentQuantity
+          sku
+          variantTitle
+          image {
+            url
+          }
+          variant {
+            id
+          }
+          discountedUnitPriceSet {
+            presentmentMoney {
+              amount
+              currencyCode
             }
           }
         }
@@ -278,7 +328,7 @@ export function fulfillmentBranch({ isFulfilled, hasUnshippedItems }) {
 // "1001" / "#1001" / " 1001 " -> "#1001" — the format Shopify's order search
 // query expects and the only one worth guessing at from free-text customer
 // input.
-function normalizeOrderName(input) {
+export function normalizeOrderName(input) {
   const trimmed = String(input ?? "").trim();
   if (!trimmed) return "";
   return trimmed.startsWith("#") ? trimmed : `#${trimmed}`;
@@ -311,12 +361,18 @@ export async function findOrderForWithdrawalLookup(admin, { orderName, email }) 
     (fulfillment) => Boolean(fulfillment.deliveredAt) || fulfillment.displayStatus === "DELIVERED",
   );
 
-  const lineItems = (order.lineItems?.nodes ?? []).map((line) => {
+  // Units still on the order (removed or refunded units drop out) — the same
+  // count the submission records — and only lines that still have any.
+  const lineItems = (order.lineItems?.nodes ?? [])
+    .filter((line) => (line.currentQuantity ?? line.quantity) > 0)
+    .map((line) => {
     const variantTitle = (line.variant?.selectedOptions ?? [])
       .map((option) => option.value)
       .filter(Boolean)
       .join(" / ");
-    const price = line.discountedUnitPriceSet?.shopMoney;
+    // Presentment money: the currency the customer paid in, the same one the
+    // order status page and the stored request use.
+    const price = line.discountedUnitPriceSet?.presentmentMoney;
     return {
       id: line.id,
       title: line.title,
@@ -325,17 +381,17 @@ export async function findOrderForWithdrawalLookup(admin, { orderName, email }) 
       sku: line.sku ?? "",
       imageUrl: line.image?.url ?? "",
       imageAlt: line.image?.altText ?? line.title,
-      quantity: line.quantity,
+      quantity: line.currentQuantity ?? line.quantity,
       refundableQuantity: line.refundableQuantity ?? 0,
       price: price ? { amount: Number(price.amount), currencyCode: price.currencyCode } : null,
     };
-  });
+    });
 
   const address = order.shippingAddress;
   const shippingAddress = address
     ? {
-        countryCode: address.countryCode ?? "",
-        formatted: [address.address1, address.address2, address.city, address.provinceCode, address.zip, address.countryCode]
+        countryCode: address.countryCodeV2 ?? "",
+        formatted: [address.address1, address.address2, address.city, address.provinceCode, address.zip, address.countryCodeV2]
           .filter(Boolean)
           .join(", "),
       }
@@ -349,6 +405,50 @@ export async function findOrderForWithdrawalLookup(admin, { orderName, email }) 
     isDelivered,
     shippingAddress,
     lineItems,
+  };
+}
+
+/**
+ * The order as the submission flow needs it, or null if it doesn't exist.
+ * Line items carry the unit price in the customer's currency and the units
+ * still on the order (removed units drop out).
+ */
+export async function fetchOrderForSubmission(admin, orderId) {
+  const data = await adminQuery(admin, {
+    operation: "WithdrawalSubmissionOrder",
+    query: SUBMISSION_ORDER_QUERY,
+    variables: { id: orderId },
+  });
+
+  const order = data.order;
+  if (!order) return null;
+
+  const address = order.shippingAddress;
+  return {
+    id: order.id,
+    name: order.name ?? "",
+    email: order.email ?? "",
+    confirmationNumber: order.confirmationNumber ?? null,
+    customerName: order.customer?.displayName || address?.name || "",
+    countryCode: address?.countryCodeV2 ?? "",
+    shippingAddress: address
+      ? [address.address1, address.address2, address.city, address.provinceCode, address.zip, address.countryCodeV2]
+          .filter(Boolean)
+          .join(", ")
+      : "",
+    lineItems: (order.lineItems?.nodes ?? []).map((line) => {
+      const price = line.discountedUnitPriceSet?.presentmentMoney;
+      return {
+        id: line.id,
+        title: line.title ?? "",
+        variantTitle: line.variantTitle ?? "",
+        sku: line.sku ?? "",
+        imageUrl: line.image?.url ?? "",
+        variantId: line.variant?.id ?? null,
+        quantity: line.currentQuantity ?? line.quantity ?? 0,
+        unitPrice: price ? { amount: Number(price.amount), currencyCode: price.currencyCode } : null,
+      };
+    }),
   };
 }
 

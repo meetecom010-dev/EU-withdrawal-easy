@@ -16,11 +16,11 @@ export const DEFAULT_TRANSLATIONS = {
     labels: {
       step1Title: "Ihren Kauf widerrufen",
       step1Description:
-        "Sie haben das Recht, diesen Kauf innerhalb von 14 Tagen ohne Angabe von Gründen zu widerrufen.",
+        "Sie haben das Recht, diesen Kauf innerhalb von {{days}} Tagen ohne Angabe von Gründen zu widerrufen.",
       itemSelectionHeading: "Wählen Sie die Artikel aus, die Sie widerrufen möchten",
       deliveredTitle: "Ihre gelieferte Bestellung widerrufen",
       deliveredDescription:
-        "Ihre Bestellung wurde geliefert. Sie können Ihren Kauf innerhalb von 14 Tagen nach Lieferung dennoch widerrufen.",
+        "Ihre Bestellung wurde geliefert. Sie können Ihren Kauf innerhalb von {{days}} Tagen nach Lieferung dennoch widerrufen.",
       deliveredItemSelectionHeading:
         "Wählen Sie die gelieferten Artikel aus, die Sie widerrufen möchten",
       confirmHeading: "Bestätigen Sie Ihren Widerruf",
@@ -31,13 +31,13 @@ export const DEFAULT_TRANSLATIONS = {
       submittedTitle: "Widerrufsantrag eingereicht",
       submittedMessage:
         "Wir haben Ihren Widerrufsantrag erhalten und werden uns in Kürze bei Ihnen melden.",
-      deliveredSubmittedTitle: "Rücksendeantrag eingereicht",
+      deliveredSubmittedTitle: "Widerrufsantrag eingereicht",
       deliveredSubmittedMessage:
-        "Wir haben Ihren Rücksendeantrag erhalten und senden Ihnen weitere Anweisungen per E-Mail.",
+        "Wir haben Ihren Widerrufsantrag erhalten und senden Ihnen per E-Mail Anweisungen zur Rücksendung der Artikel.",
       step1ButtonLabel: "Weiter",
       confirmButtonLabel: "Widerruf bestätigen",
     },
-    reasonLabel: "Grund für die Rücksendung",
+    reasonLabel: "Grund für den Widerruf",
     reasonOptions: {
       "Changed my mind": "Meinung geändert",
       "Wrong size": "Falsche Größe",
@@ -49,11 +49,11 @@ export const DEFAULT_TRANSLATIONS = {
     labels: {
       step1Title: "Rétractation de votre achat",
       step1Description:
-        "Vous avez le droit de vous rétracter de cet achat dans un délai de 14 jours sans avoir à motiver votre décision.",
+        "Vous avez le droit de vous rétracter de cet achat dans un délai de {{days}} jours sans avoir à motiver votre décision.",
       itemSelectionHeading: "Sélectionnez les articles à rétracter",
       deliveredTitle: "Rétractation de votre commande livrée",
       deliveredDescription:
-        "Votre commande a été livrée. Vous pouvez encore vous rétracter de votre achat dans un délai de 14 jours suivant la livraison.",
+        "Votre commande a été livrée. Vous pouvez encore vous rétracter de votre achat dans un délai de {{days}} jours suivant la livraison.",
       deliveredItemSelectionHeading: "Sélectionnez les articles livrés à rétracter",
       confirmHeading: "Confirmez votre rétractation",
       confirmMessage: "Veuillez confirmer que vous souhaitez vous rétracter de cet achat.",
@@ -64,13 +64,13 @@ export const DEFAULT_TRANSLATIONS = {
       submittedTitle: "Demande de rétractation envoyée",
       submittedMessage:
         "Nous avons bien reçu votre demande de rétractation et vous recontacterons sous peu.",
-      deliveredSubmittedTitle: "Demande de retour envoyée",
+      deliveredSubmittedTitle: "Demande de rétractation envoyée",
       deliveredSubmittedMessage:
-        "Nous avons bien reçu votre demande de retour et vous enverrons les instructions par e-mail.",
+        "Nous avons bien reçu votre demande de rétractation et vous enverrons par e-mail les instructions pour retourner les articles.",
       step1ButtonLabel: "Continuer",
       confirmButtonLabel: "Confirmer la rétractation",
     },
-    reasonLabel: "Motif du retour",
+    reasonLabel: "Motif de la rétractation",
     reasonOptions: {
       "Changed my mind": "J'ai changé d'avis",
       "Wrong size": "Mauvaise taille",
@@ -82,11 +82,11 @@ export const DEFAULT_TRANSLATIONS = {
     labels: {
       step1Title: "Herroep uw aankoop",
       step1Description:
-        "U hebt het recht om deze aankoop binnen 14 dagen zonder opgave van redenen te herroepen.",
+        "U hebt het recht om deze aankoop binnen {{days}} dagen zonder opgave van redenen te herroepen.",
       itemSelectionHeading: "Selecteer de artikelen die u wilt herroepen",
       deliveredTitle: "Herroep uw geleverde bestelling",
       deliveredDescription:
-        "Uw bestelling is geleverd. U kunt uw aankoop nog binnen 14 dagen na levering herroepen.",
+        "Uw bestelling is geleverd. U kunt uw aankoop nog binnen {{days}} dagen na levering herroepen.",
       deliveredItemSelectionHeading: "Selecteer de geleverde artikelen die u wilt herroepen",
       confirmHeading: "Bevestig uw herroeping",
       confirmMessage: "Bevestig dat u deze aankoop wilt herroepen.",
@@ -96,13 +96,13 @@ export const DEFAULT_TRANSLATIONS = {
       submittedTitle: "Herroepingsverzoek ingediend",
       submittedMessage:
         "We hebben uw herroepingsverzoek ontvangen en nemen binnenkort contact met u op.",
-      deliveredSubmittedTitle: "Retourverzoek ingediend",
+      deliveredSubmittedTitle: "Herroepingsverzoek ingediend",
       deliveredSubmittedMessage:
-        "We hebben uw retourverzoek ontvangen en sturen u verdere instructies per e-mail.",
+        "We hebben uw herroepingsverzoek ontvangen en sturen u per e-mail instructies om de artikelen terug te sturen.",
       step1ButtonLabel: "Doorgaan",
       confirmButtonLabel: "Herroeping bevestigen",
     },
-    reasonLabel: "Reden voor retour",
+    reasonLabel: "Reden van herroeping",
     reasonOptions: {
       "Changed my mind": "Van gedachten veranderd",
       "Wrong size": "Verkeerde maat",
@@ -114,11 +114,11 @@ export const DEFAULT_TRANSLATIONS = {
     labels: {
       step1Title: "Recedi dal tuo acquisto",
       step1Description:
-        "Hai il diritto di recedere da questo acquisto entro 14 giorni senza fornire alcuna motivazione.",
+        "Hai il diritto di recedere da questo acquisto entro {{days}} giorni senza fornire alcuna motivazione.",
       itemSelectionHeading: "Seleziona gli articoli da cui vuoi recedere",
       deliveredTitle: "Recedi dal tuo ordine consegnato",
       deliveredDescription:
-        "Il tuo ordine è stato consegnato. Puoi comunque recedere dal tuo acquisto entro 14 giorni dalla consegna.",
+        "Il tuo ordine è stato consegnato. Puoi comunque recedere dal tuo acquisto entro {{days}} giorni dalla consegna.",
       deliveredItemSelectionHeading: "Seleziona gli articoli consegnati da cui vuoi recedere",
       confirmHeading: "Conferma il tuo recesso",
       confirmMessage: "Conferma di voler recedere da questo acquisto.",
@@ -128,13 +128,13 @@ export const DEFAULT_TRANSLATIONS = {
       submittedTitle: "Richiesta di recesso inviata",
       submittedMessage:
         "Abbiamo ricevuto la tua richiesta di recesso e ti contatteremo a breve.",
-      deliveredSubmittedTitle: "Richiesta di reso inviata",
+      deliveredSubmittedTitle: "Richiesta di recesso inviata",
       deliveredSubmittedMessage:
-        "Abbiamo ricevuto la tua richiesta di reso e ti invieremo ulteriori istruzioni via e-mail.",
+        "Abbiamo ricevuto la tua richiesta di recesso e ti invieremo via e-mail le istruzioni per restituire gli articoli.",
       step1ButtonLabel: "Continua",
       confirmButtonLabel: "Conferma recesso",
     },
-    reasonLabel: "Motivo del reso",
+    reasonLabel: "Motivo del recesso",
     reasonOptions: {
       "Changed my mind": "Ho cambiato idea",
       "Wrong size": "Taglia sbagliata",
@@ -146,11 +146,11 @@ export const DEFAULT_TRANSLATIONS = {
     labels: {
       step1Title: "Desiste de tu compra",
       step1Description:
-        "Tienes derecho a desistir de esta compra en un plazo de 14 días sin necesidad de justificación.",
+        "Tienes derecho a desistir de esta compra en un plazo de {{days}} días sin necesidad de justificación.",
       itemSelectionHeading: "Selecciona los artículos de los que quieres desistir",
       deliveredTitle: "Desiste de tu pedido entregado",
       deliveredDescription:
-        "Tu pedido ha sido entregado. Aún puedes desistir de tu compra en un plazo de 14 días desde la entrega.",
+        "Tu pedido ha sido entregado. Aún puedes desistir de tu compra en un plazo de {{days}} días desde la entrega.",
       deliveredItemSelectionHeading:
         "Selecciona los artículos entregados de los que quieres desistir",
       confirmHeading: "Confirma tu desistimiento",
@@ -161,13 +161,13 @@ export const DEFAULT_TRANSLATIONS = {
       submittedTitle: "Solicitud de desistimiento enviada",
       submittedMessage:
         "Hemos recibido tu solicitud de desistimiento y nos pondremos en contacto contigo en breve.",
-      deliveredSubmittedTitle: "Solicitud de devolución enviada",
+      deliveredSubmittedTitle: "Solicitud de desistimiento enviada",
       deliveredSubmittedMessage:
-        "Hemos recibido tu solicitud de devolución y te enviaremos más instrucciones por correo electrónico.",
+        "Hemos recibido tu solicitud de desistimiento y te enviaremos por correo electrónico las instrucciones para devolver los artículos.",
       step1ButtonLabel: "Continuar",
       confirmButtonLabel: "Confirmar desistimiento",
     },
-    reasonLabel: "Motivo de la devolución",
+    reasonLabel: "Motivo del desistimiento",
     reasonOptions: {
       "Changed my mind": "He cambiado de opinión",
       "Wrong size": "Talla incorrecta",
@@ -179,11 +179,11 @@ export const DEFAULT_TRANSLATIONS = {
     labels: {
       step1Title: "Odstąp od zakupu",
       step1Description:
-        "Masz prawo odstąpić od tego zakupu w ciągu 14 dni bez podawania przyczyny.",
+        "Masz prawo odstąpić od tego zakupu w ciągu {{days}} dni bez podawania przyczyny.",
       itemSelectionHeading: "Wybierz produkty, od których chcesz odstąpić",
       deliveredTitle: "Odstąp od dostarczonego zamówienia",
       deliveredDescription:
-        "Twoje zamówienie zostało dostarczone. Nadal możesz odstąpić od zakupu w ciągu 14 dni od dostawy.",
+        "Twoje zamówienie zostało dostarczone. Nadal możesz odstąpić od zakupu w ciągu {{days}} dni od dostawy.",
       deliveredItemSelectionHeading:
         "Wybierz dostarczone produkty, od których chcesz odstąpić",
       confirmHeading: "Potwierdź odstąpienie",
@@ -193,13 +193,13 @@ export const DEFAULT_TRANSLATIONS = {
       submittedTitle: "Wniosek o odstąpienie został wysłany",
       submittedMessage:
         "Otrzymaliśmy Twój wniosek o odstąpienie i wkrótce się z Tobą skontaktujemy.",
-      deliveredSubmittedTitle: "Wniosek o zwrot został wysłany",
+      deliveredSubmittedTitle: "Wniosek o odstąpienie został wysłany",
       deliveredSubmittedMessage:
-        "Otrzymaliśmy Twój wniosek o zwrot i wyślemy dalsze instrukcje e-mailem.",
+        "Otrzymaliśmy Twój wniosek o odstąpienie i wyślemy e-mailem instrukcje dotyczące zwrotu produktów.",
       step1ButtonLabel: "Dalej",
       confirmButtonLabel: "Potwierdź odstąpienie",
     },
-    reasonLabel: "Powód zwrotu",
+    reasonLabel: "Powód odstąpienia",
     reasonOptions: {
       "Changed my mind": "Zmiana zdania",
       "Wrong size": "Nieprawidłowy rozmiar",
@@ -211,11 +211,11 @@ export const DEFAULT_TRANSLATIONS = {
     labels: {
       step1Title: "Ångra ditt köp",
       step1Description:
-        "Du har rätt att ångra detta köp inom 14 dagar utan att ange något skäl.",
+        "Du har rätt att ångra detta köp inom {{days}} dagar utan att ange något skäl.",
       itemSelectionHeading: "Välj de artiklar du vill ångra",
       deliveredTitle: "Ångra din levererade beställning",
       deliveredDescription:
-        "Din beställning har levererats. Du kan fortfarande ångra ditt köp inom 14 dagar från leveransen.",
+        "Din beställning har levererats. Du kan fortfarande ångra ditt köp inom {{days}} dagar från leveransen.",
       deliveredItemSelectionHeading: "Välj de levererade artiklar du vill ångra",
       confirmHeading: "Bekräfta din ångerbegäran",
       confirmMessage: "Bekräfta att du vill ångra detta köp.",
@@ -223,13 +223,13 @@ export const DEFAULT_TRANSLATIONS = {
       declaration: "Jag frånträder härmed avtalet om köp av de valda artiklarna.",
       submittedTitle: "Ångerbegäran skickad",
       submittedMessage: "Vi har tagit emot din ångerbegäran och återkommer inom kort.",
-      deliveredSubmittedTitle: "Returbegäran skickad",
+      deliveredSubmittedTitle: "Ångerbegäran skickad",
       deliveredSubmittedMessage:
-        "Vi har tagit emot din returbegäran och skickar ytterligare instruktioner via e-post.",
+        "Vi har tagit emot din ångerbegäran och skickar instruktioner för att returnera artiklarna via e-post.",
       step1ButtonLabel: "Fortsätt",
       confirmButtonLabel: "Bekräfta ångerbegäran",
     },
-    reasonLabel: "Anledning till retur",
+    reasonLabel: "Anledning till ånger",
     reasonOptions: {
       "Changed my mind": "Ångrade mig",
       "Wrong size": "Fel storlek",
@@ -241,11 +241,11 @@ export const DEFAULT_TRANSLATIONS = {
     labels: {
       step1Title: "Desista da sua compra",
       step1Description:
-        "Tem o direito de desistir desta compra no prazo de 14 dias, sem necessidade de justificação.",
+        "Tem o direito de desistir desta compra no prazo de {{days}} dias, sem necessidade de justificação.",
       itemSelectionHeading: "Selecione os artigos dos quais pretende desistir",
       deliveredTitle: "Desista da sua encomenda entregue",
       deliveredDescription:
-        "A sua encomenda foi entregue. Ainda pode desistir da sua compra no prazo de 14 dias após a entrega.",
+        "A sua encomenda foi entregue. Ainda pode desistir da sua compra no prazo de {{days}} dias após a entrega.",
       deliveredItemSelectionHeading:
         "Selecione os artigos entregues dos quais pretende desistir",
       confirmHeading: "Confirme a sua desistência",
@@ -256,13 +256,13 @@ export const DEFAULT_TRANSLATIONS = {
       submittedTitle: "Pedido de desistência enviado",
       submittedMessage:
         "Recebemos o seu pedido de desistência e entraremos em contacto consigo brevemente.",
-      deliveredSubmittedTitle: "Pedido de devolução enviado",
+      deliveredSubmittedTitle: "Pedido de desistência enviado",
       deliveredSubmittedMessage:
-        "Recebemos o seu pedido de devolução e enviaremos mais instruções por e-mail.",
+        "Recebemos o seu pedido de desistência e enviaremos por e-mail as instruções para devolver os artigos.",
       step1ButtonLabel: "Continuar",
       confirmButtonLabel: "Confirmar desistência",
     },
-    reasonLabel: "Motivo da devolução",
+    reasonLabel: "Motivo da desistência",
     reasonOptions: {
       "Changed my mind": "Mudei de ideias",
       "Wrong size": "Tamanho errado",
@@ -274,11 +274,11 @@ export const DEFAULT_TRANSLATIONS = {
     labels: {
       step1Title: "Atsisakykite savo pirkinio",
       step1Description:
-        "Turite teisę atsisakyti šio pirkinio per 14 dienų nenurodydami priežasties.",
+        "Turite teisę atsisakyti šio pirkinio per {{days}} dienų nenurodydami priežasties.",
       itemSelectionHeading: "Pasirinkite prekes, kurių atsisakote",
       deliveredTitle: "Atsisakykite pristatyto užsakymo",
       deliveredDescription:
-        "Jūsų užsakymas buvo pristatytas. Vis tiek galite atsisakyti pirkinio per 14 dienų nuo pristatymo.",
+        "Jūsų užsakymas buvo pristatytas. Vis tiek galite atsisakyti pirkinio per {{days}} dienų nuo pristatymo.",
       deliveredItemSelectionHeading:
         "Pasirinkite pristatytas prekes, kurių atsisakote",
       confirmHeading: "Patvirtinkite atsisakymą",
@@ -289,13 +289,13 @@ export const DEFAULT_TRANSLATIONS = {
       submittedTitle: "Atsisakymo prašymas pateiktas",
       submittedMessage:
         "Gavome jūsų atsisakymo prašymą ir netrukus su jumis susisieksime.",
-      deliveredSubmittedTitle: "Grąžinimo prašymas pateiktas",
+      deliveredSubmittedTitle: "Atsisakymo prašymas pateiktas",
       deliveredSubmittedMessage:
-        "Gavome jūsų grąžinimo prašymą ir atsiųsime tolesnes instrukcijas el. paštu.",
+        "Gavome jūsų atsisakymo prašymą ir el. paštu atsiųsime prekių grąžinimo instrukcijas.",
       step1ButtonLabel: "Tęsti",
       confirmButtonLabel: "Patvirtinti atsisakymą",
     },
-    reasonLabel: "Grąžinimo priežastis",
+    reasonLabel: "Atsisakymo priežastis",
     reasonOptions: {
       "Changed my mind": "Persigalvojau",
       "Wrong size": "Netinkamas dydis",
@@ -307,11 +307,11 @@ export const DEFAULT_TRANSLATIONS = {
     labels: {
       step1Title: "Peruuta ostoksesi",
       step1Description:
-        "Sinulla on oikeus peruuttaa tämä osto 14 päivän kuluessa ilmoittamatta syytä.",
+        "Sinulla on oikeus peruuttaa tämä osto {{days}} päivän kuluessa ilmoittamatta syytä.",
       itemSelectionHeading: "Valitse tuotteet, jotka haluat peruuttaa",
       deliveredTitle: "Peruuta toimitettu tilauksesi",
       deliveredDescription:
-        "Tilauksesi on toimitettu. Voit silti peruuttaa ostoksesi 14 päivän kuluessa toimituksesta.",
+        "Tilauksesi on toimitettu. Voit silti peruuttaa ostoksesi {{days}} päivän kuluessa toimituksesta.",
       deliveredItemSelectionHeading:
         "Valitse toimitetut tuotteet, jotka haluat peruuttaa",
       confirmHeading: "Vahvista peruutuksesi",
@@ -322,13 +322,13 @@ export const DEFAULT_TRANSLATIONS = {
       submittedTitle: "Peruutuspyyntö lähetetty",
       submittedMessage:
         "Olemme vastaanottaneet peruutuspyyntösi ja otamme sinuun pian yhteyttä.",
-      deliveredSubmittedTitle: "Palautuspyyntö lähetetty",
+      deliveredSubmittedTitle: "Peruutuspyyntö lähetetty",
       deliveredSubmittedMessage:
-        "Olemme vastaanottaneet palautuspyyntösi ja lähetämme lisäohjeet sähköpostitse.",
+        "Olemme vastaanottaneet peruutuspyyntösi ja lähetämme sähköpostitse ohjeet tuotteiden palauttamiseen.",
       step1ButtonLabel: "Jatka",
       confirmButtonLabel: "Vahvista peruutus",
     },
-    reasonLabel: "Palautuksen syy",
+    reasonLabel: "Peruutuksen syy",
     reasonOptions: {
       "Changed my mind": "Muutin mieleni",
       "Wrong size": "Väärä koko",

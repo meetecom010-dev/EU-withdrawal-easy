@@ -20,5 +20,15 @@
   "item.select": "Wybierz {{title}}",
   "item.remove": "Usuń {{title}}",
   "item.fallbackTitle": "Produkt",
-  "error.submit": "Coś poszło nie tak podczas wysyłania wniosku. Spróbuj ponownie."
+  "error.submit": "Coś poszło nie tak podczas wysyłania wniosku. Spróbuj ponownie.",
+  "error.order_not_found": "Nie znaleźliśmy tego zamówienia.",
+  "error.invalid_items": "Wybrane produkty nie należą do tego zamówienia. Odśwież stronę i spróbuj ponownie.",
+  "error.duplicate_request": "Wniosek o odstąpienie dla tego zamówienia jest już rozpatrywany.",
+  "error.rate_limited": "Zbyt wiele prób. Odczekaj kilka minut i spróbuj ponownie.",
+  "eligibility.order_not_found": "Nie znaleźliśmy tego zamówienia.",
+  "eligibility.order_cancelled": "To zamówienie zostało anulowane, więc nie ma od czego odstąpić.",
+  "eligibility.already_requested": "Otrzymaliśmy już wniosek o odstąpienie dla tego zamówienia i go rozpatrujemy.",
+  "eligibility.deadline_passed": "Termin na odstąpienie od umowy dla tego zamówienia minął {{date}}. Skontaktuj się z nami, jeśli uważasz, że to błąd.",
+  "eligibility.deadline_passed_no_date": "Termin na odstąpienie od umowy dla tego zamówienia minął. Skontaktuj się z nami, jeśli uważasz, że to błąd.",
+  "eligibility.not_eligible": "Nie można już odstąpić od tego zamówienia."
 }

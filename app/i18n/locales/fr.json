@@ -14,7 +14,8 @@
     "preview": "Aperçu",
     "remove": "Retirer",
     "save": "Enregistrer",
-    "verified": "Vérifié"
+    "verified": "Vérifié",
+    "retry": "Réessayer"
   },
   "nav": {
     "home": "Accueil",
@@ -32,7 +33,7 @@
     "emailServiceUnavailable": "Impossible de se connecter au service d'e-mail. Réessayez dans quelques minutes.",
     "emailServiceNotConfigured": "L'envoi d'e-mails n'est pas encore configuré. Contactez l'assistance.",
     "requestNotFound": "Cette demande de rétractation n'existe pas ou a été supprimée.",
-    "requestDecided": "Cette demande a déjà été approuvée ou refusée. Les actions sur la commande ne sont donc plus disponibles.",
+    "requestDecided": "Cette demande a été refusée. Les actions sur la commande ne sont donc plus disponibles.",
     "unknownDecision": "Choisissez d'approuver ou de refuser cette demande.",
     "invalidStatus": "Choisissez un statut valide pour cette demande.",
     "noteRequired": "Saisissez une note.",
@@ -44,7 +45,8 @@
     "senderNotStarted": "Vérifiez d'abord votre adresse d'expéditeur.",
     "senderIdMissing": "Impossible d'enregistrer cette adresse d'expéditeur. Réessayez.",
     "domainInvalid": "Saisissez un domaine valide, comme votreboutique.com.",
-    "domainFreeProvider": "Les fournisseurs d'e-mail gratuits comme Gmail et Yahoo ne peuvent pas être authentifiés. Utilisez plutôt le domaine de votre boutique."
+    "domainFreeProvider": "Les fournisseurs d'e-mail gratuits comme Gmail et Yahoo ne peuvent pas être authentifiés. Utilisez plutôt le domaine de votre boutique.",
+    "alreadyDecided": "Cette demande a déjà été approuvée ou refusée."
   },
   "auth": {
     "login": {
@@ -253,7 +255,8 @@
         "email": "Un e-mail de confirmation automatique que les clients peuvent conserver"
       },
       "penaltyHeading": "Ce qui se passe si vous n'êtes pas en conformité",
-      "penalty": "Si le bouton de rétractation est absent ou ne fonctionne pas, la loi prolonge le délai de rétractation de {{days}} jours. Les clients disposent alors de 12 mois et {{days}} jours pour se rétracter de chaque commande concernée."
+      "penalty": "Si le bouton de rétractation est absent ou ne fonctionne pas, vous vous exposez à des sanctions selon le droit national, et les clients peuvent disposer de bien plus de {{days}} jours pour se rétracter.",
+      "disclaimer": "Il s'agit d'informations générales, pas d'un conseil juridique."
     },
     "form": {
       "heading": "Activer votre formulaire de rétractation",
@@ -283,8 +286,8 @@
     "countries": {
       "heading": "Pays éligibles",
       "description": "Les clients ne voient le formulaire de rétractation que si leur commande est expédiée dans l'un de ces pays.",
-      "all": "Les {{count}} pays de l'UE (recommandé)",
-      "allDetails": "Le droit de rétractation s'applique dans toute l'UE.",
+      "all": "Les {{count}} pays de l'UE et de l'EEE (recommandé)",
+      "allDetails": "Le droit de rétractation s'applique dans toute l'UE et l'EEE.",
       "specific": "Pays spécifiques",
       "specificDetails": "Choisissez les pays ci-dessous. Vous pouvez modifier ce choix à tout moment.",
       "pickerLabel": "Pays",
@@ -344,7 +347,8 @@
         "messageBefore": "Message avant la livraison",
         "titleAfter": "Titre après la livraison",
         "messageAfter": "Message après la livraison"
-      }
+      },
+      "daysHint": "Saisissez {{days}} pour afficher votre délai de rétractation en jours."
     },
     "automation": {
       "heading": "Automatisation",
@@ -353,7 +357,7 @@
         "heading": "Avant l'expédition de la commande",
         "description": "S'applique lorsqu'une demande arrive avant l'expédition de tout article.",
         "hold": "Suspendre le traitement pour examen",
-        "holdDetails": "Mettez le traitement en pause jusqu'à ce que vous approuviez ou refusiez la demande. La suspension est levée lorsque vous décidez.",
+        "holdDetails": "Mettez le traitement en pause pendant que vous examinez la demande. Si vous la refusez, la suspension est levée. Après l'avoir approuvée, remboursez les articles rétractés, puis levez la suspension.",
         "tagDetails": "Ajoutez une balise aux commandes qui reçoivent une demande avant l'expédition, pour que votre équipe les retrouve dans la liste des commandes."
       },
       "fallback": {
@@ -408,7 +412,7 @@
     },
     "preview": {
       "heading": "Aperçu en direct",
-      "compliantBadge": "Conforme 2 étapes",
+      "compliantBadge": "Confirmation en 2 étapes",
       "surfaceLabel": "Aperçu",
       "surfaces": {
         "orderStatus": "Page d'état de la commande",
@@ -810,7 +814,8 @@
       "previewTitle": "Aperçu de l'e-mail",
       "templateUnchanged": "Vos modifications ne s'appliquent qu'à cet e-mail. Votre modèle enregistré ne changera pas.",
       "noEmail": "Le client ne recevra pas d'e-mail. Vous pouvez le contacter séparément si nécessaire.",
-      "holdReleased": "Cela lève aussi la suspension du traitement de cette commande, qui pourra de nouveau être traitée."
+      "holdReleased": "Cela lève aussi la suspension du traitement de cette commande, qui pourra de nouveau être traitée.",
+      "holdKept": "La suspension du traitement est maintenue pour que les articles rétractés ne soient pas expédiés. Remboursez-les ou annulez la commande, puis levez la suspension pour les articles restant à expédier."
     },
     "refundModal": {
       "heading": "Rembourser les articles concernés",
@@ -852,7 +857,7 @@
       "heading": "Expéditeur",
       "description": "Ces paramètres s'appliquent à chaque e-mail envoyé par l'application pour votre boutique. Envoyez depuis votre propre adresse vérifiée et choisissez où arrivent les réponses des clients.",
       "emailLabel": "E-mail de l'expéditeur",
-      "emailPlaceholder": "notifications@withdrawaleasy.com",
+      "emailPlaceholder": "orders@yourstore.com",
       "detailsVerified": "Les e-mails sont envoyés depuis cette adresse.",
       "detailsPending": "Saisissez le code envoyé à cette adresse pour la vérifier.",
       "detailsDefault": "Si vous laissez ce champ vide, les e-mails sont envoyés depuis {{email}}.",
@@ -1179,7 +1184,7 @@
           "Articles dans un retour : une fois revenus, sélectionnez Traiter et rembourser sur le retour. Le client est remboursé et le retour est fermé.",
           "Rien n'a encore été expédié : vous pouvez aussi annuler et rembourser toute la commande depuis Plus d'actions."
         ],
-        "closing": "Le droit de l'UE vous accorde {{refundDays}} à compter de la rétractation pour rembourser. La page de la demande indique le temps restant. Remboursez avant d'approuver la demande."
+        "closing": "Le droit de l'UE vous accorde {{refundDays}} à compter de la rétractation pour rembourser. La page de la demande indique le temps restant."
       },
       "returns": {
         "question": "Comment fonctionnent les retours ?",
@@ -1189,10 +1194,10 @@
         ]
       },
       "decision-lock": {
-        "question": "Pourquoi les actions sur la commande sont-elles désactivées après l'approbation ou le refus d'une demande ?",
+        "question": "Que se passe-t-il quand j'approuve ou refuse une demande ?",
         "paragraphs": [
-          "Approuver ou refuser clôture la demande. Ensuite, les remboursements, suspensions, retours et annulations sont désactivés, pour que la commande ne soit pas modifiée par erreur. C'est pourquoi vous devez rembourser avant d'approuver.",
-          "La décision lève aussi toute suspension du traitement placée par l'application. Si cette levée échoue, vous pouvez toujours sélectionner Lever la suspension du traitement."
+          "L'approbation maintient toute suspension du traitement placée par l'application, pour que les articles rétractés ne soient pas expédiés. Ensuite, depuis la page de la demande, remboursez les articles, créez un retour ou annulez la commande. Enfin, levez la suspension pour que le reste de la commande puisse être expédié.",
+          "Refuser clôture la demande. La suspension du traitement placée par l'application est levée, et les remboursements, suspensions, retours et annulations sont désactivés, pour que la commande ne soit pas modifiée par erreur. Si cette levée échoue, vous pouvez toujours sélectionner Lever la suspension du traitement."
         ]
       },
       "emails": {
@@ -1211,7 +1216,7 @@
       "countries-languages": {
         "question": "Quels pays et quelles langues l'application prend-elle en charge ?",
         "paragraphs": [
-          "Tous les pays de l'UE sont éligibles par défaut. Si vous ne vendez qu'à certains d'entre eux, sélectionnez Pays spécifiques dans les Paramètres.",
+          "Tous les pays de l'UE et de l'EEE sont éligibles par défaut. Si vous ne vendez qu'à certains d'entre eux, sélectionnez Pays spécifiques dans les Paramètres.",
           "Le formulaire est disponible en {{languageCount}} langues : {{languages}}. Les clients le voient dans leur propre langue.",
           "L'anglais est la langue de base. Si vous laissez un champ traduit vide, les clients voient le texte anglais à la place."
         ]

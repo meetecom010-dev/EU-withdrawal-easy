@@ -13,9 +13,12 @@
 
 import { message } from "../../i18n/errors";
 import { AFTER_DELIVERY_ACTIONS, BASE_LOCALE, FALLBACK_OPTIONS } from "./constants";
+import { LEGAL_MIN_WITHDRAWAL_DAYS } from "../../constants";
 
 const FALLBACK_DAYS_RANGE = { min: 1, max: 90 };
-const DEADLINE_DAYS_RANGE = { min: 1, max: 365 };
+// Never below the EU minimum: a shorter period would take away a right the
+// customer legally has.
+const DEADLINE_DAYS_RANGE = { min: LEGAL_MIN_WITHDRAWAL_DAYS, max: 365 };
 const TRANSIT_DAYS_RANGE = { min: 0, max: 90 };
 
 const FALLBACK_VALUES = FALLBACK_OPTIONS.map((option) => option.value);

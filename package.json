@@ -22,11 +22,11 @@
     "node": ">=20.19 <22 || >=22.12"
   },
   "dependencies": {
-    "@react-router/dev": "^7.12.0",
-    "@react-router/express": "^7.12.0",
-    "@react-router/fs-routes": "^7.12.0",
-    "@react-router/node": "^7.12.0",
-    "@react-router/serve": "^7.12.0",
+    "@react-router/dev": "^7.18.4",
+    "@react-router/express": "^7.18.4",
+    "@react-router/fs-routes": "^7.18.4",
+    "@react-router/node": "^7.18.4",
+    "@react-router/serve": "^7.18.4",
     "@shopify/app-bridge-react": "^4.2.4",
     "@shopify/shopify-app-react-router": "^1.1.0",
     "compression": "^1.8.1",
@@ -38,7 +38,7 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-i18next": "^17.0.15",
-    "react-router": "^7.12.0",
+    "react-router": "^7.18.4",
     "vite-tsconfig-paths": "^5.1.4"
   },
   "devDependencies": {

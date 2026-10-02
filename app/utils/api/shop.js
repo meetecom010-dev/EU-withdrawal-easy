@@ -1,16 +1,8 @@
 import { apiFetch } from "./client";
 
-// Frontend calls for the /api/shop endpoint (app/routes/api.shop.jsx).
-export function getShop() {
-  return apiFetch("/shop");
-}
-
+// Frontend calls for the /api/shop endpoint (app/routes/api/shop.jsx).
 export function updateShopPlan(plan) {
   return apiFetch("/shop", { method: "PUT", body: plan });
-}
-
-export function resetShopPlan() {
-  return apiFetch("/shop", { method: "DELETE" });
 }
 
 export function updateOnboardingStatus({ onboardingCompleted }) {

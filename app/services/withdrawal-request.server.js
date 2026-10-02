@@ -67,10 +67,50 @@ export async function findOpenWithdrawalRequest(shop, orderId) {
   return doc ? serializeWithdrawalRequest(doc) : null;
 }
 
+// The requests list and its CSV export only read the summary fields, so the
+// automation log, staff notes, and address (the bulk of each document) are
+// left out.
 export async function listWithdrawalRequests(shop) {
   await connectDB();
-  const docs = await WithdrawalRequest.find({ shop }).sort({ submittedAt: -1 });
+  const docs = await WithdrawalRequest.find({ shop })
+    .select("-automation -notes -shippingAddress")
+    .sort({ submittedAt: -1, _id: -1 })
+    .lean();
   return docs.map(serializeWithdrawalRequest);
+}
+
+// The requests either side of this one in the list's order (newest first), for
+// the detail page's previous/next buttons — two indexed lookups instead of
+// loading every request.
+export async function findAdjacentRequestIds(shop, request) {
+  const submittedAt = request?.submittedAt ? new Date(request.submittedAt) : null;
+  if (!submittedAt || Number.isNaN(submittedAt.getTime()) || !mongoose.isValidObjectId(request.id)) {
+    return { prevId: null, nextId: null };
+  }
+  const id = new mongoose.Types.ObjectId(request.id);
+  await connectDB();
+  // Ordered by (submittedAt, _id) — the list's order — so requests sharing a
+  // timestamp still link to each other instead of being skipped.
+  const [newer, older] = await Promise.all([
+    WithdrawalRequest.findOne({
+      shop,
+      $or: [{ submittedAt: { $gt: submittedAt } }, { submittedAt, _id: { $gt: id } }],
+    })
+      .sort({ submittedAt: 1, _id: 1 })
+      .select("_id")
+      .lean(),
+    WithdrawalRequest.findOne({
+      shop,
+      $or: [{ submittedAt: { $lt: submittedAt } }, { submittedAt, _id: { $lt: id } }],
+    })
+      .sort({ submittedAt: -1, _id: -1 })
+      .select("_id")
+      .lean(),
+  ]);
+  return {
+    prevId: newer ? String(newer._id) : null,
+    nextId: older ? String(older._id) : null,
+  };
 }
 
 export async function getWithdrawalRequestById(shop, id) {
@@ -80,7 +120,9 @@ export async function getWithdrawalRequestById(shop, id) {
   return doc ? serializeWithdrawalRequest(doc) : null;
 }
 
-export async function updateWithdrawalRequestStatus(shop, id, status) {
+// `onlyIfPending` makes the change atomic: of two decisions racing (a double
+// click, two tabs), only the first is applied and the other gets null.
+export async function updateWithdrawalRequestStatus(shop, id, status, { onlyIfPending = false } = {}) {
   if (!STATUSES.includes(status)) {
     throw new TranslatableError("errors.invalidStatus");
   }
@@ -88,7 +130,7 @@ export async function updateWithdrawalRequestStatus(shop, id, status) {
 
   await connectDB();
   const doc = await WithdrawalRequest.findOneAndUpdate(
-    { shop, _id: id },
+    { shop, _id: id, ...(onlyIfPending ? { status: "pending" } : {}) },
     { $set: { status, decidedAt: new Date() } },
     { new: true, runValidators: true },
   );
@@ -145,10 +187,9 @@ function sumRevenueAtRisk(pendingRequests) {
   return best;
 }
 
-// Dashboard summary tiles (app/routes/_app._index, Home, served at "/"). No Shopify order data is
-// fetched anywhere in this app (no read_orders scope), so there's no
-// denominator for a true "% of orders withdrawn" rate — approvalRate is the
-// share of *decided* requests that were approved instead.
+// Dashboard summary tiles (app/routes/_app._index, Home, served at "/"). There's
+// no order count to divide by here, so approvalRate is the share of *decided*
+// requests that were approved rather than a "% of orders withdrawn" rate.
 export async function getDashboardStats(shop) {
   await connectDB();
   const thirtyDaysAgo = new Date(Date.now() - THIRTY_DAYS_MS);
@@ -173,7 +214,8 @@ export async function getDashboardStats(shop) {
     }),
     WithdrawalRequest.countDocuments({ shop, status: "approved" }),
     WithdrawalRequest.countDocuments({ shop, status: "rejected" }),
-    WithdrawalRequest.find({ shop, status: "pending" }),
+    // Only the items are needed to total the pending value.
+    WithdrawalRequest.find({ shop, status: "pending" }).select("items").lean(),
     WithdrawalRequest.countDocuments({ shop, submittedAt: { $gte: startOfToday } }),
     WithdrawalRequest.countDocuments({ shop, submittedAt: { $gte: startOfMonth } }),
   ]);
