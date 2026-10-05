@@ -14,7 +14,6 @@ import DashboardSkeleton from "./_app._index/component/dashboard/DashboardSkelet
 import FormSetupSkeleton from "./_app.form-setup/component/FormSetupSkeleton";
 import RequestsTableSkeleton from "./_app.withdrawal-requests/component/RequestsTableSkeleton";
 import RequestDetailSkeleton from "./_app.withdrawal-requests_.$id/component/RequestDetailSkeleton";
-import PricingSkeleton from "./_app.pricing/component/PricingSkeleton";
 import EmailTemplatesSkeleton from "./_app.email-templates/component/EmailTemplatesSkeleton";
 import FaqsSkeleton from "./_app.faqs/component/FaqsSkeleton";
 
@@ -26,7 +25,6 @@ function routeSkeletonFor(pathname) {
   if (pathname.startsWith("/form-setup")) return <FormSetupSkeleton />;
   if (/^\/withdrawal-requests\/.+/.test(pathname)) return <RequestDetailSkeleton />;
   if (pathname.startsWith("/withdrawal-requests")) return <RequestsTableSkeleton />;
-  if (pathname.startsWith("/pricing")) return <PricingSkeleton />;
   if (pathname.startsWith("/email-templates")) return <EmailTemplatesSkeleton />;
   if (pathname.startsWith("/faqs")) return <FaqsSkeleton />;
   if (pathname === "/") return <DashboardSkeleton />;
@@ -73,7 +71,6 @@ function AppShell({ pendingSkeleton, onboardingFormSettings }) {
           <s-link href="/form-setup">{t("nav.formSetup")}</s-link>
           <s-link href="/withdrawal-requests">{t("nav.withdrawalRequests")}</s-link>
           <s-link href="/email-templates">{t("nav.emailTemplates")}</s-link>
-          {/* <s-link href="/pricing">{t("nav.pricing")}</s-link> */}
         </s-app-nav>
       )}
       <OrderStatusExtensionSync />

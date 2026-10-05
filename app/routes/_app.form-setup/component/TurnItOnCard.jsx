@@ -2,9 +2,14 @@
 import { useTranslation } from "react-i18next";
 import OrderStatusExtensionStatus from "../../../components/OrderStatusExtensionStatus";
 import StandalonePageStatus from "../../../components/StandalonePageStatus";
+import { useShop } from "../../../context/ShopContext";
 
 export default function TurnItOnCard({ settings, update }) {
   const { t } = useTranslation();
+  const { orderStatusBlockAdded } = useShop();
+  // Built for Shopify doesn't allow two banners next to each other, so the
+  // storefront setup banner waits until the order status block is added.
+  const orderStatusSetupPending = settings.showOnOrderStatus && !orderStatusBlockAdded;
 
   return (
     <s-section heading={t("formSetup.enable.heading")}>
@@ -34,7 +39,9 @@ export default function TurnItOnCard({ settings, update }) {
               checked={settings.showOnStandalonePage}
               onChange={(e) => update("showOnStandalonePage", e.currentTarget.checked)}
             ></s-checkbox>
-            {settings.showOnStandalonePage && <StandalonePageStatus />}
+            {settings.showOnStandalonePage && !orderStatusSetupPending && (
+              <StandalonePageStatus />
+            )}
           </>
         )}
       </s-stack>

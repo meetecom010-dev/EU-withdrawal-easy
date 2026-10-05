@@ -21,8 +21,7 @@
     "home": "Accueil",
     "withdrawalRequests": "Demandes",
     "formSetup": "Paramètres",
-    "emailTemplates": "Notifications",
-    "pricing": "Tarifs"
+    "emailTemplates": "Notifications"
   },
   "errors": {
     "generic": "Une erreur s'est produite. Réessayez.",
@@ -70,11 +69,11 @@
   "placements": {
     "orderStatus": {
       "label": "Page d'état de la commande",
-      "details": "Affichez le formulaire de rétractation sur la page d'état de la commande que les clients voient après le paiement."
+      "details": "Les clients accèdent à cette page après le paiement et depuis l'e-mail de confirmation de commande."
     },
     "storefront": {
       "label": "Page de boutique",
-      "details": "Affichez le formulaire de rétractation sur une page dédiée de votre thème, pour que les clients le trouvent en dehors de la page d'état de la commande."
+      "details": "Ajoutez le formulaire à votre thème, par exemple sur une page liée dans le pied de page."
     }
   },
   "orderStatus": {
@@ -216,9 +215,9 @@
   "onboarding": {
     "pageTitle": "Commencer",
     "heading": "Préparez votre boutique aux rétractations dans l'UE",
-    "intro_one": "Terminez cette {{count}} étape pour offrir à vos clients de l'UE un moyen conforme de se rétracter d'un achat.",
-    "intro_other": "Terminez ces {{count}} étapes pour offrir à vos clients de l'UE un moyen conforme de se rétracter d'un achat.",
-    "intro_many": "Terminez ces {{count}} étapes pour offrir à vos clients de l'UE un moyen conforme de se rétracter d'un achat.",
+    "intro_one": "Terminez cette {{count}} étape pour que vos clients de l'UE puissent se rétracter d'une commande en ligne.",
+    "intro_other": "Terminez ces {{count}} étapes pour que vos clients de l'UE puissent se rétracter d'une commande en ligne.",
+    "intro_many": "Terminez ces {{count}} étapes pour que vos clients de l'UE puissent se rétracter d'une commande en ligne.",
     "stepBadge": "Étape {{current}} sur {{total}}",
     "completedToast": "Configuration terminée",
     "steps": {
@@ -228,7 +227,7 @@
       },
       "form": {
         "title": "Formulaire de rétractation",
-        "description": "Activez votre formulaire"
+        "description": "Activez-le et choisissez où il s'affiche"
       }
     },
     "actions": {
@@ -244,29 +243,28 @@
     },
     "welcome": {
       "heading": "Bienvenue dans {{appName}}",
-      "setupTime": "Environ 1 minute",
-      "law": "Depuis le 19 juin 2026, les boutiques qui vendent à des clients de l'UE doivent proposer un moyen de rétractation en 2 étapes pour chaque commande (directive UE 2023/2673, article 11 bis). Une politique de retour seule ne suffit pas.",
-      "app": "{{appName}} ajoute un bouton de rétractation à votre page d'état de la commande, à une page de votre boutique en ligne, ou aux deux. L'application gère la confirmation en 2 étapes et envoie l'e-mail de confirmation obligatoire. Vous gérez toutes les demandes au même endroit.",
-      "imageAlt": "Un client se rétracte d'une commande",
-      "requirementsHeading": "Ce qu'exige la loi",
+      "law": "Depuis le 19 juin 2026, les boutiques qui vendent à des clients de l'UE doivent proposer un moyen de se rétracter d'une commande en ligne. Une politique de retour seule ne suffit pas.",
+      "imageAlt": "Aperçu de l'application {{appName}}",
+      "requirementsHeading": "L'application couvre ce qu'exige la loi",
       "requirements": {
-        "button": "Un bouton de rétractation clairement libellé, facile à trouver pour les clients",
-        "twoStep": "Un processus en 2 étapes : les clients soumettent leur rétractation, puis la confirment",
-        "email": "Un e-mail de confirmation automatique que les clients peuvent conserver"
+        "button": "Un bouton de rétractation clairement libellé et facile à trouver",
+        "twoStep": "Un formulaire en 2 étapes : les clients soumettent leur rétractation, puis la confirment",
+        "email": "Un e-mail de confirmation envoyé automatiquement au client",
+        "manage": "Toutes les demandes au même endroit, pour les suivre et les gérer"
       },
-      "penaltyHeading": "Ce qui se passe si vous n'êtes pas en conformité",
-      "penalty": "Si le bouton de rétractation est absent ou ne fonctionne pas, vous vous exposez à des sanctions selon le droit national, et les clients peuvent disposer de bien plus de {{days}} jours pour se rétracter.",
       "disclaimer": "Il s'agit d'informations générales, pas d'un conseil juridique."
     },
     "form": {
       "heading": "Activer votre formulaire de rétractation",
-      "body": "Les clients soumettent leur rétractation, puis la confirment dans une étape distincte, comme l'exige le droit de l'UE. Le formulaire inclut des mentions légales par défaut. Les clients disposent de {{days}} à compter de la livraison pour se rétracter.",
+      "body": "Le formulaire est prêt à l'emploi avec un texte par défaut. Les clients disposent de {{days}} pour se rétracter. Vous pouvez modifier cela à tout moment dans les Paramètres.",
       "switch": "Activer le formulaire de rétractation",
-      "later": "Vous pourrez tout modifier plus tard dans les Paramètres.",
+      "required": "Activez le formulaire de rétractation pour terminer la configuration.",
       "loadError": "Impossible de charger les paramètres de votre formulaire. Vous pouvez terminer la configuration maintenant et activer le formulaire plus tard dans les Paramètres.",
       "saveError": "Impossible d'enregistrer vos choix pour le formulaire. Réessayez, ou terminez la configuration sans eux et définissez-les plus tard dans les Paramètres.",
       "finishWithoutSaving": "Terminer sans enregistrer",
-      "placementError": "Sélectionnez au moins un emplacement ou désactivez le formulaire."
+      "placementError": "Sélectionnez au moins un emplacement pour afficher le formulaire.",
+      "blockError": "Ajoutez le bloc d'application pour chaque emplacement sélectionné afin de terminer la configuration.",
+      "placementDescription": "Sélectionnez au moins une option."
     },
     "finishError": "Impossible de terminer la configuration. Réessayez."
   },
@@ -1234,38 +1232,5 @@
     "request": "Quelle fonctionnalité souhaitez-vous ?",
     "requestPlaceholder": "Décrivez la fonctionnalité et comment elle aiderait votre boutique",
     "submit": "Envoyer la suggestion"
-  },
-  "pricing": {
-    "pageTitle": "Tarifs",
-    "pricePerMonth": "{{price}} par mois",
-    "currentPlan": "Forfait actuel",
-    "choosePlan": "Choisir {{plan}}",
-    "switchedToast": "Passage au forfait {{plan}} effectué",
-    "plans": {
-      "free": {
-        "name": "Free",
-        "features": [
-          "Jusqu'à 10 demandes de rétractation par mois",
-          "Notifications par e-mail"
-        ]
-      },
-      "starter": {
-        "name": "Starter",
-        "features": [
-          "Demandes de rétractation illimitées",
-          "Champs de formulaire personnalisés",
-          "Notifications par e-mail"
-        ]
-      },
-      "pro": {
-        "name": "Pro",
-        "features": [
-          "Tout le forfait Starter",
-          "Assistance prioritaire",
-          "Remboursements automatisés"
-        ]
-      }
-    },
-    "switchError": "Impossible de changer de forfait"
   }
 }

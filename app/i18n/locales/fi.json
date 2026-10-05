@@ -20,8 +20,7 @@
     "home": "Etusivu",
     "withdrawalRequests": "Pyynnöt",
     "formSetup": "Asetukset",
-    "emailTemplates": "Ilmoitukset",
-    "pricing": "Hinnoittelu"
+    "emailTemplates": "Ilmoitukset"
   },
   "errors": {
     "generic": "Jokin meni vikaan. Yritä uudelleen.",
@@ -69,11 +68,11 @@
   "placements": {
     "orderStatus": {
       "label": "Tilauksen tilasivu",
-      "details": "Näytä peruutuslomake tilauksen tilasivulla, jonka asiakkaat näkevät kassan jälkeen."
+      "details": "Asiakkaat pääsevät tälle sivulle kassan jälkeen ja tilausvahvistussähköpostista."
     },
     "storefront": {
       "label": "Kaupan sivu",
-      "details": "Näytä peruutuslomake teeman omalla sivulla, jotta asiakkaat löytävät sen myös tilauksen tilasivun ulkopuolelta."
+      "details": "Lisää lomake teemaasi, esimerkiksi sivulle, johon on linkki alatunnisteessa."
     }
   },
   "orderStatus": {
@@ -213,8 +212,8 @@
   "onboarding": {
     "pageTitle": "Aloita",
     "heading": "Valmistele kauppasi EU:n peruutuksia varten",
-    "intro_one": "Viimeistele tämä {{count}} vaihe, jotta EU-asiakkaasi voivat peruuttaa oston lainmukaisesti.",
-    "intro_other": "Viimeistele nämä {{count}} vaihetta, jotta EU-asiakkaasi voivat peruuttaa oston lainmukaisesti.",
+    "intro_one": "Viimeistele tämä {{count}} vaihe, jotta EU-asiakkaat voivat peruuttaa tilauksen verkossa.",
+    "intro_other": "Viimeistele nämä {{count}} vaihetta, jotta EU-asiakkaat voivat peruuttaa tilauksen verkossa.",
     "stepBadge": "Vaihe {{current}}/{{total}}",
     "completedToast": "Määritys valmis",
     "steps": {
@@ -224,7 +223,7 @@
       },
       "form": {
         "title": "Peruutuslomake",
-        "description": "Ota lomake käyttöön"
+        "description": "Ota käyttöön ja valitse, missä se näkyy"
       }
     },
     "actions": {
@@ -240,29 +239,28 @@
     },
     "welcome": {
       "heading": "Tervetuloa käyttämään sovellusta {{appName}}",
-      "setupTime": "Vie noin 1 minuutin",
-      "law": "19.6.2026 alkaen EU:n asiakkaille myyvien kauppojen on tarjottava jokaiselle tilaukselle 2-vaiheinen tapa peruuttaa ostos (EU-direktiivi 2023/2673, 11 a artikla). Pelkkä palautuskäytäntö ei riitä.",
-      "app": "{{appName}} lisää peruutuspainikkeen tilauksen tilasivulle, verkkokauppasi sivulle tai molempiin. Se hoitaa 2-vaiheisen vahvistuksen ja lähettää vaaditun vahvistussähköpostin. Voit hallita kaikkia pyyntöjä yhdessä paikassa.",
-      "imageAlt": "Asiakas peruuttaa tilauksen",
-      "requirementsHeading": "Mitä laki vaatii",
+      "law": "19.6.2026 alkaen EU:n asiakkaille myyvien kauppojen on tarjottava tapa peruuttaa tilaus verkossa. Pelkkä palautuskäytäntö ei riitä.",
+      "imageAlt": "Sovelluksen {{appName}} esikatselu",
+      "requirementsHeading": "Sovellus kattaa lain vaatimukset",
       "requirements": {
-        "button": "Selkeästi merkitty peruutuspainike, jonka asiakkaat löytävät helposti",
-        "twoStep": "2-vaiheinen prosessi: asiakas lähettää peruutuksen ja vahvistaa sen sitten",
-        "email": "Automaattinen vahvistussähköposti, jonka asiakas voi säilyttää"
+        "button": "Selkeästi merkitty peruutuspainike, joka on helppo löytää",
+        "twoStep": "2-vaiheinen lomake: asiakas lähettää peruutuksen ja vahvistaa sen sitten",
+        "email": "Vahvistussähköposti, joka lähetetään asiakkaalle automaattisesti",
+        "manage": "Kaikki pyynnöt yhdessä paikassa, jotta voit seurata ja hallita niitä"
       },
-      "penaltyHeading": "Mitä tapahtuu, jos et noudata vaatimuksia",
-      "penalty": "Jos peruutuspainike puuttuu tai ei toimi, voit saada seuraamuksia kansallisen lain mukaan, ja asiakkaat voivat saada paljon yli {{days}} päivää aikaa peruuttaa.",
       "disclaimer": "Tämä on yleistä tietoa, ei oikeudellista neuvontaa."
     },
     "form": {
       "heading": "Ota peruutuslomake käyttöön",
-      "body": "Asiakkaat lähettävät peruutuksen ja vahvistavat sen erillisessä vaiheessa, kuten EU-lainsäädäntö edellyttää. Lomakkeessa on oletusarvoinen lakiteksti. Asiakkailla on toimituksesta alkaen {{days}} aikaa peruuttaa.",
+      "body": "Lomake on valmis käyttöön oletusteksteineen. Asiakkailla on {{days}} aikaa peruuttaa. Voit muuttaa tätä milloin tahansa Asetuksissa.",
       "switch": "Ota peruutuslomake käyttöön",
-      "later": "Voit muuttaa näitä myöhemmin Asetuksissa.",
+      "required": "Ota peruutuslomake käyttöön viimeistelläksesi käyttöönoton.",
       "loadError": "Lomakkeen asetuksia ei voitu ladata. Voit viimeistellä määrityksen nyt ja ottaa lomakkeen käyttöön myöhemmin Asetuksissa.",
       "saveError": "Lomakkeen valintoja ei voitu tallentaa. Yritä uudelleen tai viimeistele määritys ilman niitä ja tee valinnat myöhemmin Asetuksissa.",
       "finishWithoutSaving": "Viimeistele tallentamatta",
-      "placementError": "Valitse vähintään yksi paikka tai poista lomake käytöstä."
+      "placementError": "Valitse vähintään yksi paikka, jossa lomake näytetään.",
+      "blockError": "Lisää sovelluslohko jokaiseen valitsemaasi paikkaan viimeistelläksesi käyttöönoton.",
+      "placementDescription": "Valitse vähintään yksi."
     },
     "finishError": "Määritystä ei voitu viimeistellä. Yritä uudelleen."
   },
@@ -1218,38 +1216,5 @@
     "request": "Minkä ominaisuuden haluaisit?",
     "requestPlaceholder": "Kuvaile ominaisuutta ja sitä, miten se auttaisi kauppaasi",
     "submit": "Lähetä ehdotus"
-  },
-  "pricing": {
-    "pageTitle": "Hinnoittelu",
-    "pricePerMonth": "{{price}} kuukaudessa",
-    "currentPlan": "Nykyinen tilaus",
-    "choosePlan": "Valitse {{plan}}",
-    "switchedToast": "Vaihdettu {{plan}}-tilaukseen",
-    "plans": {
-      "free": {
-        "name": "Free",
-        "features": [
-          "Enintään 10 peruutuspyyntöä kuukaudessa",
-          "Sähköposti-ilmoitukset"
-        ]
-      },
-      "starter": {
-        "name": "Starter",
-        "features": [
-          "Rajattomasti peruutuspyyntöjä",
-          "Mukautetut lomakekentät",
-          "Sähköposti-ilmoitukset"
-        ]
-      },
-      "pro": {
-        "name": "Pro",
-        "features": [
-          "Kaikki Starter-tilauksen ominaisuudet",
-          "Ensisijainen tuki",
-          "Automaattiset hyvitykset"
-        ]
-      }
-    },
-    "switchError": "Tilaustasi ei voitu vaihtaa"
   }
 }

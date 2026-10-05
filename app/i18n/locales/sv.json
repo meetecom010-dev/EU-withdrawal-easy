@@ -20,8 +20,7 @@
     "home": "Start",
     "withdrawalRequests": "Begäranden",
     "formSetup": "Inställningar",
-    "emailTemplates": "Aviseringar",
-    "pricing": "Priser"
+    "emailTemplates": "Aviseringar"
   },
   "errors": {
     "generic": "Något gick fel. Försök igen.",
@@ -69,11 +68,11 @@
   "placements": {
     "orderStatus": {
       "label": "Orderstatussida",
-      "details": "Visa ångerformuläret på orderstatussidan som kunderna ser efter kassan."
+      "details": "Kunderna når den här sidan efter kassan och via orderbekräftelsen i sitt mejl."
     },
     "storefront": {
       "label": "Butikssida",
-      "details": "Visa ångerformuläret på en egen sida i ditt tema, så att kunderna hittar det utanför orderstatussidan."
+      "details": "Lägg till formuläret i ditt tema, till exempel på en sida som länkas i sidfoten."
     }
   },
   "orderStatus": {
@@ -213,8 +212,8 @@
   "onboarding": {
     "pageTitle": "Kom igång",
     "heading": "Gör din butik redo för ånger inom EU",
-    "intro_one": "Slutför det här {{count}} steget för att ge dina EU-kunder ett regelenligt sätt att ångra ett köp.",
-    "intro_other": "Slutför de här {{count}} stegen för att ge dina EU-kunder ett regelenligt sätt att ångra ett köp.",
+    "intro_one": "Slutför det här {{count}} steget så att EU-kunder kan ångra en order online.",
+    "intro_other": "Slutför de här {{count}} stegen så att EU-kunder kan ångra en order online.",
     "stepBadge": "Steg {{current}} av {{total}}",
     "completedToast": "Konfigurationen är klar",
     "steps": {
@@ -224,7 +223,7 @@
       },
       "form": {
         "title": "Ångerformulär",
-        "description": "Aktivera ditt formulär"
+        "description": "Aktivera det och välj var det visas"
       }
     },
     "actions": {
@@ -240,29 +239,28 @@
     },
     "welcome": {
       "heading": "Välkommen till {{appName}}",
-      "setupTime": "Tar ungefär 1 minut",
-      "law": "Sedan den 19 juni 2026 måste butiker som säljer till kunder i EU erbjuda ett sätt att ångra varje order i 2 steg (EU-direktiv 2023/2673, artikel 11a). Det räcker inte med enbart en returpolicy.",
-      "app": "{{appName}} lägger till en ångerknapp på din orderstatussida, en sida i din onlinebutik eller båda. Appen hanterar bekräftelsen i 2 steg och skickar det obligatoriska bekräftelsemejlet. Du hanterar alla begäranden på ett ställe.",
-      "imageAlt": "En kund som ångrar en order",
-      "requirementsHeading": "Vad lagen kräver",
+      "law": "Sedan den 19 juni 2026 måste butiker som säljer till kunder i EU erbjuda ett sätt att ångra en order online. Det räcker inte med enbart en returpolicy.",
+      "imageAlt": "Förhandsvisning av {{appName}}",
+      "requirementsHeading": "Appen täcker det lagen kräver",
       "requirements": {
-        "button": "En tydligt märkt ångerknapp som kunderna lätt hittar",
-        "twoStep": "En process i 2 steg: kunderna skickar sin ånger och bekräftar den sedan",
-        "email": "Ett automatiskt bekräftelsemejl som kunderna kan spara"
+        "button": "En tydligt märkt ångerknapp som är lätt att hitta",
+        "twoStep": "Ett formulär i 2 steg: kunderna skickar sin ånger och bekräftar den sedan",
+        "email": "Ett bekräftelsemejl som skickas automatiskt till kunden",
+        "manage": "Alla förfrågningar på ett ställe, så att du kan följa upp och hantera dem"
       },
-      "penaltyHeading": "Vad som händer om du inte följer reglerna",
-      "penalty": "Om ångerknappen saknas eller inte fungerar kan du riskera sanktioner enligt nationell lag, och kunderna kan få betydligt längre än {{days}} dagar på sig att ångra sig.",
       "disclaimer": "Detta är allmän information, inte juridisk rådgivning."
     },
     "form": {
       "heading": "Aktivera ditt ångerformulär",
-      "body": "Kunderna skickar sin ånger och bekräftar den i ett separat steg, enligt EU-lagstiftningen. Formuläret har juridisk standardtext. Kunderna har {{days}} på sig att ångra sig, räknat från leveransen.",
+      "body": "Formuläret är klart att använda med standardtext. Kunderna har {{days}} på sig att ångra sig. Du kan ändra detta när som helst i Inställningar.",
       "switch": "Aktivera ångerformulär",
-      "later": "Du kan ändra allt detta senare i Inställningar.",
+      "required": "Aktivera ångerformuläret för att slutföra konfigurationen.",
       "loadError": "Det gick inte att läsa in dina formulärinställningar. Du kan slutföra konfigurationen nu och aktivera formuläret senare i Inställningar.",
       "saveError": "Det gick inte att spara dina formulärval. Försök igen, eller slutför konfigurationen utan dem och ställ in dem senare i Inställningar.",
       "finishWithoutSaving": "Slutför utan att spara",
-      "placementError": "Välj minst en plats eller inaktivera formuläret."
+      "placementError": "Välj minst en plats där formuläret ska visas.",
+      "blockError": "Lägg till appblocket för varje plats du har valt för att slutföra konfigurationen.",
+      "placementDescription": "Välj minst ett alternativ."
     },
     "finishError": "Det gick inte att slutföra konfigurationen. Försök igen."
   },
@@ -1218,38 +1216,5 @@
     "request": "Vilken funktion vill du ha?",
     "requestPlaceholder": "Beskriv funktionen och hur den skulle hjälpa din butik",
     "submit": "Skicka förslag"
-  },
-  "pricing": {
-    "pageTitle": "Priser",
-    "pricePerMonth": "{{price}} per månad",
-    "currentPlan": "Nuvarande abonnemang",
-    "choosePlan": "Välj {{plan}}",
-    "switchedToast": "Bytte till abonnemanget {{plan}}",
-    "plans": {
-      "free": {
-        "name": "Free",
-        "features": [
-          "Upp till 10 ångerbegäranden per månad",
-          "E-postaviseringar"
-        ]
-      },
-      "starter": {
-        "name": "Starter",
-        "features": [
-          "Obegränsat antal ångerbegäranden",
-          "Anpassade formulärfält",
-          "E-postaviseringar"
-        ]
-      },
-      "pro": {
-        "name": "Pro",
-        "features": [
-          "Allt i Starter",
-          "Prioriterad support",
-          "Automatiska återbetalningar"
-        ]
-      }
-    },
-    "switchError": "Det gick inte att byta abonnemang"
   }
 }

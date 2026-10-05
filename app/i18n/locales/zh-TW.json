@@ -19,8 +19,7 @@
     "home": "首頁",
     "withdrawalRequests": "申請",
     "formSetup": "設定",
-    "emailTemplates": "通知",
-    "pricing": "方案與價格"
+    "emailTemplates": "通知"
   },
   "errors": {
     "generic": "發生錯誤，請再試一次。",
@@ -68,11 +67,11 @@
   "placements": {
     "orderStatus": {
       "label": "訂單狀態頁面",
-      "details": "在顧客結帳後看到的訂單狀態頁面上顯示撤回表單。"
+      "details": "顧客會在結帳後以及透過訂單確認電子郵件前往此頁面。"
     },
     "storefront": {
       "label": "商店頁面",
-      "details": "在佈景主題中的獨立頁面上顯示撤回表單，讓顧客在訂單狀態頁面以外也能找到。"
+      "details": "將表單新增到你的佈景主題，例如新增到頁尾連結的頁面上。"
     }
   },
   "orderStatus": {
@@ -210,7 +209,7 @@
   "onboarding": {
     "pageTitle": "開始使用",
     "heading": "讓商店準備好處理歐盟撤回",
-    "intro_other": "完成以下 {{count}} 個步驟，為歐盟顧客提供合規的購買撤回方式。",
+    "intro_other": "完成以下 {{count}} 個步驟，讓歐盟顧客可以線上撤回訂單。",
     "stepBadge": "第 {{current}} 步，共 {{total}} 步",
     "completedToast": "設定已完成",
     "steps": {
@@ -220,7 +219,7 @@
       },
       "form": {
         "title": "撤回表單",
-        "description": "啟用表單"
+        "description": "啟用並選擇顯示位置"
       }
     },
     "actions": {
@@ -236,29 +235,28 @@
     },
     "welcome": {
       "heading": "歡迎使用 {{appName}}",
-      "setupTime": "約需 1 分鐘",
-      "law": "自 2026 年 6 月 19 日起，向歐盟顧客銷售商品的商店必須為每筆訂單提供兩步驟撤回方式 (歐盟指令 2023/2673 第 11a 條)。只有退貨政策是不夠的。",
-      "app": "{{appName}} 會在訂單狀態頁面、網路商店的頁面或兩者上新增撤回按鈕。它會處理兩步驟確認流程，並寄送必要的確認電子郵件。你可以在同一個地方管理所有申請。",
-      "imageAlt": "正在撤回訂單的顧客",
-      "requirementsHeading": "法律規定",
+      "law": "自 2026 年 6 月 19 日起，向歐盟顧客銷售商品的商店必須提供線上撤回訂單的方式。只有退貨政策是不夠的。",
+      "imageAlt": "{{appName}} 應用程式預覽",
+      "requirementsHeading": "應用程式涵蓋法律規定的內容",
       "requirements": {
-        "button": "標示清楚、方便顧客找到的撤回按鈕",
-        "twoStep": "兩步驟流程：顧客先送出撤回，再進行確認",
-        "email": "顧客可以保留的自動確認電子郵件"
+        "button": "標示清楚、容易找到的撤回按鈕",
+        "twoStep": "兩步驟表單：顧客先送出撤回，再進行確認",
+        "email": "自動寄給顧客的確認電子郵件",
+        "manage": "所有申請集中在一處，方便你追蹤和管理"
       },
-      "penaltyHeading": "未遵守規定的後果",
-      "penalty": "如果沒有撤回按鈕或按鈕無法使用，你可能會依各國法律受到處罰，顧客的撤回期也可能遠超過 {{days}} 天。",
       "disclaimer": "這是一般資訊，並非法律建議。"
     },
     "form": {
       "heading": "啟用撤回表單",
-      "body": "依照歐盟法律規定，顧客會先送出撤回，再於另一個步驟中確認。表單內含預設的法律文字。顧客可在收到商品後 {{days}}內撤回。",
+      "body": "表單已內含預設文字，可以直接使用。顧客可在 {{days}}內撤回。你可以隨時在「設定」中變更。",
       "switch": "啟用撤回表單",
-      "later": "你之後可以在「設定」中變更所有內容。",
+      "required": "請啟用撤回表單以完成設定。",
       "loadError": "無法載入表單設定。你可以現在完成設定，之後再到「設定」中啟用表單。",
       "saveError": "無法儲存表單選項。請再試一次，或略過這些選項完成設定，之後再到「設定」中設定。",
       "finishWithoutSaving": "不儲存並完成",
-      "placementError": "請至少選擇一個位置，或停用表單。"
+      "placementError": "請至少選擇一個顯示表單的位置。",
+      "blockError": "請為你選擇的每個位置新增應用程式區塊以完成設定。",
+      "placementDescription": "請至少選擇一項。"
     },
     "finishError": "無法完成設定，請再試一次。"
   },
@@ -1202,38 +1200,5 @@
     "request": "你希望新增什麼功能？",
     "requestPlaceholder": "請說明這項功能，以及它能如何幫助你的商店",
     "submit": "送出建議"
-  },
-  "pricing": {
-    "pageTitle": "方案與價格",
-    "pricePerMonth": "每月 {{price}}",
-    "currentPlan": "目前方案",
-    "choosePlan": "選擇 {{plan}}",
-    "switchedToast": "已切換至 {{plan}} 方案",
-    "plans": {
-      "free": {
-        "name": "Free",
-        "features": [
-          "每月最多 10 筆撤回申請",
-          "電子郵件通知"
-        ]
-      },
-      "starter": {
-        "name": "Starter",
-        "features": [
-          "無限撤回申請",
-          "自訂表單欄位",
-          "電子郵件通知"
-        ]
-      },
-      "pro": {
-        "name": "Pro",
-        "features": [
-          "包含 Starter 的所有功能",
-          "優先支援",
-          "自動退款"
-        ]
-      }
-    },
-    "switchError": "無法變更你的方案"
   }
 }

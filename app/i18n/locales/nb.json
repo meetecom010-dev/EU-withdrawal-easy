@@ -20,8 +20,7 @@
     "home": "Hjem",
     "withdrawalRequests": "Forespørsler",
     "formSetup": "Innstillinger",
-    "emailTemplates": "Varsler",
-    "pricing": "Priser"
+    "emailTemplates": "Varsler"
   },
   "errors": {
     "generic": "Noe gikk galt. Prøv igjen.",
@@ -69,11 +68,11 @@
   "placements": {
     "orderStatus": {
       "label": "Ordrestatusside",
-      "details": "Vis angreskjemaet på ordrestatussiden som kundene ser etter kassen."
+      "details": "Kundene kommer til denne siden etter kassen og fra ordrebekreftelsen på e-post."
     },
     "storefront": {
       "label": "Butikkside",
-      "details": "Vis angreskjemaet på en egen side i temaet ditt, slik at kundene finner det utenfor ordrestatussiden."
+      "details": "Legg til skjemaet i temaet ditt, for eksempel på en side som er lenket i bunnteksten."
     }
   },
   "orderStatus": {
@@ -213,8 +212,8 @@
   "onboarding": {
     "pageTitle": "Kom i gang",
     "heading": "Gjør butikken klar for angrerett i EU",
-    "intro_one": "Fullfør dette {{count}} trinnet for å gi EU-kundene dine en lovlig måte å angre et kjøp på.",
-    "intro_other": "Fullfør disse {{count}} trinnene for å gi EU-kundene dine en lovlig måte å angre et kjøp på.",
+    "intro_one": "Fullfør dette {{count}} trinnet, slik at EU-kunder kan angre en ordre på nett.",
+    "intro_other": "Fullfør disse {{count}} trinnene, slik at EU-kunder kan angre en ordre på nett.",
     "stepBadge": "Trinn {{current}} av {{total}}",
     "completedToast": "Oppsettet er fullført",
     "steps": {
@@ -224,7 +223,7 @@
       },
       "form": {
         "title": "Angreskjema",
-        "description": "Aktiver skjemaet"
+        "description": "Aktiver det og velg hvor det vises"
       }
     },
     "actions": {
@@ -240,29 +239,28 @@
     },
     "welcome": {
       "heading": "Velkommen til {{appName}}",
-      "setupTime": "Tar omtrent 1 minutt",
-      "law": "Siden 19. juni 2026 må butikker som selger til kunder i EU, tilby en måte å angre hver ordre på i 2 trinn (EU-direktiv 2023/2673, artikkel 11a). Det er ikke nok med bare en returpolicy.",
-      "app": "{{appName}} legger til en angreknapp på ordrestatussiden, en side i nettbutikken eller begge deler. Appen håndterer bekreftelsen i 2 trinn og sender den påkrevde bekreftelses-e-posten. Du administrerer alle forespørsler på ett sted.",
-      "imageAlt": "En kunde som angrer en ordre",
-      "requirementsHeading": "Hva loven krever",
+      "law": "Siden 19. juni 2026 må butikker som selger til kunder i EU, tilby en måte å angre en ordre på nett. Det er ikke nok med bare en returpolicy.",
+      "imageAlt": "Forhåndsvisning av {{appName}}",
+      "requirementsHeading": "Appen dekker det loven krever",
       "requirements": {
-        "button": "En tydelig merket angreknapp som kundene lett finner",
-        "twoStep": "En prosess i 2 trinn: kundene sender inn angringen og bekrefter den deretter",
-        "email": "En automatisk bekreftelses-e-post som kundene kan ta vare på"
+        "button": "En tydelig merket angreknapp som er lett å finne",
+        "twoStep": "Et skjema i 2 trinn: kundene sender inn angringen og bekrefter den deretter",
+        "email": "En bekreftelses-e-post som sendes automatisk til kunden",
+        "manage": "Alle forespørsler på ett sted, slik at du kan følge opp og administrere dem"
       },
-      "penaltyHeading": "Hva som skjer hvis du ikke følger reglene",
-      "penalty": "Hvis angreknappen mangler eller ikke fungerer, kan du risikere sanksjoner etter nasjonal lov, og kundene kan få mye lengre enn {{days}} dager på å angre.",
       "disclaimer": "Dette er generell informasjon, ikke juridisk rådgivning."
     },
     "form": {
       "heading": "Aktiver angreskjemaet",
-      "body": "Kundene sender inn angringen og bekrefter den i et eget trinn, slik EU-retten krever. Skjemaet har juridisk standardtekst. Kundene har {{days}} på å angre, regnet fra levering.",
+      "body": "Skjemaet er klart til bruk med standardtekst. Kundene har {{days}} på å angre. Du kan endre dette når som helst i Innstillinger.",
       "switch": "Aktiver angreskjema",
-      "later": "Du kan endre alt dette senere i Innstillinger.",
+      "required": "Aktiver angreskjemaet for å fullføre oppsettet.",
       "loadError": "Kunne ikke laste inn skjemainnstillingene. Du kan fullføre oppsettet nå og aktivere skjemaet senere i Innstillinger.",
       "saveError": "Kunne ikke lagre skjemavalgene. Prøv igjen, eller fullfør oppsettet uten dem og angi dem senere i Innstillinger.",
       "finishWithoutSaving": "Fullfør uten å lagre",
-      "placementError": "Velg minst ett sted, eller deaktiver skjemaet."
+      "placementError": "Velg minst ett sted der skjemaet skal vises.",
+      "blockError": "Legg til appblokken for hvert sted du valgte, for å fullføre oppsettet.",
+      "placementDescription": "Velg minst ett alternativ."
     },
     "finishError": "Kunne ikke fullføre oppsettet. Prøv igjen."
   },
@@ -1218,38 +1216,5 @@
     "request": "Hvilken funksjon ønsker du deg?",
     "requestPlaceholder": "Beskriv funksjonen og hvordan den ville hjelpe butikken din",
     "submit": "Send forslag"
-  },
-  "pricing": {
-    "pageTitle": "Priser",
-    "pricePerMonth": "{{price}} per måned",
-    "currentPlan": "Nåværende abonnement",
-    "choosePlan": "Velg {{plan}}",
-    "switchedToast": "Byttet til abonnementet {{plan}}",
-    "plans": {
-      "free": {
-        "name": "Free",
-        "features": [
-          "Opptil 10 angreforespørsler per måned",
-          "E-postvarsler"
-        ]
-      },
-      "starter": {
-        "name": "Starter",
-        "features": [
-          "Ubegrenset antall angreforespørsler",
-          "Egendefinerte skjemafelter",
-          "E-postvarsler"
-        ]
-      },
-      "pro": {
-        "name": "Pro",
-        "features": [
-          "Alt i Starter",
-          "Prioritert kundestøtte",
-          "Automatiske refusjoner"
-        ]
-      }
-    },
-    "switchError": "Kunne ikke endre abonnementet"
   }
 }

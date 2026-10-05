@@ -21,8 +21,7 @@
     "home": "Inicio",
     "withdrawalRequests": "Solicitudes",
     "formSetup": "Configuración",
-    "emailTemplates": "Notificaciones",
-    "pricing": "Precios"
+    "emailTemplates": "Notificaciones"
   },
   "errors": {
     "generic": "Se produjo un error. Inténtalo de nuevo.",
@@ -70,11 +69,11 @@
   "placements": {
     "orderStatus": {
       "label": "Página de estado del pedido",
-      "details": "Muestra el formulario de desistimiento en la página de estado del pedido que los clientes ven después del pago."
+      "details": "Los clientes llegan a esta página después del pago y desde el correo electrónico de confirmación del pedido."
     },
     "storefront": {
       "label": "Página de la tienda",
-      "details": "Muestra el formulario de desistimiento en una página propia de tu tema, para que los clientes lo encuentren fuera de la página de estado del pedido."
+      "details": "Agrega el formulario a tu tema, por ejemplo, en una página enlazada desde el pie de página."
     }
   },
   "orderStatus": {
@@ -216,9 +215,9 @@
   "onboarding": {
     "pageTitle": "Comenzar",
     "heading": "Prepara tu tienda para los desistimientos en la UE",
-    "intro_one": "Completa este {{count}} paso para ofrecer a tus clientes de la UE una forma conforme a la ley de desistir de una compra.",
-    "intro_other": "Completa estos {{count}} pasos para ofrecer a tus clientes de la UE una forma conforme a la ley de desistir de una compra.",
-    "intro_many": "Completa estos {{count}} pasos para ofrecer a tus clientes de la UE una forma conforme a la ley de desistir de una compra.",
+    "intro_one": "Completa este {{count}} paso para que tus clientes de la UE puedan desistir de un pedido en línea.",
+    "intro_other": "Completa estos {{count}} pasos para que tus clientes de la UE puedan desistir de un pedido en línea.",
+    "intro_many": "Completa estos {{count}} pasos para que tus clientes de la UE puedan desistir de un pedido en línea.",
     "stepBadge": "Paso {{current}} de {{total}}",
     "completedToast": "Configuración completada",
     "steps": {
@@ -228,7 +227,7 @@
       },
       "form": {
         "title": "Formulario de desistimiento",
-        "description": "Activa tu formulario"
+        "description": "Actívalo y elige dónde se muestra"
       }
     },
     "actions": {
@@ -244,29 +243,28 @@
     },
     "welcome": {
       "heading": "Te damos la bienvenida a {{appName}}",
-      "setupTime": "Tarda aproximadamente 1 minuto",
-      "law": "Desde el 19 de junio de 2026, las tiendas que venden a clientes de la UE deben ofrecer una forma de desistir de cada pedido en 2 pasos (Directiva UE 2023/2673, artículo 11 bis). Una política de devoluciones por sí sola no es suficiente.",
-      "app": "{{appName}} agrega un botón de desistimiento a tu página de estado del pedido, a una página de tu tienda online o a ambas. Gestiona la confirmación en 2 pasos y envía el correo electrónico de confirmación obligatorio. Puedes gestionar todas las solicitudes en un solo lugar.",
-      "imageAlt": "Un cliente desistiendo de un pedido",
-      "requirementsHeading": "Qué exige la ley",
+      "law": "Desde el 19 de junio de 2026, las tiendas que venden a clientes de la UE deben ofrecer una forma en línea de desistir de un pedido. Una política de devoluciones por sí sola no es suficiente.",
+      "imageAlt": "Vista previa de la app {{appName}}",
+      "requirementsHeading": "La app cubre lo que exige la ley",
       "requirements": {
-        "button": "Un botón de desistimiento claramente identificado que los clientes puedan encontrar fácilmente",
-        "twoStep": "Un proceso en 2 pasos: los clientes envían su desistimiento y luego lo confirman",
-        "email": "Un correo electrónico de confirmación automático que los clientes puedan conservar"
+        "button": "Un botón de desistimiento claramente identificado y fácil de encontrar",
+        "twoStep": "Un formulario en 2 pasos: los clientes envían su desistimiento y luego lo confirman",
+        "email": "Un correo electrónico de confirmación que se envía automáticamente al cliente",
+        "manage": "Todas las solicitudes en un solo lugar para que puedas hacer su seguimiento y gestionarlas"
       },
-      "penaltyHeading": "Qué pasa si no cumples",
-      "penalty": "Si falta el botón de desistimiento o no funciona, podrías enfrentarte a sanciones según la legislación nacional, y los clientes podrían tener mucho más de {{days}} días para desistir.",
       "disclaimer": "Esta es información general, no asesoramiento legal."
     },
     "form": {
       "heading": "Activa tu formulario de desistimiento",
-      "body": "Los clientes envían su desistimiento y luego lo confirman en un paso aparte, como exige la legislación de la UE. El formulario incluye un texto legal predeterminado. Los clientes tienen {{days}} para desistir, a partir de la entrega.",
+      "body": "El formulario está listo para usarse con un texto predeterminado. Los clientes tienen {{days}} para desistir. Puedes cambiarlo en cualquier momento en Configuración.",
       "switch": "Activar el formulario de desistimiento",
-      "later": "Puedes cambiar todo esto más tarde en Configuración.",
+      "required": "Activa el formulario de desistimiento para terminar la configuración.",
       "loadError": "No se pudo cargar la configuración de tu formulario. Puedes finalizar la configuración ahora y activar el formulario más tarde en Configuración.",
       "saveError": "No se pudieron guardar tus opciones del formulario. Inténtalo de nuevo, o finaliza la configuración sin ellas y defínelas más tarde en Configuración.",
       "finishWithoutSaving": "Finalizar sin guardar",
-      "placementError": "Selecciona al menos un lugar o desactiva el formulario."
+      "placementError": "Selecciona al menos un lugar donde mostrar el formulario.",
+      "blockError": "Agrega el bloque de aplicación en cada lugar que seleccionaste para terminar la configuración.",
+      "placementDescription": "Selecciona al menos una opción."
     },
     "finishError": "No se pudo finalizar la configuración. Inténtalo de nuevo."
   },
@@ -1234,38 +1232,5 @@
     "request": "¿Qué función te gustaría?",
     "requestPlaceholder": "Describe la función y cómo ayudaría a tu tienda",
     "submit": "Enviar solicitud"
-  },
-  "pricing": {
-    "pageTitle": "Precios",
-    "pricePerMonth": "{{price}} al mes",
-    "currentPlan": "Plan actual",
-    "choosePlan": "Elegir {{plan}}",
-    "switchedToast": "Cambiaste al plan {{plan}}",
-    "plans": {
-      "free": {
-        "name": "Free",
-        "features": [
-          "Hasta 10 solicitudes de desistimiento al mes",
-          "Notificaciones por correo electrónico"
-        ]
-      },
-      "starter": {
-        "name": "Starter",
-        "features": [
-          "Solicitudes de desistimiento ilimitadas",
-          "Campos de formulario personalizados",
-          "Notificaciones por correo electrónico"
-        ]
-      },
-      "pro": {
-        "name": "Pro",
-        "features": [
-          "Todo lo del plan Starter",
-          "Soporte prioritario",
-          "Reembolsos automatizados"
-        ]
-      }
-    },
-    "switchError": "No se pudo cambiar tu plan"
   }
 }

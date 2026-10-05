@@ -4,7 +4,8 @@ import connectDB from "../../db.server";
 import Shop from "../../models/shop.server";
 import { getOrCreateShop } from "../../services/shop.server";
 
-const ALLOWED_PLAN_FIELDS = ["name", "price", "currency", "interval"];
+// The plan is not writable here: billing is Shopify App Pricing (free only
+// for now), so the merchant's plan comes from Shopify, never from the client.
 const ALLOWED_SHOP_FIELDS = [
   "onboardingCompleted",
   "orderStatusBlockAdded",
@@ -18,29 +19,14 @@ export const loader = async ({ request }) => {
   return Response.json({ shop });
 };
 
-// PUT/PATCH /api/shop -> update the plan
-// DELETE /api/shop -> reset the plan back to Free
+// PUT/PATCH /api/shop -> update onboarding / extension status flags
 export const action = async ({ request }) => {
   const { session } = await authenticate.admin(request);
   await connectDB();
 
-  if (request.method === "DELETE") {
-    const shop = await Shop.findOneAndUpdate(
-      { shop: session.shop },
-      { $set: { plan: {} } },
-      { new: true, upsert: true, setDefaultsOnInsert: true },
-    );
-    return Response.json({ shop });
-  }
-
   if (request.method === "PUT" || request.method === "PATCH") {
     const body = await request.json();
     const update = {};
-    for (const field of ALLOWED_PLAN_FIELDS) {
-      if (body?.[field] !== undefined) {
-        update[`plan.${field}`] = body[field];
-      }
-    }
     for (const field of ALLOWED_SHOP_FIELDS) {
       if (body?.[field] !== undefined) {
         update[field] = body[field];

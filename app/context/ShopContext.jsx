@@ -48,7 +48,7 @@ export function ShopProvider({ shop: shopFromLoader, children }) {
   const value = useMemo(
     () => ({
       shop,
-      // Call after a mutation (e.g. changing the plan, finishing onboarding)
+      // Call after a mutation (e.g. finishing onboarding)
       // to re-run the _app.jsx loader and refresh the shared shop data.
       refreshShop: () => revalidator.revalidate(),
       patchShop,

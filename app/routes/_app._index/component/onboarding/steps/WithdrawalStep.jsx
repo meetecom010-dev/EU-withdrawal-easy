@@ -3,17 +3,24 @@ import { useTranslation } from "react-i18next";
 import { DEFAULT_WITHDRAWAL_DAYS } from "../../../../../constants";
 import OrderStatusExtensionStatus from "../../../../../components/OrderStatusExtensionStatus";
 import StandalonePageStatus from "../../../../../components/StandalonePageStatus";
+import { useShop } from "../../../../../context/ShopContext";
 
 export default function WithdrawalStep({
   enabled,
   onEnabledChange,
+  formRequiredError,
   showOnOrderStatus,
   onShowOnOrderStatusChange,
   showOnStandalonePage,
   onShowOnStandalonePageChange,
   placementError,
+  blockError,
 }) {
   const { t } = useTranslation();
+  const { orderStatusBlockAdded } = useShop();
+  // Built for Shopify doesn't allow two banners next to each other, so the
+  // storefront setup banner waits until the order status block is added.
+  const orderStatusSetupPending = showOnOrderStatus && !orderStatusBlockAdded;
 
   return (
     <s-stack direction="block" gap="base">
@@ -27,6 +34,7 @@ export default function WithdrawalStep({
       <s-checkbox
         label={t("onboarding.form.switch")}
         checked={enabled}
+        error={formRequiredError ? t("onboarding.form.required") : undefined}
         onChange={(event) => onEnabledChange(event.target.checked)}
       ></s-checkbox>
 
@@ -36,9 +44,7 @@ export default function WithdrawalStep({
             {/* Same copy as the setup guide on Home, so both flows read as
                 the same feature. */}
             <s-heading>{t("home.setupGuide.steps.form.placementHeading")}</s-heading>
-            <s-paragraph color="subdued">
-              {t("home.setupGuide.steps.form.placementDescription")}
-            </s-paragraph>
+            <s-paragraph color="subdued">{t("onboarding.form.placementDescription")}</s-paragraph>
             <s-checkbox
               label={t("placements.orderStatus.label")}
               details={t("placements.orderStatus.details")}
@@ -52,15 +58,14 @@ export default function WithdrawalStep({
               checked={showOnStandalonePage}
               onChange={(event) => onShowOnStandalonePageChange(event.target.checked)}
             ></s-checkbox>
-            {showOnStandalonePage && <StandalonePageStatus />}
+            {showOnStandalonePage && !orderStatusSetupPending && <StandalonePageStatus />}
             {placementError && (
               <s-text tone="critical">{t("onboarding.form.placementError")}</s-text>
             )}
+            {blockError && <s-text tone="critical">{t("onboarding.form.blockError")}</s-text>}
           </s-stack>
         </s-box>
       )}
-
-      <s-paragraph color="subdued">{t("onboarding.form.later")}</s-paragraph>
     </s-stack>
   );
 }

@@ -20,8 +20,7 @@
     "home": "Home",
     "withdrawalRequests": "Requests",
     "formSetup": "Settings",
-    "emailTemplates": "Notifications",
-    "pricing": "Pricing"
+    "emailTemplates": "Notifications"
   },
   "errors": {
     "generic": "Something went wrong. Try again.",
@@ -69,11 +68,11 @@
   "placements": {
     "orderStatus": {
       "label": "Order status page",
-      "details": "Show the withdrawal form on the order status page that customers see after checkout."
+      "details": "Customers reach this page after checkout and from their order confirmation email."
     },
     "storefront": {
       "label": "Storefront page",
-      "details": "Show the withdrawal form on its own page in your theme, so customers can find it outside the order status page."
+      "details": "Add the form to your theme, for example on a page linked in your footer."
     }
   },
   "orderStatus": {
@@ -213,8 +212,8 @@
   "onboarding": {
     "pageTitle": "Get started",
     "heading": "Get your store ready for EU withdrawals",
-    "intro_one": "Complete this {{count}} step to give your EU customers a compliant way to withdraw from a purchase.",
-    "intro_other": "Complete these {{count}} steps to give your EU customers a compliant way to withdraw from a purchase.",
+    "intro_one": "Finish this {{count}} step so EU customers can withdraw from an order online.",
+    "intro_other": "Finish these {{count}} steps so EU customers can withdraw from an order online.",
     "stepBadge": "Step {{current}} of {{total}}",
     "completedToast": "Setup completed",
     "steps": {
@@ -224,7 +223,7 @@
       },
       "form": {
         "title": "Withdrawal form",
-        "description": "Turn on your form"
+        "description": "Turn it on and choose where it shows"
       }
     },
     "actions": {
@@ -240,29 +239,28 @@
     },
     "welcome": {
       "heading": "Welcome to {{appName}}",
-      "setupTime": "Takes about 1 minute",
-      "law": "Since June 19, 2026, stores that sell to EU customers must offer a 2-step way to withdraw from every order (EU Directive 2023/2673, Article 11a). A returns policy alone isn't enough.",
-      "app": "{{appName}} adds a withdrawal button to your order status page, a page in your online store, or both. It handles the 2-step confirmation and sends the required confirmation email. You can manage all requests in one place.",
-      "imageAlt": "A customer withdrawing from an order",
-      "requirementsHeading": "What the law requires",
+      "law": "Since June 19, 2026, stores that sell to EU customers must offer an online way to withdraw from an order. A returns policy alone isn't enough.",
+      "imageAlt": "{{appName}} app preview",
+      "requirementsHeading": "The app covers what the law requires",
       "requirements": {
-        "button": "A clearly labeled withdrawal button that customers can easily find",
-        "twoStep": "A 2-step process: customers submit their withdrawal, then confirm it",
-        "email": "An automatic confirmation email that customers can keep"
+        "button": "A withdrawal button that's clearly labeled and easy to find",
+        "twoStep": "A 2-step form: customers submit their withdrawal, then confirm it",
+        "email": "A confirmation email sent to the customer automatically",
+        "manage": "All requests in one place, so you can track and manage them"
       },
-      "penaltyHeading": "What happens if you don't comply",
-      "penalty": "If the withdrawal button is missing or doesn't work, you may face penalties under national law, and customers may get much longer than {{days}} days to withdraw.",
       "disclaimer": "This is general information, not legal advice."
     },
     "form": {
       "heading": "Turn on your withdrawal form",
-      "body": "Customers submit their withdrawal, then confirm it in a separate step, as EU law requires. The form comes with default legal wording. Customers get {{days}} to withdraw, starting from delivery.",
+      "body": "The form is ready to use with default wording. Customers get {{days}} to withdraw. You can change this anytime in Settings.",
       "switch": "Turn on withdrawal form",
-      "later": "You can change all of this later in Settings.",
+      "required": "Turn on the withdrawal form to finish setup.",
       "loadError": "Couldn't load your form settings. You can finish setup now and turn on the form later in Settings.",
       "saveError": "Couldn't save your form choices. Try again, or finish setup without them and set them later in Settings.",
       "finishWithoutSaving": "Finish without saving",
-      "placementError": "Select at least one place, or turn off the form."
+      "placementError": "Select at least one place to show the form.",
+      "blockError": "Add the app block for each place you selected to finish setup.",
+      "placementDescription": "Select at least one."
     },
     "finishError": "Couldn't finish setup. Try again."
   },
@@ -1218,38 +1216,5 @@
     "request": "What feature would you like?",
     "requestPlaceholder": "Describe the feature and how it would help your store",
     "submit": "Send request"
-  },
-  "pricing": {
-    "pageTitle": "Pricing",
-    "pricePerMonth": "{{price}} per month",
-    "currentPlan": "Current plan",
-    "choosePlan": "Choose {{plan}}",
-    "switchedToast": "Switched to the {{plan}} plan",
-    "plans": {
-      "free": {
-        "name": "Free",
-        "features": [
-          "Up to 10 withdrawal requests per month",
-          "Email notifications"
-        ]
-      },
-      "starter": {
-        "name": "Starter",
-        "features": [
-          "Unlimited withdrawal requests",
-          "Custom form fields",
-          "Email notifications"
-        ]
-      },
-      "pro": {
-        "name": "Pro",
-        "features": [
-          "Everything in Starter",
-          "Priority support",
-          "Automated refunds"
-        ]
-      }
-    },
-    "switchError": "Couldn't change your plan"
   }
 }

@@ -22,8 +22,7 @@
     "home": "Strona główna",
     "withdrawalRequests": "Zgłoszenia",
     "formSetup": "Ustawienia",
-    "emailTemplates": "Powiadomienia",
-    "pricing": "Cennik"
+    "emailTemplates": "Powiadomienia"
   },
   "errors": {
     "generic": "Coś poszło nie tak. Spróbuj ponownie.",
@@ -71,11 +70,11 @@
   "placements": {
     "orderStatus": {
       "label": "Strona statusu zamówienia",
-      "details": "Pokazuj formularz odstąpienia na stronie statusu zamówienia, którą klienci widzą po złożeniu zamówienia."
+      "details": "Klienci trafiają na tę stronę po złożeniu zamówienia oraz z e-maila z potwierdzeniem zamówienia."
     },
     "storefront": {
       "label": "Strona sklepu",
-      "details": "Pokazuj formularz odstąpienia na osobnej stronie w motywie, aby klienci mogli go znaleźć poza stroną statusu zamówienia."
+      "details": "Dodaj formularz do motywu, na przykład na stronie, do której prowadzi link w stopce."
     }
   },
   "orderStatus": {
@@ -219,10 +218,10 @@
   "onboarding": {
     "pageTitle": "Pierwsze kroki",
     "heading": "Przygotuj sklep na odstąpienia od umowy w UE",
-    "intro_one": "Wykonaj ten {{count}} krok, aby zapewnić klientom z UE zgodny z prawem sposób odstąpienia od zakupu.",
-    "intro_few": "Wykonaj te {{count}} kroki, aby zapewnić klientom z UE zgodny z prawem sposób odstąpienia od zakupu.",
-    "intro_many": "Wykonaj tych {{count}} kroków, aby zapewnić klientom z UE zgodny z prawem sposób odstąpienia od zakupu.",
-    "intro_other": "Wykonaj te kroki ({{count}}), aby zapewnić klientom z UE zgodny z prawem sposób odstąpienia od zakupu.",
+    "intro_one": "Wykonaj ten {{count}} krok, aby klienci z UE mogli odstąpić od zamówienia online.",
+    "intro_few": "Wykonaj te {{count}} kroki, aby klienci z UE mogli odstąpić od zamówienia online.",
+    "intro_many": "Wykonaj tych {{count}} kroków, aby klienci z UE mogli odstąpić od zamówienia online.",
+    "intro_other": "Wykonaj te kroki ({{count}}), aby klienci z UE mogli odstąpić od zamówienia online.",
     "stepBadge": "Krok {{current}} z {{total}}",
     "completedToast": "Konfiguracja ukończona",
     "steps": {
@@ -232,7 +231,7 @@
       },
       "form": {
         "title": "Formularz odstąpienia",
-        "description": "Włącz formularz"
+        "description": "Włącz go i wybierz, gdzie się wyświetla"
       }
     },
     "actions": {
@@ -248,29 +247,28 @@
     },
     "welcome": {
       "heading": "Witaj w {{appName}}",
-      "setupTime": "Zajmuje około 1 minuty",
-      "law": "Od 19 czerwca 2026 r. sklepy sprzedające klientom z UE muszą zapewnić 2-etapowy sposób odstąpienia od każdego zamówienia (dyrektywa UE 2023/2673, art. 11a). Sama polityka zwrotów nie wystarczy.",
-      "app": "{{appName}} dodaje przycisk odstąpienia do strony statusu zamówienia, strony w sklepie internetowym lub obu tych miejsc. Obsługuje 2-etapowe potwierdzenie i wysyła wymagany e-mail z potwierdzeniem. Wszystkimi zgłoszeniami zarządzasz w jednym miejscu.",
-      "imageAlt": "Klient odstępujący od zamówienia",
-      "requirementsHeading": "Czego wymaga prawo",
+      "law": "Od 19 czerwca 2026 r. sklepy sprzedające klientom z UE muszą zapewnić możliwość odstąpienia od zamówienia online. Sama polityka zwrotów nie wystarczy.",
+      "imageAlt": "Podgląd aplikacji {{appName}}",
+      "requirementsHeading": "Aplikacja zapewnia to, czego wymaga prawo",
       "requirements": {
-        "button": "Wyraźnie oznaczonego przycisku odstąpienia, który klienci łatwo znajdą",
-        "twoStep": "Procesu 2-etapowego: klienci wysyłają odstąpienie, a następnie je potwierdzają",
-        "email": "Automatycznego e-maila z potwierdzeniem, który klienci mogą zachować"
+        "button": "Wyraźnie oznaczony przycisk odstąpienia, który łatwo znaleźć",
+        "twoStep": "Formularz 2-etapowy: klienci wysyłają odstąpienie, a następnie je potwierdzają",
+        "email": "E-mail z potwierdzeniem wysyłany automatycznie do klienta",
+        "manage": "Wszystkie zgłoszenia w jednym miejscu, aby łatwo je śledzić i nimi zarządzać"
       },
-      "penaltyHeading": "Co się stanie, jeśli nie spełnisz wymogów",
-      "penalty": "Jeśli brakuje przycisku odstąpienia lub nie działa, grożą Ci sankcje zgodnie z prawem krajowym, a klienci mogą mieć znacznie więcej niż {{days}} dni na odstąpienie.",
       "disclaimer": "To informacje ogólne, a nie porada prawna."
     },
     "form": {
       "heading": "Włącz formularz odstąpienia",
-      "body": "Klienci wysyłają odstąpienie, a następnie potwierdzają je w osobnym kroku, zgodnie z wymogami prawa UE. Formularz zawiera domyślne treści prawne. Klienci mają {{days}} na odstąpienie, licząc od dostawy.",
+      "body": "Formularz jest gotowy do użycia z domyślnymi treściami. Klienci mają {{days}} na odstąpienie. Możesz to zmienić w dowolnym momencie w Ustawieniach.",
       "switch": "Włącz formularz odstąpienia",
-      "later": "Wszystko to możesz później zmienić w Ustawieniach.",
+      "required": "Włącz formularz odstąpienia, aby zakończyć konfigurację.",
       "loadError": "Nie udało się wczytać ustawień formularza. Możesz teraz zakończyć konfigurację i włączyć formularz później w Ustawieniach.",
       "saveError": "Nie udało się zapisać wyborów dotyczących formularza. Spróbuj ponownie albo zakończ konfigurację bez nich i ustaw je później w Ustawieniach.",
       "finishWithoutSaving": "Zakończ bez zapisywania",
-      "placementError": "Wybierz co najmniej jedno miejsce lub wyłącz formularz."
+      "placementError": "Wybierz co najmniej jedno miejsce, w którym ma się wyświetlać formularz.",
+      "blockError": "Dodaj blok aplikacji w każdym wybranym miejscu, aby zakończyć konfigurację.",
+      "placementDescription": "Wybierz co najmniej jedną opcję."
     },
     "finishError": "Nie udało się zakończyć konfiguracji. Spróbuj ponownie."
   },
@@ -1250,38 +1248,5 @@
     "request": "Jakiej funkcji potrzebujesz?",
     "requestPlaceholder": "Opisz funkcję i to, jak pomogłaby Twojemu sklepowi",
     "submit": "Wyślij propozycję"
-  },
-  "pricing": {
-    "pageTitle": "Cennik",
-    "pricePerMonth": "{{price}} miesięcznie",
-    "currentPlan": "Obecny plan",
-    "choosePlan": "Wybierz {{plan}}",
-    "switchedToast": "Zmieniono plan na {{plan}}",
-    "plans": {
-      "free": {
-        "name": "Free",
-        "features": [
-          "Do 10 zgłoszeń odstąpienia miesięcznie",
-          "Powiadomienia e-mail"
-        ]
-      },
-      "starter": {
-        "name": "Starter",
-        "features": [
-          "Nieograniczona liczba zgłoszeń odstąpienia",
-          "Niestandardowe pola formularza",
-          "Powiadomienia e-mail"
-        ]
-      },
-      "pro": {
-        "name": "Pro",
-        "features": [
-          "Wszystko z planu Starter",
-          "Priorytetowa pomoc",
-          "Automatyczne zwroty środków"
-        ]
-      }
-    },
-    "switchError": "Nie udało się zmienić planu"
   }
 }

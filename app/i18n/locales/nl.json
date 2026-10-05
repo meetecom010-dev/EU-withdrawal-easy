@@ -20,8 +20,7 @@
     "home": "Start",
     "withdrawalRequests": "Verzoeken",
     "formSetup": "Instellingen",
-    "emailTemplates": "Meldingen",
-    "pricing": "Prijzen"
+    "emailTemplates": "Meldingen"
   },
   "errors": {
     "generic": "Er is iets misgegaan. Probeer het opnieuw.",
@@ -69,11 +68,11 @@
   "placements": {
     "orderStatus": {
       "label": "Bestelstatuspagina",
-      "details": "Toon het herroepingsformulier op de bestelstatuspagina die klanten na het afrekenen zien."
+      "details": "Klanten komen op deze pagina na het afrekenen en via de e-mail met hun orderbevestiging."
     },
     "storefront": {
       "label": "Winkelpagina",
-      "details": "Toon het herroepingsformulier op een eigen pagina in je thema, zodat klanten het ook buiten de bestelstatuspagina kunnen vinden."
+      "details": "Voeg het formulier toe aan je thema, bijvoorbeeld op een pagina die in je footer is gelinkt."
     }
   },
   "orderStatus": {
@@ -213,8 +212,8 @@
   "onboarding": {
     "pageTitle": "Aan de slag",
     "heading": "Maak je winkel klaar voor EU-herroepingen",
-    "intro_one": "Voltooi deze {{count}} stap om je EU-klanten een conforme manier te bieden om een aankoop te herroepen.",
-    "intro_other": "Voltooi deze {{count}} stappen om je EU-klanten een conforme manier te bieden om een aankoop te herroepen.",
+    "intro_one": "Voltooi deze {{count}} stap zodat EU-klanten een bestelling online kunnen herroepen.",
+    "intro_other": "Voltooi deze {{count}} stappen zodat EU-klanten een bestelling online kunnen herroepen.",
     "stepBadge": "Stap {{current}} van {{total}}",
     "completedToast": "Configuratie voltooid",
     "steps": {
@@ -224,7 +223,7 @@
       },
       "form": {
         "title": "Herroepingsformulier",
-        "description": "Je formulier inschakelen"
+        "description": "Schakel het in en kies waar het wordt getoond"
       }
     },
     "actions": {
@@ -240,29 +239,28 @@
     },
     "welcome": {
       "heading": "Welkom bij {{appName}}",
-      "setupTime": "Duurt ongeveer 1 minuut",
-      "law": "Sinds 19 juni 2026 moeten winkels die aan EU-klanten verkopen voor elke bestelling een herroepingsmogelijkheid in 2 stappen aanbieden (EU-richtlijn 2023/2673, artikel 11 bis). Alleen een retourbeleid is niet genoeg.",
-      "app": "{{appName}} voegt een herroepingsknop toe aan je bestelstatuspagina, een pagina in je webwinkel of beide. De app regelt de bevestiging in 2 stappen en verstuurt de verplichte bevestigingsmail. Je beheert alle verzoeken op één plek.",
-      "imageAlt": "Een klant herroept een bestelling",
-      "requirementsHeading": "Wat de wet vereist",
+      "law": "Sinds 19 juni 2026 moeten winkels die aan EU-klanten verkopen een online manier bieden om een bestelling te herroepen. Alleen een retourbeleid is niet genoeg.",
+      "imageAlt": "Voorbeeld van de app {{appName}}",
+      "requirementsHeading": "De app regelt wat de wet vereist",
       "requirements": {
-        "button": "Een duidelijk gelabelde herroepingsknop die klanten makkelijk kunnen vinden",
-        "twoStep": "Een proces in 2 stappen: klanten dienen hun herroeping in en bevestigen die daarna",
-        "email": "Een automatische bevestigingsmail die klanten kunnen bewaren"
+        "button": "Een duidelijk gelabelde herroepingsknop die makkelijk te vinden is",
+        "twoStep": "Een formulier in 2 stappen: klanten dienen hun herroeping in en bevestigen die daarna",
+        "email": "Een bevestigingsmail die automatisch naar de klant wordt verstuurd",
+        "manage": "Alle verzoeken op één plek, zodat je ze kunt volgen en beheren"
       },
-      "penaltyHeading": "Wat er gebeurt als je je niet aan de regels houdt",
-      "penalty": "Als de herroepingsknop ontbreekt of niet werkt, riskeer je sancties volgens nationaal recht en kunnen klanten veel langer dan {{days}} dagen de tijd krijgen om te herroepen.",
       "disclaimer": "Dit is algemene informatie, geen juridisch advies."
     },
     "form": {
       "heading": "Je herroepingsformulier inschakelen",
-      "body": "Klanten dienen hun herroeping in en bevestigen die in een aparte stap, zoals de EU-wetgeving vereist. Het formulier bevat standaard juridische teksten. Klanten hebben vanaf de levering {{days}} om te herroepen.",
+      "body": "Het formulier is direct klaar voor gebruik met standaardteksten. Klanten hebben {{days}} om te herroepen. Je kunt dit altijd wijzigen in Instellingen.",
       "switch": "Herroepingsformulier inschakelen",
-      "later": "Je kunt dit allemaal later wijzigen in Instellingen.",
+      "required": "Schakel het herroepingsformulier in om de configuratie te voltooien.",
       "loadError": "Je formulierinstellingen kunnen niet worden geladen. Je kunt de configuratie nu voltooien en het formulier later inschakelen in Instellingen.",
       "saveError": "Je formulierkeuzes kunnen niet worden opgeslagen. Probeer het opnieuw, of voltooi de configuratie zonder deze keuzes en stel ze later in via Instellingen.",
       "finishWithoutSaving": "Voltooien zonder opslaan",
-      "placementError": "Selecteer minstens één plek of schakel het formulier uit."
+      "placementError": "Selecteer minstens één plek om het formulier te tonen.",
+      "blockError": "Voeg het app-blok toe voor elke plek die je hebt geselecteerd om de configuratie te voltooien.",
+      "placementDescription": "Selecteer er minstens één."
     },
     "finishError": "De configuratie kan niet worden voltooid. Probeer het opnieuw."
   },
@@ -1218,38 +1216,5 @@
     "request": "Welke functie zou je graag zien?",
     "requestPlaceholder": "Beschrijf de functie en hoe die je winkel zou helpen",
     "submit": "Verzoek verzenden"
-  },
-  "pricing": {
-    "pageTitle": "Prijzen",
-    "pricePerMonth": "{{price}} per maand",
-    "currentPlan": "Huidig abonnement",
-    "choosePlan": "{{plan}} kiezen",
-    "switchedToast": "Overgestapt naar het abonnement {{plan}}",
-    "plans": {
-      "free": {
-        "name": "Free",
-        "features": [
-          "Tot 10 herroepingsverzoeken per maand",
-          "E-mailmeldingen"
-        ]
-      },
-      "starter": {
-        "name": "Starter",
-        "features": [
-          "Onbeperkt herroepingsverzoeken",
-          "Aangepaste formuliervelden",
-          "E-mailmeldingen"
-        ]
-      },
-      "pro": {
-        "name": "Pro",
-        "features": [
-          "Alles uit Starter",
-          "Support met voorrang",
-          "Geautomatiseerde terugbetalingen"
-        ]
-      }
-    },
-    "switchError": "Je abonnement kan niet worden gewijzigd"
   }
 }

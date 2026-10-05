@@ -20,8 +20,7 @@
     "home": "Ana sayfa",
     "withdrawalRequests": "Talepler",
     "formSetup": "Ayarlar",
-    "emailTemplates": "Bildirimler",
-    "pricing": "Fiyatlandırma"
+    "emailTemplates": "Bildirimler"
   },
   "errors": {
     "generic": "Bir sorun oluştu. Tekrar deneyin.",
@@ -69,11 +68,11 @@
   "placements": {
     "orderStatus": {
       "label": "Sipariş durumu sayfası",
-      "details": "Cayma formunu, müşterilerin ödemeden sonra gördüğü sipariş durumu sayfasında gösterin."
+      "details": "Müşteriler bu sayfaya ödemeden sonra ve sipariş onayı e-postasından ulaşır."
     },
     "storefront": {
       "label": "Mağaza sayfası",
-      "details": "Müşterilerin sipariş durumu sayfası dışında da bulabilmesi için cayma formunu temanızdaki ayrı bir sayfada gösterin."
+      "details": "Formu temanıza ekleyin; örneğin altbilgide bağlantısı olan bir sayfaya."
     }
   },
   "orderStatus": {
@@ -213,8 +212,8 @@
   "onboarding": {
     "pageTitle": "Başlayın",
     "heading": "Mağazanızı AB cayma taleplerine hazırlayın",
-    "intro_one": "AB'deki müşterilerinize bir satın alımdan cayma için yasalara uygun bir yol sunmak üzere bu {{count}} adımı tamamlayın.",
-    "intro_other": "AB'deki müşterilerinize bir satın alımdan cayma için yasalara uygun bir yol sunmak üzere bu {{count}} adımı tamamlayın.",
+    "intro_one": "AB'deki müşterilerin bir siparişten online olarak cayabilmesi için bu {{count}} adımı tamamlayın.",
+    "intro_other": "AB'deki müşterilerin bir siparişten online olarak cayabilmesi için bu {{count}} adımı tamamlayın.",
     "stepBadge": "Adım {{current}}/{{total}}",
     "completedToast": "Kurulum tamamlandı",
     "steps": {
@@ -224,7 +223,7 @@
       },
       "form": {
         "title": "Cayma formu",
-        "description": "Formunuzu etkinleştirin"
+        "description": "Etkinleştirin ve nerede gösterileceğini seçin"
       }
     },
     "actions": {
@@ -240,29 +239,28 @@
     },
     "welcome": {
       "heading": "{{appName}} uygulamasına hoş geldiniz",
-      "setupTime": "Yaklaşık 1 dakika sürer",
-      "law": "19 Haziran 2026'dan itibaren AB'deki müşterilere satış yapan mağazalar, her sipariş için 2 adımlı bir cayma yolu sunmak zorundadır (AB Direktifi 2023/2673, Madde 11a). Yalnızca bir iade politikası yeterli değildir.",
-      "app": "{{appName}}, sipariş durumu sayfanıza, online mağazanızdaki bir sayfaya veya her ikisine bir cayma düğmesi ekler. 2 adımlı onayı yönetir ve zorunlu onay e-postasını gönderir. Tüm talepleri tek bir yerden yönetebilirsiniz.",
-      "imageAlt": "Bir siparişten cayan müşteri",
-      "requirementsHeading": "Yasanın gerektirdikleri",
+      "law": "19 Haziran 2026'dan itibaren AB'deki müşterilere satış yapan mağazalar, bir siparişten online olarak caymak için bir yol sunmak zorundadır. Yalnızca bir iade politikası yeterli değildir.",
+      "imageAlt": "{{appName}} uygulama önizlemesi",
+      "requirementsHeading": "Uygulama yasanın gerektirdiklerini karşılar",
       "requirements": {
-        "button": "Müşterilerin kolayca bulabileceği, açıkça etiketlenmiş bir cayma düğmesi",
-        "twoStep": "2 adımlı bir süreç: müşteriler caymalarını gönderir ve ardından onaylar",
-        "email": "Müşterilerin saklayabileceği otomatik bir onay e-postası"
+        "button": "Açıkça etiketlenmiş, kolayca bulunabilen bir cayma düğmesi",
+        "twoStep": "2 adımlı bir form: müşteriler caymalarını gönderir ve ardından onaylar",
+        "email": "Müşteriye otomatik olarak gönderilen bir onay e-postası",
+        "manage": "Tüm talepler tek bir yerde; takip edip yönetebilirsiniz"
       },
-      "penaltyHeading": "Uymazsanız ne olur?",
-      "penalty": "Cayma düğmesi yoksa veya çalışmıyorsa ulusal mevzuata göre yaptırımlarla karşılaşabilirsiniz ve müşteriler caymak için {{days}} günden çok daha uzun süreye sahip olabilir.",
       "disclaimer": "Bu bilgiler geneldir, hukuki tavsiye değildir."
     },
     "form": {
       "heading": "Cayma formunuzu etkinleştirin",
-      "body": "Müşteriler, AB mevzuatının gerektirdiği şekilde caymalarını gönderir ve ardından ayrı bir adımda onaylar. Form varsayılan yasal metinlerle birlikte gelir. Müşterilerin teslimattan itibaren caymak için {{days}} süresi vardır.",
+      "body": "Form, varsayılan metinlerle kullanıma hazırdır. Müşterilerin caymak için {{days}} süresi vardır. Bunu istediğiniz zaman Ayarlar'dan değiştirebilirsiniz.",
       "switch": "Cayma formunu etkinleştir",
-      "later": "Bunların tümünü daha sonra Ayarlar'dan değiştirebilirsiniz.",
+      "required": "Kurulumu tamamlamak için cayma formunu etkinleştirin.",
       "loadError": "Form ayarlarınız yüklenemedi. Kurulumu şimdi bitirebilir ve formu daha sonra Ayarlar'dan etkinleştirebilirsiniz.",
       "saveError": "Form seçimleriniz kaydedilemedi. Tekrar deneyin veya kurulumu bunlar olmadan bitirip daha sonra Ayarlar'dan belirleyin.",
       "finishWithoutSaving": "Kaydetmeden bitir",
-      "placementError": "En az bir yer seçin veya formu devre dışı bırakın."
+      "placementError": "Formun gösterileceği en az bir yer seçin.",
+      "blockError": "Kurulumu tamamlamak için seçtiğiniz her yere uygulama bloğunu ekleyin.",
+      "placementDescription": "En az bir seçenek belirleyin."
     },
     "finishError": "Kurulum bitirilemedi. Tekrar deneyin."
   },
@@ -1218,38 +1216,5 @@
     "request": "Hangi özelliği istersiniz?",
     "requestPlaceholder": "Özelliği ve mağazanıza nasıl yardımcı olacağını açıklayın",
     "submit": "Talebi gönder"
-  },
-  "pricing": {
-    "pageTitle": "Fiyatlandırma",
-    "pricePerMonth": "Aylık {{price}}",
-    "currentPlan": "Mevcut plan",
-    "choosePlan": "{{plan}} planını seç",
-    "switchedToast": "{{plan}} planına geçildi",
-    "plans": {
-      "free": {
-        "name": "Free",
-        "features": [
-          "Ayda en fazla 10 cayma talebi",
-          "E-posta bildirimleri"
-        ]
-      },
-      "starter": {
-        "name": "Starter",
-        "features": [
-          "Sınırsız cayma talebi",
-          "Özel form alanları",
-          "E-posta bildirimleri"
-        ]
-      },
-      "pro": {
-        "name": "Pro",
-        "features": [
-          "Starter'daki her şey",
-          "Öncelikli destek",
-          "Otomatik para iadeleri"
-        ]
-      }
-    },
-    "switchError": "Planınız değiştirilemedi"
   }
 }

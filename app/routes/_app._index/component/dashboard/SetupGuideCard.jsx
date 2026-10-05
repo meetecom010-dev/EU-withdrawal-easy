@@ -156,7 +156,7 @@ export default function SetupGuideCard({
                                 (step.useSwitch ? (
                                   <s-switch
                                     label={step.checkboxLabel ?? step.label}
-                                    checked={step.complete}
+                                    checked={step.checked ?? step.complete}
                                     onChange={(event) =>
                                       step.onToggle(event.currentTarget.checked)
                                     }
@@ -164,13 +164,13 @@ export default function SetupGuideCard({
                                 ) : (
                                   <s-checkbox
                                     label={step.checkboxLabel ?? step.label}
-                                    checked={step.complete}
+                                    checked={step.checked ?? step.complete}
                                     onChange={(event) =>
                                       step.onToggle(event.currentTarget.checked)
                                     }
                                   ></s-checkbox>
                                 ))}
-                              {step.placementOptions && step.complete && (
+                              {step.placementOptions && (step.checked ?? step.complete) && (
                                 <s-box padding="base" borderWidth="base" borderRadius="base">
                                   <s-stack direction="block" gap="small-200">
                                     <s-heading>{step.placementHeading}</s-heading>

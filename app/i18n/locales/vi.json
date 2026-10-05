@@ -19,8 +19,7 @@
     "home": "Trang chủ",
     "withdrawalRequests": "Yêu cầu",
     "formSetup": "Cài đặt",
-    "emailTemplates": "Thông báo",
-    "pricing": "Bảng giá"
+    "emailTemplates": "Thông báo"
   },
   "errors": {
     "generic": "Đã xảy ra lỗi. Hãy thử lại.",
@@ -68,11 +67,11 @@
   "placements": {
     "orderStatus": {
       "label": "Trang trạng thái đơn hàng",
-      "details": "Hiển thị biểu mẫu rút lại trên trang trạng thái đơn hàng mà khách hàng thấy sau khi thanh toán."
+      "details": "Khách hàng truy cập trang này sau khi thanh toán và từ email xác nhận đơn hàng."
     },
     "storefront": {
       "label": "Trang cửa hàng",
-      "details": "Hiển thị biểu mẫu rút lại trên một trang riêng trong chủ đề để khách hàng có thể tìm thấy biểu mẫu ngoài trang trạng thái đơn hàng."
+      "details": "Thêm biểu mẫu vào chủ đề của bạn, ví dụ trên một trang được liên kết ở chân trang."
     }
   },
   "orderStatus": {
@@ -210,7 +209,7 @@
   "onboarding": {
     "pageTitle": "Bắt đầu",
     "heading": "Chuẩn bị cửa hàng cho việc rút lại tại EU",
-    "intro_other": "Hoàn tất {{count}} bước này để cung cấp cho khách hàng tại EU cách rút lại giao dịch mua theo đúng quy định.",
+    "intro_other": "Hoàn tất {{count}} bước này để khách hàng tại EU có thể rút lại đơn hàng trực tuyến.",
     "stepBadge": "Bước {{current}}/{{total}}",
     "completedToast": "Đã hoàn tất thiết lập",
     "steps": {
@@ -220,7 +219,7 @@
       },
       "form": {
         "title": "Biểu mẫu rút lại",
-        "description": "Bật biểu mẫu"
+        "description": "Bật và chọn nơi hiển thị"
       }
     },
     "actions": {
@@ -236,29 +235,28 @@
     },
     "welcome": {
       "heading": "Chào mừng bạn đến với {{appName}}",
-      "setupTime": "Mất khoảng 1 phút",
-      "law": "Kể từ ngày 19 tháng 6 năm 2026, các cửa hàng bán cho khách hàng tại EU phải cung cấp cách rút lại 2 bước cho mọi đơn hàng (Chỉ thị EU 2023/2673, Điều 11a). Chỉ có chính sách trả hàng là chưa đủ.",
-      "app": "{{appName}} thêm nút rút lại vào trang trạng thái đơn hàng, một trang trong cửa hàng trực tuyến hoặc cả hai. Ứng dụng xử lý bước xác nhận 2 bước và gửi email xác nhận bắt buộc. Bạn có thể quản lý mọi yêu cầu tại một nơi.",
-      "imageAlt": "Khách hàng đang rút lại một đơn hàng",
-      "requirementsHeading": "Yêu cầu của pháp luật",
+      "law": "Kể từ ngày 19 tháng 6 năm 2026, các cửa hàng bán cho khách hàng tại EU phải cung cấp cách rút lại đơn hàng trực tuyến. Chỉ có chính sách trả hàng là chưa đủ.",
+      "imageAlt": "Bản xem trước ứng dụng {{appName}}",
+      "requirementsHeading": "Ứng dụng đáp ứng những gì pháp luật yêu cầu",
       "requirements": {
-        "button": "Nút rút lại có nhãn rõ ràng để khách hàng dễ dàng tìm thấy",
-        "twoStep": "Quy trình 2 bước: khách hàng gửi yêu cầu rút lại rồi xác nhận",
-        "email": "Email xác nhận tự động mà khách hàng có thể lưu giữ"
+        "button": "Nút rút lại có nhãn rõ ràng và dễ tìm",
+        "twoStep": "Biểu mẫu 2 bước: khách hàng gửi yêu cầu rút lại rồi xác nhận",
+        "email": "Email xác nhận được gửi tự động cho khách hàng",
+        "manage": "Tất cả yêu cầu ở một nơi để bạn theo dõi và quản lý"
       },
-      "penaltyHeading": "Điều gì xảy ra nếu bạn không tuân thủ",
-      "penalty": "Nếu thiếu nút rút lại hoặc nút không hoạt động, bạn có thể bị xử phạt theo luật quốc gia và khách hàng có thể có thời hạn rút lại dài hơn {{days}} ngày rất nhiều.",
       "disclaimer": "Đây là thông tin chung, không phải tư vấn pháp lý."
     },
     "form": {
       "heading": "Bật biểu mẫu rút lại",
-      "body": "Khách hàng gửi yêu cầu rút lại rồi xác nhận ở một bước riêng, theo quy định của pháp luật EU. Biểu mẫu có sẵn nội dung pháp lý mặc định. Khách hàng có {{days}} để rút lại, tính từ ngày giao hàng.",
+      "body": "Biểu mẫu đã sẵn sàng sử dụng với nội dung mặc định. Khách hàng có {{days}} để rút lại. Bạn có thể thay đổi điều này bất cứ lúc nào trong Cài đặt.",
       "switch": "Bật biểu mẫu rút lại",
-      "later": "Bạn có thể thay đổi tất cả những điều này sau trong Cài đặt.",
+      "required": "Bật biểu mẫu rút lại để hoàn tất thiết lập.",
       "loadError": "Không thể tải cài đặt biểu mẫu. Bạn có thể hoàn tất thiết lập ngay bây giờ và bật biểu mẫu sau trong Cài đặt.",
       "saveError": "Không thể lưu các lựa chọn cho biểu mẫu. Hãy thử lại, hoặc hoàn tất thiết lập mà không lưu và đặt lại sau trong Cài đặt.",
       "finishWithoutSaving": "Hoàn tất mà không lưu",
-      "placementError": "Chọn ít nhất một vị trí hoặc tắt biểu mẫu."
+      "placementError": "Chọn ít nhất một nơi để hiển thị biểu mẫu.",
+      "blockError": "Thêm khối ứng dụng cho từng nơi bạn đã chọn để hoàn tất thiết lập.",
+      "placementDescription": "Chọn ít nhất một tùy chọn."
     },
     "finishError": "Không thể hoàn tất thiết lập. Hãy thử lại."
   },
@@ -1202,38 +1200,5 @@
     "request": "Bạn muốn có tính năng nào?",
     "requestPlaceholder": "Mô tả tính năng và cách tính năng đó giúp ích cho cửa hàng của bạn",
     "submit": "Gửi đề xuất"
-  },
-  "pricing": {
-    "pageTitle": "Bảng giá",
-    "pricePerMonth": "{{price}} mỗi tháng",
-    "currentPlan": "Gói hiện tại",
-    "choosePlan": "Chọn {{plan}}",
-    "switchedToast": "Đã chuyển sang gói {{plan}}",
-    "plans": {
-      "free": {
-        "name": "Free",
-        "features": [
-          "Tối đa 10 yêu cầu rút lại mỗi tháng",
-          "Thông báo qua email"
-        ]
-      },
-      "starter": {
-        "name": "Starter",
-        "features": [
-          "Không giới hạn yêu cầu rút lại",
-          "Trường biểu mẫu tùy chỉnh",
-          "Thông báo qua email"
-        ]
-      },
-      "pro": {
-        "name": "Pro",
-        "features": [
-          "Mọi tính năng của gói Starter",
-          "Hỗ trợ ưu tiên",
-          "Hoàn tiền tự động"
-        ]
-      }
-    },
-    "switchError": "Không thể thay đổi gói của bạn"
   }
 }

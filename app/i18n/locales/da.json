@@ -20,8 +20,7 @@
     "home": "Start",
     "withdrawalRequests": "Anmodninger",
     "formSetup": "Indstillinger",
-    "emailTemplates": "Notifikationer",
-    "pricing": "Priser"
+    "emailTemplates": "Notifikationer"
   },
   "errors": {
     "generic": "Noget gik galt. Prøv igen.",
@@ -69,11 +68,11 @@
   "placements": {
     "orderStatus": {
       "label": "Ordrestatusside",
-      "details": "Vis fortrydelsesformularen på ordrestatussiden, som kunderne ser efter betalingen."
+      "details": "Kunderne kommer til denne side efter betalingen og via deres ordrebekræftelse på mail."
     },
     "storefront": {
       "label": "Butiksside",
-      "details": "Vis fortrydelsesformularen på en separat side i dit tema, så kunderne kan finde den uden for ordrestatussiden."
+      "details": "Føj formularen til dit tema, f.eks. på en side, der er linket til i din footer."
     }
   },
   "orderStatus": {
@@ -213,8 +212,8 @@
   "onboarding": {
     "pageTitle": "Kom i gang",
     "heading": "Gør din butik klar til fortrydelser i EU",
-    "intro_one": "Fuldfør dette {{count}} trin for at give dine EU-kunder en lovlig måde at fortryde et køb på.",
-    "intro_other": "Fuldfør disse {{count}} trin for at give dine EU-kunder en lovlig måde at fortryde et køb på.",
+    "intro_one": "Fuldfør dette {{count}} trin, så EU-kunder kan fortryde en ordre online.",
+    "intro_other": "Fuldfør disse {{count}} trin, så EU-kunder kan fortryde en ordre online.",
     "stepBadge": "Trin {{current}} af {{total}}",
     "completedToast": "Opsætningen er fuldført",
     "steps": {
@@ -224,7 +223,7 @@
       },
       "form": {
         "title": "Fortrydelsesformular",
-        "description": "Aktivér din formular"
+        "description": "Aktivér den, og vælg, hvor den vises"
       }
     },
     "actions": {
@@ -240,29 +239,28 @@
     },
     "welcome": {
       "heading": "Velkommen til {{appName}}",
-      "setupTime": "Tager cirka 1 minut",
-      "law": "Siden 19. juni 2026 skal butikker, der sælger til kunder i EU, tilbyde en måde at fortryde hver ordre på i 2 trin (EU-direktiv 2023/2673, artikel 11a). En returpolitik alene er ikke nok.",
-      "app": "{{appName}} tilføjer en fortrydelsesknap til din ordrestatusside, en side i din webshop eller begge dele. Appen håndterer bekræftelsen i 2 trin og sender den påkrævede bekræftelsesmail. Du kan administrere alle anmodninger ét sted.",
-      "imageAlt": "En kunde fortryder en ordre",
-      "requirementsHeading": "Hvad loven kræver",
+      "law": "Siden 19. juni 2026 skal butikker, der sælger til kunder i EU, tilbyde en måde at fortryde en ordre på online. En returpolitik alene er ikke nok.",
+      "imageAlt": "Forhåndsvisning af {{appName}}",
+      "requirementsHeading": "Appen dækker det, loven kræver",
       "requirements": {
-        "button": "En tydeligt mærket fortrydelsesknap, som kunderne nemt kan finde",
-        "twoStep": "En proces i 2 trin: kunderne indsender deres fortrydelse og bekræfter den derefter",
-        "email": "En automatisk bekræftelsesmail, som kunderne kan gemme"
+        "button": "En tydeligt mærket fortrydelsesknap, som er nem at finde",
+        "twoStep": "En formular i 2 trin: kunderne indsender deres fortrydelse og bekræfter den derefter",
+        "email": "En bekræftelsesmail, der automatisk sendes til kunden",
+        "manage": "Alle anmodninger samlet ét sted, så du kan følge og administrere dem"
       },
-      "penaltyHeading": "Hvad der sker, hvis du ikke overholder reglerne",
-      "penalty": "Hvis fortrydelsesknappen mangler eller ikke virker, kan du risikere sanktioner efter national lovgivning, og kunderne kan få meget længere end {{days}} dage til at fortryde.",
       "disclaimer": "Dette er generel information, ikke juridisk rådgivning."
     },
     "form": {
       "heading": "Aktivér din fortrydelsesformular",
-      "body": "Kunderne indsender deres fortrydelse og bekræfter den derefter i et separat trin, som EU-lovgivningen kræver. Formularen indeholder juridisk standardtekst. Kunderne har {{days}} til at fortryde, regnet fra levering.",
+      "body": "Formularen er klar til brug med standardtekst. Kunderne har {{days}} til at fortryde. Du kan ændre det når som helst i Indstillinger.",
       "switch": "Aktivér fortrydelsesformular",
-      "later": "Du kan ændre alt dette senere i Indstillinger.",
+      "required": "Aktivér fortrydelsesformularen for at fuldføre opsætningen.",
       "loadError": "Dine formularindstillinger kunne ikke indlæses. Du kan afslutte opsætningen nu og aktivere formularen senere i Indstillinger.",
       "saveError": "Dine formularvalg kunne ikke gemmes. Prøv igen, eller afslut opsætningen uden dem, og angiv dem senere i Indstillinger.",
       "finishWithoutSaving": "Afslut uden at gemme",
-      "placementError": "Vælg mindst ét sted, eller deaktiver formularen."
+      "placementError": "Vælg mindst ét sted, hvor formularen skal vises.",
+      "blockError": "Tilføj appblokken for hvert valgt sted for at fuldføre opsætningen.",
+      "placementDescription": "Vælg mindst én."
     },
     "finishError": "Opsætningen kunne ikke afsluttes. Prøv igen."
   },
@@ -1218,38 +1216,5 @@
     "request": "Hvilken funktion ønsker du?",
     "requestPlaceholder": "Beskriv funktionen, og hvordan den ville hjælpe din butik",
     "submit": "Send forslag"
-  },
-  "pricing": {
-    "pageTitle": "Priser",
-    "pricePerMonth": "{{price}} pr. måned",
-    "currentPlan": "Nuværende abonnement",
-    "choosePlan": "Vælg {{plan}}",
-    "switchedToast": "Skiftet til abonnementet {{plan}}",
-    "plans": {
-      "free": {
-        "name": "Free",
-        "features": [
-          "Op til 10 fortrydelsesanmodninger om måneden",
-          "E-mailnotifikationer"
-        ]
-      },
-      "starter": {
-        "name": "Starter",
-        "features": [
-          "Ubegrænsede fortrydelsesanmodninger",
-          "Tilpassede formularfelter",
-          "E-mailnotifikationer"
-        ]
-      },
-      "pro": {
-        "name": "Pro",
-        "features": [
-          "Alt i Starter",
-          "Prioriteret support",
-          "Automatiske refunderinger"
-        ]
-      }
-    },
-    "switchError": "Dit abonnement kunne ikke ændres"
   }
 }

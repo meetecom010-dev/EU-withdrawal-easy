@@ -21,8 +21,7 @@
     "home": "Home",
     "withdrawalRequests": "Richieste",
     "formSetup": "Impostazioni",
-    "emailTemplates": "Notifiche",
-    "pricing": "Prezzi"
+    "emailTemplates": "Notifiche"
   },
   "errors": {
     "generic": "Si è verificato un errore. Riprova.",
@@ -70,11 +69,11 @@
   "placements": {
     "orderStatus": {
       "label": "Pagina di stato dell'ordine",
-      "details": "Mostra il modulo di recesso nella pagina di stato dell'ordine che i clienti vedono dopo il checkout."
+      "details": "I clienti raggiungono questa pagina dopo il checkout e dall'email di conferma dell'ordine."
     },
     "storefront": {
       "label": "Pagina del negozio",
-      "details": "Mostra il modulo di recesso in una pagina dedicata del tuo tema, così i clienti possono trovarlo anche al di fuori della pagina di stato dell'ordine."
+      "details": "Aggiungi il modulo al tuo tema, ad esempio in una pagina collegata nel footer."
     }
   },
   "orderStatus": {
@@ -216,9 +215,9 @@
   "onboarding": {
     "pageTitle": "Inizia",
     "heading": "Prepara il tuo negozio ai recessi nell'UE",
-    "intro_one": "Completa questo {{count}} passaggio per offrire ai tuoi clienti UE un modo conforme per recedere da un acquisto.",
-    "intro_other": "Completa questi {{count}} passaggi per offrire ai tuoi clienti UE un modo conforme per recedere da un acquisto.",
-    "intro_many": "Completa questi {{count}} passaggi per offrire ai tuoi clienti UE un modo conforme per recedere da un acquisto.",
+    "intro_one": "Completa questo {{count}} passaggio per consentire ai clienti UE di recedere da un ordine online.",
+    "intro_other": "Completa questi {{count}} passaggi per consentire ai clienti UE di recedere da un ordine online.",
+    "intro_many": "Completa questi {{count}} passaggi per consentire ai clienti UE di recedere da un ordine online.",
     "stepBadge": "Passaggio {{current}} di {{total}}",
     "completedToast": "Configurazione completata",
     "steps": {
@@ -228,7 +227,7 @@
       },
       "form": {
         "title": "Modulo di recesso",
-        "description": "Attiva il modulo"
+        "description": "Attivalo e scegli dove mostrarlo"
       }
     },
     "actions": {
@@ -244,29 +243,28 @@
     },
     "welcome": {
       "heading": "Ti diamo il benvenuto in {{appName}}",
-      "setupTime": "Richiede circa 1 minuto",
-      "law": "Dal 19 giugno 2026, i negozi che vendono a clienti dell'UE devono offrire un modo per recedere da ogni ordine in 2 passaggi (Direttiva UE 2023/2673, articolo 11 bis). Una politica di reso da sola non è sufficiente.",
-      "app": "{{appName}} aggiunge un pulsante di recesso alla pagina di stato dell'ordine, a una pagina del tuo negozio online o a entrambe. Gestisce la conferma in 2 passaggi e invia l'email di conferma obbligatoria. Puoi gestire tutte le richieste in un unico posto.",
-      "imageAlt": "Un cliente che recede da un ordine",
-      "requirementsHeading": "Cosa richiede la legge",
+      "law": "Dal 19 giugno 2026, i negozi che vendono a clienti dell'UE devono offrire un modo online per recedere da un ordine. Una politica di reso da sola non è sufficiente.",
+      "imageAlt": "Anteprima dell'app {{appName}}",
+      "requirementsHeading": "L'app copre ciò che richiede la legge",
       "requirements": {
-        "button": "Un pulsante di recesso chiaramente etichettato che i clienti possano trovare facilmente",
-        "twoStep": "Un processo in 2 passaggi: i clienti inviano il recesso e poi lo confermano",
-        "email": "Un'email di conferma automatica che i clienti possano conservare"
+        "button": "Un pulsante di recesso chiaramente etichettato e facile da trovare",
+        "twoStep": "Un modulo in 2 passaggi: i clienti inviano il recesso e poi lo confermano",
+        "email": "Un'email di conferma inviata automaticamente al cliente",
+        "manage": "Tutte le richieste in un unico posto, per monitorarle e gestirle"
       },
-      "penaltyHeading": "Cosa succede se non rispetti la normativa",
-      "penalty": "Se il pulsante di recesso manca o non funziona, rischi sanzioni secondo la legge nazionale e i clienti potrebbero avere molto più di {{days}} giorni per recedere.",
       "disclaimer": "Queste sono informazioni generali, non una consulenza legale."
     },
     "form": {
       "heading": "Attiva il modulo di recesso",
-      "body": "I clienti inviano il recesso e poi lo confermano in un passaggio separato, come richiesto dalla normativa UE. Il modulo include un testo legale predefinito. I clienti hanno {{days}} per recedere, a partire dalla consegna.",
+      "body": "Il modulo è pronto all'uso con un testo predefinito. I clienti hanno {{days}} per recedere. Puoi modificarlo in qualsiasi momento nelle Impostazioni.",
       "switch": "Attiva il modulo di recesso",
-      "later": "Puoi modificare tutto questo in seguito nelle Impostazioni.",
+      "required": "Attiva il modulo di recesso per completare la configurazione.",
       "loadError": "Impossibile caricare le impostazioni del modulo. Puoi completare la configurazione ora e attivare il modulo in seguito nelle Impostazioni.",
       "saveError": "Impossibile salvare le scelte del modulo. Riprova, oppure completa la configurazione senza salvarle e impostale in seguito nelle Impostazioni.",
       "finishWithoutSaving": "Completa senza salvare",
-      "placementError": "Seleziona almeno una posizione oppure disattiva il modulo."
+      "placementError": "Seleziona almeno un punto in cui mostrare il modulo.",
+      "blockError": "Aggiungi il blocco dell'app per ogni punto selezionato per completare la configurazione.",
+      "placementDescription": "Seleziona almeno un'opzione."
     },
     "finishError": "Impossibile completare la configurazione. Riprova."
   },
@@ -1234,38 +1232,5 @@
     "request": "Quale funzionalità ti piacerebbe?",
     "requestPlaceholder": "Descrivi la funzionalità e come aiuterebbe il tuo negozio",
     "submit": "Invia richiesta"
-  },
-  "pricing": {
-    "pageTitle": "Prezzi",
-    "pricePerMonth": "{{price}} al mese",
-    "currentPlan": "Piano attuale",
-    "choosePlan": "Scegli {{plan}}",
-    "switchedToast": "Passaggio al piano {{plan}} effettuato",
-    "plans": {
-      "free": {
-        "name": "Free",
-        "features": [
-          "Fino a 10 richieste di recesso al mese",
-          "Notifiche via email"
-        ]
-      },
-      "starter": {
-        "name": "Starter",
-        "features": [
-          "Richieste di recesso illimitate",
-          "Campi del modulo personalizzati",
-          "Notifiche via email"
-        ]
-      },
-      "pro": {
-        "name": "Pro",
-        "features": [
-          "Tutto ciò che include Starter",
-          "Assistenza prioritaria",
-          "Rimborsi automatici"
-        ]
-      }
-    },
-    "switchError": "Impossibile cambiare il piano"
   }
 }

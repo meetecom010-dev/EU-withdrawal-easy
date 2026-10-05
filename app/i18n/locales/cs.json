@@ -22,8 +22,7 @@
     "home": "Úvod",
     "withdrawalRequests": "Žádosti",
     "formSetup": "Nastavení",
-    "emailTemplates": "Oznámení",
-    "pricing": "Ceník"
+    "emailTemplates": "Oznámení"
   },
   "errors": {
     "generic": "Něco se pokazilo. Zkuste to znovu.",
@@ -71,11 +70,11 @@
   "placements": {
     "orderStatus": {
       "label": "Stránka stavu objednávky",
-      "details": "Zobrazit formulář pro odstoupení na stránce stavu objednávky, kterou zákazníci vidí po dokončení objednávky."
+      "details": "Zákazníci se na tuto stránku dostanou po dokončení objednávky a z e-mailu s potvrzením objednávky."
     },
     "storefront": {
       "label": "Stránka obchodu",
-      "details": "Zobrazit formulář pro odstoupení na samostatné stránce v šabloně, aby ho zákazníci našli i mimo stránku stavu objednávky."
+      "details": "Přidejte formulář do šablony, například na stránku s odkazem v zápatí."
     }
   },
   "orderStatus": {
@@ -219,10 +218,10 @@
   "onboarding": {
     "pageTitle": "Začínáme",
     "heading": "Připravte svůj obchod na odstoupení od smlouvy v EU",
-    "intro_one": "Dokončete tento {{count}} krok a nabídněte zákazníkům z EU zákonný způsob, jak odstoupit od nákupu.",
-    "intro_few": "Dokončete tyto {{count}} kroky a nabídněte zákazníkům z EU zákonný způsob, jak odstoupit od nákupu.",
-    "intro_many": "Dokončete tyto kroky ({{count}}) a nabídněte zákazníkům z EU zákonný způsob, jak odstoupit od nákupu.",
-    "intro_other": "Dokončete těchto {{count}} kroků a nabídněte zákazníkům z EU zákonný způsob, jak odstoupit od nákupu.",
+    "intro_one": "Dokončete tento {{count}} krok, aby zákazníci z EU mohli od objednávky odstoupit online.",
+    "intro_few": "Dokončete tyto {{count}} kroky, aby zákazníci z EU mohli od objednávky odstoupit online.",
+    "intro_many": "Dokončete tyto kroky ({{count}}), aby zákazníci z EU mohli od objednávky odstoupit online.",
+    "intro_other": "Dokončete těchto {{count}} kroků, aby zákazníci z EU mohli od objednávky odstoupit online.",
     "stepBadge": "Krok {{current}} z {{total}}",
     "completedToast": "Nastavení dokončeno",
     "steps": {
@@ -232,7 +231,7 @@
       },
       "form": {
         "title": "Formulář pro odstoupení",
-        "description": "Zapněte formulář"
+        "description": "Zapněte ho a vyberte, kde se zobrazí"
       }
     },
     "actions": {
@@ -248,29 +247,28 @@
     },
     "welcome": {
       "heading": "Vítejte v aplikaci {{appName}}",
-      "setupTime": "Zabere asi 1 minutu",
-      "law": "Od 19. června 2026 musí obchody, které prodávají zákazníkům v EU, nabízet u každé objednávky dvoukrokový způsob odstoupení od smlouvy (směrnice EU 2023/2673, článek 11a). Samotné zásady vracení zboží nestačí.",
-      "app": "{{appName}} přidá tlačítko pro odstoupení na stránku stavu objednávky, na stránku vašeho e-shopu nebo na obě. Zajistí potvrzení ve 2 krocích a odešle povinný potvrzovací e-mail. Všechny žádosti spravujete na jednom místě.",
-      "imageAlt": "Zákazník odstupuje od objednávky",
-      "requirementsHeading": "Co zákon vyžaduje",
+      "law": "Od 19. června 2026 musí obchody, které prodávají zákazníkům v EU, nabízet online způsob odstoupení od objednávky. Samotné zásady vracení zboží nestačí.",
+      "imageAlt": "Náhled aplikace {{appName}}",
+      "requirementsHeading": "Aplikace pokrývá, co zákon vyžaduje",
       "requirements": {
         "button": "Jasně označené tlačítko pro odstoupení, které zákazníci snadno najdou",
-        "twoStep": "Proces ve 2 krocích: zákazník odstoupení odešle a poté ho potvrdí",
-        "email": "Automatický potvrzovací e-mail, který si zákazník může uschovat"
+        "twoStep": "Formulář ve 2 krocích: zákazník odstoupení odešle a poté ho potvrdí",
+        "email": "Potvrzovací e-mail, který se zákazníkovi odešle automaticky",
+        "manage": "Všechny žádosti na jednom místě, abyste je mohli sledovat a spravovat"
       },
-      "penaltyHeading": "Co se stane, pokud požadavky nesplníte",
-      "penalty": "Pokud tlačítko pro odstoupení chybí nebo nefunguje, hrozí vám sankce podle vnitrostátního práva a zákazníci mohou mít na odstoupení mnohem déle než {{days}} dní.",
       "disclaimer": "Jde o obecné informace, nikoli o právní poradenství."
     },
     "form": {
       "heading": "Zapněte formulář pro odstoupení",
-      "body": "Zákazníci odstoupení odešlou a potom ho potvrdí v samostatném kroku, jak vyžaduje právo EU. Formulář obsahuje výchozí právní texty. Zákazníci mají na odstoupení {{days}} od doručení.",
+      "body": "Formulář je připravený k použití s výchozími texty. Zákazníci mají na odstoupení {{days}}. Kdykoli to můžete změnit v Nastavení.",
       "switch": "Zapnout formulář pro odstoupení",
-      "later": "To vše můžete později změnit v Nastavení.",
+      "required": "Pro dokončení nastavení zapněte formulář pro odstoupení.",
       "loadError": "Nastavení formuláře se nepodařilo načíst. Nastavení můžete dokončit teď a formulář zapnout později v Nastavení.",
       "saveError": "Volby formuláře se nepodařilo uložit. Zkuste to znovu, nebo nastavení dokončete bez nich a nastavte je později v Nastavení.",
       "finishWithoutSaving": "Dokončit bez uložení",
-      "placementError": "Vyberte alespoň jedno místo, nebo formulář vypněte."
+      "placementError": "Vyberte alespoň jedno místo, kde se formulář zobrazí.",
+      "blockError": "Pro dokončení nastavení přidejte blok aplikace na každé vybrané místo.",
+      "placementDescription": "Vyberte alespoň jednu možnost."
     },
     "finishError": "Nastavení se nepodařilo dokončit. Zkuste to znovu."
   },
@@ -1250,38 +1248,5 @@
     "request": "Jakou funkci byste chtěli?",
     "requestPlaceholder": "Popište funkci a jak by vašemu obchodu pomohla",
     "submit": "Odeslat návrh"
-  },
-  "pricing": {
-    "pageTitle": "Ceník",
-    "pricePerMonth": "{{price}} měsíčně",
-    "currentPlan": "Aktuální tarif",
-    "choosePlan": "Zvolit {{plan}}",
-    "switchedToast": "Přepnuto na tarif {{plan}}",
-    "plans": {
-      "free": {
-        "name": "Free",
-        "features": [
-          "Až 10 žádostí o odstoupení měsíčně",
-          "E-mailová oznámení"
-        ]
-      },
-      "starter": {
-        "name": "Starter",
-        "features": [
-          "Neomezený počet žádostí o odstoupení",
-          "Vlastní pole formuláře",
-          "E-mailová oznámení"
-        ]
-      },
-      "pro": {
-        "name": "Pro",
-        "features": [
-          "Vše z tarifu Starter",
-          "Prioritní podpora",
-          "Automatické vracení peněz"
-        ]
-      }
-    },
-    "switchError": "Tarif se nepodařilo změnit"
   }
 }

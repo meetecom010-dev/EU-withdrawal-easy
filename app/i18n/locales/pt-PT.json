@@ -21,8 +21,7 @@
     "home": "Início",
     "withdrawalRequests": "Pedidos",
     "formSetup": "Definições",
-    "emailTemplates": "Notificações",
-    "pricing": "Preços"
+    "emailTemplates": "Notificações"
   },
   "errors": {
     "generic": "Ocorreu um erro. Tente novamente.",
@@ -70,11 +69,11 @@
   "placements": {
     "orderStatus": {
       "label": "Página de estado da encomenda",
-      "details": "Mostre o formulário de livre resolução na página de estado da encomenda que os clientes veem após o checkout."
+      "details": "Os clientes chegam a esta página após o checkout e a partir do e-mail de confirmação da encomenda."
     },
     "storefront": {
       "label": "Página da loja",
-      "details": "Mostre o formulário de livre resolução numa página própria do seu tema, para que os clientes o encontrem fora da página de estado da encomenda."
+      "details": "Adicione o formulário ao seu tema, por exemplo, numa página com ligação no rodapé."
     }
   },
   "orderStatus": {
@@ -216,9 +215,9 @@
   "onboarding": {
     "pageTitle": "Começar",
     "heading": "Prepare a sua loja para a livre resolução na UE",
-    "intro_one": "Conclua este {{count}} passo para oferecer aos seus clientes da UE uma forma conforme de exercer o direito de livre resolução.",
-    "intro_other": "Conclua estes {{count}} passos para oferecer aos seus clientes da UE uma forma conforme de exercer o direito de livre resolução.",
-    "intro_many": "Conclua estes {{count}} passos para oferecer aos seus clientes da UE uma forma conforme de exercer o direito de livre resolução.",
+    "intro_one": "Conclua este {{count}} passo para que os seus clientes da UE possam exercer a livre resolução de uma encomenda online.",
+    "intro_other": "Conclua estes {{count}} passos para que os seus clientes da UE possam exercer a livre resolução de uma encomenda online.",
+    "intro_many": "Conclua estes {{count}} passos para que os seus clientes da UE possam exercer a livre resolução de uma encomenda online.",
     "stepBadge": "Passo {{current}} de {{total}}",
     "completedToast": "Configuração concluída",
     "steps": {
@@ -228,7 +227,7 @@
       },
       "form": {
         "title": "Formulário de livre resolução",
-        "description": "Ativar o formulário"
+        "description": "Ative-o e escolha onde é apresentado"
       }
     },
     "actions": {
@@ -244,29 +243,28 @@
     },
     "welcome": {
       "heading": "Bem-vindo(a) ao {{appName}}",
-      "setupTime": "Demora cerca de 1 minuto",
-      "law": "Desde 19 de junho de 2026, as lojas que vendem a clientes da UE têm de disponibilizar uma forma de exercer a livre resolução de cada encomenda em 2 passos (Diretiva UE 2023/2673, artigo 11.º-A). Uma política de devoluções, por si só, não é suficiente.",
-      "app": "O {{appName}} adiciona um botão de livre resolução à página de estado da encomenda, a uma página da sua loja online ou a ambas. Trata da confirmação em 2 passos e envia o e-mail de confirmação obrigatório. Pode gerir todos os pedidos num único local.",
-      "imageAlt": "Um cliente a exercer a livre resolução de uma encomenda",
-      "requirementsHeading": "O que a lei exige",
+      "law": "Desde 19 de junho de 2026, as lojas que vendem a clientes da UE têm de disponibilizar uma forma online de exercer a livre resolução de uma encomenda. Uma política de devoluções, por si só, não é suficiente.",
+      "imageAlt": "Pré-visualização da aplicação {{appName}}",
+      "requirementsHeading": "A aplicação cobre o que a lei exige",
       "requirements": {
-        "button": "Um botão de livre resolução claramente identificado que os clientes encontrem facilmente",
-        "twoStep": "Um processo em 2 passos: os clientes enviam a livre resolução e depois confirmam-na",
-        "email": "Um e-mail de confirmação automático que os clientes possam guardar"
+        "button": "Um botão de livre resolução claramente identificado e fácil de encontrar",
+        "twoStep": "Um formulário em 2 passos: os clientes enviam a livre resolução e depois confirmam-na",
+        "email": "Um e-mail de confirmação enviado automaticamente ao cliente",
+        "manage": "Todos os pedidos num só lugar, para os acompanhar e gerir"
       },
-      "penaltyHeading": "O que acontece se não cumprir",
-      "penalty": "Se o botão de livre resolução não existir ou não funcionar, pode sofrer sanções ao abrigo da lei nacional, e os clientes podem ter muito mais do que {{days}} dias para exercer a livre resolução.",
       "disclaimer": "Esta é informação geral, não aconselhamento jurídico."
     },
     "form": {
       "heading": "Ativar o formulário de livre resolução",
-      "body": "Os clientes enviam a livre resolução e depois confirmam-na num passo separado, como exige a legislação da UE. O formulário inclui um texto jurídico predefinido. Os clientes têm {{days}} para exercer a livre resolução, a contar da entrega.",
+      "body": "O formulário está pronto a usar com um texto predefinido. Os clientes têm {{days}} para exercer a livre resolução. Pode alterar isto a qualquer momento nas Definições.",
       "switch": "Ativar o formulário de livre resolução",
-      "later": "Pode alterar tudo isto mais tarde nas Definições.",
+      "required": "Ative o formulário de livre resolução para concluir a configuração.",
       "loadError": "Não foi possível carregar as definições do formulário. Pode concluir a configuração agora e ativar o formulário mais tarde nas Definições.",
       "saveError": "Não foi possível guardar as opções do formulário. Tente novamente ou conclua a configuração sem elas e defina-as mais tarde nas Definições.",
       "finishWithoutSaving": "Concluir sem guardar",
-      "placementError": "Selecione pelo menos um local ou desative o formulário."
+      "placementError": "Selecione pelo menos um local para apresentar o formulário.",
+      "blockError": "Adicione o bloco da aplicação em cada local selecionado para concluir a configuração.",
+      "placementDescription": "Selecione pelo menos uma opção."
     },
     "finishError": "Não foi possível concluir a configuração. Tente novamente."
   },
@@ -1234,38 +1232,5 @@
     "request": "Que funcionalidade gostaria de ter?",
     "requestPlaceholder": "Descreva a funcionalidade e como ajudaria a sua loja",
     "submit": "Enviar sugestão"
-  },
-  "pricing": {
-    "pageTitle": "Preços",
-    "pricePerMonth": "{{price}} por mês",
-    "currentPlan": "Plano atual",
-    "choosePlan": "Escolher {{plan}}",
-    "switchedToast": "Mudou para o plano {{plan}}",
-    "plans": {
-      "free": {
-        "name": "Free",
-        "features": [
-          "Até 10 pedidos de livre resolução por mês",
-          "Notificações por e-mail"
-        ]
-      },
-      "starter": {
-        "name": "Starter",
-        "features": [
-          "Pedidos de livre resolução ilimitados",
-          "Campos de formulário personalizados",
-          "Notificações por e-mail"
-        ]
-      },
-      "pro": {
-        "name": "Pro",
-        "features": [
-          "Tudo o que o Starter inclui",
-          "Suporte prioritário",
-          "Reembolsos automáticos"
-        ]
-      }
-    },
-    "switchError": "Não foi possível alterar o seu plano"
   }
 }

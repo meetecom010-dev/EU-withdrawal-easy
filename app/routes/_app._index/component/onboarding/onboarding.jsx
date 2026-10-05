@@ -7,7 +7,7 @@ import WelcomeStep from "./steps/WelcomeStep";
 import WithdrawalStep from "./steps/WithdrawalStep";
 import { updateOnboardingStatus } from "../../../../utils/api/shop";
 import { saveFormSettings } from "../../../../utils/api/formSettings";
-import { useRefreshShop, useDismissOnboarding } from "../../../../context/ShopContext";
+import { useShop, useRefreshShop, useDismissOnboarding } from "../../../../context/ShopContext";
 
 // Titles/descriptions live in en.json under onboarding.steps.<key>. Steps are
 // rendered by key, so adding or removing one doesn't renumber anything.
@@ -37,6 +37,13 @@ export default function Onboarding({ onComplete, initialFormSettings }) {
     Boolean(initialFormSettings?.showOnStandalonePage),
   );
   const [placementError, setPlacementError] = useState(false);
+  const [formRequiredError, setFormRequiredError] = useState(false);
+  // Block status comes from the app-wide extension sync, which re-checks every
+  // few seconds, so the error clears by itself once the merchant adds the block.
+  const { orderStatusBlockAdded, themeBlockAdded } = useShop();
+  const blocksPending =
+    (showOnOrderStatus && !orderStatusBlockAdded) || (showOnStandalonePage && !themeBlockAdded);
+  const [blockErrorShown, setBlockErrorShown] = useState(false);
   // Errors show in a banner inside the step card, next to the action that
   // failed — not a toast, which disappears before the merchant can act on it.
   // `canFinishWithoutForm` adds a way forward when only the form save failed.
@@ -61,16 +68,30 @@ export default function Onboarding({ onComplete, initialFormSettings }) {
     return (checked) => {
       setter(checked);
       if (checked) setPlacementError(false);
+      // Recheck blocks on the next "Finish setup", not instantly on toggle.
+      setBlockErrorShown(false);
     };
   }
 
   async function finishSetup({ saveForm = true } = {}) {
     setError(null);
     const shouldSaveForm = saveForm && Boolean(formSettings);
+    // Finishing means the form is on: finishing with it off would say "Setup
+    // completed" while customers still can't withdraw. A merchant who doesn't
+    // want it yet can use "Skip setup" instead.
+    if (shouldSaveForm && !formEnabled) {
+      setFormRequiredError(true);
+      return;
+    }
     // Turning the form on with no place picked would leave it on but hidden
     // everywhere, so ask for a place first.
-    if (shouldSaveForm && formEnabled && !showOnOrderStatus && !showOnStandalonePage) {
+    if (shouldSaveForm && !showOnOrderStatus && !showOnStandalonePage) {
       setPlacementError(true);
+      return;
+    }
+    // A picked place without its app block still shows customers nothing.
+    if (shouldSaveForm && blocksPending) {
+      setBlockErrorShown(true);
       return;
     }
 
@@ -140,13 +161,7 @@ export default function Onboarding({ onComplete, initialFormSettings }) {
             {t("onboarding.intro", { count: STEPS.length })}
           </s-paragraph>
         </s-stack>
-        {/* Sidebar beside the step on a wide page, stacked above it on a phone. */}
-        <s-query-container>
-        <s-grid
-          gridTemplateColumns="@container (inline-size > 700px) 230px minmax(0, 1fr), minmax(0, 1fr)"
-          gap="base"
-          alignItems="start"
-        >
+        <s-grid gridTemplateColumns="230px minmax(0, 1fr)" gap="base" alignItems="start">
           <OnboardingSidebar steps={STEPS} currentIndex={stepIndex} />
 
           <s-box padding="large-100" borderWidth="base" borderRadius="large" background="base">
@@ -180,13 +195,16 @@ export default function Onboarding({ onComplete, initialFormSettings }) {
                     enabled={formEnabled}
                     onEnabledChange={(enabled) => {
                       setFormEnabled(enabled);
-                      if (!enabled) setPlacementError(false);
+                      if (enabled) setFormRequiredError(false);
+                      else setPlacementError(false);
                     }}
+                    formRequiredError={formRequiredError}
                     showOnOrderStatus={showOnOrderStatus}
                     onShowOnOrderStatusChange={handlePlacementChange(setShowOnOrderStatus)}
                     showOnStandalonePage={showOnStandalonePage}
                     onShowOnStandalonePageChange={handlePlacementChange(setShowOnStandalonePage)}
                     placementError={placementError}
+                    blockError={blockErrorShown && blocksPending}
                   />
                 ))}
 
@@ -217,7 +235,6 @@ export default function Onboarding({ onComplete, initialFormSettings }) {
             </s-stack>
           </s-box>
         </s-grid>
-        </s-query-container>
       </s-stack>
     </s-page>
   );

@@ -71,7 +71,11 @@ function buildSetupSteps(
       key: "form",
       label: t("home.setupGuide.steps.form.label"),
       description: t("home.setupGuide.steps.form.description"),
-      complete: Boolean(formEnabled),
+      // Done only once the form is on AND has somewhere to show — on but with
+      // no place picked, customers still see nothing.
+      complete: Boolean(formEnabled) && Boolean(showOnOrderStatus || showOnStandalonePage),
+      // The toggle itself follows the setting, not step completion.
+      checked: Boolean(formEnabled),
       checkboxLabel: t("home.setupGuide.steps.form.checkbox"),
       onToggle: onFormToggle,
       ctaLabel: t("home.setupGuide.steps.form.cta"),

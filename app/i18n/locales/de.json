@@ -20,8 +20,7 @@
     "home": "Startseite",
     "withdrawalRequests": "Anfragen",
     "formSetup": "Einstellungen",
-    "emailTemplates": "Benachrichtigungen",
-    "pricing": "Preise"
+    "emailTemplates": "Benachrichtigungen"
   },
   "errors": {
     "generic": "Etwas ist schiefgelaufen. Versuche es erneut.",
@@ -69,11 +68,11 @@
   "placements": {
     "orderStatus": {
       "label": "Bestellstatusseite",
-      "details": "Zeige das Widerrufsformular auf der Bestellstatusseite an, die Kunden nach dem Checkout sehen."
+      "details": "Kunden erreichen diese Seite nach dem Checkout und über ihre Bestellbestätigung per E-Mail."
     },
     "storefront": {
       "label": "Shop-Seite",
-      "details": "Zeige das Widerrufsformular auf einer eigenen Seite in deinem Theme an, damit Kunden es auch außerhalb der Bestellstatusseite finden."
+      "details": "Füge das Formular zu deinem Theme hinzu, zum Beispiel auf einer Seite, die im Footer verlinkt ist."
     }
   },
   "orderStatus": {
@@ -213,8 +212,8 @@
   "onboarding": {
     "pageTitle": "Los geht's",
     "heading": "Mach deinen Shop bereit für EU-Widerrufe",
-    "intro_one": "Schließe diesen {{count}} Schritt ab, um deinen EU-Kunden eine rechtskonforme Möglichkeit zum Widerruf eines Kaufs zu bieten.",
-    "intro_other": "Schließe diese {{count}} Schritte ab, um deinen EU-Kunden eine rechtskonforme Möglichkeit zum Widerruf eines Kaufs zu bieten.",
+    "intro_one": "Schließe diesen {{count}} Schritt ab, damit Kunden in der EU eine Bestellung online widerrufen können.",
+    "intro_other": "Schließe diese {{count}} Schritte ab, damit Kunden in der EU eine Bestellung online widerrufen können.",
     "stepBadge": "Schritt {{current}} von {{total}}",
     "completedToast": "Einrichtung abgeschlossen",
     "steps": {
@@ -224,7 +223,7 @@
       },
       "form": {
         "title": "Widerrufsformular",
-        "description": "Formular aktivieren"
+        "description": "Aktivieren und Platzierung wählen"
       }
     },
     "actions": {
@@ -240,29 +239,28 @@
     },
     "welcome": {
       "heading": "Willkommen bei {{appName}}",
-      "setupTime": "Dauert etwa 1 Minute",
-      "law": "Seit dem 19. Juni 2026 müssen Shops, die an Kunden in der EU verkaufen, für jede Bestellung einen Widerruf in 2 Schritten ermöglichen (EU-Richtlinie 2023/2673, Artikel 11a). Eine Rückgaberichtlinie allein reicht nicht aus.",
-      "app": "{{appName}} fügt einen Widerrufsbutton zu deiner Bestellstatusseite, einer Seite in deinem Onlineshop oder beiden hinzu. Die App übernimmt die Bestätigung in 2 Schritten und sendet die vorgeschriebene Bestätigungs-E-Mail. Alle Anfragen verwaltest du an einem Ort.",
-      "imageAlt": "Ein Kunde widerruft eine Bestellung",
-      "requirementsHeading": "Was das Gesetz verlangt",
+      "law": "Seit dem 19. Juni 2026 müssen Shops, die an Kunden in der EU verkaufen, einen Online-Widerruf für Bestellungen anbieten. Eine Rückgaberichtlinie allein reicht nicht aus.",
+      "imageAlt": "Vorschau der App {{appName}}",
+      "requirementsHeading": "Die App deckt die gesetzlichen Anforderungen ab",
       "requirements": {
-        "button": "Einen klar beschrifteten Widerrufsbutton, den Kunden leicht finden",
-        "twoStep": "Einen Prozess in 2 Schritten: Kunden reichen ihren Widerruf ein und bestätigen ihn dann",
-        "email": "Eine automatische Bestätigungs-E-Mail, die Kunden aufbewahren können"
+        "button": "Ein klar beschrifteter Widerrufsbutton, den Kunden leicht finden",
+        "twoStep": "Ein Formular in 2 Schritten: Kunden reichen ihren Widerruf ein und bestätigen ihn dann",
+        "email": "Eine Bestätigungs-E-Mail, die automatisch an Kunden gesendet wird",
+        "manage": "Alle Anfragen an einem Ort, damit du sie verfolgen und verwalten kannst"
       },
-      "penaltyHeading": "Was passiert, wenn du die Vorgaben nicht einhältst",
-      "penalty": "Fehlt der Widerrufsbutton oder funktioniert er nicht, drohen dir Sanktionen nach nationalem Recht, und Kunden können deutlich länger als {{days}} Tage Zeit für den Widerruf haben.",
       "disclaimer": "Dies sind allgemeine Informationen, keine Rechtsberatung."
     },
     "form": {
       "heading": "Widerrufsformular aktivieren",
-      "body": "Kunden reichen ihren Widerruf ein und bestätigen ihn in einem separaten Schritt, wie es das EU-Recht verlangt. Das Formular enthält rechtliche Standardtexte. Kunden haben ab Lieferung {{days}} Zeit für den Widerruf.",
+      "body": "Das Formular ist mit Standardtexten sofort einsatzbereit. Kunden haben {{days}} Zeit für den Widerruf. Du kannst das jederzeit in den Einstellungen ändern.",
       "switch": "Widerrufsformular aktivieren",
-      "later": "Du kannst all das später in den Einstellungen ändern.",
+      "required": "Aktiviere das Widerrufsformular, um die Einrichtung abzuschließen.",
       "loadError": "Deine Formulareinstellungen konnten nicht geladen werden. Du kannst die Einrichtung jetzt abschließen und das Formular später in den Einstellungen aktivieren.",
       "saveError": "Deine Formularauswahl konnte nicht gespeichert werden. Versuche es erneut oder schließe die Einrichtung ohne sie ab und lege sie später in den Einstellungen fest.",
       "finishWithoutSaving": "Ohne Speichern abschließen",
-      "placementError": "Wähle mindestens einen Ort oder deaktiviere das Formular."
+      "placementError": "Wähle mindestens einen Ort aus, an dem das Formular angezeigt wird.",
+      "blockError": "Füge für jeden ausgewählten Ort den App-Block hinzu, um die Einrichtung abzuschließen.",
+      "placementDescription": "Wähle mindestens eine Option aus."
     },
     "finishError": "Die Einrichtung konnte nicht abgeschlossen werden. Versuche es erneut."
   },
@@ -1218,38 +1216,5 @@
     "request": "Welche Funktion wünschst du dir?",
     "requestPlaceholder": "Beschreibe die Funktion und wie sie deinem Shop helfen würde",
     "submit": "Vorschlag senden"
-  },
-  "pricing": {
-    "pageTitle": "Preise",
-    "pricePerMonth": "{{price}} pro Monat",
-    "currentPlan": "Aktueller Tarif",
-    "choosePlan": "{{plan}} wählen",
-    "switchedToast": "Zum Tarif {{plan}} gewechselt",
-    "plans": {
-      "free": {
-        "name": "Free",
-        "features": [
-          "Bis zu 10 Widerrufsanfragen pro Monat",
-          "E-Mail-Benachrichtigungen"
-        ]
-      },
-      "starter": {
-        "name": "Starter",
-        "features": [
-          "Unbegrenzte Widerrufsanfragen",
-          "Benutzerdefinierte Formularfelder",
-          "E-Mail-Benachrichtigungen"
-        ]
-      },
-      "pro": {
-        "name": "Pro",
-        "features": [
-          "Alles aus Starter",
-          "Priorisierter Support",
-          "Automatisierte Erstattungen"
-        ]
-      }
-    },
-    "switchError": "Dein Tarif konnte nicht geändert werden"
   }
 }

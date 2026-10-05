@@ -19,8 +19,7 @@
     "home": "主页",
     "withdrawalRequests": "申请",
     "formSetup": "设置",
-    "emailTemplates": "通知",
-    "pricing": "定价"
+    "emailTemplates": "通知"
   },
   "errors": {
     "generic": "出现问题。请重试。",
@@ -68,11 +67,11 @@
   "placements": {
     "orderStatus": {
       "label": "订单状态页面",
-      "details": "在客户结账后看到的订单状态页面上显示撤回表单。"
+      "details": "客户可在结账后以及通过订单确认邮件访问此页面。"
     },
     "storefront": {
       "label": "商店页面",
-      "details": "在主题中的独立页面上显示撤回表单，方便客户在订单状态页面之外找到它。"
+      "details": "将表单添加到您的主题中，例如添加到页脚链接的页面上。"
     }
   },
   "orderStatus": {
@@ -210,7 +209,7 @@
   "onboarding": {
     "pageTitle": "开始使用",
     "heading": "让您的商店做好应对欧盟撤回的准备",
-    "intro_other": "完成以下 {{count}} 个步骤，为欧盟客户提供合规的购买撤回方式。",
+    "intro_other": "完成以下 {{count}} 个步骤，让欧盟客户可以在线撤回订单。",
     "stepBadge": "第 {{current}} 步，共 {{total}} 步",
     "completedToast": "设置已完成",
     "steps": {
@@ -220,7 +219,7 @@
       },
       "form": {
         "title": "撤回表单",
-        "description": "启用您的表单"
+        "description": "启用并选择显示位置"
       }
     },
     "actions": {
@@ -236,29 +235,28 @@
     },
     "welcome": {
       "heading": "欢迎使用 {{appName}}",
-      "setupTime": "大约需要 1 分钟",
-      "law": "自 2026 年 6 月 19 日起，向欧盟客户销售商品的商店必须为每个订单提供两步撤回方式（欧盟指令 2023/2673 第 11a 条）。仅有退货政策是不够的。",
-      "app": "{{appName}} 会在您的订单状态页面、在线商店的某个页面或两者上添加撤回按钮。它会处理两步确认流程并发送必需的确认邮件。您可以在一个地方管理所有申请。",
-      "imageAlt": "客户正在撤回订单",
-      "requirementsHeading": "法律要求",
+      "law": "自 2026 年 6 月 19 日起，向欧盟客户销售商品的商店必须提供在线撤回订单的方式。仅有退货政策是不够的。",
+      "imageAlt": "{{appName}} 应用预览",
+      "requirementsHeading": "应用涵盖法律要求的内容",
       "requirements": {
-        "button": "清晰标注、便于客户找到的撤回按钮",
-        "twoStep": "两步流程：客户先提交撤回，然后进行确认",
-        "email": "客户可以保存的自动确认邮件"
+        "button": "标注清晰、易于找到的撤回按钮",
+        "twoStep": "两步表单：客户先提交撤回，然后进行确认",
+        "email": "自动发送给客户的确认邮件",
+        "manage": "所有请求集中在一处，方便您跟踪和管理"
       },
-      "penaltyHeading": "不合规的后果",
-      "penalty": "如果缺少撤回按钮或按钮无法使用，您可能会依据各国法律受到处罚，客户的撤回期也可能远超 {{days}} 天。",
       "disclaimer": "这是一般信息，不构成法律建议。"
     },
     "form": {
       "heading": "启用撤回表单",
-      "body": "根据欧盟法律要求，客户先提交撤回，然后在单独的步骤中进行确认。表单包含默认法律文本。客户可在收货后 {{days}}内撤回。",
+      "body": "表单已包含默认文本，可直接使用。客户可在 {{days}}内撤回。您可以随时在“设置”中更改。",
       "switch": "启用撤回表单",
-      "later": "您可以稍后在“设置”中更改所有内容。",
+      "required": "请启用撤回表单以完成设置。",
       "loadError": "无法加载表单设置。您可以现在完成设置，稍后在“设置”中启用表单。",
       "saveError": "无法保存您的表单选择。请重试，或跳过这些选择完成设置，稍后在“设置”中进行设置。",
       "finishWithoutSaving": "不保存并完成",
-      "placementError": "请至少选择一个位置，或关闭表单。"
+      "placementError": "请至少选择一个显示表单的位置。",
+      "blockError": "请为您选择的每个位置添加应用块以完成设置。",
+      "placementDescription": "请至少选择一项。"
     },
     "finishError": "无法完成设置。请重试。"
   },
@@ -1202,38 +1200,5 @@
     "request": "您希望增加什么功能？",
     "requestPlaceholder": "请描述该功能以及它将如何帮助您的商店",
     "submit": "发送建议"
-  },
-  "pricing": {
-    "pageTitle": "定价",
-    "pricePerMonth": "每月 {{price}}",
-    "currentPlan": "当前套餐",
-    "choosePlan": "选择 {{plan}}",
-    "switchedToast": "已切换到 {{plan}} 套餐",
-    "plans": {
-      "free": {
-        "name": "Free",
-        "features": [
-          "每月最多 10 个撤回申请",
-          "邮件通知"
-        ]
-      },
-      "starter": {
-        "name": "Starter",
-        "features": [
-          "无限撤回申请",
-          "自定义表单字段",
-          "邮件通知"
-        ]
-      },
-      "pro": {
-        "name": "Pro",
-        "features": [
-          "包含 Starter 的所有功能",
-          "优先支持",
-          "自动退款"
-        ]
-      }
-    },
-    "switchError": "无法更改您的套餐"
   }
 }
