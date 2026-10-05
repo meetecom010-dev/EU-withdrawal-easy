@@ -1,22 +1,24 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
+import { useLoaderData } from "react-router";
 import { useTranslation } from "react-i18next";
 import { useAppBridge } from "@shopify/app-bridge-react";
 import { authenticate } from "../../shopify.server";
-import { getFormSettings, saveFormSettings } from "../../utils/api/formSettings";
+import { saveFormSettings } from "../../utils/api/formSettings";
+import { getOrCreateAppSettings, serializeFormSettings } from "../../services/app-settings.server";
 import TurnItOnCard from "./component/TurnItOnCard";
 import CountriesCard from "./component/CountriesCard";
 import FormFieldsEditor, { tabForErrorPath, localeForErrorPath } from "./component/FormFieldsEditor";
 import LivePreview from "./component/LivePreview";
 import AutomationCard from "./component/AutomationCard";
 import DeadlineCard from "./component/DeadlineCard";
-import FormSetupSkeleton from "./component/FormSetupSkeleton";
 import { validateFormSettings } from "./validation";
 import { translateMessages } from "../../i18n/errors";
 import { dirtyFingerprint } from "./fieldValue";
 
 export const loader = async ({ request }) => {
-  await authenticate.admin(request);
-  return null;
+  const { session } = await authenticate.admin(request);
+  const doc = await getOrCreateAppSettings(session.shop);
+  return { formSettings: serializeFormSettings(doc) };
 };
 
 function setPath(obj, path, value) {
@@ -40,14 +42,13 @@ const SAVE_BAR_ID = "form-setup-save-bar";
 export default function FormSetup() {
   const { t } = useTranslation();
   const shopify = useAppBridge();
-  const [settings, setSettings] = useState(null);
+  const { formSettings: loadedFormSettings } = useLoaderData();
+  const [settings, setSettings] = useState(loadedFormSettings);
   // The last-saved (or last-loaded) state — the Discard button reverts to
   // this, and it's what "has this form actually been modified" is measured
   // against. Only handleSave is allowed to move it forward.
-  const [savedSettings, setSavedSettings] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [savedSettings, setSavedSettings] = useState(loadedFormSettings);
 
-  const [loadError, setLoadError] = useState(null);
   const [isSaving, setIsSaving] = useState(false);
   // Save failures surface in a critical banner, not a toast — Built for
   // Shopify guidelines reserve toasts for confirmations.
@@ -56,17 +57,6 @@ export default function FormSetup() {
   // Which language the form builder is currently editing. "en" edits the base
   // copy (labels/reasonField); any other code edits that locale's translation.
   const [activeLocale, setActiveLocale] = useState("en");
-
-  useEffect(() => {
-    getFormSettings()
-
-      .then(({ formSettings }) => {
-        setSettings(formSettings);
-        setSavedSettings(formSettings);
-      })
-      .catch((error) => setLoadError(error.message))
-      .finally(() => setLoading(false));
-  }, []);
 
   // Every field updates on each keystroke so the save bar reacts immediately,
   // which makes this run constantly — the baseline only moves on save or
@@ -167,24 +157,6 @@ export default function FormSetup() {
     } finally {
       setIsSaving(false);
     }
-  }
-
-  if (loading) {
-    return <FormSetupSkeleton />;
-  }
-
-  if (loadError) {
-    return (
-      <s-page heading={t("formSetup.pageTitle")}>
-        <s-banner tone="critical" heading={t("formSetup.loadError")}>
-          <s-paragraph>{loadError}</s-paragraph>
-          {/* Loading runs once on mount, so a fresh load is the retry. */}
-          <s-button slot="secondary-actions" onClick={() => window.location.reload()}>
-            {t("common.retry")}
-          </s-button>
-        </s-banner>
-      </s-page>
-    );
   }
 
   return (

@@ -5,6 +5,7 @@ import { boundary } from "@shopify/shopify-app-react-router/server";
 import { AppProvider } from "@shopify/shopify-app-react-router/react";
 import { authenticate } from "../shopify.server";
 import { getOrCreateShop, serializeShop } from "../services/shop.server";
+import { getOrCreateAppSettings, serializeFormSettings } from "../services/app-settings.server";
 import { ShopProvider, useShop, useOnboardingDismissed } from "../context/ShopContext";
 import OrderStatusExtensionSync from "../components/OrderStatusExtensionSync";
 import ThemeBlockExtensionSync from "../components/ThemeBlockExtensionSync";
@@ -36,10 +37,18 @@ export const loader = async ({ request }) => {
   const { session } = await authenticate.admin(request);
   const shopDoc = await getOrCreateShop(session.shop);
 
+  // Onboarding (rendered below) is the only consumer of formSettings here —
+  // skip the extra query once a shop has it behind them, so every other page
+  // load isn't paying for a fetch it never uses.
+  const onboardingFormSettings = shopDoc.onboardingCompleted
+    ? null
+    : serializeFormSettings(await getOrCreateAppSettings(session.shop));
+
   return {
     // eslint-disable-next-line no-undef
     apiKey: process.env.SHOPIFY_API_KEY || "",
     shop: serializeShop(shopDoc),
+    onboardingFormSettings,
   };
 };
 
@@ -47,7 +56,7 @@ export const loader = async ({ request }) => {
 // shows only once, after install: finishing or skipping saves
 // onboardingCompleted, and onboardingDismissed opens the app straight away
 // while that save is in flight.
-function AppShell({ pendingSkeleton }) {
+function AppShell({ pendingSkeleton, onboardingFormSettings }) {
   const { t } = useTranslation();
   const shop = useShop();
   const onboardingDismissed = useOnboardingDismissed();
@@ -69,13 +78,17 @@ function AppShell({ pendingSkeleton }) {
       )}
       <OrderStatusExtensionSync />
       <ThemeBlockExtensionSync />
-      {showApp ? (pendingSkeleton ?? <Outlet />) : <Onboarding />}
+      {showApp ? (
+        pendingSkeleton ?? <Outlet />
+      ) : (
+        <Onboarding initialFormSettings={onboardingFormSettings} />
+      )}
     </>
   );
 }
 
 export default function App() {
-  const { apiKey, shop } = useLoaderData();
+  const { apiKey, shop, onboardingFormSettings } = useLoaderData();
   const navigation = useNavigation();
   const pendingSkeleton =
     navigation.state === "loading" && navigation.location
@@ -85,7 +98,7 @@ export default function App() {
   return (
     <AppProvider embedded apiKey={apiKey}>
       <ShopProvider shop={shop}>
-        <AppShell pendingSkeleton={pendingSkeleton} />
+        <AppShell pendingSkeleton={pendingSkeleton} onboardingFormSettings={onboardingFormSettings} />
       </ShopProvider>
     </AppProvider>
   );

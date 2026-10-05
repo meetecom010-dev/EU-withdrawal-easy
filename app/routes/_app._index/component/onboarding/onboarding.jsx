@@ -1,19 +1,22 @@
 /* eslint-disable react/prop-types -- plain JS project, no prop-types package installed */
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useAppBridge } from "@shopify/app-bridge-react";
 import OnboardingSidebar from "./OnboardingSidebar";
 import WelcomeStep from "./steps/WelcomeStep";
 import WithdrawalStep from "./steps/WithdrawalStep";
 import { updateOnboardingStatus } from "../../../../utils/api/shop";
-import { getFormSettings, saveFormSettings } from "../../../../utils/api/formSettings";
+import { saveFormSettings } from "../../../../utils/api/formSettings";
 import { useRefreshShop, useDismissOnboarding } from "../../../../context/ShopContext";
 
 // Titles/descriptions live in en.json under onboarding.steps.<key>. Steps are
 // rendered by key, so adding or removing one doesn't renumber anything.
 const STEPS = [{ key: "welcome" }, { key: "form" }];
 
-export default function Onboarding({ onComplete }) {
+// initialFormSettings comes from routes/_app.jsx's loader — null only if that
+// loader's own formSettings fetch failed, which the "error" branch below
+// handles (see settingsStatus).
+export default function Onboarding({ onComplete, initialFormSettings }) {
   const { t } = useTranslation();
   const shopify = useAppBridge();
   const refreshShop = useRefreshShop();
@@ -23,33 +26,26 @@ export default function Onboarding({ onComplete }) {
   // what's saved, and "Finish setup" writes all three back (the same fields the
   // Home setup guide and Settings edit). The switch starts on because turning
   // the form on is what this step is for.
-  const [formSettings, setFormSettings] = useState(null);
-  const [settingsStatus, setSettingsStatus] = useState("loading");
+  const formSettings = initialFormSettings;
+  const settingsStatus = initialFormSettings ? "ready" : "error";
   const [saving, setSaving] = useState(false);
   const [formEnabled, setFormEnabled] = useState(true);
-  const [showOnOrderStatus, setShowOnOrderStatus] = useState(false);
-  const [showOnStandalonePage, setShowOnStandalonePage] = useState(false);
+  const [showOnOrderStatus, setShowOnOrderStatus] = useState(
+    Boolean(initialFormSettings?.showOnOrderStatus),
+  );
+  const [showOnStandalonePage, setShowOnStandalonePage] = useState(
+    Boolean(initialFormSettings?.showOnStandalonePage),
+  );
   const [placementError, setPlacementError] = useState(false);
   // Errors show in a banner inside the step card, next to the action that
   // failed — not a toast, which disappears before the merchant can act on it.
   // `canFinishWithoutForm` adds a way forward when only the form save failed.
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    getFormSettings()
-      .then(({ formSettings: loaded }) => {
-        setFormSettings(loaded);
-        setShowOnOrderStatus(Boolean(loaded.showOnOrderStatus));
-        setShowOnStandalonePage(Boolean(loaded.showOnStandalonePage));
-        setSettingsStatus("ready");
-      })
-      .catch(() => setSettingsStatus("error"));
-  }, []);
-
   const currentStep = STEPS[stepIndex].key;
   const isFirst = stepIndex === 0;
   const isLast = stepIndex === STEPS.length - 1;
-  const isPrimaryDisabled = (isLast && settingsStatus === "loading") || saving;
+  const isPrimaryDisabled = saving;
   const primaryLabel = isLast
     ? t("onboarding.actions.finish")
     : isFirst

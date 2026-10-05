@@ -1,17 +1,21 @@
-import { useEffect, useState } from "react";
-import { useRouteError } from "react-router";
+import { useState } from "react";
+import { useLoaderData, useRouteError } from "react-router";
 import { useTranslation } from "react-i18next";
 import { boundary } from "@shopify/shopify-app-react-router/server";
 import { authenticate } from "../../shopify.server";
 import { useShop } from "../../context/ShopContext";
-import { getDashboardStats } from "../../utils/api/dashboardStats";
-import { getFormSettings, saveFormSettings } from "../../utils/api/formSettings";
+import { getDashboardStats } from "../../services/withdrawal-request.server";
+import { getOrCreateAppSettings, serializeFormSettings } from "../../services/app-settings.server";
+import { saveFormSettings } from "../../utils/api/formSettings";
 import Dashboard from "./component/dashboard/dashboard";
-import DashboardSkeleton from "./component/dashboard/DashboardSkeleton";
 
 export const loader = async ({ request }) => {
-  await authenticate.admin(request);
-  return null;
+  const { session } = await authenticate.admin(request);
+  const [stats, settingsDoc] = await Promise.all([
+    getDashboardStats(session.shop),
+    getOrCreateAppSettings(session.shop),
+  ]);
+  return { stats, formSettings: serializeFormSettings(settingsDoc) };
 };
 
 // Builds the setup-guide steps from real, live state instead of a hardcoded
@@ -117,20 +121,11 @@ function buildSetupSteps(
 export default function Home() {
   const { t } = useTranslation();
   const shop = useShop();
-  const [stats, setStats] = useState(null);
-  const [formSettings, setFormSettings] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [loadError, setLoadError] = useState(null);
-
-  useEffect(() => {
-    Promise.all([getDashboardStats(), getFormSettings()])
-      .then(([statsResponse, formSettingsResponse]) => {
-        setStats(statsResponse.stats);
-        setFormSettings(formSettingsResponse.formSettings);
-      })
-      .catch((error) => setLoadError(error.message))
-      .finally(() => setLoading(false));
-  }, []);
+  const { stats, formSettings: loadedFormSettings } = useLoaderData();
+  // Local copy so the setup guide's toggles can apply optimistic updates
+  // (see handleFormEnabledToggle/handlePlacementToggle) without waiting on
+  // a loader revalidation for every click.
+  const [formSettings, setFormSettings] = useState(loadedFormSettings);
 
   // Save failures show in a banner at the top of Home (not a toast, which
   // disappears before the merchant can act on it).
@@ -172,24 +167,6 @@ export default function Home() {
 
   const handleToggleOrderStatus = (checked) => handlePlacementToggle("showOnOrderStatus", checked);
   const handleToggleStandalone = (checked) => handlePlacementToggle("showOnStandalonePage", checked);
-
-  if (loading) {
-    return <DashboardSkeleton />;
-  }
-
-  if (loadError) {
-    return (
-      <s-page heading={t("home.pageTitle")}>
-        <s-banner tone="critical" heading={t("home.loadError")}>
-          <s-paragraph>{loadError}</s-paragraph>
-          {/* Loading runs once on mount, so a fresh load is the retry. */}
-          <s-button slot="secondary-actions" onClick={() => window.location.reload()}>
-            {t("common.retry")}
-          </s-button>
-        </s-banner>
-      </s-page>
-    );
-  }
 
   const setupSteps = buildSetupSteps(t, {
     formEnabled: formSettings.masterEnabled,
