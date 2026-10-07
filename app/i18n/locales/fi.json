@@ -20,7 +20,8 @@
     "home": "Etusivu",
     "withdrawalRequests": "Pyynnöt",
     "formSetup": "Asetukset",
-    "emailTemplates": "Ilmoitukset"
+    "emailTemplates": "Ilmoitukset",
+    "plans": "Paketit"
   },
   "errors": {
     "generic": "Jokin meni vikaan. Yritä uudelleen.",

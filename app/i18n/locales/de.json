@@ -20,7 +20,8 @@
     "home": "Startseite",
     "withdrawalRequests": "Anfragen",
     "formSetup": "Einstellungen",
-    "emailTemplates": "Benachrichtigungen"
+    "emailTemplates": "Benachrichtigungen",
+    "plans": "Tarife"
   },
   "errors": {
     "generic": "Etwas ist schiefgelaufen. Versuche es erneut.",

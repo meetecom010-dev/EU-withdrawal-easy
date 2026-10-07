@@ -4,8 +4,9 @@ import connectDB from "../../db.server";
 import Shop from "../../models/shop.server";
 import { getOrCreateShop } from "../../services/shop.server";
 
-// The plan is not writable here: billing is Shopify App Pricing (free only
-// for now), so the merchant's plan comes from Shopify, never from the client.
+// The plan is not writable here: billing is Shopify App Pricing, so the
+// merchant's plan is only ever synced from Shopify
+// (services/subscription.server.js), never taken from the client.
 const ALLOWED_SHOP_FIELDS = [
   "onboardingCompleted",
   "orderStatusBlockAdded",

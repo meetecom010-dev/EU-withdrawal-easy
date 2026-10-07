@@ -19,7 +19,8 @@
     "home": "หน้าหลัก",
     "withdrawalRequests": "คำขอ",
     "formSetup": "การตั้งค่า",
-    "emailTemplates": "การแจ้งเตือน"
+    "emailTemplates": "การแจ้งเตือน",
+    "plans": "แพ็กเกจ"
   },
   "errors": {
     "generic": "เกิดข้อผิดพลาด โปรดลองอีกครั้ง",

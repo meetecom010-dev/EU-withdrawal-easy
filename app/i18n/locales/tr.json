@@ -20,7 +20,8 @@
     "home": "Ana sayfa",
     "withdrawalRequests": "Talepler",
     "formSetup": "Ayarlar",
-    "emailTemplates": "Bildirimler"
+    "emailTemplates": "Bildirimler",
+    "plans": "Planlar"
   },
   "errors": {
     "generic": "Bir sorun oluştu. Tekrar deneyin.",

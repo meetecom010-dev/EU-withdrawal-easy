@@ -20,7 +20,8 @@
     "home": "Start",
     "withdrawalRequests": "Verzoeken",
     "formSetup": "Instellingen",
-    "emailTemplates": "Meldingen"
+    "emailTemplates": "Meldingen",
+    "plans": "Abonnementen"
   },
   "errors": {
     "generic": "Er is iets misgegaan. Probeer het opnieuw.",

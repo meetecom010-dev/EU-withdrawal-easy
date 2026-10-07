@@ -21,7 +21,8 @@
     "home": "Home",
     "withdrawalRequests": "Richieste",
     "formSetup": "Impostazioni",
-    "emailTemplates": "Notifiche"
+    "emailTemplates": "Notifiche",
+    "plans": "Piani"
   },
   "errors": {
     "generic": "Si è verificato un errore. Riprova.",

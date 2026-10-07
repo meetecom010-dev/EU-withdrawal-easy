@@ -20,7 +20,8 @@
     "home": "Hjem",
     "withdrawalRequests": "Forespørsler",
     "formSetup": "Innstillinger",
-    "emailTemplates": "Varsler"
+    "emailTemplates": "Varsler",
+    "plans": "Abonnementer"
   },
   "errors": {
     "generic": "Noe gikk galt. Prøv igjen.",

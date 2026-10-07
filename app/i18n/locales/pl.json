@@ -22,7 +22,8 @@
     "home": "Strona główna",
     "withdrawalRequests": "Zgłoszenia",
     "formSetup": "Ustawienia",
-    "emailTemplates": "Powiadomienia"
+    "emailTemplates": "Powiadomienia",
+    "plans": "Plany"
   },
   "errors": {
     "generic": "Coś poszło nie tak. Spróbuj ponownie.",

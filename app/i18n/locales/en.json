@@ -20,7 +20,8 @@
     "home": "Home",
     "withdrawalRequests": "Requests",
     "formSetup": "Settings",
-    "emailTemplates": "Notifications"
+    "emailTemplates": "Notifications",
+    "plans": "Plans"
   },
   "errors": {
     "generic": "Something went wrong. Try again.",

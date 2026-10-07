@@ -19,7 +19,8 @@
     "home": "Trang chủ",
     "withdrawalRequests": "Yêu cầu",
     "formSetup": "Cài đặt",
-    "emailTemplates": "Thông báo"
+    "emailTemplates": "Thông báo",
+    "plans": "Gói"
   },
   "errors": {
     "generic": "Đã xảy ra lỗi. Hãy thử lại.",

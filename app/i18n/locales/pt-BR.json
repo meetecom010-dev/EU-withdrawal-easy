@@ -21,7 +21,8 @@
     "home": "Início",
     "withdrawalRequests": "Solicitações",
     "formSetup": "Configurações",
-    "emailTemplates": "Notificações"
+    "emailTemplates": "Notificações",
+    "plans": "Planos"
   },
   "errors": {
     "generic": "Algo deu errado. Tente novamente.",

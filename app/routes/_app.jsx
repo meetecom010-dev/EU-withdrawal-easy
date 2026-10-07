@@ -6,6 +6,7 @@ import { AppProvider } from "@shopify/shopify-app-react-router/react";
 import { authenticate } from "../shopify.server";
 import { getOrCreateShop, serializeShop } from "../services/shop.server";
 import { getOrCreateAppSettings, serializeFormSettings } from "../services/app-settings.server";
+import { recordPlanRedirect, refreshSubscriptionInBackground } from "../services/subscription.server";
 import { ShopProvider, useShop, useOnboardingDismissed } from "../context/ShopContext";
 import OrderStatusExtensionSync from "../components/OrderStatusExtensionSync";
 import ThemeBlockExtensionSync from "../components/ThemeBlockExtensionSync";
@@ -32,8 +33,24 @@ function routeSkeletonFor(pathname) {
 }
 
 export const loader = async ({ request }) => {
-  const { session } = await authenticate.admin(request);
+  const { admin, session } = await authenticate.admin(request);
   const shopDoc = await getOrCreateShop(session.shop);
+
+  // After a merchant picks a plan, Shopify opens the plan's Welcome link (Home
+  // by default) with ?plan_handle=...&charge_id=... appended.
+  const { searchParams } = new URL(request.url);
+  if (searchParams.has("plan_handle") || searchParams.has("charge_id")) {
+    await recordPlanRedirect({
+      admin,
+      shop: session.shop,
+      planHandle: searchParams.get("plan_handle"),
+      chargeId: searchParams.get("charge_id"),
+    }).catch((error) => console.error(`Couldn't record the plan redirect for ${session.shop}:`, error));
+  } else {
+    refreshSubscriptionInBackground({ admin, shop: session.shop }).catch((error) =>
+      console.error(`Couldn't start the subscription refresh for ${session.shop}:`, error),
+    );
+  }
 
   // Onboarding (rendered below) is the only consumer of formSettings here —
   // skip the extra query once a shop has it behind them, so every other page
@@ -71,6 +88,7 @@ function AppShell({ pendingSkeleton, onboardingFormSettings }) {
           <s-link href="/form-setup">{t("nav.formSetup")}</s-link>
           <s-link href="/withdrawal-requests">{t("nav.withdrawalRequests")}</s-link>
           <s-link href="/email-templates">{t("nav.emailTemplates")}</s-link>
+          <s-link href="/plans">{t("nav.plans")}</s-link>
         </s-app-nav>
       )}
       <OrderStatusExtensionSync />

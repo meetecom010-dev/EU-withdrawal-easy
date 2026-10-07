@@ -22,7 +22,8 @@
     "home": "Úvod",
     "withdrawalRequests": "Žádosti",
     "formSetup": "Nastavení",
-    "emailTemplates": "Oznámení"
+    "emailTemplates": "Oznámení",
+    "plans": "Tarify"
   },
   "errors": {
     "generic": "Něco se pokazilo. Zkuste to znovu.",

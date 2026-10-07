@@ -19,7 +19,8 @@
     "home": "首頁",
     "withdrawalRequests": "申請",
     "formSetup": "設定",
-    "emailTemplates": "通知"
+    "emailTemplates": "通知",
+    "plans": "方案"
   },
   "errors": {
     "generic": "發生錯誤，請再試一次。",

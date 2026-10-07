@@ -19,7 +19,8 @@
     "home": "홈",
     "withdrawalRequests": "요청",
     "formSetup": "설정",
-    "emailTemplates": "알림"
+    "emailTemplates": "알림",
+    "plans": "요금제"
   },
   "errors": {
     "generic": "문제가 발생했습니다. 다시 시도하세요.",

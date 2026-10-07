@@ -19,7 +19,8 @@
     "home": "ホーム",
     "withdrawalRequests": "リクエスト",
     "formSetup": "設定",
-    "emailTemplates": "通知"
+    "emailTemplates": "通知",
+    "plans": "プラン"
   },
   "errors": {
     "generic": "問題が発生しました。もう一度お試しください。",

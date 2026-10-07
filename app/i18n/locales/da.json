@@ -20,7 +20,8 @@
     "home": "Start",
     "withdrawalRequests": "Anmodninger",
     "formSetup": "Indstillinger",
-    "emailTemplates": "Notifikationer"
+    "emailTemplates": "Notifikationer",
+    "plans": "Abonnementer"
   },
   "errors": {
     "generic": "Noget gik galt. Prøv igen.",

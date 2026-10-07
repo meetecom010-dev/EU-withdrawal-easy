@@ -13,6 +13,19 @@ const SHOP_CONTACT_QUERY = `#graphql
   }
 `;
 
+const SHOP_GID_QUERY = `#graphql
+  query ShopGid {
+    shop {
+      id
+    }
+  }
+`;
+
+export async function fetchShopGid(admin) {
+  const data = await adminQuery(admin, { operation: "ShopGid", query: SHOP_GID_QUERY });
+  return data.shop?.id ?? null;
+}
+
 export async function fetchShopContact(admin) {
   const data = await adminQuery(admin, {
     operation: "WithdrawalShopContact",

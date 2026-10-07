@@ -19,7 +19,8 @@
     "home": "主页",
     "withdrawalRequests": "申请",
     "formSetup": "设置",
-    "emailTemplates": "通知"
+    "emailTemplates": "通知",
+    "plans": "套餐"
   },
   "errors": {
     "generic": "出现问题。请重试。",

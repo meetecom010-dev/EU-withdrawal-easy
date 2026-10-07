@@ -20,7 +20,8 @@
     "home": "Start",
     "withdrawalRequests": "Begäranden",
     "formSetup": "Inställningar",
-    "emailTemplates": "Aviseringar"
+    "emailTemplates": "Aviseringar",
+    "plans": "Abonnemang"
   },
   "errors": {
     "generic": "Något gick fel. Försök igen.",

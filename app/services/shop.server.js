@@ -1,6 +1,7 @@
 import connectDB from "../db.server";
 import Shop from "../models/shop.server";
 import { fetchShopContact } from "./shopify/shop.server";
+import { markSubscriptionCancelled } from "./subscription.server";
 
 // Called from the afterAuth hook whenever a shop installs or re-authenticates.
 export async function upsertShopOnInstall(shop) {
@@ -19,6 +20,7 @@ export async function markShopUninstalled(shop) {
     { shop },
     { $set: { isActive: false, uninstalledAt: new Date() } },
   );
+  await markSubscriptionCancelled(shop);
 }
 
 // Returns the shop doc, creating a default one if it doesn't exist yet so
@@ -65,13 +67,16 @@ export function serializeShop(shopDoc) {
     orderStatusBlockAdded: shopDoc.orderStatusBlockAdded,
     themeBlockAdded: shopDoc.themeBlockAdded,
     plan: {
-      name: shopDoc.plan?.name,
-      price: shopDoc.plan?.price,
-      currency: shopDoc.plan?.currency,
-      interval: shopDoc.plan?.interval,
-      status: shopDoc.plan?.status,
-      trialEndsAt: shopDoc.plan?.trialEndsAt,
-      currentPeriodEnd: shopDoc.plan?.currentPeriodEnd,
+      status: shopDoc.plan?.status ?? "none",
+      handle: shopDoc.plan?.handle ?? null,
+      name: shopDoc.plan?.name ?? null,
+      price: shopDoc.plan?.price ?? null,
+      currency: shopDoc.plan?.currency ?? null,
+      interval: shopDoc.plan?.interval ?? null,
+      trialEndsAt: shopDoc.plan?.trialEndsAt ?? null,
+      currentPeriodEnd: shopDoc.plan?.currentPeriodEnd ?? null,
+      cancelAtEndOfCycle: shopDoc.plan?.cancelAtEndOfCycle ?? false,
+      pendingHandle: shopDoc.plan?.pendingHandle ?? null,
     },
   };
 }
