@@ -98,11 +98,14 @@ const translationSchema = new Schema(
 // resolves countryMode "all" to the full EU list on read.
 const formSettingsSchema = new Schema(
   {
+    // Everything starts off on a fresh install: the merchant turns the form on
+    // and picks where it shows in onboarding (or Settings / the Home guide).
     masterEnabled: { type: Boolean, default: false },
-    showOnOrderStatus: { type: Boolean, default: true },
+    // Order status page surface (checkout UI extension) — opt-in, since the
+    // merchant also has to add the app block in the checkout editor.
+    showOnOrderStatus: { type: Boolean, default: false },
     // Storefront theme app extension surface (extensions/withdrawal-theme-block)
-    // — opt-in, unlike showOnOrderStatus, since it requires the merchant to also
-    // add the app block in their theme editor before it does anything.
+    // — opt-in for the same reason: needs its app block in the theme editor.
     showOnStandalonePage: { type: Boolean, default: false },
     // "all" = every EU country is eligible (euCountries is ignored and
     // resolved to the full list); "specific" = only the euCountries below.

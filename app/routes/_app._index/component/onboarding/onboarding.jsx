@@ -22,14 +22,14 @@ export default function Onboarding({ onComplete, initialFormSettings }) {
   const refreshShop = useRefreshShop();
   const dismissOnboarding = useDismissOnboarding();
   const [stepIndex, setStepIndex] = useState(0);
-  // The form step edits real form settings: the placement boxes start from
-  // what's saved, and "Finish setup" writes all three back (the same fields the
-  // Home setup guide and Settings edit). The switch starts on because turning
-  // the form on is what this step is for.
+  // The form step edits real form settings: the switch and placement boxes all
+  // start from what's saved (all off on a fresh install), and "Finish setup"
+  // writes all three back (the same fields the Home setup guide and Settings
+  // edit). The merchant turns the form on themselves.
   const formSettings = initialFormSettings;
   const settingsStatus = initialFormSettings ? "ready" : "error";
   const [saving, setSaving] = useState(false);
-  const [formEnabled, setFormEnabled] = useState(true);
+  const [formEnabled, setFormEnabled] = useState(Boolean(initialFormSettings?.masterEnabled));
   const [showOnOrderStatus, setShowOnOrderStatus] = useState(
     Boolean(initialFormSettings?.showOnOrderStatus),
   );
